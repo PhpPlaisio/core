@@ -62,11 +62,6 @@
         <gitbranch branchname="temp" repository="." delete="true"/>
     </target>
 
-    <!-- Runs all unit tests -->
-    <target name="unit">
-        <exec command="bin/phpunit --bootstrap=test/bootstrap.php test" passthru="true" checkreturn="true"/>
-    </target>
-
     <!-- Runs PHP code sniffer -->
     <target name="phpcs">
         <exec command="bin/phpcs --standard=vendor/setbased/php-coding-standards/ruleset.xml lib/" passthru="true" checkreturn="true"/>
