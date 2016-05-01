@@ -1,0 +1,36 @@
+{
+  "name": "setbased/abc-core",
+  "description": "ABC-Framework: (Development) Core",
+  "keywords": [
+    "Framework",
+    "Core"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require-dev": {
+    "phing/phing": "2.*",
+    "phpunit/phpunit": "4.* || 5.*"
+  },
+  "require": {
+    "php": ">=5.4.0",
+    "gajus/dindent": "2.*",
+    "ircmaxell/password-compat": ">=1.0.3",
+    "setbased/exception": "1.*",
+    "setbased/abc": "*",
+    "setbased/abc-form-raw": "*",
+    "setbased/abc-html": "1.*",
+    "setbased/abc-http-header": "*",
+    "setbased/abc-table-overview": "*",
+    "setbased/abc-table-detail": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "SetBased\\Abc\\Core\\": "src/"
+    }
+  },
+  "config": {
+    "bin-dir": "bin"
+  }
+}
