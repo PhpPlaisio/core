@@ -8,7 +8,7 @@ use SetBased\Abc\Table\DetailTable;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
- *
+ * Table row showing the original page of a page.
  */
 class PageDetailsTableRow
 {
@@ -22,15 +22,9 @@ class PageDetailsTableRow
    */
   public static function addRow($table, $header, $data)
   {
-    $row = '<tr><th>';
-    $row .= Html::txt2Html($header);
-    $row .= '</th><td class="text"><a';
-    $row .= Html::generateAttribute('href', PageDetailsPage::getUrl($data['pag_id_org']));
-    $row .= '>';
-    $row .= $data['pag_id_org'];
-    $row .= '</a></td></tr>';
+    $a = Html::generateElement('a', ['href' => PageDetailsPage::getUrl($data['pag_id_org'])], $data['pag_id_org']);
 
-    $table->addRow($row);
+    $table->addRow($header, ['class' => 'text'], $a, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
