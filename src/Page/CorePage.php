@@ -75,7 +75,7 @@ abstract class CorePage extends Page
     $this->echoMainContent();
 
     $contents = ob_get_contents();
-    ob_end_clean();
+    if (ob_get_level()) ob_end_clean();
 
     // Buffer for header.
     ob_start();
@@ -101,7 +101,7 @@ abstract class CorePage extends Page
     }
 
     $this->setPageSize(ob_get_length());
-    ob_end_flush();
+    if (ob_get_level()) ob_end_flush();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -79,7 +79,7 @@ class LoginPage extends Page
     $this->showPageContent();
 
     $contents = ob_get_contents();
-    ob_end_clean();
+    if (ob_get_level()>0) ob_end_clean();
 
     // Buffer for header.
     ob_start();
@@ -100,7 +100,7 @@ class LoginPage extends Page
     }
 
     $this->setPageSize(ob_get_length());
-    ob_end_flush();
+    if (ob_get_level()>0) ob_end_flush();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
