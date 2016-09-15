@@ -11,7 +11,8 @@
   "prefer-stable": true,
   "require-dev": {
     "phing/phing": "2.*",
-    "phpunit/phpunit": "4.* || 5.*"
+    "phpunit/phpunit": "4.* || 5.*",
+    "setbased/phing-extensions": "*"
   },
   "require": {
     "php": ">=5.4.0",
