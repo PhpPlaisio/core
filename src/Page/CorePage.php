@@ -32,13 +32,6 @@ abstract class CorePage extends Page
    */
   protected $tabs;
 
-  /**
-   * If set the JQuery UI date picker will be loaded.
-   *
-   * @var bool
-   */
-  private $datePickerEnabled = false;
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
@@ -173,22 +166,6 @@ abstract class CorePage extends Page
       if ($tab['pag_id']==$pag_id_org && $tab['url']) $this->showTabContent = true;
     }
     echo '</ul>';
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Enables JQuery UI date pickers.
-   */
-  protected function enableDatePicker()
-  {
-    if (!$this->datePickerEnabled)
-    {
-      $this->jsAdmFunctionCall('SetBased/Abc/Page/Page', 'enableDatePicker');
-
-      $this->cssAppendSource('/css/ui-lightness/jquery-ui-1.10.4.custom.min.css');
-
-      $this->datePickerEnabled = true;
-    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
