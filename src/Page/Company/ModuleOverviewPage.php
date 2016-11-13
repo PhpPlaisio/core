@@ -19,14 +19,14 @@ class ModuleOverviewPage extends CompanyPage
   /**
    * Returns the URL of this page.
    *
-   * @param int $cmpId The ID of the target company.
+   * @param int $targetCmpId The ID of the target company.
    *
    * @return string
    */
-  public static function getUrl($cmpId)
+  public static function getUrl($targetCmpId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_MODULE_OVERVIEW, 'pag');
-    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
+    $url .= self::putCgiVar('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }
@@ -37,12 +37,12 @@ class ModuleOverviewPage extends CompanyPage
    */
   protected function echoTabContent()
   {
-    $modules = Abc::$DL->companyModuleGetAllEnabled($this->actCmpId, $this->lanId);
+    $modules = Abc::$DL->companyModuleGetAllEnabled($this->targetCmpId, $this->lanId);
 
     $table = new CoreOverviewTable();
 
     // Add table action for modifying the enabled modules of the target company.
-    $table->addTableAction('default', new ModuleUpdateTableAction($this->actCmpId));
+    $table->addTableAction('default', new ModuleUpdateTableAction($this->targetCmpId));
 
     // Show the ID of the module.
     $table->addColumn(new NumericTableColumn('ID', 'mdl_id'));

@@ -51,22 +51,22 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
 
     $this->rolId = self::getCgiId('rol', 'rol');
 
-    $this->details = Abc::$DL->companyRoleGetDetails($this->actCmpId, $this->rolId);
+    $this->details = Abc::$DL->companyRoleGetDetails($this->targetCmpId, $this->rolId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $cmpId The ID of the target company
-   * @param int $rolId The ID of role to be modified.
+   * @param int $targetCmpId The ID of the target company
+   * @param int $rolId       The ID of role to be modified.
    *
    * @return string
    */
-  public static function getUrl($cmpId, $rolId)
+  public static function getUrl($targetCmpId, $rolId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_ROLE_UPDATE_FUNCTIONALITIES, 'pag');
-    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
+    $url .= self::putCgiVar('cmp', $targetCmpId, 'cmp');
     $url .= self::putCgiVar('rol', $rolId, 'rol');
 
     return $url;
@@ -89,7 +89,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
   private function createForm()
   {
     // Get all available functionalities.
-    $pages = Abc::$DL->companyRoleGetAvailableFunctionalities($this->actCmpId, $this->rolId, $this->lanId);
+    $pages = Abc::$DL->companyRoleGetAvailableFunctionalities($this->targetCmpId, $this->rolId, $this->lanId);
 
     // Create form.
     $this->form = new CoreForm();
@@ -137,11 +137,11 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
     {
       if ($values['data'][$fun_id]['fun_enabled'])
       {
-        Abc::$DL->companyRoleInsertFunctionality($this->actCmpId, $this->rolId, $fun_id);
+        Abc::$DL->companyRoleInsertFunctionality($this->targetCmpId, $this->rolId, $fun_id);
       }
       else
       {
-        Abc::$DL->companyRoleDeleteFunctionality($this->actCmpId, $this->rolId, $fun_id);
+        Abc::$DL->companyRoleDeleteFunctionality($this->targetCmpId, $this->rolId, $fun_id);
       }
     }
 
@@ -175,7 +175,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(RoleDetailsPage::getUrl($this->actCmpId, $this->rolId));
+    HttpHeader::redirectSeeOther(RoleDetailsPage::getUrl($this->targetCmpId, $this->rolId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

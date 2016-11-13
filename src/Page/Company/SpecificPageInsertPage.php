@@ -27,14 +27,14 @@ class SpecificPageInsertPage extends CompanyPage
   /**
    * Returns the URL of this page.
    *
-   * @param int $cmpId The ID of the target company.
+   * @param int $targetCmpId The ID of the target company.
    *
    * @return string
    */
-  public static function getUrl($cmpId)
+  public static function getUrl($targetCmpId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_INSERT, 'pag');
-    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
+    $url .= self::putCgiVar('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }
@@ -47,7 +47,7 @@ class SpecificPageInsertPage extends CompanyPage
   {
     $values = $this->form->getValues();
 
-    Abc::$DL->companySpecificPageInsert($this->actCmpId, $values['prt_pag_id'], $values['pag_class_child']);
+    Abc::$DL->companySpecificPageInsert($this->targetCmpId, $values['prt_pag_id'], $values['pag_class_child']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -111,7 +111,7 @@ class SpecificPageInsertPage extends CompanyPage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(SpecificPageOverviewPage::getUrl($this->actCmpId));
+    HttpHeader::redirectSeeOther(SpecificPageOverviewPage::getUrl($this->targetCmpId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

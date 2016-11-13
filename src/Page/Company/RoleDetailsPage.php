@@ -22,7 +22,9 @@ class RoleDetailsPage extends CompanyPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @var int The ID of the role of which data is shown on this page.
+   * The ID of the role of which data is shown on this page.
+   *
+   * @var int
    */
   protected $rolId;
 
@@ -41,15 +43,15 @@ class RoleDetailsPage extends CompanyPage
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $cmpId The ID of the target company.
-   * @param int $rolId The ID of the role.
+   * @param int $targetCmpId The ID of the target company.
+   * @param int $rolId       The ID of the role.
    *
    * @return string
    */
-  public static function getUrl($cmpId, $rolId)
+  public static function getUrl($targetCmpId, $rolId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_ROLE_DETAILS, 'pag');
-    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
+    $url .= self::putCgiVar('cmp', $targetCmpId, 'cmp');
     $url .= self::putCgiVar('rol', $rolId, 'rol');
 
     return $url;
@@ -74,12 +76,12 @@ class RoleDetailsPage extends CompanyPage
    */
   private function showFunctionalities()
   {
-    $functionalities = Abc::$DL->companyRoleGetFunctionalities($this->actCmpId, $this->rolId, $this->lanId);
+    $functionalities = Abc::$DL->companyRoleGetFunctionalities($this->targetCmpId, $this->rolId, $this->lanId);
 
     $table = new CoreOverviewTable();
 
     // Add table action for modifying the granted functionalities.
-    $table->addTableAction('default', new RoleUpdateFunctionalitiesTableAction($this->actCmpId, $this->rolId));
+    $table->addTableAction('default', new RoleUpdateFunctionalitiesTableAction($this->targetCmpId, $this->rolId));
 
     // Show the ID of the module.
     $table->addColumn(new NumericTableColumn('ID', 'mdl_id'));
@@ -108,7 +110,7 @@ class RoleDetailsPage extends CompanyPage
    */
   private function showPages()
   {
-    $pages = Abc::$DL->companyRoleGetPages($this->actCmpId, $this->rolId, $this->lanId);
+    $pages = Abc::$DL->companyRoleGetPages($this->targetCmpId, $this->rolId, $this->lanId);
 
     $table = new CoreOverviewTable();
 
@@ -137,7 +139,7 @@ class RoleDetailsPage extends CompanyPage
    */
   private function showRole()
   {
-    $details = Abc::$DL->companyRoleGetDetails($this->actCmpId, $this->rolId);
+    $details = Abc::$DL->companyRoleGetDetails($this->targetCmpId, $this->rolId);
 
     $table = new CoreDetailTable();
 

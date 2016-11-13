@@ -21,14 +21,14 @@ class RoleOverviewPage extends CompanyPage
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $cmpId The ID of the target company.
+   * @param int $targetCmpId The ID of the target company.
    *
    * @return string
    */
-  public static function getUrl($cmpId)
+  public static function getUrl($targetCmpId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_ROLE_OVERVIEW, 'pag');
-    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
+    $url .= self::putCgiVar('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }
@@ -39,12 +39,12 @@ class RoleOverviewPage extends CompanyPage
    */
   protected function echoTabContent()
   {
-    $roles = Abc::$DL->companyRoleGetAll($this->actCmpId);
+    $roles = Abc::$DL->companyRoleGetAll($this->targetCmpId);
 
     $table = new CoreOverviewTable();
 
     // Add table action for creating a new Company.
-    $table->addTableAction('default', new RoleInsertTableAction($this->actCmpId));
+    $table->addTableAction('default', new RoleInsertTableAction($this->targetCmpId));
 
     // Show role ID.
     $table->addColumn(new NumericTableColumn('ID', 'rol_id'));

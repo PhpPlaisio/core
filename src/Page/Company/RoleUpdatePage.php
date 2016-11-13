@@ -27,9 +27,8 @@ class RoleUpdatePage extends RoleBasePage
   {
     parent::__construct();
 
-    $this->actCmpId      = self::getCgiId('cmp', 'cmp');
     $this->rolId         = self::getCgiId('rol', 'rol');
-    $this->details       = Abc::$DL->companyRoleGetDetails($this->actCmpId, $this->rolId);
+    $this->details       = Abc::$DL->companyRoleGetDetails($this->targetCmpId, $this->rolId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -37,15 +36,15 @@ class RoleUpdatePage extends RoleBasePage
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $cmpId The ID of the target company.
-   * @param int $rolId The ID of role to be modified.
+   * @param int $targetCmpId The ID of the target company.
+   * @param int $rolId       The ID of role to be modified.
    *
    * @return string
    */
-  public static function getUrl($cmpId, $rolId)
+  public static function getUrl($targetCmpId, $rolId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_ROLE_UPDATE, 'pag');
-    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
+    $url .= self::putCgiVar('cmp', $targetCmpId, 'cmp');
     $url .= self::putCgiVar('rol', $rolId, 'rol');
 
     return $url;
@@ -63,7 +62,7 @@ class RoleUpdatePage extends RoleBasePage
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
 
-    Abc::$DL->companyRoleUpdate($this->actCmpId, $this->rolId, $values['rol_name'], $values['rol_weight']);
+    Abc::$DL->companyRoleUpdate($this->targetCmpId, $this->rolId, $values['rol_name'], $values['rol_weight']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

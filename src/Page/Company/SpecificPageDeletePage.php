@@ -37,7 +37,6 @@ class SpecificPageDeletePage extends Page
     parent::__construct();
 
     $this->targetCmpId = self::getCgiId('cmp', 'cmp');
-
     $this->targetPagId = self::getCgiId('tar_pag', 'pag');
   }
 
@@ -45,15 +44,15 @@ class SpecificPageDeletePage extends Page
   /**
    * Returns the URL of this page.
    *
-   * @param int $cmpId       The ID of the target company.
+   * @param int $targetCmpId The ID of the target company.
    * @param int $targetPagId The ID of the page the must be deleted.
    *
    * @return string
    */
-  public static function getUrl($cmpId, $targetPagId)
+  public static function getUrl($targetCmpId, $targetPagId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_DELETE, 'pag');
-    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
+    $url .= self::putCgiVar('cmp', $targetCmpId, 'cmp');
     $url .= self::putCgiVar('tar_pag', $targetPagId, 'pag');
 
     return $url;

@@ -111,7 +111,7 @@ abstract class RoleBasePage extends CompanyPage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(RoleDetailsPage::getUrl($this->actCmpId, $this->rolId));
+    HttpHeader::redirectSeeOther(RoleDetailsPage::getUrl($this->targetCmpId, $this->rolId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

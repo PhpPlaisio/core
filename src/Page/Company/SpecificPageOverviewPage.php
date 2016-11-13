@@ -34,21 +34,21 @@ class SpecificPageOverviewPage extends CompanyPage
   {
     parent::__construct();
 
-    $this->pages = Abc::$DL->companySpecificPageGetAll($this->actCmpId, $this->lanId);
+    $this->pages = Abc::$DL->companySpecificPageGetAll($this->targetCmpId, $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the URL of this page.
    *
-   * @param int $cmpId The ID of the target company.
+   * @param int $targetCmpId The ID of the target company.
    *
    * @return string The URL of this page.
    */
-  public static function getUrl($cmpId)
+  public static function getUrl($targetCmpId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_OVERVIEW, 'pag');
-    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
+    $url .= self::putCgiVar('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }
@@ -61,7 +61,7 @@ class SpecificPageOverviewPage extends CompanyPage
   {
     $table = new CoreOverviewTable();
 
-    $table->addTableAction('default', new SpecificPageInsertTableAction($this->actCmpId));
+    $table->addTableAction('default', new SpecificPageInsertTableAction($this->targetCmpId));
 
     // Add column with page ID.
     $table->addColumn(new NumericTableColumn('ID', 'pag_id'));
@@ -80,10 +80,10 @@ class SpecificPageOverviewPage extends CompanyPage
     $table->addColumn(new PageDetailsIconTableColumn());
 
     // Show link to modify Company specific page.
-    $table->addColumn(new SpecificPageUpdateIconTableColumn($this->actCmpId));
+    $table->addColumn(new SpecificPageUpdateIconTableColumn($this->targetCmpId));
 
     // Show link to delete Company specific page.
-    $table->addColumn(new SpecificPageDeleteIconTableColumn($this->actCmpId));
+    $table->addColumn(new SpecificPageDeleteIconTableColumn($this->targetCmpId));
 
     echo $table->getHtmlTable($this->pages);
   }

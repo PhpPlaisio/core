@@ -31,14 +31,14 @@ class ModuleUpdatePage extends CompanyPage
   /**
    * Returns the URL of this page.
    *
-   * @param int $cmpId The ID of the target company.
+   * @param int $targetCmpId The ID of the target company.
    *
    * @return string
    */
-  public static function getUrl($cmpId)
+  public static function getUrl($targetCmpId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_MODULE_UPDATE, 'pag');
-    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
+    $url .= self::putCgiVar('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }
@@ -60,7 +60,7 @@ class ModuleUpdatePage extends CompanyPage
   private function createForm()
   {
     // Get all available modules.
-    $modules = Abc::$DL->companyModuleGetAllAvailable($this->actCmpId, $this->lanId);
+    $modules = Abc::$DL->companyModuleGetAllAvailable($this->targetCmpId, $this->lanId);
 
     // Create the form.
     $this->form = new CoreForm();
@@ -108,11 +108,11 @@ class ModuleUpdatePage extends CompanyPage
     {
       if ($values['data'][$mdl_id]['mdl_enabled'])
       {
-        Abc::$DL->companyModuleEnable($this->actCmpId, $mdl_id);
+        Abc::$DL->companyModuleEnable($this->targetCmpId, $mdl_id);
       }
       else
       {
-        Abc::$DL->companyModuleDisable($this->actCmpId, $mdl_id);
+        Abc::$DL->companyModuleDisable($this->targetCmpId, $mdl_id);
       }
     }
 
@@ -146,7 +146,7 @@ class ModuleUpdatePage extends CompanyPage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(ModuleOverviewPage::getUrl($this->actCmpId));
+    HttpHeader::redirectSeeOther(ModuleOverviewPage::getUrl($this->targetCmpId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

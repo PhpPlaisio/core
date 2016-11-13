@@ -25,14 +25,14 @@ class RoleInsertPage extends RoleBasePage
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $cmpId The ID of the target company.
+   * @param int $targetCmpId The ID of the target company.
    *
    * @return string
    */
-  public static function getUrl($cmpId)
+  public static function getUrl($targetCmpId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_ROLE_INSERT, 'pag');
-    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
+    $url .= self::putCgiVar('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }
@@ -45,7 +45,7 @@ class RoleInsertPage extends RoleBasePage
   {
     $values = $this->form->getValues();
 
-    $this->rolId = Abc::$DL->companyRoleInsert($this->actCmpId, $values['rol_name'], $values['rol_weight']);
+    $this->rolId = Abc::$DL->companyRoleInsert($this->targetCmpId, $values['rol_name'], $values['rol_weight']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

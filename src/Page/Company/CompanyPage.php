@@ -23,7 +23,7 @@ abstract class CompanyPage extends CorePage
    *
    * @var int
    */
-  protected $actCmpId;
+  protected $targetCmpId;
 
   /**
    * The details of the company of which data is shown on this page.
@@ -40,22 +40,22 @@ abstract class CompanyPage extends CorePage
   {
     parent::__construct();
 
-    $this->actCmpId = self::getCgiId('cmp', 'cmp');
+    $this->targetCmpId = self::getCgiId('cmp', 'cmp');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the URL to a child page of this page.
    *
-   * @param int $pagId The ID of the child page.
-   * @param int $cmpId The ID of the target company.
+   * @param int $pagId       The ID of the child page.
+   * @param int $targetCmpId The ID of the target company.
    *
    * @return string The URL.
    */
-  public static function getChildUrl($pagId, $cmpId)
+  public static function getChildUrl($pagId, $targetCmpId)
   {
     $url = self::putCgiVar('pag', $pagId, 'pag');
-    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
+    $url .= self::putCgiVar('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }
@@ -67,9 +67,9 @@ abstract class CompanyPage extends CorePage
   protected function echoDashboard()
   {
     // Return immediately if the cmp_id is not set.
-    if (!$this->actCmpId) return;
+    if (!$this->targetCmpId) return;
 
-    $this->companyDetails = Abc::$DL->companyGetDetails($this->actCmpId);
+    $this->companyDetails = Abc::$DL->companyGetDetails($this->targetCmpId);
 
     echo '<div id="dashboard">';
     echo '<div id="info">';
@@ -90,7 +90,7 @@ abstract class CompanyPage extends CorePage
    */
   protected function echoTabContent()
   {
-    if ($this->actCmpId)
+    if ($this->targetCmpId)
     {
       $this->appendPageTitle($this->companyDetails['cmp_abbr']);
     }
@@ -101,11 +101,14 @@ abstract class CompanyPage extends CorePage
   }
 
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * {@inheritdoc}
+   */
   protected function getTabUrl($pagId)
   {
-    if ($this->actCmpId || $pagId==C::PAG_ID_COMPANY_OVERVIEW)
+    if ($this->targetCmpId || $pagId==C::PAG_ID_COMPANY_OVERVIEW)
     {
-      return self::getChildUrl($pagId, $this->actCmpId);
+      return self::getChildUrl($pagId, $this->targetCmpId);
     }
 
     return null;
@@ -121,9 +124,9 @@ abstract class CompanyPage extends CorePage
   {
     $abc = Abc::getInstance();
 
-    $values         = $form->getValues();
-    $this->actCmpId = Abc::$DL->companyGetCmpIdByCmpAbbr($values['cmp_abbr']);
-    if ($this->actCmpId) HttpHeader::redirectSeeOther(self::getChildUrl($abc->getPagId(), $this->actCmpId));
+    $values            = $form->getValues();
+    $this->targetCmpId = Abc::$DL->companyGetCmpIdByCmpAbbr($values['cmp_abbr']);
+    if ($this->targetCmpId) HttpHeader::redirectSeeOther(self::getChildUrl($abc->getPagId(), $this->targetCmpId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

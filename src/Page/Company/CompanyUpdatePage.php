@@ -20,12 +20,15 @@ class CompanyUpdatePage extends CompanyBasePage
   private $details;
 
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Object constructor.
+   */
   public function __construct()
   {
     parent::__construct();
 
-    $this->actCmpId    = self::getCgiId('cmp', 'cmp');
-    $this->details     = Abc::$DL->companyGetDetails($this->actCmpId);
+    $this->targetCmpId = self::getCgiId('cmp', 'cmp');
+    $this->details     = Abc::$DL->companyGetDetails($this->targetCmpId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -33,14 +36,14 @@ class CompanyUpdatePage extends CompanyBasePage
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $cmpId The ID of the target language.
+   * @param int $targetCmpId The ID of the target language.
    *
    * @return string
    */
-  public static function getUrl($cmpId)
+  public static function getUrl($targetCmpId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_UPDATE, 'pag');
-    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
+    $url .= self::putCgiVar('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }
@@ -57,7 +60,7 @@ class CompanyUpdatePage extends CompanyBasePage
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
 
-    Abc::$DL->companyUpdate($this->actCmpId, $values['cmp_abbr'], $values['cmp_label']);
+    Abc::$DL->companyUpdate($this->targetCmpId, $values['cmp_abbr'], $values['cmp_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

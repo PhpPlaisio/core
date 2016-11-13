@@ -20,7 +20,7 @@ abstract class CompanyBasePage extends CorePage
    *
    * @var int
    */
-  protected $actCmpId;
+  protected $targetCmpId;
 
   /**
    * The ID of the word for the text of the submit button of the form shown on this page.
@@ -111,7 +111,7 @@ abstract class CompanyBasePage extends CorePage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(CompanyDetailsPage::getUrl($this->actCmpId));
+    HttpHeader::redirectSeeOther(CompanyDetailsPage::getUrl($this->targetCmpId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -17,13 +17,6 @@ class CompanyDetailsPage extends CompanyPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The ID of the company of which data is shown on this page (i.e. the target company).
-   *
-   * @var int
-   */
-  protected $actCmpId;
-
-  /**
    * The details of the target company.
    *
    * @var array
@@ -38,23 +31,21 @@ class CompanyDetailsPage extends CompanyPage
   {
     parent::__construct();
 
-    $this->actCmpId = self::getCgiId('cmp', 'cmp');
-
-    $this->details = Abc::$DL->companyGetDetails($this->actCmpId);
+    $this->details = Abc::$DL->companyGetDetails($this->targetCmpId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $cmpId The ID of the target company.
+   * @param int $targetCmpId The ID of the target company.
    *
    * @return string
    */
-  public static function getUrl($cmpId)
+  public static function getUrl($targetCmpId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_DETAILS, 'pag');
-    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
+    $url .= self::putCgiVar('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }
@@ -77,7 +68,7 @@ class CompanyDetailsPage extends CompanyPage
     $table = new CoreDetailTable();
 
     // Add table action for update the company details.
-    $table->addTableAction('default', new CompanyUpdateTableAction($this->actCmpId));
+    $table->addTableAction('default', new CompanyUpdateTableAction($this->targetCmpId));
 
     // Show company ID.
     NumericTableRow::addRow($table, 'ID', $this->details['cmp_id'], '%d');

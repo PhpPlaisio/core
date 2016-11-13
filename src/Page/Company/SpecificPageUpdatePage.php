@@ -47,7 +47,7 @@ class SpecificPageUpdatePage extends CompanyPage
 
     $this->targetPagId = self::getCgiId('tar_pag', 'pag');
 
-    $this->targetPageDetails = Abc::$DL->companySpecificPageGetDetails($this->actCmpId,
+    $this->targetPageDetails = Abc::$DL->companySpecificPageGetDetails($this->targetCmpId,
                                                                        $this->targetPagId,
                                                                        $this->lanId);
   }
@@ -56,15 +56,15 @@ class SpecificPageUpdatePage extends CompanyPage
   /**
    * Returns the URL of this page.
    *
-   * @param int $cmpId       The ID of the target company.
+   * @param int $targetCmpId The ID of the target company.
    * @param int $targetPagId The ID of the page.
    *
    * @return string The URL of this page.
    */
-  public static function getUrl($cmpId, $targetPagId)
+  public static function getUrl($targetCmpId, $targetPagId)
   {
     $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_UPDATE, 'pag');
-    $url .= self::putCgiVar('cmp', $cmpId, 'cmp');
+    $url .= self::putCgiVar('cmp', $targetCmpId, 'cmp');
     $url .= self::putCgiVar('tar_pag', $targetPagId, 'pag');
 
     return $url;
@@ -80,7 +80,7 @@ class SpecificPageUpdatePage extends CompanyPage
 
     $values = $this->form->getValues();
 
-    Abc::$DL->companySpecificPageUpdate($this->actCmpId, $this->targetPagId, $values['pag_class_child']);
+    Abc::$DL->companySpecificPageUpdate($this->targetCmpId, $this->targetPagId, $values['pag_class_child']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -151,7 +151,7 @@ class SpecificPageUpdatePage extends CompanyPage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(SpecificPageOverviewPage::getUrl($this->actCmpId));
+    HttpHeader::redirectSeeOther(SpecificPageOverviewPage::getUrl($this->targetCmpId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
