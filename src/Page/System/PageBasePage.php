@@ -144,7 +144,7 @@ abstract class PageBasePage extends CorePage
     $method = $this->form->execute();
     switch ($method)
     {
-      case  'handleForm':
+      case 'handleForm':
         $this->handleForm();
         break;
 
