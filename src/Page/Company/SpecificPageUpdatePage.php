@@ -134,7 +134,7 @@ class SpecificPageUpdatePage extends CompanyPage
     $method = $this->form->execute();
     switch ($method)
     {
-      case  'handleForm':
+      case 'handleForm':
         $this->handleForm();
         break;
 
