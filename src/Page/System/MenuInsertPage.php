@@ -42,7 +42,7 @@ class MenuInsertPage extends MenuBasePage
     $changes = $this->form->getChangedControls();
     $values  = $this->form->getValues();
 
-    // Return immediately of no changes are submitted.
+    // Return immediately if no changes are submitted.
     if (empty($changes)) return;
 
     if ($values['mnu_title'])
