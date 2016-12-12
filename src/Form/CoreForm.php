@@ -9,6 +9,7 @@ use SetBased\Abc\Form\Control\ConstantControl;
 use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\HiddenControl;
 use SetBased\Abc\Form\Control\InvisibleControl;
+use SetBased\Abc\Form\Control\SubmitControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\Form;
 
@@ -114,7 +115,7 @@ class CoreForm extends Form
    * @param string     $method    The name of method for handling the form submit.
    * @param string     $name   The name of the submit button.
    *
-   * @return \SetBased\Abc\Form\Control\SubmitControl
+   * @return SubmitControl
    */
   public function addSubmitButton($wrdId, $method, $name = 'submit')
   {
