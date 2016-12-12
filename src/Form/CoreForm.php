@@ -78,8 +78,12 @@ class CoreForm extends Form
           // Set the size of text controls.
           case ($control instanceof TextControl):
             $max_length = $control->getAttribute('maxlength');
-            $size       = (isset($max_length)) ? min($max_length, self::$maxTextSize) : self::$maxTextSize;
-            $control->setAttrSize($size);
+            $size       = $control->getAttribute('size');
+            if ($size===null)
+            {
+              $size = (isset($max_length)) ? min($max_length, self::$maxTextSize) : self::$maxTextSize;
+              $control->setAttrSize($size);
+            }
             break;
         }
 
@@ -109,11 +113,15 @@ class CoreForm extends Form
    *                              </ul>
    * @param string     $method    The name of method for handling the form submit.
    * @param string     $name   The name of the submit button.
+   *
+   * @return \SetBased\Abc\Form\Control\SubmitControl
    */
   public function addSubmitButton($wrdId, $method, $name = 'submit')
   {
     $control = $this->visibleFieldSet->addSubmitButton($wrdId, $name);
     $this->addSubmitHandler($control, $method);
+
+    return $control;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
