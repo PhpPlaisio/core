@@ -232,7 +232,7 @@ class LoginPage extends Page
       if (Password::passwordNeedsRehash($response1['usr_password_hash']))
       {
         $hash = Password::passwordHash($values['usr_password']);
-        Abc::$DL->userUpdatePasswordHash($this->cmpId, $this->usrId, $hash);
+        Abc::$DL->userPasswordUpdateHash($this->cmpId, $this->usrId, $hash);
       }
 
       $domain_redirect = false;
