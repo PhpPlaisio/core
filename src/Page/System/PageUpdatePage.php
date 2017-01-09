@@ -27,8 +27,8 @@ class PageUpdatePage extends PageBasePage
   {
     parent::__construct();
 
-    $this->targetPagId   = self::getCgiId('tar_pag', 'pag');
-    $this->details       = Abc::$DL->systemPageGetDetails($this->targetPagId, $this->lanId);
+    $this->targetPagId = self::getCgiId('tar_pag', 'pag');
+    $this->details     = Abc::$DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -62,26 +62,26 @@ class PageUpdatePage extends PageBasePage
 
     if ($values['pag_title'])
     {
-      $wrd_id = Abc::$DL->wordInsertWord($this->usrId,
-                                         C::WDG_ID_PAGE_TITLE,
-                                         false,
-                                         false,
-                                         $values['pag_title']);
+      $wrd_id = Abc::$DL->bblWordInsertWord($this->usrId,
+                                            C::WDG_ID_PAGE_TITLE,
+                                            false,
+                                            false,
+                                            $values['pag_title']);
     }
     else
     {
       $wrd_id = $values['wrd_id'];
     }
 
-    Abc::$DL->systemPageUpdateDetails($this->targetPagId,
-                                      $wrd_id,
-                                      $values['ptb_id'],
-                                      $values['pag_id_org'],
-                                      $values['mnu_id'],
-                                      $values['pag_alias'],
-                                      $values['pag_class'],
-                                      $values['pag_label'],
-                                      $values['pag_weight']);
+    Abc::$DL->abcSystemPageUpdateDetails($this->targetPagId,
+                                         $wrd_id,
+                                         $values['ptb_id'],
+                                         $values['pag_id_org'],
+                                         $values['mnu_id'],
+                                         $values['pag_alias'],
+                                         $values['pag_class'],
+                                         $values['pag_label'],
+                                         $values['pag_weight']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

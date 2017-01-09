@@ -113,7 +113,7 @@ class CoreForm extends Form
    *                              <li>string: The text of the button.
    *                              </ul>
    * @param string     $method    The name of method for handling the form submit.
-   * @param string     $name   The name of the submit button.
+   * @param string     $name      The name of the submit button.
    *
    * @return SubmitControl
    */

@@ -47,7 +47,7 @@ class SpecificPageInsertPage extends CompanyPage
   {
     $values = $this->form->getValues();
 
-    Abc::$DL->companySpecificPageInsert($this->targetCmpId, $values['prt_pag_id'], $values['pag_class_child']);
+    Abc::$DL->abcCompanySpecificPageInsert($this->targetCmpId, $values['prt_pag_id'], $values['pag_class_child']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ class SpecificPageInsertPage extends CompanyPage
    */
   private function createForm()
   {
-    $pages = Abc::$DL->systemPageGetAll($this->lanId);
+    $pages = Abc::$DL->abcSystemPageGetAll($this->lanId);
 
     $this->form = new CoreForm();
 

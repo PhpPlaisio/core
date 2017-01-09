@@ -94,7 +94,7 @@ class DomainRedirectPage extends Page
   private function createForm()
   {
     $this->form = new Form();
-    $fieldset     = $this->form->addFieldSet(new FieldSet(''));
+    $fieldset   = $this->form->addFieldSet(new FieldSet(''));
 
     // Add hidden control for cdr_token2.
     $hidden = new HiddenControl('cdr_token2');
@@ -112,7 +112,7 @@ class DomainRedirectPage extends Page
     $cdr_token2 = $values['cdr_token2'];
 
     // Get session by cdr_token's.
-    $session = Abc::$DL->sessionGetSessionByRedirectTokens($cdr_token1, $cdr_token2);
+    $session = Abc::$DL->abcSessionGetSessionByRedirectTokens($cdr_token1, $cdr_token2);
 
     $parts = explode('.', $_SERVER['SERVER_NAME']);
 

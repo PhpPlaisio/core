@@ -60,7 +60,7 @@ class ModuleUpdatePage extends CompanyPage
   private function createForm()
   {
     // Get all available modules.
-    $modules = Abc::$DL->companyModuleGetAllAvailable($this->targetCmpId, $this->lanId);
+    $modules = Abc::$DL->abcCompanyModuleGetAllAvailable($this->targetCmpId, $this->lanId);
 
     // Create the form.
     $this->form = new CoreForm();
@@ -108,16 +108,16 @@ class ModuleUpdatePage extends CompanyPage
     {
       if ($values['data'][$mdl_id]['mdl_enabled'])
       {
-        Abc::$DL->companyModuleEnable($this->targetCmpId, $mdl_id);
+        Abc::$DL->abcCompanyModuleEnable($this->targetCmpId, $mdl_id);
       }
       else
       {
-        Abc::$DL->companyModuleDisable($this->targetCmpId, $mdl_id);
+        Abc::$DL->abcCompanyModuleDisable($this->targetCmpId, $mdl_id);
       }
     }
 
     // Use brute force to proper profiles.
-    Abc::$DL->profileProper();
+    Abc::$DL->abcProfileProper();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

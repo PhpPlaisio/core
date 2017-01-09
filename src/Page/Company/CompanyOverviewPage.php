@@ -41,7 +41,7 @@ class CompanyOverviewPage extends CompanyPage
    */
   protected function echoTabContent()
   {
-    $companies = Abc::$DL->companyGetAll();
+    $companies = Abc::$DL->abcCompanyGetAll();
 
     $table = new CoreOverviewTable();
 

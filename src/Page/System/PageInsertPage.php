@@ -42,25 +42,25 @@ class PageInsertPage extends PageBasePage
     $values = $this->form->getValues();
     if ($values['pag_title'])
     {
-      $wrd_id = Abc::$DL->wordInsertWord($this->usrId,
-                                         C::WDG_ID_PAGE_TITLE,
-                                         false,
-                                         false,
-                                         $values['pag_title']);
+      $wrd_id = Abc::$DL->bblWordInsertWord($this->usrId,
+                                            C::WDG_ID_PAGE_TITLE,
+                                            false,
+                                            false,
+                                            $values['pag_title']);
     }
     else
     {
       $wrd_id = $values['wrd_id'];
     }
 
-    $this->targetPagId = Abc::$DL->systemPageInsertDetails($wrd_id,
-                                                             $values['ptb_id'],
-                                                             $values['pag_id_org'],
-                                                             $values['mnu_id'],
-                                                             $values['pag_alias'],
-                                                             $values['pag_class'],
-                                                           $values['pag_label'],
-                                                           $values['pag_weight']);
+    $this->targetPagId = Abc::$DL->abcSystemPageInsertDetails($wrd_id,
+                                                              $values['ptb_id'],
+                                                              $values['pag_id_org'],
+                                                              $values['mnu_id'],
+                                                              $values['pag_alias'],
+                                                              $values['pag_class'],
+                                                              $values['pag_label'],
+                                                              $values['pag_weight']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

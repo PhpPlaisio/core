@@ -34,8 +34,8 @@ class TabUpdatePage extends TabBasePage
   {
     parent::__construct();
 
-    $this->ptbId         = self::getCgiId('ptb', 'ptb');
-    $this->details       = Abc::$DL->systemTabGetDetails($this->ptbId, $this->lanId);
+    $this->ptbId       = self::getCgiId('ptb', 'ptb');
+    $this->details     = Abc::$DL->abcSystemTabGetDetails($this->ptbId, $this->lanId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -69,18 +69,18 @@ class TabUpdatePage extends TabBasePage
 
     if ($values['ptb_title'])
     {
-      $wrd_id = Abc::$DL->wordInsertWord($this->usrId,
-                                         C::WDG_ID_PAGE_GROUP_TITLE,
-                                         false,
-                                         false,
-                                         $values['ptb_title']);
+      $wrd_id = Abc::$DL->bblWordInsertWord($this->usrId,
+                                            C::WDG_ID_PAGE_GROUP_TITLE,
+                                            false,
+                                            false,
+                                            $values['ptb_title']);
     }
     else
     {
       $wrd_id = $values['wrd_id'];
     }
 
-    Abc::$DL->systemTabUpdateDetails($this->ptbId, $wrd_id, $values['ptb_label']);
+    Abc::$DL->abcSystemTabUpdateDetails($this->ptbId, $wrd_id, $values['ptb_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

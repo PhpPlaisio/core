@@ -51,7 +51,7 @@ abstract class BabelPage extends CorePage
    */
   public function selectLanguage()
   {
-    $languages = Abc::$DL->languageGetAllLanguages($this->refLanId);
+    $languages = Abc::$DL->bblLanguageGetAllLanguages($this->refLanId);
 
     // If translator is authorized for 1 language return immediately.
     if (count($languages)==1)

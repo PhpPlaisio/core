@@ -33,7 +33,7 @@ class LogoutPage extends Page
   {
     $abc = Abc::getInstance();
 
-    Abc::$DL->sessionLogout($abc->getSesId(), $_SERVER['REMOTE_ADDR']);
+    Abc::$DL->abcSessionLogout($abc->getSesId(), $_SERVER['REMOTE_ADDR']);
 
     // Unset session and CSRF cookies.
     setcookie('ses_session_token', false, false, '/', $abc->getCanonicalServerName(), true, true);

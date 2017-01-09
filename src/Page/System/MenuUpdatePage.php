@@ -34,8 +34,8 @@ class MenuUpdatePage extends MenuBasePage
   {
     parent::__construct();
 
-    $this->mnuId         = self::getCgiId('mnu', 'mnu');
-    $this->details       = Abc::$DL->systemMenuGetDetails($this->mnuId, $this->lanId);
+    $this->mnuId       = self::getCgiId('mnu', 'mnu');
+    $this->details     = Abc::$DL->abcSystemMenuGetDetails($this->mnuId, $this->lanId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -69,24 +69,24 @@ class MenuUpdatePage extends MenuBasePage
 
     if ($values['mnu_title'])
     {
-      $wrd_id = Abc::$DL->wordInsertWord($this->usrId,
-                                         C::WDG_ID_MENU,
-                                         false,
-                                         false,
-                                         $values['mnu_title']);
+      $wrd_id = Abc::$DL->bblWordInsertWord($this->usrId,
+                                            C::WDG_ID_MENU,
+                                            false,
+                                            false,
+                                            $values['mnu_title']);
     }
     else
     {
       $wrd_id = $values['wrd_id'];
     }
 
-    Abc::$DL->systemMenuUpdate($this->mnuId,
-                               $wrd_id,
-                               $values['pag_id'],
-                               $values['mnu_level'],
-                               $values['mnu_group'],
-                               $values['mnu_weight'],
-                               $values['mnu_link']);
+    Abc::$DL->abcSystemMenuUpdate($this->mnuId,
+                                  $wrd_id,
+                                  $values['pag_id'],
+                                  $values['mnu_level'],
+                                  $values['mnu_group'],
+                                  $values['mnu_weight'],
+                                  $values['mnu_link']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

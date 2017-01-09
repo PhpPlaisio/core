@@ -35,7 +35,7 @@ class PageOverviewPage extends CorePage
    */
   protected function echoTabContent()
   {
-    $pages = Abc::$DL->SystemPageGetAll($this->lanId);
+    $pages = Abc::$DL->abcSystemPageGetAll($this->lanId);
 
     $table = new CoreOverviewTable();
     $table->addTableAction('default', new PageInsertTableAction());

@@ -64,8 +64,8 @@ abstract class FunctionalityBasePage extends CorePage
    */
   private function createForm()
   {
-    $modules = Abc::$DL->systemModuleGetAll($this->lanId);
-    $words   = Abc::$DL->wordGroupGetAllWords(C::WDG_ID_FUNCTIONALITIES, $this->lanId);
+    $modules = Abc::$DL->abcSystemModuleGetAll($this->lanId);
+    $words   = Abc::$DL->bblWordGroupGetAllWords(C::WDG_ID_FUNCTIONALITIES, $this->lanId);
 
     $this->form = new CoreForm();
 

@@ -71,10 +71,10 @@ class CoreFieldSet extends FieldSet
    * Adds a submit button to this fieldset.
    *
    * @param int|string $wrdId Depending on the type:
-   *                             <ul>
-   *                             <li>int: The ID of the word of the button text.
-   *                             <li>string: The text of the button.
-   *                             </ul>
+   *                          <ul>
+   *                          <li>int: The ID of the word of the button text.
+   *                          <li>string: The text of the button.
+   *                          </ul>
    * @param string     $name  The name of the submit button.
    *
    * @return SubmitControl

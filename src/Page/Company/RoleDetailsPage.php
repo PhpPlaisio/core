@@ -76,7 +76,7 @@ class RoleDetailsPage extends CompanyPage
    */
   private function showFunctionalities()
   {
-    $functionalities = Abc::$DL->companyRoleGetFunctionalities($this->targetCmpId, $this->rolId, $this->lanId);
+    $functionalities = Abc::$DL->abcCompanyRoleGetFunctionalities($this->targetCmpId, $this->rolId, $this->lanId);
 
     $table = new CoreOverviewTable();
 
@@ -110,7 +110,7 @@ class RoleDetailsPage extends CompanyPage
    */
   private function showPages()
   {
-    $pages = Abc::$DL->companyRoleGetPages($this->targetCmpId, $this->rolId, $this->lanId);
+    $pages = Abc::$DL->abcCompanyRoleGetPages($this->targetCmpId, $this->rolId, $this->lanId);
 
     $table = new CoreOverviewTable();
 
@@ -139,7 +139,7 @@ class RoleDetailsPage extends CompanyPage
    */
   private function showRole()
   {
-    $details = Abc::$DL->companyRoleGetDetails($this->targetCmpId, $this->rolId);
+    $details = Abc::$DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId);
 
     $table = new CoreDetailTable();
 

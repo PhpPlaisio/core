@@ -55,7 +55,7 @@ class PageUpdateFunctionalitiesPage extends CorePage
     parent::__construct();
 
     $this->targetPagId = self::getCgiId('tar_pag', 'pag');
-    $this->details     = Abc::$DL->systemPageGetDetails($this->targetPagId, $this->lanId);
+    $this->details     = Abc::$DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -90,16 +90,16 @@ class PageUpdateFunctionalitiesPage extends CorePage
     {
       if ($values['data'][$fun_id]['fun_checked'])
       {
-        Abc::$DL->systemFunctionalityInsertPage($fun_id, $this->targetPagId);
+        Abc::$DL->abcSystemFunctionalityInsertPage($fun_id, $this->targetPagId);
       }
       else
       {
-        Abc::$DL->systemFunctionalityDeletePage($fun_id, $this->targetPagId);
+        Abc::$DL->abcSystemFunctionalityDeletePage($fun_id, $this->targetPagId);
       }
     }
 
     // Use brute force to proper profiles.
-    Abc::$DL->profileProper();
+    Abc::$DL->abcProfileProper();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -121,7 +121,7 @@ class PageUpdateFunctionalitiesPage extends CorePage
   private function createForm()
   {
     // Get all functionalities.
-    $pages = Abc::$DL->systemPageGetAvailableFunctionalities($this->targetPagId, $this->lanId);
+    $pages = Abc::$DL->abcSystemPageGetAvailableFunctionalities($this->targetPagId, $this->lanId);
 
     // Create form.
     $this->form = new CoreForm();
@@ -188,7 +188,7 @@ class PageUpdateFunctionalitiesPage extends CorePage
    */
   private function showPageDetails()
   {
-    $details = Abc::$DL->systemPageGetDetails($this->targetPagId, $this->lanId);
+    $details = Abc::$DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
     $table   = new CoreDetailTable();
 
     // Add row with the ID of the page.

@@ -72,7 +72,7 @@ class TabDetailsPage extends CorePage
    */
   private function showDetails()
   {
-    $details = Abc::$DL->systemTabGetDetails($this->tabId, $this->lanId);
+    $details = Abc::$DL->abcSystemTabGetDetails($this->tabId, $this->lanId);
     $table   = new CoreDetailTable();
 
     // Add row with the ID of the tab.
@@ -93,7 +93,7 @@ class TabDetailsPage extends CorePage
    */
   private function showMasterPages()
   {
-    $pages = Abc::$DL->systemTabGetMasterPages($this->tabId, $this->lanId);
+    $pages = Abc::$DL->abcSystemTabGetMasterPages($this->tabId, $this->lanId);
 
     $table = new CoreOverviewTable();
 

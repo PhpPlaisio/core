@@ -34,7 +34,7 @@ class SpecificPageOverviewPage extends CompanyPage
   {
     parent::__construct();
 
-    $this->pages = Abc::$DL->companySpecificPageGetAll($this->targetCmpId, $this->lanId);
+    $this->pages = Abc::$DL->abcCompanySpecificPageGetAll($this->targetCmpId, $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

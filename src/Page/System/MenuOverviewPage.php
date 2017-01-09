@@ -34,7 +34,7 @@ class MenuOverviewPage extends CorePage
    */
   public function echoTabContent()
   {
-    $pages = Abc::$DL->systemMenuGetAllEntries($this->lanId);
+    $pages = Abc::$DL->abcSystemMenuGetAllEntries($this->lanId);
 
     $table = new CoreOverviewTable();
 

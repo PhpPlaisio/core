@@ -48,11 +48,11 @@ class ModuleInsertPage extends ModuleBasePage
     if ($values['mdl_name'])
     {
       // New module name. Insert word en retrieve wrd_id of the new word.
-      $wrd_id = Abc::$DL->wordInsertWord($this->usrId,
-                                         C::WDG_ID_MODULE,
-                                         false,
-                                         false,
-                                         $values['mdl_name']);
+      $wrd_id = Abc::$DL->bblWordInsertWord($this->usrId,
+                                            C::WDG_ID_MODULE,
+                                            false,
+                                            false,
+                                            $values['mdl_name']);
     }
     else
     {
@@ -61,7 +61,7 @@ class ModuleInsertPage extends ModuleBasePage
     }
 
     // Create the new module in the database.
-    $this->mdlId = Abc::$DL->systemModuleInsert($wrd_id);
+    $this->mdlId = Abc::$DL->abcSystemModuleInsert($wrd_id);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

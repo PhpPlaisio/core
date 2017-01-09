@@ -70,7 +70,7 @@ abstract class ModuleBasePage extends CorePage
    */
   private function createForm()
   {
-    $words = Abc::$DL->wordGroupGetAllWords(C::WDG_ID_MODULE, $this->lanId);
+    $words = Abc::$DL->bblWordGroupGetAllWords(C::WDG_ID_MODULE, $this->lanId);
 
     $this->form = new CoreForm();
 

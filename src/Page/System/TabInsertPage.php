@@ -42,18 +42,18 @@ class TabInsertPage extends TabBasePage
     $values = $this->form->getValues();
     if ($values['ptb_title'])
     {
-      $wrd_id = Abc::$DL->wordInsertWord($this->usrId,
-                                         C::WDG_ID_PAGE_GROUP_TITLE,
-                                         false,
-                                         false,
-                                         $values['ptb_title']);
+      $wrd_id = Abc::$DL->bblWordInsertWord($this->usrId,
+                                            C::WDG_ID_PAGE_GROUP_TITLE,
+                                            false,
+                                            false,
+                                            $values['ptb_title']);
     }
     else
     {
       $wrd_id = $values['wrd_id'];
     }
 
-    Abc::$DL->systemTabInsertDetails($wrd_id, $values['ptb_label']);
+    Abc::$DL->abcSystemTabInsertDetails($wrd_id, $values['ptb_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

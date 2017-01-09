@@ -74,7 +74,7 @@ abstract class PageBasePage extends CorePage
     $this->form = new CoreForm();
 
     // Create select box for (known) page titles.
-    $titles = Abc::$DL->wordGroupGetAllWords(C::WDG_ID_PAGE_TITLE, $this->lanId);
+    $titles = Abc::$DL->bblWordGroupGetAllWords(C::WDG_ID_PAGE_TITLE, $this->lanId);
     $input  = new SelectControl('wrd_id');
     $input->setOptions($titles, 'wrd_id', 'wrd_text');
     $input->setEmptyOption();
@@ -88,14 +88,14 @@ abstract class PageBasePage extends CorePage
     /** @todo Add validator: either wrd_id is not empty or pag_title is not empty */
 
     // Create form control for page tab group.
-    $tabs  = Abc::$DL->systemTabGetAll($this->lanId);
+    $tabs  = Abc::$DL->abcSystemTabGetAll($this->lanId);
     $input = new SelectControl('ptb_id');
     $input->setOptions($tabs, 'ptb_id', 'ptb_label');
     $input->setEmptyOption();
     $this->form->addFormControl($input, 'Page Tab');
 
     // Create form control for original page.
-    $pages = Abc::$DL->systemPageGetAllMasters($this->lanId);
+    $pages = Abc::$DL->abcSystemPageGetAllMasters($this->lanId);
     $input = new SelectControl('pag_id_org');
     $input->setOptions($pages, 'pag_id', 'pag_class');
     $input->setEmptyOption();
@@ -103,7 +103,7 @@ abstract class PageBasePage extends CorePage
     $this->form->addFormControl($input, 'Original Page');
 
     // Create form control for menu item with which the page is associated..
-    $menus = Abc::$DL->systemMenuGetAllEntries($this->lanId);
+    $menus = Abc::$DL->abcSystemMenuGetAllEntries($this->lanId);
     $input = new SelectControl('mnu_id');
     $input->setOptions($menus, 'mnu_id', 'mnu_name');
     $input->setEmptyOption();

@@ -28,7 +28,7 @@ class CompanyUpdatePage extends CompanyBasePage
     parent::__construct();
 
     $this->targetCmpId = self::getCgiId('cmp', 'cmp');
-    $this->details     = Abc::$DL->companyGetDetails($this->targetCmpId);
+    $this->details     = Abc::$DL->abcCompanyGetDetails($this->targetCmpId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -60,7 +60,7 @@ class CompanyUpdatePage extends CompanyBasePage
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
 
-    Abc::$DL->companyUpdate($this->targetCmpId, $values['cmp_abbr'], $values['cmp_label']);
+    Abc::$DL->abcCompanyUpdate($this->targetCmpId, $values['cmp_abbr'], $values['cmp_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

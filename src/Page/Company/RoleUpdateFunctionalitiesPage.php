@@ -51,7 +51,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
 
     $this->rolId = self::getCgiId('rol', 'rol');
 
-    $this->details = Abc::$DL->companyRoleGetDetails($this->targetCmpId, $this->rolId);
+    $this->details = Abc::$DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -89,7 +89,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
   private function createForm()
   {
     // Get all available functionalities.
-    $pages = Abc::$DL->companyRoleGetAvailableFunctionalities($this->targetCmpId, $this->rolId, $this->lanId);
+    $pages = Abc::$DL->abcCompanyRoleGetAvailableFunctionalities($this->targetCmpId, $this->rolId, $this->lanId);
 
     // Create form.
     $this->form = new CoreForm();
@@ -137,16 +137,16 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
     {
       if ($values['data'][$fun_id]['fun_enabled'])
       {
-        Abc::$DL->companyRoleInsertFunctionality($this->targetCmpId, $this->rolId, $fun_id);
+        Abc::$DL->abcCompanyRoleInsertFunctionality($this->targetCmpId, $this->rolId, $fun_id);
       }
       else
       {
-        Abc::$DL->companyRoleDeleteFunctionality($this->targetCmpId, $this->rolId, $fun_id);
+        Abc::$DL->abcCompanyRoleDeleteFunctionality($this->targetCmpId, $this->rolId, $fun_id);
       }
     }
 
     // Use brute force to proper profiles.
-    Abc::$DL->profileProper();
+    Abc::$DL->abcProfileProper();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

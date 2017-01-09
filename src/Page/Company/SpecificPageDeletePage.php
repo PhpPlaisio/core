@@ -64,7 +64,7 @@ class SpecificPageDeletePage extends Page
    */
   public function echoPage()
   {
-    Abc::$DL->companySpecificPageDelete($this->targetCmpId, $this->targetPagId);
+    Abc::$DL->abcCompanySpecificPageDelete($this->targetCmpId, $this->targetPagId);
 
     HttpHeader::redirectSeeOther(SpecificPageOverviewPage::getUrl($this->targetCmpId));
   }

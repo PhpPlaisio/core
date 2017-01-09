@@ -19,18 +19,18 @@ abstract class CompanyPage extends CorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The ID of the company of which data is shown on this page (i.e. the target company).
-   *
-   * @var int
-   */
-  protected $targetCmpId;
-
-  /**
    * The details of the company of which data is shown on this page.
    *
    * @var array
    */
   protected $companyDetails;
+
+  /**
+   * The ID of the company of which data is shown on this page (i.e. the target company).
+   *
+   * @var int
+   */
+  protected $targetCmpId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -69,7 +69,7 @@ abstract class CompanyPage extends CorePage
     // Return immediately if the cmp_id is not set.
     if (!$this->targetCmpId) return;
 
-    $this->companyDetails = Abc::$DL->companyGetDetails($this->targetCmpId);
+    $this->companyDetails = Abc::$DL->abcCompanyGetDetails($this->targetCmpId);
 
     echo '<div id="dashboard">';
     echo '<div id="info">';
@@ -125,7 +125,7 @@ abstract class CompanyPage extends CorePage
     $abc = Abc::getInstance();
 
     $values            = $form->getValues();
-    $this->targetCmpId = Abc::$DL->companyGetCmpIdByCmpAbbr($values['cmp_abbr']);
+    $this->targetCmpId = Abc::$DL->abcCompanyGetCmpIdByCmpAbbr($values['cmp_abbr']);
     if ($this->targetCmpId) HttpHeader::redirectSeeOther(self::getChildUrl($abc->getPagId(), $this->targetCmpId));
   }
 

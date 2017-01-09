@@ -46,14 +46,14 @@ class FunctionalityInsertPage extends FunctionalityBasePage
 
     if ($values['fun_name'])
     {
-      $wrd_id = Abc::$DL->wordInsertWord($this->usrId, C::WDG_ID_FUNCTIONALITIES, false, false, $values['fun_name']);
+      $wrd_id = Abc::$DL->bblWordInsertWord($this->usrId, C::WDG_ID_FUNCTIONALITIES, false, false, $values['fun_name']);
     }
     else
     {
       $wrd_id = $values['wrd_id'];
     }
 
-    Abc::$DL->systemFunctionalityInsertDetails($values['mdl_id'], $wrd_id);
+    Abc::$DL->abcSystemFunctionalityInsertDetails($values['mdl_id'], $wrd_id);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

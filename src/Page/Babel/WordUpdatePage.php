@@ -28,7 +28,7 @@ class WordUpdatePage extends WordBasePage
     parent::__construct();
 
     $this->wrdId       = self::getCgiId('wrd', 'wrd');
-    $this->details     = Abc::$DL->wordGetDetails($this->wrdId, $this->actLanId);
+    $this->details     = Abc::$DL->bblWordGetDetails($this->wrdId, $this->actLanId);
     $this->wdgId       = $this->details['wdg_id'];
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
@@ -63,11 +63,11 @@ class WordUpdatePage extends WordBasePage
     // Return immediately when no form controls are changed.
     if (empty($changes)) return;
 
-    Abc::$DL->wordUpdateDetails($this->wrdId,
-                                $values['wdg_id'],
-                                $values['wrd_label'],
-                                $values['wrd_comment'],
-                                $values['wdt_text']);
+    Abc::$DL->bblWordUpdateDetails($this->wrdId,
+                                   $values['wdg_id'],
+                                   $values['wrd_label'],
+                                   $values['wrd_comment'],
+                                   $values['wdt_text']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

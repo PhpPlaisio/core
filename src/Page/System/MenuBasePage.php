@@ -68,7 +68,7 @@ abstract class MenuBasePage extends CorePage
     $this->form = new CoreForm();
 
     // Create select box for (known) page titles.
-    $titles = Abc::$DL->wordGroupGetAllWords(C::WDG_ID_MENU, $this->lanId);
+    $titles = Abc::$DL->bblWordGroupGetAllWords(C::WDG_ID_MENU, $this->lanId);
     $input  = new SelectControl('wrd_id');
     $input->setOptions($titles, 'wrd_id', 'wrd_text');
     $input->setOptionsObfuscator(Abc::getObfuscator('wrd'));
@@ -81,7 +81,7 @@ abstract class MenuBasePage extends CorePage
     $this->form->addFormControl($input, 'Menu Title');
 
     // Create select box for chose page for menu.
-    $pages = Abc::$DL->systemPageGetAll($this->lanId);
+    $pages = Abc::$DL->abcSystemPageGetAll($this->lanId);
     $input = new SelectControl('pag_id');
     $input->setOptions($pages, 'pag_id', 'pag_class');
     $input->setEmptyOption();

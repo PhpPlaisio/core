@@ -35,7 +35,7 @@ class FunctionalityOverviewPage extends CorePage
    */
   protected function echoTabContent()
   {
-    $functionalities = Abc::$DL->systemFunctionalityGetAll($this->lanId);
+    $functionalities = Abc::$DL->abcSystemFunctionalityGetAll($this->lanId);
 
     $table = new CoreOverviewTable();
     $table->addTableAction('default', new FunctionalityInsertTableAction());

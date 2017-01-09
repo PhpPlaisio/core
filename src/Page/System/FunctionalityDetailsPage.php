@@ -47,7 +47,7 @@ class FunctionalityDetailsPage extends CorePage
 
     $this->funId = self::getCgiId('fun', 'fun');
 
-    $this->details = Abc::$DL->systemFunctionalityGetDetails($this->funId, $this->lanId);
+    $this->details = Abc::$DL->abcSystemFunctionalityGetDetails($this->funId, $this->lanId);
 
     $this->appendPageTitle($this->details['fun_name']);
   }
@@ -107,7 +107,7 @@ class FunctionalityDetailsPage extends CorePage
    */
   private function showPages()
   {
-    $pages = Abc::$DL->systemFunctionalityGetPages($this->funId, $this->lanId);
+    $pages = Abc::$DL->abcSystemFunctionalityGetPages($this->funId, $this->lanId);
 
     $table = new CoreOverviewTable();
     $table->addTableAction('default', new FunctionalityUpdatePagesTableAction($this->funId));
@@ -137,7 +137,7 @@ class FunctionalityDetailsPage extends CorePage
    */
   private function showRoles()
   {
-    $roles = Abc::$DL->systemFunctionalityGetRoles($this->funId);
+    $roles = Abc::$DL->abcSystemFunctionalityGetRoles($this->funId);
 
     $table = new CoreOverviewTable();
 

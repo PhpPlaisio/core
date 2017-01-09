@@ -39,7 +39,7 @@ class RoleOverviewPage extends CompanyPage
    */
   protected function echoTabContent()
   {
-    $roles = Abc::$DL->companyRoleGetAll($this->targetCmpId);
+    $roles = Abc::$DL->abcCompanyRoleGetAll($this->targetCmpId);
 
     $table = new CoreOverviewTable();
 

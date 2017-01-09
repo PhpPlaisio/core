@@ -55,7 +55,7 @@ class ModuleUpdateCompaniesPage extends CorePage
 
     $this->modId = self::getCgiId('mdl', 'mdl');
 
-    $this->details = Abc::$DL->systemModuleGetDetails($this->modId, $this->lanId);
+    $this->details = Abc::$DL->abcSystemModuleGetDetails($this->modId, $this->lanId);
 
     $this->appendPageTitle($this->details['mdl_name']);
   }
@@ -95,7 +95,7 @@ class ModuleUpdateCompaniesPage extends CorePage
   private function createForm()
   {
     // Get all available pages.
-    $pages = Abc::$DL->systemModuleGetAvailableCompanies($this->modId);
+    $pages = Abc::$DL->abcSystemModuleGetAvailableCompanies($this->modId);
 
     // Create form.
     $this->form = new CoreForm();
@@ -143,16 +143,16 @@ class ModuleUpdateCompaniesPage extends CorePage
     {
       if ($values['data'][$cmp_id]['mdl_granted'])
       {
-        Abc::$DL->companyModuleEnable($cmp_id, $this->modId);
+        Abc::$DL->abcCompanyModuleEnable($cmp_id, $this->modId);
       }
       else
       {
-        Abc::$DL->companyModuleDisable($cmp_id, $this->modId);
+        Abc::$DL->abcCompanyModuleDisable($cmp_id, $this->modId);
       }
     }
 
     // Use brute force to proper profiles.
-    Abc::$DL->profileProper();
+    Abc::$DL->abcProfileProper();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

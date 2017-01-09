@@ -86,7 +86,7 @@ class WordTranslateWordsPage extends BabelPage
    */
   private function createForm()
   {
-    $words = Abc::$DL->wordGroupGetAllWordsTranslator($this->wdgId, $this->actLanId);
+    $words = Abc::$DL->bblWordGroupGetAllWordsTranslator($this->wdgId, $this->actLanId);
 
     $this->form = new CoreForm();
 
@@ -128,7 +128,7 @@ class WordTranslateWordsPage extends BabelPage
 
     foreach ($changes['data'] as $wrd_id => $changed)
     {
-      Abc::$DL->wordTranslateWord($this->usrId, $wrd_id, $this->actLanId, $values['data'][$wrd_id]['act_wdt_text']);
+      Abc::$DL->bblWordTranslateWord($this->usrId, $wrd_id, $this->actLanId, $values['data'][$wrd_id]['act_wdt_text']);
     }
   }
 

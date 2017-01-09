@@ -35,7 +35,7 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
     parent::__construct();
 
     $this->funId       = self::getCgiId('fun', 'fun');
-    $this->details     = Abc::$DL->systemFunctionalityGetDetails($this->funId, $this->lanId);
+    $this->details     = Abc::$DL->abcSystemFunctionalityGetDetails($this->funId, $this->lanId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -69,18 +69,18 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
 
     if ($values['fun_name'])
     {
-      $wrd_id = Abc::$DL->wordInsertWord($this->usrId,
-                                         C::WDG_ID_FUNCTIONALITIES,
-                                         false,
-                                         false,
-                                         $values['fun_name']);
+      $wrd_id = Abc::$DL->bblWordInsertWord($this->usrId,
+                                            C::WDG_ID_FUNCTIONALITIES,
+                                            false,
+                                            false,
+                                            $values['fun_name']);
     }
     else
     {
       $wrd_id = $values['wrd_id'];
     }
 
-    Abc::$DL->systemFunctionalityUpdateDetails($this->funId, $values['mdl_id'], $wrd_id);
+    Abc::$DL->abcSystemFunctionalityUpdateDetails($this->funId, $values['mdl_id'], $wrd_id);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

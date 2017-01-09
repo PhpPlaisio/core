@@ -174,10 +174,10 @@ abstract class CorePage extends Page
    */
   protected function getPageTabs()
   {
-    $this->tabs = Abc::$DL->authGetPageTabs($this->cmpId,
-                                            Abc::getInstance()->getPtbId(),
-                                            $this->proId,
-                                            $this->lanId);
+    $this->tabs = Abc::$DL->abcAuthGetPageTabs($this->cmpId,
+                                               Abc::getInstance()->getPtbId(),
+                                               $this->proId,
+                                               $this->lanId);
     foreach ($this->tabs as &$tab)
     {
       $tab['url'] = $this->getTabUrl($tab['pag_id']);
@@ -211,7 +211,7 @@ abstract class CorePage extends Page
    */
   private function echoMainMenu()
   {
-    $menu_items  = Abc::$DL->authGetMenu($this->cmpId, $this->proId, $this->lanId);
+    $menu_items  = Abc::$DL->abcAuthGetMenu($this->cmpId, $this->proId, $this->lanId);
     $page_mnu_id = Abc::getInstance()->getMnuId();
 
     echo '<ul>';

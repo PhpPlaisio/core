@@ -55,7 +55,7 @@ class FunctionalityUpdateRolesPage extends CorePage
 
     $this->funId = self::getCgiId('fun', 'fun');
 
-    $this->details = Abc::$DL->systemFunctionalityGetDetails($this->funId, $this->lanId);
+    $this->details = Abc::$DL->abcSystemFunctionalityGetDetails($this->funId, $this->lanId);
 
     $this->appendPageTitle($this->details['fun_name']);
   }
@@ -95,7 +95,7 @@ class FunctionalityUpdateRolesPage extends CorePage
   private function createForm()
   {
     // Get all available pages.
-    $pages = Abc::$DL->systemFunctionalityGetAvailableRoles($this->funId);
+    $pages = Abc::$DL->abcSystemFunctionalityGetAvailableRoles($this->funId);
 
     // Create form.
     $this->form = new CoreForm();
@@ -143,16 +143,16 @@ class FunctionalityUpdateRolesPage extends CorePage
     {
       if ($values['data'][$rol_id]['rol_enabled'])
       {
-        Abc::$DL->companyRoleInsertFunctionality($values['data'][$rol_id]['cmp_id'], $rol_id, $this->funId);
+        Abc::$DL->abcCompanyRoleInsertFunctionality($values['data'][$rol_id]['cmp_id'], $rol_id, $this->funId);
       }
       else
       {
-        Abc::$DL->companyRoleDeleteFunctionality($values['data'][$rol_id]['cmp_id'], $rol_id, $this->funId);
+        Abc::$DL->abcCompanyRoleDeleteFunctionality($values['data'][$rol_id]['cmp_id'], $rol_id, $this->funId);
       }
     }
 
     // Use brute force to proper profiles.
-    Abc::$DL->profileProper();
+    Abc::$DL->abcProfileProper();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

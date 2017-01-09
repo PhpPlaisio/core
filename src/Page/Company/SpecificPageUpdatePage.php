@@ -47,9 +47,9 @@ class SpecificPageUpdatePage extends CompanyPage
 
     $this->targetPagId = self::getCgiId('tar_pag', 'pag');
 
-    $this->targetPageDetails = Abc::$DL->companySpecificPageGetDetails($this->targetCmpId,
-                                                                       $this->targetPagId,
-                                                                       $this->lanId);
+    $this->targetPageDetails = Abc::$DL->abcCompanySpecificPageGetDetails($this->targetCmpId,
+                                                                          $this->targetPagId,
+                                                                          $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ class SpecificPageUpdatePage extends CompanyPage
 
     $values = $this->form->getValues();
 
-    Abc::$DL->companySpecificPageUpdate($this->targetCmpId, $this->targetPagId, $values['pag_class_child']);
+    Abc::$DL->abcCompanySpecificPageUpdate($this->targetCmpId, $this->targetPagId, $values['pag_class_child']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

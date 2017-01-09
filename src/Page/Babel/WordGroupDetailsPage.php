@@ -47,7 +47,7 @@ class WordGroupDetailsPage extends BabelPage
 
     $this->wdgId = self::getCgiId('wdg', 'wdg');
 
-    $this->details = Abc::$DL->wordGroupGetDetails($this->wdgId);
+    $this->details = Abc::$DL->bblWordGroupGetDetails($this->wdgId);
 
     $this->appendPageTitle($this->details['wdg_name']);
   }
@@ -111,12 +111,12 @@ class WordGroupDetailsPage extends BabelPage
   {
     // Determine whether the user is a translator.
     $is_translator = ($this->actLanId!=$this->refLanId &&
-      Abc::$DL->authGetPageAuth($this->cmpId, $this->proId, C::PAG_ID_BABEL_WORD_TRANSLATE));
+      Abc::$DL->abcAuthGetPageAuth($this->cmpId, $this->proId, C::PAG_ID_BABEL_WORD_TRANSLATE));
 
-    $words = Abc::$DL->wordGroupGetAllWordsTranslator($this->wdgId, $this->actLanId);
+    $words = Abc::$DL->bblWordGroupGetAllWordsTranslator($this->wdgId, $this->actLanId);
 
-    $ref_language = Abc::$DL->languageGetName($this->refLanId, $this->refLanId);
-    $act_language = Abc::$DL->LanguageGetName($this->actLanId, $this->refLanId);
+    $ref_language = Abc::$DL->bblLanguageGetName($this->refLanId, $this->refLanId);
+    $act_language = Abc::$DL->bblLanguageGetName($this->actLanId, $this->refLanId);
 
     $table = new CoreOverviewTable();
 
@@ -162,7 +162,7 @@ class WordGroupDetailsPage extends BabelPage
     $table->addColumn(new WordUpdateIconTableColumn());
 
     // Show link to delete the word.
-    if (Abc::$DL->authGetPageAuth($this->cmpId, $this->proId, C::PAG_ID_BABEL_WORD_DELETE))
+    if (Abc::$DL->abcAuthGetPageAuth($this->cmpId, $this->proId, C::PAG_ID_BABEL_WORD_DELETE))
     {
       $table->addColumn(new WordDeleteIconTableColumn());
     }

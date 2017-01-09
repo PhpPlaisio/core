@@ -16,13 +16,6 @@ abstract class CompanyBasePage extends CorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The ID of the company to be modified or inserted.
-   *
-   * @var int
-   */
-  protected $targetCmpId;
-
-  /**
    * The ID of the word for the text of the submit button of the form shown on this page.
    *
    * @var int
@@ -35,6 +28,13 @@ abstract class CompanyBasePage extends CorePage
    * @var CoreForm
    */
   protected $form;
+
+  /**
+   * The ID of the company to be modified or inserted.
+   *
+   * @var int
+   */
+  protected $targetCmpId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

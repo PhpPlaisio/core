@@ -73,7 +73,7 @@ class PageDetailsPage extends CorePage
    */
   private function showDetails()
   {
-    $details = Abc::$DL->systemPageGetDetails($this->targetPagId, $this->lanId);
+    $details = Abc::$DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
     $table   = new CoreDetailTable();
 
     // Add table action for updating the page details.
@@ -112,7 +112,7 @@ class PageDetailsPage extends CorePage
    */
   private function showFunctionalities()
   {
-    $roles = Abc::$DL->systemPageGetGrantedFunctionalities($this->targetPagId, $this->lanId);
+    $roles = Abc::$DL->abcSystemPageGetGrantedFunctionalities($this->targetPagId, $this->lanId);
 
     $table = new CoreOverviewTable();
 
@@ -134,7 +134,7 @@ class PageDetailsPage extends CorePage
    */
   private function showGrantedRoles()
   {
-    $roles = Abc::$DL->systemPageGetGrantedRoles($this->targetPagId, $this->lanId);
+    $roles = Abc::$DL->abcSystemPageGetGrantedRoles($this->targetPagId, $this->lanId);
 
     $table = new CoreOverviewTable();
 

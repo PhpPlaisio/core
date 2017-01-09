@@ -39,7 +39,7 @@ class CompanyInsertPage extends CompanyBasePage
   {
     $values = $this->form->getValues();
 
-    $this->targetCmpId = Abc::$DL->companyInsert($values['cmp_abbr'], $values['cmp_label']);
+    $this->targetCmpId = Abc::$DL->abcCompanyInsert($values['cmp_abbr'], $values['cmp_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

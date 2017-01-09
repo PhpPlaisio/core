@@ -205,7 +205,7 @@ class LoginPage extends Page
     $values = $this->form->getValues();
 
     // Phase 1: Validate the user is allowed to login (except for password validation).
-    $response1 = Abc::$DL->sessionLogin1($abc->getSesId(), $values['usr_name'], $values['cmp_abbr']);
+    $response1 = Abc::$DL->abcSessionLogin1($abc->getSesId(), $values['usr_name'], $values['cmp_abbr']);
     $lgr_id    = $response1['lgr_id'];
 
     if ($lgr_id==C::LGR_ID_GRANTED)
@@ -216,13 +216,13 @@ class LoginPage extends Page
     }
 
     // Phase 3: Log the login attempt and set session.
-    $response3 = Abc::$DL->sessionLogin3($abc->getSesId(),
-                                         $response1['cmp_id'],
-                                         $response1['usr_id'],
-                                         $lgr_id,
-                                         $values['usr_name'],
-                                         $values['cmp_abbr'],
-                                         $_SERVER['REMOTE_ADDR']);
+    $response3 = Abc::$DL->abcSessionLogin3($abc->getSesId(),
+                                            $response1['cmp_id'],
+                                            $response1['usr_id'],
+                                            $lgr_id,
+                                            $values['usr_name'],
+                                            $values['cmp_abbr'],
+                                            $_SERVER['REMOTE_ADDR']);
 
     if ($response3['lgr_id']==C::LGR_ID_GRANTED)
     {
@@ -232,7 +232,7 @@ class LoginPage extends Page
       if (Password::passwordNeedsRehash($response1['usr_password_hash']))
       {
         $hash = Password::passwordHash($values['usr_password']);
-        Abc::$DL->userUpdatePasswordHash($this->cmpId, $this->usrId, $hash);
+        Abc::$DL->abcUserPasswordUpdateHash($this->cmpId, $this->usrId, $hash);
       }
 
       $domain_redirect = false;
@@ -247,7 +247,7 @@ class LoginPage extends Page
           setcookie('ses_csrf_token', false, false, '/', $abc->getCanonicalServerName(), true, false);
           /*
           // Get tokens for cross domain redirect.
-          $tokens = Abc::$DL->sessionGetRedirectTokens( $this->myRequestBus->getSesId() );
+          $tokens = Abc::$DL->abcSessionGetRedirectTokens( $this->myRequestBus->getSesId() );
 
           // Set a (temporary) cookie that is valid at SLD.
           setcookie( 'cdr_token1', $tokens['cdr_token1'], false, '/', $parts[1].'.'.$parts[2], true, true );

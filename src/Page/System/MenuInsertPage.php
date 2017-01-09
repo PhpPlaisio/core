@@ -47,23 +47,23 @@ class MenuInsertPage extends MenuBasePage
 
     if ($values['mnu_title'])
     {
-      $wrd_id = Abc::$DL->wordInsertWord($this->usrId,
-                                         C::WDG_ID_MENU,
-                                         false,
-                                         false,
-                                         $values['mnu_title']);
+      $wrd_id = Abc::$DL->bblWordInsertWord($this->usrId,
+                                            C::WDG_ID_MENU,
+                                            false,
+                                            false,
+                                            $values['mnu_title']);
     }
     else
     {
       $wrd_id = $values['wrd_id'];
     }
 
-    Abc::$DL->systemMenuInsert($wrd_id,
-                               $values['pag_id'],
-                               $values['mnu_level'],
-                               $values['mnu_group'],
-                               $values['mnu_weight'],
-                               $values['mnu_link']);
+    Abc::$DL->abcSystemMenuInsert($wrd_id,
+                                  $values['pag_id'],
+                                  $values['mnu_level'],
+                                  $values['mnu_group'],
+                                  $values['mnu_weight'],
+                                  $values['mnu_link']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -47,7 +47,7 @@ class ModuleDetailsPage extends CorePage
 
     $this->mdlId = self::getCgiId('mdl', 'mdl');
 
-    $this->details = Abc::$DL->systemModuleGetDetails($this->mdlId, $this->lanId);
+    $this->details = Abc::$DL->abcSystemModuleGetDetails($this->mdlId, $this->lanId);
 
     $this->appendPageTitle($this->details['mdl_name']);
   }
@@ -87,7 +87,7 @@ class ModuleDetailsPage extends CorePage
    */
   private function showCompanies()
   {
-    $functions = Abc::$DL->systemModuleGetGrantedCompanies($this->mdlId);
+    $functions = Abc::$DL->abcSystemModuleGetGrantedCompanies($this->mdlId);
 
     $table = new CoreOverviewTable();
 
@@ -132,7 +132,7 @@ class ModuleDetailsPage extends CorePage
    */
   private function showFunctionalities()
   {
-    $functions = Abc::$DL->systemModuleGetFunctions($this->mdlId, $this->lanId);
+    $functions = Abc::$DL->abcSystemModuleGetFunctions($this->mdlId, $this->lanId);
 
     $table = new CoreOverviewTable();
 

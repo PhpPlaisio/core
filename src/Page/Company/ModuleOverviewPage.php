@@ -37,7 +37,7 @@ class ModuleOverviewPage extends CompanyPage
    */
   protected function echoTabContent()
   {
-    $modules = Abc::$DL->companyModuleGetAllEnabled($this->targetCmpId, $this->lanId);
+    $modules = Abc::$DL->abcCompanyModuleGetAllEnabled($this->targetCmpId, $this->lanId);
 
     $table = new CoreOverviewTable();
 

@@ -31,7 +31,7 @@ class CompanyDetailsPage extends CompanyPage
   {
     parent::__construct();
 
-    $this->details = Abc::$DL->companyGetDetails($this->targetCmpId);
+    $this->details = Abc::$DL->abcCompanyGetDetails($this->targetCmpId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
