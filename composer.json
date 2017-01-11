@@ -7,25 +7,25 @@
   ],
   "type": "library",
   "license": "MIT",
-  "minimum-stability": "dev",
-  "prefer-stable": true,
   "require-dev": {
     "phing/phing": "2.*",
     "phpunit/phpunit": "4.* || 5.*",
-    "setbased/phing-extensions": "*"
+    "setbased/phing-extensions": "2.*"
   },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "require": {
     "php": ">=5.4.0",
     "gajus/dindent": "2.*",
     "ircmaxell/password-compat": ">=1.0.3",
     "setbased/exception": "1.*",
-    "setbased/abc": "*",
-    "setbased/abc-form": "*",
-    "setbased/abc-form-louver": "*",
+    "setbased/abc": "dev-master",
+    "setbased/abc-form": "dev-master",
+    "setbased/abc-form-louver": "dev-master",
     "setbased/abc-html": "1.*",
-    "setbased/abc-http-header": "*",
-    "setbased/abc-table-overview": "*",
-    "setbased/abc-table-detail": "*"
+    "setbased/abc-http-header": "1.*",
+    "setbased/abc-table-overview": "dev-master",
+    "setbased/abc-table-detail": "dev-master"
   },
   "autoload": {
     "psr-4": {
