@@ -26,7 +26,7 @@ class ModuleOverviewPage extends CorePage
    */
   public static function getUrl()
   {
-    return self::putCgiVar('pag', C::PAG_ID_SYSTEM_MODULE_OVERVIEW, 'pag');
+    return self::putCgiId('pag', C::PAG_ID_SYSTEM_MODULE_OVERVIEW, 'pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

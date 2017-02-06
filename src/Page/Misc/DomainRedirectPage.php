@@ -52,8 +52,8 @@ class DomainRedirectPage extends Page
    */
   public static function getUrl($request)
   {
-    $url = self::putCgiVar('pag', C::PAG_ID_USER_DOMAIN_REDIRECT, 'pag');
-    $url .= self::putCgiVar('redirect', $request);
+    $url = self::putCgiId('pag', C::PAG_ID_USER_DOMAIN_REDIRECT, 'pag');
+    $url .= self::putCgiUrl('redirect', $request);
 
     return $url;
   }

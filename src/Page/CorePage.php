@@ -194,7 +194,7 @@ abstract class CorePage extends Page
    */
   protected function getTabUrl($pagId)
   {
-    $url = self::putCgiVar('pag', $pagId, 'pag');
+    $url = self::putCgiId('pag', $pagId, 'pag');
 
     return $url;
   }

@@ -63,9 +63,9 @@ class WordGroupDetailsPage extends BabelPage
    */
   public static function getUrl($wdgId, $targetLanId)
   {
-    $url = self::putCgiVar('pag', C::PAG_ID_BABEL_WORD_GROUP_DETAILS, 'pag');
-    $url .= self::putCgiVar('wdg', $wdgId, 'wdg');
-    $url .= self::putCgiVar('act_lan', $targetLanId, 'lan');
+    $url = self::putCgiId('pag', C::PAG_ID_BABEL_WORD_GROUP_DETAILS, 'pag');
+    $url .= self::putCgiId('wdg', $wdgId, 'wdg');
+    $url .= self::putCgiId('act_lan', $targetLanId, 'lan');
 
     return $url;
   }

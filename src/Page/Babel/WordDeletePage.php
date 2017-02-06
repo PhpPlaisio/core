@@ -41,8 +41,8 @@ class WordDeletePage extends BabelPage
    */
   public static function getUrl($wrdId)
   {
-    $url = self::putCgiVar('pag', C::PAG_ID_BABEL_WORD_DELETE, 'pag');
-    $url .= self::putCgiVar('wrd', $wrdId, 'wrd');
+    $url = self::putCgiId('pag', C::PAG_ID_BABEL_WORD_DELETE, 'pag');
+    $url .= self::putCgiId('wrd', $wrdId, 'wrd');
 
     return $url;
   }

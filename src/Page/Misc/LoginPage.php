@@ -61,8 +61,8 @@ class LoginPage extends Page
    */
   public static function getUrl($uri = null)
   {
-    $url = self::putCgiVar('pag', C::PAG_ID_MISC_LOGIN, 'pag');
-    $url .= self::putCgiVar('redirect', $uri);
+    $url = self::putCgiId('pag', C::PAG_ID_MISC_LOGIN, 'pag');
+    $url .= self::putCgiUrl('redirect', $uri);
 
     return $url;
   }

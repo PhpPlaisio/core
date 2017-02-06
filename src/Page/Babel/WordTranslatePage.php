@@ -77,10 +77,10 @@ class WordTranslatePage extends BabelPage
    */
   public static function getUrl($wrdId, $lanId, $redirectUrl = null)
   {
-    $url = self::putCgiVar('pag', C::PAG_ID_BABEL_WORD_TRANSLATE, 'pag');
-    $url .= self::putCgiVar('wrd', $wrdId, 'wrd');
-    $url .= self::putCgiVar('act_lan', $lanId, 'lan');
-    $url .= self::putCgiVar('redirect', $redirectUrl);
+    $url = self::putCgiId('pag', C::PAG_ID_BABEL_WORD_TRANSLATE, 'pag');
+    $url .= self::putCgiId('wrd', $wrdId, 'wrd');
+    $url .= self::putCgiId('act_lan', $lanId, 'lan');
+    $url .= self::putCgiUrl('redirect', $redirectUrl);
 
     return $url;
   }

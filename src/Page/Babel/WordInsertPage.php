@@ -33,9 +33,9 @@ class WordInsertPage extends WordBasePage
    */
   public static function getUrl($wdgId)
   {
-    $url = self::putCgiVar('pag', C::PAG_ID_BABEL_WORD_INSERT, 'pag');
-    $url .= self::putCgiVar('wdg', $wdgId, 'wdg');
-    $url .= self::putCgiVar('act_lan', C::LAN_ID_BABEL_REFERENCE, 'lan');
+    $url = self::putCgiId('pag', C::PAG_ID_BABEL_WORD_INSERT, 'pag');
+    $url .= self::putCgiId('wdg', $wdgId, 'wdg');
+    $url .= self::putCgiId('act_lan', C::LAN_ID_BABEL_REFERENCE, 'lan');
 
     return $url;
   }

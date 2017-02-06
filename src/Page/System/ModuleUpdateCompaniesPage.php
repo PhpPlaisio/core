@@ -70,8 +70,8 @@ class ModuleUpdateCompaniesPage extends CorePage
    */
   public static function getUrl($modId)
   {
-    $url = self::putCgiVar('pag', C::PAG_ID_SYSTEM_MODULE_UPDATE_COMPANIES, 'pag');
-    $url .= self::putCgiVar('mdl', $modId, 'mdl');
+    $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_MODULE_UPDATE_COMPANIES, 'pag');
+    $url .= self::putCgiId('mdl', $modId, 'mdl');
 
     return $url;
   }

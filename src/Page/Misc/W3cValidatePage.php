@@ -79,7 +79,7 @@ class W3cValidatePage extends Page
    */
   public static function getUrl($fileName, $mode = 'validate')
   {
-    $url = self::putCgiVar('pag', C::PAG_ID_MISC_W3C_VALIDATE, 'pag');
+    $url = self::putCgiId('pag', C::PAG_ID_MISC_W3C_VALIDATE, 'pag');
     $url .= self::putCgiVar('mode', $mode);
     $url .= self::putCgiVar('file', $fileName);
 

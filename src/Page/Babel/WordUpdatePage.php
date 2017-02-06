@@ -44,9 +44,9 @@ class WordUpdatePage extends WordBasePage
    */
   public static function getUrl($wrdId, $redirectUrl = null)
   {
-    $url = self::putCgiVar('pag', C::PAG_ID_BABEL_WORD_UPDATE, 'pag');
-    $url .= self::putCgiVar('wrd', $wrdId, 'wrd');
-    $url .= self::putCgiVar('redirect', $redirectUrl);
+    $url = self::putCgiId('pag', C::PAG_ID_BABEL_WORD_UPDATE, 'pag');
+    $url .= self::putCgiId('wrd', $wrdId, 'wrd');
+    $url .= self::putCgiUrl('redirect', $redirectUrl);
 
     return $url;
   }

@@ -54,8 +54,8 @@ abstract class CompanyPage extends CorePage
    */
   public static function getChildUrl($pagId, $targetCmpId)
   {
-    $url = self::putCgiVar('pag', $pagId, 'pag');
-    $url .= self::putCgiVar('cmp', $targetCmpId, 'cmp');
+    $url = self::putCgiId('pag', $pagId, 'pag');
+    $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }
