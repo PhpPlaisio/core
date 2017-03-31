@@ -40,18 +40,18 @@ abstract class CorePage extends Page
   {
     parent::__construct();
 
-    $this->cssAppendSource('/css/abc/reset.css');
-    $this->cssAppendSource('/css/abc/layout.css');
-    $this->cssAppendSource('/css/abc/main-menu.css');
-    $this->cssAppendSource('/css/abc/secondary-menu.css');
-    $this->cssAppendSource('/css/abc/dashboard.css');
-    $this->cssAppendSource('/css/abc/content.css');
-    $this->cssAppendSource('/css/abc/style.css');
-    $this->cssAppendSource('/css/abc/overview_table.css');
-    $this->cssAppendSource('/css/abc/detail_table.css');
-    $this->cssAppendSource('/css/abc/input_table.css');
+    Abc::$assets->cssAppendSource('abc/reset.css');
+    Abc::$assets->cssAppendSource('abc/layout.css');
+    Abc::$assets->cssAppendSource('abc/main-menu.css');
+    Abc::$assets->cssAppendSource('abc/secondary-menu.css');
+    Abc::$assets->cssAppendSource('abc/dashboard.css');
+    Abc::$assets->cssAppendSource('abc/content.css');
+    Abc::$assets->cssAppendSource('abc/style.css');
+    Abc::$assets->cssAppendSource('abc/overview_table.css');
+    Abc::$assets->cssAppendSource('abc/detail_table.css');
+    Abc::$assets->cssAppendSource('abc/input_table.css');
 
-    $this->jsAdmSetPageSpecificMain(__CLASS__);
+    Abc::$assets->jsAdmSetPageSpecificMain(__CLASS__);
 
     if (isset($_SERVER['ABC_ENV']) && $_SERVER['ABC_ENV']=='dev')
     {
@@ -194,7 +194,7 @@ abstract class CorePage extends Page
    */
   protected function getTabUrl($pagId)
   {
-    $url = self::putCgiVar('pag', $pagId, 'pag');
+    $url = self::putCgiId('pag', $pagId, 'pag');
 
     return $url;
   }

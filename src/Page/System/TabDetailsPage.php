@@ -48,8 +48,8 @@ class TabDetailsPage extends CorePage
    */
   public static function getUrl($tabId)
   {
-    $url = self::putCgiVar('pag', C::PAG_ID_SYSTEM_TAB_DETAILS, 'pag');
-    $url .= self::putCgiVar('ptb', $tabId, 'ptb');
+    $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_TAB_DETAILS, 'pag');
+    $url .= self::putCgiId('ptb', $tabId, 'ptb');
 
     return $url;
   }

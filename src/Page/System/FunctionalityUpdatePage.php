@@ -49,8 +49,8 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
    */
   public static function getUrl($funId)
   {
-    $url = self::putCgiVar('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_UPDATE, 'pag');
-    $url .= self::putCgiVar('fun', $funId, 'fun');
+    $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_UPDATE, 'pag');
+    $url .= self::putCgiId('fun', $funId, 'fun');
 
     return $url;
   }

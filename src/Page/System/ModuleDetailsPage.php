@@ -62,8 +62,8 @@ class ModuleDetailsPage extends CorePage
    */
   public static function getUrl($mdlId)
   {
-    $url = self::putCgiVar('pag', C::PAG_ID_SYSTEM_MODULE_DETAILS, 'pag');
-    $url .= self::putCgiVar('mdl', $mdlId, 'mdl');
+    $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_MODULE_DETAILS, 'pag');
+    $url .= self::putCgiId('mdl', $mdlId, 'mdl');
 
     return $url;
   }

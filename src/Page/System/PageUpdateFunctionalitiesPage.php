@@ -68,8 +68,8 @@ class PageUpdateFunctionalitiesPage extends CorePage
    */
   public static function getUrl($pagId)
   {
-    $url = self::putCgiVar('pag', C::PAG_ID_SYSTEM_PAGE_UPDATE_FUNCTIONALITIES, 'pag');
-    $url .= self::putCgiVar('tar_pag', $pagId, 'pag');
+    $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_PAGE_UPDATE_FUNCTIONALITIES, 'pag');
+    $url .= self::putCgiId('tar_pag', $pagId, 'pag');
 
     return $url;
   }

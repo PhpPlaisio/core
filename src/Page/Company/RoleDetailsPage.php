@@ -50,9 +50,9 @@ class RoleDetailsPage extends CompanyPage
    */
   public static function getUrl($targetCmpId, $rolId)
   {
-    $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_ROLE_DETAILS, 'pag');
-    $url .= self::putCgiVar('cmp', $targetCmpId, 'cmp');
-    $url .= self::putCgiVar('rol', $rolId, 'rol');
+    $url = self::putCgiId('pag', C::PAG_ID_COMPANY_ROLE_DETAILS, 'pag');
+    $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
+    $url .= self::putCgiId('rol', $rolId, 'rol');
 
     return $url;
   }

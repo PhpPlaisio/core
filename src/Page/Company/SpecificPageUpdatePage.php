@@ -63,9 +63,9 @@ class SpecificPageUpdatePage extends CompanyPage
    */
   public static function getUrl($targetCmpId, $targetPagId)
   {
-    $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_UPDATE, 'pag');
-    $url .= self::putCgiVar('cmp', $targetCmpId, 'cmp');
-    $url .= self::putCgiVar('tar_pag', $targetPagId, 'pag');
+    $url = self::putCgiId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_UPDATE, 'pag');
+    $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
+    $url .= self::putCgiId('tar_pag', $targetPagId, 'pag');
 
     return $url;
   }

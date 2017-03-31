@@ -37,16 +37,16 @@ class WordUpdatePage extends WordBasePage
   /**
    * Returns the relative URL for this page.
    *
-   * @param int         $wrdId       The ID of the word.
-   * @param string|null $redirectUrl If set the URL to redirect the user agent.
+   * @param int         $wrdId    The ID of the word.
+   * @param string|null $redirect If set the URL to redirect the user agent.
    *
    * @return string
    */
-  public static function getUrl($wrdId, $redirectUrl = null)
+  public static function getUrl($wrdId, $redirect = null)
   {
-    $url = self::putCgiVar('pag', C::PAG_ID_BABEL_WORD_UPDATE, 'pag');
-    $url .= self::putCgiVar('wrd', $wrdId, 'wrd');
-    $url .= self::putCgiVar('redirect', $redirectUrl);
+    $url = self::putCgiId('pag', C::PAG_ID_BABEL_WORD_UPDATE, 'pag');
+    $url .= self::putCgiId('wrd', $wrdId, 'wrd');
+    $url .= self::putCgiUrl('redirect', $redirect);
 
     return $url;
   }

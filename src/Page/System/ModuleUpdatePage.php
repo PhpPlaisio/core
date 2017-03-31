@@ -40,8 +40,8 @@ class ModuleUpdatePage extends ModuleBasePage
    */
   public static function getUrl($mdlId)
   {
-    $url = self::putCgiVar('pag', C::PAG_ID_SYSTEM_MODULE_UPDATE, 'pag');
-    $url .= self::putCgiVar('mdl', $mdlId, 'mdl');
+    $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_MODULE_UPDATE, 'pag');
+    $url .= self::putCgiId('mdl', $mdlId, 'mdl');
 
     return $url;
   }

@@ -29,7 +29,7 @@ class FunctionalityInsertPage extends FunctionalityBasePage
    */
   public static function getUrl()
   {
-    return self::putCgiVar('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_INSERT, 'pag');
+    return self::putCgiId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_INSERT, 'pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

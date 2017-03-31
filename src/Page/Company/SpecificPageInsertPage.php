@@ -33,8 +33,8 @@ class SpecificPageInsertPage extends CompanyPage
    */
   public static function getUrl($targetCmpId)
   {
-    $url = self::putCgiVar('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_INSERT, 'pag');
-    $url .= self::putCgiVar('cmp', $targetCmpId, 'cmp');
+    $url = self::putCgiId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_INSERT, 'pag');
+    $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }

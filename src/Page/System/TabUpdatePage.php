@@ -49,8 +49,8 @@ class TabUpdatePage extends TabBasePage
    */
   public static function getUrl($ptbId)
   {
-    $url = self::putCgiVar('pag', C::PAG_ID_SYSTEM_TAB_UPDATE, 'pag');
-    $url .= self::putCgiVar('ptb', $ptbId, 'ptb');
+    $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_TAB_UPDATE, 'pag');
+    $url .= self::putCgiId('ptb', $ptbId, 'ptb');
 
     return $url;
   }

@@ -53,8 +53,7 @@ class WordTranslatePage extends BabelPage
   {
     parent::__construct();
 
-    $this->wrdId = self::getCgiId('wrd', 'wrd');
-
+    $this->wrdId    = self::getCgiId('wrd', 'wrd');
     $this->redirect = self::getCgiUrl('redirect');
 
     $this->details = Abc::$DL->bblWordGetDetails($this->wrdId, $this->actLanId);
@@ -69,18 +68,18 @@ class WordTranslatePage extends BabelPage
   /**
    * Returns the relative URL for this page.
    *
-   * @param int         $wrdId       The ID of the word to be translated.
-   * @param int         $lanId       The ID of the target language.
-   * @param string|null $redirectUrl If set the URL to redirect the user agent after the word has been translated.
+   * @param int         $wrdId    The ID of the word to be translated.
+   * @param int         $lanId    The ID of the target language.
+   * @param string|null $redirect If set the URL to redirect the user agent after the word has been translated.
    *
    * @return string
    */
-  public static function getUrl($wrdId, $lanId, $redirectUrl = null)
+  public static function getUrl($wrdId, $lanId, $redirect = null)
   {
-    $url = self::putCgiVar('pag', C::PAG_ID_BABEL_WORD_TRANSLATE, 'pag');
-    $url .= self::putCgiVar('wrd', $wrdId, 'wrd');
-    $url .= self::putCgiVar('act_lan', $lanId, 'lan');
-    $url .= self::putCgiVar('redirect', $redirectUrl);
+    $url = self::putCgiId('pag', C::PAG_ID_BABEL_WORD_TRANSLATE, 'pag');
+    $url .= self::putCgiId('wrd', $wrdId, 'wrd');
+    $url .= self::putCgiId('act_lan', $lanId, 'lan');
+    $url .= self::putCgiUrl('redirect', $redirect);
 
     return $url;
   }

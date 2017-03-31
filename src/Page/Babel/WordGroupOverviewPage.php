@@ -27,8 +27,8 @@ class WordGroupOverviewPage extends BabelPage
    */
   public static function getUrl($targetLanId = null)
   {
-    $url = self::putCgiVar('pag', C::PAG_ID_BABEL_WORD_GROUP_OVERVIEW, 'pag');
-    $url .= self::putCgiVar('act_lan', $targetLanId, 'lan');
+    $url = self::putCgiId('pag', C::PAG_ID_BABEL_WORD_GROUP_OVERVIEW, 'pag');
+    $url .= self::putCgiId('act_lan', $targetLanId, 'lan');
 
     return $url;
   }

@@ -55,14 +55,14 @@ class LoginPage extends Page
   /**
    * Returns the relative URL for this page.
    *
-   * @param string|null $uri A URI to which the user agent must be redirected after a successful login.
+   * @param string|null $redirect A URL to which the user agent must be redirected after a successful login.
    *
    * @return string
    */
-  public static function getUrl($uri = null)
+  public static function getUrl($redirect = null)
   {
-    $url = self::putCgiVar('pag', C::PAG_ID_MISC_LOGIN, 'pag');
-    $url .= self::putCgiVar('redirect', $uri);
+    $url = self::putCgiId('pag', C::PAG_ID_MISC_LOGIN, 'pag');
+    $url .= self::putCgiUrl('redirect', $redirect);
 
     return $url;
   }
@@ -306,15 +306,7 @@ class LoginPage extends Page
     echo '<head>';
     echo '<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>';
 
-    // echo "<title>".SET_Html::txt2Html( Babel::getWord( C::WRD_ID_USER_LOGIN, $this->myLanId ) )."</title>";
-    foreach ($this->cssSources as $css_source)
-    {
-      echo '<link rel="stylesheet" media="screen" type="text/css" href="', $css_source, '"/>';
-    }
-    if ($this->css)
-    {
-      echo '<style type="text/css" media="all">', $this->css, '</style>';
-    }
+    Abc::$assets->echoCascadingStyleSheets();
 
     echo '</head><body>';
   }

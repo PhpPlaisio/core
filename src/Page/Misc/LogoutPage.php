@@ -21,7 +21,7 @@ class LogoutPage extends Page
    */
   public static function getUrl()
   {
-    return self::putCgiVar('pag', C::PAG_ID_MISC_LOGOUT, 'pag');
+    return self::putCgiId('pag', C::PAG_ID_MISC_LOGOUT, 'pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

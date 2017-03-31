@@ -28,7 +28,7 @@ class CompanyInsertPage extends CompanyBasePage
    */
   public static function getUrl()
   {
-    return self::putCgiVar('pag', C::PAG_ID_COMPANY_INSERT, 'pag');
+    return self::putCgiId('pag', C::PAG_ID_COMPANY_INSERT, 'pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

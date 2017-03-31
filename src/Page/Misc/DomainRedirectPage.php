@@ -46,14 +46,14 @@ class DomainRedirectPage extends Page
   /**
    * Returns the URL to this page.
    *
-   * @param string $request The URL to which the user agent is redirect on success.
+   * @param string $redirect The URL to which the user agent is redirect on success.
    *
    * @return string The URL to this page.
    */
-  public static function getUrl($request)
+  public static function getUrl($redirect)
   {
-    $url = self::putCgiVar('pag', C::PAG_ID_USER_DOMAIN_REDIRECT, 'pag');
-    $url .= self::putCgiVar('redirect', $request);
+    $url = self::putCgiId('pag', C::PAG_ID_USER_DOMAIN_REDIRECT, 'pag');
+    $url .= self::putCgiUrl('redirect', $redirect);
 
     return $url;
   }
