@@ -47,11 +47,7 @@ class MenuInsertPage extends MenuBasePage
 
     if ($values['mnu_title'])
     {
-      $wrd_id = Abc::$DL->bblWordInsertWord($this->usrId,
-                                            C::WDG_ID_MENU,
-                                            false,
-                                            false,
-                                            $values['mnu_title']);
+      $wrd_id = Abc::$DL->bblWordInsertWord(C::WDG_ID_MENU, null, null, $values['mnu_title']);
     }
     else
     {

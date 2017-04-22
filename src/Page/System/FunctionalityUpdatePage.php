@@ -69,11 +69,7 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
 
     if ($values['fun_name'])
     {
-      $wrd_id = Abc::$DL->bblWordInsertWord($this->usrId,
-                                            C::WDG_ID_FUNCTIONALITIES,
-                                            false,
-                                            false,
-                                            $values['fun_name']);
+      $wrd_id = Abc::$DL->bblWordInsertWord(C::WDG_ID_FUNCTIONALITIES, null, null, $values['fun_name']);
     }
     else
     {
