@@ -9,15 +9,11 @@ create procedure abc_system_tab_insert_details( in p_wrd_id    @aut_page_tab.wrd
 reads sql data
 -- type: singleton1
 begin
-  declare l_ptb_id @aut_page_tab.ptb_id%type@;
-
   insert into AUT_PAGE_TAB( wrd_id
   ,                         ptb_label )
   values ( p_wrd_id
   ,        p_ptb_label )
   ;
 
-  set l_ptb_id = last_insert_id();
-
-  select l_ptb_id ptb_id;
+  select last_insert_id() ptb_id;
 end

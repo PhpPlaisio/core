@@ -23,6 +23,5 @@ begin
   ,       p_rol_name )
   ;
 
-  select last_insert_id() rol_id
-  ;
+  select last_insert_id() rol_id;
 end
