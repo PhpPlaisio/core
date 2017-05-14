@@ -1,0 +1,23 @@
+/**
+ * Inserts a new role group and selects the ID of the new role group.
+ * 
+ * @param p_wrd_id     The ID of the word for the name of the role group.
+ * @param p_rlg_weight The weight for sorting of the role group.
+ * @param p_rlg_label  The label of the word group.
+ */
+create procedure abc_system_role_group_insert(in p_wrd_id     @aut_role_group.wrd_id%type@,
+                                              in p_rlg_weight @aut_role_group.rlg_weight%type@,
+                                              in p_rlg_label  @aut_role_group.rlg_label%type@)
+modifies sql data
+-- type: singleton1
+begin
+  insert into AUT_ROLE_GROUP( wrd_id
+  ,                           rlg_weight
+  ,                           rlg_label )
+  values( p_wrd_id
+  ,       p_rlg_weight
+  ,       p_rlg_label )
+  ;
+
+  select last_insert_id();
+end

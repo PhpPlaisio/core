@@ -3,16 +3,24 @@
  *
  * @param p_cmp_id The ID of the company.
  * @param p_rol_id The ID of the role.
+ * @param p_lan_id The ID of the language use for linguistic entities.
  */
-create procedure abc_company_role_get_details( in p_cmp_id @aut_company.cmp_id%type@,
-                                               in p_rol_id @aut_role.rol_id%type@ )
+create procedure abc_company_role_get_details(in p_cmp_id @aut_company.cmp_id%type@,
+                                              in p_rol_id @aut_role.rol_id%type@,
+                                              in p_lan_id @bbl_language.lan_id%type@)
 reads sql data
 -- type: row1
 begin
-  select rol_id
-  ,      rol_weight
-  ,      rol_name
-  from   AUT_ROLE
+  select rol.rol_id
+  ,      rol.rol_weight
+  ,      rol.rol_name
+
+  ,      rlg.rlg_id
+  ,      wd2.wdt_text   rlg_name
+  from       AUT_ROLE       rol
+  inner join AUT_ROLE_GROUP rlg  on  rlg.rlg_id = rol.rlg_id
+  inner join BBL_WORD_TEXT  wd2  on  wd2.wrd_id = rlg.wrd_id and
+                                     wd2.lan_id = p_lan_id
   where  cmp_id = p_cmp_id
   and    rol_id = p_rol_id
   ;

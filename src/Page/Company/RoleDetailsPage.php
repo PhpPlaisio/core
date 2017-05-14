@@ -7,6 +7,7 @@ use SetBased\Abc\C;
 use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableAction\Company\RoleUpdateFunctionalitiesTableAction;
+use SetBased\Abc\Core\TableAction\Company\RoleUpdateTableAction;
 use SetBased\Abc\Core\TableColumn\System\FunctionalityDetailsIconTableColumn;
 use SetBased\Abc\Core\TableColumn\System\PageDetailsIconTableColumn;
 use SetBased\Abc\Table\TableColumn\NumericTableColumn;
@@ -139,19 +140,23 @@ class RoleDetailsPage extends CompanyPage
    */
   private function showRole()
   {
-    $details = Abc::$DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId);
+    $details = Abc::$DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId, $this->lanId);
 
     $table = new CoreDetailTable();
 
-    // @todo Add table action for update the company details.
+    // Add action for updating the details of the role.
+    $table->addTableAction('default', new RoleUpdateTableAction($this->targetCmpId, $this->rolId));
 
-    // Add row for role ID.
+    // Show the name of the role group.
+    TextTableRow::addRow($table, 'Role Group', $details['rlg_name']);
+
+    // Show ID of the role.
     NumericTableRow::addRow($table, 'ID', $details['rol_id'], '%d');
 
-    // Add row for role name.
+    // Show the name og the role.
     TextTableRow::addRow($table, 'Role', $details['rol_name']);
 
-    /// Add row for weight.
+    // Show the weight of the role.
     NumericTableRow::addRow($table, 'Weight', $details['rol_weight'], '%d');
 
     echo $table->getHtmlTable();

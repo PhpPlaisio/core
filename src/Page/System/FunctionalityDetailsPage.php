@@ -9,7 +9,7 @@ use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableAction\System\FunctionalityUpdatePagesTableAction;
 use SetBased\Abc\Core\TableAction\System\FunctionalityUpdateRolesTableAction;
-use SetBased\Abc\Core\TableColumn\Company\RoleDetailsIconTableColumn;
+use SetBased\Abc\Core\TableColumn\Company\RoleTableColumn;
 use SetBased\Abc\Core\TableColumn\System\PageDetailsIconTableColumn;
 use SetBased\Abc\Table\TableColumn\NumericTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
@@ -17,6 +17,7 @@ use SetBased\Abc\Table\TableRow\NumericTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
 //----------------------------------------------------------------------------------------------------------------------
+
 /**
  * Page with information about a functionality.
  */
@@ -38,6 +39,7 @@ class FunctionalityDetailsPage extends CorePage
   private $funId;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * {inheritdoc}
    */
@@ -151,14 +153,8 @@ class FunctionalityDetailsPage extends CorePage
     $col = $table->addColumn(new TextTableColumn('Company', 'cmp_abbr'));
     $col->setSortOrder(1);
 
-    // Show role ID.
-    $table->addColumn(new NumericTableColumn('ID', 'rol_id'));
-
-    // Show name of the role.
-    $table->addColumn(new TextTableColumn('Role', 'rol_name'));
-
-    // Show viewing the details of the role.
-    $table->addColumn(new RoleDetailsIconTableColumn());
+    // Show role ID and name
+    $table->addColumn(new RoleTableColumn('Role'));
 
     echo $table->getHtmlTable($roles);
   }

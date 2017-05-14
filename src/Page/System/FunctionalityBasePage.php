@@ -78,7 +78,7 @@ abstract class FunctionalityBasePage extends CorePage
     // Input for functionality name.
     // @todo Make control for reusing a word or create a new word. 
     $input = new SelectControl('wrd_id');
-    $input->setOptions($words, 'wrd_id', 'wrd_text');
+    $input->setOptions($words, 'wrd_id', 'wdt_text');
     $input->setEmptyOption();
     $this->form->addFormControl($input, 'Name');
 

@@ -94,8 +94,8 @@ class FunctionalityUpdateRolesPage extends CorePage
    */
   private function createForm()
   {
-    // Get all available pages.
-    $pages = Abc::$DL->abcSystemFunctionalityGetAvailableRoles($this->funId);
+    // Get all available roles.
+    $roles = Abc::$DL->abcSystemFunctionalityGetAvailableRoles($this->funId, $this->lanId);
 
     // Create form.
     $this->form = new CoreForm();
@@ -120,7 +120,7 @@ class FunctionalityUpdateRolesPage extends CorePage
     $louver->addClass('overview_table');
     $louver->setRowFactory($factory);
     $louver->setFooterControl($button);
-    $louver->setData($pages);
+    $louver->setData($roles);
     $louver->populate();
 
     // Add the lover control to the form.

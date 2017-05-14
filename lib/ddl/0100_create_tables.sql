@@ -5,7 +5,7 @@
 /*  FileName : abc.ecm                                                            */
 /*  Platform : MySQL 5                                                            */
 /*  Version  : Concept                                                            */
-/*  Date     : donderdag 20 april 2017                                            */
+/*  Date     : zondag 14 mei 2017                                                 */
 /*================================================================================*/
 /*================================================================================*/
 /* CREATE TABLES                                                                  */
@@ -288,9 +288,28 @@ CREATE TABLE `AUT_PRO_PAG` (
   CONSTRAINT `PK_AUT_PRO_PAG` PRIMARY KEY (`pro_id`, `pag_id`)
 );
 
+CREATE TABLE `AUT_ROLE_GROUP` (
+  `rlg_id` SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  `wrd_id` SMALLINT UNSIGNED NOT NULL,
+  `rlg_weight` SMALLINT UNSIGNED NOT NULL,
+  `rlg_label` VARCHAR(50) CHARACTER SET ascii COLLATE ascii_general_ci,
+  CONSTRAINT `PK_AUT_ROLE_GROUP` PRIMARY KEY (`rlg_id`)
+);
+
+/*
+COMMENT ON COLUMN `AUT_ROLE_GROUP`.`wrd_id`
+The name of the role group.
+*/
+
+/*
+COMMENT ON COLUMN `AUT_ROLE_GROUP`.`rlg_weight`
+The weight of the role group for sorting.
+*/
+
 CREATE TABLE `AUT_ROLE` (
   `rol_id` SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
   `cmp_id` SMALLINT UNSIGNED NOT NULL,
+  `rlg_id` SMALLINT UNSIGNED NOT NULL,
   `rol_weight` SMALLINT NOT NULL,
   `rol_name` VARCHAR(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`rol_id`)
@@ -481,7 +500,11 @@ CREATE INDEX `IX_AUT_PAGE_COMPANY2` ON `AUT_PAGE_COMPANY` (`cmp_id`);
 
 CREATE INDEX `IX_AUT_PRO_PAG1` ON `AUT_PRO_PAG` (`pag_id`, `pro_id`);
 
+CREATE INDEX `IX_FK_AUT_ROLE_GROUP1` ON `AUT_ROLE_GROUP` (`wrd_id`);
+
 CREATE INDEX `cmp_id` ON `AUT_ROLE` (`cmp_id`);
+
+CREATE INDEX `IX_FK_AUT_ROLE` ON `AUT_ROLE` (`rlg_id`);
 
 CREATE UNIQUE INDEX `IX_AUT_PRO_ROL1` ON `AUT_PRO_ROL` (`rol_id`, `pro_id`);
 
@@ -673,11 +696,19 @@ ALTER TABLE `AUT_PRO_PAG`
   FOREIGN KEY (`pro_id`) REFERENCES `AUT_PROFILE` (`pro_id`)
   ON DELETE CASCADE;
 
+ALTER TABLE `AUT_ROLE_GROUP`
+  ADD CONSTRAINT `FK_AUT_ROLE_GROUP_BBL_WORD`
+  FOREIGN KEY (`wrd_id`) REFERENCES `BBL_WORD` (`wrd_id`);
+
 ALTER TABLE `AUT_ROLE`
   ADD CONSTRAINT `AUT_ROLE_ibfk_1`
   FOREIGN KEY (`cmp_id`) REFERENCES `AUT_COMPANY` (`cmp_id`)
   ON UPDATE NO ACTION
   ON DELETE NO ACTION;
+
+ALTER TABLE `AUT_ROLE`
+  ADD CONSTRAINT `FK_AUT_ROLE_AUT_ROLE_GROUP`
+  FOREIGN KEY (`rlg_id`) REFERENCES `AUT_ROLE_GROUP` (`rlg_id`);
 
 ALTER TABLE `AUT_PRO_ROL`
   ADD CONSTRAINT `FK_AUT_PRO_ROL_AUT_COMPANY`

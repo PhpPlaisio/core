@@ -5,7 +5,6 @@ namespace SetBased\Abc\Core\Page\System;
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Core\Form\FormValidator\SystemModuleInsertCompoundValidator;
 use SetBased\Abc\Core\Page\CorePage;
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\TextControl;
@@ -13,9 +12,9 @@ use SetBased\Abc\Helper\HttpHeader;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
- * Abstract parent class for inserting or updating the details of a module.
+ * Abstract parent page for inserting and updating details of a role group for the target company.
  */
-abstract class ModuleBasePage extends CorePage
+abstract class RoleGroupBasePage extends CorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -33,13 +32,16 @@ abstract class ModuleBasePage extends CorePage
   protected $form;
 
   /**
-   * @var int The ID of de module to be updated or inserted.
+   * The ID of the role group that is been inserted or updated.
+   *
+   * @var int
    */
-  protected $mdlId;
+  protected $rlgId;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
-   * Must implemented by child pages to actually insert or update a module.
+   * Must implemented by child pages to actually insert or update a role of the target company.
    *
    * @return null
    */
@@ -58,7 +60,7 @@ abstract class ModuleBasePage extends CorePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Loads the initial values of the form.
+   * Loads the initial values of the form shown on this page.
    *
    * @return null
    */
@@ -70,29 +72,34 @@ abstract class ModuleBasePage extends CorePage
    */
   private function createForm()
   {
-    $words = Abc::$DL->bblWordGroupGetAllWords(C::WDG_ID_MODULE, $this->lanId);
-
     $this->form = new CoreForm();
 
-    if ($words)
-    {
-      // If there are unused modules names (i.e. words in the word group WDG_ID_MODULES that are not used by a
-      // module) create a select box with free modules names.
-      $input = new SelectControl('wrd_id');
-      $input->setOptions($words, 'wrd_id', 'wdt_text');
-      $input->setEmptyOption();
-      $this->form->addFormControl($input, 'Module Name');
-    }
+    // Create select box for (known) role group names.
+    $titles = Abc::$DL->bblWordGroupGetAllWords(C::WDG_ID_ROLE_GROUP, $this->lanId);
+    $input  = new SelectControl('wrd_id');
+    $input->setOptions($titles, 'wrd_id', 'wdt_text');
+    $input->setEmptyOption();
+    $input->setOptionsObfuscator(Abc::getObfuscator('wrd'));
+    $this->form->addFormControl($input, 'Name');
 
-    // Create a text box for (new) module name.
-    $input = new TextControl('mdl_name');
+    // Create text box for (new) page title.
+    $input = new TextControl('wdg_name');
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
-    $this->form->addFormControl($input, 'Module Name');
+    $this->form->addFormControl($input, 'Name');
+    /** @todo Add validator: either wrd_id is not empty or wdg_name is not empty */
+
+    // Input for weight.
+    $input = new TextControl('rlg_weight');
+    $input->setAttrMaxLength(C::LEN_RLG_WEIGHT);
+    $this->form->addFormControl($input, 'Weight');
+
+    // Input for label.
+    $input = new TextControl('rlg_label');
+    $input->setAttrMaxLength(C::LEN_RLG_LABEL);
+    $this->form->addFormControl($input, 'Label');
 
     // Create a submit button.
     $this->form->addSubmitButton($this->buttonWrdId, 'handleForm');
-
-    $this->form->addValidator(new SystemModuleInsertCompoundValidator());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -121,10 +128,11 @@ abstract class ModuleBasePage extends CorePage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(ModuleDetailsPage::getUrl($this->mdlId));
+    HttpHeader::redirectSeeOther(RoleGroupOverviewPage::getUrl());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
 }
 
 //----------------------------------------------------------------------------------------------------------------------
+

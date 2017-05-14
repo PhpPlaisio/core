@@ -1,23 +1,23 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
-namespace SetBased\Abc\Core\Page\Company;
+namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
- * Page for updating the details of a role.
+ * Page for updating the details of a role group.
  */
-class RoleUpdatePage extends RoleBasePage
+class RoleGroupUpdatePage extends RoleGroupBasePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The details of the role.
+   * The details of the role group.
    *
    * @var array
    */
-  private $details;
+  private $roleGroup;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -27,8 +27,9 @@ class RoleUpdatePage extends RoleBasePage
   {
     parent::__construct();
 
-    $this->rolId       = self::getCgiId('rol', 'rol');
-    $this->details     = Abc::$DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId, $this->lanId);
+    $this->rlgId     = self::getCgiId('rlg', 'rlg');
+    $this->roleGroup = Abc::$DL->abcSystemRoleGroupGetDetails($this->rlgId, $this->lanId);
+
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -36,37 +37,39 @@ class RoleUpdatePage extends RoleBasePage
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $targetCmpId The ID of the target company.
-   * @param int $rolId       The ID of role to be modified.
+   * @param int $rlgId The ID of the role group.
    *
    * @return string
    */
-  public static function getUrl($targetCmpId, $rolId)
+  public static function getUrl($rlgId)
   {
-    $url = self::putCgiId('pag', C::PAG_ID_COMPANY_ROLE_UPDATE, 'pag');
-    $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
-    $url .= self::putCgiId('rol', $rolId, 'rol');
+    $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_UPDATE, 'pag');
+    $url .= self::putCgiId('rlg', $rlgId, 'rlg');
 
     return $url;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Update the details of the role.
+   * Inserts a new role.
    */
   protected function databaseAction()
   {
-    $changes = $this->form->getChangedControls();
-    $values  = $this->form->getValues();
+    $values = $this->form->getValues();
 
-    // Return immediately if no changes are submitted.
-    if (empty($changes)) return;
+    if ($values['rlg_name']!==null)
+    {
+      $wrdId = Abc::$DL->bblWordInsertWord(C::WDG_ID_ROLE_GROUP, null, null, $values['rlg_name']);
+    }
+    else
+    {
+      $wrdId = $values['wrd_id'];
+    }
 
-    Abc::$DL->abcCompanyRoleUpdate($this->targetCmpId,
-                                   $this->rolId,
-                                   $values['rlg_id'],
-                                   $values['rol_name'],
-                                   $values['rol_weight']);
+    $this->rlgId = Abc::$DL->abcSystemRoleGroupUpdate($this->rlgId,
+                                                      $wrdId,
+                                                      $values['rlg_weight'],
+                                                      $values['rlg_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -75,7 +78,7 @@ class RoleUpdatePage extends RoleBasePage
    */
   protected function loadValues()
   {
-    $this->form->setValues($this->details);
+    $this->form->setValues($this->roleGroup);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

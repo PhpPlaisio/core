@@ -1,15 +1,16 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
-namespace SetBased\Abc\Core\TableColumn\Company;
+namespace SetBased\Abc\Core\TableColumn\System;
 
-use SetBased\Abc\Core\Page\Company\RoleDetailsPage;
+
+use SetBased\Abc\Core\Page\System\RoleGroupDetailsPage;
 use SetBased\Abc\Core\TableColumn\DetailsIconTableColumn;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
- * Table column with icon link to page with information about a role.
+ * Table column with icon linking to page with information about a role group.
  */
-class RoleDetailsIconTableColumn extends DetailsIconTableColumn
+class RoleGroupDetailsIconTableColumn extends DetailsIconTableColumn
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -17,7 +18,7 @@ class RoleDetailsIconTableColumn extends DetailsIconTableColumn
    */
   public function getUrl($row)
   {
-    return RoleDetailsPage::getUrl($row['cmp_id'], $row['rol_id']);
+    return RoleGroupDetailsPage::getUrl($row['rlg_id']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

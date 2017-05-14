@@ -1,0 +1,22 @@
+/**
+ * Selects the details of a role group.
+ *
+ * @param p_rlg_id The ID of the role group.
+ * @param p_lan_id The ID of the language use for linguistic entities.
+ */
+create procedure abc_system_role_group_get_details(in p_rlg_id @aut_role_group.rlg_id%type@,
+                                                   in p_lan_id @bbl_language.lan_id%type@)
+reads sql data
+-- type: row1
+begin
+  select rlg.rlg_id
+  ,      rlg.wrd_id
+  ,      rlg.rlg_weight
+  ,      rlg.rlg_label
+  ,      wdt.wdt_text     rlg_name
+  from       AUT_ROLE_GROUP rlg
+  inner join BBL_WORD_TEXT  wdt  on  wdt.wrd_id = rlg.wrd_id and
+                                     wdt.lan_id = p_lan_id
+  where rlg.rlg_id = p_rlg_id
+  ;
+end

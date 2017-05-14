@@ -51,7 +51,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
 
     $this->rolId = self::getCgiId('rol', 'rol');
 
-    $this->details = Abc::$DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId);
+    $this->details = Abc::$DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId, $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

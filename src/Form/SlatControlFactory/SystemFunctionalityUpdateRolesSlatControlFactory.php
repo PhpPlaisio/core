@@ -3,6 +3,8 @@
 namespace SetBased\Abc\Core\Form\SlatControlFactory;
 
 use SetBased\Abc\Abc;
+use SetBased\Abc\Core\TableColumn\Company\RoleTableColumn;
+use SetBased\Abc\Core\TableColumn\System\RoleGroupTableColumn;
 use SetBased\Abc\Form\Control\CheckboxControl;
 use SetBased\Abc\Form\Control\SlatControl;
 use SetBased\Abc\Form\Control\SlatControlFactory;
@@ -45,13 +47,13 @@ class SystemFunctionalityUpdateRolesSlatControlFactory extends SlatControlFactor
     $table_column = new TextTableColumn('Company', 'cmp_abbr');
     $this->addSlatJoint('cmp_abbr', new TableColumnSlatJoint($table_column));
 
-    // Create slat joint for table column with page ID.
-    $table_column = new NumericTableColumn('ID', 'rol_id');
-    $this->addSlatJoint('rol_id', new TableColumnSlatJoint($table_column));
+    // Create slat joint for table column with ID and name of role group.
+    $table_column = new RoleGroupTableColumn('Role Group');
+    $this->addSlatJoint('role_group', new TableColumnSlatJoint($table_column));
 
-    // Create slat joint for table column with name of class.
-    $table_column = new TextTableColumn('Role', 'rol_name');
-    $this->addSlatJoint('rol_name', new TableColumnSlatJoint($table_column));
+    // Create slat joint for table column with ID and name of role.
+    $table_column = new RoleTableColumn('Role');
+    $this->addSlatJoint('role', new TableColumnSlatJoint($table_column));
 
     // Create slat joint with checkbox for enabled or disabled page.
     $slat_joint = new CheckboxSlatJoint('Grant');
@@ -83,11 +85,11 @@ class SystemFunctionalityUpdateRolesSlatControlFactory extends SlatControlFactor
     $control->setValue($data);
 
     /** @var TableColumnControl $control */
-    $control = $this->createFormControl($row, 'rol_id');
+    $control = $this->createFormControl($row, 'role_group');
     $control->setValue($data);
 
     /** @var TableColumnControl $control */
-    $control = $this->createFormControl($row, 'rol_name');
+    $control = $this->createFormControl($row, 'role');
     $control->setValue($data);
 
     /** @var CheckboxControl $control */

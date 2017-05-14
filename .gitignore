@@ -4,4 +4,5 @@
 /bin/stratum
 /composer.lock
 /doc/
+/src/C.php
 /vendor/

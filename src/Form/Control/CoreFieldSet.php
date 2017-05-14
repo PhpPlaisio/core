@@ -129,7 +129,7 @@ class CoreFieldSet extends FieldSet
     $ret .= '<tbody>';
     foreach ($this->controls as $control)
     {
-      if ($control!=$this->buttonControl)
+      if ($control!==$this->buttonControl)
       {
         $ret .= '<tr>';
         $ret .= '<th>';
