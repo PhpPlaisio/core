@@ -1,0 +1,23 @@
+/**
+ * Selects all company specific pages.
+ *
+ * @param p_cmp_id The ID of the company.
+ * @param p_lan_id The ID of the language for linguistic entities.
+ */
+create procedure abc_company_specific_page_get_all( in p_cmp_id @aut_company.cmp_id%type@,
+                                                    in p_lan_id @bbl_word.wrd_id%type@ )
+reads sql data
+-- type: rows
+begin
+  select apc.pag_id      pag_id
+  ,      bwt.wdt_text    pag_title
+  ,      aup.pag_class   pag_class_parent
+  ,      apc.pag_class   pag_class_child
+  from       AUT_PAGE_COMPANY apc
+  inner join AUT_PAGE         aup  on  aup.pag_id = apc.pag_id
+  inner join BBL_WORD_TEXT    bwt  on  bwt.wrd_id = aup.wrd_id
+  where apc.cmp_id = p_cmp_id
+  and   bwt.lan_id = p_lan_id
+  order by aup.pag_class
+  ;
+end

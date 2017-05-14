@@ -1,0 +1,17 @@
+/**
+ * Selects the text of a word.
+ *
+ * @param p_wrd_id The ID of the word.
+ * @param p_lan_id The ID of the language for linguistic entities.
+ */
+create procedure bbl_word_get_word( in p_wrd_id @bbl_word.wrd_id%type@
+,                                   in p_lan_id @bbl_language.lan_id%type@ )
+reads sql data
+-- type: singleton1
+begin
+  select wdt_text
+  from   BBL_WORD_TEXT
+  where  wrd_id = p_wrd_id
+  and    lan_id = p_lan_id
+  ;
+end

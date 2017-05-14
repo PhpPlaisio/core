@@ -1,0 +1,16 @@
+/**
+ * Selects the details of a company.
+ *
+ * @param p_cmp_id The ID of the company.
+ */
+create procedure abc_company_get_details( in p_cmp_id @aut_company.cmp_id%type@ )
+reads sql data
+-- type: row1
+begin
+  select cmp_id
+  ,      cmp_abbr
+  ,      cmp_label
+  from   AUT_COMPANY
+  where  cmp_id = p_cmp_id
+  ;
+end

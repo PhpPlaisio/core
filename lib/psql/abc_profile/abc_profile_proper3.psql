@@ -1,0 +1,80 @@
+/**
+ *
+ */
+create procedure abc_profile_proper3()
+modifies sql data
+-- type: log
+begin
+  -- Compute new and obsolete profiles.
+  drop temporary table if exists TMP_PROFILE3;
+
+  create temporary table TMP_PROFILE3
+  (
+    pro_id   @aut_profile.pro_id%type@,
+    cmp_id   @aut_profile.cmp_id%type@,
+    usr_id   @aut_user.usr_id%type@,
+    rol_ids  @aut_profile.pro_rol_ids%type@
+  ) engine=myisam
+  ;
+
+  insert into TMP_PROFILE3(pro_id
+  ,                        cmp_id
+  ,                        usr_id
+  ,                        rol_ids)
+  select max(pro_id)
+  ,      cmp_id
+  ,      max(usr_id)
+  ,      pro_rol_ids
+  from
+  (
+    select pro_id
+    ,      cmp_id
+    ,      null          usr_id
+    ,      pro_rol_ids
+    ,      1             src
+    from   AUT_PROFILE
+
+    union all
+
+    select null
+    ,      cmp_id
+    ,      usr_id
+    ,      rol_ids
+    ,      2             src
+    from   TMP_PROFILE2
+  ) t
+  group by cmp_id
+  ,        pro_rol_ids
+  having  sum(if(src=1,1,0))<> sum(if(src=2,1,0))
+  ;
+
+
+  -- Insert new profiles
+  insert into AUT_PROFILE(cmp_id
+  ,                       pro_flags
+  ,                       pro_rol_ids)
+  select cmp_id
+  ,      0 -- xxx todo
+  ,      rol_ids
+  from   TMP_PROFILE3
+  where  pro_id is null
+  ;
+
+
+  -- Update user's profiles.
+  update     AUT_USER     usr
+  inner join TMP_PROFILE1 tmp  on  tmp.usr_id = usr.usr_id
+  inner join AUT_PROFILE  pro  on  pro.pro_rol_ids = tmp.rol_ids
+  set usr.pro_id = pro.pro_id
+  where pro.pro_id <> ifnull(usr.pro_id, 0)
+  ;
+
+
+  -- Delete obsolete profiles.
+  delete from pro
+  using      AUT_PROFILE  pro
+  inner join TMP_PROFILE3 tmp  on  tmp.pro_id = pro.pro_id
+  ;
+end
+
+

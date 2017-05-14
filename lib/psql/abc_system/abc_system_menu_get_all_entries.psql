@@ -1,0 +1,23 @@
+/**
+ * Selects all menu item entries.
+ *
+ * @param p_lan_id The ID of the language for linguistic entities.
+ */
+create procedure abc_system_menu_get_all_entries( in p_lan_id @bbl_language.lan_id%type@ )
+reads sql data
+-- type: rows
+begin
+  select mnu.mnu_id
+  ,      mnu.wrd_id
+  ,      wd1.wdt_text   mnu_name
+  ,      mnu.mnu_level
+  ,      mnu.mnu_link
+  ,      mnu.mnu_group
+  ,      mnu.mnu_weight
+  from       AUT_MENU      mnu
+  inner join BBL_WORD_TEXT wd1  on  wd1.wrd_id = mnu.wrd_id and
+                                    wd1.lan_id = p_lan_id
+  order by mnu.mnu_group
+  ,        mnu.mnu_weight
+  ;
+end

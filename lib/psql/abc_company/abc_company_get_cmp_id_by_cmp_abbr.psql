@@ -1,0 +1,14 @@
+/**
+ * Selects the company ID given a company abbreviation.
+ *
+ * @param p_cmp_abbr The company abbreviation.
+ */
+create procedure abc_company_get_cmp_id_by_cmp_abbr( in p_cmp_abbr @aut_company.cmp_abbr%type@ )
+reads sql data
+-- type: singleton0
+begin
+  select cmp_id
+  from   AUT_COMPANY
+  where  cmp_abbr = p_cmp_abbr
+  ;
+end

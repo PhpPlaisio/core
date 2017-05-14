@@ -1,0 +1,32 @@
+/**
+ *
+ */
+create procedure abc_profile_proper2()
+modifies sql data
+-- type: log
+begin
+  -- Create a temp table with unique profiles.
+  drop temporary table if exists TMP_PROFILE2;
+
+  create temporary table TMP_PROFILE2
+  (
+    cmp_id   @aut_profile.cmp_id%type@      not null,
+    usr_id   @aut_user.usr_id%type@         not null,
+    rol_ids  @aut_profile.pro_rol_ids%type@ not null,
+    primary key(rol_ids)
+  ) engine=myisam
+  ;
+
+  insert into TMP_PROFILE2(cmp_id
+  ,                        usr_id
+  ,                        rol_ids)
+  select cmp_id
+  ,      min(usr_id)
+  ,      rol_ids
+  from   TMP_PROFILE1
+  group by cmp_id
+  ,        rol_ids
+  ;
+end
+
+

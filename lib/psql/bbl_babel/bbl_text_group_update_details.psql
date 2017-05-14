@@ -1,0 +1,19 @@
+/**
+ * Updates the details of a text group.
+ *
+ * @param p_ttg_id    The ID of the text group.
+ * @param p_ttg_name  The new name of the text group.
+ * @param p_ttg_label The new label of the text group.
+ */
+create procedure bbl_text_group_update_details( in p_ttg_id    @bbl_text_group.ttg_id%type@,
+                                                in p_ttg_name  @bbl_text_group.ttg_name%type@,
+                                                in p_ttg_label @bbl_text_group.ttg_label%type@ )
+modifies sql data
+-- type: none
+begin
+  update BBL_TEXT_GROUP
+  set ttg_name  = p_ttg_name
+  ,   ttg_label = p_ttg_label
+  where ttg_id = p_ttg_id
+  ;
+end

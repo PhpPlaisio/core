@@ -1,0 +1,35 @@
+/**
+ * Selects the details of a page.
+ *
+ * @param p_pag_id The ID of the page.
+ * @param p_lan_id The ID of the language for linguistic entities.
+ */
+create procedure abc_system_page_get_details( in p_pag_id @aut_page.pag_id%type@,
+                                              in p_lan_id @bbl_language.lan_id%type@ )
+reads sql data
+-- type: row1
+begin
+  select pag.pag_id
+  ,      pag.ptb_id
+  ,      pag.pag_id_org
+  ,      pag.mnu_id
+  ,      pag.wrd_id
+  ,      pag.pag_alias
+  ,      pag.pag_class
+  ,      pag.pag_label
+  ,      pag.pag_weight
+  ,      wd1.wdt_text       pag_title
+  ,      wd2.wdt_text       mnu_name
+  ,      wd3.wdt_text       ptb_name
+  from            AUT_PAGE      pag
+  inner join      BBL_WORD_TEXT wd1  on  wd1.wrd_id = pag.wrd_id and
+                                         wd1.lan_id = p_lan_id
+  left outer join AUT_MENU      mnu  on  mnu.mnu_id = pag.mnu_id
+  left outer join BBL_WORD_TEXT wd2  on  wd2.wrd_id = mnu.wrd_id and
+                                         wd2.lan_id = p_lan_id
+  left outer join AUT_PAGE_TAB  ptb  on  ptb.ptb_id = pag.ptb_id
+  left outer join BBL_WORD_TEXT wd3  on  wd3.wrd_id = ptb.wrd_id and
+                                         wd3.lan_id = p_lan_id
+  where pag.pag_id = p_pag_id
+  ;
+end

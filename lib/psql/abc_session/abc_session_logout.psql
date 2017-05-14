@@ -1,0 +1,41 @@
+/**
+ * Logs out a user.
+ *
+ * @param p_ses_id     The ID of the session.
+ * @param p_ip_address The remote IPv4 address.
+ */
+create procedure abc_session_logout( in p_ses_id     @aut_session.ses_id%type@,
+                                     in p_ip_address varchar(15) )
+modifies sql data
+-- type: none
+begin
+  -- Log the logout attempt in the general log event table.
+  insert into LOG_EVENT( cmp_id
+  ,                      usr_id
+  ,                      let_id
+  ,                      ses_id
+  ,                      lev_datetime
+  ,                      lev_ip )
+  select ses.cmp_id
+  ,      ses.usr_id
+  ,      @LET_ID_LOGOUT@
+  ,      ses.ses_id
+  ,      now()
+  ,      inet_aton(p_ip_address)
+  from       AUT_SESSION ses
+  inner join AUT_USER    usr  on  usr.usr_id = ses.usr_id
+  where  ses.ses_id        = p_ses_id
+  and    usr.usr_anonymous = 0
+  ;
+
+  -- Mark the user as logged out.
+  update     AUT_SESSION ses
+  inner join AUT_USER    usr  on usr.cmp_id        = ses.cmp_id and
+                                 usr.usr_anonymous = 1
+  set   ses.usr_id            = usr.usr_id
+  ,     ses.ses_session_token = null
+  ,     ses.ses_csrf_token    = null
+  where ses.ses_id = p_ses_id
+  ;
+
+end

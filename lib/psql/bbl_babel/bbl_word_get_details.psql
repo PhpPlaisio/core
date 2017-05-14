@@ -1,0 +1,28 @@
+/**
+ * Selects the details of a word.
+ *
+ * @param p_wrd_id The ID of the word.
+ * @param p_lan_id The ID of the reference language.
+ */
+create procedure bbl_word_get_details( in p_wrd_id @bbl_word.wrd_id%type@
+,                                      in p_lan_id @bbl_language.lan_id%type@ )
+reads sql data
+-- type: row1
+begin
+  select wrd.wrd_id
+  ,      wrd.wrd_modified        ref_date
+  ,      wrd.wrd_label
+  ,      wrd.wrd_comment
+
+  ,      wdg.wdg_id
+  ,      wdg.wdg_name
+
+  ,      wdt.wdt_text
+  ,      wdt.wdt_modified        act_date
+  from       BBL_WORD       wrd
+  inner join BBL_WORD_GROUP wdg  on  wdg.wdg_id = wrd.wdg_id
+  inner join BBL_WORD_TEXT  wdt  on  wdt.wrd_id = wrd.wrd_id and
+                                     wdt.lan_id = p_lan_id
+  where wrd.wrd_id = p_wrd_id
+  ;
+end

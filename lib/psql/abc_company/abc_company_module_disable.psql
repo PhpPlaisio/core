@@ -1,0 +1,16 @@
+/**
+ * Disables a module for a company.
+ *
+ * @param p_cmp_id The ID of the company.
+ * @param p_mdl_id The ID of the module to be disabled.
+ */
+create procedure abc_company_module_disable( in p_cmp_id @aut_module_company.cmp_id%type@,
+                                             in p_mdl_id @aut_module_company.mdl_id%type@ )
+modifies sql data
+-- type: none
+begin
+  delete from AUT_MODULE_COMPANY
+  where cmp_id = p_cmp_id
+  and   mdl_id = p_mdl_id
+  ;
+end

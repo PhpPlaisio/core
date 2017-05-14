@@ -1,0 +1,22 @@
+/**
+ * Selects all the roles that are granted a functionality.
+ *
+ * @param p_fun_id The ID of the functionality.
+ */
+create procedure abc_system_functionality_get_roles( in p_fun_id @aut_functionality.fun_id%type@ )
+reads sql data
+-- type: rows
+begin
+  select cmp.cmp_id
+  ,      cmp.cmp_abbr
+  ,      rol.rol_id
+  ,      rol.rol_name
+  from       AUT_FUNCTIONALITY fun
+  inner join AUT_ROL_FUN       arf  on  arf.fun_id = fun.fun_id
+  inner join AUT_ROLE          rol  on  rol.rol_id = arf.rol_id
+  inner join AUT_COMPANY       cmp  on  cmp.cmp_id = rol.cmp_id
+  where fun.fun_id = p_fun_id
+  order by cmp.cmp_abbr
+  ,        rol.rol_weight
+  ;
+end

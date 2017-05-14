@@ -1,0 +1,22 @@
+/**
+ * Selects all roles including a flag indication the role is granted acces to a functionality.
+ *
+ * @param p_fun_id The ID of the functionality.
+ */
+create procedure abc_system_functionality_get_available_roles( in p_fun_id @aut_functionality.fun_id%type@ )
+reads sql data
+-- type: rows
+begin
+  select cmp.cmp_id                 cmp_id
+  ,      cmp.cmp_abbr               cmp_abbr
+  ,      rol.rol_id                 rol_id
+  ,      rol.rol_name               rol_name
+  ,      if(arf.rol_id is null,0,1) rol_enabled
+  from            AUT_ROLE    rol
+  inner join      AUT_COMPANY cmp  on  cmp.cmp_id = rol.cmp_id
+  left outer join AUT_ROL_FUN arf  on  arf.rol_id = rol.rol_id and
+                                       arf.fun_id = p_fun_id
+  order by cmp.cmp_abbr
+  ,        rol.rol_name
+  ;
+end

@@ -1,0 +1,19 @@
+/**
+ * Selects the text of a text.
+ *
+ * @param p_txt_id The ID of the text.
+ * @param p_lan_id The ID of the language for linguistic entities.
+ */
+create procedure bbl_text_get_text( in p_txt_id @bbl_text.txt_id%type@
+,                                   in p_lan_id @bbl_language.lan_id%type@ )
+reads sql data
+-- type: row1
+begin
+  select txt_format
+  ,      ttt_text
+  from       BBL_TEXT      txt
+  inner join BBL_TEXT_TEXT ttt  on  ttt.txt_id = txt.txt_id and
+                                    ttt.lan_id = p_lan_id
+  where  txt.txt_id = p_txt_id
+  ;
+end

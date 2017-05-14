@@ -1,0 +1,17 @@
+/**
+ * Adds a page to a functionality.
+ *
+ * @param p_fun_id The ID of the functionality.
+ * @param p_pag_id The ID of the page.
+ */
+create procedure abc_system_functionality_insert_page( in p_fun_id @aut_pag_fun.fun_id%type@,
+                                                       in p_pag_id @aut_pag_fun.pag_id%type@ )
+modifies sql data
+-- type: none
+begin
+  insert into AUT_PAG_FUN( fun_id
+  ,                        pag_id )
+  values( p_fun_id
+  ,       p_pag_id )
+  ;
+end

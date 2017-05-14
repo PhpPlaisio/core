@@ -1,0 +1,24 @@
+/**
+ * Updates the details of a company.
+ *
+ * @param p_cmp_id    The ID of the company.
+ * @param p_cmp_abbr  The abbreviation of the company.
+ * @param p_cmp_label The label of the company.
+ */
+create procedure abc_company_update( in  p_cmp_id      @aut_company.cmp_id%type@,
+                                     in  p_cmp_abbr    @aut_company.cmp_abbr%type@,
+                                     in  p_cmp_label   @aut_company.cmp_label%type@ )
+modifies sql data
+-- type: none
+begin
+  if (p_cmp_label='*') then
+    set p_cmp_label = concat( 'CMP_ID_', upper( replace( p_cmp_abbr, ' ', '_' ) ) );
+    /** @todo move to php */
+  end if;
+
+  update AUT_COMPANY
+  set    cmp_abbr  = p_cmp_abbr
+  ,      cmp_label = p_cmp_label
+  where  cmp_id = p_cmp_id
+  ;
+end

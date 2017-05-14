@@ -1,0 +1,22 @@
+/**
+ * Selects all modules including a flag indication the the module is granted to the company.
+ *
+ * @param p_cmp_id The ID of the company.
+ * @param p_lan_id The ID of the language for linguistic entities.
+ */
+create procedure abc_company_module_get_all_available( in p_cmp_id @aut_company.cmp_id%type@,
+                                                        in p_lan_id @bbl_word.wrd_id%type@ )
+reads sql data
+-- type: rows
+begin
+  select mdl.mdl_id                 mdl_id
+  ,      wd1.wdt_text               mdl_name
+  ,      if(mdc.mdl_id is null,0,1) mdl_enabled
+  from             AUT_MODULE        mdl
+  inner join       BBL_WORD_TEXT     wd1  on  wd1.wrd_id = mdl.wrd_id and
+                                              wd1.lan_id = p_lan_id
+  left outer join AUT_MODULE_COMPANY mdc  on  mdc.mdl_id = mdl.mdl_id and
+                                              mdc.cmp_id = p_cmp_id
+  order by mdl_name
+  ;
+end

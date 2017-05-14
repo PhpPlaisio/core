@@ -1,0 +1,15 @@
+/**
+ * Selects the details of a word group.
+ *
+ * @param p_wdg_id The ID of the word group.
+ */
+create procedure bbl_word_group_get_details( in p_wdg_id @BBL_WORD_GROUP.wdg_id%type@ )
+reads sql data
+-- type: row1
+begin
+  select wdg_id
+  ,      wdg_name
+  from   BBL_WORD_GROUP
+  where  wdg_id = p_wdg_id
+  ;
+end

@@ -1,0 +1,25 @@
+/**
+ * Selects the details of a functionality.
+ *
+ * @param p_fun_id The ID of the functionality.
+ * @param p_lan_id The ID of the language for linguistic entities.
+ */
+create procedure abc_system_functionality_get_details( in p_fun_id @aut_functionality.fun_id%type@,
+                                                       in p_lan_id @bbl_language.lan_id%type@ )
+reads sql data
+-- type: row1
+begin
+  select mdl.mdl_id     mdl_id
+  ,      fun.fun_id     fun_id
+  ,      wd1.wrd_id     wrd_id
+  ,      wd1.wdt_text   fun_name
+  ,      wd2.wdt_text   mdl_name
+  from       AUT_FUNCTIONALITY fun
+  inner join BBL_WORD_TEXT     wd1  on  wd1.wrd_id = fun.wrd_id and
+                                        wd1.lan_id = p_lan_id
+  inner join AUT_MODULE        mdl  on  mdl.mdl_id = fun.mdl_id
+  inner join BBL_WORD_TEXT     wd2  on  wd2.wrd_id = mdl.wrd_id and
+                                        wd2.lan_id = p_lan_id
+  where fun.fun_id = p_fun_id
+  ;
+end

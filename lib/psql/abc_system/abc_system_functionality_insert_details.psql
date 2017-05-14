@@ -1,0 +1,23 @@
+/**
+ * Inserts an new functionality.
+ *
+ * @param p_mdl_id The ID on the module of the new functionality.
+ * @param p_wrd_id The ID of the word of the name of the new functionality.
+ */
+create procedure abc_system_functionality_insert_details( in p_mdl_id @aut_module.mdl_id%type@,
+                                                          in p_wrd_id @bbl_word.wrd_id%type@ )
+modifies sql data
+-- type: singleton1
+begin
+  declare l_fun_id @aut_functionality.fun_id%type@;
+
+  insert into AUT_FUNCTIONALITY( mdl_id
+  ,                              wrd_id )
+  values( p_mdl_id
+  ,       p_wrd_id );
+
+  set l_fun_id = last_insert_id();
+
+  select l_fun_id fun_id
+  ;
+end

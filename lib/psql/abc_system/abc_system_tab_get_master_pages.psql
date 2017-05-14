@@ -1,0 +1,23 @@
+/**
+ * Selects all master pages of a page tab.
+ *
+ * @param p_ptb_id The ID of the page tab.
+ * @param p_lan_id The ID of the language for linguistic entities.
+ */
+create procedure abc_system_tab_get_master_pages( in p_ptb_id @aut_page_tab.ptb_id%type@,
+                                                  in p_lan_id @bbl_language.lan_id%type@ )
+reads sql data
+-- type: rows
+begin
+  select pag.pag_id             pag_id
+  ,      pag.pag_class          pag_class
+  ,      pag.pag_label          pag_label
+  ,      wd1.wdt_text           pag_title
+  from       AUT_PAGE      pag
+  inner join BBL_WORD_TEXT wd1  on  wd1.wrd_id = pag.wrd_id and
+                                    wd1.lan_id = p_lan_id
+  where pag.ptb_id = p_ptb_id
+  and   pag.pag_id = pag.pag_id_org
+  order by pag.pag_class
+  ;
+end

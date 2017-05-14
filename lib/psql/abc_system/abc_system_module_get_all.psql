@@ -1,0 +1,17 @@
+/**
+ * Selects all modules.
+ *
+ * @param p_lan_id The ID of the language used for names.
+ */
+create procedure abc_system_module_get_all( in p_lan_id @bbl_language.lan_id%type@ )
+reads sql data
+-- type: rows
+begin
+  select mdl.mdl_id     mdl_id
+  ,      wd1.wdt_text   mdl_name
+  from       AUT_MODULE    mdl
+  inner join BBL_WORD_TEXT wd1  on  wd1.wrd_id = mdl.wrd_id and
+                                    wd1.lan_id = p_lan_id
+  order by mdl_name
+  ;
+end

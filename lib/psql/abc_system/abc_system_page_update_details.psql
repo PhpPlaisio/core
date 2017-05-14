@@ -1,0 +1,41 @@
+/**
+ * Updates a page.
+ *
+ * @param p_pag_id      The ID of the page.
+ * @param p_wrd_id      The ID of the word of the page title.
+ * @param p_ptb_id      The ID of the page tab to which the page belongs (optional).
+ * @param p_pag_id_org  The ID of master page of the page (optional).
+ * @param p_mnu_id      The ID menu associated with the page.
+ * @param p_pag_alias   The alias of the page.
+ * @param p_pag_class   The class of the page.
+ * @param p_pag_label   The label of the page.
+ * @param p_pag_weight  The weight of the page inside a page group.
+ */
+create procedure abc_system_page_update_details( in p_pag_id       @aut_page.pag_id%type@,
+                                                 in p_wrd_id       @bbl_word.wrd_id%type@,
+                                                 in p_ptb_id       @aut_page_tab.ptb_id%type@,
+                                                 in p_pag_id_org   @aut_page.pag_id%type@,
+                                                 in p_mnu_id       @aut_menu.mnu_id%type@,
+                                                 in p_pag_alias    @aut_page.pag_alias%type@,
+                                                 in p_pag_class    @aut_page.pag_class%type@,
+                                                 in p_pag_label    @aut_page.pag_label%type@,
+                                                 in p_pag_weight   @aut_page.pag_weight%type@ )
+modifies sql data
+-- type: none
+begin
+  if p_pag_id_org is null and p_ptb_id is not null then
+    set p_pag_id_org = p_pag_id;
+  end if;
+
+  update AUT_PAGE
+  set wrd_id       = p_wrd_id
+  ,   ptb_id       = p_ptb_id
+  ,   pag_id_org   = p_pag_id_org
+  ,   mnu_id       = p_mnu_id
+  ,   pag_alias    = p_pag_alias
+  ,   pag_class    = p_pag_class
+  ,   pag_label    = p_pag_label
+  ,   pag_weight   = p_pag_weight
+  where pag_id = p_pag_id
+  ;
+end

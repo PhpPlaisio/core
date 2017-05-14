@@ -1,0 +1,21 @@
+/**
+ * Grants a functionality ro a role.
+ *
+ * @param p_cmp_id The ID of the company.
+ * @param p_rol_id The ID of the role.
+ * @param p_fun_id The ID of functionality granted.
+ */
+create procedure abc_company_role_insert_functionality( in p_cmp_id @aut_company.cmp_id%type@,
+                                                        in p_rol_id @aut_role.rol_id%type@,
+                                                        in p_fun_id @aut_rol_fun.fun_id%type@)
+modifies sql data
+-- type: none
+begin
+  insert into AUT_ROL_FUN( rol_id
+  ,                        fun_id
+  ,                        cmp_id )
+  values( p_rol_id
+  ,       p_fun_id
+  ,       p_cmp_id )
+  ;
+end

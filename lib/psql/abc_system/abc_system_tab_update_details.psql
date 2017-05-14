@@ -1,0 +1,19 @@
+/**
+ * Updates the details of a page tab.
+ *
+ * @param p_ptb_id    The ID of the page tab.
+ * @param p_wrd_id    The ID of the word of the title of the page tab.
+ * @param p_ptb_label The label of the page tab.
+ */
+create procedure abc_system_tab_update_details( in p_ptb_id    @aut_page_tab.ptb_id%type@,
+                                                in p_wrd_id    @aut_page_tab.wrd_id%type@,
+                                                in p_ptb_label @aut_page_tab.ptb_label%type@ )
+reads sql data
+-- type: none
+begin
+  update AUT_PAGE_TAB
+  set    wrd_id    = p_wrd_id
+  ,      ptb_label = p_ptb_label
+  where  ptb_id = p_ptb_id
+  ;
+end

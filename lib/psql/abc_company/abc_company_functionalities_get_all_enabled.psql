@@ -1,0 +1,27 @@
+/**
+ * Selects all functionalities of all granted modules to a company.
+ *
+ * @param p_cmp_id The ID of the company.
+ * @param p_lan_id The ID of the language for linguistic entities.
+ */
+create procedure abc_company_functionalities_get_all_enabled( in p_cmp_id @aut_company.cmp_id%type@,
+                                                              in p_lan_id @bbl_word.wrd_id%type@ )
+reads sql data
+-- type: rows
+begin
+  select mdl.mdl_id     mdl_id
+  ,      wd1.wdt_text   mdl_name
+  ,      fun.fun_id     fun_id
+  ,      wd2.wdt_text   fun_name
+  from       AUT_MODULE_COMPANY  mdc
+  inner join AUT_MODULE          mdl  on  mdl.mdl_id = mdc.mdl_id
+  inner join BBL_WORD_TEXT       wd1  on  wd1.wrd_id = mdl.wrd_id and
+                                          wd1.lan_id = p_lan_id
+  inner join AUT_FUNCTIONALITY   fun  on  fun.mdl_id = mdl.mdl_id
+  inner join BBL_WORD_TEXT       wd2  on  wd2.wrd_id = fun.wrd_id and
+                                          wd2.lan_id = p_lan_id
+  where mdc.cmp_id = p_cmp_id
+  order by mdl_name
+  ,        fun_name
+  ;
+end

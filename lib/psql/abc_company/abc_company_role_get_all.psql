@@ -1,0 +1,18 @@
+/**
+ * Selects all roles of a company.
+ *
+ * @param p_cmp_id The ID of the company.
+ */
+create procedure abc_company_role_get_all( in p_cmp_id @aut_role.cmp_id%type@ )
+reads sql data
+-- type: rows
+begin
+  select cmp_id
+  ,      rol_id
+  ,      rol_weight
+  ,      rol_name
+  from   AUT_ROLE
+  where  cmp_id = p_cmp_id
+  order by rol_weight
+  ;
+end

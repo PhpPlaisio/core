@@ -1,0 +1,22 @@
+/**
+ * Selects all text groups.
+ *
+ * @param p_lan_id The ID of the target language.
+ */
+create procedure bbl_text_group_get_all( in p_lan_id @bbl_language.lan_id%type@ )
+reads sql data
+-- type: rows
+begin
+  select ttg.ttg_id
+  ,      ttg.ttg_name
+  ,      count(txt.txt_id)                               n1
+  ,      sum(if(txt.txt_modified>ttt.ttt_modified,1,0))  n2
+  from            BBL_TEXT_GROUP ttg
+  left outer join BBL_TEXT       txt  on  txt.ttg_id = ttg.ttg_id
+  left outer join BBL_TEXT_TEXT  ttt  on  txt.txt_id = ttt.txt_id and
+                                          ttt.lan_id = p_lan_id
+  group by ttg.ttg_name
+  ,        ttg.ttg_id
+  order by ttg.ttg_name
+  ;
+end

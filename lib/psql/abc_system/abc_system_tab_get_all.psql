@@ -1,0 +1,18 @@
+/**
+ * Selects all page tabs.
+ *
+ * @param p_lan_id The ID of the language for linguistic entities.
+ */
+create procedure abc_system_tab_get_all( in p_lan_id @bbl_language.lan_id%type@ )
+reads sql data
+-- type: rows
+begin
+  select ptb.ptb_id      ptb_id
+  ,      ptb.ptb_label   ptb_label
+  ,      wd1.wdt_text    ptb_title
+  from       AUT_PAGE_TAB  ptb
+  inner join BBL_WORD_TEXT wd1  on  wd1.wrd_id = ptb.wrd_id and
+                                    wd1.lan_id = p_lan_id
+  order by ptb.ptb_label
+  ;
+end

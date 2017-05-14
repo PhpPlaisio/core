@@ -1,0 +1,17 @@
+/**
+ * Selects all companies that are granted a module.
+ *
+ * @param p_mdl_id The ID of the module.
+ */
+create procedure abc_system_module_get_granted_companies( in p_mdl_id @aut_module.mdl_id%type@ )
+reads sql data
+-- type: rows
+begin
+  select cmp.cmp_id
+  ,      cmp.cmp_abbr
+  from       AUT_MODULE_COMPANY amc
+  inner join AUT_COMPANY        cmp  on  cmp.cmp_id = amc.cmp_id
+  where amc.mdl_id = p_mdl_id
+  order by cmp.cmp_abbr
+  ;
+end

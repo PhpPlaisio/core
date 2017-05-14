@@ -1,0 +1,16 @@
+/**
+ * Modifies the name a module.
+ *
+ * @param p_mdl_id The ID of the module.
+ * @param p_wrd_id The ID of the word of the name of the module.
+ */
+create procedure abc_system_module_modify( in p_mdl_id @aut_module.mdl_id%type@,
+                                           in p_wrd_id @aut_module.wrd_id%type@ )
+modifies sql data
+-- type: none
+begin
+  update AUT_MODULE
+  set    wrd_id = p_wrd_id
+  where  mdl_id = p_mdl_id
+  ;
+end

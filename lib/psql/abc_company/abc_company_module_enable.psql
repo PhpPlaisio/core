@@ -1,0 +1,17 @@
+/**
+ * Enables a module for a company.
+ *
+ * @param p_cmp_id The ID of the company.
+ * @param p_mdl_id The ID of module to be enabled.
+ */
+create procedure abc_company_module_enable( in p_cmp_id @aut_module_company.cmp_id%type@,
+                                            in p_mdl_id @aut_module_company.mdl_id%type@ )
+modifies sql data
+-- type: none
+begin
+  insert into AUT_MODULE_COMPANY( cmp_id
+  ,                               mdl_id )
+  values( p_cmp_id
+  ,       p_mdl_id )
+  ;
+end

@@ -1,0 +1,20 @@
+/**
+ * Selects all functionalities of a module.
+ *
+ * @param p_mdl_id The ID of the module.
+ * @param p_lan_id The ID of the language used for names.
+ */
+create procedure abc_system_module_get_functions( in p_mdl_id @aut_module.mdl_id%type@,
+                                                  in p_lan_id @bbl_language.lan_id%type@ )
+reads sql data
+-- type: rows
+begin
+  select fun.fun_id     fun_id
+  ,      wd2.wdt_text   fun_name
+  from       AUT_FUNCTIONALITY fun
+  inner join BBL_WORD_TEXT     wd2  on  wd2.wrd_id = fun.wrd_id and
+                                        wd2.lan_id = p_lan_id
+  where fun.mdl_id = p_mdl_id
+  order by wd2.wdt_text
+;
+end

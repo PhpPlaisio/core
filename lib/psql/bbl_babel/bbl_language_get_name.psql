@@ -1,0 +1,18 @@
+/**
+ * Selects the name of a language.
+ *
+ * @param p_lan_id_act The ID of the language of which the name is selected.
+ * @param p_lan_id     The ID of the language for linguistic entities.
+ */
+create procedure bbl_language_get_name( in p_lan_id_act @bbl_language.lan_id%type@
+,                                       in p_lan_id     @bbl_language.lan_id%type@ )
+reads sql data
+-- type: singleton0
+begin
+  select wdt_text
+  from       BBL_LANGUAGE  lan
+  inner join BBL_WORD_TEXT wdt  on  lan.wrd_id = wdt.wrd_id
+  where  lan.lan_id = p_lan_id_act
+  and    wdt.lan_id = p_lan_id
+  ;
+end

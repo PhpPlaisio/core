@@ -1,0 +1,29 @@
+/**
+ * Selects all words in a word group in the reference and target language.
+ *
+ * @param p_wgd_id     The ID of the word group.
+ * @param p_lan_id_act The ID of the target language.
+ */
+create procedure bbl_word_group_get_all_words_translator( in p_wgd_id     @BBL_WORD_GROUP.wdg_id%type@
+,                                                         in p_lan_id_act @BBL_LANGUAGE.lan_id%type@ )
+reads sql data
+-- type: rows
+begin
+  select wrd.wrd_id
+  ,      wrd.wdg_id
+  ,      wrd.wrd_label
+  ,      wrd.wrd_comment
+  ,      wrd.wrd_modified                                       ref_date
+  ,      ref.wdt_text                                           ref_wdt_text
+
+  ,      act.wdt_text                                           act_wdt_text
+  ,      act.wdt_modified                                       act_date
+  from       BBL_WORD      wrd
+  inner join BBL_WORD_TEXT act  on  act.wrd_id = wrd.wrd_id and
+                                    act.lan_id = p_lan_id_act
+  inner join BBL_WORD_TEXT ref  on  ref.wrd_id = wrd.wrd_id and
+                                    ref.lan_id = @LAN_ID_BABEL_REFERENCE@
+  where  wrd.wdg_id = p_wgd_id
+  order by ref.wdt_text
+  ;
+end

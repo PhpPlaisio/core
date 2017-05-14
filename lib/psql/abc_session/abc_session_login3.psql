@@ -1,0 +1,104 @@
+/**
+ * Phase 3 of the login process.
+ *
+ * Phase 3 logs the login attempt and if login is granted upgrades the current session to a session that is tied to the
+ * user.
+ *
+ * @param p_ses_id     The ID of the session.
+ * @param p_cmp_id     The ID of the company (safeguard).
+ * @param p_usr_id     The ID of the user (optional).
+ * @param p_lgr_id     The ID of the login response.
+ * @param p_user_name  The account name of the user of the login attempt.
+ * @param p_cmp_abbr   The company abbreviation of the login attempt.
+ * @param p_ip_address The remote IPv4 address.
+ */
+create procedure abc_session_login3(in p_ses_id     @log_login.ses_id%type@,
+                                    in p_cmp_id     @log_login.cmp_id%type@,
+                                    in p_usr_id     @log_login.usr_id%type@,
+                                    in p_lgr_id     @log_login.lgr_id%type@,
+                                    in p_user_name  @log_login.llg_user_name%type@,
+                                    in p_cmp_abbr   @log_login.llg_company_abbr%type@,
+                                    in p_ip_address varchar(15))
+modifies sql data
+-- type: row1
+begin
+  declare l_ses_session_token  @aut_session.ses_session_token%type@;
+  declare l_ses_csrf_token     @aut_session.ses_csrf_token%type@;
+
+  if (p_lgr_id=@LGR_ID_GRANTED@) then
+    set l_ses_session_token = sha2(uuid(), 256);
+    set l_ses_csrf_token    = sha2(uuid(), 256);
+
+    update AUT_SESSION
+    set    usr_id            = p_usr_id
+    ,      cmp_id            = p_cmp_id
+    ,      ses_session_token = l_ses_session_token
+    ,      ses_csrf_token    = l_ses_csrf_token
+    where  ses_id = p_ses_id
+    ;
+
+    set @abc_g_skip_aut_user  = 1;
+
+    update AUT_USER
+    set    usr_last_login = now()
+    where  usr_id = p_usr_id
+    ;
+
+    set @abc_g_skip_aut_user = null;
+  end if;
+
+
+  -- Log the login attempt in the login specific log table.
+  insert into LOG_LOGIN( ses_id
+  ,                      lgr_id
+  ,                      cmp_id
+  ,                      usr_id
+  ,                      llg_datetime
+  ,                      llg_user_name
+  ,                      llg_company_abbr )
+  values( p_ses_id
+  ,       p_lgr_id
+  ,       p_cmp_id
+  ,       p_usr_id
+  ,       now()
+  ,       p_user_name
+  ,       p_cmp_abbr )
+  ;
+
+
+  -- Log the login attempt in the general event log table.
+  if (p_cmp_id is not null and p_usr_id is not null) then
+    insert into LOG_EVENT( cmp_id
+    ,                      usr_id
+    ,                      let_id
+    ,                      ses_id
+    ,                      lgr_id
+    ,                      lev_datetime
+    ,                      lev_ip )
+    values( p_cmp_id
+    ,       p_usr_id
+    ,       if (p_lgr_id=@LGR_ID_GRANTED@,@LET_ID_LOGIN_GRANTED@,@LET_ID_LOGIN_FAILED@)
+    ,       p_ses_id
+    ,       p_lgr_id
+    ,       now()
+    ,       inet_aton(p_ip_address) )
+    ;
+  end if;
+
+
+  if (p_lgr_id!=@LGR_ID_GRANTED@) then
+    set p_usr_id            = null;
+    set p_cmp_id            = null;
+    set l_ses_session_token = null;
+    set l_ses_csrf_token    = null;
+  end if;
+
+
+  -- Return the result of the login attempt.
+  select p_lgr_id              lgr_id
+  ,      p_usr_id              usr_id
+  ,      p_cmp_id              cmp_id
+  ,      l_ses_session_token   ses_session_token
+  ,      l_ses_csrf_token      ses_csrf_token
+  ;
+end

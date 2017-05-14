@@ -1,0 +1,15 @@
+/**
+ * Selects the details of a text group.
+ *
+ * @param p_ttg_id The ID of the text group.
+ */
+create procedure bbl_text_group_get_details( in p_ttg_id @bbl_text_group.ttg_id%type@ )
+reads sql data
+-- type: row1
+begin
+  select ttg_id
+  ,      ttg_name
+  from   BBL_TEXT_GROUP
+  where  ttg_id = p_ttg_id
+  ;
+end

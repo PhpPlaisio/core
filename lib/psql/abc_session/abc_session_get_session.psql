@@ -1,0 +1,148 @@
+/**
+ * Gets a session based a session token (i.e. a cookie). If no session is found a new session is created.
+ *
+ * @param p_cmp_abbr          The ID of the company of the user (safe guard).
+ * @param p_ses_session_token The session token.
+ */
+create procedure abc_session_get_session( in p_cmp_abbr          @aut_company.cmp_abbr%type@,
+                                          in p_ses_session_token @aut_session.ses_session_token%type@ )
+modifies sql data
+-- type: row1
+begin
+  declare l_ses_id            @aut_session.ses_id%type@;
+  declare l_cmp_id            @aut_company.cmp_id%type@;
+  declare l_cmp_abbr          @aut_company.cmp_abbr%type@;
+  declare l_usr_id            @aut_user.usr_id%type@;
+  declare l_usr_anonymous     @aut_user.usr_anonymous%type@;
+  declare l_pro_id            @aut_profile.pro_id%type@;
+  declare l_pro_flags         @aut_profile.pro_flags%type@;
+  declare l_lan_id            @bbl_language.lan_id%type@;
+  declare l_lan_code          @bbl_language.lan_code%type@;
+  declare l_ses_session_token @aut_session.ses_session_token%type@;
+  declare l_ses_csrf_token    @aut_session.ses_csrf_token%type@;
+
+
+  select ses.ses_id
+  ,      ses.ses_session_token
+  ,      ses.ses_csrf_token
+  ,      cmp.cmp_id
+  ,      cmp.cmp_abbr
+  ,      usr.usr_id
+  ,      usr.usr_anonymous
+  ,      pro.pro_id
+  ,      pro.pro_flags
+  ,      lan.lan_id
+  ,      lan.lan_code
+  into   l_ses_id
+  ,      l_ses_session_token
+  ,      l_ses_csrf_token
+  ,      l_cmp_id
+  ,      l_cmp_abbr
+  ,      l_usr_id
+  ,      l_usr_anonymous
+  ,      l_pro_id
+  ,      l_pro_flags
+  ,      l_lan_id
+  ,      l_lan_code
+  from       AUT_SESSION  ses
+  inner join AUT_COMPANY  cmp  on  cmp.cmp_id = ses.cmp_id
+  inner join AUT_USER     usr  on  usr.usr_id = ses.usr_id
+  inner join AUT_PROFILE  pro  on  pro.pro_id = usr.pro_id
+  inner join BBL_LANGUAGE lan  on  lan.lan_id = usr.lan_id
+  where  ses.ses_session_token = p_ses_session_token
+  and    cmp.cmp_abbr          = p_cmp_abbr
+  and    date_add(ses_last_request,interval 60 minute) > now()  -- xxx parameter
+  ;
+
+  if (found_rows()<>1) then
+    -- User is not logged in or session has expired. Create a new session.
+    select usr.usr_id
+    ,      usr.usr_anonymous
+    ,      usr.cmp_id
+    ,      cmp.cmp_abbr
+    ,      pro.pro_id
+    ,      pro.pro_flags
+    ,      lan.lan_id
+    ,      lan.lan_code
+    into   l_usr_id
+    ,      l_usr_anonymous
+    ,      l_cmp_id
+    ,      l_cmp_abbr
+    ,      l_pro_id
+    ,      l_pro_flags
+    ,      l_lan_id
+    ,      l_lan_code
+    from       AUT_COMPANY  cmp
+    inner join AUT_USER     usr  on  usr.cmp_id = cmp.cmp_id
+    inner join AUT_PROFILE  pro  on  pro.pro_id = usr.pro_id
+    inner join BBL_LANGUAGE lan  on  lan.lan_id = usr.lan_id
+    where cmp.cmp_abbr      = p_cmp_abbr
+    and   usr.usr_anonymous = 1
+    ;
+
+    if l_cmp_id is null then
+      -- p_cmp_abbr is not a valid Company abbreviation.
+      select usr.usr_id
+      ,      usr.usr_anonymous
+      ,      usr.cmp_id
+      ,      cmp.cmp_abbr
+      ,      pro.pro_id
+      ,      pro.pro_flags
+      ,      lan.lan_id
+      ,      lan.lan_code
+      into   l_usr_id
+      ,      l_usr_anonymous
+      ,      l_cmp_id
+      ,      l_cmp_abbr
+      ,      l_pro_id
+      ,      l_pro_flags
+      ,      l_lan_id
+      ,      l_lan_code
+      from       AUT_COMPANY  cmp
+      inner join AUT_USER     usr  on  usr.cmp_id = cmp.cmp_id
+      inner join AUT_PROFILE  pro  on  pro.pro_id = usr.pro_id
+      inner join BBL_LANGUAGE lan  on  lan.lan_id = usr.lan_id
+      where cmp.cmp_id        = @CMP_ID_SYSTEM@
+      and   usr.usr_anonymous = 1
+      ;
+    end if;
+
+    set l_ses_session_token = sha2( uuid(), 256 );
+    set l_ses_csrf_token    = sha2( uuid(), 256 );
+
+    insert into AUT_SESSION( ses_id
+    ,                        usr_id
+    ,                        cmp_id
+    ,                        ses_session_token
+    ,                        ses_csrf_token
+    ,                        ses_start
+    ,                        ses_last_request )
+    values( l_ses_id
+    ,       l_usr_id
+    ,       l_cmp_id
+    ,       l_ses_session_token
+    ,       l_ses_csrf_token
+    ,       now()
+    ,       now() )
+    ;
+
+    set l_ses_id = last_insert_id();
+  end if;
+
+  -- To be used in audit triggers.
+  set @abc_g_ses_id = l_ses_id;
+  set @abc_g_usr_id = l_usr_id;
+
+  select l_ses_id             ses_id
+  ,      l_cmp_id             cmp_id
+  ,      l_cmp_abbr           cmp_abbr
+  ,      l_usr_id             usr_id
+  ,      l_usr_anonymous      usr_anonymous
+  ,      l_lan_id             lan_id
+  ,      l_lan_code           lan_code
+  ,      l_pro_id             pro_id
+  ,      l_pro_flags          pro_flags
+  ,      l_ses_session_token  ses_session_token
+  ,      l_ses_csrf_token     ses_csrf_token
+  ;
+end

@@ -1,0 +1,61 @@
+/**
+ * Selects info about a page for a user.
+
+ * @param p_cmp_id    The ID of the company of the user (safe guard).
+ * @param p_pag_id    The ID of the page.
+ * @param p_pro_id    The ID of the profile of the user.
+ * @param p_lan_id    The ID of the language for linguistic entities.
+ * @param p_pag_alias The alias for the request page.
+ */
+create procedure abc_auth_get_page_info( in p_cmp_id    @aut_company.cmp_id%type@,
+                                         in p_pag_id    @aut_page.pag_id%type@,
+                                         in p_pro_id    @aut_profile.pro_id%type@,
+                                         in p_lan_id    @bbl_language.lan_id%type@,
+                                         in p_pag_alias @aut_page.pag_alias%type@ )
+reads sql data
+-- type: row0
+begin
+  if (p_pag_id is not null) then
+    select pag.pag_id                             pag_id
+    ,      pag.ptb_id                             ptb_id
+    ,      pag.mnu_id                             mnu_id
+    ,      pag.pag_id_org                         pag_id_org
+    ,      wd1.wdt_text                           pag_title
+    ,      ifnull(apc.pag_class,pag.pag_class)    pag_class
+    ,      wd2.wdt_text                           ptb_title
+    from            AUT_PRO_PAG        app
+    inner join      AUT_PAGE           pag  on  pag.pag_id = p_pag_id
+    left outer join AUT_PAGE_COMPANY   apc  on  apc.pag_id = pag.pag_id and
+                                                apc.cmp_id = p_cmp_id
+    inner join      BBL_WORD_TEXT      wd1  on  wd1.wrd_id = pag.wrd_id and
+                                                wd1.lan_id = p_lan_id
+    left outer join AUT_PAGE_TAB       ptb  on  ptb.ptb_id = pag.ptb_id
+    left outer join BBL_WORD_TEXT      wd2  on  wd2.wrd_id = ptb.wrd_id and
+                                                wd2.lan_id = p_lan_id
+    where app.pag_id = p_pag_id
+    and   app.pro_id = p_pro_id
+    -- xxx app.cmp_id = p_cmp_id
+    ;
+  else
+    select pag.pag_id                             pag_id
+    ,      pag.ptb_id                             ptb_id
+    ,      pag.mnu_id                             mnu_id
+    ,      pag.pag_id_org                         pag_id_org
+    ,      wd1.wdt_text                           pag_title
+    ,      ifnull(apc.pag_class,pag.pag_class)    pag_class
+    ,      wd2.wdt_text                           ptb_title
+    from            AUT_PAGE           pag
+    inner join      AUT_PRO_PAG        app  on  app.pag_id = pag.pag_id and
+                                                app.pro_id = p_pro_id
+    left outer join AUT_PAGE_COMPANY   apc  on  apc.pag_id = pag.pag_id and
+                                                apc.cmp_id = p_cmp_id
+    inner join      BBL_WORD_TEXT      wd1  on  wd1.wrd_id = pag.wrd_id and
+                                                wd1.lan_id = p_lan_id
+    left outer join AUT_PAGE_TAB       ptb  on  ptb.ptb_id = pag.ptb_id
+    left outer join BBL_WORD_TEXT      wd2  on  wd2.wrd_id = ptb.wrd_id and
+                                                wd2.lan_id = p_lan_id
+    where pag.pag_alias = p_pag_alias
+    -- xxx app.cmp_id = p_cmp_id
+    ;
+  end if;
+end

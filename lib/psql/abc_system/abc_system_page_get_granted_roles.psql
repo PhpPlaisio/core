@@ -1,0 +1,25 @@
+/**
+ * Selects the roles that are granted access to a page.
+ *
+ * @param p_pag_id The ID of the page.
+ * @param p_lan_id The ID of the language for linguistic entities.
+ */
+create procedure abc_system_page_get_granted_roles( in p_pag_id @aut_page.pag_id%type@,
+                                                    in p_lan_id @bbl_word.wrd_id%type@ )
+reads sql data
+-- type: rows
+begin
+  select distinct cmp.cmp_id
+  ,               cmp.cmp_abbr
+  ,               rol.rol_id
+  ,               rol.rol_name
+  from       AUT_PAG_FUN       apf
+  inner join AUT_FUNCTIONALITY fun  on  fun.fun_id = apf.fun_id
+  inner join AUT_ROL_FUN       arf  on  arf.fun_id = fun.fun_id
+  inner join AUT_ROLE          rol  on  rol.rol_id = arf.rol_id
+  inner join AUT_COMPANY       cmp  on  cmp.cmp_id = rol.cmp_id
+  where apf.pag_id = p_pag_id
+  order by cmp.cmp_abbr
+  ,        rol.rol_weight
+  ;
+end

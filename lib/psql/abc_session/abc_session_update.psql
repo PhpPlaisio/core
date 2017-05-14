@@ -1,0 +1,15 @@
+/**
+ * Updates a session with timestamp of last request.
+ *
+ * @param p_ses_id The ID of the session.
+ */
+create procedure abc_session_update( in p_ses_id @aut_session.ses_id%type@ )
+modifies sql data
+-- type: none
+begin
+	update AUT_SESSION
+	set    ses_last_request       = now()
+	,      ses_number_of_requests = ses_number_of_requests + 1
+	where  ses_id = p_ses_id
+	;
+end

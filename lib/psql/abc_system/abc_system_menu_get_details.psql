@@ -1,0 +1,24 @@
+/**
+ * Selects the details of a menu entry.
+ *
+ * @param p_mnu_id The ID of the menu item.
+ * @param p_lan_id The ID of the language for linguistic entities.
+ */
+create procedure abc_system_menu_get_details( in p_mnu_id @aut_menu.mnu_id%type@
+,                                             in p_lan_id @bbl_language.lan_id%type@ )
+modifies sql data
+-- type: row1
+begin
+  select mnu.mnu_id        mnu_id
+  ,      wd1.wrd_id        wrd_id
+  ,      mnu.pag_id        pag_id
+  ,      mnu_level         mnu_level
+  ,      mnu.mnu_group     mnu_group
+  ,      mnu.mnu_weight    mnu_weight
+  ,      mnu_link          mnu_link
+  from       AUT_MENU      mnu
+  inner join BBL_WORD_TEXT wd1  on  wd1.wrd_id = mnu.wrd_id and
+                                    wd1.lan_id = p_lan_id
+  where  mnu.mnu_id = p_mnu_id
+  ;
+end

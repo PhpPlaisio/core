@@ -1,0 +1,23 @@
+/**
+ * Insets or updates the value of a configuration parameter of a company.
+ *
+ * @param p_cmp_id    The ID of the company.
+ * @param p_cfg_id    The ID of the configuration parameter.
+ * @param p_cfg_value The value of the configuration parameter.
+ */
+create procedure abc_company_config_update_value( in p_cmp_id    @aut_company.cmp_id%type@,
+                                                  in p_cfg_id    @aut_config.cfg_id%type@,
+                                                  in p_cfg_value @aut_config_value.cfg_value%type@ )
+reads sql data
+-- type: none
+begin
+  insert into AUT_CONFIG_VALUE( cmp_id
+  ,                             cfg_id
+  ,                             cfg_value )
+  values( p_cmp_id
+  ,       p_cfg_id
+  ,       p_cfg_value )
+  on duplicate key
+  update cfg_value = p_cfg_value
+  ;
+end

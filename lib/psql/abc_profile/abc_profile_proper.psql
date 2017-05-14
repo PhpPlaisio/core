@@ -1,0 +1,23 @@
+/**
+ *
+ */
+create procedure abc_profile_proper()
+modifies sql data
+-- type: log
+begin
+  -- Create a temp table with all profiles of all users.
+  call abc_profile_proper1();
+
+  -- Create a temp table with unique profiles.
+  call abc_profile_proper2();
+
+  -- Compute new and obsolete profiles.
+  call abc_profile_proper3();
+
+  call abc_profile_proper4();
+
+  -- Insert new profile pages.
+  call abc_profile_proper5();
+end
+
+

@@ -1,0 +1,14 @@
+/**
+ * Selects all companies.
+ */
+create procedure abc_company_get_all()
+reads sql data
+-- type: rows
+begin
+  select cmp_id
+  ,      cmp_abbr
+  ,      cmp_label
+  from   AUT_COMPANY
+  order by cmp_abbr
+  ;
+end

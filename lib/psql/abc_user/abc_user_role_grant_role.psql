@@ -1,0 +1,35 @@
+/**
+ * Grants a role to a user. If the role is already granted the granted interval will be updated.
+ *
+ * @param p_cmp_id         The ID of the company.
+ * @param p_usr_id         The ID of the user.
+ * @param p_rol_id         The ID of the role.
+ * @param p_aur_date_start The date from which the role is granted.
+ * @param p_aur_date_stop  The date after which the role is revoked.
+ */
+create procedure abc_user_role_grant_role(in p_cmp_id         @aut_usr_rol.cmp_id%type@,
+                                          in p_usr_id         @aut_usr_rol.usr_id%type@,
+                                          in p_rol_id         @aut_usr_rol.rol_id%type@,
+                                          in p_aur_date_start @aut_usr_rol.aur_date_start%type@,
+                                          in p_aur_date_stop  @aut_usr_rol.aur_date_stop%type@)
+modifies sql data
+-- type: none
+begin
+  set p_aur_date_start = ifnull(p_aur_date_start, curdate());
+  set p_aur_date_stop  = ifnull(p_aur_date_stop, @OPEN_DATE_STOP@);
+
+  insert into AUT_USR_ROL( cmp_id
+  ,                        usr_id
+  ,                        rol_id
+  ,                        aur_date_start
+  ,                        aur_date_stop )
+  values( p_cmp_id
+  ,       p_usr_id
+  ,       p_rol_id
+  ,       p_aur_date_start
+  ,       p_aur_date_stop )
+  on duplicate key
+  update aur_date_start = p_aur_date_start
+  ,      aur_date_stop  = p_aur_date_stop
+  ;
+end

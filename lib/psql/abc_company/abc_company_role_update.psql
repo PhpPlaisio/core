@@ -1,0 +1,22 @@
+/**
+ * Updates the details of a role.
+ *
+ * @param p_cmp_id     The company ID.
+ * @param p_rol_id     The rol ID of the role to be updated.
+ * @param p_rol_name   The new name of the role.
+ * @param p_rol_weight The new weight of the role.
+ */
+create procedure abc_company_role_update( in p_cmp_id     @aut_company.cmp_id%type@,
+                                          in p_rol_id     @aut_role.rol_id%type@,
+                                          in p_rol_name   @aut_role.rol_name%type@,
+                                          in p_rol_weight @aut_role.rol_weight%type@ )
+modifies sql data
+-- type: none
+begin
+  update AUT_ROLE
+  set rol_name   = p_rol_name
+  ,   rol_weight = p_rol_weight
+  where cmp_id = p_cmp_id
+  and   rol_id = p_rol_id
+  ;
+end

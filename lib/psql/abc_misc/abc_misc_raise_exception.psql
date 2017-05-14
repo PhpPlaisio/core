@@ -1,0 +1,18 @@
+/**
+ * Raises an exception.
+ *
+ * @param p_message The message of the exception.
+ */
+create procedure abc_misc_raise_exception( in p_message varchar(255) )
+reads sql data
+-- type: hidden
+begin
+  declare i int;
+
+  set i = p_message;
+
+ -- set @l_sql = concat( 'UPDATE `Error: ', p_message, '` set x=1' );
+
+ -- prepare stmt from @l_sql;
+ -- execute stmt;
+end

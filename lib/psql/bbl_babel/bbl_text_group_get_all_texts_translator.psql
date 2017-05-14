@@ -1,0 +1,27 @@
+/**
+ * Selects all text in a text group in the reference and target language.
+ *
+ * @param p_ttg_id     The ID of the text group.
+ * @param p_lan_id_act The ID of the target language.
+ */
+create procedure bbl_text_group_get_all_texts_translator( in p_ttg_id     @bbl_text_group.ttg_id%type@,
+                                                          in p_lan_id_act @bbl_language.lan_id%type@ )
+reads sql data
+-- type: rows
+begin
+  select txt.txt_id
+  ,      txt.txt_label
+  ,      txt.txt_modified               ref_date
+  ,      ref.ttt_text                   ref_ttt_text
+
+  ,      act.ttt_text                   act_ttt_text
+  ,      act.ttt_modified               act_date
+  from       BBL_TEXT      txt
+  inner join BBL_TEXT_TEXT act  on  act.txt_id = txt.txt_id and
+                                    act.lan_id = p_lan_id_act
+  inner join BBL_TEXT_TEXT ref  on  ref.txt_id = txt.txt_id and
+                                    ref.lan_id = @LAN_ID_BABEL_REFERENCE@
+  where txt.ttg_id = p_ttg_id
+  order by ref.ttt_text
+  ;
+end

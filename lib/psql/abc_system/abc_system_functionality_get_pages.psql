@@ -1,0 +1,28 @@
+/**
+ * Selects the pages to which a functionality grants access to.
+ *
+ * @param p_fun_id The ID of the functionality.
+ * @param p_lan_id The ID of the language for linguistic entities.
+ */
+create procedure abc_system_functionality_get_pages( in p_fun_id @aut_functionality.fun_id%type@,
+                                                     in p_lan_id @bbl_language.lan_id%type@ )
+reads sql data
+-- type: rows
+begin
+  select fun.fun_id     fun_id
+  ,      pag.pag_id     pag_id
+  ,      wd1.wdt_text   fun_name
+  ,      wd2.wdt_text   pag_title
+  ,      pag.pag_class  pag_class
+  ,      pag.pag_label  pag_label
+  from       AUT_FUNCTIONALITY fun
+  inner join BBL_WORD_TEXT     wd1  on  wd1.wrd_id = fun.wrd_id and
+                                        wd1.lan_id = p_lan_id
+  inner join AUT_PAG_FUN       apf  on  apf.fun_id = fun.fun_id
+  inner join AUT_PAGE          pag  on  pag.pag_id = apf.pag_id
+  inner join BBL_WORD_TEXT     wd2  on  wd2.wrd_id = pag.wrd_id and
+                                        wd2.lan_id = p_lan_id
+  where fun.fun_id = p_fun_id
+  order by pag_class
+  ;
+end

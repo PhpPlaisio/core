@@ -1,0 +1,18 @@
+/**
+ * Deletes a company specific page.
+ *
+ * @param p_cmp_id The ID of the company.
+ * @param p_pag_id The ID of the page that must be deleted.
+ */
+create procedure abc_company_specific_page_delete( in p_cmp_id  @aut_page_company.cmp_id%type@,
+                                                   in p_pag_id  @aut_page_company.pag_id%type@ )
+modifies sql data
+-- type: none
+begin
+  delete
+  from   AUT_PAGE_COMPANY
+  where  pag_id = p_pag_id
+  and    cmp_id = p_cmp_id
+  ;
+end
+

@@ -1,0 +1,34 @@
+/**
+ * Selects all functionalities of all modules granted to a company including a flag indication the the functionality
+ * is granted to a role.
+ *
+ * @param p_cmp_id The ID of the company.
+ * @param p_rol_id The ID of the role.
+ * @param p_lan_id The ID of the language for linguistic entities.
+ */
+create procedure abc_company_role_get_available_functionalities( in p_cmp_id @aut_company.cmp_id%type@,
+                                                                 in p_rol_id @aut_role.rol_id%type@,
+                                                                 in p_lan_id @bbl_language.lan_id%type@ )
+reads sql data
+-- type: rows
+begin
+  select mdl.mdl_id                      mdl_id
+  ,      fun.fun_id                      fun_id
+  ,      wd1.wdt_text                    mdl_name
+  ,      wd2.wdt_text                    fun_name
+  ,      if(arf.fun_id is not null,1,0)  fun_enabled
+  from            AUT_MODULE_COMPANY amc
+  inner join      AUT_MODULE         mdl  on  mdl.mdl_id = amc.mdl_id
+  inner join      BBL_WORD_TEXT      wd1  on  wd1.wrd_id = mdl.wrd_id and
+                                              wd1.lan_id = p_lan_id
+  inner join      AUT_FUNCTIONALITY  fun  on  fun.mdl_id = mdl.mdl_id
+  inner join      BBL_WORD_TEXT      wd2  on  wd2.wrd_id = fun.wrd_id and
+                                              wd2.lan_id = p_lan_id
+  left outer join AUT_ROL_FUN        arf  on  arf.fun_id = fun.fun_id and
+                                              arf.rol_id = p_rol_id   and
+                                              arf.cmp_id = p_cmp_id
+  where amc.cmp_id = p_cmp_id
+  order by mdl_name
+  ,        fun_name
+  ;
+end

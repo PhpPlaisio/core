@@ -1,0 +1,19 @@
+/**
+ * Inserts a new module.
+ *
+ * @param p_wrd_id The ID of the word of the name of the module.
+ */
+create procedure abc_system_module_insert( in p_wrd_id @bbl_word.wrd_id%type@ )
+modifies sql data
+-- type: singleton1
+begin
+  declare l_mdl_id @aut_module.mdl_id%type@;
+
+  insert into AUT_MODULE( wrd_id )
+  values( p_wrd_id );
+
+  set l_mdl_id = last_insert_id();
+
+  select l_mdl_id mdl_id
+  ;
+end

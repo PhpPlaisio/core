@@ -1,0 +1,18 @@
+/**
+ * Selects all companies include a flag indicating that company is granted a module.
+ *
+ * @param p_mdl_id The ID of the module.
+ */
+create procedure abc_system_module_get_available_companies( in p_mdl_id @aut_module.mdl_id%type@ )
+reads sql data
+-- type: rows
+begin
+  select cmp.cmp_id
+  ,      cmp.cmp_abbr
+  ,      if(amc.mdl_id,1,0)  mdl_granted
+  from            AUT_COMPANY        cmp
+  left outer join AUT_MODULE_COMPANY amc  on amc.mdl_id = p_mdl_id and
+                                             amc.cmp_id = cmp.cmp_id
+  order by cmp.cmp_abbr
+  ;
+end

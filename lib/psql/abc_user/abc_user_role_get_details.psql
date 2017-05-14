@@ -1,0 +1,25 @@
+/**
+ * Select the details of a granted role to a user.
+ *
+ * @param p_cmp_id The ID of the company (safeguard).
+ * @param p_usr_id The ID of the user.
+ * @param p_rol_id The ID of the role.
+ */
+create procedure abc_user_role_get_details(in p_cmp_id @aut_usr_rol.cmp_id%type@,
+                                           in p_usr_id @aut_usr_rol.usr_id%type@,
+                                           in p_rol_id @aut_usr_rol.rol_id%type@)
+reads sql data
+-- type: row0
+begin
+  select rol.rol_id
+  ,      rol.rol_weight
+  ,      rol.rol_name
+  ,      aur.aur_date_start
+  ,      aur.aur_date_stop
+  from       AUT_USR_ROL aur
+  inner join AUT_ROLE    rol  on  rol.rol_id = aur.rol_id
+  where aur.cmp_id = p_cmp_id
+  and   aur.usr_id = p_usr_id
+  and   aur.rol_id = p_rol_id
+  ;
+end

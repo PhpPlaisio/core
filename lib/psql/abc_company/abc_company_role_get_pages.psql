@@ -1,0 +1,27 @@
+/**
+ * Selects the pages to which a role grants access to.
+ *
+ * @param p_cmp_id The ID of the company.
+ * @param p_rol_id The ID of the role.
+ * @param p_lan_id The ID of the language for linguistic entities.
+ */
+create procedure abc_company_role_get_pages( in p_cmp_id @aut_company.cmp_id%type@,
+                                             in p_rol_id @aut_role.rol_id%type@,
+                                             in p_lan_id @bbl_language.lan_id%type@ )
+reads sql data
+-- type: rows
+begin
+  select pag.pag_id     pag_id
+  ,      wd2.wdt_text   pag_title
+  ,      pag.pag_class  pag_class
+  ,      pag.pag_label  pag_label
+  from       AUT_ROL_FUN       arf
+  inner join AUT_PAG_FUN       apf  on  apf.fun_id = arf.fun_id
+  inner join AUT_PAGE          pag  on  pag.pag_id = apf.pag_id
+  inner join BBL_WORD_TEXT     wd2  on  wd2.wrd_id = pag.wrd_id and
+                                        wd2.lan_id = p_lan_id
+  where arf.cmp_id = p_cmp_id
+  and   arf.rol_id = p_rol_id
+  order by pag.pag_class
+  ;
+end

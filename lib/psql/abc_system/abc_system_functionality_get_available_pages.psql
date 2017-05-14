@@ -1,0 +1,18 @@
+/**
+ * Selects all pages including a flag indication the the page is part of a functionality.
+ *
+ * @param p_fun_id The ID of the functionality.
+ */
+create procedure abc_system_functionality_get_available_pages( in p_fun_id @aut_functionality.fun_id%type@ )
+reads sql data
+-- type: rows
+begin
+  select pag.pag_id                 pag_id
+  ,      pag_class                  pag_class
+  ,      if(apf.pag_id is null,0,1) pag_enabled
+  from            AUT_PAGE    pag
+  left outer join AUT_PAG_FUN apf  on  apf.pag_id = pag.pag_id and
+                                       apf.fun_id = p_fun_id
+  order by pag_class
+  ;
+end

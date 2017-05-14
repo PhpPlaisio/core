@@ -1,0 +1,19 @@
+/**
+ * Revokes a granted functionality from a role.
+ *
+ * @param p_cmp_id The ID of the company.
+ * @param p_rol_id The ID of the role.
+ * @param p_fun_id The ID of functionality revoked.
+ */
+create procedure abc_company_role_delete_functionality( in p_cmp_id @aut_company.cmp_id%type@,
+                                                        in p_rol_id @aut_role.rol_id%type@,
+                                                        in p_fun_id @aut_rol_fun.fun_id%type@ )
+modifies sql data
+-- type: none
+begin
+  delete from AUT_ROL_FUN
+  where cmp_id = p_cmp_id
+  and   rol_id = p_rol_id
+  and   fun_id = p_fun_id
+  ;
+end

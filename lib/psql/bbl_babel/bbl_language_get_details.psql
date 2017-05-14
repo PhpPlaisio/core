@@ -1,0 +1,23 @@
+/**
+ * Selects the details of a language.
+ *
+ * @param p_lan_id_act The ID of the language of which the details are selected.
+ */
+create procedure bbl_language_get_details(in p_lan_id_act @bbl_language.lan_id%type@)
+reads sql data
+-- type: singleton0
+begin
+  select lan_id
+  ,      lan_code
+  ,      wrd_id
+  ,      lan_locale
+  ,      lan_date_format_full
+  ,      lan_date_format_abbr1
+  ,      lan_date_format_abbr2
+  ,      lan_date_format_compact
+  ,      lan_date_format_compact_weekday_abbr
+  ,      lan_date_time_format_full
+  from   BBL_LANGUAGE
+  where lan_id = p_lan_id_act
+  ;
+end

@@ -1,0 +1,31 @@
+/**
+ * Selects all the roles that are granted a functionality.
+ *
+ * @param p_cmp_id The ID of the company.
+ * @param p_rol_id The ID of the role.
+ * @param p_lan_id The ID of the language for linguistic entities.
+ */
+create procedure abc_company_role_get_functionalities( in p_cmp_id @aut_company.cmp_id%type@,
+                                                       in p_rol_id @aut_role.rol_id%type@,
+                                                       in p_lan_id @bbl_language.lan_id%type@ )
+reads sql data
+-- type: rows
+begin
+  select mdl.mdl_id     mdl_id
+  ,      fun.fun_id     fun_id
+  ,      wd1.wdt_text   mdl_name
+  ,      wd2.wdt_text   fun_name
+  from       AUT_ROLE          rol
+  inner join AUT_ROL_FUN       arf  on  arf.rol_id = rol.rol_id
+  inner join AUT_FUNCTIONALITY fun  on  fun.fun_id = arf.fun_id
+  inner join BBL_WORD_TEXT     wd2  on  wd2.wrd_id = fun.wrd_id and
+                                        wd2.lan_id = p_lan_id
+  inner join AUT_MODULE        mdl  on  mdl.mdl_id = fun.mdl_id
+  inner join BBL_WORD_TEXT     wd1  on  wd1.wrd_id = mdl.wrd_id and
+                                        wd1.lan_id = p_lan_id
+  where rol.cmp_id = p_cmp_id
+  and   rol.rol_id = p_rol_id
+  order by mdl_name
+  ,        fun_name
+  ;
+end

@@ -1,0 +1,23 @@
+/**
+ * Selects all functionalities.
+ *
+ * @param p_lan_id The ID of the language used for names.
+ */
+create procedure abc_system_functionality_get_all( in p_lan_id @bbl_language.lan_id%type@ )
+reads sql data
+-- type: rows
+begin
+  select mdl.mdl_id     mdl_id
+  ,      fun.fun_id     fun_id
+  ,      wd1.wdt_text   mdl_name
+  ,      wd2.wdt_text   fun_name
+  from       AUT_MODULE        mdl
+  inner join BBL_WORD_TEXT     wd1  on  wd1.wrd_id = mdl.wrd_id and
+                                        wd1.lan_id = p_lan_id
+  inner join AUT_FUNCTIONALITY fun  on  fun.mdl_id = mdl.mdl_id
+  inner join BBL_WORD_TEXT     wd2  on  wd2.wrd_id = fun.wrd_id and
+                                        wd2.lan_id = p_lan_id
+  order by mdl_name
+  ,        fun_name
+  ;
+end
