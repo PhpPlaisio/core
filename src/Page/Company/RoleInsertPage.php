@@ -45,7 +45,10 @@ class RoleInsertPage extends RoleBasePage
   {
     $values = $this->form->getValues();
 
-    $this->rolId = Abc::$DL->abcCompanyRoleInsert($this->targetCmpId, $values['rol_name'], $values['rol_weight']);
+    $this->rolId = Abc::$DL->abcCompanyRoleInsert($this->targetCmpId,
+                                                  $values['rlg_id'],
+                                                  $values['rol_name'],
+                                                  $values['rol_weight']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
