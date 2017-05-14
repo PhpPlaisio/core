@@ -31,6 +31,13 @@ abstract class FunctionalityBasePage extends CorePage
    */
   protected $form;
 
+  /**
+   * The ID of the inserted or updated functionality.
+   *
+   * @var int
+   */
+  protected $funId;
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Must implemented by child pages to actually insert or update a functionality.
@@ -116,7 +123,7 @@ abstract class FunctionalityBasePage extends CorePage
   {
     $this->dataBaseAction();
 
-    HttpHeader::redirectSeeOther(FunctionalityOverviewPage::getUrl());
+    HttpHeader::redirectSeeOther(FunctionalityDetailsPage::getUrl($this->funId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

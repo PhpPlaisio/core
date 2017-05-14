@@ -53,7 +53,7 @@ class FunctionalityInsertPage extends FunctionalityBasePage
       $wrd_id = $values['wrd_id'];
     }
 
-    Abc::$DL->abcSystemFunctionalityInsertDetails($values['mdl_id'], $wrd_id);
+    $this->funId = Abc::$DL->abcSystemFunctionalityInsertDetails($values['mdl_id'], $wrd_id);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
