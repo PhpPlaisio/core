@@ -99,7 +99,6 @@ class LoginPage extends Page
       file_put_contents($this->w3cPathName, $contents);
     }
 
-    $this->setPageSize(ob_get_length());
     if (ob_get_level()>0) ob_end_flush();
   }
 

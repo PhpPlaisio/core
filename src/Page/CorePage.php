@@ -100,7 +100,6 @@ abstract class CorePage extends Page
       file_put_contents($this->w3cPathName, ob_get_contents());
     }
 
-    $this->setPageSize(ob_get_length());
     if (ob_get_level()) ob_end_flush();
   }
 
