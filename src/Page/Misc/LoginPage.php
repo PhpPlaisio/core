@@ -130,16 +130,16 @@ class LoginPage extends Page
     $input->setAttrMaxLength(C::LEN_PASSWORD);
     $this->form->addFormControl($input, 'Wachtwoord', true);
 
-    if ($abc->getDomain())
+    if ($abc::$domainResolver->getDomain())
     {
       // Show domain.
       $input = new SpanControl('dummy');
-      $input->setInnerText(strtolower($abc->getDomain()));
+      $input->setInnerText(strtolower($abc::$domainResolver->getDomain()));
       $this->form->addFormControl($input, 'Company');
 
       // Constant for domain.
       $input = new ConstantControl('cmp_abbr');
-      $input->setValue($abc->getDomain());
+      $input->setValue($abc::$domainResolver->getDomain());
       $this->form->addFormControl($input);
     }
     else
@@ -235,7 +235,7 @@ class LoginPage extends Page
       }
 
       $domain_redirect = false;
-      if (!$abc->getDomain())
+      if (!$abc::$domainResolver->getDomain())
       {
         // Redirect browser to $values['cmp_abbr'].onzerelaties.net
         $parts = explode('.', $_SERVER['SERVER_NAME']);

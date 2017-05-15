@@ -7,6 +7,8 @@ use SetBased\Abc\C;
 use SetBased\Abc\Core\Page\CorePage;
 use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
+use SetBased\Abc\Core\TableAction\System\RoleGroupUpdateTableAction;
+use SetBased\Abc\Core\TableColumn\Company\CompanyTableColumn;
 use SetBased\Abc\Core\TableColumn\Company\RoleTableColumn;
 use SetBased\Abc\Table\TableColumn\NumericTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
@@ -90,6 +92,9 @@ class RoleGroupDetailsPage extends CorePage
   {
     $table = new CoreDetailTable();
 
+    // Add table action for updating the rle group.
+    $table->addTableAction('default', new RoleGroupUpdateTableAction($this->rlgId));
+
     // Show ID of the role group.
     NumericTableRow::addRow($table, 'ID', $this->roleGroup['rlg_id'], '%d');
 
@@ -114,11 +119,8 @@ class RoleGroupDetailsPage extends CorePage
   {
     $table = new CoreOverviewTable();
 
-    // Show the ID of the company.
-    $table->addColumn(new NumericTableColumn(C::WRD_ID_ID, 'cmp_id'));
-
-    // Show the name of the company.
-    $table->addColumn(new TextTableColumn(C::WRD_ID_COMPANY, 'cmp_abbr'));
+    // Show the ID abbreviation of the company.
+    $table->addColumn(new CompanyTableColumn(C::WRD_ID_COMPANY));
 
     // Show the name of the role.
     $table->addColumn(new RoleTableColumn(C::WRD_ID_ROLE));

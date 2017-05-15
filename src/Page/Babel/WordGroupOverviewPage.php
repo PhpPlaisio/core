@@ -6,7 +6,7 @@ use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableAction\Babel\WordGroupInsertTableAction;
-use SetBased\Abc\Core\TableColumn\Babel\WordGroupDetailsIconTableColumn;
+use SetBased\Abc\Core\TableColumn\Babel\WordGroupTableColumn;
 use SetBased\Abc\Core\TableColumn\Babel\WordGroupUpdateIconTableColumn;
 use SetBased\Abc\Table\TableColumn\NumericTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
@@ -60,24 +60,18 @@ class WordGroupOverviewPage extends BabelPage
     // Table action for inserting a new word group.
     $table->addTableAction('default', new WordGroupInsertTableAction());
 
-    // Show word group ID.
-    $table->addColumn(new NumericTableColumn('ID', 'wdg_id'));
-
-    // Show word group name.
-    $col = $table->addColumn(new TextTableColumn('Word Group', 'wdg_name'));
+    // Show ID and name of the word group
+    $col = $table->addColumn(new WordGroupTableColumn('Word Group', $this->actLanId));
     $col->setSortOrder(1);
 
     // Show total words in the word group.
-    $table->addColumn(new TextTableColumn('# Words', 'n1'));
+    $table->addColumn(new NumericTableColumn('# Words', 'n1'));
 
     // Show total words to be translated in the word group.
     if ($this->actLanId!=$this->refLanId)
     {
       $table->addColumn(new TextTableColumn('To Do', 'n2'));
     }
-
-    // Add link to the details of the word group.
-    $table->addColumn(new WordGroupDetailsIconTableColumn($this->actLanId));
 
     // Add link to the modify the word group.
     $table->addColumn(new WordGroupUpdateIconTableColumn());

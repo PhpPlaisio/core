@@ -8,6 +8,7 @@ use SetBased\Abc\Core\Page\CorePage;
 use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableColumn\System\PageDetailsIconTableColumn;
+use SetBased\Abc\Core\TableColumn\System\PageTableColumn;
 use SetBased\Abc\Table\TableColumn\NumericTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
@@ -97,11 +98,8 @@ class TabDetailsPage extends CorePage
 
     $table = new CoreOverviewTable();
 
-    // Show page ID.
-    $table->addColumn(new NumericTableColumn('ID', 'pag_id'));
-
-    // Show class name.
-    $col = $table->addColumn(new TextTableColumn('Class', 'pag_class'));
+    // Show the ID and class of the page.
+    $col = $table->addColumn(new PageTableColumn('Page'));
     $col->setSortOrder(1);
 
     // Show title of page.
@@ -109,9 +107,6 @@ class TabDetailsPage extends CorePage
 
     // Show label of the page ID.
     $table->addColumn(new TextTableColumn('Label', 'pag_label'));
-
-    // Show viewing the details the page.
-    $table->addColumn(new PageDetailsIconTableColumn());
 
     echo $table->getHtmlTable($pages);
   }

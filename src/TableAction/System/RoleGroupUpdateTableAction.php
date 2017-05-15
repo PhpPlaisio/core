@@ -1,24 +1,29 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
-namespace SetBased\Abc\Core\TableColumn\System;
+namespace SetBased\Abc\Core\TableAction\System;
 
-
-use SetBased\Abc\Core\Page\System\RoleGroupDetailsPage;
-use SetBased\Abc\Core\TableColumn\DetailsIconTableColumn;
+use SetBased\Abc\Core\Page\System\RoleGroupInsertPage;
+use SetBased\Abc\Core\Page\System\RoleGroupUpdatePage;
+use SetBased\Abc\Core\TableAction\InsertItemTableAction;
+use SetBased\Abc\Core\TableAction\UpdateItemTableAction;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
- * Table column with icon linking to page with information about a role group.
+ * Table action for updating a role group.
  */
-class RoleGroupDetailsIconTableColumn extends DetailsIconTableColumn
+class RoleGroupUpdateTableAction extends UpdateItemTableAction
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * Object constructor.
+   *
+   * @param int $rlgId The ID of the role group.
    */
-  public function getUrl($row)
+  public function __construct($rlgId)
   {
-    return RoleGroupDetailsPage::getUrl($row['rlg_id']);
+    $this->url = RoleGroupUpdatePage::getUrl($rlgId);
+
+    $this->title = 'Edit role group';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

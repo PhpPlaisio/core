@@ -8,14 +8,15 @@ use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableAction\Company\RoleUpdateFunctionalitiesTableAction;
 use SetBased\Abc\Core\TableAction\Company\RoleUpdateTableAction;
-use SetBased\Abc\Core\TableColumn\System\FunctionalityDetailsIconTableColumn;
-use SetBased\Abc\Core\TableColumn\System\PageDetailsIconTableColumn;
-use SetBased\Abc\Table\TableColumn\NumericTableColumn;
+use SetBased\Abc\Core\TableColumn\Company\FunctionalityTableColumn;
+use SetBased\Abc\Core\TableColumn\Company\ModuleTableColumn;
+use SetBased\Abc\Core\TableColumn\System\PageTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
 //----------------------------------------------------------------------------------------------------------------------
+
 /**
  * Page with information about a role.
  */
@@ -30,6 +31,7 @@ class RoleDetailsPage extends CompanyPage
   protected $rolId;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    */
@@ -84,22 +86,13 @@ class RoleDetailsPage extends CompanyPage
     // Add table action for modifying the granted functionalities.
     $table->addTableAction('default', new RoleUpdateFunctionalitiesTableAction($this->targetCmpId, $this->rolId));
 
-    // Show the ID of the module.
-    $table->addColumn(new NumericTableColumn('ID', 'mdl_id'));
-
-    // Show name of module.
-    $col = $table->addColumn(new TextTableColumn('Module', 'mdl_name'));
+    // Show the ID and the name of the module.
+    $col = $table->addColumn(new ModuleTableColumn('Module'));
     $col->setSortOrder(1);
 
-    // Show the ID of the functionality.
-    $table->addColumn(new NumericTableColumn('ID', 'fun_id'));
-
-    // Show name of functionality.
-    $col = $table->addColumn(new TextTableColumn('Functionality', 'fun_name'));
+    // Show the ID and the name of the functionality.
+    $col = $table->addColumn(new FunctionalityTableColumn('Functionality'));
     $col->setSortOrder(2);
-
-    // Add column with icon a link to view the details of the functionality.
-    $table->addColumn(new FunctionalityDetailsIconTableColumn());
 
     // Generate the HTML code for the table.
     echo $table->getHtmlTable($functionalities);
@@ -115,11 +108,8 @@ class RoleDetailsPage extends CompanyPage
 
     $table = new CoreOverviewTable();
 
-    // Show page ID.
-    $table->addColumn(new NumericTableColumn('ID', 'pag_id'));
-
-    // Show class name.
-    $col = $table->addColumn(new TextTableColumn('Class', 'pag_class'));
+    // Show the ID and class of the page
+    $col = $table->addColumn(new PageTableColumn('Page'));
     $col->setSortOrder(1);
 
     // Show title of page.
@@ -127,9 +117,6 @@ class RoleDetailsPage extends CompanyPage
 
     // Show label of the page ID.
     $table->addColumn(new TextTableColumn('Label', 'pag_label'));
-
-    // Show modifying the page.
-    $table->addColumn(new PageDetailsIconTableColumn());
 
     echo $table->getHtmlTable($pages);
   }

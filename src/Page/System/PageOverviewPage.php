@@ -8,6 +8,7 @@ use SetBased\Abc\Core\Page\CorePage;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableAction\System\PageInsertTableAction;
 use SetBased\Abc\Core\TableColumn\System\PageDetailsIconTableColumn;
+use SetBased\Abc\Core\TableColumn\System\PageTableColumn;
 use SetBased\Abc\Core\TableColumn\System\PageUpdateIconTableColumn;
 use SetBased\Abc\Table\TableColumn\NumericTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
@@ -40,11 +41,8 @@ class PageOverviewPage extends CorePage
     $table = new CoreOverviewTable();
     $table->addTableAction('default', new PageInsertTableAction());
 
-    // Show page ID.
-    $table->addColumn(new NumericTableColumn('ID', 'pag_id'));
-
-    // Show class name.
-    $col = $table->addColumn(new TextTableColumn('Class', 'pag_class'));
+    // Show the id and class of the page.
+    $col = $table->addColumn(new PageTableColumn('Page'));
     $col->setSortOrder(1);
 
     // Show title of page.
@@ -62,10 +60,7 @@ class PageOverviewPage extends CorePage
     // Show page tab of the page.
     $table->addColumn(new TextTableColumn('Page Tab', 'ptb_label'));
 
-    // Show modifying the page.
-    $table->addColumn(new PageDetailsIconTableColumn());
-
-    // Show link to the details of the page.
+    // Show icon to modify the page.
     $table->addColumn(new PageUpdateIconTableColumn());
 
     echo $table->getHtmlTable($pages);

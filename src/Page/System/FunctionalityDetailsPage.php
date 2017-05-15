@@ -9,15 +9,14 @@ use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableAction\System\FunctionalityUpdatePagesTableAction;
 use SetBased\Abc\Core\TableAction\System\FunctionalityUpdateRolesTableAction;
+use SetBased\Abc\Core\TableColumn\Company\CompanyTableColumn;
 use SetBased\Abc\Core\TableColumn\Company\RoleTableColumn;
-use SetBased\Abc\Core\TableColumn\System\PageDetailsIconTableColumn;
-use SetBased\Abc\Table\TableColumn\NumericTableColumn;
+use SetBased\Abc\Core\TableColumn\System\PageTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
 //----------------------------------------------------------------------------------------------------------------------
-
 /**
  * Page with information about a functionality.
  */
@@ -114,11 +113,8 @@ class FunctionalityDetailsPage extends CorePage
     $table = new CoreOverviewTable();
     $table->addTableAction('default', new FunctionalityUpdatePagesTableAction($this->funId));
 
-    // Show page ID.
-    $table->addColumn(new NumericTableColumn('ID', 'pag_id'));
-
-    // Show class name.
-    $col = $table->addColumn(new TextTableColumn('Class', 'pag_class'));
+    // Show the ID and class of the page.
+    $col = $table->addColumn(new PageTableColumn('Page'));
     $col->setSortOrder(1);
 
     // Show title of page.
@@ -126,9 +122,6 @@ class FunctionalityDetailsPage extends CorePage
 
     // Show label of the page ID.
     $table->addColumn(new TextTableColumn('Label', 'pag_label'));
-
-    // Show modifying the page.
-    $table->addColumn(new PageDetailsIconTableColumn());
 
     echo $table->getHtmlTable($pages);
   }
@@ -146,15 +139,12 @@ class FunctionalityDetailsPage extends CorePage
     // Add table action for granting and revoking this functionality to/from roles.
     $table->addTableAction('default', new FunctionalityUpdateRolesTableAction($this->funId));
 
-    // Show Company ID.
-    $table->addColumn(new NumericTableColumn('ID', 'cmp_id'));
-
-    // Show Company abbreviation.
-    $col = $table->addColumn(new TextTableColumn('Company', 'cmp_abbr'));
+    // Show ID and abbreviation of the company.
+    $col = $table->addColumn(new CompanyTableColumn(C::WRD_ID_COMPANY));
     $col->setSortOrder(1);
 
     // Show role ID and name
-    $table->addColumn(new RoleTableColumn('Role'));
+    $table->addColumn(new RoleTableColumn(C::WRD_ID_ROLE));
 
     echo $table->getHtmlTable($roles);
   }

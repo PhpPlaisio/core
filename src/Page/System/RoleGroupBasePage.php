@@ -83,7 +83,7 @@ abstract class RoleGroupBasePage extends CorePage
     $this->form->addFormControl($input, 'Name');
 
     // Create text box for (new) page title.
-    $input = new TextControl('wdg_name');
+    $input = new TextControl('rlg_name');
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
     $this->form->addFormControl($input, 'Name');
     /** @todo Add validator: either wrd_id is not empty or wdg_name is not empty */

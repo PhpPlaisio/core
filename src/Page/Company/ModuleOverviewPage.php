@@ -6,8 +6,7 @@ use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableAction\Company\ModuleUpdateTableAction;
-use SetBased\Abc\Table\TableColumn\NumericTableColumn;
-use SetBased\Abc\Table\TableColumn\TextTableColumn;
+use SetBased\Abc\Core\TableColumn\Company\ModuleTableColumn;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
@@ -44,11 +43,8 @@ class ModuleOverviewPage extends CompanyPage
     // Add table action for modifying the enabled modules of the target company.
     $table->addTableAction('default', new ModuleUpdateTableAction($this->targetCmpId));
 
-    // Show the ID of the module.
-    $table->addColumn(new NumericTableColumn('ID', 'mdl_id'));
-
-    // Show the name of the module.
-    $col = $table->addColumn(new TextTableColumn('Model', 'mdl_name'));
+    // Show the ID and the name of the module.
+    $col = $table->addColumn(new ModuleTableColumn('Module'));
     $col->setSortOrder(1);
 
     // Generate the HTML code for the table.

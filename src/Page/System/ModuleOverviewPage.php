@@ -7,12 +7,11 @@ use SetBased\Abc\C;
 use SetBased\Abc\Core\Page\CorePage;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableAction\System\ModuleInsertTableAction;
-use SetBased\Abc\Core\TableColumn\System\ModuleDetailsIconTableColumn;
+use SetBased\Abc\Core\TableColumn\Company\ModuleTableColumn;
 use SetBased\Abc\Core\TableColumn\System\ModuleUpdateIconTableColumn;
-use SetBased\Abc\Table\TableColumn\NumericTableColumn;
-use SetBased\Abc\Table\TableColumn\TextTableColumn;
 
 //----------------------------------------------------------------------------------------------------------------------
+
 /**
  * Page with overview of all modules.
  */
@@ -42,15 +41,9 @@ class ModuleOverviewPage extends CorePage
     // Add table action for inserting a new module.
     $table->addTableAction('default', new ModuleInsertTableAction());
 
-    // Show the ID of the module.
-    $table->addColumn(new NumericTableColumn('ID', 'mdl_id'));
-
-    // Show the name of the module.
-    $col = $table->addColumn(new TextTableColumn('Module', 'mdl_name'));
+    // Show the ID and the name of the module.
+    $col = $table->addColumn(new ModuleTableColumn('Module'));
     $col->setSortOrder(1);
-
-    // Add column with icon to view the details of the module.
-    $table->addColumn(new ModuleDetailsIconTableColumn());
 
     // Add column with icon to modify the details of the module.
     $table->addColumn(new ModuleUpdateIconTableColumn());

@@ -13,6 +13,7 @@ use SetBased\Abc\Table\TableColumn\NumericTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
 
 //----------------------------------------------------------------------------------------------------------------------
+
 /**
  * Page with an overview of all company specific pages for the target company.
  */
@@ -27,6 +28,7 @@ class SpecificPageOverviewPage extends CompanyPage
   private $pages;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    */
@@ -63,7 +65,7 @@ class SpecificPageOverviewPage extends CompanyPage
 
     $table->addTableAction('default', new SpecificPageInsertTableAction($this->targetCmpId));
 
-    // Add column with page ID.
+    // Add column with ID and class of the parent page.
     $table->addColumn(new NumericTableColumn('ID', 'pag_id'));
 
     // Add column with page title.

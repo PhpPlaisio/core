@@ -7,12 +7,13 @@ use SetBased\Abc\C;
 use SetBased\Abc\Core\Page\CorePage;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableAction\System\RoleGroupInsertTableAction;
-use SetBased\Abc\Core\TableColumn\System\RoleGroupDetailsIconTableColumn;
+use SetBased\Abc\Core\TableColumn\System\RoleGroupTableColumn;
 use SetBased\Abc\Core\TableColumn\System\RoleGroupUpdateIconTableColumn;
 use SetBased\Abc\Table\TableColumn\NumericTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
 
 //----------------------------------------------------------------------------------------------------------------------
+
 /**
  * Page with an overview of all role groups.
  */
@@ -39,14 +40,11 @@ class RoleGroupOverviewPage extends CorePage
 
     $table = new CoreOverviewTable();
 
-    // Add table action for creating a new Company.
+    // Add table action for creating a new role group.
     $table->addTableAction('default', new RoleGroupInsertTableAction());
 
-    // Show role ID.
-    $table->addColumn(new NumericTableColumn('ID', 'rlg_id'));
-
-    // Show the name of the role group.
-    $table->addColumn(new TextTableColumn('Role Group', 'rlg_name'));
+    // Show ID and name of the role group.
+    $table->addColumn(new RoleGroupTableColumn('Role Group'));
 
     // Show the weight of the role group.
     $col = $table->addColumn(new NumericTableColumn('Weight', 'rlg_weight'));
@@ -54,9 +52,6 @@ class RoleGroupOverviewPage extends CorePage
 
     // Show the label of the role group.
     $table->addColumn(new TextTableColumn('Label', 'rlg_label'));
-
-    // Add link to the details of the role.
-    $table->addColumn(new RoleGroupDetailsIconTableColumn());
 
     // Add link to the update the role group.
     $table->addColumn(new RoleGroupUpdateIconTableColumn());

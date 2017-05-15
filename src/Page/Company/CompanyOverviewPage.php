@@ -7,9 +7,8 @@ use SetBased\Abc\C;
 use SetBased\Abc\Core\Page\CorePage;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableAction\Company\CompanyInsertTableAction;
-use SetBased\Abc\Core\TableColumn\Company\CompanyDetailsIconTableColumn;
+use SetBased\Abc\Core\TableColumn\Company\CompanyTableColumn;
 use SetBased\Abc\Core\TableColumn\Company\CompanyUpdateIconTableColumn;
-use SetBased\Abc\Table\TableColumn\NumericTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -30,6 +29,9 @@ class CompanyOverviewPage extends CompanyPage
   }
 
   //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * {@inheritdoc}
+   */
   public function echoMainContent()
   {
     CorePage::echoMainContent();
@@ -48,20 +50,14 @@ class CompanyOverviewPage extends CompanyPage
     // Add table action for creating a new Company.
     $table->addTableAction('default', new CompanyInsertTableAction());
 
-    // Show Company ID.
-    $table->addColumn(new NumericTableColumn('ID', 'cmp_id'));
-
-    // Show word group name.
-    $col = $table->addColumn(new TextTableColumn('Company abbreviation', 'cmp_abbr'));
+    // Show company ID and abbreviation of the company.
+    $col = $table->addColumn(new CompanyTableColumn(C::WRD_ID_COMPANY));
     $col->setSortOrder(1);
 
-    // Show total words in the word group.
+    // Show label of the company.
     $table->addColumn(new TextTableColumn('Label', 'cmp_label'));
 
-    // Add link to the details of the Company.
-    $table->addColumn(new CompanyDetailsIconTableColumn());
-
-    // Add link to the update the Company.
+    // Add link to the update the company.
     $table->addColumn(new CompanyUpdateIconTableColumn());
 
     echo $table->getHtmlTable($companies);
