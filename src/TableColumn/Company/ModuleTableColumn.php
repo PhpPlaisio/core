@@ -2,7 +2,6 @@
 //----------------------------------------------------------------------------------------------------------------------
 namespace SetBased\Abc\Core\TableColumn\Company;
 
-use SetBased\Abc\Core\Page\Company\CompanyDetailsPage;
 use SetBased\Abc\Core\Page\System\ModuleDetailsPage;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Table\TableColumn\DualTableColumn;

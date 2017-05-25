@@ -31,13 +31,13 @@ class LogoutPage extends Page
    */
   public function echoPage()
   {
-    $abc = Abc::getInstance();
+    $hostname = Abc::$canonicalHostnameResolver->getCanonicalHostname();
 
-    Abc::$DL->abcSessionLogout($abc->getSesId(), $_SERVER['REMOTE_ADDR']);
+    Abc::$DL->abcSessionLogout(Abc::getInstance()->getSesId(), $_SERVER['REMOTE_ADDR']);
 
     // Unset session and CSRF cookies.
-    setcookie('ses_session_token', false, false, '/', $abc->getCanonicalServerName(), true, true);
-    setcookie('ses_csrf_token', false, false, '/', $abc->getCanonicalServerName(), true, false);
+    setcookie('ses_session_token', false, false, '/', $hostname, true, true);
+    setcookie('ses_csrf_token', false, false, '/', $hostname, true, false);
 
     session_start();
     session_destroy();

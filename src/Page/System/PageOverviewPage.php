@@ -7,10 +7,8 @@ use SetBased\Abc\C;
 use SetBased\Abc\Core\Page\CorePage;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableAction\System\PageInsertTableAction;
-use SetBased\Abc\Core\TableColumn\System\PageDetailsIconTableColumn;
 use SetBased\Abc\Core\TableColumn\System\PageTableColumn;
 use SetBased\Abc\Core\TableColumn\System\PageUpdateIconTableColumn;
-use SetBased\Abc\Table\TableColumn\NumericTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
 
 //----------------------------------------------------------------------------------------------------------------------

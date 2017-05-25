@@ -10,8 +10,6 @@ use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableAction\System\RoleGroupUpdateTableAction;
 use SetBased\Abc\Core\TableColumn\Company\CompanyTableColumn;
 use SetBased\Abc\Core\TableColumn\Company\RoleTableColumn;
-use SetBased\Abc\Table\TableColumn\NumericTableColumn;
-use SetBased\Abc\Table\TableColumn\TextTableColumn;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 

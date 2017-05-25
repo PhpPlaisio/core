@@ -199,7 +199,8 @@ class LoginPage extends Page
    */
   private function login()
   {
-    $abc = Abc::getInstance();
+    $abc      = Abc::getInstance();
+    $hostname = Abc::$canonicalHostnameResolver->getCanonicalHostname();
 
     $values = $this->form->getValues();
 
@@ -242,8 +243,8 @@ class LoginPage extends Page
         if (count($parts)==3 && $parts[0]=='www' && $_SERVER['HTTPS']=='on')
         {
           // Unset session and CSRF cookies.
-          setcookie('ses_session_token', false, false, '/', $abc->getCanonicalServerName(), true, true);
-          setcookie('ses_csrf_token', false, false, '/', $abc->getCanonicalServerName(), true, false);
+          setcookie('ses_session_token', false, false, '/', $hostname, true, true);
+          setcookie('ses_csrf_token', false, false, '/', $hostname, true, false);
           /*
           // Get tokens for cross domain redirect.
           $tokens = Abc::$DL->abcSessionGetRedirectTokens( $this->myRequestBus->getSesId() );
@@ -269,20 +270,8 @@ class LoginPage extends Page
         // Set the secure token.
         if ($_SERVER['HTTPS']=='on')
         {
-          setcookie('ses_session_token',
-                    $response3['ses_session_token'],
-                    false,
-                    '/',
-                    $abc->getCanonicalServerName(),
-                    true,
-                    true);
-          setcookie('ses_csrf_token',
-                    $response3['ses_csrf_token'],
-                    false,
-                    '/',
-                    $abc->getCanonicalServerName(),
-                    true,
-                    false);
+          setcookie('ses_session_token', $response3['ses_session_token'], false, '/', $hostname, true, true);
+          setcookie('ses_csrf_token', $response3['ses_csrf_token'], false, '/', $hostname, true, false);
         }
 
         HttpHeader::redirectSeeOther(($this->redirect) ? $this->redirect : '/');
