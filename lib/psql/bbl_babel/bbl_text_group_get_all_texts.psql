@@ -1,7 +1,7 @@
 /**
- * Selects all text in a text group in alphabetical order.
+ * Selects all texts in a text group in alphabetical order.
  *
- * @param p_wgd_id The ID of the word group.
+ * @param p_ttg_id The ID of the text group.
  * @param p_lan_id The ID of the target language.
  */
 create procedure bbl_text_group_get_all_texts( in p_ttg_id @bbl_text_group.ttg_id%type@,
