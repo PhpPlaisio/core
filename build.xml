@@ -16,30 +16,6 @@
         <exec command="apigen generate --todo --tree --source src --destination doc" passthru="true" checkreturn="true"/>
     </target>
 
-    <!-- Creates a new version/release. -->
-    <target name="version">
-        <ReadSemanticVersion file=".version"
-                             versionProperty="VERSION"
-                             releaseProperty="RELEASE"
-                             preReleaseProperty="PRE_RELEASE"
-                             haltOnError="true"/>
-
-        <if>
-            <equals arg1="${PRE_RELEASE}" arg2=""/>
-            <then>
-                <property name="RPM_RELEASE" value="1%{?dist}"/>
-            </then>
-            <else>
-                <property name="RPM_RELEASE" value="${PRE_RELEASE}%{?dist}"/>
-            </else>
-        </if>
-
-        <gitcommit repository="." message="Release: ${VERSION}" allFiles="true"/>
-        <gitpush repository="."/>
-        <gittag repository="." name="${VERSION}"/>
-        <gitpush repository="." refspec="${VERSION}" quiet="false"/>
-    </target>
-
     <target name="build">
         <echo message=""/>
     </target>
