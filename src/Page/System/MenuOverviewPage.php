@@ -4,7 +4,7 @@ namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableAction\System\MenuInsertTableAction;
 use SetBased\Abc\Core\TableColumn\System\MenuUpdateIconTableColumn;
@@ -15,7 +15,7 @@ use SetBased\Abc\Table\TableColumn\TextTableColumn;
 /**
  * Page with an overview of all menu entries.
  */
-class MenuOverviewPage extends CorePage
+class MenuOverviewPage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

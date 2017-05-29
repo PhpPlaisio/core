@@ -4,7 +4,7 @@ namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableAction\System\RoleGroupUpdateTableAction;
@@ -17,7 +17,7 @@ use SetBased\Abc\Table\TableRow\TextTableRow;
 /**
  * Page with the details of a all role group.
  */
-class RoleGroupDetailsPage extends CorePage
+class RoleGroupDetailsPage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

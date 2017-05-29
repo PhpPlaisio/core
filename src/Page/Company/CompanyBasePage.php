@@ -4,7 +4,7 @@ namespace SetBased\Abc\Core\Page\Company;
 
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\HttpHeader;
 
@@ -12,7 +12,7 @@ use SetBased\Abc\Helper\HttpHeader;
 /**
  * Abstract parent page for inserting and updating the details of a company.
  */
-abstract class CompanyBasePage extends CorePage
+abstract class CompanyBasePage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

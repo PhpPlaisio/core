@@ -4,7 +4,7 @@ namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableColumn\System\PageTableColumn;
@@ -16,7 +16,7 @@ use SetBased\Abc\Table\TableRow\TextTableRow;
 /**
  * Page with information about a page group.
  */
-class TabDetailsPage extends CorePage
+class TabDetailsPage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

@@ -4,7 +4,7 @@ namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableAction\System\ModuleUpdateCompaniesTableAction;
@@ -18,7 +18,7 @@ use SetBased\Abc\Table\TableRow\TextTableRow;
 /**
  * Page with the details of a module.
  */
-class ModuleDetailsPage extends CorePage
+class ModuleDetailsPage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

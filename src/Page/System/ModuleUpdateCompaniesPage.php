@@ -8,7 +8,7 @@ use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\Control\CoreButtonControl;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Form\SlatControlFactory\SystemModuleUpdateCompaniesSlatControlFactory;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\LouverControl;
@@ -21,7 +21,7 @@ use SetBased\Abc\Table\TableRow\TextTableRow;
 /**
  * Page for granting or revoking a module to or from companies.
  */
-class ModuleUpdateCompaniesPage extends CorePage
+class ModuleUpdateCompaniesPage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

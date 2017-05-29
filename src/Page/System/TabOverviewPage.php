@@ -4,7 +4,7 @@ namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableAction\System\TabInsertTableAction;
 use SetBased\Abc\Core\TableColumn\System\TabDetailsIconTableColumn;
@@ -16,7 +16,7 @@ use SetBased\Abc\Table\TableColumn\TextTableColumn;
 /**
  * Page with overview of all page groups.
  */
-class TabOverviewPage extends CorePage
+class TabOverviewPage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

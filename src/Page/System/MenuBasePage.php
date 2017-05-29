@@ -5,7 +5,7 @@ namespace SetBased\Abc\Core\Page\System;
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\Validator\IntegerValidator;
@@ -15,7 +15,7 @@ use SetBased\Abc\Helper\HttpHeader;
 /**
  * Abstract parent class for inserting or updating a menu entry.
  */
-abstract class MenuBasePage extends CorePage
+abstract class MenuBasePage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

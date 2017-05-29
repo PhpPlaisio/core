@@ -5,7 +5,7 @@ namespace SetBased\Abc\Core\Page\System;
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\HttpHeader;
@@ -14,7 +14,7 @@ use SetBased\Abc\Helper\HttpHeader;
 /**
  * Abstract parent page for inserting and updating details of a role group for the target company.
  */
-abstract class RoleGroupBasePage extends CorePage
+abstract class RoleGroupBasePage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

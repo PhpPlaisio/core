@@ -5,7 +5,7 @@ namespace SetBased\Abc\Core\Page\Company;
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Helper\HttpHeader;
@@ -15,7 +15,7 @@ use SetBased\Exception\LogicException;
 /**
  * Abstract parent page for pages about companies.
  */
-abstract class CompanyPage extends CorePage
+abstract class CompanyPage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

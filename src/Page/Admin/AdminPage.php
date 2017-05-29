@@ -2,10 +2,10 @@
 //----------------------------------------------------------------------------------------------------------------------
 namespace SetBased\Abc\Core\Page\Admin;
 
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 
 //----------------------------------------------------------------------------------------------------------------------
-abstract class AdminPage extends CorePage
+abstract class AdminPage extends TabPage
 {
 }
 

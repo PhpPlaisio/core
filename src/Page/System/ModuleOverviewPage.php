@@ -4,7 +4,7 @@ namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableAction\System\ModuleInsertTableAction;
 use SetBased\Abc\Core\TableColumn\Company\ModuleTableColumn;
@@ -15,7 +15,7 @@ use SetBased\Abc\Core\TableColumn\System\ModuleUpdateIconTableColumn;
 /**
  * Page with overview of all modules.
  */
-class ModuleOverviewPage extends CorePage
+class ModuleOverviewPage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

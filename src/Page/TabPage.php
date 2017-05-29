@@ -3,15 +3,15 @@
 namespace SetBased\Abc\Core\Page;
 
 use SetBased\Abc\Abc;
+use SetBased\Abc\Core\Page\Misc\W3cValidatePage;
 use SetBased\Abc\Helper\Html;
-use SetBased\Abc\Page\Page;
+use SetBased\Abc\Page\CorePage;
 
 //----------------------------------------------------------------------------------------------------------------------
-
 /**
  * Abstract parent page for all core pages of ABC.
  */
-abstract class CorePage extends Page
+abstract class TabPage extends CorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -32,6 +32,21 @@ abstract class CorePage extends Page
    * @var array[]
    */
   protected $tabs;
+
+  /**
+   * The path where the HTML code of this page is stored for the W3C validator.
+   *
+   * @var string
+   */
+  protected $w3cPathName;
+
+  /**
+   * If set to true (typically on DEV environment) the HTML code of this page will be validated by the W3C validator.
+   *
+   * @var bool
+   */
+  protected $w3cValidate = false;
+
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -182,6 +197,20 @@ abstract class CorePage extends Page
     {
       $tab['url'] = $this->getTabUrl($tab['pag_id']);
     }
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Enables validation of the HTML code of this page by the W3C Validator.
+   */
+  protected function enableW3cValidator()
+  {
+    $prefix            = 'w3c_validator_'.Abc::obfuscate($this->usrId, 'usr').'_';
+    $w3c_file          = uniqid($prefix).'.xhtml';
+    $this->w3cValidate = true;
+    $this->w3cPathName = DIR_TMP.'/'.$w3c_file;
+    $url               = W3cValidatePage::getUrl($w3c_file);
+    Abc::$assets->jsAdmClassSpecificFunctionCall(__CLASS__, 'w3cValidate', [$url]);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

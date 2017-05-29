@@ -4,7 +4,7 @@ namespace SetBased\Abc\Core\Page\Company;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableAction\Company\CompanyInsertTableAction;
 use SetBased\Abc\Core\TableColumn\Company\CompanyTableColumn;
@@ -34,7 +34,7 @@ class CompanyOverviewPage extends CompanyPage
    */
   public function echoMainContent()
   {
-    CorePage::echoMainContent();
+    TabPage::echoMainContent();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

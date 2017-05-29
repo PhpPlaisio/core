@@ -8,7 +8,7 @@ use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\Control\CoreButtonControl;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Form\SlatControlFactory\SystemFunctionalityUpdateRolesSlatControlFactory;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\LouverControl;
@@ -21,7 +21,7 @@ use SetBased\Abc\Table\TableRow\TextTableRow;
 /**
  * Page for granting/revoking access to/from a functionality to roles.
  */
-class FunctionalityUpdateRolesPage extends CorePage
+class FunctionalityUpdateRolesPage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

@@ -8,7 +8,7 @@ use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\Control\CoreButtonControl;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Form\SlatControlFactory\SystemPageUpdateFunctionalitiesSlatControlFactory;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Core\TableRow\System\PageDetailsTableRow;
 use SetBased\Abc\Form\Control\FieldSet;
@@ -22,7 +22,7 @@ use SetBased\Abc\Table\TableRow\TextTableRow;
 /**
  * Page for modifying the functionalities that grant access to a target page.
  */
-class PageUpdateFunctionalitiesPage extends CorePage
+class PageUpdateFunctionalitiesPage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
