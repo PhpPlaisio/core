@@ -7,14 +7,14 @@ use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\HiddenControl;
 use SetBased\Abc\Form\Form;
 use SetBased\Abc\Helper\HttpHeader;
-use SetBased\Abc\Page\Page;
+use SetBased\Abc\Page\CorePage;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for redirecting the user agent from the general domain (e.g. www.example.com) to the company specific domain
  * (e.g. setbased.example.com).
  */
-class DomainRedirectPage extends Page
+class DomainRedirectPage extends CorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

@@ -12,13 +12,13 @@ use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\Form;
 use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Helper\Password;
-use SetBased\Abc\Page\Page;
+use SetBased\Abc\Page\CorePage;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for logging on the website.
  */
-class LoginPage extends Page
+class LoginPage extends CorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -44,11 +44,6 @@ class LoginPage extends Page
     parent::__construct();
 
     $this->redirect = self::getCgiUrl('redirect');
-
-    if (isset($_SERVER['ABC_ENV']) && $_SERVER['ABC_ENV']=='dev')
-    {
-      $this->enableW3cValidator();
-    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -91,13 +86,6 @@ class LoginPage extends Page
     echo '</div>';
 
     $this->showPageTrailer();
-
-    // Write the HTML code of this page to the file system for (asynchronous) validation.
-    if ($this->w3cValidate)
-    {
-      $contents = ob_get_contents();
-      file_put_contents($this->w3cPathName, $contents);
-    }
 
     if (ob_get_level()>0) ob_end_flush();
   }

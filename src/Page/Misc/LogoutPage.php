@@ -5,13 +5,13 @@ namespace SetBased\Abc\Core\Page\Misc;
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Helper\HttpHeader;
-use SetBased\Abc\Page\Page;
+use SetBased\Abc\Page\CorePage;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for logging off from the website.
  */
-class LogoutPage extends Page
+class LogoutPage extends CorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
