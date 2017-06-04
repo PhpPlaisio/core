@@ -22,9 +22,9 @@ class RoleTableColumn extends DualTableColumn
    */
   public function __construct($headerText)
   {
+    parent::__construct('numeric', 'text');
+
     $this->headerText = $headerText;
-    $this->dataType   = 'numeric';
-    $this->dataType2  = 'text';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

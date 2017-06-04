@@ -37,7 +37,8 @@ class BoolIconTableColumn extends TableColumn
    */
   public function __construct($headerText, $fieldName, $showFalse = false)
   {
-    $this->dataType   = 'bool';
+    parent::__construct('bool');
+
     $this->headerText = $headerText;
     $this->fieldName  = $fieldName;
     $this->showFalse  = $showFalse;

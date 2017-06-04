@@ -7,7 +7,6 @@ use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Table\TableColumn\DualTableColumn;
 
 //----------------------------------------------------------------------------------------------------------------------
-
 /**
  * A dual table column with the ID and name of a word group.
  */
@@ -22,17 +21,18 @@ class WordGroupTableColumn extends DualTableColumn
   private $lanIdTarget;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    *
-   * @param string|int|null $headerText The header of this column.
+   * @param string|int|null $headerText  The header of this column.
    * @param int             $lanIdTarget The ID of the target language.
    */
   public function __construct($headerText, $lanIdTarget)
   {
+    parent::__construct('numeric', 'text');
+
     $this->headerText  = $headerText;
-    $this->dataType    = 'numeric';
-    $this->dataType2   = 'text';
     $this->lanIdTarget = $lanIdTarget;
   }
 
