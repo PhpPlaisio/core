@@ -3,7 +3,6 @@
 namespace SetBased\Abc\Core\Page\Company;
 
 use SetBased\Abc\Abc;
-use SetBased\Abc\Babel;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\Control\CoreButtonControl;
 use SetBased\Abc\Core\Form\CoreForm;
@@ -76,7 +75,7 @@ class ModuleUpdatePage extends CompanyPage
     // Add submit button.
     $button = new CoreButtonControl('');
     $submit = new SubmitControl('submit');
-    $submit->setValue(Babel::getWord(C::WRD_ID_BUTTON_OK));
+    $submit->setValue(Abc::$babel->getWord(C::WRD_ID_BUTTON_OK));
     $button->addFormControl($submit);
     $this->form->addSubmitHandler($button, 'handleForm');
 

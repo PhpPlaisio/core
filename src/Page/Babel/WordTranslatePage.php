@@ -3,7 +3,6 @@
 namespace SetBased\Abc\Core\Page\Babel;
 
 use SetBased\Abc\Abc;
-use SetBased\Abc\Babel;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Form\Control\SpanControl;
@@ -100,8 +99,8 @@ class WordTranslatePage extends BabelPage
    */
   private function createForm()
   {
-    $ref_language = Abc::$DL->bblLanguageGetName($this->refLanId, $this->refLanId);
-    $act_language = Abc::$DL->bblLanguageGetName($this->actLanId, $this->refLanId);
+    $refLanguage = Abc::$DL->bblLanguageGetName($this->refLanId, $this->refLanId);
+    $actLanguage = Abc::$DL->bblLanguageGetName($this->actLanId, $this->refLanId);
 
     $this->form = new CoreForm();
 
@@ -129,15 +128,23 @@ class WordTranslatePage extends BabelPage
     // @todo Show data.
 
     // Show word in reference language.
-    $input = new SpanControl('ref_language');
-    $input->setInnerText(Babel::getWord($this->wrdId /*, $this->myRefLanId*/)); // @todo show word in ref lan.
-    $this->form->addFormControl($input, $ref_language);
+    Abc::$babel->pushLanguage($this->refLanId);
+    try
+    {
+      $input = new SpanControl('ref_language');
+      $input->setInnerText(Abc::$babel->getWord($this->wrdId));
+      $this->form->addFormControl($input, $refLanguage);
+    }
+    finally
+    {
+      Abc::$babel->popLanguage();
+    }
 
     // Create form control for the actual word.
     $input = new TextControl('wdt_text');
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
     $input->setValue($this->details['wdt_text']);
-    $this->form->addFormControl($input, $act_language, true);
+    $this->form->addFormControl($input, $actLanguage, true);
 
     // Create a submit button.
     $this->form->addSubmitButton(C::WRD_ID_BUTTON_TRANSLATE, 'handleForm');

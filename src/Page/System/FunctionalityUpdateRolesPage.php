@@ -3,7 +3,6 @@
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
-use SetBased\Abc\Babel;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\Control\CoreButtonControl;
 use SetBased\Abc\Core\Form\CoreForm;
@@ -111,7 +110,7 @@ class FunctionalityUpdateRolesPage extends TabPage
     // Add submit button.
     $button = new CoreButtonControl('');
     $submit = new SubmitControl('submit');
-    $submit->setValue(Babel::getWord(C::WRD_ID_BUTTON_UPDATE));
+    $submit->setValue(Abc::$babel->getWord(C::WRD_ID_BUTTON_UPDATE));
     $button->addFormControl($submit);
     $this->form->addSubmitHandler($button, 'handleForm');
 
