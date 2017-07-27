@@ -12,13 +12,13 @@ use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\Form;
 use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Helper\Password;
-use SetBased\Abc\Page\Page;
+use SetBased\Abc\Page\CorePage;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for logging on the website.
  */
-class LoginPage extends Page
+class LoginPage extends CorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -44,11 +44,6 @@ class LoginPage extends Page
     parent::__construct();
 
     $this->redirect = self::getCgiUrl('redirect');
-
-    if (isset($_SERVER['ABC_ENV']) && $_SERVER['ABC_ENV']=='dev')
-    {
-      $this->enableW3cValidator();
-    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -92,14 +87,6 @@ class LoginPage extends Page
 
     $this->showPageTrailer();
 
-    // Write the HTML code of this page to the file system for (asynchronous) validation.
-    if ($this->w3cValidate)
-    {
-      $contents = ob_get_contents();
-      file_put_contents($this->w3cPathName, $contents);
-    }
-
-    $this->setPageSize(ob_get_length());
     if (ob_get_level()>0) ob_end_flush();
   }
 
@@ -131,16 +118,16 @@ class LoginPage extends Page
     $input->setAttrMaxLength(C::LEN_PASSWORD);
     $this->form->addFormControl($input, 'Wachtwoord', true);
 
-    if ($abc->getDomain())
+    if ($abc::$domainResolver->getDomain())
     {
       // Show domain.
       $input = new SpanControl('dummy');
-      $input->setInnerText(strtolower($abc->getDomain()));
+      $input->setInnerText(strtolower($abc::$domainResolver->getDomain()));
       $this->form->addFormControl($input, 'Company');
 
       // Constant for domain.
       $input = new ConstantControl('cmp_abbr');
-      $input->setValue($abc->getDomain());
+      $input->setValue($abc::$domainResolver->getDomain());
       $this->form->addFormControl($input);
     }
     else
@@ -200,7 +187,8 @@ class LoginPage extends Page
    */
   private function login()
   {
-    $abc = Abc::getInstance();
+    $abc      = Abc::getInstance();
+    $hostname = Abc::$canonicalHostnameResolver->getCanonicalHostname();
 
     $values = $this->form->getValues();
 
@@ -236,15 +224,15 @@ class LoginPage extends Page
       }
 
       $domain_redirect = false;
-      if (!$abc->getDomain())
+      if (!$abc::$domainResolver->getDomain())
       {
         // Redirect browser to $values['cmp_abbr'].onzerelaties.net
         $parts = explode('.', $_SERVER['SERVER_NAME']);
         if (count($parts)==3 && $parts[0]=='www' && $_SERVER['HTTPS']=='on')
         {
           // Unset session and CSRF cookies.
-          setcookie('ses_session_token', false, false, '/', $abc->getCanonicalServerName(), true, true);
-          setcookie('ses_csrf_token', false, false, '/', $abc->getCanonicalServerName(), true, false);
+          setcookie('ses_session_token', false, false, '/', $hostname, true, true);
+          setcookie('ses_csrf_token', false, false, '/', $hostname, true, false);
           /*
           // Get tokens for cross domain redirect.
           $tokens = Abc::$DL->abcSessionGetRedirectTokens( $this->myRequestBus->getSesId() );
@@ -270,20 +258,8 @@ class LoginPage extends Page
         // Set the secure token.
         if ($_SERVER['HTTPS']=='on')
         {
-          setcookie('ses_session_token',
-                    $response3['ses_session_token'],
-                    false,
-                    '/',
-                    $abc->getCanonicalServerName(),
-                    true,
-                    true);
-          setcookie('ses_csrf_token',
-                    $response3['ses_csrf_token'],
-                    false,
-                    '/',
-                    $abc->getCanonicalServerName(),
-                    true,
-                    false);
+          setcookie('ses_session_token', $response3['ses_session_token'], false, '/', $hostname, true, true);
+          setcookie('ses_csrf_token', $response3['ses_csrf_token'], false, '/', $hostname, true, false);
         }
 
         HttpHeader::redirectSeeOther(($this->redirect) ? $this->redirect : '/');

@@ -2,7 +2,7 @@
 //----------------------------------------------------------------------------------------------------------------------
 namespace SetBased\Abc\Core\Form;
 
-use SetBased\Abc\Babel;
+use SetBased\Abc\Abc;
 use SetBased\Abc\Core\Form\Control\CoreFieldSet;
 use SetBased\Abc\Core\Form\Validator\MandatoryValidator;
 use SetBased\Abc\Form\Control\ConstantControl;
@@ -45,7 +45,7 @@ class CoreForm extends Form
     $this->attributes['class']        = 'input_table';
     $this->attributes['autocomplete'] = false;
 
-    $this->visibleFieldSet = $this->addFieldSet(new CoreFieldSet(''));
+    $this->visibleFieldSet = $this->addFieldSet(new CoreFieldSet());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -92,7 +92,7 @@ class CoreForm extends Form
 
         if (isset($wrdId))
         {
-          $control->setFakeAttribute('_abc_label', (is_int($wrdId)) ? Babel::getWord($wrdId) : $wrdId);
+          $control->setFakeAttribute('_abc_label', (is_int($wrdId)) ? Abc::$babel->getWord($wrdId) : $wrdId);
         }
 
         if ($mandatory)
@@ -144,7 +144,7 @@ class CoreForm extends Form
    */
   public function setTitle($wrdId)
   {
-    $this->visibleFieldSet->setTitle(Babel::getWord($wrdId));
+    $this->visibleFieldSet->setTitle(Abc::$babel->getWord($wrdId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

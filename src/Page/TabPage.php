@@ -3,14 +3,15 @@
 namespace SetBased\Abc\Core\Page;
 
 use SetBased\Abc\Abc;
+use SetBased\Abc\Core\Page\Misc\W3cValidatePage;
 use SetBased\Abc\Helper\Html;
-use SetBased\Abc\Page\Page;
+use SetBased\Abc\Page\CorePage;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
  * Abstract parent page for all core pages of ABC.
  */
-abstract class CorePage extends Page
+abstract class TabPage extends CorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -31,6 +32,21 @@ abstract class CorePage extends Page
    * @var array[]
    */
   protected $tabs;
+
+  /**
+   * The path where the HTML code of this page is stored for the W3C validator.
+   *
+   * @var string
+   */
+  protected $w3cPathName;
+
+  /**
+   * If set to true (typically on DEV environment) the HTML code of this page will be validated by the W3C validator.
+   *
+   * @var bool
+   */
+  protected $w3cValidate = false;
+
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -100,7 +116,6 @@ abstract class CorePage extends Page
       file_put_contents($this->w3cPathName, ob_get_contents());
     }
 
-    $this->setPageSize(ob_get_length());
     if (ob_get_level()) ob_end_flush();
   }
 
@@ -186,6 +201,20 @@ abstract class CorePage extends Page
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Enables validation of the HTML code of this page by the W3C Validator.
+   */
+  protected function enableW3cValidator()
+  {
+    $prefix            = 'w3c_validator_'.Abc::obfuscate($this->usrId, 'usr').'_';
+    $w3c_file          = uniqid($prefix).'.xhtml';
+    $this->w3cValidate = true;
+    $this->w3cPathName = DIR_TMP.'/'.$w3c_file;
+    $url               = W3cValidatePage::getUrl($w3c_file);
+    Abc::$assets->jsAdmClassSpecificFunctionCall(__CLASS__, 'w3cValidate', [$url]);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns the URL of a tab of the page group of current page.
    *
    * @param int $pagId The ID of the page of the tab.
@@ -211,31 +240,42 @@ abstract class CorePage extends Page
    */
   private function echoMainMenu()
   {
-    $menu_items  = Abc::$DL->abcAuthGetMenu($this->cmpId, $this->proId, $this->lanId);
+    $items       = Abc::$DL->abcAuthGetMenu($this->cmpId, $this->proId, $this->lanId);
     $page_mnu_id = Abc::getInstance()->getMnuId();
 
     echo '<ul>';
-
     $last_group = 0;
-    foreach ($menu_items as $i => $menu_item)
+    foreach ($items as $i => $item)
     {
-      $mnu_link = '/pag/'.Abc::obfuscate($menu_item['pag_id'], 'pag').$menu_item['mnu_link'];
-      $class    = " class='menu_".$menu_item['mnu_level'];
+      if (isset($item['pag_alias']))
+      {
+        $link = '/'.$item['pag_alias'];
+      }
+      else
+      {
+        $link = self::putCgiId('pag', $item['pag_id'], 'pag');
+      }
+      $link .= $item['mnu_link'];
+
+      $class = 'menu_'.$item['mnu_level'];
 
       if ($i==0) $class .= ' first';
-      if ($i==count($menu_items) - 1) $class .= ' last';
-      if ($menu_item['mnu_id']==$page_mnu_id) $class .= ' menu_active';
-      if ($menu_item['mnu_group']<>$last_group) $class .= ' group_first';
-      if (!isset($menu_items[$i + 1]) ||
-        $menu_item['mnu_group']<>$menu_items[$i + 1]['mnu_group']
-      ) $class .= ' group_last';
 
-      $class .= "'";
+      if ($i==count($items) - 1) $class .= ' last';
 
-      if ($mnu_link) echo '<li', $class, '><a href="', $mnu_link, '">', Html::txt2Html($menu_item['mnu_text']), '</a></li>';
-      else           echo '<li', $class, '><a>', Html::txt2Html($menu_item['mnu_text']), '</a></li>';
+      if ($item['mnu_id']==$page_mnu_id) $class .= ' menu_active';
 
-      $last_group = $menu_item['mnu_group'];
+      if ($item['mnu_group']<>$last_group) $class .= ' group_first';
+
+      if (!isset($items[$i + 1]) || $item['mnu_group']<>$items[$i + 1]['mnu_group'])
+      {
+        $class .= ' group_last';
+      }
+
+      $a = Html::generateElement('a', ['href' => $link], Html::txt2Html($item['mnu_text']));
+      echo Html::generateElement('li', ['class' => $class], $a, true);
+
+      $last_group = $item['mnu_group'];
     }
     echo '</ul>';
 

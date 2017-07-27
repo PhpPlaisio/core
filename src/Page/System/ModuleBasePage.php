@@ -6,7 +6,7 @@ use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Form\FormValidator\SystemModuleInsertCompoundValidator;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\HttpHeader;
@@ -15,7 +15,7 @@ use SetBased\Abc\Helper\HttpHeader;
 /**
  * Abstract parent class for inserting or updating the details of a module.
  */
-abstract class ModuleBasePage extends CorePage
+abstract class ModuleBasePage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -79,7 +79,7 @@ abstract class ModuleBasePage extends CorePage
       // If there are unused modules names (i.e. words in the word group WDG_ID_MODULES that are not used by a
       // module) create a select box with free modules names.
       $input = new SelectControl('wrd_id');
-      $input->setOptions($words, 'wrd_id', 'wrd_text');
+      $input->setOptions($words, 'wrd_id', 'wdt_text');
       $input->setEmptyOption();
       $this->form->addFormControl($input, 'Module Name');
     }

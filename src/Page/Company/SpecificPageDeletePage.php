@@ -5,13 +5,13 @@ namespace SetBased\Abc\Core\Page\Company;
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Helper\HttpHeader;
-use SetBased\Abc\Page\Page;
+use SetBased\Abc\Page\CorePage;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for deleting a company specific page that overrides a standard page.
  */
-class SpecificPageDeletePage extends Page
+class SpecificPageDeletePage extends CorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

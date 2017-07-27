@@ -3,12 +3,11 @@
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
-use SetBased\Abc\Babel;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\Control\CoreButtonControl;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Form\SlatControlFactory\SystemModuleUpdateCompaniesSlatControlFactory;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\LouverControl;
@@ -21,7 +20,7 @@ use SetBased\Abc\Table\TableRow\TextTableRow;
 /**
  * Page for granting or revoking a module to or from companies.
  */
-class ModuleUpdateCompaniesPage extends CorePage
+class ModuleUpdateCompaniesPage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -111,7 +110,7 @@ class ModuleUpdateCompaniesPage extends CorePage
     // Add submit button.
     $button = new CoreButtonControl('');
     $submit = new SubmitControl('submit');
-    $submit->setValue(Babel::getWord(C::WRD_ID_BUTTON_UPDATE));
+    $submit->setValue(Abc::$babel->getWord(C::WRD_ID_BUTTON_UPDATE));
     $button->addFormControl($submit);
     $this->form->addSubmitHandler($button, 'handleForm');
 

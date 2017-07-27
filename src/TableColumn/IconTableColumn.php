@@ -46,8 +46,9 @@ abstract class IconTableColumn extends TableColumn
    */
   public function __construct()
   {
+    parent::__construct('none');
+
     $this->sortable = false;
-    $this->dataType = 'none';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

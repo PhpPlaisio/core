@@ -2,12 +2,13 @@
 //----------------------------------------------------------------------------------------------------------------------
 namespace SetBased\Abc\Core\Page\Company;
 
+use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
+use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\HttpHeader;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Abstract parent page for inserting and updating details of a role for the target company.
  */
@@ -36,6 +37,7 @@ abstract class RoleBasePage extends CompanyPage
   protected $rolId;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Must implemented by child pages to actually insert or update a role of the target company.
    *
@@ -70,16 +72,26 @@ abstract class RoleBasePage extends CompanyPage
   {
     $this->form = new CoreForm();
 
-    // Create form control for Company name.
+    // Input for role group.
+    $roleGroups = Abc::$DL->abcSystemRoleGroupGetAll($this->lanId);
+    $input      = new SelectControl('rlg_id');
+    $input->setOptions($roleGroups, 'rlg_id', 'rlg_name');
+    $this->form->addFormControl($input, 'Role Group', true);
+
+    // Input for name.
     $input = new TextControl('rol_name');
     $input->setAttrMaxLength(C::LEN_ROL_NAME);
-    $this->form->addFormControl($input, 'Role');
+    $this->form->addFormControl($input, 'Name', true);
 
-    // Create form control for comment.
+    // Input for weight.
     $input = new TextControl('rol_weight');
     $input->setAttrMaxLength(C::LEN_ROL_WEIGHT);
     $this->form->addFormControl($input, 'Weight');
-    // XXX numeric
+
+    // Input for label.
+    $input = new TextControl('rol_label');
+    $input->setAttrMaxLength(C::LEN_ROL_LABEL);
+    $this->form->addFormControl($input, 'Label');
 
     // Create a submit button.
     $this->form->addSubmitButton($this->buttonWrdId, 'handleForm');

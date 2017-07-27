@@ -5,7 +5,7 @@ namespace SetBased\Abc\Core\Page\System;
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\HttpHeader;
@@ -14,7 +14,7 @@ use SetBased\Abc\Helper\HttpHeader;
 /**
  * Abstract parent page for inserting and updating a functionality.
  */
-abstract class FunctionalityBasePage extends CorePage
+abstract class FunctionalityBasePage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -30,6 +30,13 @@ abstract class FunctionalityBasePage extends CorePage
    * @var CoreForm
    */
   protected $form;
+
+  /**
+   * The ID of the inserted or updated functionality.
+   *
+   * @var int
+   */
+  protected $funId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -78,7 +85,7 @@ abstract class FunctionalityBasePage extends CorePage
     // Input for functionality name.
     // @todo Make control for reusing a word or create a new word. 
     $input = new SelectControl('wrd_id');
-    $input->setOptions($words, 'wrd_id', 'wrd_text');
+    $input->setOptions($words, 'wrd_id', 'wdt_text');
     $input->setEmptyOption();
     $this->form->addFormControl($input, 'Name');
 
@@ -116,7 +123,7 @@ abstract class FunctionalityBasePage extends CorePage
   {
     $this->dataBaseAction();
 
-    HttpHeader::redirectSeeOther(FunctionalityOverviewPage::getUrl());
+    HttpHeader::redirectSeeOther(FunctionalityDetailsPage::getUrl($this->funId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

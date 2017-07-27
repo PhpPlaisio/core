@@ -5,7 +5,7 @@ namespace SetBased\Abc\Core\Page\System;
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\Validator\IntegerValidator;
@@ -15,7 +15,7 @@ use SetBased\Abc\Helper\HttpHeader;
 /**
  * Abstract parent class for inserting or updating a menu entry.
  */
-abstract class MenuBasePage extends CorePage
+abstract class MenuBasePage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -70,7 +70,7 @@ abstract class MenuBasePage extends CorePage
     // Create select box for (known) page titles.
     $titles = Abc::$DL->bblWordGroupGetAllWords(C::WDG_ID_MENU, $this->lanId);
     $input  = new SelectControl('wrd_id');
-    $input->setOptions($titles, 'wrd_id', 'wrd_text');
+    $input->setOptions($titles, 'wrd_id', 'wdt_text');
     $input->setOptionsObfuscator(Abc::getObfuscator('wrd'));
     $input->setEmptyOption();
     $this->form->addFormControl($input, 'Menu Title');

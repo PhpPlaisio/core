@@ -1,44 +1,45 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
-namespace SetBased\Abc\Core\TableColumn\Babel;
+namespace SetBased\Abc\Core\TableColumn\Company;
 
-use SetBased\Abc\Core\Page\Babel\WordGroupDetailsPage;
-use SetBased\Abc\Core\TableColumn\DetailsIconTableColumn;
+use SetBased\Abc\Core\Page\Company\CompanyDetailsPage;
+use SetBased\Abc\Helper\Html;
+use SetBased\Abc\Table\TableColumn\DualTableColumn;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
- * Table column with icon linking to page with an overview of all words in a word group.
+ * A dual table column with the ID and name of a company.
  */
-class WordGroupDetailsIconTableColumn extends DetailsIconTableColumn
+class CompanyTableColumn extends DualTableColumn
 {
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * The ID of the target language.
-   *
-   * @var int
-   */
-  private $actLanId;
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
-   * @param int $targetLanId The ID of the target language.
+   * @param string|int|null $headerText The header of this column.
    */
-  public function __construct($targetLanId)
+  public function __construct($headerText)
   {
-    parent::__construct();
+    parent::__construct('numeric', 'text');
 
-    $this->actLanId = $targetLanId;
+    $this->headerText = $headerText;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * {@inheritdoc}
    */
-  public function getUrl($row)
+  public function getHtmlCell($row)
   {
-    return WordGroupDetailsPage::getUrl($row['wdg_id'], $this->actLanId);
+    $url = CompanyDetailsPage::getUrl($row['cmp_id']);
+
+    $ret = '<td class="number link">';
+    $ret .= Html::generateElement('a', ['href' => $url], $row['cmp_id']);
+    $ret .= '</td>';
+
+    $ret .= Html::generateElement('td', [], $row['cmp_abbr']);
+
+    return $ret;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -2,17 +2,27 @@
  * Selects all roles of a company.
  *
  * @param p_cmp_id The ID of the company.
+ * @param p_lan_id The ID of the language for linguistic entities.
  */
-create procedure abc_company_role_get_all( in p_cmp_id @aut_role.cmp_id%type@ )
+create procedure abc_company_role_get_all(in p_cmp_id @aut_role.cmp_id%type@,
+                                          in p_lan_id @bbl_language.lan_id%type@)
 reads sql data
 -- type: rows
 begin
-  select cmp_id
-  ,      rol_id
-  ,      rol_weight
-  ,      rol_name
-  from   AUT_ROLE
-  where  cmp_id = p_cmp_id
-  order by rol_weight
+  select rol.cmp_id
+  ,      rol.rol_id
+  ,      rol.rol_weight
+  ,      rol.rol_name
+  ,      rol.rol_label
+
+  ,      rlg.rlg_id
+  ,      wd2.wdt_text    rlg_name
+  from       AUT_ROLE       rol
+  inner join AUT_ROLE_GROUP rlg  on  rlg.rlg_id = rol.rlg_id
+  inner join BBL_WORD_TEXT  wd2  on  wd2.wrd_id = rlg.wrd_id and
+                                     wd2.lan_id = p_lan_id
+  where  rol.cmp_id = p_cmp_id
+  order by rlg.rlg_weight
+  ,        rol.rol_weight
   ;
 end

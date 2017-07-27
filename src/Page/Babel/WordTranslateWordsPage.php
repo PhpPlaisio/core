@@ -3,7 +3,6 @@
 namespace SetBased\Abc\Core\Page\Babel;
 
 use SetBased\Abc\Abc;
-use SetBased\Abc\Babel;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\Control\CoreButtonControl;
 use SetBased\Abc\Core\Form\CoreForm;
@@ -101,7 +100,7 @@ class WordTranslateWordsPage extends BabelPage
     // Add submit button.
     $button = new CoreButtonControl('');
     $submit = new SubmitControl('submit');
-    $submit->setValue(Babel::getWord(C::WRD_ID_BUTTON_TRANSLATE));
+    $submit->setValue(Abc::$babel->getWord(C::WRD_ID_BUTTON_TRANSLATE));
     $button->addFormControl($submit);
     $this->form->addSubmitHandler($button, 'handleForm');
 

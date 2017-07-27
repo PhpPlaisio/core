@@ -2,14 +2,14 @@
 //----------------------------------------------------------------------------------------------------------------------
 namespace SetBased\Abc\Core\TableColumn\System;
 
-use SetBased\Abc\Core\Page\System\FunctionalityDetailsPage;
-use SetBased\Abc\Core\TableColumn\DetailsIconTableColumn;
+use SetBased\Abc\Core\Page\System\RoleGroupUpdatePage;
+use SetBased\Abc\Core\TableColumn\UpdateIconTableColumn;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
- * Table column with icon linking to page with information about a functionality.
+ * Table column with icon linking to page for updating the details of a role group.
  */
-class FunctionalityDetailsIconTableColumn extends DetailsIconTableColumn
+class RoleGroupUpdateIconTableColumn extends UpdateIconTableColumn
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -17,7 +17,7 @@ class FunctionalityDetailsIconTableColumn extends DetailsIconTableColumn
    */
   public function getUrl($row)
   {
-    return FunctionalityDetailsPage::getUrl($row['fun_id']);
+    return RoleGroupUpdatePage::getUrl($row['rlg_id']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

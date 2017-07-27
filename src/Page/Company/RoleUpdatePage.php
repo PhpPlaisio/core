@@ -5,7 +5,6 @@ namespace SetBased\Abc\Core\Page\Company;
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for updating the details of a role.
  */
@@ -28,7 +27,7 @@ class RoleUpdatePage extends RoleBasePage
     parent::__construct();
 
     $this->rolId       = self::getCgiId('rol', 'rol');
-    $this->details     = Abc::$DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId);
+    $this->details     = Abc::$DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId, $this->lanId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -62,7 +61,12 @@ class RoleUpdatePage extends RoleBasePage
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
 
-    Abc::$DL->abcCompanyRoleUpdate($this->targetCmpId, $this->rolId, $values['rol_name'], $values['rol_weight']);
+    Abc::$DL->abcCompanyRoleUpdate($this->targetCmpId,
+                                   $this->rolId,
+                                   $values['rlg_id'],
+                                   $values['rol_name'],
+                                   $values['rol_weight'],
+                                   $values['rol_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

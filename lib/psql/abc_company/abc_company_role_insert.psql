@@ -2,23 +2,30 @@
  * Insert a new role.
  *
  * @param p_cmp_id     The company ID.
- * @param p_rol_name   The new name of the role.
- * @param p_rol_weight The new weight of the role.
+ * @param p_rlg_id     The rol ID of the role group.
+ * @param p_rol_name   The name of the role.
+ * @param p_rol_weight The weight of the role.
+ * @param p_rol_label  The label of the role.
  */
-create procedure abc_company_role_insert( in p_cmp_id     @aut_company.cmp_id%type@,
-                                          in p_rol_name   @aut_role.rol_name%type@,
-                                          in p_rol_weight @aut_role.rol_weight%type@ )
+create procedure abc_company_role_insert(in p_cmp_id     @aut_company.cmp_id%type@,
+                                         in p_rlg_id     @aut_role.rlg_id%type@,
+                                         in p_rol_name   @aut_role.rol_name%type@,
+                                         in p_rol_weight @aut_role.rol_weight%type@,
+                                         in p_rol_label  @aut_role.rol_label%type@)
 modifies sql data
 -- type: singleton1
 begin
   insert into AUT_ROLE( cmp_id
+  ,                     rlg_id
   ,                     rol_weight
-  ,                     rol_name)
+  ,                     rol_name
+  ,                     rol_label)
   values( p_cmp_id
+  ,       p_rlg_id
   ,       p_rol_weight
-  ,       p_rol_name )
+  ,       p_rol_name
+  ,       p_rol_label)
   ;
 
-  select last_insert_id() rol_id
-  ;
+  select last_insert_id() rol_id;
 end

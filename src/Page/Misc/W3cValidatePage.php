@@ -7,14 +7,14 @@ use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Error\NotAuthorizedException;
 use SetBased\Abc\Helper\Html;
-use SetBased\Abc\Page\Page;
+use SetBased\Abc\Page\CorePage;
 use SetBased\Exception\FallenException;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for validating the generated HTML code. This page must be use on development environments only.
  */
-class W3cValidatePage extends Page
+class W3cValidatePage extends CorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

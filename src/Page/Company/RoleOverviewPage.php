@@ -6,12 +6,11 @@ use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableAction\Company\RoleInsertTableAction;
-use SetBased\Abc\Core\TableColumn\Company\RoleDetailsIconTableColumn;
+use SetBased\Abc\Core\TableColumn\Company\RoleTableColumn;
 use SetBased\Abc\Core\TableColumn\Company\RoleUpdateIconTableColumn;
+use SetBased\Abc\Core\TableColumn\System\RoleGroupTableColumn;
 use SetBased\Abc\Table\TableColumn\NumericTableColumn;
-use SetBased\Abc\Table\TableColumn\TextTableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page with an overview of all roles of the target company.
  */
@@ -39,25 +38,24 @@ class RoleOverviewPage extends CompanyPage
    */
   protected function echoTabContent()
   {
-    $roles = Abc::$DL->abcCompanyRoleGetAll($this->targetCmpId);
+    $roles = Abc::$DL->abcCompanyRoleGetAll($this->targetCmpId, $this->lanId);
 
     $table = new CoreOverviewTable();
 
-    // Add table action for creating a new Company.
+    // Add table action for creating a new role.
     $table->addTableAction('default', new RoleInsertTableAction($this->targetCmpId));
 
-    // Show role ID.
-    $table->addColumn(new NumericTableColumn('ID', 'rol_id'));
+    // Show role group ID and name.
+    $table->addColumn(new RoleGroupTableColumn('Role Group'));
 
-    // Show the name of the role.
-    $table->addColumn(new TextTableColumn('Role', 'rol_name'));
+    // Show role ID and name.
+    $table->addColumn(new RoleTableColumn('Role'));
 
     // Show the weight of the role.
-    $col = $table->addColumn(new NumericTableColumn('Weight', 'rol_weight'));
-    $col->setSortOrder(1);
+    $table->addColumn(new NumericTableColumn('Weight', 'rol_weight'));
 
-    // Add link to the details of the role.
-    $table->addColumn(new RoleDetailsIconTableColumn());
+    // Show the label of the role.
+    $table->addColumn(new NumericTableColumn('Label', 'rol_label'));
 
     // Add link to the update the role.
     $table->addColumn(new RoleUpdateIconTableColumn());

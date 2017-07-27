@@ -1,23 +1,28 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
-namespace SetBased\Abc\Core\TableColumn\System;
+namespace SetBased\Abc\Core\TableAction\Company;
 
-use SetBased\Abc\Core\Page\System\ModuleDetailsPage;
-use SetBased\Abc\Core\TableColumn\DetailsIconTableColumn;
+use SetBased\Abc\Core\Page\Company\RoleUpdatePage;
+use SetBased\Abc\Core\TableAction\UpdateItemTableAction;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
- * Table column with icon linking to page for updating the details of a functionality.
+ * Table action for modifying the details to a role.
  */
-class ModuleDetailsIconTableColumn extends DetailsIconTableColumn
+class RoleUpdateTableAction extends UpdateItemTableAction
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * Object constructor.
+   *
+   * @param int $targetCmpId The ID of the target company of the role.
+   * @param int $rolId       The ID of the role.
    */
-  public function getUrl($row)
+  public function __construct($targetCmpId, $rolId)
   {
-    return ModuleDetailsPage::getUrl($row['mdl_id']);
+    $this->url = RoleUpdatePage::getUrl($targetCmpId, $rolId);
+
+    $this->title = 'Modify role';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

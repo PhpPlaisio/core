@@ -5,7 +5,7 @@ namespace SetBased\Abc\Core\Page\System;
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\HttpHeader;
@@ -14,7 +14,7 @@ use SetBased\Abc\Helper\HttpHeader;
 /**
  * Abstract parent page for inserting or modifying a page group.
  */
-abstract class TabBasePage extends CorePage
+abstract class TabBasePage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -80,7 +80,7 @@ abstract class TabBasePage extends CorePage
     // Create select box for (known) page titles.
     $titles = Abc::$DL->bblWordGroupGetAllWords(C::WDG_ID_PAGE_GROUP_TITLE, $this->lanId);
     $input  = new SelectControl('wrd_id');
-    $input->setOptions($titles, 'wrd_id', 'wrd_text');
+    $input->setOptions($titles, 'wrd_id', 'wdt_text');
     $input->setEmptyOption();
     $this->form->addFormControl($input, 'Title');
 

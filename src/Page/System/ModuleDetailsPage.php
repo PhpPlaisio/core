@@ -4,15 +4,13 @@ namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableAction\System\ModuleUpdateCompaniesTableAction;
 use SetBased\Abc\Core\TableAction\System\ModuleUpdateTableAction;
-use SetBased\Abc\Core\TableColumn\Company\CompanyDetailsIconTableColumn;
-use SetBased\Abc\Core\TableColumn\System\FunctionalityDetailsIconTableColumn;
-use SetBased\Abc\Table\TableColumn\NumericTableColumn;
-use SetBased\Abc\Table\TableColumn\TextTableColumn;
+use SetBased\Abc\Core\TableColumn\Company\CompanyTableColumn;
+use SetBased\Abc\Core\TableColumn\Company\FunctionalityTableColumn;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
@@ -20,7 +18,7 @@ use SetBased\Abc\Table\TableRow\TextTableRow;
 /**
  * Page with the details of a module.
  */
-class ModuleDetailsPage extends CorePage
+class ModuleDetailsPage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -94,14 +92,8 @@ class ModuleDetailsPage extends CorePage
     // Add table action for granting this module to companies.
     $table->addTableAction('default', new ModuleUpdateCompaniesTableAction($this->mdlId));
 
-    // Show company ID.
-    $table->addColumn(new NumericTableColumn('ID', 'cmp_id'));
-
-    // Show company abbr.
-    $table->addColumn(new TextTableColumn('Company', 'cmp_abbr'));
-
-    // Show link to view the details of the company.
-    $table->addColumn(new CompanyDetailsIconTableColumn());
+    // Show ID and abbreviation of the company
+    $table->addColumn(new CompanyTableColumn(C::WRD_ID_COMPANY));
 
     echo $table->getHtmlTable($functions);
   }
@@ -136,14 +128,8 @@ class ModuleDetailsPage extends CorePage
 
     $table = new CoreOverviewTable();
 
-    // Show function ID.
-    $table->addColumn(new NumericTableColumn('ID', 'fun_id'));
-
-    // Show function name.
-    $table->addColumn(new TextTableColumn('Function', 'fun_name'));
-
-    // Show link to view the details of the functionality.
-    $table->addColumn(new FunctionalityDetailsIconTableColumn());
+    // Show ID and name of the functionality
+    $table->addColumn(new FunctionalityTableColumn('Function'));
 
     echo $table->getHtmlTable($functions);
   }

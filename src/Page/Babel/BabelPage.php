@@ -5,7 +5,7 @@ namespace SetBased\Abc\Core\Page\Babel;
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Form;
 use SetBased\Abc\Helper\HttpHeader;
@@ -14,7 +14,7 @@ use SetBased\Abc\Helper\HttpHeader;
 /**
  * Abstract parent page for all Babel pages.
  */
-abstract class BabelPage extends CorePage
+abstract class BabelPage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

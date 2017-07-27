@@ -4,13 +4,16 @@ namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableAction\System\PageUpdateFunctionalitiesTableAction;
 use SetBased\Abc\Core\TableAction\System\PageUpdateTableAction;
+use SetBased\Abc\Core\TableColumn\Company\CompanyTableColumn;
+use SetBased\Abc\Core\TableColumn\Company\FunctionalityTableColumn;
+use SetBased\Abc\Core\TableColumn\Company\ModuleTableColumn;
+use SetBased\Abc\Core\TableColumn\Company\RoleTableColumn;
 use SetBased\Abc\Core\TableRow\System\PageDetailsTableRow;
-use SetBased\Abc\Table\TableColumn\TextTableColumn;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
@@ -18,7 +21,7 @@ use SetBased\Abc\Table\TableRow\TextTableRow;
 /**
  * Page with information about a (target) page.
  */
-class PageDetailsPage extends CorePage
+class PageDetailsPage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -119,11 +122,11 @@ class PageDetailsPage extends CorePage
     // Table action for modify the functionalities that grant access to the page whow on this page.
     $table->addTableAction('default', new PageUpdateFunctionalitiesTableAction($this->targetPagId));
 
-    // Show module name.
-    $table->addColumn(new TextTableColumn('Module', 'mdl_name'));
+    // Show the ID and name of the module.
+    $table->addColumn(new ModuleTableColumn('Module'));
 
-    // Show functionality name.
-    $table->addColumn(new TextTableColumn('Functionality', 'fun_name'));
+    // Show the ID and name of the functionality.
+    $table->addColumn(new FunctionalityTableColumn('Functionality'));
 
     echo $table->getHtmlTable($roles);
   }
@@ -138,11 +141,11 @@ class PageDetailsPage extends CorePage
 
     $table = new CoreOverviewTable();
 
-    // Show Company abbreviation.
-    $table->addColumn(new TextTableColumn('Company', 'cmp_abbr'));
+    // Show ID and abbreviation of the company.
+    $table->addColumn(new CompanyTableColumn(C::WRD_ID_COMPANY));
 
-    // Show role name.
-    $table->addColumn(new TextTableColumn('Role', 'rol_name'));
+    // Show ID and name of the role.
+    $table->addColumn(new RoleTableColumn(C::WRD_ID_ROLE));
 
     echo $table->getHtmlTable($roles);
   }

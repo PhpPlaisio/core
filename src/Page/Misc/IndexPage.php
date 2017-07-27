@@ -3,13 +3,13 @@
 namespace SetBased\Abc\Core\Page\Misc;
 
 use SetBased\Abc\Abc;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
  * The home page.
  */
-class IndexPage extends CorePage
+class IndexPage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

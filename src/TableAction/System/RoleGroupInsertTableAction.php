@@ -1,23 +1,25 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
-namespace SetBased\Abc\Core\TableColumn\Company;
+namespace SetBased\Abc\Core\TableAction\System;
 
-use SetBased\Abc\Core\Page\Company\RoleDetailsPage;
-use SetBased\Abc\Core\TableColumn\DetailsIconTableColumn;
+use SetBased\Abc\Core\Page\System\RoleGroupInsertPage;
+use SetBased\Abc\Core\TableAction\InsertItemTableAction;
 
 //----------------------------------------------------------------------------------------------------------------------
 /**
- * Table column with icon link to page with information about a role.
+ * Table action for inserting a role group.
  */
-class RoleDetailsIconTableColumn extends DetailsIconTableColumn
+class RoleGroupInsertTableAction extends InsertItemTableAction
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * Object constructor.
    */
-  public function getUrl($row)
+  public function __construct()
   {
-    return RoleDetailsPage::getUrl($row['cmp_id'], $row['rol_id']);
+    $this->url = RoleGroupInsertPage::getUrl();
+
+    $this->title = 'Create role group';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

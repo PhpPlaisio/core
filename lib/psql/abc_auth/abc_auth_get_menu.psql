@@ -11,15 +11,18 @@ create procedure abc_auth_get_menu( in p_cmp_id @aut_company.cmp_id%type@
 reads sql data
 -- type: rows
 begin
-  select distinct mnu.mnu_id        mnu_id
-  ,               mnu.pag_id        pag_id
-  ,               mnu.mnu_level     mnu_level
-  ,               mnu.mnu_group     mnu_group
+  select distinct mnu.mnu_id
+  ,               mnu.mnu_level
+  ,               mnu.mnu_group
   ,               wd1.wdt_text      mnu_text
-  ,               mnu.mnu_link      mnu_link
+  ,               mnu.mnu_link
+
+  ,               pag.pag_id
+  ,               pag.pag_alias
   from       AUT_MENU          mnu
   inner join AUT_PRO_PAG       app  on  app.pag_id = mnu.pag_id and
                                         app.pro_id = p_pro_id
+  inner join AUT_PAGE          pag  on  pag.pag_id = mnu.pag_id
   inner join BBL_WORD_TEXT     wd1  on  wd1.wrd_id = mnu.wrd_id and
                                         wd1.lan_id = p_lan_id
   -- where app.cmp_id_id = p_cmp_id

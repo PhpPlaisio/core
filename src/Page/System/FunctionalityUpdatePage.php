@@ -19,13 +19,6 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
    */
   private $details;
 
-  /**
-   * The ID of the functionality.
-   *
-   * @var int
-   */
-  private $funId;
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.

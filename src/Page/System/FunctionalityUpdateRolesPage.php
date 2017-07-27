@@ -3,12 +3,11 @@
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
-use SetBased\Abc\Babel;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\Control\CoreButtonControl;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Form\SlatControlFactory\SystemFunctionalityUpdateRolesSlatControlFactory;
-use SetBased\Abc\Core\Page\CorePage;
+use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\LouverControl;
@@ -21,7 +20,7 @@ use SetBased\Abc\Table\TableRow\TextTableRow;
 /**
  * Page for granting/revoking access to/from a functionality to roles.
  */
-class FunctionalityUpdateRolesPage extends CorePage
+class FunctionalityUpdateRolesPage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -94,8 +93,8 @@ class FunctionalityUpdateRolesPage extends CorePage
    */
   private function createForm()
   {
-    // Get all available pages.
-    $pages = Abc::$DL->abcSystemFunctionalityGetAvailableRoles($this->funId);
+    // Get all available roles.
+    $roles = Abc::$DL->abcSystemFunctionalityGetAvailableRoles($this->funId, $this->lanId);
 
     // Create form.
     $this->form = new CoreForm();
@@ -111,7 +110,7 @@ class FunctionalityUpdateRolesPage extends CorePage
     // Add submit button.
     $button = new CoreButtonControl('');
     $submit = new SubmitControl('submit');
-    $submit->setValue(Babel::getWord(C::WRD_ID_BUTTON_UPDATE));
+    $submit->setValue(Abc::$babel->getWord(C::WRD_ID_BUTTON_UPDATE));
     $button->addFormControl($submit);
     $this->form->addSubmitHandler($button, 'handleForm');
 
@@ -120,7 +119,7 @@ class FunctionalityUpdateRolesPage extends CorePage
     $louver->addClass('overview_table');
     $louver->setRowFactory($factory);
     $louver->setFooterControl($button);
-    $louver->setData($pages);
+    $louver->setData($roles);
     $louver->populate();
 
     // Add the lover control to the form.

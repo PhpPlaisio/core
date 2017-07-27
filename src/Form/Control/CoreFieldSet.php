@@ -2,7 +2,7 @@
 //----------------------------------------------------------------------------------------------------------------------
 namespace SetBased\Abc\Core\Form\Control;
 
-use SetBased\Abc\Babel;
+use SetBased\Abc\Abc;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\ResetControl;
 use SetBased\Abc\Form\Control\SubmitControl;
@@ -46,7 +46,7 @@ class CoreFieldSet extends FieldSet
                             $resetName = 'reset'
   )
   {
-    $this->buttonControl = new CoreButtonControl('');
+    $this->buttonControl = new CoreButtonControl();
 
     // Create submit button.
     $submit = new SubmitControl($submitName);
@@ -89,7 +89,7 @@ class CoreFieldSet extends FieldSet
     }
 
     $input = new SubmitControl($name);
-    $input->setValue((is_int($wrdId)) ? Babel::getWord($wrdId) : $wrdId);
+    $input->setValue((is_int($wrdId)) ? Abc::$babel->getWord($wrdId) : $wrdId);
     $this->buttonControl->addFormControl($input);
 
     return $input;
@@ -129,7 +129,7 @@ class CoreFieldSet extends FieldSet
     $ret .= '<tbody>';
     foreach ($this->controls as $control)
     {
-      if ($control!=$this->buttonControl)
+      if ($control!==$this->buttonControl)
       {
         $ret .= '<tr>';
         $ret .= '<th>';
