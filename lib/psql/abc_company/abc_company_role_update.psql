@@ -1,17 +1,19 @@
 /**
  * Updates the details of a role.
  *
- * @param p_cmp_id     The company ID.
- * @param p_rol_id     The rol ID of the role to be updated.
- * @param p_rlg_id     The rol ID of the role group.
- * @param p_rol_name   The new name of the role.
- * @param p_rol_weight The new weight of the role.
+ * @param p_cmp_id     The company ID (safeguard).
+ * @param p_rol_id     The ID of the role to be updated.
+ * @param p_rlg_id     The ID of the role group.
+ * @param p_rol_name   The name of the role.
+ * @param p_rol_weight The weight of the role.
+ * @param p_rol_label  The label of the role.
  */
-create procedure abc_company_role_update( in p_cmp_id     @aut_company.cmp_id%type@,
-                                          in p_rol_id     @aut_role.rol_id%type@,
-                                          in p_rlg_id     @aut_role.rlg_id%type@,
-                                          in p_rol_name   @aut_role.rol_name%type@,
-                                          in p_rol_weight @aut_role.rol_weight%type@ )
+create procedure abc_company_role_update(in p_cmp_id     @aut_company.cmp_id%type@,
+                                         in p_rol_id     @aut_role.rol_id%type@,
+                                         in p_rlg_id     @aut_role.rlg_id%type@,
+                                         in p_rol_name   @aut_role.rol_name%type@,
+                                         in p_rol_weight @aut_role.rol_weight%type@,
+                                         in p_rol_label  @aut_role.rol_label%type@)
 modifies sql data
 -- type: none
 begin
@@ -19,6 +21,7 @@ begin
   set rlg_id     = p_rlg_id
   ,   rol_name   = p_rol_name
   ,   rol_weight = p_rol_weight
+  ,   rol_label  = p_rol_label
   where cmp_id = p_cmp_id
   and   rol_id = p_rol_id
   ;

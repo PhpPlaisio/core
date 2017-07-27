@@ -5,7 +5,6 @@ namespace SetBased\Abc\Core\Page\Company;
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for inserting a new role.
  */
@@ -21,6 +20,7 @@ class RoleInsertPage extends RoleBasePage
 
     $this->buttonWrdId = C::WRD_ID_BUTTON_INSERT;
   }
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL for this page.
@@ -48,7 +48,8 @@ class RoleInsertPage extends RoleBasePage
     $this->rolId = Abc::$DL->abcCompanyRoleInsert($this->targetCmpId,
                                                   $values['rlg_id'],
                                                   $values['rol_name'],
-                                                  $values['rol_weight']);
+                                                  $values['rol_weight'],
+                                                  $values['rol_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

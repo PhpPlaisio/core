@@ -15,8 +15,6 @@ use SetBased\Abc\Table\TableColumn\TextTableColumn;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
-//----------------------------------------------------------------------------------------------------------------------
-
 /**
  * Page with information about a role.
  */
@@ -31,7 +29,6 @@ class RoleDetailsPage extends CompanyPage
   protected $rolId;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    */
@@ -140,11 +137,14 @@ class RoleDetailsPage extends CompanyPage
     // Show ID of the role.
     NumericTableRow::addRow($table, 'ID', $details['rol_id'], '%d');
 
-    // Show the name og the role.
+    // Show name.
     TextTableRow::addRow($table, 'Role', $details['rol_name']);
 
-    // Show the weight of the role.
+    // Show weight.
     NumericTableRow::addRow($table, 'Weight', $details['rol_weight'], '%d');
+
+    // Show label.
+    TextTableRow::addRow($table, 'Label', $details['rol_label']);
 
     echo $table->getHtmlTable();
   }

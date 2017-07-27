@@ -5,7 +5,7 @@
 /*  FileName : abc.ecm                                                            */
 /*  Platform : MySQL 5                                                            */
 /*  Version  : Concept                                                            */
-/*  Date     : zondag 14 mei 2017                                                 */
+/*  Date     : donderdag 27 juli 2017                                             */
 /*================================================================================*/
 /*================================================================================*/
 /* CREATE TABLES                                                                  */
@@ -312,6 +312,7 @@ CREATE TABLE `AUT_ROLE` (
   `rlg_id` SMALLINT UNSIGNED NOT NULL,
   `rol_weight` SMALLINT NOT NULL,
   `rol_name` VARCHAR(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `rol_label` VARCHAR(50) CHARACTER SET ascii COLLATE ascii_general_ci,
   CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`rol_id`)
 );
 

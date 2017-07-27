@@ -11,7 +11,6 @@ use SetBased\Abc\Core\TableColumn\Company\RoleUpdateIconTableColumn;
 use SetBased\Abc\Core\TableColumn\System\RoleGroupTableColumn;
 use SetBased\Abc\Table\TableColumn\NumericTableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page with an overview of all roles of the target company.
  */
@@ -54,6 +53,9 @@ class RoleOverviewPage extends CompanyPage
 
     // Show the weight of the role.
     $table->addColumn(new NumericTableColumn('Weight', 'rol_weight'));
+
+    // Show the label of the role.
+    $table->addColumn(new NumericTableColumn('Label', 'rol_label'));
 
     // Add link to the update the role.
     $table->addColumn(new RoleUpdateIconTableColumn());

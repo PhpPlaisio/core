@@ -14,6 +14,7 @@ begin
   select rol.rol_id
   ,      rol.rol_weight
   ,      rol.rol_name
+  ,      rol.rol_label
 
   ,      rlg.rlg_id
   ,      wd2.wdt_text   rlg_name
