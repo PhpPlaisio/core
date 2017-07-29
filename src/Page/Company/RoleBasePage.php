@@ -9,7 +9,6 @@ use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\HttpHeader;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Abstract parent page for inserting and updating details of a role for the target company.
  */
@@ -77,18 +76,22 @@ abstract class RoleBasePage extends CompanyPage
     $roleGroups = Abc::$DL->abcSystemRoleGroupGetAll($this->lanId);
     $input      = new SelectControl('rlg_id');
     $input->setOptions($roleGroups, 'rlg_id', 'rlg_name');
-    $this->form->addFormControl($input, 'Role Group');
+    $this->form->addFormControl($input, 'Role Group', true);
 
-    // Input for Company name.
+    // Input for name.
     $input = new TextControl('rol_name');
     $input->setAttrMaxLength(C::LEN_ROL_NAME);
-    $this->form->addFormControl($input, 'Name');
+    $this->form->addFormControl($input, 'Name', true);
 
-    // Input for comment.
+    // Input for weight.
     $input = new TextControl('rol_weight');
     $input->setAttrMaxLength(C::LEN_ROL_WEIGHT);
     $this->form->addFormControl($input, 'Weight');
-    // XXX numeric
+
+    // Input for label.
+    $input = new TextControl('rol_label');
+    $input->setAttrMaxLength(C::LEN_ROL_LABEL);
+    $this->form->addFormControl($input, 'Label');
 
     // Create a submit button.
     $this->form->addSubmitButton($this->buttonWrdId, 'handleForm');

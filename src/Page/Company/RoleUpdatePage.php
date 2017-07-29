@@ -5,7 +5,6 @@ namespace SetBased\Abc\Core\Page\Company;
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for updating the details of a role.
  */
@@ -66,7 +65,8 @@ class RoleUpdatePage extends RoleBasePage
                                    $this->rolId,
                                    $values['rlg_id'],
                                    $values['rol_name'],
-                                   $values['rol_weight']);
+                                   $values['rol_weight'],
+                                   $values['rol_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
