@@ -92,7 +92,7 @@ abstract class CompanyPage extends TabPage
   {
     if ($this->targetCmpId)
     {
-      $this->appendPageTitle($this->companyDetails['cmp_abbr']);
+      Abc::$assets->appendPageTitle($this->companyDetails['cmp_abbr']);
     }
     else
     {

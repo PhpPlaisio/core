@@ -56,7 +56,7 @@ class ModuleUpdateCompaniesPage extends TabPage
 
     $this->details = Abc::$DL->abcSystemModuleGetDetails($this->modId, $this->lanId);
 
-    $this->appendPageTitle($this->details['mdl_name']);
+    Abc::$assets->appendPageTitle($this->details['mdl_name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

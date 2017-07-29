@@ -74,9 +74,9 @@ abstract class TabPage extends CorePage
       $this->enableW3cValidator();
     }
 
-    Abc::getInstance()->setPageTitle(Abc::getInstance()->getPageGroupTitle().
-                                     ' - '.
-                                     Abc::getInstance()->getPageTitle());
+    Abc::$assets->setPageTitle(Abc::getInstance()->getPageGroupTitle().
+                               ' - '.
+                               Abc::$assets->getPageTitle());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
