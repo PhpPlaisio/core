@@ -17,7 +17,7 @@
     "setbased/abc-form-louver": "^0.10.0",
     "setbased/abc-html": "^1.1.0",
     "setbased/abc-http-header": "^1.0.0",
-    "setbased/abc-page-core": "^0.9.0",
+    "setbased/abc-page-core": "^0.9.1",
     "setbased/abc-table-overview": "^0.10.1",
     "setbased/abc-table-detail": "^0.9.0"
   },
