@@ -19,7 +19,6 @@
 </td>
 <td>
 <a href="https://packagist.org/packages/setbased/abc-core"><img src="https://poser.pugx.org/setbased/abc-core/v/stable" alt="Latest Stable Version"/></a><br/>
-<a href="https://www.versioneye.com/user/projects/5725d284ba37ce0031fc2227"><img src="https://www.versioneye.com/user/projects/5725d284ba37ce0031fc2227/badge.svg?style=flat" alt="Dependency Status"/></a>
 </td>
 <td>
 <a href="https://scrutinizer-ci.com/g/SetBased/php-abc-core/?branch=master"><img src="https://scrutinizer-ci.com/g/SetBased/php-abc-core/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"/></a><br/>
