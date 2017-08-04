@@ -49,7 +49,7 @@ class WordGroupDetailsPage extends BabelPage
 
     $this->details = Abc::$DL->bblWordGroupGetDetails($this->wdgId);
 
-    $this->appendPageTitle($this->details['wdg_name']);
+    Abc::$assets->appendPageTitle($this->details['wdg_name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

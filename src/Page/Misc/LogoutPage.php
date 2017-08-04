@@ -31,16 +31,7 @@ class LogoutPage extends CorePage
    */
   public function echoPage()
   {
-    $hostname = Abc::$canonicalHostnameResolver->getCanonicalHostname();
-
-    Abc::$DL->abcSessionLogout(Abc::getInstance()->getSesId(), $_SERVER['REMOTE_ADDR']);
-
-    // Unset session and CSRF cookies.
-    setcookie('ses_session_token', false, false, '/', $hostname, true, true);
-    setcookie('ses_csrf_token', false, false, '/', $hostname, true, false);
-
-    session_start();
-    session_destroy();
+    Abc::$session->logout();
 
     HttpHeader::redirectSeeOther('/');
   }

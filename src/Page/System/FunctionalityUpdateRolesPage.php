@@ -56,7 +56,7 @@ class FunctionalityUpdateRolesPage extends TabPage
 
     $this->details = Abc::$DL->abcSystemFunctionalityGetDetails($this->funId, $this->lanId);
 
-    $this->appendPageTitle($this->details['fun_name']);
+    Abc::$assets->appendPageTitle($this->details['fun_name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

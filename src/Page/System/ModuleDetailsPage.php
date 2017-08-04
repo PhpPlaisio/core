@@ -47,7 +47,7 @@ class ModuleDetailsPage extends TabPage
 
     $this->details = Abc::$DL->abcSystemModuleGetDetails($this->mdlId, $this->lanId);
 
-    $this->appendPageTitle($this->details['mdl_name']);
+    Abc::$assets->appendPageTitle($this->details['mdl_name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
