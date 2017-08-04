@@ -5,7 +5,7 @@
 /*  FileName : abc.ecm                                                            */
 /*  Platform : MySQL 5                                                            */
 /*  Version  : Concept                                                            */
-/*  Date     : donderdag 27 juli 2017                                             */
+/*  Date     : zaterdag 5 augustus 2017                                           */
 /*================================================================================*/
 /*================================================================================*/
 /* CREATE TABLES                                                                  */
@@ -72,87 +72,6 @@ CREATE TABLE `AUT_CONFIG_VALUE` (
 )
 engine=innodb;
 
-CREATE TABLE `AUT_PROFILE` (
-  `pro_id` SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
-  `cmp_id` SMALLINT UNSIGNED NOT NULL,
-  `pro_flags` INT UNSIGNED NOT NULL,
-  `pro_rol_ids` VARCHAR(100) CHARACTER SET ascii,
-  CONSTRAINT `PK_AUT_PROFILE` PRIMARY KEY (`pro_id`)
-);
-
-/*
-COMMENT ON COLUMN `AUT_PROFILE`.`pro_flags`
-The aggregated flags of the roles of this profile.
-*/
-
-/*
-COMMENT ON COLUMN `AUT_PROFILE`.`pro_rol_ids`
-The natrual key of a profile: a space sparated list of the roles of this profile.
-*/
-
-CREATE TABLE `BBL_WORD_GROUP` (
-  `wdg_id` TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
-  `wdg_name` VARCHAR(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `wdg_label` VARCHAR(30) CHARACTER SET ascii COLLATE ascii_general_ci,
-  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`wdg_id`)
-);
-
-CREATE TABLE `BBL_WORD` (
-  `wrd_id` SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
-  `wdg_id` TINYINT UNSIGNED NOT NULL,
-  `wrd_modified` DATETIME NOT NULL,
-  `wrd_comment` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci,
-  `wrd_label` VARCHAR(50) CHARACTER SET ascii COLLATE ascii_general_ci,
-  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`wrd_id`),
-  CONSTRAINT `wrd_label` UNIQUE (`wrd_label`)
-);
-
-CREATE TABLE `BBL_LANGUAGE` (
-  `lan_id` TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
-  `wrd_id` SMALLINT UNSIGNED NOT NULL,
-  `lan_code` VARCHAR(8) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `lan_locale` VARCHAR(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `lan_date_format_full` VARCHAR(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `lan_date_format_abbr1` VARCHAR(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `lan_date_format_abbr2` VARCHAR(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `lan_date_format_compact` VARCHAR(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `lan_date_format_compact_weekday_abbr` VARCHAR(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `lan_date_time_format_full` VARCHAR(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`lan_id`)
-);
-
-CREATE TABLE `AUT_USER` (
-  `usr_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-  `cmp_id` SMALLINT UNSIGNED NOT NULL,
-  `lan_id` TINYINT UNSIGNED NOT NULL,
-  `pro_id` SMALLINT UNSIGNED,
-  `usr_name` VARCHAR(64) CHARACTER SET utf8 COLLATE utf8_general_ci,
-  `usr_password_hash` VARCHAR(60) CHARACTER SET ascii COLLATE ascii_bin,
-  `usr_anonymous` BOOL,
-  `usr_blocked` BOOL DEFAULT 0 NOT NULL,
-  `usr_last_login` DATETIME,
-  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`usr_id`),
-  CONSTRAINT `usr_name` UNIQUE (`cmp_id`, `usr_name`)
-);
-
-/*
-COMMENT ON COLUMN `AUT_USER`.`usr_anonymous`
-If set this user is an anonymous user. Per company there can be only one anonymous user.
-*/
-
-CREATE TABLE `AUT_SESSION` (
-  `ses_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-  `cmp_id` SMALLINT UNSIGNED NOT NULL,
-  `usr_id` INTEGER UNSIGNED NOT NULL,
-  `ses_session_token` VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin,
-  `ses_csrf_token` VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin,
-  `ses_start` DATETIME NOT NULL,
-  `ses_last_request` DATETIME NOT NULL,
-  `ses_number_of_requests` SMALLINT(5) DEFAULT 0 NOT NULL,
-  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`ses_id`),
-  CONSTRAINT `ses_session_token` UNIQUE (`ses_session_token`)
-);
-
 CREATE TABLE `AUT_CROSS_DOMAIN_REDIRECT` (
   `cdr_token1` VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
   `cdr_token2` VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
@@ -183,6 +102,23 @@ The description of this flag.
 COMMENT ON COLUMN `AUT_FLAG`.`rfl_function`
 The bitwise function for aggregating this flag.
 */
+
+CREATE TABLE `BBL_WORD_GROUP` (
+  `wdg_id` TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  `wdg_name` VARCHAR(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `wdg_label` VARCHAR(30) CHARACTER SET ascii COLLATE ascii_general_ci,
+  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`wdg_id`)
+);
+
+CREATE TABLE `BBL_WORD` (
+  `wrd_id` SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  `wdg_id` TINYINT UNSIGNED NOT NULL,
+  `wrd_modified` DATETIME NOT NULL,
+  `wrd_comment` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci,
+  `wrd_label` VARCHAR(50) CHARACTER SET ascii COLLATE ascii_general_ci,
+  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`wrd_id`),
+  CONSTRAINT `wrd_label` UNIQUE (`wrd_label`)
+);
 
 CREATE TABLE `AUT_MODULE` (
   `mdl_id` SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
@@ -282,6 +218,24 @@ CREATE TABLE `AUT_PAGE_COMPANY` (
 )
 engine=innodb;
 
+CREATE TABLE `AUT_PROFILE` (
+  `pro_id` SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  `cmp_id` SMALLINT UNSIGNED NOT NULL,
+  `pro_flags` INT UNSIGNED NOT NULL,
+  `pro_rol_ids` VARCHAR(100) CHARACTER SET ascii,
+  CONSTRAINT `PK_AUT_PROFILE` PRIMARY KEY (`pro_id`)
+);
+
+/*
+COMMENT ON COLUMN `AUT_PROFILE`.`pro_flags`
+The aggregated flags of the roles of this profile.
+*/
+
+/*
+COMMENT ON COLUMN `AUT_PROFILE`.`pro_rol_ids`
+The natrual key of a profile: a space sparated list of the roles of this profile.
+*/
+
 CREATE TABLE `AUT_PRO_PAG` (
   `pag_id` SMALLINT UNSIGNED NOT NULL,
   `pro_id` SMALLINT UNSIGNED NOT NULL,
@@ -347,6 +301,39 @@ CREATE TABLE `AUT_ROL_FUN` (
   CONSTRAINT `SECONDARY` UNIQUE (`fun_id`, `rol_id`)
 )
 engine=innodb;
+
+CREATE TABLE `BBL_LANGUAGE` (
+  `lan_id` TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  `wrd_id` SMALLINT UNSIGNED NOT NULL,
+  `lan_code` VARCHAR(8) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `lan_locale` VARCHAR(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `lan_date_format_full` VARCHAR(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `lan_date_format_abbr1` VARCHAR(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `lan_date_format_abbr2` VARCHAR(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `lan_date_format_compact` VARCHAR(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `lan_date_format_compact_weekday_abbr` VARCHAR(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `lan_date_time_format_full` VARCHAR(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`lan_id`)
+);
+
+CREATE TABLE `AUT_USER` (
+  `usr_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
+  `cmp_id` SMALLINT UNSIGNED NOT NULL,
+  `lan_id` TINYINT UNSIGNED NOT NULL,
+  `pro_id` SMALLINT UNSIGNED,
+  `usr_name` VARCHAR(64) CHARACTER SET utf8 COLLATE utf8_general_ci,
+  `usr_password_hash` VARCHAR(60) CHARACTER SET ascii COLLATE ascii_bin,
+  `usr_anonymous` BOOL,
+  `usr_blocked` BOOL DEFAULT 0 NOT NULL,
+  `usr_last_login` DATETIME,
+  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`usr_id`),
+  CONSTRAINT `usr_name` UNIQUE (`cmp_id`, `usr_name`)
+);
+
+/*
+COMMENT ON COLUMN `AUT_USER`.`usr_anonymous`
+If set this user is an anonymous user. Per company there can be only one anonymous user.
+*/
 
 CREATE TABLE `AUT_USR_ROL` (
   `cmp_id` SMALLINT UNSIGNED NOT NULL,
@@ -453,21 +440,9 @@ CREATE INDEX `IX_AUT_CONFIG2` ON `AUT_CONFIG` (`ccl_id`);
 
 CREATE INDEX `CFG_ID` ON `AUT_CONFIG_VALUE` (`cfg_id`);
 
-CREATE INDEX `IX_AUT_PROFILE1` ON `AUT_PROFILE` (`cmp_id`);
-
-CREATE UNIQUE INDEX `IX_AUT_PROFILE2` ON `AUT_PROFILE` (`pro_rol_ids`);
+CREATE INDEX `IX_AUT_CROSS_DOMAIN_REDIRECT1` ON `AUT_CROSS_DOMAIN_REDIRECT` (`ses_id`);
 
 CREATE INDEX `wdg_id` ON `BBL_WORD` (`wdg_id`);
-
-CREATE INDEX `wrd_id` ON `BBL_LANGUAGE` (`wrd_id`);
-
-CREATE INDEX `cmp_id` ON `AUT_USER` (`cmp_id`);
-
-CREATE INDEX `IX_AUT_USER1` ON `AUT_USER` (`pro_id`);
-
-CREATE INDEX `lan_id` ON `AUT_USER` (`lan_id`);
-
-CREATE INDEX `IX_AUT_CROSS_DOMAIN_REDIRECT1` ON `AUT_CROSS_DOMAIN_REDIRECT` (`ses_id`);
 
 CREATE INDEX `IX_AUT_MODULE1` ON `AUT_MODULE` (`wrd_id`);
 
@@ -499,6 +474,10 @@ CREATE INDEX `IX_AUT_PAGE_COMPANY1` ON `AUT_PAGE_COMPANY` (`pag_id`);
 
 CREATE INDEX `IX_AUT_PAGE_COMPANY2` ON `AUT_PAGE_COMPANY` (`cmp_id`);
 
+CREATE INDEX `IX_AUT_PROFILE1` ON `AUT_PROFILE` (`cmp_id`);
+
+CREATE UNIQUE INDEX `IX_AUT_PROFILE2` ON `AUT_PROFILE` (`pro_rol_ids`);
+
 CREATE INDEX `IX_AUT_PRO_PAG1` ON `AUT_PRO_PAG` (`pag_id`, `pro_id`);
 
 CREATE INDEX `IX_FK_AUT_ROLE_GROUP1` ON `AUT_ROLE_GROUP` (`wrd_id`);
@@ -514,6 +493,14 @@ CREATE INDEX `IX_AUT_PRO_ROL3` ON `AUT_PRO_ROL` (`cmp_id`);
 CREATE UNIQUE INDEX `IX_AUT_ROL_FLG1` ON `AUT_ROL_FLG` (`rol_id`, `rfl_id`);
 
 CREATE INDEX `IX_AUT_ROL_FUN3` ON `AUT_ROL_FUN` (`cmp_id`);
+
+CREATE INDEX `wrd_id` ON `BBL_LANGUAGE` (`wrd_id`);
+
+CREATE INDEX `cmp_id` ON `AUT_USER` (`cmp_id`);
+
+CREATE INDEX `IX_AUT_USER1` ON `AUT_USER` (`pro_id`);
+
+CREATE INDEX `lan_id` ON `AUT_USER` (`lan_id`);
 
 CREATE INDEX `cmp_id` ON `AUT_USR_ROL` (`cmp_id`);
 
@@ -575,41 +562,16 @@ ALTER TABLE `AUT_CONFIG_VALUE`
   ADD CONSTRAINT `AUT_CONFIG_VALUE_ibfk_2`
   FOREIGN KEY (`cfg_id`) REFERENCES `AUT_CONFIG` (`cfg_id`);
 
-ALTER TABLE `AUT_PROFILE`
-  ADD CONSTRAINT `FK_AUT_PROFILE_AUT_COMPANY`
-  FOREIGN KEY (`cmp_id`) REFERENCES `AUT_COMPANY` (`cmp_id`);
+ALTER TABLE `AUT_CROSS_DOMAIN_REDIRECT`
+  ADD CONSTRAINT `FK_AUT_CROSS_DOMAIN_REDIRECT_ABC_AUTH_SESSION`
+  FOREIGN KEY (`ses_id`) REFERENCES `ABC_AUTH_SESSION` (`ses_id`)
+  ON DELETE CASCADE;
 
 ALTER TABLE `BBL_WORD`
   ADD CONSTRAINT `BBL_WORD_ibfk_1`
   FOREIGN KEY (`wdg_id`) REFERENCES `BBL_WORD_GROUP` (`wdg_id`)
   ON UPDATE NO ACTION
   ON DELETE NO ACTION;
-
-ALTER TABLE `BBL_LANGUAGE`
-  ADD CONSTRAINT `FK_BBL_LANGUAGE_BBL_WORD`
-  FOREIGN KEY (`wrd_id`) REFERENCES `BBL_WORD` (`wrd_id`);
-
-ALTER TABLE `AUT_USER`
-  ADD CONSTRAINT `AUT_USER_ibfk_1`
-  FOREIGN KEY (`cmp_id`) REFERENCES `AUT_COMPANY` (`cmp_id`)
-  ON UPDATE NO ACTION
-  ON DELETE NO ACTION;
-
-ALTER TABLE `AUT_USER`
-  ADD CONSTRAINT `FK_AUT_USER_AUT_PROFILE`
-  FOREIGN KEY (`pro_id`) REFERENCES `AUT_PROFILE` (`pro_id`)
-  ON DELETE SET NULL;
-
-ALTER TABLE `AUT_USER`
-  ADD CONSTRAINT `AUT_USER_ibfk_2`
-  FOREIGN KEY (`lan_id`) REFERENCES `BBL_LANGUAGE` (`lan_id`)
-  ON UPDATE NO ACTION
-  ON DELETE NO ACTION;
-
-ALTER TABLE `AUT_CROSS_DOMAIN_REDIRECT`
-  ADD CONSTRAINT `FK_AUT_CROSS_DOMAIN_REDIRECT_AUT_SESSION`
-  FOREIGN KEY (`ses_id`) REFERENCES `AUT_SESSION` (`ses_id`)
-  ON DELETE CASCADE;
 
 ALTER TABLE `AUT_MODULE`
   ADD CONSTRAINT `FK_AUT_MODULE_BBL_WORD`
@@ -687,6 +649,10 @@ ALTER TABLE `AUT_PAGE_COMPANY`
   ADD CONSTRAINT `FK_AUT_PAGE_COMPANY_AUT_PAGE`
   FOREIGN KEY (`pag_id`) REFERENCES `AUT_PAGE` (`pag_id`);
 
+ALTER TABLE `AUT_PROFILE`
+  ADD CONSTRAINT `FK_AUT_PROFILE_AUT_COMPANY`
+  FOREIGN KEY (`cmp_id`) REFERENCES `AUT_COMPANY` (`cmp_id`);
+
 ALTER TABLE `AUT_PRO_PAG`
   ADD CONSTRAINT `FK_AUT_PRO_PAG_AUT_PAGE`
   FOREIGN KEY (`pag_id`) REFERENCES `AUT_PAGE` (`pag_id`)
@@ -743,6 +709,27 @@ ALTER TABLE `AUT_ROL_FUN`
 ALTER TABLE `AUT_ROL_FUN`
   ADD CONSTRAINT `FK_AUT_ROL_FUN_AUT_ROLE`
   FOREIGN KEY (`rol_id`) REFERENCES `AUT_ROLE` (`rol_id`);
+
+ALTER TABLE `BBL_LANGUAGE`
+  ADD CONSTRAINT `FK_BBL_LANGUAGE_BBL_WORD`
+  FOREIGN KEY (`wrd_id`) REFERENCES `BBL_WORD` (`wrd_id`);
+
+ALTER TABLE `AUT_USER`
+  ADD CONSTRAINT `AUT_USER_ibfk_1`
+  FOREIGN KEY (`cmp_id`) REFERENCES `AUT_COMPANY` (`cmp_id`)
+  ON UPDATE NO ACTION
+  ON DELETE NO ACTION;
+
+ALTER TABLE `AUT_USER`
+  ADD CONSTRAINT `FK_AUT_USER_AUT_PROFILE`
+  FOREIGN KEY (`pro_id`) REFERENCES `AUT_PROFILE` (`pro_id`)
+  ON DELETE SET NULL;
+
+ALTER TABLE `AUT_USER`
+  ADD CONSTRAINT `AUT_USER_ibfk_2`
+  FOREIGN KEY (`lan_id`) REFERENCES `BBL_LANGUAGE` (`lan_id`)
+  ON UPDATE NO ACTION
+  ON DELETE NO ACTION;
 
 ALTER TABLE `AUT_USR_ROL`
   ADD CONSTRAINT `AUT_USR_ROL_ibfk_1`

@@ -28,9 +28,7 @@ class IndexPage extends TabPage
    */
   public function echoPage()
   {
-    $abc = Abc::getInstance();
-
-    if ($abc->isAnonymous())
+    if (Abc::$session->isAnonymous())
     {
       $this->showAnonymousPage();
     }

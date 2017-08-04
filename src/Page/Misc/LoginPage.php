@@ -187,83 +187,32 @@ class LoginPage extends CorePage
    */
   private function login()
   {
-    $abc      = Abc::getInstance();
-    $hostname = Abc::$canonicalHostnameResolver->getCanonicalHostname();
-
     $values = $this->form->getValues();
 
     // Phase 1: Validate the user is allowed to login (except for password validation).
-    $response1 = Abc::$DL->abcSessionLogin1($abc->getSesId(), $values['usr_name'], $values['cmp_abbr']);
-    $lgr_id    = $response1['lgr_id'];
+    $response = Abc::$DL->abcSessionLogin1(Abc::$session->getSesId(), $values['usr_name'], $values['cmp_abbr']);
+    $lgr_id   = $response['lgr_id'];
 
     if ($lgr_id==C::LGR_ID_GRANTED)
     {
       // Phase 2: So far, user is allowed to login. Last validation: verify password.
-      $match = Password::passwordVerify($values['usr_password'], $response1['usr_password_hash']);
+      $match = Password::passwordVerify($values['usr_password'], $response['usr_password_hash']);
       if ($match!==true) $lgr_id = C::LGR_ID_WRONG_PASSWORD;
     }
 
-    // Phase 3: Log the login attempt and set session.
-    $response3 = Abc::$DL->abcSessionLogin3($abc->getSesId(),
-                                            $response1['cmp_id'],
-                                            $response1['usr_id'],
-                                            $lgr_id,
-                                            $values['usr_name'],
-                                            $values['cmp_abbr'],
-                                            $_SERVER['REMOTE_ADDR']);
-
-    if ($response3['lgr_id']==C::LGR_ID_GRANTED)
+    if ($lgr_id==C::LGR_ID_GRANTED)
     {
       // The user has logged on successfully.
+      Abc::$session->login($response['usr_id']);
 
       // First verify that the hash is sill up to date.
-      if (Password::passwordNeedsRehash($response1['usr_password_hash']))
+      if (Password::passwordNeedsRehash($response['usr_password_hash']))
       {
         $hash = Password::passwordHash($values['usr_password']);
         Abc::$DL->abcUserPasswordUpdateHash($this->cmpId, $this->usrId, $hash);
       }
 
-      $domain_redirect = false;
-      if (!$abc::$domainResolver->getDomain())
-      {
-        // Redirect browser to $values['cmp_abbr'].onzerelaties.net
-        $parts = explode('.', $_SERVER['SERVER_NAME']);
-        if (count($parts)==3 && $parts[0]=='www' && $_SERVER['HTTPS']=='on')
-        {
-          // Unset session and CSRF cookies.
-          setcookie('ses_session_token', false, false, '/', $hostname, true, true);
-          setcookie('ses_csrf_token', false, false, '/', $hostname, true, false);
-          /*
-          // Get tokens for cross domain redirect.
-          $tokens = Abc::$DL->abcSessionGetRedirectTokens( $this->myRequestBus->getSesId() );
-
-          // Set a (temporary) cookie that is valid at SLD.
-          setcookie( 'cdr_token1', $tokens['cdr_token1'], false, '/', $parts[1].'.'.$parts[2], true, true );
-
-          // Set token to be used in JavaScript.
-          $values    = $this->form->getValues();
-          $host_name = mb_strtolower( $values['cmp_abbr'] ).'.'.$parts[1].'.'.$parts[2];
-          $url       = 'https://'.$host_name.DomainRedirectPage::getUrl( $this->redirect );
-
-          $this->appendJavaScriptLine( 'PageMiscLogin.ourCdrToken2="'.$tokens['cdr_token2'].'";' ); // xxx escaping
-          $this->appendJavaScriptLine( 'PageMiscLogin.ourCdrUrl="'.$url.'";' ); // xxx escaping
-
-          $domain_redirect = true;
-          */
-        }
-      }
-
-      if (!$domain_redirect)
-      {
-        // Set the secure token.
-        if ($_SERVER['HTTPS']=='on')
-        {
-          setcookie('ses_session_token', $response3['ses_session_token'], false, '/', $hostname, true, true);
-          setcookie('ses_csrf_token', $response3['ses_csrf_token'], false, '/', $hostname, true, false);
-        }
-
-        HttpHeader::redirectSeeOther(($this->redirect) ? $this->redirect : '/');
-      }
+      HttpHeader::redirectSeeOther(($this->redirect) ? $this->redirect : '/');
 
       return true;
     }
