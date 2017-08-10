@@ -12,7 +12,7 @@
     "gajus/dindent": "^2.0.0",
     "setbased/exception": "^1.0.0",
     "setbased/abc": "^0.10.0",
-    "setbased/abc-babel": "^0.9.1",
+    "setbased/abc-babel": "^0.10.1",
     "setbased/abc-form": "^0.10.0",
     "setbased/abc-form-louver": "^0.10.0",
     "setbased/abc-html": "^1.1.0",
