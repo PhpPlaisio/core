@@ -5,7 +5,7 @@
 /*  FileName : abc.ecm                                                            */
 /*  Platform : MySQL 5                                                            */
 /*  Version  : Concept                                                            */
-/*  Date     : zaterdag 5 augustus 2017                                           */
+/*  Date     : zondag 13 augustus 2017                                            */
 /*================================================================================*/
 /*================================================================================*/
 /* CREATE TABLES                                                                  */
@@ -306,6 +306,7 @@ CREATE TABLE `BBL_LANGUAGE` (
   `lan_id` TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
   `wrd_id` SMALLINT UNSIGNED NOT NULL,
   `lan_code` VARCHAR(8) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `lan_lang` VARCHAR(12) NOT NULL,
   `lan_locale` VARCHAR(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `lan_date_format_full` VARCHAR(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `lan_date_format_abbr1` VARCHAR(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
