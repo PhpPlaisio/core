@@ -3,12 +3,10 @@
  *
  * Phase 1 validates that the company exists and the user exists and is allowed to login.
  *
- * @param p_ses_id   The ID of the session.
  * @param p_usr_name The account name of the user.
  * @param p_cmp_abbr The abbreviation of the company.
  */
-create procedure abc_session_login1(in p_ses_id   @aut_session.ses_id%type@,
-                                    in p_usr_name @aut_user.usr_name%type@,
+create procedure abc_session_login1(in p_usr_name @aut_user.usr_name%type@,
                                     in p_cmp_abbr @aut_company.cmp_abbr%type@)
 modifies sql data
 -- type: row1

@@ -190,7 +190,7 @@ class LoginPage extends CorePage
     $values = $this->form->getValues();
 
     // Phase 1: Validate the user is allowed to login (except for password validation).
-    $response = Abc::$DL->abcSessionLogin1(Abc::$session->getSesId(), $values['usr_name'], $values['cmp_abbr']);
+    $response = Abc::$DL->abcSessionLogin1($values['usr_name'], $values['cmp_abbr']);
     $lgr_id   = $response['lgr_id'];
 
     if ($lgr_id==C::LGR_ID_GRANTED)
