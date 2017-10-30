@@ -11,7 +11,7 @@
     "php": ">=7.0.0",
     "gajus/dindent": "^2.0.0",
     "setbased/exception": "^1.0.0",
-    "setbased/abc": "^0.10.5",
+    "setbased/abc": "^0.10.15",
     "setbased/abc-babel": "^0.10.2",
     "setbased/abc-form": "^0.10.0",
     "setbased/abc-form-louver": "^0.10.0",
