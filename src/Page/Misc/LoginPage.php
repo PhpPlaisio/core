@@ -187,7 +187,7 @@ class LoginPage extends CorePage
       if (Password::passwordNeedsRehash($response['usr_password_hash']))
       {
         $hash = Password::passwordHash($values['usr_password']);
-        Abc::$DL->abcUserPasswordUpdateHash($this->cmpId, $this->usrId, $hash);
+        Abc::$DL->abcUserPasswordUpdateHash($this->cmpId, $response['usr_id'], $hash);
       }
 
       HttpHeader::redirectSeeOther($this->redirect);
