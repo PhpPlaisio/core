@@ -2,10 +2,8 @@
  * Selects the roles that are granted access to a page.
  *
  * @param p_pag_id The ID of the page.
- * @param p_lan_id The ID of the language for linguistic entities.
  */
-create procedure abc_system_page_get_granted_roles( in p_pag_id @aut_page.pag_id%type@,
-                                                    in p_lan_id @bbl_word.wrd_id%type@ )
+create procedure abc_system_page_get_granted_roles(in p_pag_id @aut_page.pag_id%type@)
 reads sql data
 -- type: rows
 begin

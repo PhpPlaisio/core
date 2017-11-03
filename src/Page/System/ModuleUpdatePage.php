@@ -61,7 +61,7 @@ class ModuleUpdatePage extends ModuleBasePage
     if ($values['mdl_name'])
     {
       // New module name. Insert word en retrieve wrd_id of the new word.
-      $wrd_id = Abc::$DL->bblWordInsertWord(C::WDG_ID_MODULE, null, null, $values['mdl_name']);
+      $wrd_id = Abc::$DL->abcBabelWordInsertWord(C::WDG_ID_MODULE, null, null, $values['mdl_name']);
     }
     else
     {

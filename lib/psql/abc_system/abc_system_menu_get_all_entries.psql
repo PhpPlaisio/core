@@ -3,7 +3,7 @@
  *
  * @param p_lan_id The ID of the language for linguistic entities.
  */
-create procedure abc_system_menu_get_all_entries( in p_lan_id @bbl_language.lan_id%type@ )
+create procedure abc_system_menu_get_all_entries(in p_lan_id @abc_babel_language.lan_id%type@)
 reads sql data
 -- type: rows
 begin
@@ -14,9 +14,9 @@ begin
   ,      mnu.mnu_link
   ,      mnu.mnu_group
   ,      mnu.mnu_weight
-  from       AUT_MENU      mnu
-  inner join BBL_WORD_TEXT wd1  on  wd1.wrd_id = mnu.wrd_id and
-                                    wd1.lan_id = p_lan_id
+  from       AUT_MENU            mnu
+  inner join ABC_BABEL_WORD_TEXT wd1  on  wd1.wrd_id = mnu.wrd_id and
+                                          wd1.lan_id = p_lan_id
   order by mnu.mnu_group
   ,        mnu.mnu_weight
   ;

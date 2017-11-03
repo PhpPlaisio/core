@@ -42,7 +42,7 @@ class RoleGroupInsertPage extends RoleGroupBasePage
 
     if ($values['rlg_name']!==null)
     {
-      $wrdId = Abc::$DL->bblWordInsertWord(C::WDG_ID_ROLE_GROUP, null, null, $values['rlg_name']);
+      $wrdId = Abc::$DL->abcBabelWordInsertWord(C::WDG_ID_ROLE_GROUP, null, null, $values['rlg_name']);
     }
     else
     {

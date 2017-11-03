@@ -53,7 +53,7 @@ class WordGroupOverviewPage extends BabelPage
    */
   private function showWordGroups()
   {
-    $groups = Abc::$DL->bblWordGroupGetAll($this->actLanId);
+    $groups = Abc::$DL->abcBabelWordGroupGetAll($this->actLanId);
 
     $table = new CoreOverviewTable();
 

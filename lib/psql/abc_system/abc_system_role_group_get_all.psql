@@ -3,7 +3,7 @@
  *
  * @param p_lan_id The ID of the language use for linguistic entities.
  */
-create procedure abc_system_role_group_get_all(in p_lan_id @bbl_language.lan_id%type@)
+create procedure abc_system_role_group_get_all(in p_lan_id @abc_babel_language.lan_id%type@)
 reads sql data
 -- type: rows
 begin
@@ -12,9 +12,9 @@ begin
   ,      rlg.rlg_weight
   ,      rlg.rlg_label
   ,      wdt.wdt_text     rlg_name
-  from       AUT_ROLE_GROUP rlg
-  inner join BBL_WORD_TEXT  wdt  on  wdt.wrd_id = rlg.wrd_id and
-                                     wdt.lan_id = p_lan_id
+  from       AUT_ROLE_GROUP      rlg
+  inner join ABC_BABEL_WORD_TEXT wdt  on  wdt.wrd_id = rlg.wrd_id and
+                                          wdt.lan_id = p_lan_id
   order by rlg.rlg_weight
   ;
 end

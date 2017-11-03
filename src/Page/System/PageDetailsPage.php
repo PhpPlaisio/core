@@ -137,7 +137,7 @@ class PageDetailsPage extends TabPage
    */
   private function showGrantedRoles()
   {
-    $roles = Abc::$DL->abcSystemPageGetGrantedRoles($this->targetPagId, $this->lanId);
+    $roles = Abc::$DL->abcSystemPageGetGrantedRoles($this->targetPagId);
 
     $table = new CoreOverviewTable();
 

@@ -5,16 +5,13 @@ namespace SetBased\Abc\Core\Page\Misc;
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Form\Control\ConstantControl;
 use SetBased\Abc\Form\Control\PasswordControl;
-use SetBased\Abc\Form\Control\SpanControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\Form;
 use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Helper\Password;
 use SetBased\Abc\Page\CorePage;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for logging on the website.
  */

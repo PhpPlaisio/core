@@ -1,0 +1,17 @@
+/**
+ * Deletes a text.
+ *
+ * @param p_txt_id The ID of the text to be be deleted.
+ */
+create procedure abc_babel_text_delete_text(in p_txt_id @abc_babel_text.txt_id%type@)
+modifies sql data
+-- type: none
+begin
+  delete from ABC_BABEL_TEXT_TEXT
+  where wrd_id = p_txt_id
+  ;
+
+  delete from ABC_BABEL_TEXT
+  where wrd_id = p_txt_id
+  ;
+end

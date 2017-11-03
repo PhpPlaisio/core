@@ -7,15 +7,15 @@
  * @param p_wrd_comment The new comment of the word.
  * @param p_wdt_text    The new value of the word.
  */
-create procedure bbl_word_update_details( in p_wrd_id      @bbl_word.wrd_id%type@,
-                                          in p_wdg_id      @bbl_word.wdg_id%type@,
-                                          in p_wrd_label   @bbl_word.wrd_label%type@,
-                                          in p_wrd_comment @bbl_word.wrd_comment%type@,
-                                          in p_wdt_text    @bbl_word_text.wdt_text%type@ )
+create procedure abc_babel_word_update_details(in p_wrd_id      @abc_babel_word.wrd_id%type@,
+                                               in p_wdg_id      @abc_babel_word.wdg_id%type@,
+                                               in p_wrd_label   @abc_babel_word.wrd_label%type@,
+                                               in p_wrd_comment @abc_babel_word.wrd_comment%type@,
+                                               in p_wdt_text    @abc_babel_word_text.wdt_text%type@)
 modifies sql data
 -- type: none
 begin
-  update BBL_WORD
+  update ABC_BABEL_WORD
   set wdg_id      = p_wdg_id
   ,   wrd_label   = p_wrd_label
   ,   wrd_comment = p_wrd_comment
@@ -23,8 +23,7 @@ begin
   ;
 
   -- XXX Only when text has been modified.
-  -- XXX Add entry to translate history.
-  update BBL_WORD_TEXT
+  update ABC_BABEL_WORD_TEXT
   set wdt_text = p_wdt_text
   where wrd_id = p_wrd_id
   and   lan_id = @LAN_ID_BABEL_REFERENCE@

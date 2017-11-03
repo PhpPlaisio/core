@@ -5,9 +5,9 @@
  * @param p_mdl_id The ID on the module.
  * @param p_wrd_id The ID of the word of the name of the functionality.
  */
-create procedure abc_system_functionality_update_details( in p_fun_id @aut_functionality.fun_id%type@,
-                                                          in p_mdl_id @aut_functionality.mdl_id%type@,
-                                                          in p_wrd_id @bbl_word.wrd_id%type@ )
+create procedure abc_system_functionality_update_details(in p_fun_id @aut_functionality.fun_id%type@,
+                                                         in p_mdl_id @aut_functionality.mdl_id%type@,
+                                                         in p_wrd_id @abc_babel_word.wrd_id%type@)
 modifies sql data
 -- type: none
 begin

@@ -7,15 +7,15 @@
  * @param p_txt_comment The new comment of the text.
  * @param p_ttt_text    The new value of the text.
  */
-create procedure bbl_text_update_details( in p_txt_id      @bbl_text.txt_id%type@,
-                                          in p_ttg_id      @bbl_text.ttg_id%type@,
-                                          in p_txt_label   @bbl_text.txt_label%type@,
-                                          in p_txt_comment @bbl_text.txt_comment%type@,
-                                          in p_ttt_text    @bbl_text_text.ttt_text%type@ )
+create procedure abc_babel_text_update_details(in p_txt_id      @abc_babel_text.txt_id%type@,
+                                               in p_ttg_id      @abc_babel_text.ttg_id%type@,
+                                               in p_txt_label   @abc_babel_text.txt_label%type@,
+                                               in p_txt_comment @abc_babel_text.txt_comment%type@,
+                                               in p_ttt_text    @abc_babel_text_text.ttt_text%type@ )
 modifies sql data
 -- type: none
 begin
-  update BBL_TEXT
+  update ABC_BABEL_TEXT
   set ttg_id      = p_ttg_id
   ,   txt_label   = p_txt_label
   ,   txt_comment = p_txt_comment
@@ -23,8 +23,7 @@ begin
   ;
 
   -- XXX Only when text has been modified.
-  -- XXX Add entry to translate history.
-  update BBL_TEXT_TEXT
+  update ABC_BABEL_TEXT_TEXT
   set ttt_text = p_ttt_text
   where txt_id = p_txt_id
   and   lan_id = @LAN_ID_BABEL_REFERENCE@

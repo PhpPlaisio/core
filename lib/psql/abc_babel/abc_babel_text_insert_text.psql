@@ -1,0 +1,43 @@
+/**
+ * Inserts a text.
+ *
+ * @param p_ttg_id      The ID of the text group of the new word.
+ * @param p_txt_label   The label of the new text.
+ * @param p_txt_comment The comment on the new text.
+ * @param p_ttt_text    The value of the new text.
+ */
+create procedure abc_babel_text_insert_text(in p_ttg_id      @abc_babel_text_group.ttg_id%type@,
+                                            in p_txt_label   @abc_babel_text.txt_label%type@,
+                                            in p_txt_comment @abc_babel_text.txt_comment%type@,
+                                            in p_ttt_text    @abc_babel_text_text.ttt_text%type@)
+modifies sql data
+-- type: singleton1
+begin
+  declare l_txt_id @abc_babel_text.txt_id%type@;
+
+  insert into ABC_BABEL_TEXT( ttg_id
+  ,                           txt_label
+  ,                           txt_comment
+  ,                           txt_timestamp )
+  values( p_ttg_id
+  ,       p_txt_label
+  ,       p_txt_comment
+  ,       current_timestamp() )
+  ;
+
+  set l_txt_id = last_insert_id();
+
+  insert into ABC_BABEL_TEXT_TEXT( txt_id
+  ,                                lan_id
+  ,                                ttt_text
+  ,                                ttt_timestamp )
+  select l_txt_id
+  ,      lan_id
+  ,      p_ttt_text
+  ,      if(lan_id=@LAN_ID_BABEL_REFERENCE@, current_timestamp(), '1970-01-01 12:00:00')
+  from   ABC_BABEL_LANGUAGE
+  ;
+
+  select l_txt_id txt_id
+  ;
+end

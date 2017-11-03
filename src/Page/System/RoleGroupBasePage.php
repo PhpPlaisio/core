@@ -75,7 +75,7 @@ abstract class RoleGroupBasePage extends TabPage
     $this->form = new CoreForm();
 
     // Create select box for (known) role group names.
-    $titles = Abc::$DL->bblWordGroupGetAllWords(C::WDG_ID_ROLE_GROUP, $this->lanId);
+    $titles = Abc::$DL->abcBabelWordGroupGetAllWords(C::WDG_ID_ROLE_GROUP, $this->lanId);
     $input  = new SelectControl('wrd_id');
     $input->setOptions($titles, 'wrd_id', 'wdt_text');
     $input->setEmptyOption();

@@ -51,7 +51,7 @@ abstract class BabelPage extends TabPage
    */
   public function selectLanguage()
   {
-    $languages = Abc::$DL->bblLanguageGetAllLanguages($this->refLanId);
+    $languages = Abc::$DL->abcBabelLanguageGetAllLanguages($this->refLanId);
 
     // If translator is authorized for 1 language return immediately.
     if (count($languages)==1)

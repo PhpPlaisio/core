@@ -1,19 +1,19 @@
 /**
  * Inserts a new menu entry.
  *
- * @param p_wrd_id        The ID of the word for the menu item title.
- * @param p_pag_id        The ID of the page where te menu item links to.
- * @param p_mnu_level     The level of the menu item.
- * @param p_mnu_group     The group to which the menu item belongs.
- * @param p_mnu_weight    The weight of the menu item inside its group.
- * @param p_mnu_link      Additional query string for the hyper link of the menu item.
+ * @param p_wrd_id     The ID of the word for the menu item title.
+ * @param p_pag_id     The ID of the page where te menu item links to.
+ * @param p_mnu_level  The level of the menu item.
+ * @param p_mnu_group  The group to which the menu item belongs.
+ * @param p_mnu_weight The weight of the menu item inside its group.
+ * @param p_mnu_link   Additional query string for the hyper link of the menu item.
  */
-create procedure abc_system_menu_insert( in p_wrd_id       @bbl_word.wrd_id%type@,
-                                         in p_pag_id       @aut_menu.pag_id%type@,
-                                         in p_mnu_level    @aut_menu.pag_id%type@,
-                                         in p_mnu_group    @aut_menu.pag_id%type@,
-                                         in p_mnu_weight   @aut_menu.pag_id%type@,
-                                         in p_mnu_link     @aut_menu.mnu_link%type@ )
+create procedure abc_system_menu_insert(in p_wrd_id     @abc_babel_word.wrd_id%type@,
+                                        in p_pag_id     @aut_menu.pag_id%type@,
+                                        in p_mnu_level  @aut_menu.pag_id%type@,
+                                        in p_mnu_group  @aut_menu.pag_id%type@,
+                                        in p_mnu_weight @aut_menu.pag_id%type@,
+                                        in p_mnu_link   @aut_menu.mnu_link%type@)
 modifies sql data
 -- type: none
 begin

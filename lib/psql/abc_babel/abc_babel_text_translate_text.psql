@@ -1,0 +1,31 @@
+/**
+ * Translates a text.
+ *
+ * @param p_txt_id   The ID of text that has been translated.
+ * @param p_lan_id   The ID of the language in which the text has been translated.
+ * @param p_ttt_text The translated text.
+ */
+create procedure abc_babel_text_translate_text(in p_txt_id   @abc_babel_text_text.txt_id%type@
+,                                              in p_lan_id   @abc_babel_text_text.lan_id%type@
+,                                              in p_ttt_text @abc_babel_text_text.ttt_text%type@)
+modifies sql data
+-- type: none
+begin
+  -- Update text in the specified language.
+  update ABC_BABEL_TEXT_TEXT
+  set    ttt_text      = p_ttt_text
+  ,      ttt_timestamp = current_timestamp()
+  where  txt_id = p_txt_id
+  and    lan_id = p_lan_id
+  ;
+
+  if (p_lan_id=@LAN_ID_BABEL_REFERENCE@) then
+    -- Update text in all languages for which the text hasn't been translated yet.
+    update ABC_BABEL_TEXT_TEXT
+    set    ttt_text      =  p_ttt_text
+    where  txt_id        =  p_txt_id
+    and    ttt_timestamp =  '1900-01-01 00:00:00'
+    and    lan_id        <> @LAN_ID_BABEL_REFERENCE@
+    ;
+  end if;
+end

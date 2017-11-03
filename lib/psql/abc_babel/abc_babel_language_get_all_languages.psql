@@ -1,0 +1,18 @@
+/**
+ * Selects all languages.
+ *
+ * @param p_lan_id The ID of the language for linguistic entities.
+ */
+create procedure abc_babel_language_get_all_languages(in p_lan_id @abc_babel_language.lan_id%type@)
+reads sql data
+-- type: rows
+begin
+  select lan.lan_id
+  ,      lan.lan_locale
+  ,      wd1.wdt_text        lan_name
+  from       ABC_BABEL_LANGUAGE  lan
+  inner join ABC_BABEL_WORD_TEXT wd1  on  wd1.wrd_id = lan.wrd_id and
+                                          wd1.lan_id = p_lan_id
+  order by wd1.wdt_text
+  ;
+end
