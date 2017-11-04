@@ -29,7 +29,7 @@ begin
   values( p_wdg_id
   ,       p_wrd_label
   ,       p_wrd_comment
-  ,       current_timestamp() )
+  ,       now() )
   ;
 
   set l_wrd_id = last_insert_id();
@@ -41,7 +41,7 @@ begin
   select l_wrd_id
   ,      lan_id
   ,      p_wdt_text
-  ,      if(lan_id=@LAN_ID_BABEL_REFERENCE@, current_timestamp(), '1970-01-01 12:00:00')
+  ,      if(lan_id=@LAN_ID_BABEL_REFERENCE@, now(), convert_tz('1970-01-01 12:00:00', '+00:00', @@time_zone))
   from   ABC_BABEL_LANGUAGE
   ;
 

@@ -3,7 +3,7 @@
  *
  * @param p_wdg_id The ID of the word group.
  */
-create procedure abc_babel_word_group_get_details(in p_wdg_id @ABC_BABEL_WORD_GROUP.wdg_id%type@)
+create procedure abc_babel_word_group_get_details(in p_wdg_id @abc_babel_word_group.wdg_id%type@)
 reads sql data
 -- type: row1
 begin

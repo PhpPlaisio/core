@@ -4,8 +4,8 @@
  * @param p_wdg_name  The name of the word group.
  * @param p_wdg_label The label of the word group.
  */
-create procedure abc_babel_word_group_insert_details(in p_wdg_name  @ABC_BABEL_WORD_group.wdg_name%type@,
-                                                     in p_wdg_label @ABC_BABEL_WORD_group.wdg_label%type@)
+create procedure abc_babel_word_group_insert_details(in p_wdg_name  @abc_babel_word_group.wdg_name%type@,
+                                                     in p_wdg_label @abc_babel_word_group.wdg_label%type@)
 modifies sql data
 -- type: singleton1
 begin
