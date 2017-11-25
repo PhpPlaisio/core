@@ -55,7 +55,7 @@ class WordTranslatePage extends BabelPage
     $this->wrdId    = self::getCgiId('wrd', 'wrd');
     $this->redirect = self::getCgiUrl('redirect');
 
-    $this->details = Abc::$DL->bblWordGetDetails($this->wrdId, $this->actLanId);
+    $this->details = Abc::$DL->abcBabelWordGetDetails($this->wrdId, $this->actLanId);
 
     if (!isset($this->redirect))
     {
@@ -99,8 +99,8 @@ class WordTranslatePage extends BabelPage
    */
   private function createForm()
   {
-    $refLanguage = Abc::$DL->bblLanguageGetName($this->refLanId, $this->refLanId);
-    $actLanguage = Abc::$DL->bblLanguageGetName($this->actLanId, $this->refLanId);
+    $refLanguage = Abc::$DL->abcBabelLanguageGetName($this->refLanId, $this->refLanId);
+    $actLanguage = Abc::$DL->abcBabelLanguageGetName($this->actLanId, $this->refLanId);
 
     $this->form = new CoreForm();
 
@@ -162,7 +162,7 @@ class WordTranslatePage extends BabelPage
     // Return immediately when no form controls are changed.
     if (empty($changes)) return;
 
-    Abc::$DL->bblWordTranslateWord($this->usrId, $this->wrdId, $this->actLanId, $values['wdt_text']);
+    Abc::$DL->abcBabelWordTranslateWord($this->usrId, $this->wrdId, $this->actLanId, $values['wdt_text']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -72,7 +72,7 @@ abstract class FunctionalityBasePage extends TabPage
   private function createForm()
   {
     $modules = Abc::$DL->abcSystemModuleGetAll($this->lanId);
-    $words   = Abc::$DL->bblWordGroupGetAllWords(C::WDG_ID_FUNCTIONALITIES, $this->lanId);
+    $words   = Abc::$DL->abcBabelWordGroupGetAllWords(C::WDG_ID_FUNCTIONALITIES, $this->lanId);
 
     $this->form = new CoreForm();
 

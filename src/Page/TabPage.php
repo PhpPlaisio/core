@@ -74,7 +74,7 @@ abstract class TabPage extends CorePage
       $this->enableW3cValidator();
     }
 
-    Abc::$assets->setPageTitle(Abc::getInstance()->getPageGroupTitle().
+    Abc::$assets->setPageTitle(Abc::$abc->getPageGroupTitle().
                                ' - '.
                                Abc::$assets->getPageTitle());
   }
@@ -161,7 +161,7 @@ abstract class TabPage extends CorePage
    */
   protected function echoTabs()
   {
-    $pag_id_org = Abc::getInstance()->getPagIdOrg();
+    $pag_id_org = Abc::$abc->getPagIdOrg();
 
     $this->getPageTabs();
 
@@ -190,7 +190,7 @@ abstract class TabPage extends CorePage
   protected function getPageTabs()
   {
     $this->tabs = Abc::$DL->abcAuthGetPageTabs($this->cmpId,
-                                               Abc::getInstance()->getPtbId(),
+                                               Abc::$abc->getPtbId(),
                                                $this->proId,
                                                $this->lanId);
     foreach ($this->tabs as &$tab)
@@ -241,7 +241,7 @@ abstract class TabPage extends CorePage
   private function echoMainMenu()
   {
     $items       = Abc::$DL->abcAuthGetMenu($this->cmpId, $this->proId, $this->lanId);
-    $page_mnu_id = Abc::getInstance()->getMnuId();
+    $page_mnu_id = Abc::$abc->getMnuId();
 
     echo '<ul>';
     $last_group = 0;

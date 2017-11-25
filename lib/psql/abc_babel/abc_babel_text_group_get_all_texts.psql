@@ -1,0 +1,20 @@
+/**
+ * Selects all texts in a text group in alphabetical order.
+ *
+ * @param p_ttg_id The ID of the text group.
+ * @param p_lan_id The ID of the target language.
+ */
+create procedure abc_babel_text_group_get_all_texts(in p_ttg_id @abc_babel_text_group.ttg_id%type@,
+                                                    in p_lan_id @abc_babel_language.lan_id%type@)
+reads sql data
+-- type: rows
+begin
+  select txt.txt_id
+  ,      ttt.ttt_text
+  from       ABC_BABEL_TEXT      txt
+  inner join ABC_BABEL_TEXT_TEXT ttt  on  ttt.txt_id = txt.txt_id and
+                                          ttt.lan_id = p_lan_id_act
+  where txt.ttg_id = p_ttg_id
+  order by ttt.ttt_text
+  ;
+end

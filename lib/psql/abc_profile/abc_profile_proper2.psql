@@ -10,9 +10,9 @@ begin
 
   create temporary table TMP_PROFILE2
   (
-    cmp_id   @aut_profile.cmp_id%type@      not null,
-    usr_id   @aut_user.usr_id%type@         not null,
-    rol_ids  @aut_profile.pro_rol_ids%type@ not null,
+    cmp_id   @abc_auth_company.cmp_id%type@      not null,
+    usr_id   @abc_auth_user.usr_id%type@         not null,
+    rol_ids  @abc_auth_profile.pro_rol_ids%type@ not null,
     primary key(rol_ids)
   ) engine=myisam
   ;

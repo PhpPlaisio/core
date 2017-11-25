@@ -10,10 +10,10 @@ begin
 
   create temporary table TMP_PROFILE3
   (
-    pro_id   @aut_profile.pro_id%type@,
-    cmp_id   @aut_profile.cmp_id%type@,
-    usr_id   @aut_user.usr_id%type@,
-    rol_ids  @aut_profile.pro_rol_ids%type@
+    pro_id   @abc_auth_profile.pro_id%type@,
+    cmp_id   @abc_auth_company.cmp_id%type@,
+    usr_id   @abc_auth_user.usr_id%type@,
+    rol_ids  @abc_auth_profile.pro_rol_ids%type@
   ) engine=myisam
   ;
 
@@ -32,7 +32,7 @@ begin
     ,      null          usr_id
     ,      pro_rol_ids
     ,      1             src
-    from   AUT_PROFILE
+    from   ABC_AUTH_PROFILE
 
     union all
 
@@ -50,9 +50,9 @@ begin
 
 
   -- Insert new profiles
-  insert into AUT_PROFILE(cmp_id
-  ,                       pro_flags
-  ,                       pro_rol_ids)
+  insert into ABC_AUTH_PROFILE(cmp_id
+  ,                            pro_flags
+  ,                            pro_rol_ids)
   select cmp_id
   ,      0 -- xxx todo
   ,      rol_ids
@@ -62,9 +62,9 @@ begin
 
 
   -- Update user's profiles.
-  update     AUT_USER     usr
-  inner join TMP_PROFILE1 tmp  on  tmp.usr_id = usr.usr_id
-  inner join AUT_PROFILE  pro  on  pro.pro_rol_ids = tmp.rol_ids
+  update     ABC_AUTH_USER    usr
+  inner join TMP_PROFILE1     tmp  on  tmp.usr_id = usr.usr_id
+  inner join ABC_AUTH_PROFILE pro  on  pro.pro_rol_ids = tmp.rol_ids
   set usr.pro_id = pro.pro_id
   where pro.pro_id <> ifnull(usr.pro_id, 0)
   ;
@@ -72,8 +72,8 @@ begin
 
   -- Delete obsolete profiles.
   delete from pro
-  using      AUT_PROFILE  pro
-  inner join TMP_PROFILE3 tmp  on  tmp.pro_id = pro.pro_id
+  using      ABC_AUTH_PROFILE pro
+  inner join TMP_PROFILE3     tmp  on  tmp.pro_id = pro.pro_id
   ;
 end
 

@@ -74,7 +74,7 @@ abstract class PageBasePage extends TabPage
     $this->form = new CoreForm();
 
     // Create select box for (known) page titles.
-    $titles = Abc::$DL->bblWordGroupGetAllWords(C::WDG_ID_PAGE_TITLE, $this->lanId);
+    $titles = Abc::$DL->abcBabelWordGroupGetAllWords(C::WDG_ID_PAGE_TITLE, $this->lanId);
     $input  = new SelectControl('wrd_id');
     $input->setOptions($titles, 'wrd_id', 'wdt_text');
     $input->setEmptyOption();

@@ -37,8 +37,8 @@ class BabelWordTranslateSlatControlFactory extends SlatControlFactory
    */
   public function __construct($lanId, $targetLanId)
   {
-    $ref_language = Abc::$DL->bblLanguageGetName($lanId, $lanId);
-    $act_language = Abc::$DL->bblLanguageGetName($targetLanId, $lanId);
+    $ref_language = Abc::$DL->abcBabelLanguageGetName($lanId, $lanId);
+    $act_language = Abc::$DL->abcBabelLanguageGetName($targetLanId, $lanId);
 
     // Create slat joint for table column with word ID.
     $table_column = new NumericTableColumn('ID', 'wrd_id');

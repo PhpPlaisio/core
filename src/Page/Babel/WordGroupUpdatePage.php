@@ -28,7 +28,7 @@ class WordGroupUpdatePage extends WordGroupBasePage
     parent::__construct();
 
     $this->wdgId       = self::getCgiId('wdg', 'wdg');
-    $this->details     = Abc::$DL->bblWordGroupGetDetails($this->wdgId);
+    $this->details     = Abc::$DL->abcBabelWordGroupGetDetails($this->wdgId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -57,7 +57,7 @@ class WordGroupUpdatePage extends WordGroupBasePage
   {
     $values = $this->form->getValues();
 
-    Abc::$DL->bblWordGroupUpdateDetails($this->wdgId, $values['wdg_name'], $values['wdg_label']);
+    Abc::$DL->abcBabelWordGroupUpdateDetails($this->wdgId, $values['wdg_name'], $values['wdg_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

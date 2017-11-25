@@ -44,7 +44,7 @@ class WordGroupInsertPage extends WordGroupBasePage
   {
     $values = $this->form->getValues();
 
-    $this->wdgId = Abc::$DL->bblWordGroupInsertDetails($values['wdg_name'], $values['wdg_label']);
+    $this->wdgId = Abc::$DL->abcBabelWordGroupInsertDetails($values['wdg_name'], $values['wdg_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -13,7 +13,6 @@ use SetBased\Abc\Form\Control\SubmitControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\Form;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Form class for all forms in the core of ABC.
  */
@@ -114,12 +113,14 @@ class CoreForm extends Form
    *                              </ul>
    * @param string     $method    The name of method for handling the form submit.
    * @param string     $name      The name of the submit button.
+   * @param string     $class     The class(es) of the submit button.
    *
    * @return SubmitControl
    */
-  public function addSubmitButton($wrdId, $method, $name = 'submit')
+  public function addSubmitButton($wrdId, $method, $name = 'submit', $class = 'btn btn-success')
   {
     $control = $this->visibleFieldSet->addSubmitButton($wrdId, $name);
+    $control->addClass($class);
     $this->addSubmitHandler($control, $method);
 
     return $control;

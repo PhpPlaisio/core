@@ -5,16 +5,13 @@ namespace SetBased\Abc\Core\Page\Misc;
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Form\Control\ConstantControl;
 use SetBased\Abc\Form\Control\PasswordControl;
-use SetBased\Abc\Form\Control\SpanControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\Form;
 use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Helper\Password;
 use SetBased\Abc\Page\CorePage;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for logging on the website.
  */
@@ -43,7 +40,7 @@ class LoginPage extends CorePage
   {
     parent::__construct();
 
-    $this->redirect = self::getCgiUrl('redirect');
+    $this->redirect = self::getCgiUrl('redirect', '/');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -103,8 +100,6 @@ class LoginPage extends CorePage
    */
   private function createForm()
   {
-    $abc = Abc::getInstance();
-
     $this->form = new CoreForm('', false);
 
     // Input for user name.
@@ -117,26 +112,6 @@ class LoginPage extends CorePage
     $input->setAttrSize(C::LEN_USR_NAME);
     $input->setAttrMaxLength(C::LEN_PASSWORD);
     $this->form->addFormControl($input, 'Wachtwoord', true);
-
-    if ($abc::$domainResolver->getDomain())
-    {
-      // Show domain.
-      $input = new SpanControl('dummy');
-      $input->setInnerText(strtolower($abc::$domainResolver->getDomain()));
-      $this->form->addFormControl($input, 'Company');
-
-      // Constant for domain.
-      $input = new ConstantControl('cmp_abbr');
-      $input->setValue($abc::$domainResolver->getDomain());
-      $this->form->addFormControl($input);
-    }
-    else
-    {
-      // Input for domain.
-      $input = new TextControl('cmp_abbr');
-      $input->setAttrMaxLength(C::LEN_CMP_ABBR);
-      $this->form->addFormControl($input, 'Company', true);
-    }
 
     $this->form->addSubmitButton(C::WRD_ID_BUTTON_LOGIN, 'handleForm');
   }
@@ -190,7 +165,7 @@ class LoginPage extends CorePage
     $values = $this->form->getValues();
 
     // Phase 1: Validate the user is allowed to login (except for password validation).
-    $response = Abc::$DL->abcSessionLogin1(Abc::$session->getSesId(), $values['usr_name'], $values['cmp_abbr']);
+    $response = Abc::$DL->abcSessionLogin1($this->cmpId, $values['usr_name']);
     $lgr_id   = $response['lgr_id'];
 
     if ($lgr_id==C::LGR_ID_GRANTED)
@@ -209,10 +184,10 @@ class LoginPage extends CorePage
       if (Password::passwordNeedsRehash($response['usr_password_hash']))
       {
         $hash = Password::passwordHash($values['usr_password']);
-        Abc::$DL->abcUserPasswordUpdateHash($this->cmpId, $this->usrId, $hash);
+        Abc::$DL->abcUserPasswordUpdateHash($this->cmpId, $response['usr_id'], $hash);
       }
 
-      HttpHeader::redirectSeeOther(($this->redirect) ? $this->redirect : '/');
+      HttpHeader::redirectSeeOther($this->redirect);
 
       return true;
     }

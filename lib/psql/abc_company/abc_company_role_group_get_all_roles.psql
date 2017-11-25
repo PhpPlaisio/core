@@ -1,13 +1,11 @@
 /**
  * Selects all roles in a role group of a company.
  *
- * @param p_cmp_id The ID of the company.
+ * @param p_cmp_id The ID of the company (safeguard).
  * @param p_rlg_id The ID of the role group.
- * @param p_lan_id The ID of the language for linguistic entities.
  */
 create procedure abc_company_role_group_get_all_roles(in p_cmp_id @aut_role.cmp_id%type@,
-                                                      in p_rlg_id @aut_role.rlg_id%type@,
-                                                      in p_lan_id @bbl_language.lan_id%type@)
+                                                      in p_rlg_id @aut_role.rlg_id%type@)
 reads sql data
 -- type: rows
 begin

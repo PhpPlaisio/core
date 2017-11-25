@@ -8,7 +8,7 @@
  * @param p_rol_weight The weight of the role.
  * @param p_rol_label  The label of the role.
  */
-create procedure abc_company_role_update(in p_cmp_id     @aut_company.cmp_id%type@,
+create procedure abc_company_role_update(in p_cmp_id     @abc_auth_company.cmp_id%type@,
                                          in p_rol_id     @aut_role.rol_id%type@,
                                          in p_rlg_id     @aut_role.rlg_id%type@,
                                          in p_rol_name   @aut_role.rol_name%type@,

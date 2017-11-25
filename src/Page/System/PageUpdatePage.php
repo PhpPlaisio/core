@@ -62,7 +62,7 @@ class PageUpdatePage extends PageBasePage
 
     if ($values['pag_title'])
     {
-      $wrd_id = Abc::$DL->bblWordInsertWord(C::WDG_ID_PAGE_TITLE, null, null, $values['pag_title']);
+      $wrd_id = Abc::$DL->abcBabelWordInsertWord(C::WDG_ID_PAGE_TITLE, null, null, $values['pag_title']);
     }
     else
     {

@@ -1,0 +1,22 @@
+/**
+ * Selects all word groups.
+ *
+ * @param p_lan_id The ID of the target language.
+ */
+create procedure abc_babel_word_group_get_all(in p_lan_id @abc_babel_language.lan_id%type@)
+reads sql data
+-- type: rows
+begin
+  select wdg.wdg_id
+  ,      wdg.wdg_name
+  ,      count(wrd.wrd_id)                                 n1
+  ,      sum(if(wrd.wrd_timestamp>wdt.wdt_timestamp,1,0))  n2
+  from            ABC_BABEL_WORD_GROUP wdg
+  left outer join ABC_BABEL_WORD       wrd  on  wrd.wdg_id = wdg.wdg_id
+  left outer join ABC_BABEL_WORD_TEXT  wdt  on  wrd.wrd_id = wdt.wrd_id and
+                                                wdt.lan_id = p_lan_id
+  group by wdg.wdg_name
+  ,        wdg.wdg_id
+  order by wdg.wdg_name
+  ;
+end

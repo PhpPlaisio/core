@@ -69,7 +69,7 @@ class MenuUpdatePage extends MenuBasePage
 
     if ($values['mnu_title'])
     {
-      $wrd_id = Abc::$DL->bblWordInsertWord(C::WDG_ID_MENU, null, null, $values['mnu_title']);
+      $wrd_id = Abc::$DL->abcBabelWordInsertWord(C::WDG_ID_MENU, null, null, $values['mnu_title']);
     }
     else
     {

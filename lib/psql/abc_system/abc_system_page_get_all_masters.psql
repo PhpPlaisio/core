@@ -3,7 +3,7 @@
  *
  * @param p_lan_id The ID of the language for linguistic entities.
  */
-create procedure abc_system_page_get_all_masters( in p_lan_id @bbl_language.lan_id%type@ )
+create procedure abc_system_page_get_all_masters(in p_lan_id @abc_babel_language.lan_id%type@)
 reads sql data
 -- type: rows
 begin
@@ -15,13 +15,13 @@ begin
   ,      wd1.wdt_text           pag_title
   ,      wd2.wdt_text           mnu_name
   ,      ptb.ptb_label
-  from            AUT_PAGE      pag
-  inner join      BBL_WORD_TEXT wd1  on  wd1.wrd_id = pag.wrd_id and
-                                         wd1.lan_id = p_lan_id
-  left outer join AUT_PAGE_TAB  ptb  on  ptb.ptb_id = pag.ptb_id
-  left outer join AUT_MENU      mnu  on  pag.mnu_id = mnu.mnu_id
-  left outer join BBL_WORD_TEXT wd2  on  wd2.wrd_id = mnu.wrd_id and
-                                         wd2.lan_id = p_lan_id
+  from            AUT_PAGE            pag
+  inner join      ABC_BABEL_WORD_TEXT wd1  on  wd1.wrd_id = pag.wrd_id and
+                                               wd1.lan_id = p_lan_id
+  left outer join AUT_PAGE_TAB        ptb  on  ptb.ptb_id = pag.ptb_id
+  left outer join AUT_MENU            mnu  on  pag.mnu_id = mnu.mnu_id
+  left outer join ABC_BABEL_WORD_TEXT wd2  on  wd2.wrd_id = mnu.wrd_id and
+                                               wd2.lan_id = p_lan_id
   where pag.pag_id = pag.pag_id_org
   order by pag.pag_class
   ;

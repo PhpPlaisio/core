@@ -84,7 +84,7 @@ class CoreFieldSet extends FieldSet
     // If necessary create a button form control.
     if (!$this->buttonControl)
     {
-      $this->buttonControl = new CoreButtonControl('');
+      $this->buttonControl = new CoreButtonControl();
       $this->addFormControl($this->buttonControl);
     }
 

@@ -10,14 +10,14 @@
  * @param p_pag_label   The label of the new page.
  * @param p_pag_weight  The weight of the page inside a page group.
  */
-create procedure abc_system_page_insert_details( in p_wrd_id       @bbl_word.wrd_id%type@,
-                                                 in p_ptb_id       @aut_page_tab.ptb_id%type@,
-                                                 in p_pag_id_org   @aut_page.pag_id%type@,
-                                                 in p_mnu_id       @aut_menu.mnu_id%type@,
-                                                 in p_pag_alias    @aut_page.pag_alias%type@,
-                                                 in p_pag_class    @aut_page.pag_class%type@,
-                                                 in p_pag_label    @aut_page.pag_label%type@,
-                                                 in p_pag_weight   @aut_page.pag_weight%type@ )
+create procedure abc_system_page_insert_details(in p_wrd_id     @aut_page.wrd_id%type@,
+                                                in p_ptb_id     @aut_page.ptb_id%type@,
+                                                in p_pag_id_org @aut_page.pag_id%type@,
+                                                in p_mnu_id     @aut_page.mnu_id%type@,
+                                                in p_pag_alias  @aut_page.pag_alias%type@,
+                                                in p_pag_class  @aut_page.pag_class%type@,
+                                                in p_pag_label  @aut_page.pag_label%type@,
+                                                in p_pag_weight @aut_page.pag_weight%type@)
 modifies sql data
 -- type: singleton1
 begin

@@ -53,9 +53,9 @@ class WordDeletePage extends BabelPage
    */
   protected function echoTabContent()
   {
-    $details = Abc::$DL->bblWordGetDetails($this->wrdId, $this->lanId);
+    $details = Abc::$DL->abcBabelWordGetDetails($this->wrdId, $this->lanId);
 
-    Abc::$DL->bblWordDeleteWord($this->wrdId);
+    Abc::$DL->abcBabelWordDeleteWord($this->wrdId);
 
     HttpHeader::redirectSeeOther(WordGroupDetailsPage::getUrl($details['wdg_id'], $this->actLanId));
   }
