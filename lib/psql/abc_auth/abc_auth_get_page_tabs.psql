@@ -6,9 +6,9 @@
  * @param p_pro_id The ID of the profile of the user.
  * @param p_lan_id The ID of the language for linguistic entities.
  */
-create procedure abc_auth_get_page_tabs(in p_cmp_id @aut_company.cmp_id%type@,
+create procedure abc_auth_get_page_tabs(in p_cmp_id @abc_auth_company.cmp_id%type@,
                                         in p_ptb_id @aut_page_tab.ptb_id%type@,
-                                        in p_pro_id @aut_profile.pro_id%type@,
+                                        in p_pro_id @abc_auth_profile.pro_id%type@,
                                         in p_lan_id @abc_babel_language.lan_id%type@)
 reads sql data
 -- type: rows_with_key pag_id

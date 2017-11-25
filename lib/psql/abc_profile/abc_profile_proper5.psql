@@ -35,7 +35,7 @@ begin
     ,      apf.pag_id
     ,      2           src
     from       TMP_PROFILE2       tmp
-    inner join AUT_USER           usr  on  usr.usr_id = tmp.usr_id
+    inner join ABC_AUTH_USER      usr  on  usr.usr_id = tmp.usr_id
     inner join AUT_USR_ROL        aur  on  aur.usr_id = tmp.usr_id and
                                            curdate() between aur.aur_date_start
                                                      and     aur.aur_date_stop

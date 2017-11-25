@@ -7,9 +7,9 @@
  * @param p_lan_id    The ID of the language for linguistic entities.
  * @param p_pag_alias The alias for the request page.
  */
-create procedure abc_auth_get_page_info(in p_cmp_id    @aut_company.cmp_id%type@,
+create procedure abc_auth_get_page_info(in p_cmp_id    @abc_auth_company.cmp_id%type@,
                                         in p_pag_id    @aut_page.pag_id%type@,
-                                        in p_pro_id    @aut_profile.pro_id%type@,
+                                        in p_pro_id    @abc_auth_profile.pro_id%type@,
                                         in p_lan_id    @abc_babel_language.lan_id%type@,
                                         in p_pag_alias @aut_page.pag_alias%type@)
 reads sql data

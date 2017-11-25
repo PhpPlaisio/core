@@ -10,18 +10,20 @@
   "require": {
     "php": ">=7.0.0",
     "gajus/dindent": "^2.0.0",
-    "setbased/exception": "^1.0.0",
     "setbased/abc": "^0.10.18",
     "setbased/abc-babel-core": "^0.10.7",
-    "setbased/abc-helper-password": "^1.0.0",
+    "setbased/abc-company": "^1.0.0",
     "setbased/abc-exception": "^1.0.0",
     "setbased/abc-form": "^0.10.0",
     "setbased/abc-form-louver": "^0.10.0",
+    "setbased/abc-helper-password": "^1.0.0",
     "setbased/abc-html": "^1.4.0",
     "setbased/abc-http-header": "^1.1.0",
     "setbased/abc-page-core": "^0.10.3",
+    "setbased/abc-profile": "^1.0.0",
     "setbased/abc-table-overview": "^0.10.6",
-    "setbased/abc-table-detail": "^0.10.1"
+    "setbased/abc-user": "^1.0.0",
+    "setbased/exception": "^1.0.0"
   },
   "require-dev": {
     "phing/phing": "^2.0.0",

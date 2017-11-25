@@ -12,8 +12,8 @@ begin
 
   ,      rol.rol_id
   ,      rol.rol_name
-  from       AUT_ROLE    rol
-  inner join AUT_COMPANY cmp  on  cmp.cmp_id = rol.cmp_id
+  from       AUT_ROLE         rol
+  inner join ABC_AUTH_COMPANY cmp  on  cmp.cmp_id = rol.cmp_id
   where rol.rlg_id = p_rlg_id
   order by cmp.cmp_abbr
   ,        rol.rol_weight

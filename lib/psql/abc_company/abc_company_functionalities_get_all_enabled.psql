@@ -4,7 +4,7 @@
  * @param p_cmp_id The ID of the company.
  * @param p_lan_id The ID of the language for linguistic entities.
  */
-create procedure abc_company_functionalities_get_all_enabled(in p_cmp_id @aut_company.cmp_id%type@,
+create procedure abc_company_functionalities_get_all_enabled(in p_cmp_id @abc_auth_company.cmp_id%type@,
                                                              in p_lan_id @abc_babel_word.wrd_id%type@)
 reads sql data
 -- type: rows

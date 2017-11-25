@@ -8,7 +8,7 @@ begin
   select cmp_id
   ,      cmp_abbr
   ,      cmp_label
-  from   AUT_COMPANY
+  from   ABC_AUTH_COMPANY
   order by cmp_abbr
   ;
 end

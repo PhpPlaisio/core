@@ -1,5 +1,5 @@
 /**
- * Selects all roles including a flag indication the role is granted acces to a functionality.
+ * Selects all roles including a flag indication the role is granted access to a functionality.
  *
  * @param p_fun_id The ID of the functionality.
  * @param p_lan_id The ID of the language use for linguistic entities.
@@ -22,7 +22,7 @@ begin
   inner join      AUT_ROLE_GROUP      rlg  on  rlg.rlg_id = rol.rlg_id
   inner join      ABC_BABEL_WORD_TEXT wdt  on  wdt.wrd_id = rlg.wrd_id and
                                                wdt.lan_id = p_lan_id
-  inner join      AUT_COMPANY         cmp  on  cmp.cmp_id = rol.cmp_id
+  inner join      ABC_AUTH_COMPANY    cmp  on  cmp.cmp_id = rol.cmp_id
   left outer join AUT_ROL_FUN         arf  on  arf.rol_id = rol.rol_id and
                                                arf.fun_id = p_fun_id
   order by cmp.cmp_abbr

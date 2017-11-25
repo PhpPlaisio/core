@@ -2,21 +2,14 @@
 /* DDL SCRIPT                                                                     */
 /*================================================================================*/
 /*  Title    : ABC Framework                                                      */
-/*  FileName : abc.ecm                                                            */
+/*  FileName : abc-core.ecm                                                       */
 /*  Platform : MySQL 5                                                            */
 /*  Version  : Concept                                                            */
-/*  Date     : vrijdag 3 november 2017                                            */
+/*  Date     : zaterdag 25 november 2017                                          */
 /*================================================================================*/
 /*================================================================================*/
 /* CREATE TABLES                                                                  */
 /*================================================================================*/
-
-CREATE TABLE `AUT_COMPANY` (
-  `cmp_id` SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
-  `cmp_abbr` VARCHAR(15) NOT NULL,
-  `cmp_label` VARCHAR(20) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
-  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`cmp_id`)
-);
 
 CREATE TABLE `AUT_CONFIG_CLASS` (
   `ccl_id` SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
@@ -110,13 +103,6 @@ CREATE TABLE `AUT_FUNCTIONALITY` (
 )
 engine=innodb;
 
-CREATE TABLE `AUT_LOGIN_RESPONSE` (
-  `lgr_id` TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
-  `wrd_id` SMALLINT UNSIGNED NOT NULL,
-  `lgr_label` VARCHAR(40) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
-  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`lgr_id`)
-);
-
 CREATE TABLE `AUT_PAGE_TAB` (
   `ptb_id` TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
   `wrd_id` SMALLINT UNSIGNED NOT NULL,
@@ -193,24 +179,6 @@ CREATE TABLE `AUT_PAGE_COMPANY` (
 )
 engine=innodb;
 
-CREATE TABLE `AUT_PROFILE` (
-  `pro_id` SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
-  `cmp_id` SMALLINT UNSIGNED NOT NULL,
-  `pro_flags` INT UNSIGNED NOT NULL,
-  `pro_rol_ids` VARCHAR(100) CHARACTER SET ascii,
-  CONSTRAINT `PK_AUT_PROFILE` PRIMARY KEY (`pro_id`)
-);
-
-/*
-COMMENT ON COLUMN `AUT_PROFILE`.`pro_flags`
-The aggregated flags of the roles of this profile.
-*/
-
-/*
-COMMENT ON COLUMN `AUT_PROFILE`.`pro_rol_ids`
-The natrual key of a profile: a space sparated list of the roles of this profile.
-*/
-
 CREATE TABLE `AUT_PRO_PAG` (
   `pag_id` SMALLINT UNSIGNED NOT NULL,
   `pro_id` SMALLINT UNSIGNED NOT NULL,
@@ -277,25 +245,6 @@ CREATE TABLE `AUT_ROL_FUN` (
 )
 engine=innodb;
 
-CREATE TABLE `AUT_USER` (
-  `usr_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-  `cmp_id` SMALLINT UNSIGNED NOT NULL,
-  `lan_id` TINYINT UNSIGNED NOT NULL,
-  `pro_id` SMALLINT UNSIGNED,
-  `usr_name` VARCHAR(64) CHARACTER SET utf8 COLLATE utf8_general_ci,
-  `usr_password_hash` VARCHAR(60) CHARACTER SET ascii COLLATE ascii_bin,
-  `usr_anonymous` BOOL,
-  `usr_blocked` BOOL DEFAULT 0 NOT NULL,
-  `usr_last_login` DATETIME,
-  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`usr_id`),
-  CONSTRAINT `usr_name` UNIQUE (`cmp_id`, `usr_name`)
-);
-
-/*
-COMMENT ON COLUMN `AUT_USER`.`usr_anonymous`
-If set this user is an anonymous user. Per company there can be only one anonymous user.
-*/
-
 CREATE TABLE `AUT_USR_ROL` (
   `cmp_id` SMALLINT UNSIGNED NOT NULL,
   `usr_id` INTEGER UNSIGNED NOT NULL,
@@ -318,7 +267,6 @@ CREATE TABLE `LOG_EVENT` (
   `lev_id` INTEGER UNSIGNED AUTO_INCREMENT NOT NULL,
   `cmp_id` SMALLINT UNSIGNED NOT NULL,
   `let_id` TINYINT UNSIGNED NOT NULL,
-  `lgr_id` TINYINT UNSIGNED,
   `ses_id` INTEGER UNSIGNED NOT NULL,
   `usr_id` INTEGER UNSIGNED NOT NULL,
   `lev_datetime` DATETIME NOT NULL,
@@ -328,18 +276,6 @@ CREATE TABLE `LOG_EVENT` (
   CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`lev_id`)
 )
 engine=innodb;
-
-CREATE TABLE `LOG_LOGIN` (
-  `lli_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-  `cmp_id` SMALLINT UNSIGNED,
-  `lgr_id` TINYINT UNSIGNED NOT NULL,
-  `ses_id` INTEGER UNSIGNED,
-  `usr_id` INTEGER UNSIGNED,
-  `llg_datetime` DATETIME NOT NULL,
-  `llg_user_name` VARCHAR(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `llg_company_abbr` VARCHAR(15) CHARACTER SET ascii NOT NULL,
-  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`lli_id`)
-);
 
 /*================================================================================*/
 /* CREATE INDEXES                                                                 */
@@ -356,8 +292,6 @@ CREATE INDEX `IX_AUT_MODULE1` ON `AUT_MODULE` (`wrd_id`);
 CREATE INDEX `IX_AUT_FUNCTIONALITY1` ON `AUT_FUNCTIONALITY` (`mdl_id`);
 
 CREATE INDEX `IX_AUT_FUNCTIONALITY2` ON `AUT_FUNCTIONALITY` (`wrd_id`);
-
-CREATE INDEX `wrd_id` ON `AUT_LOGIN_RESPONSE` (`wrd_id`);
 
 CREATE INDEX `IX_AUT_PAGE_TAB1` ON `AUT_PAGE_TAB` (`wrd_id`);
 
@@ -381,10 +315,6 @@ CREATE INDEX `IX_AUT_PAGE_COMPANY1` ON `AUT_PAGE_COMPANY` (`pag_id`);
 
 CREATE INDEX `IX_AUT_PAGE_COMPANY2` ON `AUT_PAGE_COMPANY` (`cmp_id`);
 
-CREATE INDEX `IX_AUT_PROFILE1` ON `AUT_PROFILE` (`cmp_id`);
-
-CREATE UNIQUE INDEX `IX_AUT_PROFILE2` ON `AUT_PROFILE` (`pro_rol_ids`);
-
 CREATE INDEX `IX_AUT_PRO_PAG1` ON `AUT_PRO_PAG` (`pag_id`, `pro_id`);
 
 CREATE INDEX `IX_FK_AUT_ROLE_GROUP1` ON `AUT_ROLE_GROUP` (`wrd_id`);
@@ -401,12 +331,6 @@ CREATE UNIQUE INDEX `IX_AUT_ROL_FLG1` ON `AUT_ROL_FLG` (`rol_id`, `rfl_id`);
 
 CREATE INDEX `IX_AUT_ROL_FUN3` ON `AUT_ROL_FUN` (`cmp_id`);
 
-CREATE INDEX `cmp_id` ON `AUT_USER` (`cmp_id`);
-
-CREATE INDEX `IX_AUT_USER1` ON `AUT_USER` (`pro_id`);
-
-CREATE INDEX `lan_id` ON `AUT_USER` (`lan_id`);
-
 CREATE INDEX `cmp_id` ON `AUT_USR_ROL` (`cmp_id`);
 
 CREATE INDEX `WRD_ID` ON `LOG_EVENT_TYPE` (`wrd_id`);
@@ -415,29 +339,15 @@ CREATE INDEX `cmp_id` ON `LOG_EVENT` (`cmp_id`);
 
 CREATE INDEX `IX_LOG_EVENT1` ON `LOG_EVENT` (`ses_id`);
 
-CREATE INDEX `lgr_id` ON `LOG_EVENT` (`lgr_id`);
-
 CREATE INDEX `usr_id` ON `LOG_EVENT` (`usr_id`);
-
-CREATE INDEX `cmp_id` ON `LOG_LOGIN` (`cmp_id`);
-
-CREATE INDEX `lgr_id` ON `LOG_LOGIN` (`lgr_id`);
-
-CREATE INDEX `llg_date_time` ON `LOG_LOGIN` (`llg_datetime`);
-
-CREATE INDEX `llg_user_name` ON `LOG_LOGIN` (`llg_user_name`);
-
-CREATE INDEX `ses_id` ON `LOG_LOGIN` (`ses_id`);
-
-CREATE INDEX `usr_id` ON `LOG_LOGIN` (`usr_id`);
 
 /*================================================================================*/
 /* CREATE FOREIGN KEYS                                                            */
 /*================================================================================*/
 
 ALTER TABLE `AUT_CONFIG`
-  ADD CONSTRAINT `FK_AUT_CONFIG_AUT_COMPANY`
-  FOREIGN KEY (`cmp_id`) REFERENCES `AUT_COMPANY` (`cmp_id`);
+  ADD CONSTRAINT `FK_AUT_CONFIG_ABC_AUTH_COMPANY`
+  FOREIGN KEY (`cmp_id`) REFERENCES `ABC_AUTH_COMPANY` (`cmp_id`);
 
 ALTER TABLE `AUT_CONFIG`
   ADD CONSTRAINT `FK_AUT_CONFIG_AUT_CONFIG_CLASS`
@@ -458,10 +368,6 @@ ALTER TABLE `AUT_FUNCTIONALITY`
 ALTER TABLE `AUT_FUNCTIONALITY`
   ADD CONSTRAINT `FK_AUT_FUNCTIONALITY_AUT_MODULE`
   FOREIGN KEY (`mdl_id`) REFERENCES `AUT_MODULE` (`mdl_id`);
-
-ALTER TABLE `AUT_LOGIN_RESPONSE`
-  ADD CONSTRAINT `FK_AUT_LOGIN_RESPONSE_ABC_BABEL_WORD`
-  FOREIGN KEY (`wrd_id`) REFERENCES `ABC_BABEL_WORD` (`wrd_id`);
 
 ALTER TABLE `AUT_PAGE_TAB`
   ADD CONSTRAINT `FK_AUT_PAGE_TAB_ABC_BABEL_WORD`
@@ -500,8 +406,8 @@ ALTER TABLE `AUT_MENU`
   ON DELETE NO ACTION;
 
 ALTER TABLE `AUT_MODULE_COMPANY`
-  ADD CONSTRAINT `FK_AUT_MODULE_COMPANY_AUT_COMPANY`
-  FOREIGN KEY (`cmp_id`) REFERENCES `AUT_COMPANY` (`cmp_id`);
+  ADD CONSTRAINT `FK_AUT_MODULE_COMPANY_ABC_AUTH_COMPANY`
+  FOREIGN KEY (`cmp_id`) REFERENCES `ABC_AUTH_COMPANY` (`cmp_id`);
 
 ALTER TABLE `AUT_MODULE_COMPANY`
   ADD CONSTRAINT `FK_AUT_MODULE_COMPANY_AUT_MODULE`
@@ -516,25 +422,21 @@ ALTER TABLE `AUT_PAG_FUN`
   FOREIGN KEY (`pag_id`) REFERENCES `AUT_PAGE` (`pag_id`);
 
 ALTER TABLE `AUT_PAGE_COMPANY`
-  ADD CONSTRAINT `FK_AUT_PAGE_COMPANY_AUT_COMPANY`
-  FOREIGN KEY (`cmp_id`) REFERENCES `AUT_COMPANY` (`cmp_id`);
+  ADD CONSTRAINT `FK_AUT_PAGE_COMPANY_ABC_AUTH_COMPANY`
+  FOREIGN KEY (`cmp_id`) REFERENCES `ABC_AUTH_COMPANY` (`cmp_id`);
 
 ALTER TABLE `AUT_PAGE_COMPANY`
   ADD CONSTRAINT `FK_AUT_PAGE_COMPANY_AUT_PAGE`
   FOREIGN KEY (`pag_id`) REFERENCES `AUT_PAGE` (`pag_id`);
 
-ALTER TABLE `AUT_PROFILE`
-  ADD CONSTRAINT `FK_AUT_PROFILE_AUT_COMPANY`
-  FOREIGN KEY (`cmp_id`) REFERENCES `AUT_COMPANY` (`cmp_id`);
+ALTER TABLE `AUT_PRO_PAG`
+  ADD CONSTRAINT `FK_AUT_PRO_PAG_ABC_AUTH_PROFILE`
+  FOREIGN KEY (`pro_id`) REFERENCES `ABC_AUTH_PROFILE` (`pro_id`)
+  ON DELETE CASCADE;
 
 ALTER TABLE `AUT_PRO_PAG`
   ADD CONSTRAINT `FK_AUT_PRO_PAG_AUT_PAGE`
   FOREIGN KEY (`pag_id`) REFERENCES `AUT_PAGE` (`pag_id`)
-  ON DELETE CASCADE;
-
-ALTER TABLE `AUT_PRO_PAG`
-  ADD CONSTRAINT `FK_AUT_PRO_PAG_AUT_PROFILE`
-  FOREIGN KEY (`pro_id`) REFERENCES `AUT_PROFILE` (`pro_id`)
   ON DELETE CASCADE;
 
 ALTER TABLE `AUT_ROLE_GROUP`
@@ -542,8 +444,8 @@ ALTER TABLE `AUT_ROLE_GROUP`
   FOREIGN KEY (`wrd_id`) REFERENCES `ABC_BABEL_WORD` (`wrd_id`);
 
 ALTER TABLE `AUT_ROLE`
-  ADD CONSTRAINT `AUT_ROLE_ibfk_1`
-  FOREIGN KEY (`cmp_id`) REFERENCES `AUT_COMPANY` (`cmp_id`)
+  ADD CONSTRAINT `FK_AUT_ROLE_ABC_AUTH_COMPANY`
+  FOREIGN KEY (`cmp_id`) REFERENCES `ABC_AUTH_COMPANY` (`cmp_id`)
   ON UPDATE NO ACTION
   ON DELETE NO ACTION;
 
@@ -552,17 +454,17 @@ ALTER TABLE `AUT_ROLE`
   FOREIGN KEY (`rlg_id`) REFERENCES `AUT_ROLE_GROUP` (`rlg_id`);
 
 ALTER TABLE `AUT_PRO_ROL`
-  ADD CONSTRAINT `FK_AUT_PRO_ROL_AUT_COMPANY`
-  FOREIGN KEY (`cmp_id`) REFERENCES `AUT_COMPANY` (`cmp_id`);
+  ADD CONSTRAINT `FK_AUT_PRO_ROL_ABC_AUTH_COMPANY`
+  FOREIGN KEY (`cmp_id`) REFERENCES `ABC_AUTH_COMPANY` (`cmp_id`);
+
+ALTER TABLE `AUT_PRO_ROL`
+  ADD CONSTRAINT `FK_AUT_PRO_ROL_ABC_AUTH_PROFILE`
+  FOREIGN KEY (`pro_id`) REFERENCES `ABC_AUTH_PROFILE` (`pro_id`)
+  ON DELETE CASCADE;
 
 ALTER TABLE `AUT_PRO_ROL`
   ADD CONSTRAINT `FK_AUT_PRO_ROL_AUT_ROLE`
   FOREIGN KEY (`rol_id`) REFERENCES `AUT_ROLE` (`rol_id`);
-
-ALTER TABLE `AUT_PRO_ROL`
-  ADD CONSTRAINT `FK_AUT_PRO_ROL_AUT_PROFILE`
-  FOREIGN KEY (`pro_id`) REFERENCES `AUT_PROFILE` (`pro_id`)
-  ON DELETE CASCADE;
 
 ALTER TABLE `AUT_ROL_FLG`
   ADD CONSTRAINT `FK_AUT_ROL_FLG_AUT_FLAG`
@@ -573,8 +475,8 @@ ALTER TABLE `AUT_ROL_FLG`
   FOREIGN KEY (`rol_id`) REFERENCES `AUT_ROLE` (`rol_id`);
 
 ALTER TABLE `AUT_ROL_FUN`
-  ADD CONSTRAINT `FK_AUT_ROL_FUN_AUT_COMPANY`
-  FOREIGN KEY (`cmp_id`) REFERENCES `AUT_COMPANY` (`cmp_id`);
+  ADD CONSTRAINT `FK_AUT_ROL_FUN_ABC_AUTH_COMPANY`
+  FOREIGN KEY (`cmp_id`) REFERENCES `ABC_AUTH_COMPANY` (`cmp_id`);
 
 ALTER TABLE `AUT_ROL_FUN`
   ADD CONSTRAINT `FK_AUT_ROL_FUN_AUT_FUNCTIONALITY`
@@ -584,26 +486,15 @@ ALTER TABLE `AUT_ROL_FUN`
   ADD CONSTRAINT `FK_AUT_ROL_FUN_AUT_ROLE`
   FOREIGN KEY (`rol_id`) REFERENCES `AUT_ROLE` (`rol_id`);
 
-ALTER TABLE `AUT_USER`
-  ADD CONSTRAINT `FK_AUT_USER_ABC_BABEL_LANGUAGE`
-  FOREIGN KEY (`lan_id`) REFERENCES `ABC_BABEL_LANGUAGE` (`lan_id`)
+ALTER TABLE `AUT_USR_ROL`
+  ADD CONSTRAINT `FK_AUT_USR_ROL_ABC_AUTH_COMPANY`
+  FOREIGN KEY (`cmp_id`) REFERENCES `ABC_AUTH_COMPANY` (`cmp_id`)
   ON UPDATE NO ACTION
   ON DELETE NO ACTION;
-
-ALTER TABLE `AUT_USER`
-  ADD CONSTRAINT `AUT_USER_ibfk_1`
-  FOREIGN KEY (`cmp_id`) REFERENCES `AUT_COMPANY` (`cmp_id`)
-  ON UPDATE NO ACTION
-  ON DELETE NO ACTION;
-
-ALTER TABLE `AUT_USER`
-  ADD CONSTRAINT `FK_AUT_USER_AUT_PROFILE`
-  FOREIGN KEY (`pro_id`) REFERENCES `AUT_PROFILE` (`pro_id`)
-  ON DELETE SET NULL;
 
 ALTER TABLE `AUT_USR_ROL`
-  ADD CONSTRAINT `AUT_USR_ROL_ibfk_1`
-  FOREIGN KEY (`cmp_id`) REFERENCES `AUT_COMPANY` (`cmp_id`)
+  ADD CONSTRAINT `FK_AUT_USR_ROL_ABC_AUTH_USER`
+  FOREIGN KEY (`usr_id`) REFERENCES `ABC_AUTH_USER` (`usr_id`)
   ON UPDATE NO ACTION
   ON DELETE NO ACTION;
 
@@ -613,44 +504,16 @@ ALTER TABLE `AUT_USR_ROL`
   ON UPDATE NO ACTION
   ON DELETE NO ACTION;
 
-ALTER TABLE `AUT_USR_ROL`
-  ADD CONSTRAINT `AUT_USR_ROL_ibfk_2`
-  FOREIGN KEY (`usr_id`) REFERENCES `AUT_USER` (`usr_id`)
-  ON UPDATE NO ACTION
-  ON DELETE NO ACTION;
+ALTER TABLE `LOG_EVENT`
+  ADD CONSTRAINT `FK_LOG_EVENT_ABC_AUTH_COMPANY`
+  FOREIGN KEY (`cmp_id`) REFERENCES `ABC_AUTH_COMPANY` (`cmp_id`);
 
 ALTER TABLE `LOG_EVENT`
-  ADD CONSTRAINT `FK_LOG_EVENT_AUT_COMPANY`
-  FOREIGN KEY (`cmp_id`) REFERENCES `AUT_COMPANY` (`cmp_id`);
-
-ALTER TABLE `LOG_EVENT`
-  ADD CONSTRAINT `FK_LOG_EVENT_AUT_LOGIN_RESPONSE`
-  FOREIGN KEY (`lgr_id`) REFERENCES `AUT_LOGIN_RESPONSE` (`lgr_id`);
-
-ALTER TABLE `LOG_EVENT`
-  ADD CONSTRAINT `FK_LOG_EVENT_AUT_USER`
-  FOREIGN KEY (`usr_id`) REFERENCES `AUT_USER` (`usr_id`);
+  ADD CONSTRAINT `FK_LOG_EVENT_ABC_AUTH_USER`
+  FOREIGN KEY (`usr_id`) REFERENCES `ABC_AUTH_USER` (`usr_id`);
 
 ALTER TABLE `LOG_EVENT`
   ADD CONSTRAINT `LOG_EVENT_ibfk_3`
   FOREIGN KEY (`let_id`) REFERENCES `LOG_EVENT_TYPE` (`let_id`)
-  ON UPDATE NO ACTION
-  ON DELETE NO ACTION;
-
-ALTER TABLE `LOG_LOGIN`
-  ADD CONSTRAINT `LOG_LOGIN_ibfk_6`
-  FOREIGN KEY (`cmp_id`) REFERENCES `AUT_COMPANY` (`cmp_id`)
-  ON UPDATE NO ACTION
-  ON DELETE NO ACTION;
-
-ALTER TABLE `LOG_LOGIN`
-  ADD CONSTRAINT `LOG_LOGIN_ibfk_5`
-  FOREIGN KEY (`lgr_id`) REFERENCES `AUT_LOGIN_RESPONSE` (`lgr_id`)
-  ON UPDATE NO ACTION
-  ON DELETE NO ACTION;
-
-ALTER TABLE `LOG_LOGIN`
-  ADD CONSTRAINT `LOG_LOGIN_ibfk_7`
-  FOREIGN KEY (`usr_id`) REFERENCES `AUT_USER` (`usr_id`)
   ON UPDATE NO ACTION
   ON DELETE NO ACTION;

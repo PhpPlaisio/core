@@ -6,7 +6,7 @@
  * @param p_lan_id   The ID of the language in which the word has been translated.
  * @param p_wdt_text The translated word.
  */
-create procedure abc_babel_word_translate_word(in p_usr_id   @aut_user.usr_id%type@
+create procedure abc_babel_word_translate_word(in p_usr_id   @abc_auth_user.usr_id%type@
 ,                                              in p_wrd_id   @abc_babel_word.wrd_id%type@
 ,                                              in p_lan_id   @abc_babel_language.lan_id%type@
 ,                                              in p_wdt_text @abc_babel_word_text.wdt_text%type@)
