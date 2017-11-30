@@ -5,7 +5,7 @@
 /*  FileName : abc-core.ecm                                                       */
 /*  Platform : MySQL 5                                                            */
 /*  Version  : Concept                                                            */
-/*  Date     : zaterdag 25 november 2017                                          */
+/*  Date     : donderdag 30 november 2017                                         */
 /*================================================================================*/
 /*================================================================================*/
 /* CREATE TABLES                                                                  */
@@ -255,28 +255,6 @@ CREATE TABLE `AUT_USR_ROL` (
   CONSTRAINT `SECONDAY` UNIQUE (`rol_id`, `usr_id`)
 );
 
-CREATE TABLE `LOG_EVENT_TYPE` (
-  `let_id` TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
-  `wrd_id` SMALLINT UNSIGNED NOT NULL,
-  `let_label` VARCHAR(50) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
-  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`let_id`)
-)
-engine=innodb;
-
-CREATE TABLE `LOG_EVENT` (
-  `lev_id` INTEGER UNSIGNED AUTO_INCREMENT NOT NULL,
-  `cmp_id` SMALLINT UNSIGNED NOT NULL,
-  `let_id` TINYINT UNSIGNED NOT NULL,
-  `ses_id` INTEGER UNSIGNED NOT NULL,
-  `usr_id` INTEGER UNSIGNED NOT NULL,
-  `lev_datetime` DATETIME NOT NULL,
-  `lev_ip` INTEGER UNSIGNED,
-  `lev_arg1` VARCHAR(64),
-  `lev_arg2` VARCHAR(64),
-  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`lev_id`)
-)
-engine=innodb;
-
 /*================================================================================*/
 /* CREATE INDEXES                                                                 */
 /*================================================================================*/
@@ -332,14 +310,6 @@ CREATE UNIQUE INDEX `IX_AUT_ROL_FLG1` ON `AUT_ROL_FLG` (`rol_id`, `rfl_id`);
 CREATE INDEX `IX_AUT_ROL_FUN3` ON `AUT_ROL_FUN` (`cmp_id`);
 
 CREATE INDEX `cmp_id` ON `AUT_USR_ROL` (`cmp_id`);
-
-CREATE INDEX `WRD_ID` ON `LOG_EVENT_TYPE` (`wrd_id`);
-
-CREATE INDEX `cmp_id` ON `LOG_EVENT` (`cmp_id`);
-
-CREATE INDEX `IX_LOG_EVENT1` ON `LOG_EVENT` (`ses_id`);
-
-CREATE INDEX `usr_id` ON `LOG_EVENT` (`usr_id`);
 
 /*================================================================================*/
 /* CREATE FOREIGN KEYS                                                            */
@@ -501,19 +471,5 @@ ALTER TABLE `AUT_USR_ROL`
 ALTER TABLE `AUT_USR_ROL`
   ADD CONSTRAINT `AUT_USR_ROL_ibfk_3`
   FOREIGN KEY (`rol_id`) REFERENCES `AUT_ROLE` (`rol_id`)
-  ON UPDATE NO ACTION
-  ON DELETE NO ACTION;
-
-ALTER TABLE `LOG_EVENT`
-  ADD CONSTRAINT `FK_LOG_EVENT_ABC_AUTH_COMPANY`
-  FOREIGN KEY (`cmp_id`) REFERENCES `ABC_AUTH_COMPANY` (`cmp_id`);
-
-ALTER TABLE `LOG_EVENT`
-  ADD CONSTRAINT `FK_LOG_EVENT_ABC_AUTH_USER`
-  FOREIGN KEY (`usr_id`) REFERENCES `ABC_AUTH_USER` (`usr_id`);
-
-ALTER TABLE `LOG_EVENT`
-  ADD CONSTRAINT `LOG_EVENT_ibfk_3`
-  FOREIGN KEY (`let_id`) REFERENCES `LOG_EVENT_TYPE` (`let_id`)
   ON UPDATE NO ACTION
   ON DELETE NO ACTION;
