@@ -68,6 +68,11 @@ begin
   set usr.pro_id = pro.pro_id
   where pro.pro_id <> ifnull(usr.pro_id, 0)
   ;
+
+  -- Unset profiles of user without roles.
+  update     ABC_AUTH_USER usr
+  inner join TMP_PROFILE3  tmp  on  tmp.pro_id = usr.pro_id
+  set usr.pro_id = null
+  where tmp.usr_id is null
+  ;
 end
-
-
