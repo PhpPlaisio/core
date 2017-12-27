@@ -68,13 +68,6 @@ begin
   set usr.pro_id = pro.pro_id
   where pro.pro_id <> ifnull(usr.pro_id, 0)
   ;
-
-
-  -- Delete obsolete profiles.
-  delete from pro
-  using      ABC_AUTH_PROFILE pro
-  inner join TMP_PROFILE3     tmp  on  tmp.pro_id = pro.pro_id
-  ;
 end
 
 
