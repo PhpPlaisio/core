@@ -69,10 +69,14 @@ begin
   where pro.pro_id <> ifnull(usr.pro_id, 0)
   ;
 
-  -- Unset profiles of user without roles.
-  update     ABC_AUTH_USER usr
-  inner join TMP_PROFILE3  tmp  on  tmp.pro_id = usr.pro_id
+  -- Unset profiles of users without roles.
+  update ABC_AUTH_USER usr
   set usr.pro_id = null
-  where tmp.usr_id is null
+  where  usr.usr_id not in ( select usr_id
+                             from AUT_USR_ROL aur
+                             where curdate() between aur.aur_date_start
+                             and                     aur.aur_date_stop
+                           )
+  and usr.pro_id is not null
   ;
 end
