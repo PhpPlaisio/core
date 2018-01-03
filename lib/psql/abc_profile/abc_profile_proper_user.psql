@@ -1,0 +1,86 @@
+/**
+ * Updates the profile of a user.
+ *
+ * @param p_cmp_id The ID of the company (safeguard).
+ * @param p_usr_id The ID of the user.
+ */
+create procedure abc_profile_proper_user(in p_cmp_id @abc_auth_user.cmp_id%type@,
+                                         in p_usr_id @abc_auth_user.usr_id%type@)
+modifies sql data
+-- type: none
+begin
+  declare l_pro_id  @abc_auth_profile.pro_id%type@;
+  declare l_rol_ids @abc_auth_profile.pro_rol_ids%type@;
+
+  select group_concat(rol_id ORDER BY rol_id)
+  into   l_rol_ids
+  from   AUT_USR_ROL
+  where  cmp_id = p_cmp_id
+  and    usr_id = p_usr_id
+  and    curdate() between aur_date_start
+                   and     aur_date_stop
+  group by cmp_id
+  ,        usr_id
+  ;
+
+  if (l_rol_ids is not null) then
+    select pro_id
+    into   l_pro_id
+    from   ABC_AUTH_PROFILE
+    where  cmp_id  = p_cmp_id
+    and    rol_ids = l_rol_ids
+    for update
+    ;
+
+    if (l_pro_id is null) then
+      insert into ABC_AUTH_PROFILE( cmp_id
+      ,                             pro_flags
+      ,                             rol_ids )
+      values( p_cmp_id
+      ,       0
+      ,       l_rol_ids )
+      ;
+
+      set l_pro_id = last_insert_id();
+
+      -- Insert new profile pages.
+      insert into AUT_PRO_ROL(cmp_id
+      ,                       pro_id
+      ,                       rol_id)
+      select p_cmp_id
+      ,      l_pro_id
+      ,      rol_id
+      from   AUT_USR_ROL
+      where  cmp_id = p_cmp_id
+      and    usr_id = p_usr_id
+      and    curdate() between aur_date_start
+                       and     aur_date_stop
+      ;
+
+      -- Insert new profile pages.
+      insert into AUT_PRO_PAG(pro_id
+      ,                       pag_id)
+      select l_pro_id
+      ,      apf.pag_id
+      from       AUT_USR_ROL        aur
+      inner join AUT_ROL_FUN        arf  on  arf.rol_id = aur.rol_id
+      inner join AUT_FUNCTIONALITY  fun  on  fun.fun_id = arf.fun_id
+      inner join AUT_PAG_FUN        apf  on  apf.fun_id = fun.fun_id
+      inner join AUT_MODULE_COMPANY amc  on  amc.mdl_id = fun.mdl_id and
+                                             amc.cmp_id = p_cmp_id
+      where aur.cmp_id = p_cmp_id
+      and   aur.usr_id = p_usr_id
+      and   curdate() between aur.aur_date_start
+                      and     aur.aur_date_stop
+      group by l_pro_id
+      ,        apf.pag_id
+      ;
+    end if;
+  end if;
+
+  update ABC_AUTH_USER
+  set pro_id = l_pro_id
+  where cmp_id = p_cmp_id
+  and   usr_id = p_usr_id
+  ;
+end
