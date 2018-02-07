@@ -1,23 +1,25 @@
 /**
- *
+ * Recomputes all profiles and makes tables AUT_PRO_ROL and AUT_PRO_PAG proper.
  */
 create procedure abc_profile_proper()
 modifies sql data
--- type: log
+-- type: none
 begin
-  -- Create a temp table with all profiles of all users.
+  -- Create a temporary table with all profiles of all users.
   call abc_profile_proper1();
 
-  -- Create a temp table with unique profiles.
+  -- Create a temporary table with unique profiles.
   call abc_profile_proper2();
 
-  -- Compute new and obsolete profiles.
+  -- Insert new profiles profiles.
   call abc_profile_proper3();
 
+  -- Insert new and remove obsolete profile roles.
   call abc_profile_proper4();
 
-  -- Insert new profile pages.
+  -- Insert new and remove obsolete profile pages.
   call abc_profile_proper5();
+
+  -- Update profiles of users.
+  call abc_profile_proper6();
 end
-
-

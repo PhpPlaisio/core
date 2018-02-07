@@ -43,7 +43,7 @@ begin
 
       set l_pro_id = last_insert_id();
 
-      -- Insert new profile pages.
+      -- Insert new profile roles.
       insert into AUT_PRO_ROL(cmp_id
       ,                       pro_id
       ,                       rol_id)

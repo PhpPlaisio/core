@@ -1,0 +1,26 @@
+/**
+ * Updates the profiles of all users.
+ */
+create procedure abc_profile_proper6()
+modifies sql data
+-- type: hidden
+begin
+  -- Update user's profiles.
+  update     ABC_AUTH_USER    usr
+  inner join TMP_PROFILE1     tmp  on  tmp.usr_id = usr.usr_id
+  inner join ABC_AUTH_PROFILE pro  on  pro.pro_rol_ids = tmp.tmp_rol_ids
+  set usr.pro_id = pro.pro_id
+  where pro.pro_id <> ifnull(usr.pro_id, 0)
+  ;
+
+  -- Unset profiles of users without roles.
+  update ABC_AUTH_USER usr
+  set usr.pro_id = null
+  where  usr.usr_id not in ( select usr_id
+                             from   TMP_PROFILE1
+                           )
+  and usr.pro_id is not null
+  ;
+end
+
+

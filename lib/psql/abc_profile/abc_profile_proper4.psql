@@ -1,64 +1,57 @@
 /**
- *
+ * Creates temporary table TMP_PROFILE4 with new and obsolete profiles roles and inserts new profile roles and removes
+ * obsolete profile roles.
  */
 create procedure abc_profile_proper4()
 modifies sql data
 -- type: hidden
 begin
-  -- Compute new and obsolete profiles.
   drop temporary table if exists TMP_PROFILE4;
 
   create temporary table TMP_PROFILE4
   (
-    cmp_id   @aut_pro_rol.cmp_id%type@,
-    pro_id   @aut_pro_rol.pro_id%type@,
-    rol_id   @aut_pro_rol.rol_id%type@,
-    tmp_diff int
+    cmp_id   @aut_pro_rol.cmp_id%type@ not null,
+    pro_id   @aut_pro_rol.pro_id%type@ not null,
+    rol_id   @aut_pro_rol.rol_id%type@ not null,
+    tmp_diff int                       not null,
+    primary key (pro_id, rol_id)
   ) engine=myisam
   ;
 
-  insert into TMP_PROFILE4(cmp_id
-  ,                        pro_id
+  -- Compute new and obsolete profile roles.
+  insert into TMP_PROFILE4(pro_id
+  ,                        cmp_id
   ,                        rol_id
   ,                        tmp_diff)
-  select cmp_id
-  ,      pro_id
+  select pro_id
+  ,      cmp_id
   ,      rol_id
   ,      sum(if(src=2,1,0)) - sum(if(src=1,1,0))
   from
   (
-    select cmp_id
-    ,      pro_id
+    select pro_id
+    ,      cmp_id
     ,      rol_id
     ,      1           src
     from   AUT_PRO_ROL
 
     union all
 
-    select usr.cmp_id
-    ,      usr.pro_id
-    ,      aur.rol_id
+    select pro.pro_id
+    ,      pro.cmp_id
+    ,      substring_index(substring_index(pro.pro_rol_ids, ',', seq.seq), ',', -1) rol_id
     ,      2           src
-    from       TMP_PROFILE2       tmp
-    inner join ABC_AUTH_USER      usr  on  usr.usr_id = tmp.usr_id
-    inner join AUT_USR_ROL        aur  on  aur.usr_id = tmp.usr_id and
-                                           curdate() between aur.aur_date_start
-                                                     and     aur.aur_date_stop
-    inner join AUT_ROL_FUN        arf  on  arf.rol_id = aur.rol_id
-    inner join AUT_FUNCTIONALITY  fun  on  fun.fun_id = arf.fun_id
-    inner join AUT_PAG_FUN        apf  on  apf.fun_id = fun.fun_id
-    inner join AUT_MODULE_COMPANY amc  on  amc.mdl_id = fun.mdl_id
-    where amc.cmp_id = tmp.cmp_id
-    group by usr.cmp_id
-    ,        usr.pro_id
-    ,        aur.rol_id
+    from       ABC_AUTH_PROFILE pro
+    inner join seq_1_to_100     seq  on  1 = 1
+    group by pro.pro_id
+    ,        pro.cmp_id
+    ,        rol_id
   ) t
   group by cmp_id
   ,        pro_id
   ,        rol_id
   having  sum(if(src=1,1,0)) <> sum(if(src=2,1,0))
   ;
-
 
   -- Delete obsolete profile roles.
   delete from apr
@@ -68,8 +61,7 @@ begin
   where tmp.tmp_diff < 0
   ;
 
-
-  -- Insert new profile pages.
+  -- Insert new profile roles.
   insert into AUT_PRO_ROL(cmp_id
   ,                       pro_id
   ,                       rol_id)

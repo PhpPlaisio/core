@@ -1,31 +1,27 @@
 /**
- *
+ * Creates temporary table TMP_PROFILE2 with all unique profiles.
  */
 create procedure abc_profile_proper2()
 modifies sql data
--- type: log
+-- type: hidden
 begin
-  -- Create a temp table with unique profiles.
   drop temporary table if exists TMP_PROFILE2;
 
   create temporary table TMP_PROFILE2
   (
-    cmp_id   @abc_auth_company.cmp_id%type@      not null,
-    usr_id   @abc_auth_user.usr_id%type@         not null,
-    rol_ids  @abc_auth_profile.pro_rol_ids%type@ not null,
-    primary key(rol_ids)
+    cmp_id      @abc_auth_company.cmp_id%type@      not null,
+    tmp_rol_ids @abc_auth_profile.pro_rol_ids%type@ not null,
+    primary key(tmp_rol_ids)
   ) engine=myisam
   ;
 
-  insert into TMP_PROFILE2(cmp_id
-  ,                        usr_id
-  ,                        rol_ids)
+  insert into TMP_PROFILE2( cmp_id
+  ,                         tmp_rol_ids )
   select cmp_id
-  ,      min(usr_id)
-  ,      rol_ids
+  ,      tmp_rol_ids
   from   TMP_PROFILE1
   group by cmp_id
-  ,        rol_ids
+  ,        tmp_rol_ids
   ;
 end
 
