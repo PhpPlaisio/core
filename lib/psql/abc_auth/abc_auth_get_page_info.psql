@@ -16,25 +16,26 @@ reads sql data
 -- type: row0
 begin
   if (p_pag_id is not null) then
-    select pag.pag_id
+select pag.pag_id
     ,      pag.ptb_id
     ,      pag.mnu_id
     ,      pag.pag_id_org
     ,      wd1.wdt_text                           pag_title
     ,      ifnull(apc.pag_class,pag.pag_class)    pag_class
     ,      wd2.wdt_text                           ptb_title
-    from            AUT_PRO_PAG         app
-    inner join      AUT_PAGE            pag  on  pag.pag_id = p_pag_id
-    left outer join AUT_PAGE_COMPANY    apc  on  apc.pag_id = pag.pag_id and
-                                                 apc.cmp_id = p_cmp_id
+		,      if (app.pag_id,1,0)                    authorized
+    from            AUT_PAGE            pag
     inner join      ABC_BABEL_WORD_TEXT wd1  on  wd1.wrd_id = pag.wrd_id and
                                                  wd1.lan_id = p_lan_id
+		left outer join AUT_PRO_PAG         app  on  app.pag_id = pag.pag_id and
+																								 app.pro_id = p_pro_id
+                                                 -- app.cmp_id = p_cmp_id
+    left outer join AUT_PAGE_COMPANY    apc  on  apc.pag_id = pag.pag_id and
+                                                 apc.cmp_id = p_cmp_id
     left outer join AUT_PAGE_TAB        ptb  on  ptb.ptb_id = pag.ptb_id
     left outer join ABC_BABEL_WORD_TEXT wd2  on  wd2.wrd_id = ptb.wrd_id and
                                                  wd2.lan_id = p_lan_id
-    where app.pag_id = p_pag_id
-    and   app.pro_id = p_pro_id
-    -- xxx app.cmp_id = p_cmp_id
+    where pag.pag_id = p_pag_id
     ;
   else
     select pag.pag_id
@@ -44,18 +45,19 @@ begin
     ,      wd1.wdt_text                           pag_title
     ,      ifnull(apc.pag_class,pag.pag_class)    pag_class
     ,      wd2.wdt_text                           ptb_title
+		,      if (app.pag_id,1,0)                    authorized
     from            AUT_PAGE            pag
-    inner join      AUT_PRO_PAG         app  on  app.pag_id = pag.pag_id and
-                                                 app.pro_id = p_pro_id
-    left outer join AUT_PAGE_COMPANY    apc  on  apc.pag_id = pag.pag_id and
-                                                 apc.cmp_id = p_cmp_id
     inner join      ABC_BABEL_WORD_TEXT wd1  on  wd1.wrd_id = pag.wrd_id and
                                                  wd1.lan_id = p_lan_id
+    left outer join AUT_PRO_PAG         app  on  app.pag_id = pag.pag_id and
+                                                 app.pro_id = p_pro_id
+                                                 -- app.cmp_id = p_cmp_id
+    left outer join AUT_PAGE_COMPANY    apc  on  apc.pag_id = pag.pag_id and
+                                                 apc.cmp_id = p_cmp_id
     left outer join AUT_PAGE_TAB        ptb  on  ptb.ptb_id = pag.ptb_id
     left outer join ABC_BABEL_WORD_TEXT          wd2  on  wd2.wrd_id = ptb.wrd_id and
                                                  wd2.lan_id = p_lan_id
     where pag.pag_alias = p_pag_alias
-    -- xxx app.cmp_id = p_cmp_id
     ;
   end if;
 end
