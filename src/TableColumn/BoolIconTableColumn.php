@@ -48,7 +48,7 @@ class BoolIconTableColumn extends TableColumn
   /**
    * {@inheritdoc}
    */
-  public function getHtmlCell($row)
+  public function getHtmlCell(array $row): string
   {
     $attributes = ['class' => 'bool'];
 

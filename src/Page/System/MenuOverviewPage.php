@@ -44,8 +44,9 @@ class MenuOverviewPage extends TabPage
     $table->addColumn(new NumericTableColumn('ID', 'mnu_id'));
 
     // Show menu name.
-    $col = $table->addColumn(new TextTableColumn('Name', 'mnu_name'));
-    $col->setSortOrder(1);
+    $column = new TextTableColumn('Name', 'mnu_name');
+    $column->setSortOrder(1);
+    $table->addColumn($column);
 
     // Show menu level.
     $table->addColumn(new NumericTableColumn('Level', 'mnu_level'));

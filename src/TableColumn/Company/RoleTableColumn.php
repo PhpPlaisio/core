@@ -31,7 +31,7 @@ class RoleTableColumn extends DualTableColumn
   /**
    * {@inheritdoc}
    */
-  public function getHtmlCell($row)
+  public function getHtmlCell(array $row): string
   {
     $url = RoleDetailsPage::getUrl($row['cmp_id'], $row['rol_id']);
 

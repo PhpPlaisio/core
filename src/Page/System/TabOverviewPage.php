@@ -46,8 +46,9 @@ class TabOverviewPage extends TabPage
     $table->addColumn(new NumericTableColumn('ID', 'ptb_id'));
 
     // Show label title of the page tab.
-    $col = $table->addColumn(new TextTableColumn('Title', 'ptb_title'));
-    $col->setSortOrder(1);
+    $column = new TextTableColumn('Title', 'ptb_title');
+    $column->setSortOrder(1);
+    $table->addColumn($column);
 
     // Show label of the page tab.
     $table->addColumn(new TextTableColumn('Label', 'ptb_label'));

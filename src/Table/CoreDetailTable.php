@@ -53,7 +53,7 @@ class CoreDetailTable extends DetailTable
    *
    * @return string
    */
-  public function getHtmlHeader()
+  public function getHtmlHeader(): string
   {
     $ret = null;
 
@@ -96,7 +96,7 @@ class CoreDetailTable extends DetailTable
    *
    * @return string
    */
-  public function getHtmlTable()
+  public function getHtmlTable(): string
   {
     $ret = '<div class="detail_table">';
     $ret .= parent::getHtmlTable();

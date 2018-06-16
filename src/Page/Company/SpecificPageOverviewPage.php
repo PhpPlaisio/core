@@ -72,8 +72,9 @@ class SpecificPageOverviewPage extends CompanyPage
     $table->addColumn(new TextTableColumn('Title', 'pag_title'));
 
     // Add column with name of parent class.
-    $column = $table->addColumn(new TextTableColumn('Parent Class', 'pag_class_parent'));
+    $column =new TextTableColumn('Parent Class', 'pag_class_parent');
     $column->setSortOrder(1);
+    $table->addColumn($column);
 
     // Add column with name of child class.
     $table->addColumn(new TextTableColumn('Child Class', 'pag_class_child'));

@@ -40,12 +40,14 @@ class FunctionalityOverviewPage extends TabPage
     $table->addTableAction('default', new FunctionalityInsertTableAction());
 
     // Show the ID and the name of the module.
-    $col = $table->addColumn(new ModuleTableColumn('Module'));
-    $col->setSortOrder(1);
+    $column = new ModuleTableColumn('Module');
+    $column->setSortOrder(1);
+    $table->addColumn($column);
 
     // Show ID and name of the functionality.
-    $col = $table->addColumn(new FunctionalityTableColumn('Functionality'));
-    $col->setSortOrder(2);
+    $column =new FunctionalityTableColumn('Functionality');
+    $column->setSortOrder(2);
+    $table->addColumn($column);
 
     // Add column with icon adn link to update the details of the functionality.
     $table->addColumn(new FunctionalityUpdateIconTableColumn());

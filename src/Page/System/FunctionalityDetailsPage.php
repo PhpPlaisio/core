@@ -114,8 +114,9 @@ class FunctionalityDetailsPage extends TabPage
     $table->addTableAction('default', new FunctionalityUpdatePagesTableAction($this->funId));
 
     // Show the ID and class of the page.
-    $col = $table->addColumn(new PageTableColumn('Page'));
-    $col->setSortOrder(1);
+    $column =new PageTableColumn('Page');
+    $column->setSortOrder(1);
+    $table->addColumn($column);
 
     // Show title of page.
     $table->addColumn(new TextTableColumn('Title', 'pag_title'));
@@ -140,8 +141,9 @@ class FunctionalityDetailsPage extends TabPage
     $table->addTableAction('default', new FunctionalityUpdateRolesTableAction($this->funId));
 
     // Show ID and abbreviation of the company.
-    $col = $table->addColumn(new CompanyTableColumn(C::WRD_ID_COMPANY));
-    $col->setSortOrder(1);
+    $column = new CompanyTableColumn(C::WRD_ID_COMPANY);
+    $column->setSortOrder(1);
+    $table->addColumn($column);
 
     // Show role ID and name
     $table->addColumn(new RoleTableColumn(C::WRD_ID_ROLE));

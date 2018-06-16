@@ -29,7 +29,7 @@ class PageTableColumn extends DualTableColumn
   /**
    * {@inheritdoc}
    */
-  public function getHtmlCell($row)
+  public function getHtmlCell(array $row): string
   {
     $url = PageDetailsPage::getUrl($row['pag_id']);
 

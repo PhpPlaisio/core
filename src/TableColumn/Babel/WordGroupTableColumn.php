@@ -40,7 +40,7 @@ class WordGroupTableColumn extends DualTableColumn
   /**
    * {@inheritdoc}
    */
-  public function getHtmlCell($row)
+  public function getHtmlCell(array $row): string
   {
     $url = WordGroupDetailsPage::getUrl($row['wdg_id'], $this->lanIdTarget);
 

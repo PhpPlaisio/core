@@ -97,8 +97,9 @@ class TabDetailsPage extends TabPage
     $table = new CoreOverviewTable();
 
     // Show the ID and class of the page.
-    $col = $table->addColumn(new PageTableColumn('Page'));
-    $col->setSortOrder(1);
+    $column = new PageTableColumn('Page');
+    $column->setSortOrder(1);
+    $table->addColumn($column);
 
     // Show title of page.
     $table->addColumn(new TextTableColumn('Title', 'pag_title'));

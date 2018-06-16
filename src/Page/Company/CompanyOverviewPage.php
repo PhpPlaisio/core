@@ -51,8 +51,9 @@ class CompanyOverviewPage extends CompanyPage
     $table->addTableAction('default', new CompanyInsertTableAction());
 
     // Show company ID and abbreviation of the company.
-    $col = $table->addColumn(new CompanyTableColumn(C::WRD_ID_COMPANY));
-    $col->setSortOrder(1);
+    $column = new CompanyTableColumn(C::WRD_ID_COMPANY);
+    $column->setSortOrder(1);
+    $table->addColumn($column);
 
     // Show label of the company.
     $table->addColumn(new TextTableColumn('Label', 'cmp_label'));

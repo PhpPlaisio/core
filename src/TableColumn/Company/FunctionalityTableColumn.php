@@ -29,7 +29,7 @@ class FunctionalityTableColumn extends DualTableColumn
   /**
    * {@inheritdoc}
    */
-  public function getHtmlCell($row)
+  public function getHtmlCell(array $row): string
   {
     $url = FunctionalityDetailsPage::getUrl($row['fun_id']);
 

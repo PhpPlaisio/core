@@ -61,8 +61,9 @@ class WordGroupOverviewPage extends BabelPage
     $table->addTableAction('default', new WordGroupInsertTableAction());
 
     // Show ID and name of the word group
-    $col = $table->addColumn(new WordGroupTableColumn('Word Group', $this->actLanId));
-    $col->setSortOrder(1);
+    $column = new WordGroupTableColumn('Word Group', $this->actLanId);
+    $column->setSortOrder(1);
+    $table->addColumn($column);
 
     // Show total words in the word group.
     $table->addColumn(new NumericTableColumn('# Words', 'n1'));

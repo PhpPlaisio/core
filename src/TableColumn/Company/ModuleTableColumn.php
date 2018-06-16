@@ -29,7 +29,7 @@ class ModuleTableColumn extends DualTableColumn
   /**
    * {@inheritdoc}
    */
-  public function getHtmlCell($row)
+  public function getHtmlCell(array $row): string
   {
     $url = ModuleDetailsPage::getUrl($row['mdl_id']);
 

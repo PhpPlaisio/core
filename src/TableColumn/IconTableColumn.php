@@ -53,11 +53,9 @@ abstract class IconTableColumn extends TableColumn
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @param array $row
-   *
-   * @return string
+   * @inheritdoc
    */
-  public function getHtmlCell($row)
+  public function getHtmlCell(array $row): string
   {
     $url = $this->getUrl($row);
 

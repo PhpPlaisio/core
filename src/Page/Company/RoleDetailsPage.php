@@ -84,12 +84,14 @@ class RoleDetailsPage extends CompanyPage
     $table->addTableAction('default', new RoleUpdateFunctionalitiesTableAction($this->targetCmpId, $this->rolId));
 
     // Show the ID and the name of the module.
-    $col = $table->addColumn(new ModuleTableColumn('Module'));
-    $col->setSortOrder(1);
+    $column = new ModuleTableColumn('Module');
+    $column->setSortOrder(1);
+    $table->addColumn($column);
 
     // Show the ID and the name of the functionality.
-    $col = $table->addColumn(new FunctionalityTableColumn('Functionality'));
-    $col->setSortOrder(2);
+    $column = new FunctionalityTableColumn('Functionality');
+    $column->setSortOrder(2);
+    $table->addColumn($column);
 
     // Generate the HTML code for the table.
     echo $table->getHtmlTable($functionalities);
@@ -106,8 +108,9 @@ class RoleDetailsPage extends CompanyPage
     $table = new CoreOverviewTable();
 
     // Show the ID and class of the page
-    $col = $table->addColumn(new PageTableColumn('Page'));
-    $col->setSortOrder(1);
+    $column = new PageTableColumn('Page');
+    $column->setSortOrder(1);
+    $table->addColumn($column);
 
     // Show title of page.
     $table->addColumn(new TextTableColumn('Title', 'pag_title'));

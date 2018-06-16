@@ -47,8 +47,9 @@ class RoleGroupOverviewPage extends TabPage
     $table->addColumn(new RoleGroupTableColumn('Role Group'));
 
     // Show the weight of the role group.
-    $col = $table->addColumn(new NumericTableColumn('Weight', 'rlg_weight'));
-    $col->setSortOrder(1);
+    $column = new NumericTableColumn('Weight', 'rlg_weight');
+    $column->setSortOrder(1);
+    $table->addColumn($column);
 
     // Show the label of the role group.
     $table->addColumn(new TextTableColumn('Label', 'rlg_label'));

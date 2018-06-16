@@ -29,7 +29,7 @@ class RoleGroupTableColumn extends DualTableColumn
   /**
    * {@inheritdoc}
    */
-  public function getHtmlCell($row)
+  public function getHtmlCell(array $row): string
   {
     $url = RoleGroupDetailsPage::getUrl($row['rlg_id']);
 

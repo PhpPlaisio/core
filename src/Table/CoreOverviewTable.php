@@ -57,7 +57,7 @@ class CoreOverviewTable extends OverviewTable
    *
    * @return string
    */
-  public function getHtmlHeader()
+  public function getHtmlHeader(): string
   {
     $ret = null;
 
@@ -104,7 +104,7 @@ class CoreOverviewTable extends OverviewTable
    *
    * @return string
    */
-  public function getHtmlTable($rows)
+  public function getHtmlTable(array $rows): string
   {
     // Always add row count to the default table actions.
     $this->addTableAction('default', new RowCountTableAction(count($rows)));

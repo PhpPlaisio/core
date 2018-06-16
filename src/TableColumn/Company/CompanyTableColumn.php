@@ -29,7 +29,7 @@ class CompanyTableColumn extends DualTableColumn
   /**
    * {@inheritdoc}
    */
-  public function getHtmlCell($row)
+  public function getHtmlCell(array $row): string
   {
     $url = CompanyDetailsPage::getUrl($row['cmp_id']);
 

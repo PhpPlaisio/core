@@ -42,8 +42,9 @@ class ModuleOverviewPage extends TabPage
     $table->addTableAction('default', new ModuleInsertTableAction());
 
     // Show the ID and the name of the module.
-    $col = $table->addColumn(new ModuleTableColumn('Module'));
-    $col->setSortOrder(1);
+    $column = new ModuleTableColumn('Module');
+    $column->setSortOrder(1);
+    $table->addColumn($column);
 
     // Add column with icon to modify the details of the module.
     $table->addColumn(new ModuleUpdateIconTableColumn());

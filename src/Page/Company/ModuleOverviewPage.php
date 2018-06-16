@@ -44,8 +44,9 @@ class ModuleOverviewPage extends CompanyPage
     $table->addTableAction('default', new ModuleUpdateTableAction($this->targetCmpId));
 
     // Show the ID and the name of the module.
-    $col = $table->addColumn(new ModuleTableColumn('Module'));
-    $col->setSortOrder(1);
+    $column = new ModuleTableColumn('Module');
+    $column->setSortOrder(1);
+    $table->addColumn($column);
 
     // Generate the HTML code for the table.
     echo $table->getHtmlTable($modules);
