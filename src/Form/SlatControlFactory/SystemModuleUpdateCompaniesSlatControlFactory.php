@@ -57,7 +57,7 @@ class SystemModuleUpdateCompaniesSlatControlFactory extends SlatControlFactory
   {
     $row = new SlatControl($data['cmp_id']);
     $row->setObfuscator($this->cmpIdObfuscator);
-    $louverControl->addFormControl($row);;
+    $louverControl->addFormControl($row);
 
     /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'cmp_id');

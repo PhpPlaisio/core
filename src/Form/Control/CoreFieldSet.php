@@ -55,7 +55,7 @@ class CoreFieldSet extends FieldSet
     $this->buttonControl->addFormControl($submit);
 
     // Create reset button.
-    if ($resetButtonText)
+    if ($resetButtonText!==null)
     {
       $reset = new ResetControl($resetName);
       $reset->setValue($resetButtonText);
