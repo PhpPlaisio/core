@@ -63,7 +63,7 @@ class LoginPage extends CorePage
   /**
    * @inheritdoc
    */
-  public function echoPage()
+  public function echoPage(): void
   {
     // Buffer for actual contents.
     ob_start();

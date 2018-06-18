@@ -109,7 +109,7 @@ class W3cValidatePage extends CorePage
   /**
    * @inheritdoc
    */
-  public function echoPage()
+  public function echoPage(): void
   {
     switch ($this->mode)
     {

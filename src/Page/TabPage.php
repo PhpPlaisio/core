@@ -82,7 +82,7 @@ abstract class TabPage extends CorePage
   /**
    * Echos the actual page content, i.e. the inner HTML of the body tag.
    */
-  public function echoPage()
+  public function echoPage(): void
   {
     // Buffer for actual contents.
     ob_start();

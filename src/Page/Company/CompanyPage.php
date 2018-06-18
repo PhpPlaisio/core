@@ -32,7 +32,6 @@ abstract class CompanyPage extends TabPage
   protected $targetCmpId;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    */

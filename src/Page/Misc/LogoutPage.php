@@ -28,7 +28,7 @@ class LogoutPage extends CorePage
    * Logs the user out of the website. I.e. the current session is ended and the user is redirected to the home
    * page of the site.
    */
-  public function echoPage()
+  public function echoPage(): void
   {
     Abc::$session->logout();
 

@@ -25,7 +25,7 @@ class IndexPage extends TabPage
   /**
    * @inheritdoc
    */
-  public function echoPage()
+  public function echoPage(): void
   {
     if (Abc::$session->isAnonymous())
     {

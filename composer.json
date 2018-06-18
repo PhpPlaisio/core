@@ -15,7 +15,7 @@
     "setbased/abc-company": "^1.1.0",
     "setbased/abc-exception": "^1.0.0",
     "setbased/abc-form": "^0.10.2",
-    "setbased/abc-form-louver": "^0.10.4",
+    "setbased/abc-form-louver": "^0.10.5",
     "setbased/abc-helper-password": "^2.0.0",
     "setbased/abc-html": "^2.0.0",
     "setbased/abc-http-header": "^2.0.0",

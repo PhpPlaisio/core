@@ -61,7 +61,7 @@ class SpecificPageDeletePage extends CorePage
   /**
    * Deletes a company specific page.
    */
-  public function echoPage()
+  public function echoPage(): void
   {
     Abc::$DL->abcCompanySpecificPageDelete($this->targetCmpId, $this->targetPagId);
 
