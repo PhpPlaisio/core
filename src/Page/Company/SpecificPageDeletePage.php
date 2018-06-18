@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Company;
 
 use SetBased\Abc\Abc;
@@ -7,7 +7,6 @@ use SetBased\Abc\C;
 use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Page\CorePage;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for deleting a company specific page that overrides a standard page.
  */
@@ -49,7 +48,7 @@ class SpecificPageDeletePage extends CorePage
    *
    * @return string
    */
-  public static function getUrl($targetCmpId, $targetPagId)
+  public static function getUrl(int $targetCmpId, int $targetPagId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_DELETE, 'pag');
     $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');

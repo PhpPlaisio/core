@@ -1,12 +1,11 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\TableColumn\Company;
 
 use SetBased\Abc\Core\Page\Company\CompanyDetailsPage;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Table\TableColumn\DualTableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * A dual table column with the ID and name of a company.
  */
@@ -27,7 +26,7 @@ class CompanyTableColumn extends DualTableColumn
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function getHtmlCell(array $row): string
   {

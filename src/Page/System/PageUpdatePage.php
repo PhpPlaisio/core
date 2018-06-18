@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for updating the details of a target page.
  */
@@ -36,11 +35,11 @@ class PageUpdatePage extends PageBasePage
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $pagId
+   * @param int $pagId The ID of the target page.
    *
    * @return string
    */
-  public static function getUrl($pagId)
+  public static function getUrl(int $pagId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_PAGE_UPDATE, 'pag');
     $url .= self::putCgiId('tar_pag', $pagId, 'pag');
@@ -52,7 +51,7 @@ class PageUpdatePage extends PageBasePage
   /**
    * Inserts a page.
    */
-  protected function databaseAction()
+  protected function databaseAction(): void
   {
     $changes = $this->form->getChangedControls();
     $values  = $this->form->getValues();
@@ -82,9 +81,9 @@ class PageUpdatePage extends PageBasePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function loadValues()
+  protected function loadValues(): void
   {
     $values = $this->details;
     unset($values['pag_title']);

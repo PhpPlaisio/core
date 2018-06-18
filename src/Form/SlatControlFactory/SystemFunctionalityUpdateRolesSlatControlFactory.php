@@ -1,11 +1,12 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Form\SlatControlFactory;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\Core\TableColumn\Company\RoleTableColumn;
 use SetBased\Abc\Core\TableColumn\System\RoleGroupTableColumn;
 use SetBased\Abc\Form\Control\CheckboxControl;
+use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SlatControl;
 use SetBased\Abc\Form\Control\SlatControlFactory;
 use SetBased\Abc\Form\Control\TableColumnControl;
@@ -16,7 +17,6 @@ use SetBased\Abc\Obfuscator\Obfuscator;
 use SetBased\Abc\Table\TableColumn\NumericTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Slat control factory for creating slat controls for updating the pages that a functionality grants access to.
  */
@@ -64,13 +64,13 @@ class SystemFunctionalityUpdateRolesSlatControlFactory extends SlatControlFactor
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  public function createRow($louverControl, $data)
+  public function createRow(LouverControl $louverControl, array $data): SlatControl
   {
-    /** @var SlatControl $row */
-    $row = $louverControl->addFormControl(new SlatControl($data['rol_id']));
+    $row = new SlatControl($data['rol_id']);
     $row->setObfuscator($this->rolIdObfuscator);
+    $louverControl->addFormControl($row);
 
     /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'cmp_id');
@@ -95,6 +95,8 @@ class SystemFunctionalityUpdateRolesSlatControlFactory extends SlatControlFactor
     /** @var CheckboxControl $control */
     $control = $this->createFormControl($row, 'rol_enabled');
     $control->setValue($data['rol_enabled']);
+
+    return $row;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

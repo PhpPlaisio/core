@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Form;
 
 use SetBased\Abc\Abc;
@@ -9,7 +9,7 @@ use SetBased\Abc\Form\Control\ConstantControl;
 use SetBased\Abc\Form\Control\Control;
 use SetBased\Abc\Form\Control\HiddenControl;
 use SetBased\Abc\Form\Control\InvisibleControl;
-use SetBased\Abc\Form\Control\SubmitControl;
+use SetBased\Abc\Form\Control\PushMeControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\Form;
 
@@ -34,17 +34,19 @@ class CoreForm extends Form
   protected $visibleFieldSet;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  public function __construct($name = '', $csrfCheckFlag = true)
+  public function __construct(string $name = '', bool $csrfCheckFlag = true)
   {
     parent::__construct($name, $csrfCheckFlag);
 
     $this->attributes['class']        = 'input_table';
     $this->attributes['autocomplete'] = false;
 
-    $this->visibleFieldSet = $this->addFieldSet(new CoreFieldSet());
+    $this->visibleFieldSet = new CoreFieldSet();
+    $this->addFieldSet($this->visibleFieldSet);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -60,7 +62,7 @@ class CoreForm extends Form
    *                                   </ul>
    * @param bool            $mandatory If true the form control is mandatory.
    */
-  public function addFormControl($control, $wrdId = null, $mandatory = false)
+  public function addFormControl(Control $control, $wrdId = null, bool $mandatory = false)
   {
     switch (true)
     {
@@ -115,9 +117,12 @@ class CoreForm extends Form
    * @param string     $name      The name of the submit button.
    * @param string     $class     The class(es) of the submit button.
    *
-   * @return SubmitControl
+   * @return PushMeControl
    */
-  public function addSubmitButton($wrdId, $method, $name = 'submit', $class = 'btn btn-success')
+  public function addSubmitButton($wrdId,
+                                  string $method,
+                                  string $name = 'submit',
+                                  ?string $class = 'btn btn-success'): PushMeControl
   {
     $control = $this->visibleFieldSet->addSubmitButton($wrdId, $name);
     $control->addClass($class);
@@ -132,7 +137,7 @@ class CoreForm extends Form
    *
    * @return CoreFieldSet
    */
-  public function getVisibleFieldSet()
+  public function getVisibleFieldSet(): CoreFieldSet
   {
     return $this->visibleFieldSet;
   }
@@ -143,7 +148,7 @@ class CoreForm extends Form
    *
    * @param int $wrdId The wrd_id of the title.
    */
-  public function setTitle($wrdId)
+  public function setTitle(int $wrdId): void
   {
     $this->visibleFieldSet->setTitle(Abc::$babel->getWord($wrdId));
   }
@@ -152,9 +157,9 @@ class CoreForm extends Form
   /**
    * Sets the title of this form.
    *
-   * @param string $title The title.
+   * @param string|null $title The title.
    */
-  public function setTitleText($title)
+  public function setTitleText(?string $title): void
   {
     $this->visibleFieldSet->setTitle($title);
   }

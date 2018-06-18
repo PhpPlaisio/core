@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
@@ -16,7 +16,6 @@ use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for setting the pages that a functionality grants access.
  */
@@ -56,7 +55,7 @@ class FunctionalityUpdatePagesPage extends TabPage
    *
    * @return string
    */
-  public static function getUrl($funId)
+  public static function getUrl(int $funId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_UPDATE_PAGES, 'pag');
     $url .= self::putCgiId('fun', $funId, 'fun');
@@ -66,9 +65,9 @@ class FunctionalityUpdatePagesPage extends TabPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $this->showFunctionality();
 
@@ -80,7 +79,7 @@ class FunctionalityUpdatePagesPage extends TabPage
   /**
    * Creates the form shown on this page.
    */
-  private function createForm()
+  private function createForm(): void
   {
     // Get all available pages.
     $pages = Abc::$DL->abcSystemFunctionalityGetAvailablePages($this->funId);
@@ -119,7 +118,7 @@ class FunctionalityUpdatePagesPage extends TabPage
   /**
    * Handles the form submit, i.e. add or removes pages to the functionality.
    */
-  private function databaseAction()
+  private function databaseAction(): void
   {
     $changes = $this->form->getChangedControls();
     $values  = $this->form->getValues();
@@ -147,7 +146,7 @@ class FunctionalityUpdatePagesPage extends TabPage
   /**
    * Executes the form shown on this page.
    */
-  private function executeForm()
+  private function executeForm(): void
   {
     $method = $this->form->execute();
     switch ($method)
@@ -165,7 +164,7 @@ class FunctionalityUpdatePagesPage extends TabPage
   /**
    * Handles the form submit.
    */
-  private function handleForm()
+  private function handleForm(): void
   {
     $this->databaseAction();
 
@@ -176,7 +175,7 @@ class FunctionalityUpdatePagesPage extends TabPage
   /**
    * Echos brief info about the functionality.
    */
-  private function showFunctionality()
+  private function showFunctionality(): void
   {
     $details = Abc::$DL->abcSystemFunctionalityGetDetails($this->funId, $this->lanId);
 

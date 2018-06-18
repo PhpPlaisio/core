@@ -1,12 +1,11 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\TableColumn\System;
 
 use SetBased\Abc\Core\Page\System\RoleGroupDetailsPage;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Table\TableColumn\DualTableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * A dual table column with the ID and name of a role group.
  */
@@ -27,7 +26,7 @@ class RoleGroupTableColumn extends DualTableColumn
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function getHtmlCell(array $row): string
   {

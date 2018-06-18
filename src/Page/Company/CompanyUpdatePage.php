@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Company;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for updating the details of a company.
  */
@@ -40,7 +39,7 @@ class CompanyUpdatePage extends CompanyBasePage
    *
    * @return string
    */
-  public static function getUrl($targetCmpId)
+  public static function getUrl(int $targetCmpId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_COMPANY_UPDATE, 'pag');
     $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
@@ -52,7 +51,7 @@ class CompanyUpdatePage extends CompanyBasePage
   /**
    * Updates the details of the target company.
    */
-  protected function databaseAction()
+  protected function databaseAction(): void
   {
     $changes = $this->form->getChangedControls();
     $values  = $this->form->getValues();
@@ -65,9 +64,9 @@ class CompanyUpdatePage extends CompanyBasePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function loadValues()
+  protected function loadValues(): void
   {
     $this->form->setValues($this->details);
   }

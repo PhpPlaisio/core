@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for inserting a page.
  */
@@ -28,7 +27,7 @@ class PageInsertPage extends PageBasePage
    *
    * @return string
    */
-  public static function getUrl()
+  public static function getUrl(): string
   {
     return self::putCgiId('pag', C::PAG_ID_SYSTEM_PAGE_INSERT, 'pag');
   }
@@ -37,7 +36,7 @@ class PageInsertPage extends PageBasePage
   /**
    * Inserts a page.
    */
-  protected function databaseAction()
+  protected function databaseAction(): void
   {
     $values = $this->form->getValues();
     if ($values['pag_title'])
@@ -61,9 +60,9 @@ class PageInsertPage extends PageBasePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function loadValues()
+  protected function loadValues(): void
   {
     // Nothing to do.
   }

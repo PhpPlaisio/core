@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for inserting a functionality.
  */
@@ -27,7 +26,7 @@ class FunctionalityInsertPage extends FunctionalityBasePage
    *
    * @return string
    */
-  public static function getUrl()
+  public static function getUrl(): string
   {
     return self::putCgiId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_INSERT, 'pag');
   }
@@ -36,7 +35,7 @@ class FunctionalityInsertPage extends FunctionalityBasePage
   /**
    * Inserts a functionality.
    */
-  protected function dataBaseAction()
+  protected function dataBaseAction(): void
   {
     $changes = $this->form->getChangedControls();
     $values  = $this->form->getValues();
@@ -58,9 +57,9 @@ class FunctionalityInsertPage extends FunctionalityBasePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function loadValues()
+  protected function loadValues(): void
   {
     // Nothing to do.
   }

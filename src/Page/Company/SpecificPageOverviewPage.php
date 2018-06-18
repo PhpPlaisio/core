@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Company;
 
 use SetBased\Abc\Abc;
@@ -47,7 +47,7 @@ class SpecificPageOverviewPage extends CompanyPage
    *
    * @return string The URL of this page.
    */
-  public static function getUrl($targetCmpId)
+  public static function getUrl(int $targetCmpId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_OVERVIEW, 'pag');
     $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
@@ -57,9 +57,9 @@ class SpecificPageOverviewPage extends CompanyPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $table = new CoreOverviewTable();
 

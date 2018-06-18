@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Misc;
 
 use Gajus\Dindent\Indenter;
@@ -10,7 +10,6 @@ use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Page\CorePage;
 use SetBased\Exception\FallenException;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for validating the generated HTML code. This page must be use on development environments only.
  */
@@ -77,7 +76,7 @@ class W3cValidatePage extends CorePage
    *
    * @return string The URL of this page.
    */
-  public static function getUrl($fileName, $mode = 'validate')
+  public static function getUrl(string $fileName, string $mode = 'validate'): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_MISC_W3C_VALIDATE, 'pag');
     $url .= self::putCgiVar('mode', $mode);
@@ -90,7 +89,7 @@ class W3cValidatePage extends CorePage
   /**
    * Validates that the requested file is a file for W3C validation and is owned by the current user.
    */
-  public function checkAuthorization()
+  public function checkAuthorization(): void
   {
     // Assert that the filename is a basename (and does not contain crafted (sub-)directories).
     if (basename($this->filename)!==$this->filename)
@@ -108,7 +107,7 @@ class W3cValidatePage extends CorePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function echoPage()
   {
@@ -131,7 +130,7 @@ class W3cValidatePage extends CorePage
   /**
    * Shows a HTML snippet indicating the validity of the source.
    */
-  private function showValidateResponse()
+  private function showValidateResponse(): void
   {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_HEADER, 1);
@@ -184,7 +183,7 @@ class W3cValidatePage extends CorePage
   /**
    * Shows the validation report including source listing.
    */
-  private function showValidateSource()
+  private function showValidateSource(): void
   {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_HEADER, 1);

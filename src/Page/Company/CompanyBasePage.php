@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Company;
 
 use SetBased\Abc\C;
@@ -8,7 +8,6 @@ use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\HttpHeader;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Abstract parent page for inserting and updating the details of a company.
  */
@@ -40,15 +39,15 @@ abstract class CompanyBasePage extends TabPage
   /**
    * Must implemented by child pages to actually insert or update a company.
    *
-   * @return null
+   * @return void
    */
-  abstract protected function databaseAction();
+  abstract protected function databaseAction(): void;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $this->createForm();
     $this->loadValues();
@@ -59,15 +58,15 @@ abstract class CompanyBasePage extends TabPage
   /**
    * Sets the initial values of the form shown on this page.
    *
-   * @return null
+   * @return void
    */
-  abstract protected function loadValues();
+  abstract protected function loadValues(): void;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Creates the form shown on this page.
    */
-  private function createForm()
+  private function createForm(): void
   {
     $this->form = new CoreForm();
 
@@ -89,7 +88,7 @@ abstract class CompanyBasePage extends TabPage
   /**
    * Executes the form shown on this page.
    */
-  private function executeForm()
+  private function executeForm(): void
   {
     $method = $this->form->execute();
     switch ($method)
@@ -107,7 +106,7 @@ abstract class CompanyBasePage extends TabPage
   /**
    * Handles the form submit.
    */
-  private function handleForm()
+  private function handleForm(): void
   {
     $this->databaseAction();
 

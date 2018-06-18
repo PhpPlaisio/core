@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for updating the details of a role group.
  */
@@ -41,7 +40,7 @@ class RoleGroupUpdatePage extends RoleGroupBasePage
    *
    * @return string
    */
-  public static function getUrl($rlgId)
+  public static function getUrl(int $rlgId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_UPDATE, 'pag');
     $url .= self::putCgiId('rlg', $rlgId, 'rlg');
@@ -53,7 +52,7 @@ class RoleGroupUpdatePage extends RoleGroupBasePage
   /**
    * Inserts a new role.
    */
-  protected function databaseAction()
+  protected function databaseAction(): void
   {
     $values = $this->form->getValues();
 
@@ -74,9 +73,9 @@ class RoleGroupUpdatePage extends RoleGroupBasePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function loadValues()
+  protected function loadValues(): void
   {
     $this->form->setValues($this->roleGroup);
   }

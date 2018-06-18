@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
@@ -13,7 +13,6 @@ use SetBased\Abc\Core\TableColumn\Company\RoleTableColumn;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page with the details of a all role group.
  */
@@ -63,7 +62,7 @@ class RoleGroupDetailsPage extends TabPage
    *
    * @return string
    */
-  public static function getUrl($rlgId)
+  public static function getUrl(int $rlgId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_DETAILS, 'pag');
     $url .= self::putCgiId('rlg', $rlgId, 'rlg');
@@ -73,9 +72,9 @@ class RoleGroupDetailsPage extends TabPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $this->echoDetails();
 
@@ -86,7 +85,7 @@ class RoleGroupDetailsPage extends TabPage
   /**
    * Shows the details of the role group.
    */
-  private function echoDetails()
+  private function echoDetails(): void
   {
     $table = new CoreDetailTable();
 
@@ -113,7 +112,7 @@ class RoleGroupDetailsPage extends TabPage
   /**
    * Shows the roles in the role group.
    */
-  private function echoRoles()
+  private function echoRoles(): void
   {
     $table = new CoreOverviewTable();
 

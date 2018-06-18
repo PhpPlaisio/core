@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Company;
 
 use SetBased\Abc\Abc;
@@ -12,7 +12,6 @@ use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SubmitControl;
 use SetBased\Abc\Helper\HttpHeader;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for enabling and disabling the modules for a company.
  */
@@ -34,7 +33,7 @@ class ModuleUpdatePage extends CompanyPage
    *
    * @return string
    */
-  public static function getUrl($targetCmpId)
+  public static function getUrl(int $targetCmpId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_COMPANY_MODULE_UPDATE, 'pag');
     $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
@@ -44,9 +43,9 @@ class ModuleUpdatePage extends CompanyPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $this->createForm();
     $this->executeForm();
@@ -56,7 +55,7 @@ class ModuleUpdatePage extends CompanyPage
   /**
    * Creates the form shown on this page.
    */
-  private function createForm()
+  private function createForm(): void
   {
     // Get all available modules.
     $modules = Abc::$DL->abcCompanyModuleGetAllAvailable($this->targetCmpId, $this->lanId);
@@ -95,7 +94,7 @@ class ModuleUpdatePage extends CompanyPage
   /**
    *  Handles the form submit.
    */
-  private function databaseAction()
+  private function databaseAction(): void
   {
     $values  = $this->form->getValues();
     $changes = $this->form->getChangedControls();
@@ -123,7 +122,7 @@ class ModuleUpdatePage extends CompanyPage
   /**
    * Executes the form shown on this page.
    */
-  private function executeForm()
+  private function executeForm(): void
   {
     $method = $this->form->execute();
     switch ($method)
@@ -141,7 +140,7 @@ class ModuleUpdatePage extends CompanyPage
   /**
    * Handles the form submit.
    */
-  private function handleForm()
+  private function handleForm(): void
   {
     $this->databaseAction();
 

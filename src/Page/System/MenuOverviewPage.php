@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
@@ -11,7 +11,6 @@ use SetBased\Abc\Core\TableColumn\System\MenuUpdateIconTableColumn;
 use SetBased\Abc\Table\TableColumn\NumericTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page with an overview of all menu entries.
  */
@@ -23,16 +22,16 @@ class MenuOverviewPage extends TabPage
    *
    * @return string
    */
-  public static function getUrl()
+  public static function getUrl(): string
   {
     return self::putCgiId('pag', C::PAG_ID_SYSTEM_MENU_OVERVIEW, 'pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  public function echoTabContent()
+  public function echoTabContent(): void
   {
     $pages = Abc::$DL->abcSystemMenuGetAllEntries($this->lanId);
 

@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for modifying the details of a module.
  */
@@ -38,7 +37,7 @@ class ModuleUpdatePage extends ModuleBasePage
    *
    * @return string
    */
-  public static function getUrl($mdlId)
+  public static function getUrl(int $mdlId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_MODULE_UPDATE, 'pag');
     $url .= self::putCgiId('mdl', $mdlId, 'mdl');
@@ -50,7 +49,7 @@ class ModuleUpdatePage extends ModuleBasePage
   /**
    * Updates the details of the module.
    */
-  protected function dataBaseAction()
+  protected function dataBaseAction(): void
   {
     $changes = $this->form->getChangedControls();
     $values  = $this->form->getValues();
@@ -75,9 +74,9 @@ class ModuleUpdatePage extends ModuleBasePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function loadValues()
+  protected function loadValues(): void
   {
     $values = $this->details;
     unset($values['mdl_name']);

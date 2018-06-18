@@ -1,12 +1,11 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Babel;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Helper\HttpHeader;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for deleting a word.
  */
@@ -39,7 +38,7 @@ class WordDeletePage extends BabelPage
    *
    * @return string
    */
-  public static function getUrl($wrdId)
+  public static function getUrl(int $wrdId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_BABEL_WORD_DELETE, 'pag');
     $url .= self::putCgiId('wrd', $wrdId, 'wrd');
@@ -49,9 +48,9 @@ class WordDeletePage extends BabelPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $details = Abc::$DL->abcBabelWordGetDetails($this->wrdId, $this->lanId);
 

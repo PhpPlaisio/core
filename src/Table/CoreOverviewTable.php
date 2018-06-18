@@ -1,12 +1,12 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Table;
 
 use SetBased\Abc\Core\TableAction\RowCountTableAction;
 use SetBased\Abc\Core\TableAction\TableAction;
+use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Table\OverviewTable;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Extends \SetBased\Abc\Table\OverviewTable with table actions.
  */
@@ -28,6 +28,7 @@ class CoreOverviewTable extends OverviewTable
   protected $tablesActionGroups = [];
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    */
@@ -46,7 +47,7 @@ class CoreOverviewTable extends OverviewTable
    * @param string      $groupName   The group to witch the table action must be added.
    * @param TableAction $tableAction The table action.
    */
-  public function addTableAction($groupName, $tableAction)
+  public function addTableAction(string $groupName, TableAction $tableAction): void
   {
     $this->tablesActionGroups[$groupName][] = $tableAction;
   }
@@ -74,7 +75,12 @@ class CoreOverviewTable extends OverviewTable
         // Add a separator between groups of table actions.
         if (!$first_group)
         {
-          $ret .= '<img class="noaction" src="'.ICON_SEPARATOR.'" width="16" height="16" alt="|"/>';
+          $ret .= Html::generateVoidElement('img',
+                                            ['class'  => 'noaction',
+                                             'scr'    => ICON_SEPARATOR,
+                                             'width'  => 16,
+                                             'height' => 16,
+                                             'alt'    => '|']);
         }
 
         // Generate HTML code for all table actions groups.
@@ -126,9 +132,9 @@ class CoreOverviewTable extends OverviewTable
    *
    * @param bool $flag If empty table actions are not shown.
    */
-  public function setShowTableActions($flag)
+  public function setShowTableActions(bool $flag): void
   {
-    $this->showTableActions = ($flag) ? true : false;
+    $this->showTableActions = $flag;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
@@ -11,7 +11,6 @@ use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\HttpHeader;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Abstract parent class for inserting or updating the details of a module.
  */
@@ -41,15 +40,15 @@ abstract class ModuleBasePage extends TabPage
   /**
    * Must implemented by child pages to actually insert or update a module.
    *
-   * @return null
+   * @return void
    */
-  abstract protected function databaseAction();
+  abstract protected function databaseAction(): void;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $this->createForm();
     $this->loadValues();
@@ -60,15 +59,15 @@ abstract class ModuleBasePage extends TabPage
   /**
    * Loads the initial values of the form.
    *
-   * @return null
+   * @return void
    */
-  abstract protected function loadValues();
+  abstract protected function loadValues(): void;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Creates the form shown on this page.
    */
-  private function createForm()
+  private function createForm(): void
   {
     $words = Abc::$DL->abcBabelWordGroupGetAllWords(C::WDG_ID_MODULE, $this->lanId);
 
@@ -99,7 +98,7 @@ abstract class ModuleBasePage extends TabPage
   /**
    * Executes the form shown on this page.
    */
-  private function executeForm()
+  private function executeForm(): void
   {
     $method = $this->form->execute();
     switch ($method)
@@ -117,7 +116,7 @@ abstract class ModuleBasePage extends TabPage
   /**
    * Handles the form submit.
    */
-  private function handleForm()
+  private function handleForm(): void
   {
     $this->databaseAction();
 

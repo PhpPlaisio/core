@@ -1,12 +1,11 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\TableColumn\System;
 
 use SetBased\Abc\Core\Page\System\PageDetailsPage;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Table\TableColumn\DualTableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * A dual table column with the ID and class of a page.
  */
@@ -27,7 +26,7 @@ class PageTableColumn extends DualTableColumn
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function getHtmlCell(array $row): string
   {

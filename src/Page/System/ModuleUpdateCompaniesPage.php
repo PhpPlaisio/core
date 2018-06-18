@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
@@ -16,7 +16,6 @@ use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for granting or revoking a module to or from companies.
  */
@@ -67,7 +66,7 @@ class ModuleUpdateCompaniesPage extends TabPage
    *
    * @return string
    */
-  public static function getUrl($modId)
+  public static function getUrl(int $modId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_MODULE_UPDATE_COMPANIES, 'pag');
     $url .= self::putCgiId('mdl', $modId, 'mdl');
@@ -77,9 +76,9 @@ class ModuleUpdateCompaniesPage extends TabPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $this->showModule();
 
@@ -91,7 +90,7 @@ class ModuleUpdateCompaniesPage extends TabPage
   /**
    * Creates the form shown on this page.
    */
-  private function createForm()
+  private function createForm(): void
   {
     // Get all available pages.
     $pages = Abc::$DL->abcSystemModuleGetAvailableCompanies($this->modId);
@@ -130,7 +129,7 @@ class ModuleUpdateCompaniesPage extends TabPage
   /**
    * Handles the form submit, i.e. add or removes pages to the functionality.
    */
-  private function databaseAction()
+  private function databaseAction(): void
   {
     $changes = $this->form->getChangedControls();
     $values  = $this->form->getValues();
@@ -158,7 +157,7 @@ class ModuleUpdateCompaniesPage extends TabPage
   /**
    * Executes the form shown on this page.
    */
-  private function executeForm()
+  private function executeForm(): void
   {
     $method = $this->form->execute();
     switch ($method)
@@ -176,7 +175,7 @@ class ModuleUpdateCompaniesPage extends TabPage
   /**
    * Handles the form submit.
    */
-  private function handleForm()
+  private function handleForm(): void
   {
     $this->databaseAction();
 
@@ -187,7 +186,7 @@ class ModuleUpdateCompaniesPage extends TabPage
   /**
    * Echos brief info about the functionality.
    */
-  private function showModule()
+  private function showModule(): void
   {
     $table = new CoreDetailTable();
 

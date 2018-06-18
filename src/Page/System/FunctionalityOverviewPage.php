@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
@@ -11,7 +11,6 @@ use SetBased\Abc\Core\TableColumn\Company\FunctionalityTableColumn;
 use SetBased\Abc\Core\TableColumn\Company\ModuleTableColumn;
 use SetBased\Abc\Core\TableColumn\System\FunctionalityUpdateIconTableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page with an overview all functionalities.
  */
@@ -23,16 +22,16 @@ class FunctionalityOverviewPage extends TabPage
    *
    * @return string
    */
-  public static function getUrl()
+  public static function getUrl(): string
   {
     return self::putCgiId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_OVERVIEW, 'pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $functionalities = Abc::$DL->abcSystemFunctionalityGetAll($this->lanId);
 

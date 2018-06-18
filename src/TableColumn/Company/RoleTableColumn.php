@@ -1,14 +1,11 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\TableColumn\Company;
-
-
 
 use SetBased\Abc\Core\Page\Company\RoleDetailsPage;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Table\TableColumn\DualTableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * A dual table column with the ID and the name of a role.
  */
@@ -29,7 +26,7 @@ class RoleTableColumn extends DualTableColumn
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function getHtmlCell(array $row): string
   {

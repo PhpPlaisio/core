@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
@@ -12,8 +12,6 @@ use SetBased\Abc\Core\TableColumn\System\RoleGroupUpdateIconTableColumn;
 use SetBased\Abc\Table\TableColumn\NumericTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
-
 /**
  * Page with an overview of all role groups.
  */
@@ -25,16 +23,16 @@ class RoleGroupOverviewPage extends TabPage
    *
    * @return string
    */
-  public static function getUrl()
+  public static function getUrl(): string
   {
     return self::putCgiId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_OVERVIEW, 'pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $roles = Abc::$DL->abcSystemRoleGroupGetAll($this->lanId);
 

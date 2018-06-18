@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Misc;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\Core\Page\TabPage;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * The home page.
  */
@@ -17,14 +16,14 @@ class IndexPage extends TabPage
    *
    * @return string
    */
-  public static function getUrl()
+  public static function getUrl(): string
   {
     return '/';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function echoPage()
   {
@@ -42,7 +41,7 @@ class IndexPage extends TabPage
   /**
    * Shows the page content for an identified user, i.e. a user that has logged in.
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     echo 'System content';
   }
@@ -51,7 +50,7 @@ class IndexPage extends TabPage
   /**
    * Shows the page content for an anonymous in, i.e. a user that is not logged in.
    */
-  private function showAnonymousPage()
+  private function showAnonymousPage(): void
   {
     echo '<?xml version="1.0" encoding="UTF-8"?>';
     echo '<!DOCTYPE html PUBLIC "-//W3C//Dtd XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/Dtd/xhtml1-strict.dtd">';

@@ -1,10 +1,9 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\TableAction;
 
 use SetBased\Abc\Helper\Html;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Parent class for table actions for uploading data.
  */
@@ -27,9 +26,9 @@ class UploadItemTableAction implements TableAction
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  public function getHtml()
+  public function getHtml(): string
   {
     $ret = '<a';
     $ret .= Html::generateAttribute('href', $this->url);

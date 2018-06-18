@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Company;
 
 use SetBased\Abc\Abc;
@@ -12,7 +12,6 @@ use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SubmitControl;
 use SetBased\Abc\Helper\HttpHeader;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for modifying the granted functionalities to a role.
  */
@@ -62,7 +61,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
    *
    * @return string
    */
-  public static function getUrl($targetCmpId, $rolId)
+  public static function getUrl(int $targetCmpId, int $rolId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_COMPANY_ROLE_UPDATE_FUNCTIONALITIES, 'pag');
     $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
@@ -73,9 +72,9 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $this->createForm();
     $this->executeForm();
@@ -85,7 +84,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
   /**
    * Creates the form shown on this page.
    */
-  private function createForm()
+  private function createForm(): void
   {
     // Get all available functionalities.
     $pages = Abc::$DL->abcCompanyRoleGetAvailableFunctionalities($this->targetCmpId, $this->rolId, $this->lanId);
@@ -124,7 +123,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
   /**
    * Grants and revokes functionalities from the role.
    */
-  private function databaseAction()
+  private function databaseAction(): void
   {
     $changes = $this->form->getChangedControls();
     $values  = $this->form->getValues();
@@ -152,7 +151,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
   /**
    * Executes the form shown on this page.
    */
-  private function executeForm()
+  private function executeForm(): void
   {
     $method = $this->form->execute();
     switch ($method)
@@ -170,7 +169,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
   /**
    * Handles the form submit.
    */
-  private function handleForm()
+  private function handleForm(): void
   {
     $this->databaseAction();
 

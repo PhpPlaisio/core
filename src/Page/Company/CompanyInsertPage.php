@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Company;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for inserting a company.
  */
@@ -26,7 +25,7 @@ class CompanyInsertPage extends CompanyBasePage
   /**
    * Returns the relative URL for this page.
    */
-  public static function getUrl()
+  public static function getUrl(): string
   {
     return self::putCgiId('pag', C::PAG_ID_COMPANY_INSERT, 'pag');
   }
@@ -35,7 +34,7 @@ class CompanyInsertPage extends CompanyBasePage
   /**
    * Actually insert the company.
    */
-  protected function databaseAction()
+  protected function databaseAction(): void
   {
     $values = $this->form->getValues();
 
@@ -44,9 +43,9 @@ class CompanyInsertPage extends CompanyBasePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function loadValues()
+  protected function loadValues(): void
   {
     // Nothing to do.
   }

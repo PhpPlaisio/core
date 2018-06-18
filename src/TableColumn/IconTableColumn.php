@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\TableColumn;
 
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Table\TableColumn\TableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Abstract table column for columns with icons.
  */
@@ -95,7 +94,7 @@ abstract class IconTableColumn extends TableColumn
    *
    * @return string
    */
-  abstract public function getUrl($row);
+  abstract public function getUrl(array $row): string;
 
   //--------------------------------------------------------------------------------------------------------------------
 }

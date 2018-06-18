@@ -1,9 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Form\SlatControlFactory;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\Form\Control\CheckboxControl;
+use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SlatControl;
 use SetBased\Abc\Form\Control\SlatControlFactory;
 use SetBased\Abc\Form\Control\TableColumnControl;
@@ -13,7 +14,6 @@ use SetBased\Abc\Obfuscator\Obfuscator;
 use SetBased\Abc\Table\TableColumn\NumericTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Slat control factory for creating slat controls for updating the functionality that grant access to a page.
  */
@@ -58,13 +58,13 @@ class SystemPageUpdateFunctionalitiesSlatControlFactory extends SlatControlFacto
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  public function createRow($louverControl, $data)
+  public function createRow(LouverControl $louverControl, array $data): SlatControl
   {
-    /** @var SlatControl $row */
-    $row = $louverControl->addFormControl(new SlatControl($data['fun_id']));
+    $row = new SlatControl($data['fun_id']);
     $row->setObfuscator($this->funIdObfuscator);
+    $louverControl->addFormControl($row);
 
     /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'mdl_id');
@@ -85,6 +85,8 @@ class SystemPageUpdateFunctionalitiesSlatControlFactory extends SlatControlFacto
     /** @var CheckboxControl $control */
     $control = $this->createFormControl($row, 'fun_checked');
     $control->setValue($data['fun_checked']);
+
+    return $row;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

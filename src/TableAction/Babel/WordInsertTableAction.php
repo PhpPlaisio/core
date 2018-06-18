@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\TableAction\Babel;
 
 use SetBased\Abc\Core\Page\Babel\WordInsertPage;
 use SetBased\Abc\Core\TableAction\InsertItemTableAction;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Table action for inserting a word.
  */
@@ -17,7 +16,7 @@ class WordInsertTableAction extends InsertItemTableAction
    *
    * @param int $wdgId The ID of the word group of the new word.
    */
-  public function __construct($wdgId)
+  public function __construct(int $wdgId)
   {
     $this->url = WordInsertPage::getUrl($wdgId);
 

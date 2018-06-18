@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Company;
 
 use SetBased\Abc\Abc;
@@ -48,7 +48,7 @@ class RoleDetailsPage extends CompanyPage
    *
    * @return string
    */
-  public static function getUrl($targetCmpId, $rolId)
+  public static function getUrl(int $targetCmpId, int $rolId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_COMPANY_ROLE_DETAILS, 'pag');
     $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
@@ -59,9 +59,9 @@ class RoleDetailsPage extends CompanyPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $this->showRole();
 
@@ -74,7 +74,7 @@ class RoleDetailsPage extends CompanyPage
   /**
    * Shows the functionalities that are granted to the role shown on this page.
    */
-  private function showFunctionalities()
+  private function showFunctionalities(): void
   {
     $functionalities = Abc::$DL->abcCompanyRoleGetFunctionalities($this->targetCmpId, $this->rolId, $this->lanId);
 
@@ -101,7 +101,7 @@ class RoleDetailsPage extends CompanyPage
   /**
    * Show the pages that the functionality shown on this page grants access to.
    */
-  private function showPages()
+  private function showPages(): void
   {
     $pages = Abc::$DL->abcCompanyRoleGetPages($this->targetCmpId, $this->rolId, $this->lanId);
 
@@ -125,7 +125,7 @@ class RoleDetailsPage extends CompanyPage
   /**
    * Echos brief info about the role.
    */
-  private function showRole()
+  private function showRole(): void
   {
     $details = Abc::$DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId, $this->lanId);
 

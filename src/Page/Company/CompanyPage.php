@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Company;
 
 use SetBased\Abc\Abc;
@@ -11,7 +11,6 @@ use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Exception\LogicException;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Abstract parent page for pages about companies.
  */
@@ -33,6 +32,7 @@ abstract class CompanyPage extends TabPage
   protected $targetCmpId;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    */
@@ -52,7 +52,7 @@ abstract class CompanyPage extends TabPage
    *
    * @return string The URL.
    */
-  public static function getChildUrl($pagId, $targetCmpId)
+  public static function getChildUrl(int $pagId, int $targetCmpId): string
   {
     $url = self::putCgiId('pag', $pagId, 'pag');
     $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
@@ -64,7 +64,7 @@ abstract class CompanyPage extends TabPage
   /**
    * Shows brief information about the target company.
    */
-  protected function echoDashboard()
+  protected function echoDashboard(): void
   {
     // Return immediately if the cmp_id is not set.
     if (!$this->targetCmpId) return;
@@ -86,9 +86,9 @@ abstract class CompanyPage extends TabPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     if ($this->targetCmpId)
     {
@@ -102,9 +102,9 @@ abstract class CompanyPage extends TabPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function getTabUrl($pagId)
+  protected function getTabUrl(int $pagId): ?string
   {
     if ($this->targetCmpId || $pagId==C::PAG_ID_COMPANY_OVERVIEW)
     {
@@ -120,7 +120,7 @@ abstract class CompanyPage extends TabPage
    *
    * @param CoreForm $form The form.
    */
-  protected function handleCompanyForm($form)
+  protected function handleCompanyForm(CoreForm $form): void
   {
     $values            = $form->getValues();
     $this->targetCmpId = Abc::$DL->abcCompanyGetCmpIdByCmpAbbr($values['cmp_abbr']);
@@ -130,8 +130,10 @@ abstract class CompanyPage extends TabPage
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Creates the form for selecting the target company.
+   *
+   * @return CoreForm
    */
-  private function createCompanyForm()
+  private function createCompanyForm(): CoreForm
   {
     $form = new CoreForm();
 
@@ -149,7 +151,7 @@ abstract class CompanyPage extends TabPage
   /**
    * Sets the target company.
    */
-  private function getCompany()
+  private function getCompany(): void
   {
     $form   = $this->createCompanyForm();
     $method = $form->execute();

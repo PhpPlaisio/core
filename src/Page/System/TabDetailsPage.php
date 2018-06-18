@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
@@ -12,7 +12,6 @@ use SetBased\Abc\Table\TableColumn\TextTableColumn;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page with information about a page group.
  */
@@ -45,7 +44,7 @@ class TabDetailsPage extends TabPage
    *
    * @return string
    */
-  public static function getUrl($tabId)
+  public static function getUrl(int $tabId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_TAB_DETAILS, 'pag');
     $url .= self::putCgiId('ptb', $tabId, 'ptb');
@@ -55,9 +54,9 @@ class TabDetailsPage extends TabPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $this->showDetails();
 
@@ -69,7 +68,7 @@ class TabDetailsPage extends TabPage
   /**
    * Echos the details of the page group.
    */
-  private function showDetails()
+  private function showDetails(): void
   {
     $details = Abc::$DL->abcSystemTabGetDetails($this->tabId, $this->lanId);
     $table   = new CoreDetailTable();
@@ -90,7 +89,7 @@ class TabDetailsPage extends TabPage
   /**
    * Echos an overview of all master pages of the page group.
    */
-  private function showMasterPages()
+  private function showMasterPages(): void
   {
     $pages = Abc::$DL->abcSystemTabGetMasterPages($this->tabId, $this->lanId);
 

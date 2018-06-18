@@ -1,12 +1,11 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\TableColumn\Company;
 
 use SetBased\Abc\Core\Page\System\ModuleDetailsPage;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Table\TableColumn\DualTableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * A dual table column with the ID and name of a module.
  */
@@ -27,7 +26,7 @@ class ModuleTableColumn extends DualTableColumn
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function getHtmlCell(array $row): string
   {

@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Company;
 
 use SetBased\Abc\Abc;
@@ -11,7 +11,6 @@ use SetBased\Abc\Core\TableColumn\Company\CompanyTableColumn;
 use SetBased\Abc\Core\TableColumn\Company\CompanyUpdateIconTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page with an overview of all companies.
  */
@@ -23,25 +22,25 @@ class CompanyOverviewPage extends CompanyPage
    *
    * @return string
    */
-  public static function getUrl()
+  public static function getUrl(): string
   {
     return self::putCgiId('pag', C::PAG_ID_COMPANY_OVERVIEW, 'pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  public function echoMainContent()
+  public function echoMainContent(): void
   {
     TabPage::echoMainContent();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $companies = Abc::$DL->abcCompanyGetAll();
 

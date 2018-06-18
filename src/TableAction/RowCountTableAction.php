@@ -1,10 +1,9 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\TableAction;
 
 use SetBased\Abc\Helper\Html;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * A pseudo table action showing the row count in a (overview) table body.
  */
@@ -24,16 +23,16 @@ class RowCountTableAction implements TableAction
    *
    * @param int $rowCount The number of rows in the table body.
    */
-  public function __construct($rowCount)
+  public function __construct(int $rowCount)
   {
     $this->rowCount = $rowCount;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  public function getHtml()
+  public function getHtml(): string
   {
     return '<span class="row_count">'.Html::txt2Html($this->rowCount).'</span>';
   }

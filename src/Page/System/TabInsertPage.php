@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Inserts a page group.
  */
@@ -28,7 +27,7 @@ class TabInsertPage extends TabBasePage
    *
    * @return string
    */
-  public static function getUrl()
+  public static function getUrl(): string
   {
     return self::putCgiId('pag', C::PAG_ID_SYSTEM_TAB_INSERT, 'pag');
   }
@@ -37,7 +36,7 @@ class TabInsertPage extends TabBasePage
   /**
    * Inserts a page group.
    */
-  protected function databaseAction()
+  protected function databaseAction(): void
   {
     $values = $this->form->getValues();
     if ($values['ptb_title'])
@@ -54,9 +53,9 @@ class TabInsertPage extends TabBasePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function loadValues()
+  protected function loadValues(): void
   {
     // Nothing to do.
   }

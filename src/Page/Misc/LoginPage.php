@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Misc;
 
 use SetBased\Abc\Abc;
@@ -51,7 +51,7 @@ class LoginPage extends CorePage
    *
    * @return string
    */
-  public static function getUrl($redirect = null)
+  public static function getUrl(?string $redirect = null): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_MISC_LOGIN, 'pag');
     $url .= self::putCgiUrl('redirect', $redirect);
@@ -61,7 +61,7 @@ class LoginPage extends CorePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function echoPage()
   {
@@ -98,7 +98,7 @@ class LoginPage extends CorePage
   /**
    * Creates the form shown on this page.
    */
-  private function createForm()
+  private function createForm(): void
   {
     $this->form = new CoreForm('', false);
 
@@ -120,7 +120,7 @@ class LoginPage extends CorePage
   /**
    * Echos the form shown on this page.
    */
-  private function echoForm()
+  private function echoForm(): void
   {
     echo $this->form->generate();
   }
@@ -129,7 +129,7 @@ class LoginPage extends CorePage
   /**
    * Executes the form shown on this page.
    */
-  private function executeForm()
+  private function executeForm(): void
   {
     $method = $this->form->execute();
     switch ($method)
@@ -147,7 +147,7 @@ class LoginPage extends CorePage
   /**
    * Handles the form submit.
    */
-  private function handleForm()
+  private function handleForm(): void
   {
     $login_succeeded = $this->login();
 
@@ -160,7 +160,7 @@ class LoginPage extends CorePage
    *
    * @return bool
    */
-  private function login()
+  private function login(): bool
   {
     $values = $this->form->getValues();
 
@@ -199,7 +199,7 @@ class LoginPage extends CorePage
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  private function showPageHeader()
+  private function showPageHeader(): void
   {
     echo '<!DOCTYPE html>';
     echo '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="nl" lang="nl" dir="ltr">';
@@ -212,7 +212,7 @@ class LoginPage extends CorePage
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  private function showPageTrailer()
+  private function showPageTrailer(): void
   {
     echo '</body></html>';
   }

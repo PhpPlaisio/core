@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Company;
 
 use SetBased\Abc\Abc;
@@ -8,7 +8,6 @@ use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableAction\Company\ModuleUpdateTableAction;
 use SetBased\Abc\Core\TableColumn\Company\ModuleTableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page with an overview of the enabled modules of a company.
  */
@@ -22,7 +21,7 @@ class ModuleOverviewPage extends CompanyPage
    *
    * @return string
    */
-  public static function getUrl($targetCmpId)
+  public static function getUrl(int $targetCmpId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_COMPANY_MODULE_OVERVIEW, 'pag');
     $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
@@ -32,9 +31,9 @@ class ModuleOverviewPage extends CompanyPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $modules = Abc::$DL->abcCompanyModuleGetAllEnabled($this->targetCmpId, $this->lanId);
 

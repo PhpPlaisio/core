@@ -1,12 +1,11 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\TableColumn\Babel;
 
 use SetBased\Abc\Core\Page\Babel\WordGroupDetailsPage;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Table\TableColumn\DualTableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * A dual table column with the ID and name of a word group.
  */
@@ -21,14 +20,13 @@ class WordGroupTableColumn extends DualTableColumn
   private $lanIdTarget;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    *
    * @param string|int|null $headerText  The header of this column.
    * @param int             $lanIdTarget The ID of the target language.
    */
-  public function __construct($headerText, $lanIdTarget)
+  public function __construct($headerText, int $lanIdTarget)
   {
     parent::__construct('numeric', 'text');
 
@@ -38,7 +36,7 @@ class WordGroupTableColumn extends DualTableColumn
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function getHtmlCell(array $row): string
   {

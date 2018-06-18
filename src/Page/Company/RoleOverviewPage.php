@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Company;
 
 use SetBased\Abc\Abc;
@@ -24,7 +24,7 @@ class RoleOverviewPage extends CompanyPage
    *
    * @return string
    */
-  public static function getUrl($targetCmpId)
+  public static function getUrl(int $targetCmpId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_COMPANY_ROLE_OVERVIEW, 'pag');
     $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
@@ -34,9 +34,9 @@ class RoleOverviewPage extends CompanyPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $roles = Abc::$DL->abcCompanyRoleGetAll($this->targetCmpId, $this->lanId);
 

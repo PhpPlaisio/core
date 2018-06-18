@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Babel;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for updating the details of a word.
  */
@@ -42,7 +41,7 @@ class WordUpdatePage extends WordBasePage
    *
    * @return string
    */
-  public static function getUrl($wrdId, $redirect = null)
+  public static function getUrl(int $wrdId, ?string $redirect = null): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_BABEL_WORD_UPDATE, 'pag');
     $url .= self::putCgiId('wrd', $wrdId, 'wrd');
@@ -55,7 +54,7 @@ class WordUpdatePage extends WordBasePage
   /**
    * Updates the details of the word.
    */
-  public function databaseAction()
+  public function databaseAction(): void
   {
     $values  = $this->form->getValues();
     $changes = $this->form->getChangedControls();
@@ -72,9 +71,9 @@ class WordUpdatePage extends WordBasePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function setValues()
+  protected function setValues(): void
   {
     $this->form->setValues($this->details);
   }

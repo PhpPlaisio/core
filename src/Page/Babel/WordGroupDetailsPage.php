@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Babel;
 
 use SetBased\Abc\Abc;
@@ -16,7 +16,6 @@ use SetBased\Abc\Table\TableColumn\TextTableColumn;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page with an overview of all words in a word group.
  */
@@ -61,7 +60,7 @@ class WordGroupDetailsPage extends BabelPage
    *
    * @return string
    */
-  public static function getUrl($wdgId, $targetLanId)
+  public static function getUrl(int $wdgId, int $targetLanId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_BABEL_WORD_GROUP_DETAILS, 'pag');
     $url .= self::putCgiId('wdg', $wdgId, 'wdg');
@@ -72,9 +71,9 @@ class WordGroupDetailsPage extends BabelPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  public function echoTabContent()
+  public function echoTabContent(): void
   {
     $this->selectLanguage();
 
@@ -90,7 +89,7 @@ class WordGroupDetailsPage extends BabelPage
   /**
    * Echos brief info about the word group.
    */
-  private function showWordGroupInfo()
+  private function showWordGroupInfo(): void
   {
     $table = new CoreDetailTable();
 
@@ -107,7 +106,7 @@ class WordGroupDetailsPage extends BabelPage
   /**
    * Echos an overview of all words in a word group.
    */
-  private function showWords()
+  private function showWords(): void
   {
     // Determine whether the user is a translator.
     $is_translator = ($this->actLanId!=$this->refLanId &&

@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Babel;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for inserting a word group.
  */
@@ -28,7 +27,7 @@ class WordGroupInsertPage extends WordGroupBasePage
    *
    * @return string
    */
-  public static function getUrl()
+  public static function getUrl(): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_BABEL_WORD_GROUP_INSERT, 'pag');
     $url .= self::putCgiId('act_lan', C::LAN_ID_BABEL_REFERENCE, 'lan');
@@ -40,7 +39,7 @@ class WordGroupInsertPage extends WordGroupBasePage
   /**
    * Actually inserts a word group.
    */
-  protected function databaseAction()
+  protected function databaseAction(): void
   {
     $values = $this->form->getValues();
 
@@ -49,9 +48,9 @@ class WordGroupInsertPage extends WordGroupBasePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function setValues()
+  protected function setValues(): void
   {
     // Nothing to do.
   }

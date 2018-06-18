@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
@@ -17,7 +17,6 @@ use SetBased\Abc\Core\TableRow\System\PageDetailsTableRow;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page with information about a (target) page.
  */
@@ -48,7 +47,7 @@ class PageDetailsPage extends TabPage
    *
    * @return string
    */
-  public static function getUrl($pagId)
+  public static function getUrl(int $pagId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_PAGE_DETAILS, 'pag');
     $url .= self::putCgiId('tar_pag', $pagId, 'pag');
@@ -58,9 +57,9 @@ class PageDetailsPage extends TabPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $this->showDetails();
 
@@ -74,7 +73,7 @@ class PageDetailsPage extends TabPage
   /**
    * Echos the details of a page.
    */
-  private function showDetails()
+  private function showDetails(): void
   {
     $details = Abc::$DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
     $table   = new CoreDetailTable();
@@ -113,7 +112,7 @@ class PageDetailsPage extends TabPage
   /**
    * Echos functionalities that grant access to the page shown on this page.
    */
-  private function showFunctionalities()
+  private function showFunctionalities(): void
   {
     $roles = Abc::$DL->abcSystemPageGetGrantedFunctionalities($this->targetPagId, $this->lanId);
 
@@ -135,7 +134,7 @@ class PageDetailsPage extends TabPage
   /**
    * Echos roles that are granted access to the page shown on this page.
    */
-  private function showGrantedRoles()
+  private function showGrantedRoles(): void
   {
     $roles = Abc::$DL->abcSystemPageGetGrantedRoles($this->targetPagId);
 

@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Babel;
 
 use SetBased\Abc\Abc;
@@ -11,7 +11,6 @@ use SetBased\Abc\Core\TableColumn\Babel\WordGroupUpdateIconTableColumn;
 use SetBased\Abc\Table\TableColumn\NumericTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page show an overview of all word groups.
  */
@@ -25,7 +24,7 @@ class WordGroupOverviewPage extends BabelPage
    *
    * @return string
    */
-  public static function getUrl($targetLanId = null)
+  public static function getUrl(?int $targetLanId = null): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_BABEL_WORD_GROUP_OVERVIEW, 'pag');
     $url .= self::putCgiId('act_lan', $targetLanId, 'lan');
@@ -35,9 +34,9 @@ class WordGroupOverviewPage extends BabelPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $this->selectLanguage();
 
@@ -51,7 +50,7 @@ class WordGroupOverviewPage extends BabelPage
   /**
    * Shows the overview of all word groups.
    */
-  private function showWordGroups()
+  private function showWordGroups(): void
   {
     $groups = Abc::$DL->abcBabelWordGroupGetAll($this->actLanId);
 

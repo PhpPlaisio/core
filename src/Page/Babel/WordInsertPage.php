@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Babel;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for inserting a word.
  */
@@ -31,7 +30,7 @@ class WordInsertPage extends WordBasePage
    *
    * @return string
    */
-  public static function getUrl($wdgId)
+  public static function getUrl(int $wdgId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_BABEL_WORD_INSERT, 'pag');
     $url .= self::putCgiId('wdg', $wdgId, 'wdg');
@@ -44,7 +43,7 @@ class WordInsertPage extends WordBasePage
   /**
    * Inserts a word.
    */
-  protected function databaseAction()
+  protected function databaseAction(): void
   {
     $values = $this->form->getValues();
 
@@ -56,9 +55,9 @@ class WordInsertPage extends WordBasePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function setValues()
+  protected function setValues(): void
   {
     // Nothing to do.
   }

@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
@@ -10,7 +10,6 @@ use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\HttpHeader;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Abstract parent page for inserting and updating a functionality.
  */
@@ -42,15 +41,15 @@ abstract class FunctionalityBasePage extends TabPage
   /**
    * Must implemented by child pages to actually insert or update a functionality.
    *
-   * @return null
+   * @return void
    */
-  abstract protected function dataBaseAction();
+  abstract protected function dataBaseAction(): void;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $this->createForm();
     $this->loadValues();
@@ -61,15 +60,15 @@ abstract class FunctionalityBasePage extends TabPage
   /**
    * Loads the initial values of the form.
    *
-   * @return null
+   * @return void
    */
-  abstract protected function loadValues();
+  abstract protected function loadValues(): void;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Creates the form shown on this page.
    */
-  private function createForm()
+  private function createForm(): void
   {
     $modules = Abc::$DL->abcSystemModuleGetAll($this->lanId);
     $words   = Abc::$DL->abcBabelWordGroupGetAllWords(C::WDG_ID_FUNCTIONALITIES, $this->lanId);
@@ -101,7 +100,7 @@ abstract class FunctionalityBasePage extends TabPage
   /**
    * Executes the form shown on this page.
    */
-  private function executeForm()
+  private function executeForm(): void
   {
     $method = $this->form->execute();
     switch ($method)
@@ -119,7 +118,7 @@ abstract class FunctionalityBasePage extends TabPage
   /**
    * Handles the form submit.
    */
-  private function handleForm()
+  private function handleForm(): void
   {
     $this->dataBaseAction();
 

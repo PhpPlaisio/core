@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
@@ -17,7 +17,6 @@ use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for modifying the functionalities that grant access to a target page.
  */
@@ -61,11 +60,11 @@ class PageUpdateFunctionalitiesPage extends TabPage
   /**
    * Returns the relative URL to this page.
    *
-   * @param int $pagId
+   * @param int $pagId The Id of the target page.
    *
    * @return string
    */
-  public static function getUrl($pagId)
+  public static function getUrl(int $pagId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_PAGE_UPDATE_FUNCTIONALITIES, 'pag');
     $url .= self::putCgiId('tar_pag', $pagId, 'pag');
@@ -77,7 +76,7 @@ class PageUpdateFunctionalitiesPage extends TabPage
   /**
    * Updates the functionalities that grant access to the target page.
    */
-  protected function databaseAction()
+  protected function databaseAction(): void
   {
     $changes = $this->form->getChangedControls();
     $values  = $this->form->getValues();
@@ -103,9 +102,9 @@ class PageUpdateFunctionalitiesPage extends TabPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $this->showPageDetails();
 
@@ -117,7 +116,7 @@ class PageUpdateFunctionalitiesPage extends TabPage
   /**
    * Creates the form shown on this page.
    */
-  private function createForm()
+  private function createForm(): void
   {
     // Get all functionalities.
     $pages = Abc::$DL->abcSystemPageGetAvailableFunctionalities($this->targetPagId, $this->lanId);
@@ -156,7 +155,7 @@ class PageUpdateFunctionalitiesPage extends TabPage
   /**
    * Executes the form shown on this page.
    */
-  private function executeForm()
+  private function executeForm(): void
   {
     $method = $this->form->execute();
     switch ($method)
@@ -174,7 +173,7 @@ class PageUpdateFunctionalitiesPage extends TabPage
   /**
    * Handles the form submit.
    */
-  private function handleForm()
+  private function handleForm(): void
   {
     $this->databaseAction();
 
@@ -185,7 +184,7 @@ class PageUpdateFunctionalitiesPage extends TabPage
   /**
    * Echos the details of the target page.
    */
-  private function showPageDetails()
+  private function showPageDetails(): void
   {
     $details = Abc::$DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
     $table   = new CoreDetailTable();

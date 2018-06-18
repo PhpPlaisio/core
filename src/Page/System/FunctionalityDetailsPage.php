@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
@@ -16,7 +16,6 @@ use SetBased\Abc\Table\TableColumn\TextTableColumn;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page with information about a functionality.
  */
@@ -38,9 +37,8 @@ class FunctionalityDetailsPage extends TabPage
   private $funId;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
-   * {inheritdoc}
+   * @inheritdoc
    */
   public function __construct()
   {
@@ -61,7 +59,7 @@ class FunctionalityDetailsPage extends TabPage
    *
    * @return string
    */
-  public static function getUrl($funId)
+  public static function getUrl(int $funId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_DETAILS, 'pag');
     $url .= self::putCgiId('fun', $funId, 'fun');
@@ -71,9 +69,9 @@ class FunctionalityDetailsPage extends TabPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $this->showDetails();
 
@@ -86,7 +84,7 @@ class FunctionalityDetailsPage extends TabPage
   /**
    * Echos the details of a functionality.
    */
-  private function showDetails()
+  private function showDetails(): void
   {
     $table = new CoreDetailTable();
 
@@ -106,7 +104,7 @@ class FunctionalityDetailsPage extends TabPage
   /**
    * Echos the pages that the functionality grants access to.
    */
-  private function showPages()
+  private function showPages(): void
   {
     $pages = Abc::$DL->abcSystemFunctionalityGetPages($this->funId, $this->lanId);
 
@@ -131,7 +129,7 @@ class FunctionalityDetailsPage extends TabPage
   /**
    * Show the roles that are granted the functionality.
    */
-  private function showRoles()
+  private function showRoles(): void
   {
     $roles = Abc::$DL->abcSystemFunctionalityGetRoles($this->funId);
 

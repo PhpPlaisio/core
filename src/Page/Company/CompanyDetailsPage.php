@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Company;
 
 use SetBased\Abc\Abc;
@@ -9,7 +9,6 @@ use SetBased\Abc\Core\TableAction\Company\CompanyUpdateTableAction;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page with details of a company.
  */
@@ -42,7 +41,7 @@ class CompanyDetailsPage extends CompanyPage
    *
    * @return string
    */
-  public static function getUrl($targetCmpId)
+  public static function getUrl(int $targetCmpId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_COMPANY_DETAILS, 'pag');
     $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
@@ -52,9 +51,9 @@ class CompanyDetailsPage extends CompanyPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $this->showCompanyDetails();
   }
@@ -63,7 +62,7 @@ class CompanyDetailsPage extends CompanyPage
   /**
    * Show the details of the company.
    */
-  private function showCompanyDetails()
+  private function showCompanyDetails(): void
   {
     $table = new CoreDetailTable();
 

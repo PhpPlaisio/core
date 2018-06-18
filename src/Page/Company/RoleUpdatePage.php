@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Company;
 
 use SetBased\Abc\Abc;
@@ -40,7 +40,7 @@ class RoleUpdatePage extends RoleBasePage
    *
    * @return string
    */
-  public static function getUrl($targetCmpId, $rolId)
+  public static function getUrl(int $targetCmpId, int $rolId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_COMPANY_ROLE_UPDATE, 'pag');
     $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
@@ -53,7 +53,7 @@ class RoleUpdatePage extends RoleBasePage
   /**
    * Update the details of the role.
    */
-  protected function databaseAction()
+  protected function databaseAction(): void
   {
     $changes = $this->form->getChangedControls();
     $values  = $this->form->getValues();
@@ -71,9 +71,9 @@ class RoleUpdatePage extends RoleBasePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function loadValues()
+  protected function loadValues(): void
   {
     $this->form->setValues($this->details);
   }

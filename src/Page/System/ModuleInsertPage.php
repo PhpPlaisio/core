@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for inserting a module.
  */
@@ -28,7 +27,7 @@ class ModuleInsertPage extends ModuleBasePage
    *
    * @return string
    */
-  public static function getUrl()
+  public static function getUrl(): string
   {
     return self::putCgiId('pag', C::PAG_ID_SYSTEM_MODULE_INSERT, 'pag');
   }
@@ -37,7 +36,7 @@ class ModuleInsertPage extends ModuleBasePage
   /**
    * Inserts a module.
    */
-  protected function dataBaseAction()
+  protected function dataBaseAction(): void
   {
     $changes = $this->form->getChangedControls();
     $values  = $this->form->getValues();
@@ -62,9 +61,9 @@ class ModuleInsertPage extends ModuleBasePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function loadValues()
+  protected function loadValues(): void
   {
     // Nothing to do.
   }

@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\TableColumn;
 
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Table\TableColumn\TableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Table column for cells with an icon for boolean values.
  */
@@ -30,12 +29,12 @@ class BoolIconTableColumn extends TableColumn
   /**
    * Object constructor.
    *
-   * @param string|int|null $headerText    The header text of this table column.
-   * @param string          $fieldName     The key to be used for getting the value from the data row.
-   * @param bool            $showFalse     If set for false values an icon is shown, otherwise the cell is empty for
-   *                                       false values.
+   * @param string|int|null $headerText The header text of this table column.
+   * @param string          $fieldName  The key to be used for getting the value from the data row.
+   * @param bool            $showFalse  If set for false values an icon is shown, otherwise the cell is empty for
+   *                                    false values.
    */
-  public function __construct($headerText, $fieldName, $showFalse = false)
+  public function __construct($headerText, string $fieldName, bool $showFalse = false)
   {
     parent::__construct('bool');
 
@@ -46,7 +45,7 @@ class BoolIconTableColumn extends TableColumn
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
   public function getHtmlCell(array $row): string
   {

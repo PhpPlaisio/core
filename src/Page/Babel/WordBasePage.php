@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Babel;
 
 use SetBased\Abc\Abc;
@@ -14,7 +14,6 @@ use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Abstract parent page for pages for inserting and updating a word.
  */
@@ -53,15 +52,15 @@ abstract class WordBasePage extends BabelPage
   /**
    * Must implemented by child pages to actually insert or update a word.
    *
-   * @return null
+   * @return void
    */
-  abstract protected function databaseAction();
+  abstract protected function databaseAction(): void;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $this->echoWordGroupInfo();
 
@@ -74,15 +73,15 @@ abstract class WordBasePage extends BabelPage
   /**
    * Sets the initial values of the form shown on this page.
    *
-   * @return null
+   * @return void
    */
-  abstract protected function setValues();
+  abstract protected function setValues(): void;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Creates the form shown on this page.
    */
-  private function createForm()
+  private function createForm(): void
   {
     $ref_language = Abc::$DL->abcBabelLanguageGetName($this->refLanId, $this->refLanId);
 
@@ -126,7 +125,7 @@ abstract class WordBasePage extends BabelPage
   /**
    * Echos brief info of the word group of the word.
    */
-  private function echoWordGroupInfo()
+  private function echoWordGroupInfo(): void
   {
     $group = Abc::$DL->abcBabelWordGroupGetDetails($this->wdgId);
 
@@ -145,7 +144,7 @@ abstract class WordBasePage extends BabelPage
   /**
    * Executes the form shown on this page.
    */
-  private function executeForm()
+  private function executeForm(): void
   {
     $method = $this->form->execute();
     switch ($method)
@@ -163,7 +162,7 @@ abstract class WordBasePage extends BabelPage
   /**
    * Handles the form submit.
    */
-  private function handleForm()
+  private function handleForm(): void
   {
     $this->databaseAction();
 

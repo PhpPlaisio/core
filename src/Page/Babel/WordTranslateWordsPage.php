@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Babel;
 
 use SetBased\Abc\Abc;
@@ -12,7 +12,6 @@ use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SubmitControl;
 use SetBased\Abc\Helper\HttpHeader;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for translating all words in a word group.
  */
@@ -60,7 +59,7 @@ class WordTranslateWordsPage extends BabelPage
    *
    * @return string
    */
-  public static function getUrl($wdgId, $lanId)
+  public static function getUrl(int $wdgId, int $lanId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_BABEL_WORD_TRANSLATE_WORDS, 'pag');
     $url .= self::putCgiId('wdg', $wdgId, 'wdg');
@@ -71,9 +70,9 @@ class WordTranslateWordsPage extends BabelPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  public function echoTabContent()
+  public function echoTabContent(): void
   {
     $this->createForm();
     $this->executeForm();
@@ -83,7 +82,7 @@ class WordTranslateWordsPage extends BabelPage
   /**
    * Creates the form shown on this page.
    */
-  private function createForm()
+  private function createForm(): void
   {
     $words = Abc::$DL->abcBabelWordGroupGetAllWordsTranslator($this->wdgId, $this->actLanId);
 
@@ -120,7 +119,7 @@ class WordTranslateWordsPage extends BabelPage
   /**
    * Updates the translations of the words in the target language.
    */
-  private function databaseAction()
+  private function databaseAction(): void
   {
     $values  = $this->form->getValues();
     $changes = $this->form->getChangedControls();
@@ -135,7 +134,7 @@ class WordTranslateWordsPage extends BabelPage
   /**
    * Executes the form shown on this page.
    */
-  private function executeForm()
+  private function executeForm(): void
   {
     $method = $this->form->execute();
     switch ($method)
@@ -153,7 +152,7 @@ class WordTranslateWordsPage extends BabelPage
   /**
    * Handles the form submit.
    */
-  private function handleForm()
+  private function handleForm(): void
   {
     $this->databaseAction();
 

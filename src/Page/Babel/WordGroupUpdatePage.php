@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Babel;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for updating the details of a word group.
  */
@@ -36,11 +35,11 @@ class WordGroupUpdatePage extends WordGroupBasePage
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $wdgId
+   * @param int $wdgId The ID of the word group.
    *
    * @return string
    */
-  public static function getUrl($wdgId)
+  public static function getUrl(int $wdgId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_BABEL_WORD_GROUP_UPDATE, 'pag');
     $url .= self::putCgiId('wdg', $wdgId, 'wdg');
@@ -53,7 +52,7 @@ class WordGroupUpdatePage extends WordGroupBasePage
   /**
    * Updates the word group.
    */
-  protected function databaseAction()
+  protected function databaseAction(): void
   {
     $values = $this->form->getValues();
 
@@ -62,9 +61,9 @@ class WordGroupUpdatePage extends WordGroupBasePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function setValues()
+  protected function setValues(): void
   {
     $this->form->setValues($this->details);
   }

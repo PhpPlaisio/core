@@ -2,7 +2,8 @@
 
 namespace SetBased\Abc\Core\Form\Validator;
 
-//----------------------------------------------------------------------------------------------------------------------
+use SetBased\Abc\Form\Control\Control;
+
 /**
  * Validator for validating that a form control has been filled out.
  */
@@ -22,16 +23,16 @@ class MandatoryValidator extends \SetBased\Abc\Form\Validator\MandatoryValidator
    *
    * @param int $txtId The text ID of the error message.
    */
-  public function __construct($txtId)
+  public function __construct(int $txtId)
   {
     $this->txtId = $txtId;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  public function validate($control)
+  public function validate(Control $control): bool
   {
     $valid = parent::validate($control);
 

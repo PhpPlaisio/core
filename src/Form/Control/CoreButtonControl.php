@@ -1,10 +1,9 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Form\Control;
 
 use SetBased\Abc\Form\Control\ComplexControl;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * A complex control with buttons.
  */
@@ -12,9 +11,9 @@ class CoreButtonControl extends ComplexControl
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  public function generate()
+  public function generate(): string
   {
     $html = $this->prefix;
     $html .= '<table class="button">';

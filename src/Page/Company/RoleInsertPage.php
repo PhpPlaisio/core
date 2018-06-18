@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Company;
 
 use SetBased\Abc\Abc;
@@ -29,7 +29,7 @@ class RoleInsertPage extends RoleBasePage
    *
    * @return string
    */
-  public static function getUrl($targetCmpId)
+  public static function getUrl(int $targetCmpId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_COMPANY_ROLE_INSERT, 'pag');
     $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
@@ -41,7 +41,7 @@ class RoleInsertPage extends RoleBasePage
   /**
    * Inserts a new role.
    */
-  protected function databaseAction()
+  protected function databaseAction(): void
   {
     $values = $this->form->getValues();
 
@@ -54,9 +54,9 @@ class RoleInsertPage extends RoleBasePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function loadValues()
+  protected function loadValues(): void
   {
     // Nothing to do.
   }

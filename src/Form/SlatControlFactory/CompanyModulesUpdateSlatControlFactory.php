@@ -1,9 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Form\SlatControlFactory;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\Form\Control\CheckboxControl;
+use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SlatControl;
 use SetBased\Abc\Form\Control\SlatControlFactory;
 use SetBased\Abc\Form\Control\TableColumnControl;
@@ -12,7 +13,6 @@ use SetBased\Abc\Form\SlatJoint\TableColumnSlatJoint;
 use SetBased\Abc\Obfuscator\Obfuscator;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Slat control factory for creating slat controls for enabling or disabling active modules of a company.
  */
@@ -45,13 +45,13 @@ class CompanyModulesUpdateSlatControlFactory extends SlatControlFactory
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  public function createRow($louverControl, $data)
+  public function createRow(LouverControl $louverControl, array $data): SlatControl
   {
-    /** @var SlatControl $row */
-    $row = $louverControl->addFormControl(new SlatControl($data['mdl_id']));
+    $row = new SlatControl($data['mdl_id']);
     $row->setObfuscator($this->mdlIdObfuscator);
+    $louverControl->addFormControl($row);
 
     /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'mdl_name');
@@ -60,6 +60,8 @@ class CompanyModulesUpdateSlatControlFactory extends SlatControlFactory
     /** @var CheckboxControl $control */
     $control = $this->createFormControl($row, 'mdl_enabled');
     $control->setValue($data['mdl_enabled']);
+
+    return $row;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

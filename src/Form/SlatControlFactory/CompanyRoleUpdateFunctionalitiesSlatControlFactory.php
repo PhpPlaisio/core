@@ -1,9 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Form\SlatControlFactory;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\Form\Control\CheckboxControl;
+use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SlatControl;
 use SetBased\Abc\Form\Control\SlatControlFactory;
 use SetBased\Abc\Form\Control\TableColumnControl;
@@ -12,7 +13,6 @@ use SetBased\Abc\Form\SlatJoint\TableColumnSlatJoint;
 use SetBased\Abc\Obfuscator\Obfuscator;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Slat control factory for creating slat joints for updating enabled functionalities.
  */
@@ -51,13 +51,13 @@ class CompanyRoleUpdateFunctionalitiesSlatControlFactory extends SlatControlFact
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  public function createRow($louverControl, $data)
+  public function createRow(LouverControl $louverControl, array $data): SlatControl
   {
-    /** @var SlatControl $row */
-    $row = $louverControl->addFormControl(new SlatControl($data['fun_id']));
+    $row = new SlatControl($data['fun_id']);
     $row->setObfuscator($this->funIdObfuscator);
+    $louverControl->addFormControl($row);
 
     /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'mdl_name');
@@ -70,6 +70,8 @@ class CompanyRoleUpdateFunctionalitiesSlatControlFactory extends SlatControlFact
     /** @var CheckboxControl $control */
     $control = $this->createFormControl($row, 'fun_enabled');
     $control->setValue($data['fun_enabled']);
+
+    return $row;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

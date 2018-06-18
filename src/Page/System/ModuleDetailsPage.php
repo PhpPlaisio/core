@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
@@ -14,7 +14,6 @@ use SetBased\Abc\Core\TableColumn\Company\FunctionalityTableColumn;
 use SetBased\Abc\Table\TableRow\NumericTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page with the details of a module.
  */
@@ -58,7 +57,7 @@ class ModuleDetailsPage extends TabPage
    *
    * @return string
    */
-  public static function getUrl($mdlId)
+  public static function getUrl(int $mdlId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_MODULE_DETAILS, 'pag');
     $url .= self::putCgiId('mdl', $mdlId, 'mdl');
@@ -68,9 +67,9 @@ class ModuleDetailsPage extends TabPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $this->showDetails();
 
@@ -83,7 +82,7 @@ class ModuleDetailsPage extends TabPage
   /**
    * Echos an overview table with all companies that are granted this module.
    */
-  private function showCompanies()
+  private function showCompanies(): void
   {
     $functions = Abc::$DL->abcSystemModuleGetGrantedCompanies($this->mdlId);
 
@@ -102,7 +101,7 @@ class ModuleDetailsPage extends TabPage
   /**
    * Echos the details the module.
    */
-  private function showDetails()
+  private function showDetails(): void
   {
     $table = new CoreDetailTable();
 
@@ -122,7 +121,7 @@ class ModuleDetailsPage extends TabPage
   /**
    * Echos an overview table with all functionalities provides by the module.
    */
-  private function showFunctionalities()
+  private function showFunctionalities(): void
   {
     $functions = Abc::$DL->abcSystemModuleGetFunctions($this->mdlId, $this->lanId);
 

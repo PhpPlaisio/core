@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Table;
 
 use SetBased\Abc\Core\TableAction\TableAction;
 use SetBased\Abc\Table\DetailTable;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Extends \SetBased\Abc\Table\DetailTable with table actions.
  */
@@ -42,7 +41,7 @@ class CoreDetailTable extends DetailTable
    * @param string      $groupName   The group to witch the table action must be added.
    * @param TableAction $tableAction The table action.
    */
-  public function addTableAction($groupName, $tableAction)
+  public function addTableAction(string $groupName, TableAction $tableAction): void
   {
     $this->tablesActionGroups[$groupName][] = $tableAction;
   }
@@ -111,9 +110,9 @@ class CoreDetailTable extends DetailTable
    *
    * @param bool $flag If empty table actions are not shown.
    */
-  public function setShowTableActions($flag)
+  public function setShowTableActions(bool $flag): void
   {
-    $this->showTableActions = ($flag) ? true : false;
+    $this->showTableActions = $flag;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

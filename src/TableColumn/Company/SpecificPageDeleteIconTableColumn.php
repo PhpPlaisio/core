@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\TableColumn\Company;
 
 use SetBased\Abc\Core\Page\Company\SpecificPageDeletePage;
 use SetBased\Abc\Core\TableColumn\DeleteIconTableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Table with column for deleting a company specific page that overrides a standard page.
  */
@@ -23,7 +22,7 @@ class SpecificPageDeleteIconTableColumn extends DeleteIconTableColumn
   /**
    * @param int $targetCmpId The ID of the target company.
    */
-  public function __construct($targetCmpId)
+  public function __construct(int $targetCmpId)
   {
     parent::__construct();
 
@@ -31,9 +30,9 @@ class SpecificPageDeleteIconTableColumn extends DeleteIconTableColumn
   }
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  public function getUrl($row)
+  public function getUrl(array $row): string
   {
     $this->confirmMessage = 'Remove page "'.$row['pag_class_child'].'?'; // xxxbbl
 

@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Babel;
 
 use SetBased\Abc\C;
@@ -8,7 +8,6 @@ use SetBased\Abc\Form\Control\SpanControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\HttpHeader;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Abstract parent page for inserting and updating a word group.
  */
@@ -40,15 +39,15 @@ abstract class WordGroupBasePage extends BabelPage
   /**
    * Must be implemented by a child page to actually insert or update a word group.
    *
-   * @return null
+   * @return void
    */
-  abstract protected function databaseAction();
+  abstract protected function databaseAction(): void;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $this->createForm();
     $this->setValues();
@@ -59,15 +58,15 @@ abstract class WordGroupBasePage extends BabelPage
   /**
    * Sets the initial values of the form shown on this page.
    *
-   * @return null
+   * @return void
    */
-  abstract protected function setValues();
+  abstract protected function setValues(): void;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Creates the form shown on this page.
    */
-  private function createForm()
+  private function createForm(): void
   {
     $this->form = new CoreForm();
 
@@ -97,7 +96,7 @@ abstract class WordGroupBasePage extends BabelPage
   /**
    * Executes the form shown on this page.
    */
-  private function executeForm()
+  private function executeForm(): void
   {
     $method = $this->form->execute();
     switch ($method)
@@ -115,7 +114,7 @@ abstract class WordGroupBasePage extends BabelPage
   /**
    * Handles the form submit.
    */
-  private function handleForm()
+  private function handleForm(): void
   {
     $this->databaseAction();
 

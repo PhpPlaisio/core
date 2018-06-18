@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Company;
 
 use SetBased\Abc\Abc;
@@ -9,7 +9,6 @@ use SetBased\Abc\Form\Control\HtmlControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\HttpHeader;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for updating the details of a company specific page that overrides a standard page.
  */
@@ -61,7 +60,7 @@ class SpecificPageUpdatePage extends CompanyPage
    *
    * @return string The URL of this page.
    */
-  public static function getUrl($targetCmpId, $targetPagId)
+  public static function getUrl(int $targetCmpId, int $targetPagId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_UPDATE, 'pag');
     $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
@@ -74,7 +73,7 @@ class SpecificPageUpdatePage extends CompanyPage
   /**
    * Updates the Company specific page after a form submit.
    */
-  protected function databaseAction()
+  protected function databaseAction(): void
   {
     if (!$this->form->getChangedControls()) return;
 
@@ -85,9 +84,9 @@ class SpecificPageUpdatePage extends CompanyPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function echoTabContent()
+  protected function echoTabContent(): void
   {
     $this->createForm();
     $this->executeForm();
@@ -97,7 +96,7 @@ class SpecificPageUpdatePage extends CompanyPage
   /**
    * Creates the form shown on this page.
    */
-  private function createForm()
+  private function createForm(): void
   {
     $this->form = new CoreForm();
 
@@ -129,7 +128,7 @@ class SpecificPageUpdatePage extends CompanyPage
   /**
    * Executes the form shown on this page.
    */
-  private function executeForm()
+  private function executeForm(): void
   {
     $method = $this->form->execute();
     switch ($method)
@@ -147,7 +146,7 @@ class SpecificPageUpdatePage extends CompanyPage
   /**
    * Handles the form submit.
    */
-  private function handleForm()
+  private function handleForm(): void
   {
     $this->databaseAction();
 

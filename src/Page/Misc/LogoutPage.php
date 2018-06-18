@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Misc;
 
 use SetBased\Abc\Abc;
@@ -7,7 +7,6 @@ use SetBased\Abc\C;
 use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Page\CorePage;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for logging off from the website.
  */
@@ -19,7 +18,7 @@ class LogoutPage extends CorePage
    *
    * @return string
    */
-  public static function getUrl()
+  public static function getUrl(): string
   {
     return self::putCgiId('pag', C::PAG_ID_MISC_LOGOUT, 'pag');
   }

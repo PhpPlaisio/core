@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\TableColumn\Company;
 
 use SetBased\Abc\Core\Page\Company\SpecificPageUpdatePage;
 use SetBased\Abc\Core\TableColumn\UpdateIconTableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Table column with icon linking to page for updating the details of a company specific page that overrides a standard
  * page.
@@ -26,7 +25,7 @@ class SpecificPageUpdateIconTableColumn extends UpdateIconTableColumn
    *
    * @param int $targetCmpId The ID of the target company.
    */
-  public function __construct($targetCmpId)
+  public function __construct(int $targetCmpId)
   {
     parent::__construct();
 
@@ -35,9 +34,9 @@ class SpecificPageUpdateIconTableColumn extends UpdateIconTableColumn
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  public function getUrl($row)
+  public function getUrl(array $row): string
   {
     return SpecificPageUpdatePage::getUrl($this->targetCmpId, $row['pag_id']);
   }

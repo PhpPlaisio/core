@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for updating the details of a menu entry.
  */
@@ -43,11 +42,11 @@ class MenuUpdatePage extends MenuBasePage
   /**
    * Returns the relative URL to this page.
    *
-   * @param int $mnuId
+   * @param int $mnuId The ID of the menu entry.
    *
    * @return string
    */
-  public static function getUrl($mnuId)
+  public static function getUrl(int $mnuId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_MENU_MODIFY, 'pag');
     $url .= self::putCgiId('mnu', $mnuId, 'mnu');
@@ -59,7 +58,7 @@ class MenuUpdatePage extends MenuBasePage
   /**
    * Updates the menu entry.
    */
-  protected function databaseAction()
+  protected function databaseAction(): void
   {
     $changes = $this->form->getChangedControls();
     $values  = $this->form->getValues();
@@ -87,9 +86,9 @@ class MenuUpdatePage extends MenuBasePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function loadValues()
+  protected function loadValues(): void
   {
     $this->form->setValues($this->details);
   }

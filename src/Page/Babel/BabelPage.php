@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\Babel;
 
 use SetBased\Abc\Abc;
@@ -10,7 +10,6 @@ use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Form;
 use SetBased\Abc\Helper\HttpHeader;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Abstract parent page for all Babel pages.
  */
@@ -49,7 +48,7 @@ abstract class BabelPage extends TabPage
   /**
    * Sets the target language. If the user is authorized for multiple languages a form is shown.
    */
-  public function selectLanguage()
+  public function selectLanguage(): void
   {
     $languages = Abc::$DL->abcBabelLanguageGetAllLanguages($this->refLanId);
 
@@ -78,7 +77,7 @@ abstract class BabelPage extends TabPage
   /**
    * @param Form $form The form for selecting the language.
    */
-  protected function handleSelectLanguage($form)
+  protected function handleSelectLanguage(Form $form): void
   {
     $values         = $form->getValues();
     $this->actLanId = $values['babel']['act_lan_id'];
@@ -96,7 +95,7 @@ abstract class BabelPage extends TabPage
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  private function createSelectLanguageForm($languages)
+  private function createSelectLanguageForm(array $languages): Form
   {
     $form = new CoreForm('babel', false);
 

@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for updating the details of a page group.
  */
@@ -47,7 +46,7 @@ class TabUpdatePage extends TabBasePage
    *
    * @return string
    */
-  public static function getUrl($ptbId)
+  public static function getUrl(int $ptbId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_TAB_UPDATE, 'pag');
     $url .= self::putCgiId('ptb', $ptbId, 'ptb');
@@ -59,7 +58,7 @@ class TabUpdatePage extends TabBasePage
   /**
    * Updates the details of a page group.
    */
-  protected function databaseAction()
+  protected function databaseAction(): void
   {
     $changes = $this->form->getChangedControls();
     $values  = $this->form->getValues();
@@ -81,9 +80,9 @@ class TabUpdatePage extends TabBasePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function loadValues()
+  protected function loadValues(): void
   {
     $values = $this->details;
     unset($values['ptb_title']);

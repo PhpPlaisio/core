@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page;
 
 use SetBased\Abc\Abc;
@@ -7,7 +7,6 @@ use SetBased\Abc\Core\Page\Misc\W3cValidatePage;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Page\CorePage;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Abstract parent page for all core pages of ABC.
  */
@@ -123,7 +122,7 @@ abstract class TabPage extends CorePage
   /**
    * Can be overridden to echo a summary of the entity shown of the current page.
    */
-  protected function echoDashboard()
+  protected function echoDashboard(): void
   {
     // Nothing to do.
   }
@@ -132,7 +131,7 @@ abstract class TabPage extends CorePage
   /**
    * Echos the main content of the page, e.g. the dashboard, the tabs (secondary menu), and tab content.
    */
-  protected function echoMainContent()
+  protected function echoMainContent(): void
   {
     $this->echoDashboard();
 
@@ -153,13 +152,13 @@ abstract class TabPage extends CorePage
    *
    * @return void
    */
-  abstract protected function echoTabContent();
+  abstract protected function echoTabContent(): void;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Echos the tabs of this page, a.k.a. the secondary menu.
    */
-  protected function echoTabs()
+  protected function echoTabs(): void
   {
     $pag_id_org = Abc::$abc->getPagIdOrg();
 
@@ -187,7 +186,7 @@ abstract class TabPage extends CorePage
   /**
    * Retrieves the tabs of page group of the current page.
    */
-  protected function getPageTabs()
+  protected function getPageTabs(): void
   {
     $this->tabs = Abc::$DL->abcAuthGetPageTabs($this->cmpId,
                                                Abc::$abc->getPtbId(),
@@ -203,7 +202,7 @@ abstract class TabPage extends CorePage
   /**
    * Enables validation of the HTML code of this page by the W3C Validator.
    */
-  protected function enableW3cValidator()
+  protected function enableW3cValidator(): void
   {
     $prefix            = 'w3c_validator_'.Abc::obfuscate($this->usrId, 'usr').'_';
     $w3c_file          = uniqid($prefix).'.xhtml';
@@ -221,15 +220,13 @@ abstract class TabPage extends CorePage
    *
    * @return string
    */
-  protected function getTabUrl($pagId)
+  protected function getTabUrl(int $pagId): ?string
   {
-    $url = self::putCgiId('pag', $pagId, 'pag');
-
-    return $url;
+    return self::putCgiId('pag', $pagId, 'pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
-  protected function showIconBar()
+  protected function showIconBar(): void
   {
     // Nothing to do.
   }
@@ -238,7 +235,7 @@ abstract class TabPage extends CorePage
   /**
    * Echos the main menu.
    */
-  private function echoMainMenu()
+  private function echoMainMenu(): void
   {
     $items       = Abc::$DL->abcAuthGetMenu($this->cmpId, $this->proId, $this->lanId);
     $page_mnu_id = Abc::$abc->getMnuId();

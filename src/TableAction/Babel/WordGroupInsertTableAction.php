@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\TableAction\Babel;
 
 use SetBased\Abc\Core\Page\Babel\WordGroupInsertPage;
 use SetBased\Abc\Core\TableAction\InsertItemTableAction;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Table action for inserting a word group.
  */

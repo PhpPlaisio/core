@@ -1,11 +1,11 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Form\FormValidator;
 
+use SetBased\Abc\Form\Control\CompoundControl;
 use SetBased\Abc\Form\Control\SimpleControl;
 use SetBased\Abc\Form\Validator\CompoundValidator;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Form validator for the form for inserting or updating a module.
  */
@@ -13,9 +13,9 @@ class SystemModuleInsertCompoundValidator implements CompoundValidator
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  public function validate($control)
+  public function validate(CompoundControl $control): bool
   {
     $ret = true;
 

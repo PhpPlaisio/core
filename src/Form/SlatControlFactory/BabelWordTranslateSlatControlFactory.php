@@ -1,9 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Form\SlatControlFactory;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
+use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SlatControl;
 use SetBased\Abc\Form\Control\SlatControlFactory;
 use SetBased\Abc\Form\Control\TableColumnControl;
@@ -14,7 +15,6 @@ use SetBased\Abc\Obfuscator\Obfuscator;
 use SetBased\Abc\Table\TableColumn\NumericTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Slat control factory for creating slat controls for translating words.
  */
@@ -35,7 +35,7 @@ class BabelWordTranslateSlatControlFactory extends SlatControlFactory
    * @param int $lanId       The ID of the reference language.
    * @param int $targetLanId The ID of the target language.
    */
-  public function __construct($lanId, $targetLanId)
+  public function __construct(int $lanId, int $targetLanId)
   {
     $ref_language = Abc::$DL->abcBabelLanguageGetName($lanId, $lanId);
     $act_language = Abc::$DL->abcBabelLanguageGetName($targetLanId, $lanId);
@@ -57,13 +57,13 @@ class BabelWordTranslateSlatControlFactory extends SlatControlFactory
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  public function createRow($louverControl, $data)
+  public function createRow(LouverControl $louverControl, array $data): SlatControl
   {
-    /** @var SlatControl $row */
-    $row = $louverControl->addFormControl(new SlatControl($data['wrd_id']));
+    $row =new SlatControl($data['wrd_id']);
     $row->setObfuscator($this->wrdIdObfuscator);
+    $louverControl->addFormControl($row);
 
     /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'wrd_id');
@@ -77,6 +77,8 @@ class BabelWordTranslateSlatControlFactory extends SlatControlFactory
     $control = $this->createFormControl($row, 'act_wdt_text');
     $control->setValue($data['act_wdt_text']);
     $control->setAttrSize(C::LEN_WDT_TEXT);
+
+    return $row;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

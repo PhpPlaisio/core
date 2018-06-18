@@ -1,11 +1,10 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Core\Page\System;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 
-//----------------------------------------------------------------------------------------------------------------------
 /**
  * Page for updating the details of a functionality.
  */
@@ -40,7 +39,7 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
    *
    * @return string
    */
-  public static function getUrl($funId)
+  public static function getUrl(int $funId): string
   {
     $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_UPDATE, 'pag');
     $url .= self::putCgiId('fun', $funId, 'fun');
@@ -52,7 +51,7 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
   /**
    * Updates the details of the functionality.
    */
-  protected function dataBaseAction()
+  protected function dataBaseAction(): void
   {
     $changes = $this->form->getChangedControls();
     $values  = $this->form->getValues();
@@ -74,9 +73,9 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * {@inheritdoc}
+   * @inheritdoc
    */
-  protected function loadValues()
+  protected function loadValues(): void
   {
     $values = $this->details;
     unset($values['fun_name']);
