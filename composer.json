@@ -10,25 +10,25 @@
   "require": {
     "php": ">=7.1.0",
     "gajus/dindent": "^2.0.0",
-    "setbased/abc": "^0.10.38",
-    "setbased/abc-babel-core": "^0.10.7",
+    "setbased/abc": "*",
+    "setbased/abc-babel-core": "*",
     "setbased/abc-company": "^1.1.0",
     "setbased/abc-exception": "^1.0.0",
-    "setbased/abc-form": "^0.10.2",
-    "setbased/abc-form-louver": "^0.10.5",
-    "setbased/abc-helper-password": "^2.0.0",
-    "setbased/abc-html": "^2.0.0",
-    "setbased/abc-http-header": "^2.0.0",
-    "setbased/abc-page-core": "^0.10.7",
+    "setbased/abc-form": "*",
+    "setbased/abc-form-louver": "*",
+    "setbased/abc-helper-password": "^1.0.0 || ^2.0.0",
+    "setbased/abc-html": "^1.0.0 || ^2.0.0",
+    "setbased/abc-http-header": "^1.0.0 || ^2.0.0",
+    "setbased/abc-page-core": "*",
     "setbased/abc-profile": "^1.1.0",
-    "setbased/abc-table-detail": "^0.10.2",
-    "setbased/abc-table-overview": "^0.10.7",
+    "setbased/abc-table-detail": "*",
+    "setbased/abc-table-overview": "*",
     "setbased/abc-user": "^1.1.0",
     "setbased/exception": "^1.0.0"
   },
   "require-dev": {
     "phing/phing": "^2.0.0",
-    "setbased/php-stratum": "^0.9.64"
+    "setbased/php-stratum": "*"
   },
   "autoload": {
     "psr-4": {
