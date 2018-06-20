@@ -36,7 +36,7 @@ class SpecificPageUpdateIconTableColumn extends UpdateIconTableColumn
   /**
    * @inheritdoc
    */
-  public function getUrl(array $row): string
+  public function getUrl(array $row): ?string
   {
     return SpecificPageUpdatePage::getUrl($this->targetCmpId, $row['pag_id']);
   }

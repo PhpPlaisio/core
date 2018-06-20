@@ -14,7 +14,7 @@ class PageUpdateIconTableColumn extends UpdateIconTableColumn
   /**
    * @inheritdoc
    */
-  public function getUrl(array $row): string
+  public function getUrl(array $row): ?string
   {
     return PageUpdatePage::getUrl($row['pag_id']);
   }

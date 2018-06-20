@@ -14,7 +14,7 @@ class RoleGroupUpdateIconTableColumn extends UpdateIconTableColumn
   /**
    * @inheritdoc
    */
-  public function getUrl(array $row): string
+  public function getUrl(array $row): ?string
   {
     return RoleGroupUpdatePage::getUrl($row['rlg_id']);
   }

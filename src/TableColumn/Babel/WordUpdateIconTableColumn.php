@@ -14,7 +14,7 @@ class WordUpdateIconTableColumn extends UpdateIconTableColumn
   /**
    * @inheritdoc
    */
-  public function getUrl(array $row): string
+  public function getUrl(array $row): ?string
   {
     return WordUpdatePage::getUrl($row['wrd_id']);
   }

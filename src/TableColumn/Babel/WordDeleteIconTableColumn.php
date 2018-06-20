@@ -14,7 +14,7 @@ class WordDeleteIconTableColumn extends DeleteIconTableColumn
   /**
    * @inheritdoc
    */
-  public function getUrl(array $row): string
+  public function getUrl(array $row): ?string
   {
     $this->confirmMessage = 'Remove word '.$row['wrd_id'].'?'; // xxxbbl
 

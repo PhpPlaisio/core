@@ -37,7 +37,7 @@ class WordTranslateIconTableColumn extends IconTableColumn
   /**
    * @inheritdoc
    */
-  public function getUrl(array $row): string
+  public function getUrl(array $row): ?string
   {
     return WordTranslatePage::getUrl($row['wrd_id'], $this->actLanId);
   }

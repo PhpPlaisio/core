@@ -14,7 +14,7 @@ class ModuleUpdateIconTableColumn extends UpdateIconTableColumn
   /**
    * @inheritdoc
    */
-  public function getUrl(array $row): string
+  public function getUrl(array $row): ?string
   {
     return ModuleUpdatePage::getUrl($row['mdl_id']);
   }

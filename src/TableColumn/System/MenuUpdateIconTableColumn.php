@@ -14,7 +14,7 @@ class MenuUpdateIconTableColumn extends UpdateIconTableColumn
   /**
    * @inheritdoc
    */
-  public function getUrl(array $row): string
+  public function getUrl(array $row): ?string
   {
     return MenuUpdatePage::getUrl($row['mnu_id']);
   }

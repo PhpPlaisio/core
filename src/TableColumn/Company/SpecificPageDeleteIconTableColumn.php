@@ -32,7 +32,7 @@ class SpecificPageDeleteIconTableColumn extends DeleteIconTableColumn
   /**
    * @inheritdoc
    */
-  public function getUrl(array $row): string
+  public function getUrl(array $row): ?string
   {
     $this->confirmMessage = 'Remove page "'.$row['pag_class_child'].'?'; // xxxbbl
 

@@ -14,7 +14,7 @@ class TabDetailsIconTableColumn extends DetailsIconTableColumn
   /**
    * @inheritdoc
    */
-  public function getUrl(array $row): string
+  public function getUrl(array $row): ?string
   {
     return TabDetailsPage::getUrl($row['ptb_id']);
   }

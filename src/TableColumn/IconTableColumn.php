@@ -59,27 +59,24 @@ abstract class IconTableColumn extends TableColumn
     $url = $this->getUrl($row);
 
     $ret = '<td>';
-    if ($url)
+
+    if ($url!==null)
     {
-      $ret .= '<a';
-      $ret .= Html::generateAttribute('href', $url);
-      $ret .= ' class="icon_action"';
-      if ($this->isDownloadLink) $ret .= ' target="_blank"';
-      $ret .= '>';
+      $ret .= Html::generateTag('a',
+                                ['href'   => $url,
+                                 'class'  => 'icon_action',
+                                 'target' => ($this->isDownloadLink) ? '_blank' : null]);
     }
 
-    $ret .= '<img';
-    $ret .= Html::generateAttribute('src', $this->iconUrl);
-    $ret .= ' width="12"';
-    $ret .= ' height="12"';
-    $ret .= ' class="icon"';
+    $ret .= Html::generateVoidElement('img',
+                                      ['src'                  => $this->iconUrl,
+                                       'width'                => '12',
+                                       'height'               => '12',
+                                       'class'                => 'icon',
+                                       'alt'                  => $this->altValue,
+                                       'data-confirm-message' => $this->confirmMessage]);
 
-    if ($this->confirmMessage) $ret .= Html::generateAttribute('data-confirm-message', $this->confirmMessage);
-
-    $ret .= Html::generateAttribute('alt', $this->altValue);
-    $ret .= '/>';
-
-    if ($url) $ret .= '</a>';
+    if ($url!==null) $ret .= '</a>';
 
     $ret .= '</td>';
 
@@ -92,9 +89,9 @@ abstract class IconTableColumn extends TableColumn
    *
    * @param array $row The data row.
    *
-   * @return string
+   * @return string|null
    */
-  abstract public function getUrl(array $row): string;
+  abstract public function getUrl(array $row): ?string;
 
   //--------------------------------------------------------------------------------------------------------------------
 }
