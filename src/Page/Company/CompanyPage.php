@@ -124,7 +124,10 @@ abstract class CompanyPage extends TabPage
   {
     $values            = $form->getValues();
     $this->targetCmpId = Abc::$DL->abcCompanyGetCmpIdByCmpAbbr($values['cmp_abbr']);
-    if ($this->targetCmpId) HttpHeader::redirectSeeOther(self::getChildUrl(Abc::$abc->getPagId(), $this->targetCmpId));
+    if ($this->targetCmpId)
+    {
+      HttpHeader::redirectSeeOther(self::getChildUrl(Abc::$requestHandler->getPagId(), $this->targetCmpId));
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
