@@ -21,9 +21,16 @@ class PageDetailsTableRow
    */
   public static function addRow(DetailTable $table, $header, array $data)
   {
-    $a = Html::generateElement('a', ['href' => PageDetailsPage::getUrl($data['pag_id_org'])], $data['pag_id_org']);
+    if ($data['pag_id_org']!==null)
+    {
+      $a = Html::generateElement('a', ['href' => PageDetailsPage::getUrl($data['pag_id_org'])], $data['pag_id_org']);
 
-    $table->addRow($header, ['class' => 'text'], $a, true);
+      $table->addRow($header, ['class' => 'text'], $a, true);
+    }
+    else
+    {
+      $table->addRow($header);
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
