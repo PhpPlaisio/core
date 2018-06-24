@@ -40,7 +40,7 @@ class LoginPage extends CorePage
   {
     parent::__construct();
 
-    $this->redirect = self::getCgiUrl('redirect', '/');
+    $this->redirect = Abc::$cgi->getManUrl('redirect', '/');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -53,8 +53,9 @@ class LoginPage extends CorePage
    */
   public static function getUrl(?string $redirect = null): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_MISC_LOGIN, 'pag');
-    $url .= self::putCgiUrl('redirect', $redirect);
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_MISC_LOGIN, 'pag');
+    $url .= Abc::$cgi->putUrl('redirect', $redirect);
 
     return $url;
   }

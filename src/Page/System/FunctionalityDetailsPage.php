@@ -44,7 +44,7 @@ class FunctionalityDetailsPage extends TabPage
   {
     parent::__construct();
 
-    $this->funId = self::getCgiId('fun', 'fun');
+    $this->funId = Abc::$cgi->getManId('fun', 'fun');
 
     $this->details = Abc::$DL->abcSystemFunctionalityGetDetails($this->funId, $this->lanId);
 
@@ -61,8 +61,9 @@ class FunctionalityDetailsPage extends TabPage
    */
   public static function getUrl(int $funId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_DETAILS, 'pag');
-    $url .= self::putCgiId('fun', $funId, 'fun');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_DETAILS, 'pag');
+    $url .= Abc::$cgi->putId('fun', $funId, 'fun');
 
     return $url;
   }

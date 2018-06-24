@@ -49,7 +49,7 @@ class RoleGroupDetailsPage extends TabPage
   {
     parent::__construct();
 
-    $this->rlgId     = self::getCgiId('rlg', 'rlg');
+    $this->rlgId     = Abc::$cgi->getManId('rlg', 'rlg');
     $this->roleGroup = Abc::$DL->abcSystemRoleGroupGetDetails($this->rlgId, $this->lanId);
     $this->roles     = Abc::$DL->abcSystemRoleGroupGetRoles($this->rlgId);
   }
@@ -64,8 +64,9 @@ class RoleGroupDetailsPage extends TabPage
    */
   public static function getUrl(int $rlgId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_DETAILS, 'pag');
-    $url .= self::putCgiId('rlg', $rlgId, 'rlg');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_DETAILS, 'pag');
+    $url .= Abc::$cgi->putId('rlg', $rlgId, 'rlg');
 
     return $url;
   }

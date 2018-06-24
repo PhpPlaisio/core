@@ -26,7 +26,7 @@ class CompanyUpdatePage extends CompanyBasePage
   {
     parent::__construct();
 
-    $this->targetCmpId = self::getCgiId('cmp', 'cmp');
+    $this->targetCmpId = Abc::$cgi->getManId('cmp', 'cmp');
     $this->details     = Abc::$DL->abcCompanyGetDetails($this->targetCmpId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
@@ -41,8 +41,9 @@ class CompanyUpdatePage extends CompanyBasePage
    */
   public static function getUrl(int $targetCmpId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_COMPANY_UPDATE, 'pag');
-    $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_UPDATE, 'pag');
+    $url .= Abc::$cgi->putId('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }

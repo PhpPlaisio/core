@@ -39,9 +39,7 @@ abstract class BabelPage extends TabPage
     parent::__construct();
 
     $this->refLanId = C::LAN_ID_BABEL_REFERENCE;
-
-    $this->actLanId = self::getCgiId('act_lan', 'lan');
-    if (!isset($this->actLanId)) $this->actLanId = $this->lanId;
+    $this->actLanId = Abc::$cgi->getManId('act_lan', 'lan', $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

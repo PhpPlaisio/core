@@ -43,8 +43,9 @@ class CompanyDetailsPage extends CompanyPage
    */
   public static function getUrl(int $targetCmpId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_COMPANY_DETAILS, 'pag');
-    $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_DETAILS, 'pag');
+    $url .= Abc::$cgi->putId('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }

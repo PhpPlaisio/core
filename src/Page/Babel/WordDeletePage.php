@@ -27,7 +27,7 @@ class WordDeletePage extends BabelPage
   {
     parent::__construct();
 
-    $this->wrdId = self::getCgiId('wrd', 'wrd');
+    $this->wrdId = Abc::$cgi->getManId('wrd', 'wrd');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -40,8 +40,9 @@ class WordDeletePage extends BabelPage
    */
   public static function getUrl(int $wrdId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_BABEL_WORD_DELETE, 'pag');
-    $url .= self::putCgiId('wrd', $wrdId, 'wrd');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_DELETE, 'pag');
+    $url .= Abc::$cgi->putId('wrd', $wrdId, 'wrd');
 
     return $url;
   }

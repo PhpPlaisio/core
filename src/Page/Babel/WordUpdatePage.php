@@ -26,7 +26,7 @@ class WordUpdatePage extends WordBasePage
   {
     parent::__construct();
 
-    $this->wrdId       = self::getCgiId('wrd', 'wrd');
+    $this->wrdId       = Abc::$cgi->getManId('wrd', 'wrd');
     $this->details     = Abc::$DL->abcBabelWordGetDetails($this->wrdId, $this->actLanId);
     $this->wdgId       = $this->details['wdg_id'];
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
@@ -43,9 +43,10 @@ class WordUpdatePage extends WordBasePage
    */
   public static function getUrl(int $wrdId, ?string $redirect = null): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_BABEL_WORD_UPDATE, 'pag');
-    $url .= self::putCgiId('wrd', $wrdId, 'wrd');
-    $url .= self::putCgiUrl('redirect', $redirect);
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_UPDATE, 'pag');
+    $url .= Abc::$cgi->putId('wrd', $wrdId, 'wrd');
+    $url .= Abc::$cgi->putUrl('redirect', $redirect);
 
     return $url;
   }

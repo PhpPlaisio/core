@@ -26,7 +26,7 @@ class RoleGroupUpdatePage extends RoleGroupBasePage
   {
     parent::__construct();
 
-    $this->rlgId     = self::getCgiId('rlg', 'rlg');
+    $this->rlgId     = Abc::$cgi->getManId('rlg', 'rlg');
     $this->roleGroup = Abc::$DL->abcSystemRoleGroupGetDetails($this->rlgId, $this->lanId);
 
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
@@ -42,8 +42,9 @@ class RoleGroupUpdatePage extends RoleGroupBasePage
    */
   public static function getUrl(int $rlgId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_UPDATE, 'pag');
-    $url .= self::putCgiId('rlg', $rlgId, 'rlg');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_UPDATE, 'pag');
+    $url .= Abc::$cgi->putId('rlg', $rlgId, 'rlg');
 
     return $url;
   }

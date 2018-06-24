@@ -31,8 +31,9 @@ class RoleInsertPage extends RoleBasePage
    */
   public static function getUrl(int $targetCmpId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_COMPANY_ROLE_INSERT, 'pag');
-    $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_ROLE_INSERT, 'pag');
+    $url .= Abc::$cgi->putId('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }

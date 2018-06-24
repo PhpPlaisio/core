@@ -24,7 +24,7 @@ class ModuleUpdatePage extends ModuleBasePage
   {
     parent::__construct();
 
-    $this->mdlId       = self::getCgiId('mdl', 'mdl');
+    $this->mdlId       = Abc::$cgi->getManId('mdl', 'mdl');
     $this->details     = Abc::$DL->abcSystemModuleGetDetails($this->mdlId, $this->lanId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
@@ -39,8 +39,9 @@ class ModuleUpdatePage extends ModuleBasePage
    */
   public static function getUrl(int $mdlId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_MODULE_UPDATE, 'pag');
-    $url .= self::putCgiId('mdl', $mdlId, 'mdl');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_MODULE_UPDATE, 'pag');
+    $url .= Abc::$cgi->putId('mdl', $mdlId, 'mdl');
 
     return $url;
   }

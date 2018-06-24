@@ -51,12 +51,12 @@ class WordTranslatePage extends BabelPage
   {
     parent::__construct();
 
-    $this->wrdId    = self::getCgiId('wrd', 'wrd');
-    $this->redirect = self::getCgiUrl('redirect');
+    $this->wrdId    = Abc::$cgi->getManId('wrd', 'wrd');
+    $this->redirect = Abc::$cgi->getOptUrl('redirect');
 
     $this->details = Abc::$DL->abcBabelWordGetDetails($this->wrdId, $this->actLanId);
 
-    if (!isset($this->redirect))
+    if ($this->redirect===null)
     {
       $this->redirect = WordGroupDetailsPage::getUrl($this->details['wdg_id'], $this->actLanId);
     }
@@ -74,10 +74,11 @@ class WordTranslatePage extends BabelPage
    */
   public static function getUrl(int $wrdId, int $lanId, ?string $redirect = null): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_BABEL_WORD_TRANSLATE, 'pag');
-    $url .= self::putCgiId('wrd', $wrdId, 'wrd');
-    $url .= self::putCgiId('act_lan', $lanId, 'lan');
-    $url .= self::putCgiUrl('redirect', $redirect);
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_TRANSLATE, 'pag');
+    $url .= Abc::$cgi->putId('wrd', $wrdId, 'wrd');
+    $url .= Abc::$cgi->putId('act_lan', $lanId, 'lan');
+    $url .= Abc::$cgi->putUrl('redirect', $redirect);
 
     return $url;
   }

@@ -51,7 +51,7 @@ class ModuleUpdateCompaniesPage extends TabPage
   {
     parent::__construct();
 
-    $this->modId = self::getCgiId('mdl', 'mdl');
+    $this->modId = Abc::$cgi->getManId('mdl', 'mdl');
 
     $this->details = Abc::$DL->abcSystemModuleGetDetails($this->modId, $this->lanId);
 
@@ -68,8 +68,9 @@ class ModuleUpdateCompaniesPage extends TabPage
    */
   public static function getUrl(int $modId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_MODULE_UPDATE_COMPANIES, 'pag');
-    $url .= self::putCgiId('mdl', $modId, 'mdl');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_MODULE_UPDATE_COMPANIES, 'pag');
+    $url .= Abc::$cgi->putId('mdl', $modId, 'mdl');
 
     return $url;
   }

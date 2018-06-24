@@ -24,7 +24,10 @@ class MenuOverviewPage extends TabPage
    */
   public static function getUrl(): string
   {
-    return self::putCgiId('pag', C::PAG_ID_SYSTEM_MENU_OVERVIEW, 'pag');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_MENU_OVERVIEW, 'pag');
+
+    return $url;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

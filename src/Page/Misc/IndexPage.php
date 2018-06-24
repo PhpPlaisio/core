@@ -18,7 +18,9 @@ class IndexPage extends TabPage
    */
   public static function getUrl(): string
   {
-    return '/';
+    $url = Abc::$cgi->putLeader();
+
+    return ($url==='') ? '/' : $url;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -61,8 +61,8 @@ class W3cValidatePage extends CorePage
   {
     parent::__construct();
 
-    $this->filename = self::getCgiVar('file');
-    $this->mode     = self::getCgiVar('mode');
+    $this->filename = Abc::$cgi->getManString('file');
+    $this->mode     = Abc::$cgi->getManString('mode');
 
     $this->pathName = DIR_TMP.'/'.$this->filename;
   }
@@ -78,9 +78,10 @@ class W3cValidatePage extends CorePage
    */
   public static function getUrl(string $fileName, string $mode = 'validate'): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_MISC_W3C_VALIDATE, 'pag');
-    $url .= self::putCgiVar('mode', $mode);
-    $url .= self::putCgiVar('file', $fileName);
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_MISC_W3C_VALIDATE, 'pag');
+    $url .= Abc::$cgi->putString('mode', $mode);
+    $url .= Abc::$cgi->putString('file', $fileName);
 
     return $url;
   }

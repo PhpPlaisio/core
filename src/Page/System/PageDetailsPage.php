@@ -24,7 +24,9 @@ class PageDetailsPage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @var int The ID of the target page shown on this page.
+   * The ID of the target page shown on this page.
+   *
+   * @var int
    */
   protected $targetPagId;
 
@@ -36,7 +38,7 @@ class PageDetailsPage extends TabPage
   {
     parent::__construct();
 
-    $this->targetPagId = self::getCgiId('tar_pag', 'pag');
+    $this->targetPagId = Abc::$cgi->getManId('tar_pag', 'pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -49,8 +51,9 @@ class PageDetailsPage extends TabPage
    */
   public static function getUrl(int $pagId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_PAGE_DETAILS, 'pag');
-    $url .= self::putCgiId('tar_pag', $pagId, 'pag');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_PAGE_DETAILS, 'pag');
+    $url .= Abc::$cgi->putId('tar_pag', $pagId, 'pag');
 
     return $url;
   }

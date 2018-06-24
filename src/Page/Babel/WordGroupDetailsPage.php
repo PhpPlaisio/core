@@ -44,7 +44,7 @@ class WordGroupDetailsPage extends BabelPage
   {
     parent::__construct();
 
-    $this->wdgId = self::getCgiId('wdg', 'wdg');
+    $this->wdgId = Abc::$cgi->getManId('wdg', 'wdg');
 
     $this->details = Abc::$DL->abcBabelWordGroupGetDetails($this->wdgId);
 
@@ -62,9 +62,10 @@ class WordGroupDetailsPage extends BabelPage
    */
   public static function getUrl(int $wdgId, int $targetLanId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_BABEL_WORD_GROUP_DETAILS, 'pag');
-    $url .= self::putCgiId('wdg', $wdgId, 'wdg');
-    $url .= self::putCgiId('act_lan', $targetLanId, 'lan');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_GROUP_DETAILS, 'pag');
+    $url .= Abc::$cgi->putId('wdg', $wdgId, 'wdg');
+    $url .= Abc::$cgi->putId('act_lan', $targetLanId, 'lan');
 
     return $url;
   }

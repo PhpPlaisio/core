@@ -26,7 +26,7 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
   {
     parent::__construct();
 
-    $this->funId       = self::getCgiId('fun', 'fun');
+    $this->funId       = Abc::$cgi->getManId('fun', 'fun');
     $this->details     = Abc::$DL->abcSystemFunctionalityGetDetails($this->funId, $this->lanId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
@@ -41,8 +41,9 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
    */
   public static function getUrl(int $funId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_UPDATE, 'pag');
-    $url .= self::putCgiId('fun', $funId, 'fun');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_UPDATE, 'pag');
+    $url .= Abc::$cgi->putId('fun', $funId, 'fun');
 
     return $url;
   }

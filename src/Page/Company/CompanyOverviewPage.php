@@ -24,7 +24,10 @@ class CompanyOverviewPage extends CompanyPage
    */
   public static function getUrl(): string
   {
-    return self::putCgiId('pag', C::PAG_ID_COMPANY_OVERVIEW, 'pag');
+    $url = Abc::$cgi->putLeader();
+    $url .=  Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_OVERVIEW, 'pag');
+
+    return $url;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

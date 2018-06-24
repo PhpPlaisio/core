@@ -26,7 +26,7 @@ class PageUpdatePage extends PageBasePage
   {
     parent::__construct();
 
-    $this->targetPagId = self::getCgiId('tar_pag', 'pag');
+    $this->targetPagId = Abc::$cgi->getManId('tar_pag', 'pag');
     $this->details     = Abc::$DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
@@ -41,8 +41,9 @@ class PageUpdatePage extends PageBasePage
    */
   public static function getUrl(int $pagId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_PAGE_UPDATE, 'pag');
-    $url .= self::putCgiId('tar_pag', $pagId, 'pag');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_PAGE_UPDATE, 'pag');
+    $url .= Abc::$cgi->putId('tar_pag', $pagId, 'pag');
 
     return $url;
   }

@@ -33,21 +33,22 @@ class TabDetailsPage extends TabPage
   {
     parent::__construct();
 
-    $this->tabId = self::getCgiId('ptb', 'ptb');
+    $this->tabId = Abc::$cgi->getManId('ptb', 'ptb');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $tabId The ID of the tab shown on this page.
+   * @param int $ptbId The ID of the tab shown on this page.
    *
    * @return string
    */
-  public static function getUrl(int $tabId): string
+  public static function getUrl(int $ptbId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_TAB_DETAILS, 'pag');
-    $url .= self::putCgiId('ptb', $tabId, 'ptb');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_TAB_DETAILS, 'pag');
+    $url .= Abc::$cgi->putId('ptb', $ptbId, 'ptb');
 
     return $url;
   }

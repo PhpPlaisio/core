@@ -26,7 +26,7 @@ class RoleUpdatePage extends RoleBasePage
   {
     parent::__construct();
 
-    $this->rolId       = self::getCgiId('rol', 'rol');
+    $this->rolId       = Abc::$cgi->getManId('rol', 'rol');
     $this->details     = Abc::$DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId, $this->lanId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
@@ -42,9 +42,10 @@ class RoleUpdatePage extends RoleBasePage
    */
   public static function getUrl(int $targetCmpId, int $rolId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_COMPANY_ROLE_UPDATE, 'pag');
-    $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
-    $url .= self::putCgiId('rol', $rolId, 'rol');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_ROLE_UPDATE, 'pag');
+    $url .= Abc::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url .= Abc::$cgi->putId('rol', $rolId, 'rol');
 
     return $url;
   }

@@ -36,7 +36,7 @@ class RoleDetailsPage extends CompanyPage
   {
     parent::__construct();
 
-    $this->rolId = self::getCgiId('rol', 'rol');
+    $this->rolId = Abc::$cgi->getManId('rol', 'rol');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -50,9 +50,10 @@ class RoleDetailsPage extends CompanyPage
    */
   public static function getUrl(int $targetCmpId, int $rolId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_COMPANY_ROLE_DETAILS, 'pag');
-    $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
-    $url .= self::putCgiId('rol', $rolId, 'rol');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_ROLE_DETAILS, 'pag');
+    $url .= Abc::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url .= Abc::$cgi->putId('rol', $rolId, 'rol');
 
     return $url;
   }

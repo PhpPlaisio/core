@@ -44,7 +44,7 @@ class SpecificPageUpdatePage extends CompanyPage
   {
     parent::__construct();
 
-    $this->targetPagId = self::getCgiId('tar_pag', 'pag');
+    $this->targetPagId = Abc::$cgi->getManId('tar_pag', 'pag');
 
     $this->targetPageDetails = Abc::$DL->abcCompanySpecificPageGetDetails($this->targetCmpId,
                                                                           $this->targetPagId,
@@ -62,9 +62,10 @@ class SpecificPageUpdatePage extends CompanyPage
    */
   public static function getUrl(int $targetCmpId, int $targetPagId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_UPDATE, 'pag');
-    $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
-    $url .= self::putCgiId('tar_pag', $targetPagId, 'pag');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_UPDATE, 'pag');
+    $url .= Abc::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url .= Abc::$cgi->putId('tar_pag', $targetPagId, 'pag');
 
     return $url;
   }

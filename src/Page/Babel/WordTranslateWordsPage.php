@@ -47,7 +47,7 @@ class WordTranslateWordsPage extends BabelPage
   {
     parent::__construct();
 
-    $this->wdgId = self::getCgiId('wdg', 'wdg');
+    $this->wdgId = Abc::$cgi->getManId('wdg', 'wdg');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -61,9 +61,10 @@ class WordTranslateWordsPage extends BabelPage
    */
   public static function getUrl(int $wdgId, int $lanId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_BABEL_WORD_TRANSLATE_WORDS, 'pag');
-    $url .= self::putCgiId('wdg', $wdgId, 'wdg');
-    $url .= self::putCgiId('act_lan', $lanId, 'lan');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_TRANSLATE_WORDS, 'pag');
+    $url .= Abc::$cgi->putId('wdg', $wdgId, 'wdg');
+    $url .= Abc::$cgi->putId('act_lan', $lanId, 'lan');
 
     return $url;
   }

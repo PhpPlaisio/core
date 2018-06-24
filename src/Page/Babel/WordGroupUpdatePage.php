@@ -26,7 +26,7 @@ class WordGroupUpdatePage extends WordGroupBasePage
   {
     parent::__construct();
 
-    $this->wdgId       = self::getCgiId('wdg', 'wdg');
+    $this->wdgId       = Abc::$cgi->getManId('wdg', 'wdg');
     $this->details     = Abc::$DL->abcBabelWordGroupGetDetails($this->wdgId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
@@ -41,9 +41,10 @@ class WordGroupUpdatePage extends WordGroupBasePage
    */
   public static function getUrl(int $wdgId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_BABEL_WORD_GROUP_UPDATE, 'pag');
-    $url .= self::putCgiId('wdg', $wdgId, 'wdg');
-    $url .= self::putCgiId('act_lan', C::LAN_ID_BABEL_REFERENCE, 'lan');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_GROUP_UPDATE, 'pag');
+    $url .= Abc::$cgi->putId('wdg', $wdgId, 'wdg');
+    $url .= Abc::$cgi->putId('act_lan', C::LAN_ID_BABEL_REFERENCE, 'lan');
 
     return $url;
   }

@@ -35,8 +35,8 @@ class SpecificPageDeletePage extends CorePage
   {
     parent::__construct();
 
-    $this->targetCmpId = self::getCgiId('cmp', 'cmp');
-    $this->targetPagId = self::getCgiId('tar_pag', 'pag');
+    $this->targetCmpId = Abc::$cgi->getManId('cmp', 'cmp');
+    $this->targetPagId = Abc::$cgi->getManId('tar_pag', 'pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -50,9 +50,10 @@ class SpecificPageDeletePage extends CorePage
    */
   public static function getUrl(int $targetCmpId, int $targetPagId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_DELETE, 'pag');
-    $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
-    $url .= self::putCgiId('tar_pag', $targetPagId, 'pag');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_DELETE, 'pag');
+    $url .= Abc::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url .= Abc::$cgi->putId('tar_pag', $targetPagId, 'pag');
 
     return $url;
   }

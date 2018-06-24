@@ -222,7 +222,7 @@ abstract class TabPage extends CorePage
    */
   protected function getTabUrl(int $pagId): ?string
   {
-    return self::putCgiId('pag', $pagId, 'pag');
+    return Abc::$cgi->putId('pag', $pagId, 'pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -250,7 +250,7 @@ abstract class TabPage extends CorePage
       }
       else
       {
-        $link = self::putCgiId('pag', $item['pag_id'], 'pag');
+        $link = Abc::$cgi->putId('pag', $item['pag_id'], 'pag');
       }
       $link .= $item['mnu_link'];
 

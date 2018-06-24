@@ -33,7 +33,7 @@ class MenuUpdatePage extends MenuBasePage
   {
     parent::__construct();
 
-    $this->mnuId       = self::getCgiId('mnu', 'mnu');
+    $this->mnuId       = Abc::$cgi->getManId('mnu', 'mnu');
     $this->details     = Abc::$DL->abcSystemMenuGetDetails($this->mnuId, $this->lanId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
@@ -48,8 +48,9 @@ class MenuUpdatePage extends MenuBasePage
    */
   public static function getUrl(int $mnuId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_MENU_MODIFY, 'pag');
-    $url .= self::putCgiId('mnu', $mnuId, 'mnu');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_MENU_MODIFY, 'pag');
+    $url .= Abc::$cgi->putId('mnu', $mnuId, 'mnu');
 
     return $url;
   }

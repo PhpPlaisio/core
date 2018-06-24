@@ -33,7 +33,7 @@ class TabUpdatePage extends TabBasePage
   {
     parent::__construct();
 
-    $this->ptbId       = self::getCgiId('ptb', 'ptb');
+    $this->ptbId       = Abc::$cgi->getManId('ptb', 'ptb');
     $this->details     = Abc::$DL->abcSystemTabGetDetails($this->ptbId, $this->lanId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
@@ -48,8 +48,9 @@ class TabUpdatePage extends TabBasePage
    */
   public static function getUrl(int $ptbId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_TAB_UPDATE, 'pag');
-    $url .= self::putCgiId('ptb', $ptbId, 'ptb');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_TAB_UPDATE, 'pag');
+    $url .= Abc::$cgi->putId('ptb', $ptbId, 'ptb');
 
     return $url;
   }

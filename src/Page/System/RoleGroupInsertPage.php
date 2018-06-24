@@ -28,7 +28,10 @@ class RoleGroupInsertPage extends RoleGroupBasePage
    */
   public static function getUrl(): string
   {
-    return self::putCgiId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_INSERT, 'pag');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_INSERT, 'pag');
+
+    return $url;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

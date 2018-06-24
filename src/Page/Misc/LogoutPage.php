@@ -20,7 +20,10 @@ class LogoutPage extends CorePage
    */
   public static function getUrl(): string
   {
-    return self::putCgiId('pag', C::PAG_ID_MISC_LOGOUT, 'pag');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_MISC_LOGOUT, 'pag');
+
+    return $url;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

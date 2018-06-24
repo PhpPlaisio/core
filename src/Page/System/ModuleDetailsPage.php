@@ -42,7 +42,7 @@ class ModuleDetailsPage extends TabPage
   {
     parent::__construct();
 
-    $this->mdlId = self::getCgiId('mdl', 'mdl');
+    $this->mdlId = Abc::$cgi->getManId('mdl', 'mdl');
 
     $this->details = Abc::$DL->abcSystemModuleGetDetails($this->mdlId, $this->lanId);
 
@@ -59,8 +59,9 @@ class ModuleDetailsPage extends TabPage
    */
   public static function getUrl(int $mdlId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_MODULE_DETAILS, 'pag');
-    $url .= self::putCgiId('mdl', $mdlId, 'mdl');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_MODULE_DETAILS, 'pag');
+    $url .= Abc::$cgi->putId('mdl', $mdlId, 'mdl');
 
     return $url;
   }

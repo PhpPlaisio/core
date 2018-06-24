@@ -39,7 +39,7 @@ abstract class CompanyPage extends TabPage
   {
     parent::__construct();
 
-    $this->targetCmpId = self::getCgiId('cmp', 'cmp');
+    $this->targetCmpId = Abc::$cgi->getManId('cmp', 'cmp');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -53,8 +53,9 @@ abstract class CompanyPage extends TabPage
    */
   public static function getChildUrl(int $pagId, int $targetCmpId): string
   {
-    $url = self::putCgiId('pag', $pagId, 'pag');
-    $url .= self::putCgiId('cmp', $targetCmpId, 'cmp');
+    $url = Abc::$cgi->putLeader();
+     $url .= Abc::$cgi->putId('pag', $pagId, 'pag');
+    $url .= Abc::$cgi->putId('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }

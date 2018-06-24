@@ -44,7 +44,7 @@ class FunctionalityUpdatePagesPage extends TabPage
   {
     parent::__construct();
 
-    $this->funId = self::getCgiId('fun', 'fun');
+    $this->funId = Abc::$cgi->getManId('fun', 'fun');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -57,8 +57,9 @@ class FunctionalityUpdatePagesPage extends TabPage
    */
   public static function getUrl(int $funId): string
   {
-    $url = self::putCgiId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_UPDATE_PAGES, 'pag');
-    $url .= self::putCgiId('fun', $funId, 'fun');
+    $url = Abc::$cgi->putLeader();
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_UPDATE_PAGES, 'pag');
+    $url .= Abc::$cgi->putId('fun', $funId, 'fun');
 
     return $url;
   }
