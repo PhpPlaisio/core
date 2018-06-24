@@ -68,7 +68,7 @@ abstract class TabPage extends CorePage
 
     Abc::$assets->jsAdmSetPageSpecificMain(__CLASS__);
 
-    if (isset($_SERVER['ABC_ENV']) && $_SERVER['ABC_ENV']=='dev')
+    if (Abc::$request->isEnvDev())
     {
       $this->enableW3cValidator();
     }
