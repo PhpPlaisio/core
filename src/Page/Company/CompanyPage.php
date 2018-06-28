@@ -27,7 +27,7 @@ abstract class CompanyPage extends TabPage
   /**
    * The ID of the company of which data is shown on this page (i.e. the target company).
    *
-   * @var int
+   * @var int|null
    */
   protected $targetCmpId;
 
@@ -39,22 +39,22 @@ abstract class CompanyPage extends TabPage
   {
     parent::__construct();
 
-    $this->targetCmpId = Abc::$cgi->getManId('cmp', 'cmp');
+    $this->targetCmpId = Abc::$cgi->getOptId('cmp', 'cmp');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the URL to a child page of this page.
    *
-   * @param int $pagId       The ID of the child page.
-   * @param int $targetCmpId The ID of the target company.
+   * @param int      $pagId       The ID of the child page.
+   * @param int|null $targetCmpId The ID of the target company.
    *
    * @return string The URL.
    */
-  public static function getChildUrl(int $pagId, int $targetCmpId): string
+  public static function getChildUrl(int $pagId, ?int $targetCmpId): string
   {
     $url = Abc::$cgi->putLeader();
-     $url .= Abc::$cgi->putId('pag', $pagId, 'pag');
+    $url .= Abc::$cgi->putId('pag', $pagId, 'pag');
     $url .= Abc::$cgi->putId('cmp', $targetCmpId, 'cmp');
 
     return $url;
@@ -124,7 +124,7 @@ abstract class CompanyPage extends TabPage
   {
     $values            = $form->getValues();
     $this->targetCmpId = Abc::$DL->abcCompanyGetCmpIdByCmpAbbr($values['cmp_abbr']);
-    if ($this->targetCmpId)
+    if ($this->targetCmpId!==null)
     {
       HttpHeader::redirectSeeOther(self::getChildUrl(Abc::$requestHandler->getPagId(), $this->targetCmpId));
     }
@@ -173,4 +173,3 @@ abstract class CompanyPage extends TabPage
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-
