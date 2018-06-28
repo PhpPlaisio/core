@@ -11,7 +11,8 @@ create procedure abc_babel_text_insert_text(in p_ttg_id      @abc_babel_text_gro
                                             in p_txt_comment @abc_babel_text.txt_comment%type@,
                                             in p_ttt_text    @abc_babel_text_text.ttt_text%type@)
 modifies sql data
--- type: singleton1
+-- type:   singleton1
+-- return: int
 begin
   declare l_txt_id @abc_babel_text.txt_id%type@;
 
@@ -38,6 +39,5 @@ begin
   from   ABC_BABEL_LANGUAGE
   ;
 
-  select l_txt_id txt_id
-  ;
+  select l_txt_id txt_id;
 end

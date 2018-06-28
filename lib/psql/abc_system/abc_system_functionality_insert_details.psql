@@ -7,7 +7,8 @@
 create procedure abc_system_functionality_insert_details(in p_mdl_id @aut_module.mdl_id%type@,
                                                          in p_wrd_id @abc_babel_word.wrd_id%type@)
 modifies sql data
--- type: singleton1
+-- type:   singleton1
+-- return: int
 begin
   insert into AUT_FUNCTIONALITY( mdl_id
   ,                              wrd_id )

@@ -9,7 +9,8 @@ create procedure abc_system_role_group_insert(in p_wrd_id     @aut_role_group.wr
                                               in p_rlg_weight @aut_role_group.rlg_weight%type@,
                                               in p_rlg_label  @aut_role_group.rlg_label%type@)
 modifies sql data
--- type: singleton1
+-- type:   singleton1
+-- return: int
 begin
   insert into AUT_ROLE_GROUP( wrd_id
   ,                           rlg_weight
@@ -19,5 +20,5 @@ begin
   ,       p_rlg_label )
   ;
 
-  select last_insert_id();
+  select last_insert_id() rlg_id;
 end

@@ -5,7 +5,8 @@
  */
 create procedure abc_company_get_cmp_id_by_cmp_abbr( in p_cmp_abbr @abc_auth_company.cmp_abbr%type@ )
 reads sql data
--- type: singleton0
+-- type:   singleton0
+-- return: int|null
 begin
   select cmp_id
   from   ABC_AUTH_COMPANY

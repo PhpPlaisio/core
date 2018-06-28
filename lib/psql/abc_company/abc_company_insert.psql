@@ -4,20 +4,21 @@
  * @param p_cmp_abbr  The abbreviation of the new company.
  * @param p_cmp_label The label of the new company.
  */
-create procedure abc_company_insert( in p_cmp_abbr  @abc_auth_company.cmp_abbr%type@,
-                                     in p_cmp_label @abc_auth_company.cmp_label%type@ )
+create procedure abc_company_insert(in p_cmp_abbr  @abc_auth_company.cmp_abbr%type@,
+                                    in p_cmp_label @abc_auth_company.cmp_label%type@)
 modifies sql data
--- type: singleton1
+-- type:   singleton1
+-- return: int
 begin
   declare l_cmp_id @abc_auth_company.cmp_id%type@;
 
   if (p_cmp_label='*') then
-    set p_cmp_label = concat( 'CMP_ID_', upper( replace( p_cmp_abbr, ' ', '_' ) ) );
+    set p_cmp_label = concat('CMP_ID_', upper(replace(p_cmp_abbr, ' ', '_')));
     /** @todo move to php */
   end if;
 
   insert into ABC_AUTH_COMPANY( cmp_abbr
-  ,                        cmp_label )
+  ,                             cmp_label )
   values( p_cmp_abbr
   ,       p_cmp_label )
   ;

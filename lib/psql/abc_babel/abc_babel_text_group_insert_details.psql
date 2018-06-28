@@ -7,7 +7,8 @@
 create procedure abc_babel_text_group_insert_details(in p_ttg_name  @abc_babel_text_group.ttg_name%type@,
                                                      in p_ttg_label @abc_babel_text_group.ttg_label%type@)
 modifies sql data
--- type: singleton1
+-- type:   singleton1
+-- return: int
 begin
   insert into ABC_BABEL_TEXT_GROUP( ttg_name
   ,                                 ttg_label )

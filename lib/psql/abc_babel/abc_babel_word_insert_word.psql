@@ -11,10 +11,10 @@ create procedure abc_babel_word_insert_word(in p_wdg_id      @abc_babel_word_gro
                                             in p_wrd_comment @abc_babel_word.wrd_comment%type@,
                                             in p_wdt_text    @abc_babel_word_text.wdt_text%type@)
 modifies sql data
--- type: singleton1
+-- type:   singleton1
+-- return: int
 begin
   declare l_wrd_id @ABC_BABEL_WORD.wrd_id%type@;
-
 
   if (p_wrd_label='*') then
     -- Replace label with aut generated label.
@@ -45,6 +45,5 @@ begin
   from   ABC_BABEL_LANGUAGE
   ;
 
-  select l_wrd_id wrd_id
-  ;
+  select l_wrd_id wrd_id;
 end

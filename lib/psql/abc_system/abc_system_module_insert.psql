@@ -5,7 +5,8 @@
  */
 create procedure abc_system_module_insert(in p_wrd_id @abc_babel_word.wrd_id%type@)
 modifies sql data
--- type: singleton1
+-- type:   singleton1
+-- return: int
 begin
   insert into AUT_MODULE( wrd_id )
   values( p_wrd_id )

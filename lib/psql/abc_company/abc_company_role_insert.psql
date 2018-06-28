@@ -13,7 +13,8 @@ create procedure abc_company_role_insert(in p_cmp_id     @abc_auth_company.cmp_i
                                          in p_rol_weight @aut_role.rol_weight%type@,
                                          in p_rol_label  @aut_role.rol_label%type@)
 modifies sql data
--- type: singleton1
+-- type:   singleton1
+-- return: int
 begin
   insert into AUT_ROLE( cmp_id
   ,                     rlg_id

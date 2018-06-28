@@ -7,7 +7,8 @@
 create procedure abc_system_tab_insert_details( in p_wrd_id    @aut_page_tab.wrd_id%type@,
                                                 in p_ptb_label @aut_page_tab.ptb_label%type@ )
 reads sql data
--- type: singleton1
+-- type:   singleton1
+-- return: int
 begin
   insert into AUT_PAGE_TAB( wrd_id
   ,                         ptb_label )

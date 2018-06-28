@@ -19,7 +19,8 @@ create procedure abc_system_page_insert_details(in p_wrd_id     @aut_page.wrd_id
                                                 in p_pag_label  @aut_page.pag_label%type@,
                                                 in p_pag_weight @aut_page.pag_weight%type@)
 modifies sql data
--- type: singleton1
+-- type:   singleton1
+-- return: int
 begin
   declare l_pag_id @aut_page.pag_id%type@;
 
@@ -49,6 +50,5 @@ begin
     ;
   end if;
 
-  select l_pag_id pag_id
-  ;
+  select l_pag_id pag_id;
 end
