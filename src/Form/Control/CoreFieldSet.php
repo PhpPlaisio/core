@@ -5,7 +5,7 @@ namespace SetBased\Abc\Core\Form\Control;
 use SetBased\Abc\Abc;
 use SetBased\Abc\Form\Control\ComplexControl;
 use SetBased\Abc\Form\Control\FieldSet;
-use SetBased\Abc\Form\Control\PushMeControl;
+use SetBased\Abc\Form\Control\PushControl;
 use SetBased\Abc\Form\Control\ResetControl;
 use SetBased\Abc\Form\Control\SubmitControl;
 use SetBased\Abc\Helper\Html;
@@ -31,7 +31,6 @@ class CoreFieldSet extends FieldSet
   private $htmlTitle;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Adds a button control to this fieldset.
    *
@@ -78,9 +77,9 @@ class CoreFieldSet extends FieldSet
    *                          </ul>
    * @param string     $name  The name of the submit button.
    *
-   * @return PushMeControl
+   * @return PushControl
    */
-  public function addSubmitButton($wrdId, string $name = 'submit'): PushMeControl
+  public function addSubmitButton($wrdId, string $name = 'submit'): PushControl
   {
     // If necessary create a button form control.
     if (!$this->buttonControl)

@@ -5,11 +5,8 @@ namespace SetBased\Abc\Core\Form;
 use SetBased\Abc\Abc;
 use SetBased\Abc\Core\Form\Control\CoreFieldSet;
 use SetBased\Abc\Core\Form\Validator\MandatoryValidator;
-use SetBased\Abc\Form\Control\ConstantControl;
 use SetBased\Abc\Form\Control\Control;
-use SetBased\Abc\Form\Control\HiddenControl;
-use SetBased\Abc\Form\Control\InvisibleControl;
-use SetBased\Abc\Form\Control\PushMeControl;
+use SetBased\Abc\Form\Control\PushControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\Form;
 
@@ -34,7 +31,6 @@ class CoreForm extends Form
   protected $visibleFieldSet;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * @inheritdoc
    */
@@ -64,43 +60,37 @@ class CoreForm extends Form
    */
   public function addFormControl(Control $control, $wrdId = null, bool $mandatory = false)
   {
-    switch (true)
+    if ($control->isHidden())
     {
       // Add hidden, constant, and invisible controls to the fieldset for hidden controls.
-      case ($control instanceof HiddenControl):
-      case ($control instanceof ConstantControl):
-      case ($control instanceof InvisibleControl):
-        $this->hiddenFieldSet->addFormControl($control);
-        break;
-
+      $this->hiddenFieldSet->addFormControl($control);
+    }
+    else
+    {
       // Add all other controls to the visible fieldset.
-      default:
-        switch (true)
+      if ($control instanceof TextControl)
+      {
+        $maxLength = $control->getAttribute('maxlength');
+        $size      = $control->getAttribute('size');
+        if ($size===null)
         {
-          // Set the size of text controls.
-          case ($control instanceof TextControl):
-            $max_length = $control->getAttribute('maxlength');
-            $size       = $control->getAttribute('size');
-            if ($size===null)
-            {
-              $size = (isset($max_length)) ? min($max_length, self::$maxTextSize) : self::$maxTextSize;
-              $control->setAttrSize($size);
-            }
-            break;
+          $size = (isset($maxLength)) ? min($maxLength, self::$maxTextSize) : self::$maxTextSize;
+          $control->setAttrSize($size);
         }
+      }
 
-        $this->visibleFieldSet->addFormControl($control);
+      $this->visibleFieldSet->addFormControl($control);
 
-        if (isset($wrdId))
-        {
-          $control->setFakeAttribute('_abc_label', (is_int($wrdId)) ? Abc::$babel->getWord($wrdId) : $wrdId);
-        }
+      if ($wrdId!==null)
+      {
+        $control->setFakeAttribute('_abc_label', (is_int($wrdId)) ? Abc::$babel->getWord($wrdId) : $wrdId);
+      }
 
-        if ($mandatory)
-        {
-          $control->addValidator(new MandatoryValidator(0));
-          $control->setFakeAttribute('_abc_mandatory', true);
-        }
+      if ($mandatory)
+      {
+        $control->addValidator(new MandatoryValidator(0));
+        $control->setFakeAttribute('_abc_mandatory', true);
+      }
     }
   }
 
@@ -117,12 +107,12 @@ class CoreForm extends Form
    * @param string     $name      The name of the submit button.
    * @param string     $class     The class(es) of the submit button.
    *
-   * @return PushMeControl
+   * @return PushControl
    */
   public function addSubmitButton($wrdId,
                                   string $method,
                                   string $name = 'submit',
-                                  ?string $class = 'btn btn-success'): PushMeControl
+                                  ?string $class = 'btn btn-success'): PushControl
   {
     $control = $this->visibleFieldSet->addSubmitButton($wrdId, $name);
     $control->addClass($class);
