@@ -115,8 +115,8 @@ class CoreForm extends Form
                                   ?string $class = 'btn btn-success'): PushControl
   {
     $control = $this->visibleFieldSet->addSubmitButton($wrdId, $name);
+    $control->setMethod($method);
     $control->addClass($class);
-    $this->addSubmitHandler($control, $method);
 
     return $control;
   }

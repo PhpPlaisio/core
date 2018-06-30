@@ -108,11 +108,11 @@ class FunctionalityUpdateRolesPage extends TabPage
     $factory->enableFilter();
 
     // Add submit button.
-    $button = new CoreButtonControl('');
+    $button = new CoreButtonControl();
     $submit = new SubmitControl('submit');
+    $submit->setMethod('handleForm');
     $submit->setValue(Abc::$babel->getWord(C::WRD_ID_BUTTON_UPDATE));
     $button->addFormControl($submit);
-    $this->form->addSubmitHandler($button, 'handleForm');
 
     // Put everything together in a LouverControl.
     $louver = new LouverControl('data');
