@@ -125,6 +125,9 @@ class WordTranslateWordsPage extends BabelPage
     $values  = $this->form->getValues();
     $changes = $this->form->getChangedControls();
 
+    // If no changes are submitted return immediately.
+    if (empty($changes)) return;
+
     foreach ($changes['data'] as $wrd_id => $changed)
     {
       Abc::$DL->abcBabelWordTranslateWord($this->usrId, $wrd_id, $this->actLanId, $values['data'][$wrd_id]['act_wdt_text']);
