@@ -123,7 +123,7 @@ class LoginPage extends CorePage
    */
   private function echoForm(): void
   {
-    echo $this->form->generate();
+    echo $this->form->getHtml();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -99,9 +99,9 @@ class CoreFieldSet extends FieldSet
   /**
    * @inheritdoc
    */
-  public function generate(): string
+  public function getHtml(): string
   {
-    $ret = $this->generateStartTag();
+    $ret = $this->getHtmlStartTag();
 
     $ret .= '<div class="input_table">';
     $ret .= '<table>';
@@ -120,7 +120,7 @@ class CoreFieldSet extends FieldSet
       $ret .= '<tfoot class="button">';
       $ret .= '<tr>';
       $ret .= '<td colspan="2">';
-      $ret .= $this->buttonControl->generate();
+      $ret .= $this->buttonControl->getHtml();
       $ret .= '</td>';
       $ret .= '</tr>';
       $ret .= '</tfoot>';
@@ -139,7 +139,7 @@ class CoreFieldSet extends FieldSet
         $ret .= '</th>';
 
         $ret .= '<td>';
-        $ret .= $control->generate();
+        $ret .= $control->getHtml();
         $ret .= '</td>';
 
         $messages = $control->getErrorMessages(true);
@@ -164,7 +164,7 @@ class CoreFieldSet extends FieldSet
     $ret .= '</table>';
     $ret .= '</div>';
 
-    $ret .= $this->generateEndTag();
+    $ret .= $this->getHtmlEndTag();
 
     return $ret;
   }

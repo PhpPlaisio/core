@@ -13,7 +13,7 @@ class CoreButtonControl extends ComplexControl
   /**
    * @inheritdoc
    */
-  public function generate(): string
+  public function getHtml(): string
   {
     $html = $this->prefix;
     $html .= '<table class="button">';
@@ -22,7 +22,7 @@ class CoreButtonControl extends ComplexControl
     foreach ($this->controls as $control)
     {
       $html .= '<td>';
-      $html .= $control->generate();
+      $html .= $control->getHtml();
       $html .= '</td>';
     }
 
