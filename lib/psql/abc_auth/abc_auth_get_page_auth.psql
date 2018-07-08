@@ -10,7 +10,7 @@ create procedure abc_auth_get_page_auth( in p_cmp_id @abc_auth_company.cmp_id%ty
 ,                                        in p_pag_id @aut_page.pag_id%type@ )
 reads sql data
 -- type:   singleton1
--- return: int
+-- return: bool
 begin
   select count(*) n
   from   AUT_PRO_PAG
