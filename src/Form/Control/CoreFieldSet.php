@@ -115,17 +115,6 @@ class CoreFieldSet extends FieldSet
       $ret .= '</thead>';
     }
 
-    if ($this->buttonControl)
-    {
-      $ret .= '<tfoot class="button">';
-      $ret .= '<tr>';
-      $ret .= '<td colspan="2">';
-      $ret .= $this->buttonControl->getHtml();
-      $ret .= '</td>';
-      $ret .= '</tr>';
-      $ret .= '</tfoot>';
-    }
-
     $ret .= '<tbody>';
     foreach ($this->controls as $control)
     {
@@ -159,8 +148,19 @@ class CoreFieldSet extends FieldSet
         $ret .= '</tr>';
       }
     }
-
     $ret .= '</tbody>';
+
+    if ($this->buttonControl)
+    {
+      $ret .= '<tfoot class="button">';
+      $ret .= '<tr>';
+      $ret .= '<td colspan="2">';
+      $ret .= $this->buttonControl->getHtml();
+      $ret .= '</td>';
+      $ret .= '</tr>';
+      $ret .= '</tfoot>';
+    }
+
     $ret .= '</table>';
     $ret .= '</div>';
 
