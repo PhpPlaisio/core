@@ -27,7 +27,7 @@ abstract class CompanyPage extends TabPage
   /**
    * The ID of the company of which data is shown on this page (i.e. the target company).
    *
-   * @var int|null
+   * @var int
    */
   protected $targetCmpId;
 
@@ -39,7 +39,7 @@ abstract class CompanyPage extends TabPage
   {
     parent::__construct();
 
-    $this->targetCmpId = Abc::$cgi->getOptId('cmp', 'cmp');
+    $this->targetCmpId = Abc::$cgi->getManId('cmp', 'cmp');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -150,6 +150,7 @@ abstract class CompanyPage extends TabPage
 
     return $form;
   }
+
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Sets the target company.

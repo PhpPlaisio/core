@@ -14,7 +14,7 @@ use SetBased\Abc\Table\TableColumn\TextTableColumn;
 /**
  * Page with an overview of all companies.
  */
-class CompanyOverviewPage extends CompanyPage
+class CompanyOverviewPage extends TabPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -28,15 +28,6 @@ class CompanyOverviewPage extends CompanyPage
     $url .=  Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_OVERVIEW, 'pag');
 
     return $url;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritdoc
-   */
-  public function echoMainContent(): void
-  {
-    TabPage::echoMainContent();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
