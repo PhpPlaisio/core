@@ -24,7 +24,8 @@
     "setbased/abc-table-detail": "*",
     "setbased/abc-table-overview": "*",
     "setbased/abc-user": "^1.1.0",
-    "setbased/exception": "^1.0.0"
+    "setbased/exception": "^1.0.0",
+    "ext-curl": "*"
   },
   "require-dev": {
     "phing/phing": "^2.0.0",
