@@ -17,6 +17,13 @@ class CoreFieldSet extends FieldSet
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * The class used in the generated HTML code.
+   *
+   * @var string|null
+   */
+  public static $class = 'input-table';
+
+  /**
    * The complex form control holding the buttons of this fieldset.
    *
    * @var ComplexControl
@@ -31,6 +38,7 @@ class CoreFieldSet extends FieldSet
   private $htmlTitle;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Adds a button control to this fieldset.
    *
@@ -101,33 +109,36 @@ class CoreFieldSet extends FieldSet
    */
   public function getHtml(): string
   {
+    $this->addClass(static::$class);
+
     $ret = $this->getHtmlStartTag();
 
-    $ret .= '<div class="input_table">';
-    $ret .= '<table>';
+    $ret .= Html::generateTag('table', $this->attributes);
+
+    $childAttributes = ['class' => static::$class];
 
     if ($this->htmlTitle)
     {
-      $ret .= '<thead>';
-      $ret .= '<tr>';
+      $ret .= Html::generateTag('thead', $childAttributes);
+      $ret .= Html::generateTag('tr', $childAttributes);
       $ret .= '<th colspan="2">'.$this->htmlTitle.'</th>';
       $ret .= '</tr>';
       $ret .= '</thead>';
     }
 
-    $ret .= '<tbody>';
+    $ret .= Html::generateTag('tbody', $childAttributes);
     foreach ($this->controls as $control)
     {
       if ($control!==$this->buttonControl)
       {
-        $ret       .= '<tr>';
+        $ret       .= Html::generateTag('tr', $childAttributes);
         $ret       .= '<th>';
         $ret       .= Html::txt2Html($control->getAttribute('_abc_label'));
         $mandatory = $control->getAttribute('_abc_mandatory');
         if (!empty($mandatory)) $ret .= '<span class="mandatory">*</span>';
         $ret .= '</th>';
 
-        $ret .= '<td>';
+        $ret .= Html::generateTag('td', $childAttributes);
         $ret .= $control->getHtml();
         $ret .= '</td>';
 
@@ -152,8 +163,8 @@ class CoreFieldSet extends FieldSet
 
     if ($this->buttonControl)
     {
-      $ret .= '<tfoot class="button">';
-      $ret .= '<tr>';
+      $ret .= Html::generateTag('tfoot', $childAttributes);
+      $ret .= Html::generateTag('tr', $childAttributes);
       $ret .= '<td colspan="2">';
       $ret .= $this->buttonControl->getHtml();
       $ret .= '</td>';
@@ -162,7 +173,6 @@ class CoreFieldSet extends FieldSet
     }
 
     $ret .= '</table>';
-    $ret .= '</div>';
 
     $ret .= $this->getHtmlEndTag();
 
