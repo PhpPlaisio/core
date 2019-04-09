@@ -9,7 +9,7 @@ use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableColumn\System\PageTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
-use SetBased\Abc\Table\TableRow\NumericTableRow;
+use SetBased\Abc\Table\TableRow\IntegerTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
 /**
@@ -75,7 +75,7 @@ class TabDetailsPage extends TabPage
     $table   = new CoreDetailTable();
 
     // Add row with the ID of the tab.
-    NumericTableRow::addRow($table, 'ID', $details['ptb_id'], '%d');
+    IntegerTableRow::addRow($table, 'ID', $details['ptb_id']);
 
     // Add row with the title of the tab.
     TextTableRow::addRow($table, 'Title', $details['ptb_title']);

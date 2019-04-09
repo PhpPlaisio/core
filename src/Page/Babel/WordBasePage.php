@@ -11,7 +11,7 @@ use SetBased\Abc\Form\Control\SpanControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Helper\HttpHeader;
-use SetBased\Abc\Table\TableRow\NumericTableRow;
+use SetBased\Abc\Table\TableRow\IntegerTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
 /**
@@ -132,7 +132,7 @@ abstract class WordBasePage extends BabelPage
     $table = new CoreDetailTable();
 
     // Add row for the ID of the word group.
-    NumericTableRow::addRow($table, 'ID', $group['wdg_id'], '%d');
+    IntegerTableRow::addRow($table, 'ID', $group['wdg_id']);
 
     // Add row for the name of the word group.
     TextTableRow::addRow($table, 'Word Group', $group['wdg_name']);

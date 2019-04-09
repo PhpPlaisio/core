@@ -13,7 +13,7 @@ use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SubmitControl;
 use SetBased\Abc\Helper\HttpHeader;
-use SetBased\Abc\Table\TableRow\NumericTableRow;
+use SetBased\Abc\Table\TableRow\IntegerTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
 /**
@@ -183,7 +183,7 @@ class FunctionalityUpdatePagesPage extends TabPage
     $table = new CoreDetailTable();
 
     // Add row for the ID of the function.
-    NumericTableRow::addRow($table, 'ID', $details['fun_id'], '%d');
+    IntegerTableRow::addRow($table, 'ID', $details['fun_id']);
 
     // Add row for the module name to which the function belongs.
     TextTableRow::addRow($table, 'Module', $details['mdl_name']);

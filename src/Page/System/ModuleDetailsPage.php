@@ -11,7 +11,7 @@ use SetBased\Abc\Core\TableAction\System\ModuleUpdateCompaniesTableAction;
 use SetBased\Abc\Core\TableAction\System\ModuleUpdateTableAction;
 use SetBased\Abc\Core\TableColumn\Company\CompanyTableColumn;
 use SetBased\Abc\Core\TableColumn\Company\FunctionalityTableColumn;
-use SetBased\Abc\Table\TableRow\NumericTableRow;
+use SetBased\Abc\Table\TableRow\IntegerTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
 /**
@@ -110,7 +110,7 @@ class ModuleDetailsPage extends TabPage
     $table->addTableAction('default', new ModuleUpdateTableAction($this->mdlId));
 
     // Add row for the ID of the module.
-    NumericTableRow::addRow($table, 'ID', $this->details['mdl_id'], '%d');
+    IntegerTableRow::addRow($table, 'ID', $this->details['mdl_id']);
 
     // Add row for the name of the module.
     TextTableRow::addRow($table, 'Module', $this->details['mdl_name']);

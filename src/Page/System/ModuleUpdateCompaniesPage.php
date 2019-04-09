@@ -13,7 +13,7 @@ use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SubmitControl;
 use SetBased\Abc\Helper\HttpHeader;
-use SetBased\Abc\Table\TableRow\NumericTableRow;
+use SetBased\Abc\Table\TableRow\IntegerTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
 /**
@@ -192,7 +192,7 @@ class ModuleUpdateCompaniesPage extends TabPage
     $table = new CoreDetailTable();
 
     // Add row for the ID of the module.
-    NumericTableRow::addRow($table, 'ID', $this->details['mdl_id'], '%d');
+    IntegerTableRow::addRow($table, 'ID', $this->details['mdl_id']);
 
     // Add row for the module name.
     TextTableRow::addRow($table, 'Module', $this->details['mdl_name']);

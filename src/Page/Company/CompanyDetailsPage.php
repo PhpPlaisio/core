@@ -6,7 +6,7 @@ use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Core\TableAction\Company\CompanyUpdateTableAction;
-use SetBased\Abc\Table\TableRow\NumericTableRow;
+use SetBased\Abc\Table\TableRow\IntegerTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
 /**
@@ -71,7 +71,7 @@ class CompanyDetailsPage extends CompanyPage
     $table->addTableAction('default', new CompanyUpdateTableAction($this->targetCmpId));
 
     // Show company ID.
-    NumericTableRow::addRow($table, 'ID', $this->details['cmp_id'], '%d');
+    IntegerTableRow::addRow($table, 'ID', $this->details['cmp_id']);
 
     // Show company abbreviation.
     TextTableRow::addRow($table, 'Abbreviation', $this->details['cmp_abbr']);

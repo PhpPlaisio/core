@@ -10,7 +10,7 @@ use SetBased\Abc\Core\Table\CoreOverviewTable;
 use SetBased\Abc\Core\TableAction\System\RoleGroupUpdateTableAction;
 use SetBased\Abc\Core\TableColumn\Company\CompanyTableColumn;
 use SetBased\Abc\Core\TableColumn\Company\RoleTableColumn;
-use SetBased\Abc\Table\TableRow\NumericTableRow;
+use SetBased\Abc\Table\TableRow\IntegerTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
 /**
@@ -41,7 +41,6 @@ class RoleGroupDetailsPage extends TabPage
   private $roles;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    */
@@ -94,7 +93,7 @@ class RoleGroupDetailsPage extends TabPage
     $table->addTableAction('default', new RoleGroupUpdateTableAction($this->rlgId));
 
     // Show ID of the role group.
-    NumericTableRow::addRow($table, 'ID', $this->roleGroup['rlg_id'], '%d');
+    IntegerTableRow::addRow($table, 'ID', $this->roleGroup['rlg_id']);
 
     // Show name of the role group.
     TextTableRow::addRow($table, 'Name', $this->roleGroup['rlg_name']);

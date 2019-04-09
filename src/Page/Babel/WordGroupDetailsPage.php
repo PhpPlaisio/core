@@ -13,7 +13,7 @@ use SetBased\Abc\Core\TableColumn\Babel\WordTranslateIconTableColumn;
 use SetBased\Abc\Core\TableColumn\Babel\WordUpdateIconTableColumn;
 use SetBased\Abc\Table\TableColumn\NumericTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
-use SetBased\Abc\Table\TableRow\NumericTableRow;
+use SetBased\Abc\Table\TableRow\IntegerTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
 /**
@@ -95,7 +95,7 @@ class WordGroupDetailsPage extends BabelPage
     $table = new CoreDetailTable();
 
     // Add row for the ID of the word group.
-    NumericTableRow::addRow($table, 'ID', $this->details['wdg_id'], '%d');
+    IntegerTableRow::addRow($table, 'ID', $this->details['wdg_id']);
 
     // Add row for the name of the word group.
     TextTableRow::addRow($table, 'Word Group', $this->details['wdg_name']);

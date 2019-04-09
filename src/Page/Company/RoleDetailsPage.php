@@ -12,7 +12,7 @@ use SetBased\Abc\Core\TableColumn\Company\FunctionalityTableColumn;
 use SetBased\Abc\Core\TableColumn\Company\ModuleTableColumn;
 use SetBased\Abc\Core\TableColumn\System\PageTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
-use SetBased\Abc\Table\TableRow\NumericTableRow;
+use SetBased\Abc\Table\TableRow\IntegerTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
 /**
@@ -139,13 +139,13 @@ class RoleDetailsPage extends CompanyPage
     TextTableRow::addRow($table, 'Role Group', $details['rlg_name']);
 
     // Show ID of the role.
-    NumericTableRow::addRow($table, 'ID', $details['rol_id'], '%d');
+    IntegerTableRow::addRow($table, 'ID', $details['rol_id']);
 
     // Show name.
     TextTableRow::addRow($table, 'Role', $details['rol_name']);
 
     // Show weight.
-    NumericTableRow::addRow($table, 'Weight', $details['rol_weight'], '%d');
+    IntegerTableRow::addRow($table, 'Weight', $details['rol_weight']);
 
     // Show label.
     TextTableRow::addRow($table, 'Label', $details['rol_label']);

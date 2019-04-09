@@ -14,7 +14,7 @@ use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SubmitControl;
 use SetBased\Abc\Helper\HttpHeader;
-use SetBased\Abc\Table\TableRow\NumericTableRow;
+use SetBased\Abc\Table\TableRow\IntegerTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
 /**
@@ -191,7 +191,7 @@ class PageUpdateFunctionalitiesPage extends TabPage
     $table   = new CoreDetailTable();
 
     // Add row with the ID of the page.
-    NumericTableRow::addRow($table, 'ID', $details['pag_id'], '%d');
+    IntegerTableRow::addRow($table, 'ID', $details['pag_id']);
 
     // Add row with the title of the page.
     TextTableRow::addRow($table, 'Title', $details['pag_title']);

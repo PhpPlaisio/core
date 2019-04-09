@@ -13,7 +13,7 @@ use SetBased\Abc\Core\TableColumn\Company\CompanyTableColumn;
 use SetBased\Abc\Core\TableColumn\Company\RoleTableColumn;
 use SetBased\Abc\Core\TableColumn\System\PageTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
-use SetBased\Abc\Table\TableRow\NumericTableRow;
+use SetBased\Abc\Table\TableRow\IntegerTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
 /**
@@ -90,7 +90,7 @@ class FunctionalityDetailsPage extends TabPage
     $table = new CoreDetailTable();
 
     // Add row for the ID of the function.
-    NumericTableRow::addRow($table, 'ID', $this->details['fun_id'], '%d');
+    IntegerTableRow::addRow($table, 'ID', $this->details['fun_id']);
 
     // Add row for the module name to which the function belongs.
     TextTableRow::addRow($table, 'Module', $this->details['mdl_name']);
@@ -113,7 +113,7 @@ class FunctionalityDetailsPage extends TabPage
     $table->addTableAction('default', new FunctionalityUpdatePagesTableAction($this->funId));
 
     // Show the ID and class of the page.
-    $column =new PageTableColumn('Page');
+    $column = new PageTableColumn('Page');
     $column->setSortOrder(1);
     $table->addColumn($column);
 

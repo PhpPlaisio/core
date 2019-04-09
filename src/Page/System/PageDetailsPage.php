@@ -14,7 +14,7 @@ use SetBased\Abc\Core\TableColumn\Company\FunctionalityTableColumn;
 use SetBased\Abc\Core\TableColumn\Company\ModuleTableColumn;
 use SetBased\Abc\Core\TableColumn\Company\RoleTableColumn;
 use SetBased\Abc\Core\TableRow\System\PageDetailsTableRow;
-use SetBased\Abc\Table\TableRow\NumericTableRow;
+use SetBased\Abc\Table\TableRow\IntegerTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
 /**
@@ -85,7 +85,7 @@ class PageDetailsPage extends TabPage
     $table->addTableAction('default', new PageUpdateTableAction($this->targetPagId));
 
     // Add row with the ID of the page.
-    NumericTableRow::addRow($table, 'ID', $details['pag_id'], '%d');
+    IntegerTableRow::addRow($table, 'ID', $details['pag_id']);
 
     // Add row with the title of the page.
     TextTableRow::addRow($table, 'Title', $details['pag_title']);
