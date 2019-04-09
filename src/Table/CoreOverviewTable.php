@@ -28,7 +28,6 @@ class CoreOverviewTable extends OverviewTable
   protected $tablesActionGroups = [];
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    */
@@ -67,7 +66,7 @@ class CoreOverviewTable extends OverviewTable
       $colspan = $this->getNumberOfColumns();
 
       $ret .= '<tr class="table_actions">';
-      $ret .= '<td colspan="'.$colspan.'">';
+      $ret .= Html::generateTag('td', ['colspan' => $colspan]);
 
       $first_group = true;
       foreach ($this->tablesActionGroups as $group)
