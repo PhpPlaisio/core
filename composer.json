@@ -9,7 +9,6 @@
   "require": {
     "php": ">=7.1.0",
     "ext-curl": "*",
-    "gajus/dindent": "^2.0.0",
     "setbased/abc": "^0.10.0",
     "setbased/abc-babel-core": "^0.10.0",
     "setbased/abc-company": "^1.1.0",
