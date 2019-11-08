@@ -6,7 +6,7 @@ use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Helper\HttpHeader;
+use SetBased\Abc\Response\SeeOtherResponse;
 
 /**
  * Abstract parent page for inserting and updating the details of a company.
@@ -110,7 +110,7 @@ abstract class CompanyBasePage extends TabPage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(CompanyDetailsPage::getUrl($this->targetCmpId));
+    $this->response = new SeeOtherResponse(CompanyDetailsPage::getUrl($this->targetCmpId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

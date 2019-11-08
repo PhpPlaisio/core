@@ -10,7 +10,7 @@ use SetBased\Abc\Core\Form\SlatControlFactory\BabelWordTranslateSlatControlFacto
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SubmitControl;
-use SetBased\Abc\Helper\HttpHeader;
+use SetBased\Abc\Response\SeeOtherResponse;
 
 /**
  * Page for translating all words in a word group.
@@ -160,7 +160,7 @@ class WordTranslateWordsPage extends BabelPage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(WordGroupDetailsPage::getUrl($this->wdgId, $this->actLanId));
+    $this->response = new SeeOtherResponse(WordGroupDetailsPage::getUrl($this->wdgId, $this->actLanId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

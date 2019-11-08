@@ -38,7 +38,6 @@ class CoreFieldSet extends FieldSet
   private $htmlTitle;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Adds a button control to this fieldset.
    *

@@ -61,7 +61,7 @@ class BabelWordTranslateSlatControlFactory extends SlatControlFactory
    */
   public function createRow(LouverControl $louverControl, array $data): SlatControl
   {
-    $row =new SlatControl($data['wrd_id']);
+    $row = new SlatControl($data['wrd_id']);
     $row->setObfuscator($this->wrdIdObfuscator);
     $louverControl->addFormControl($row);
 

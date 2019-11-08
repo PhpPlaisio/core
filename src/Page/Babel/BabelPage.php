@@ -8,7 +8,7 @@ use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Form;
-use SetBased\Abc\Helper\HttpHeader;
+use SetBased\Abc\Response\SeeOtherResponse;
 
 /**
  * Abstract parent page for all Babel pages.
@@ -89,7 +89,7 @@ abstract class BabelPage extends TabPage
       $url .= '/'.$name.'/'.$value;
     }
 
-    HttpHeader::redirectSeeOther($url);
+    $this->response = new SeeOtherResponse($url);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

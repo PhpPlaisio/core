@@ -37,7 +37,7 @@ class SystemFunctionalityUpdateRolesSlatControlFactory extends SlatControlFactor
   public function __construct()
   {
     // Create slat joint for table column with page ID.
-    $slat_joint = new InvisibleSlatJoint('none', null);
+    $slat_joint = new InvisibleSlatJoint();
     $this->addSlatJoint('cmp_id', $slat_joint);
 
     $table_column = new NumericTableColumn('ID', 'cmp_id');

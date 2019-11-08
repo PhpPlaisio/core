@@ -4,8 +4,8 @@ namespace SetBased\Abc\Core\Page\Company;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
-use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Page\CorePage;
+use SetBased\Abc\Response\SeeOtherResponse;
 
 /**
  * Page for deleting a company specific page that overrides a standard page.
@@ -66,7 +66,7 @@ class SpecificPageDeletePage extends CorePage
   {
     Abc::$DL->abcCompanySpecificPageDelete($this->targetCmpId, $this->targetPagId);
 
-    HttpHeader::redirectSeeOther(SpecificPageOverviewPage::getUrl($this->targetCmpId));
+    $this->response = new SeeOtherResponse(SpecificPageOverviewPage::getUrl($this->targetCmpId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

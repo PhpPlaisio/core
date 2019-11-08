@@ -10,7 +10,7 @@ use SetBased\Abc\Core\Form\SlatControlFactory\CompanyRoleUpdateFunctionalitiesSl
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SubmitControl;
-use SetBased\Abc\Helper\HttpHeader;
+use SetBased\Abc\Response\SeeOtherResponse;
 
 /**
  * Page for modifying the granted functionalities to a role.
@@ -174,7 +174,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(RoleDetailsPage::getUrl($this->targetCmpId, $this->rolId));
+    $this->response = new SeeOtherResponse(RoleDetailsPage::getUrl($this->targetCmpId, $this->rolId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

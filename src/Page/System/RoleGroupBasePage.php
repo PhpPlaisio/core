@@ -8,7 +8,7 @@ use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Helper\HttpHeader;
+use SetBased\Abc\Response\SeeOtherResponse;
 
 /**
  * Abstract parent page for inserting and updating details of a role group for the target company.
@@ -126,7 +126,7 @@ abstract class RoleGroupBasePage extends TabPage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(RoleGroupOverviewPage::getUrl());
+    $this->response = new SeeOtherResponse(RoleGroupOverviewPage::getUrl());
   }
 
   //--------------------------------------------------------------------------------------------------------------------

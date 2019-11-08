@@ -25,7 +25,7 @@ class CompanyOverviewPage extends TabPage
   public static function getUrl(): string
   {
     $url = Abc::$cgi->putLeader();
-    $url .=  Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_OVERVIEW, 'pag');
+    $url .= Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_OVERVIEW, 'pag');
 
     return $url;
   }

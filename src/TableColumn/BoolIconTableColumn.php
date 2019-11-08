@@ -38,8 +38,8 @@ class BoolIconTableColumn extends TableColumn
   {
     parent::__construct('bool', $headerText);
 
-    $this->fieldName  = $fieldName;
-    $this->showFalse  = $showFalse;
+    $this->fieldName = $fieldName;
+    $this->showFalse = $showFalse;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

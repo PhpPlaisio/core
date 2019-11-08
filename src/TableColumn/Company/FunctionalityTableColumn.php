@@ -19,7 +19,7 @@ class FunctionalityTableColumn extends DualTableColumn
    */
   public function __construct($headerText)
   {
-    parent::__construct('numeric', 'text',$headerText);
+    parent::__construct('numeric', 'text', $headerText);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

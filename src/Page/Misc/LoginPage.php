@@ -8,9 +8,9 @@ use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Form\Control\PasswordControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\Form;
-use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Helper\Password;
 use SetBased\Abc\Page\CorePage;
+use SetBased\Abc\Response\SeeOtherResponse;
 
 /**
  * Page for logging on the website.
@@ -188,7 +188,7 @@ class LoginPage extends CorePage
         Abc::$DL->abcUserPasswordUpdateHash($this->cmpId, $response['usr_id'], $hash);
       }
 
-      HttpHeader::redirectSeeOther($this->redirect);
+      $this->response = new SeeOtherResponse($this->redirect);
 
       return true;
     }

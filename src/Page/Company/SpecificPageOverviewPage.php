@@ -12,8 +12,6 @@ use SetBased\Abc\Core\TableColumn\System\PageDetailsIconTableColumn;
 use SetBased\Abc\Table\TableColumn\NumericTableColumn;
 use SetBased\Abc\Table\TableColumn\TextTableColumn;
 
-//----------------------------------------------------------------------------------------------------------------------
-
 /**
  * Page with an overview of all company specific pages for the target company.
  */
@@ -28,7 +26,6 @@ class SpecificPageOverviewPage extends CompanyPage
   private $pages;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    */
@@ -73,7 +70,7 @@ class SpecificPageOverviewPage extends CompanyPage
     $table->addColumn(new TextTableColumn('Title', 'pag_title'));
 
     // Add column with name of parent class.
-    $column =new TextTableColumn('Parent Class', 'pag_class_parent');
+    $column = new TextTableColumn('Parent Class', 'pag_class_parent');
     $column->setSortOrder(1);
     $table->addColumn($column);
 

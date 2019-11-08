@@ -3,9 +3,10 @@
 namespace SetBased\Abc\Core\Page;
 
 use SetBased\Abc\Abc;
-use SetBased\Abc\Core\Page\Misc\W3cValidatePage;
 use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Page\CorePage;
+use SetBased\Abc\Response\BaseResponse;
+use SetBased\Abc\Response\Response;
 
 /**
  * Abstract parent page for all core pages of ABC.
@@ -32,21 +33,6 @@ abstract class TabPage extends CorePage
    */
   protected $tabs;
 
-  /**
-   * The path where the HTML code of this page is stored for the W3C validator.
-   *
-   * @var string
-   */
-  protected $w3cPathName;
-
-  /**
-   * If set to true (typically on DEV environment) the HTML code of this page will be validated by the W3C validator.
-   *
-   * @var bool
-   */
-  protected $w3cValidate = false;
-
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
@@ -68,11 +54,6 @@ abstract class TabPage extends CorePage
 
     Abc::$assets->jsAdmSetPageSpecificMain(__CLASS__);
 
-    if (Abc::$request->isEnvDev())
-    {
-      $this->enableW3cValidator();
-    }
-
     Abc::$assets->setPageTitle(Abc::$abc->getPageGroupTitle().
                                ' - '.
                                Abc::$assets->getPageTitle());
@@ -82,40 +63,38 @@ abstract class TabPage extends CorePage
   /**
    * Echos the actual page content, i.e. the inner HTML of the body tag.
    */
-  public function echoPage(): void
+  public function handleRequest(): Response
   {
     // Buffer for actual contents.
     ob_start();
 
     $this->echoMainContent();
 
-    $contents = ob_get_contents();
-    if (ob_get_level()) ob_end_clean();
+    $contents = ob_get_clean();
+
+    if ($this->response!==null)
+    {
+      return $this->response;
+    }
 
     // Buffer for header.
     ob_start();
 
     $this->echoPageLeader();
-
-    // Show the actual content of the page.
     echo '<div id="main-content">';
     echo $contents;
     echo '</div>';
-
-    // Show the menu.
     echo '<nav id="main-menu">';
     $this->echoMainMenu();
     echo '</nav>';
-
     $this->echoPageTrailer();
 
-    // Write the HTML code of this page to the file system for (asynchronous) validation.
-    if ($this->w3cValidate)
-    {
-      file_put_contents($this->w3cPathName, ob_get_contents());
-    }
+    $contents = ob_get_clean();
 
-    if (ob_get_level()) ob_end_flush();
+    $this->response = new BaseResponse($contents);
+    $this->response->headers->set('Content-Type', 'text/html; charset='.Html::$encoding);
+
+    return $this->response;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -144,6 +123,43 @@ abstract class TabPage extends CorePage
     echo '<div id="content">';
     $this->echoTabContent();
     echo '</div>';
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Echos the XHTML document leader, i.e. the start html tag, the head element, and start body tag.
+   */
+  protected function echoPageLeader(): void
+  {
+    echo '<!DOCTYPE html>';
+    echo Html::generateTag('html',
+                           ['xmlns'    => 'http://www.w3.org/1999/xhtml',
+                            'xml:lang' => Abc::$babel->getLang(),
+                            'lang'     => Abc::$babel->getLang()]);
+    echo '<head>';
+
+    // Echo the meta tags.
+    Abc::$assets->echoMetaTags();
+
+    // Echo the title of the XHTML document.
+    Abc::$assets->echoPageTitle();
+
+    // Echo style sheets (if any).
+    Abc::$assets->echoCascadingStyleSheets();
+
+    echo '</head><body>';
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Echos the XHTML document trailer, i.e. the end body and html tags, including the JavaScript code that will be
+   * executed using RequireJS.
+   */
+  protected function echoPageTrailer(): void
+  {
+    Abc::$assets->echoJavaScript();
+
+    echo '</body></html>';
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -196,20 +212,6 @@ abstract class TabPage extends CorePage
     {
       $tab['url'] = $this->getTabUrl($tab['pag_id']);
     }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Enables validation of the HTML code of this page by the W3C Validator.
-   */
-  protected function enableW3cValidator(): void
-  {
-    $prefix            = 'w3c_validator_'.Abc::obfuscate($this->usrId, 'usr').'_';
-    $w3c_file          = uniqid($prefix).'.xhtml';
-    $this->w3cValidate = true;
-    $this->w3cPathName = DIR_TMP.'/'.$w3c_file;
-    $url               = W3cValidatePage::getUrl($w3c_file);
-    Abc::$assets->jsAdmClassSpecificFunctionCall(__CLASS__, 'w3cValidate', [$url]);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -275,12 +277,6 @@ abstract class TabPage extends CorePage
       $last_group = $item['mnu_group'];
     }
     echo '</ul>';
-
-    // Define a content area for the feed back of w3c-validator.
-    if ($this->w3cValidate)
-    {
-      echo '<div id="w3c_validate"></div>';
-    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

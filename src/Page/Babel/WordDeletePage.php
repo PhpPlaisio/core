@@ -4,7 +4,7 @@ namespace SetBased\Abc\Core\Page\Babel;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
-use SetBased\Abc\Helper\HttpHeader;
+use SetBased\Abc\Response\SeeOtherResponse;
 
 /**
  * Page for deleting a word.
@@ -57,7 +57,7 @@ class WordDeletePage extends BabelPage
 
     Abc::$DL->abcBabelWordDeleteWord($this->wrdId);
 
-    HttpHeader::redirectSeeOther(WordGroupDetailsPage::getUrl($details['wdg_id'], $this->actLanId));
+    $this->response = new SeeOtherResponse(WordGroupDetailsPage::getUrl($details['wdg_id'], $this->actLanId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -64,10 +64,10 @@ class WordUpdatePage extends WordBasePage
     if (empty($changes)) return;
 
     Abc::$DL->abcBabelWordUpdateDetails($this->wrdId,
-                                   $values['wdg_id'],
-                                   $values['wrd_label'],
-                                   $values['wrd_comment'],
-                                   $values['wdt_text']);
+                                        $values['wdg_id'],
+                                        $values['wrd_label'],
+                                        $values['wrd_comment'],
+                                        $values['wdt_text']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -13,7 +13,7 @@ use SetBased\Abc\Core\TableRow\System\PageDetailsTableRow;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SubmitControl;
-use SetBased\Abc\Helper\HttpHeader;
+use SetBased\Abc\Response\SeeOtherResponse;
 use SetBased\Abc\Table\TableRow\IntegerTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
@@ -178,7 +178,7 @@ class PageUpdateFunctionalitiesPage extends TabPage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(PageDetailsPage::getUrl($this->targetPagId));
+    $this->response = new SeeOtherResponse(PageDetailsPage::getUrl($this->targetPagId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

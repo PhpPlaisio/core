@@ -4,8 +4,9 @@ namespace SetBased\Abc\Core\Page\Misc;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
-use SetBased\Abc\Helper\HttpHeader;
 use SetBased\Abc\Page\CorePage;
+use SetBased\Abc\Response\Response;
+use SetBased\Abc\Response\SeeOtherResponse;
 
 /**
  * Page for logging off from the website.
@@ -31,11 +32,13 @@ class LogoutPage extends CorePage
    * Logs the user out of the website. I.e. the current session is ended and the user is redirected to the home
    * page of the site.
    */
-  public function echoPage(): void
+  public function handleRequest(): Response
   {
     Abc::$session->logout();
 
-    HttpHeader::redirectSeeOther('/');
+    $this->response = new SeeOtherResponse('/');
+
+    return $this->response;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

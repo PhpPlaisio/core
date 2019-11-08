@@ -49,9 +49,9 @@ class WordInsertPage extends WordBasePage
     $values = $this->form->getValues();
 
     $this->wrdId = Abc::$DL->abcBabelWordInsertWord($this->wdgId,
-                                               $values['wrd_label'],
-                                               $values['wrd_comment'],
-                                               $values['wdt_text']);
+                                                    $values['wrd_label'],
+                                                    $values['wrd_comment'],
+                                                    $values['wdt_text']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

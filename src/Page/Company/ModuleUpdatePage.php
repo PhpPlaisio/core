@@ -10,7 +10,7 @@ use SetBased\Abc\Core\Form\SlatControlFactory\CompanyModulesUpdateSlatControlFac
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SubmitControl;
-use SetBased\Abc\Helper\HttpHeader;
+use SetBased\Abc\Response\SeeOtherResponse;
 
 /**
  * Page for enabling and disabling the modules for a company.
@@ -145,7 +145,7 @@ class ModuleUpdatePage extends CompanyPage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(ModuleOverviewPage::getUrl($this->targetCmpId));
+    $this->response = new SeeOtherResponse(ModuleOverviewPage::getUrl($this->targetCmpId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -5,31 +5,30 @@
     "ABC-Framework",
     "Core"
   ],
-  "type": "library",
   "license": "MIT",
   "require": {
     "php": ">=7.1.0",
     "ext-curl": "*",
     "gajus/dindent": "^2.0.0",
-    "setbased/abc": "*",
-    "setbased/abc-babel-core": "*",
+    "setbased/abc": "^0.10.0",
+    "setbased/abc-babel-core": "^0.10.0",
     "setbased/abc-company": "^1.1.0",
-    "setbased/abc-exception": "^1.0.0",
-    "setbased/abc-form": "*",
-    "setbased/abc-form-louver": "*",
+    "setbased/abc-exception": "^2.0.0",
+    "setbased/abc-form": "^0.11.0",
+    "setbased/abc-form-louver": "^0.11.0",
     "setbased/abc-helper-password": "^2.0.0",
     "setbased/abc-html": "^2.0.0",
-    "setbased/abc-http-header": "^2.0.0",
-    "setbased/abc-page-core": "*",
+    "setbased/abc-page-core": "^0.11.2",
     "setbased/abc-profile": "^1.1.0",
-    "setbased/abc-table-detail": "*",
-    "setbased/abc-table-overview": "*",
+    "setbased/abc-response-core": "^0.1.0",
+    "setbased/abc-table-detail": "^0.10.0",
+    "setbased/abc-table-overview": "^0.11.0",
     "setbased/abc-user": "^1.1.0",
-    "setbased/exception": "^1.0.0"
+    "setbased/exception": "^2.0.0"
   },
   "require-dev": {
     "phing/phing": "^2.0.0",
-    "setbased/php-stratum": "^4.0.0",
+    "setbased/php-stratum": "^5.0.0",
     "setbased/php-stratum-mysql": "^4.0.0"
   },
   "autoload": {

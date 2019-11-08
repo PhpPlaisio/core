@@ -7,7 +7,7 @@ use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Form\Control\SpanControl;
 use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Helper\HttpHeader;
+use SetBased\Abc\Response\SeeOtherResponse;
 
 /**
  * Page for translating a single word.
@@ -191,7 +191,7 @@ class WordTranslatePage extends BabelPage
   {
     $this->dataBaseAction();
 
-    HttpHeader::redirectSeeOther($this->redirect);
+    $this->response = new SeeOtherResponse($this->redirect);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

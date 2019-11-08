@@ -8,7 +8,7 @@ use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Helper\Html;
-use SetBased\Abc\Helper\HttpHeader;
+use SetBased\Abc\Response\SeeOtherResponse;
 use SetBased\Exception\LogicException;
 
 /**
@@ -126,7 +126,7 @@ abstract class CompanyPage extends TabPage
     $this->targetCmpId = Abc::$DL->abcCompanyGetCmpIdByCmpAbbr($values['cmp_abbr']);
     if ($this->targetCmpId!==null)
     {
-      HttpHeader::redirectSeeOther(self::getChildUrl(Abc::$requestHandler->getPagId(), $this->targetCmpId));
+      $this->response = new SeeOtherResponse(self::getChildUrl(Abc::$requestHandler->getPagId(), $this->targetCmpId));
     }
   }
 

@@ -9,7 +9,7 @@ use SetBased\Abc\Core\Form\FormValidator\SystemModuleInsertCompoundValidator;
 use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Helper\HttpHeader;
+use SetBased\Abc\Response\SeeOtherResponse;
 
 /**
  * Abstract parent class for inserting or updating the details of a module.
@@ -120,7 +120,7 @@ abstract class ModuleBasePage extends TabPage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(ModuleDetailsPage::getUrl($this->mdlId));
+    $this->response = new SeeOtherResponse(ModuleDetailsPage::getUrl($this->mdlId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

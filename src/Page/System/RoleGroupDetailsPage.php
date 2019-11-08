@@ -36,7 +36,7 @@ class RoleGroupDetailsPage extends TabPage
   /**
    * The details of roles in the role group.
    *
-   * @var \array
+   * @var array
    */
   private $roles;
 

@@ -7,7 +7,7 @@ use SetBased\Abc\C;
 use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Helper\HttpHeader;
+use SetBased\Abc\Response\SeeOtherResponse;
 
 /**
  * Abstract parent page for inserting and updating details of a role for the target company.
@@ -37,7 +37,6 @@ abstract class RoleBasePage extends CompanyPage
   protected $rolId;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Must implemented by child pages to actually insert or update a role of the target company.
    *
@@ -123,7 +122,7 @@ abstract class RoleBasePage extends CompanyPage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(RoleDetailsPage::getUrl($this->targetCmpId, $this->rolId));
+    $this->response = new SeeOtherResponse(RoleDetailsPage::getUrl($this->targetCmpId, $this->rolId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

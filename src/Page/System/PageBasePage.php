@@ -8,7 +8,7 @@ use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Helper\HttpHeader;
+use SetBased\Abc\Response\SeeOtherResponse;
 
 /**
  * Abstract parent page for inserting or modifying a page.
@@ -160,7 +160,7 @@ abstract class PageBasePage extends TabPage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(PageDetailsPage::getUrl($this->targetPagId));
+    $this->response = new SeeOtherResponse(PageDetailsPage::getUrl($this->targetPagId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

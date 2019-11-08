@@ -12,7 +12,7 @@ use SetBased\Abc\Core\Table\CoreDetailTable;
 use SetBased\Abc\Form\Control\FieldSet;
 use SetBased\Abc\Form\Control\LouverControl;
 use SetBased\Abc\Form\Control\SubmitControl;
-use SetBased\Abc\Helper\HttpHeader;
+use SetBased\Abc\Response\SeeOtherResponse;
 use SetBased\Abc\Table\TableRow\IntegerTableRow;
 use SetBased\Abc\Table\TableRow\TextTableRow;
 
@@ -169,7 +169,7 @@ class FunctionalityUpdatePagesPage extends TabPage
   {
     $this->databaseAction();
 
-    HttpHeader::redirectSeeOther(FunctionalityDetailsPage::getUrl($this->funId));
+    $this->response = new SeeOtherResponse(FunctionalityDetailsPage::getUrl($this->funId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

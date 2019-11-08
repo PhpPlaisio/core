@@ -47,7 +47,7 @@ class FunctionalityOverviewPage extends TabPage
     $table->addColumn($column);
 
     // Show ID and name of the functionality.
-    $column =new FunctionalityTableColumn('Functionality');
+    $column = new FunctionalityTableColumn('Functionality');
     $column->setSortOrder(2);
     $table->addColumn($column);
 

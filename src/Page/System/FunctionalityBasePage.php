@@ -8,7 +8,7 @@ use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Core\Page\TabPage;
 use SetBased\Abc\Form\Control\SelectControl;
 use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Helper\HttpHeader;
+use SetBased\Abc\Response\SeeOtherResponse;
 
 /**
  * Abstract parent page for inserting and updating a functionality.
@@ -122,7 +122,7 @@ abstract class FunctionalityBasePage extends TabPage
   {
     $this->dataBaseAction();
 
-    HttpHeader::redirectSeeOther(FunctionalityDetailsPage::getUrl($this->funId));
+    $this->response = new SeeOtherResponse(FunctionalityDetailsPage::getUrl($this->funId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
