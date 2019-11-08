@@ -4,6 +4,7 @@ namespace SetBased\Abc\Core\Page\Babel;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
+use SetBased\Abc\Response\Response;
 use SetBased\Abc\Response\SeeOtherResponse;
 
 /**
@@ -20,6 +21,7 @@ class WordDeletePage extends BabelPage
   private $wrdId;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    */
@@ -51,13 +53,15 @@ class WordDeletePage extends BabelPage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  public function handleRequest(): Response
   {
     $details = Abc::$DL->abcBabelWordGetDetails($this->wrdId, $this->lanId);
 
     Abc::$DL->abcBabelWordDeleteWord($this->wrdId);
 
     $this->response = new SeeOtherResponse(WordGroupDetailsPage::getUrl($details['wdg_id'], $this->actLanId));
+
+    return $this->response;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

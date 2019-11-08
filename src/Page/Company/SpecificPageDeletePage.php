@@ -5,6 +5,7 @@ namespace SetBased\Abc\Core\Page\Company;
 use SetBased\Abc\Abc;
 use SetBased\Abc\C;
 use SetBased\Abc\Page\CorePage;
+use SetBased\Abc\Response\Response;
 use SetBased\Abc\Response\SeeOtherResponse;
 
 /**
@@ -62,11 +63,13 @@ class SpecificPageDeletePage extends CorePage
   /**
    * Deletes a company specific page.
    */
-  public function echoPage(): void
+  public function handleRequest(): Response
   {
     Abc::$DL->abcCompanySpecificPageDelete($this->targetCmpId, $this->targetPagId);
 
     $this->response = new SeeOtherResponse(SpecificPageOverviewPage::getUrl($this->targetCmpId));
+
+    return $this->response;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
