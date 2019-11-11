@@ -8,8 +8,11 @@ use SetBased\Abc\Core\Form\CoreForm;
 use SetBased\Abc\Form\Control\PasswordControl;
 use SetBased\Abc\Form\Control\TextControl;
 use SetBased\Abc\Form\Form;
+use SetBased\Abc\Helper\Html;
 use SetBased\Abc\Helper\Password;
 use SetBased\Abc\Page\CorePage;
+use SetBased\Abc\Response\BaseResponse;
+use SetBased\Abc\Response\Response;
 use SetBased\Abc\Response\SeeOtherResponse;
 
 /**
@@ -64,17 +67,19 @@ class LoginPage extends CorePage
   /**
    * @inheritdoc
    */
-  public function echoPage(): void
+  public function handleRequest(): Response
   {
-    // Buffer for actual contents.
     ob_start();
 
     $this->showPageContent();
 
-    $contents = ob_get_contents();
-    if (ob_get_level()>0) ob_end_clean();
+    $contents = ob_get_clean();
 
-    // Buffer for header.
+    if ($this->response!==null)
+    {
+      return $this->response;
+    }
+
     ob_start();
 
     $this->showPageHeader();
@@ -85,7 +90,12 @@ class LoginPage extends CorePage
 
     $this->showPageTrailer();
 
-    if (ob_get_level()>0) ob_end_flush();
+    $contents = ob_get_clean();
+
+    $this->response = new BaseResponse($contents);
+    $this->response->headers->set('Content-Type', 'text/html; charset='.Html::$encoding);
+
+    return $this->response;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
