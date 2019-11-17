@@ -1,13 +1,9 @@
 <?php
 
-namespace SetBased\Abc;
+namespace Plaisio;
 
-//----------------------------------------------------------------------------------------------------------------------
 class C
 {
-  /*
-   * Constants used by ABC.
-   */
   const LAN_ID_BABEL_REFERENCE = 0;
   const OPEN_DATE_STOP         = '9999-12-31';
 
@@ -96,6 +92,29 @@ class C
    *
    * Below this doc block constants will be inserted by PhpStratum.
    */
+  const LEN_CMP_ABBR          =  15;
+  const LEN_CMP_LABEL         =  20;
+  const LEN_MNU_GROUP         =   5;
+  const LEN_MNU_LEVEL         =   3;
+  const LEN_MNU_LINK          =  64;
+  const LEN_MNU_WEIGHT        =   5;
+  const LEN_PAG_ALIAS         =  32;
+  const LEN_PAG_CLASS         = 128;
+  const LEN_PAG_LABEL         = 128;
+  const LEN_PAG_WEIGHT        =  10;
+  const LEN_PTB_LABEL         =  30;
+  const LEN_RLG_LABEL         =  50;
+  const LEN_RLG_WEIGHT        =   5;
+  const LEN_ROL_LABEL         =  50;
+  const LEN_ROL_NAME          =  32;
+  const LEN_ROL_WEIGHT        =   5;
+  const LEN_USR_NAME          =  64;
+  const LEN_USR_PASSWORD_HASH =  60;
+  const LEN_WDG_LABEL         =  30;
+  const LEN_WDG_NAME          =  32;
+  const LEN_WDT_TEXT          =  80;
+  const LEN_WRD_COMMENT       = 255;
+  const LEN_WRD_LABEL         =  50;
 
   //--------------------------------------------------------------------------------------------------------------------
 }

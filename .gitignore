@@ -4,7 +4,6 @@
 /bin/stratum
 /composer.lock
 /doc/
-/test/C.php
 /test/TestDataLayer.php
 /test/etc/routines.json
 /vendor/
