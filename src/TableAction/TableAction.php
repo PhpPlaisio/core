@@ -1,6 +1,7 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\TableAction;
+namespace Plaisio\Core\TableAction;
 
 /**
  * Interface for table actions.

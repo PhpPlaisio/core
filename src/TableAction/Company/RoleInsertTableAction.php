@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\TableAction\Company;
+namespace Plaisio\Core\TableAction\Company;
 
-use SetBased\Abc\Core\Page\Company\RoleInsertPage;
-use SetBased\Abc\Core\TableAction\InsertItemTableAction;
+use Plaisio\Core\Page\Company\RoleInsertPage;
+use Plaisio\Core\TableAction\InsertItemTableAction;
 
 /**
  * Table action for inserting a role.

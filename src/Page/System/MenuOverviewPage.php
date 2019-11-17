@@ -1,15 +1,16 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\System;
+namespace Plaisio\Core\Page\System;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Page\TabPage;
-use SetBased\Abc\Core\Table\CoreOverviewTable;
-use SetBased\Abc\Core\TableAction\System\MenuInsertTableAction;
-use SetBased\Abc\Core\TableColumn\System\MenuUpdateIconTableColumn;
-use SetBased\Abc\Table\TableColumn\NumericTableColumn;
-use SetBased\Abc\Table\TableColumn\TextTableColumn;
+use Plaisio\C;
+use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Table\CoreOverviewTable;
+use Plaisio\Core\TableAction\System\MenuInsertTableAction;
+use Plaisio\Core\TableColumn\System\MenuUpdateIconTableColumn;
+use Plaisio\Kernel\Nub;
+use Plaisio\Table\TableColumn\NumericTableColumn;
+use Plaisio\Table\TableColumn\TextTableColumn;
 
 /**
  * Page with an overview of all menu entries.
@@ -24,8 +25,8 @@ class MenuOverviewPage extends TabPage
    */
   public static function getUrl(): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_MENU_OVERVIEW, 'pag');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_MENU_OVERVIEW, 'pag');
 
     return $url;
   }
@@ -36,7 +37,7 @@ class MenuOverviewPage extends TabPage
    */
   public function echoTabContent(): void
   {
-    $pages = Abc::$DL->abcSystemMenuGetAllEntries($this->lanId);
+    $pages = Nub::$DL->abcSystemMenuGetAllEntries($this->lanId);
 
     $table = new CoreOverviewTable();
 

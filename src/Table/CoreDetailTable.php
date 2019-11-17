@@ -1,12 +1,13 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Table;
+namespace Plaisio\Core\Table;
 
-use SetBased\Abc\Core\TableAction\TableAction;
-use SetBased\Abc\Table\DetailTable;
+use Plaisio\Core\TableAction\TableAction;
+use Plaisio\Table\DetailTable;
 
 /**
- * Extends \SetBased\Abc\Table\DetailTable with table actions.
+ * Extends \Plaisio\Table\DetailTable with table actions.
  */
 class CoreDetailTable extends DetailTable
 {

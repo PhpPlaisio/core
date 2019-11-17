@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Company;
+namespace Plaisio\Core\Page\Company;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
+use Plaisio\C;
+use Plaisio\Kernel\Nub;
 
 /**
  * Page for updating the details of a company.
@@ -26,8 +27,8 @@ class CompanyUpdatePage extends CompanyBasePage
   {
     parent::__construct();
 
-    $this->targetCmpId = Abc::$cgi->getManId('cmp', 'cmp');
-    $this->details     = Abc::$DL->abcCompanyGetDetails($this->targetCmpId);
+    $this->targetCmpId = Nub::$cgi->getManId('cmp', 'cmp');
+    $this->details     = Nub::$DL->abcCompanyGetDetails($this->targetCmpId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -41,9 +42,9 @@ class CompanyUpdatePage extends CompanyBasePage
    */
   public static function getUrl(int $targetCmpId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_UPDATE, 'pag');
-    $url .= Abc::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_UPDATE, 'pag');
+    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }
@@ -60,7 +61,7 @@ class CompanyUpdatePage extends CompanyBasePage
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
 
-    Abc::$DL->abcCompanyUpdate($this->targetCmpId, $values['cmp_abbr'], $values['cmp_label']);
+    Nub::$DL->abcCompanyUpdate($this->targetCmpId, $values['cmp_abbr'], $values['cmp_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

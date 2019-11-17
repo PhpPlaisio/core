@@ -1,8 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\TableAction;
+namespace Plaisio\Core\TableAction;
 
-use SetBased\Abc\Helper\Html;
+use Plaisio\Helper\Html;
+use SetBased\Helper\Cast;
 
 /**
  * A pseudo table action showing the row count in a (overview) table body.
@@ -34,7 +36,7 @@ class RowCountTableAction implements TableAction
    */
   public function getHtml(): string
   {
-    return '<span class="row_count">'.Html::txt2Html($this->rowCount).'</span>';
+    return Html::generateElement('span', ['class' => 'row_count'], Cast::toOptString($this->rowCount));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

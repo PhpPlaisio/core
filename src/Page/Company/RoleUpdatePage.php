@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Company;
+namespace Plaisio\Core\Page\Company;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
+use Plaisio\C;
+use Plaisio\Kernel\Nub;
 
 /**
  * Page for updating the details of a role.
@@ -26,8 +27,8 @@ class RoleUpdatePage extends RoleBasePage
   {
     parent::__construct();
 
-    $this->rolId       = Abc::$cgi->getManId('rol', 'rol');
-    $this->details     = Abc::$DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId, $this->lanId);
+    $this->rolId       = Nub::$cgi->getManId('rol', 'rol');
+    $this->details     = Nub::$DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId, $this->lanId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -42,10 +43,10 @@ class RoleUpdatePage extends RoleBasePage
    */
   public static function getUrl(int $targetCmpId, int $rolId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_ROLE_UPDATE, 'pag');
-    $url .= Abc::$cgi->putId('cmp', $targetCmpId, 'cmp');
-    $url .= Abc::$cgi->putId('rol', $rolId, 'rol');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_ROLE_UPDATE, 'pag');
+    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url .= Nub::$cgi->putId('rol', $rolId, 'rol');
 
     return $url;
   }
@@ -62,7 +63,7 @@ class RoleUpdatePage extends RoleBasePage
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
 
-    Abc::$DL->abcCompanyRoleUpdate($this->targetCmpId,
+    Nub::$DL->abcCompanyRoleUpdate($this->targetCmpId,
                                    $this->rolId,
                                    $values['rlg_id'],
                                    $values['rol_name'],

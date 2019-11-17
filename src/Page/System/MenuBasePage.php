@@ -1,15 +1,16 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\System;
+namespace Plaisio\Core\Page\System;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Core\Page\TabPage;
-use SetBased\Abc\Form\Control\SelectControl;
-use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Form\Validator\IntegerValidator;
-use SetBased\Abc\Response\SeeOtherResponse;
+use Plaisio\C;
+use Plaisio\Core\Form\CoreForm;
+use Plaisio\Core\Page\TabPage;
+use Plaisio\Form\Control\SelectControl;
+use Plaisio\Form\Control\TextControl;
+use Plaisio\Form\Validator\IntegerValidator;
+use Plaisio\Kernel\Nub;
+use Plaisio\Response\SeeOtherResponse;
 
 /**
  * Abstract parent class for inserting or updating a menu entry.
@@ -67,10 +68,10 @@ abstract class MenuBasePage extends TabPage
     $this->form = new CoreForm();
 
     // Create select box for (known) page titles.
-    $titles = Abc::$DL->abcBabelWordGroupGetAllWords(C::WDG_ID_MENU, $this->lanId);
+    $titles = Nub::$DL->abcBabelWordGroupGetAllWords(C::WDG_ID_MENU, $this->lanId);
     $input  = new SelectControl('wrd_id');
     $input->setOptions($titles, 'wrd_id', 'wdt_text');
-    $input->setOptionsObfuscator(Abc::getObfuscator('wrd'));
+    $input->setOptionsObfuscator(Nub::getObfuscator('wrd'));
     $input->setEmptyOption();
     $this->form->addFormControl($input, 'Menu Title');
 
@@ -80,11 +81,11 @@ abstract class MenuBasePage extends TabPage
     $this->form->addFormControl($input, 'Menu Title');
 
     // Create select box for chose page for menu.
-    $pages = Abc::$DL->abcSystemPageGetAll($this->lanId);
+    $pages = Nub::$DL->abcSystemPageGetAll($this->lanId);
     $input = new SelectControl('pag_id');
     $input->setOptions($pages, 'pag_id', 'pag_class');
     $input->setEmptyOption();
-    $input->setOptionsObfuscator(Abc::getObfuscator('pag'));
+    $input->setOptionsObfuscator(Nub::getObfuscator('pag'));
     $this->form->addFormControl($input, 'Page Class', true);
 
     // Create text form control for input menu level.

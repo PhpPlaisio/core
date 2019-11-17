@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\TableColumn\Babel;
+namespace Plaisio\Core\TableColumn\Babel;
 
-use SetBased\Abc\Core\Page\Babel\WordTranslatePage;
-use SetBased\Abc\Core\TableColumn\IconTableColumn;
+use Plaisio\Core\Page\Babel\WordTranslatePage;
+use Plaisio\Core\TableColumn\IconTableColumn;
 
 /**
  * Table column with icon linking to page for translating a single word.

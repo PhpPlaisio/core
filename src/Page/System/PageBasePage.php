@@ -1,14 +1,15 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\System;
+namespace Plaisio\Core\Page\System;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Core\Page\TabPage;
-use SetBased\Abc\Form\Control\SelectControl;
-use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Response\SeeOtherResponse;
+use Plaisio\C;
+use Plaisio\Core\Form\CoreForm;
+use Plaisio\Core\Page\TabPage;
+use Plaisio\Form\Control\SelectControl;
+use Plaisio\Form\Control\TextControl;
+use Plaisio\Kernel\Nub;
+use Plaisio\Response\SeeOtherResponse;
 
 /**
  * Abstract parent page for inserting or modifying a page.
@@ -73,11 +74,11 @@ abstract class PageBasePage extends TabPage
     $this->form = new CoreForm();
 
     // Create select box for (known) page titles.
-    $titles = Abc::$DL->abcBabelWordGroupGetAllWords(C::WDG_ID_PAGE_TITLE, $this->lanId);
+    $titles = Nub::$DL->abcBabelWordGroupGetAllWords(C::WDG_ID_PAGE_TITLE, $this->lanId);
     $input  = new SelectControl('wrd_id');
     $input->setOptions($titles, 'wrd_id', 'wdt_text');
     $input->setEmptyOption();
-    $input->setOptionsObfuscator(Abc::getObfuscator('wrd'));
+    $input->setOptionsObfuscator(Nub::getObfuscator('wrd'));
     $this->form->addFormControl($input, 'Title');
 
     // Create text box for (new) page title.
@@ -87,26 +88,26 @@ abstract class PageBasePage extends TabPage
     /** @todo Add validator: either wrd_id is not empty or pag_title is not empty */
 
     // Create form control for page tab group.
-    $tabs  = Abc::$DL->abcSystemTabGetAll($this->lanId);
+    $tabs  = Nub::$DL->abcSystemTabGetAll($this->lanId);
     $input = new SelectControl('ptb_id');
     $input->setOptions($tabs, 'ptb_id', 'ptb_label');
     $input->setEmptyOption();
     $this->form->addFormControl($input, 'Page Tab');
 
     // Create form control for original page.
-    $pages = Abc::$DL->abcSystemPageGetAllMasters($this->lanId);
+    $pages = Nub::$DL->abcSystemPageGetAllMasters($this->lanId);
     $input = new SelectControl('pag_id_org');
     $input->setOptions($pages, 'pag_id', 'pag_class');
     $input->setEmptyOption();
-    $input->setOptionsObfuscator(Abc::getObfuscator('pag'));
+    $input->setOptionsObfuscator(Nub::getObfuscator('pag'));
     $this->form->addFormControl($input, 'Original Page');
 
     // Create form control for menu item with which the page is associated..
-    $menus = Abc::$DL->abcSystemMenuGetAllEntries($this->lanId);
+    $menus = Nub::$DL->abcSystemMenuGetAllEntries($this->lanId);
     $input = new SelectControl('mnu_id');
     $input->setOptions($menus, 'mnu_id', 'mnu_name');
     $input->setEmptyOption();
-    $input->setOptionsObfuscator(Abc::getObfuscator('mnu'));
+    $input->setOptionsObfuscator(Nub::getObfuscator('mnu'));
     $this->form->addFormControl($input, 'Menu');
 
     // Create form control for page alias.

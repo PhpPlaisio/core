@@ -1,16 +1,17 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Company;
+namespace Plaisio\Core\Page\Company;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Form\Control\CoreButtonControl;
-use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Core\Form\SlatControlFactory\CompanyRoleUpdateFunctionalitiesSlatControlFactory;
-use SetBased\Abc\Form\Control\FieldSet;
-use SetBased\Abc\Form\Control\LouverControl;
-use SetBased\Abc\Form\Control\SubmitControl;
-use SetBased\Abc\Response\SeeOtherResponse;
+use Plaisio\C;
+use Plaisio\Core\Form\Control\CoreButtonControl;
+use Plaisio\Core\Form\CoreForm;
+use Plaisio\Core\Form\SlatControlFactory\CompanyRoleUpdateFunctionalitiesSlatControlFactory;
+use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\LouverControl;
+use Plaisio\Form\Control\SubmitControl;
+use Plaisio\Kernel\Nub;
+use Plaisio\Response\SeeOtherResponse;
 
 /**
  * Page for modifying the granted functionalities to a role.
@@ -47,9 +48,9 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
   {
     parent::__construct();
 
-    $this->rolId = Abc::$cgi->getManId('rol', 'rol');
+    $this->rolId = Nub::$cgi->getManId('rol', 'rol');
 
-    $this->details = Abc::$DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId, $this->lanId);
+    $this->details = Nub::$DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId, $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -63,10 +64,10 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
    */
   public static function getUrl(int $targetCmpId, int $rolId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_ROLE_UPDATE_FUNCTIONALITIES, 'pag');
-    $url .= Abc::$cgi->putId('cmp', $targetCmpId, 'cmp');
-    $url .= Abc::$cgi->putId('rol', $rolId, 'rol');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_ROLE_UPDATE_FUNCTIONALITIES, 'pag');
+    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url .= Nub::$cgi->putId('rol', $rolId, 'rol');
 
     return $url;
   }
@@ -88,7 +89,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
   private function createForm(): void
   {
     // Get all available functionalities.
-    $pages = Abc::$DL->abcCompanyRoleGetAvailableFunctionalities($this->targetCmpId, $this->rolId, $this->lanId);
+    $pages = Nub::$DL->abcCompanyRoleGetAvailableFunctionalities($this->targetCmpId, $this->rolId, $this->lanId);
 
     // Create form.
     $this->form = new CoreForm();
@@ -105,7 +106,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
     $button = new CoreButtonControl();
     $submit = new SubmitControl('submit');
     $submit->setMethod('handleForm');
-    $submit->setValue(Abc::$babel->getWord(C::WRD_ID_BUTTON_UPDATE));
+    $submit->setValue(Nub::$babel->getWord(C::WRD_ID_BUTTON_UPDATE));
     $button->addFormControl($submit);
 
     // Put everything together in a LouverControl.
@@ -136,16 +137,16 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
     {
       if ($values['data'][$fun_id]['fun_enabled'])
       {
-        Abc::$DL->abcCompanyRoleInsertFunctionality($this->targetCmpId, $this->rolId, $fun_id);
+        Nub::$DL->abcCompanyRoleInsertFunctionality($this->targetCmpId, $this->rolId, $fun_id);
       }
       else
       {
-        Abc::$DL->abcCompanyRoleDeleteFunctionality($this->targetCmpId, $this->rolId, $fun_id);
+        Nub::$DL->abcCompanyRoleDeleteFunctionality($this->targetCmpId, $this->rolId, $fun_id);
       }
     }
 
     // Use brute force to proper profiles.
-    Abc::$DL->abcProfileProper();
+    Nub::$DL->abcProfileProper();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

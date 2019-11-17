@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Company;
+namespace Plaisio\Core\Page\Company;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
+use Plaisio\C;
+use Plaisio\Kernel\Nub;
 
 /**
  * Page for inserting a company.
@@ -27,8 +28,8 @@ class CompanyInsertPage extends CompanyBasePage
    */
   public static function getUrl(): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_INSERT, 'pag');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_INSERT, 'pag');
 
     return $url;
   }
@@ -41,7 +42,7 @@ class CompanyInsertPage extends CompanyBasePage
   {
     $values = $this->form->getValues();
 
-    $this->targetCmpId = Abc::$DL->abcCompanyInsert($values['cmp_abbr'], $values['cmp_label']);
+    $this->targetCmpId = Nub::$DL->abcCompanyInsert($values['cmp_abbr'], $values['cmp_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

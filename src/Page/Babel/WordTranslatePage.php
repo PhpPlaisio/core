@@ -1,13 +1,14 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Babel;
+namespace Plaisio\Core\Page\Babel;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Form\Control\SpanControl;
-use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Response\SeeOtherResponse;
+use Plaisio\C;
+use Plaisio\Core\Form\CoreForm;
+use Plaisio\Form\Control\SpanControl;
+use Plaisio\Form\Control\TextControl;
+use Plaisio\Kernel\Nub;
+use Plaisio\Response\SeeOtherResponse;
 
 /**
  * Page for translating a single word.
@@ -51,10 +52,10 @@ class WordTranslatePage extends BabelPage
   {
     parent::__construct();
 
-    $this->wrdId    = Abc::$cgi->getManId('wrd', 'wrd');
-    $this->redirect = Abc::$cgi->getOptUrl('redirect');
+    $this->wrdId    = Nub::$cgi->getManId('wrd', 'wrd');
+    $this->redirect = Nub::$cgi->getOptUrl('redirect');
 
-    $this->details = Abc::$DL->abcBabelWordGetDetails($this->wrdId, $this->actLanId);
+    $this->details = Nub::$DL->abcBabelWordGetDetails($this->wrdId, $this->actLanId);
 
     if ($this->redirect===null)
     {
@@ -74,11 +75,11 @@ class WordTranslatePage extends BabelPage
    */
   public static function getUrl(int $wrdId, int $lanId, ?string $redirect = null): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_TRANSLATE, 'pag');
-    $url .= Abc::$cgi->putId('wrd', $wrdId, 'wrd');
-    $url .= Abc::$cgi->putId('act_lan', $lanId, 'lan');
-    $url .= Abc::$cgi->putUrl('redirect', $redirect);
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_TRANSLATE, 'pag');
+    $url .= Nub::$cgi->putId('wrd', $wrdId, 'wrd');
+    $url .= Nub::$cgi->putId('act_lan', $lanId, 'lan');
+    $url .= Nub::$cgi->putUrl('redirect', $redirect);
 
     return $url;
   }
@@ -99,8 +100,8 @@ class WordTranslatePage extends BabelPage
    */
   private function createForm(): void
   {
-    $refLanguage = Abc::$DL->abcBabelLanguageGetName($this->refLanId, $this->refLanId);
-    $actLanguage = Abc::$DL->abcBabelLanguageGetName($this->actLanId, $this->refLanId);
+    $refLanguage = Nub::$DL->abcBabelLanguageGetName($this->refLanId, $this->refLanId);
+    $actLanguage = Nub::$DL->abcBabelLanguageGetName($this->actLanId, $this->refLanId);
 
     $this->form = new CoreForm();
 
@@ -128,16 +129,16 @@ class WordTranslatePage extends BabelPage
     // @todo Show data.
 
     // Show word in reference language.
-    Abc::$babel->pushLanguage($this->refLanId);
+    Nub::$babel->pushLanguage($this->refLanId);
     try
     {
       $input = new SpanControl('ref_language');
-      $input->setInnerText(Abc::$babel->getWord($this->wrdId));
+      $input->setInnerText(Nub::$babel->getWord($this->wrdId));
       $this->form->addFormControl($input, $refLanguage);
     }
     finally
     {
-      Abc::$babel->popLanguage();
+      Nub::$babel->popLanguage();
     }
 
     // Create form control for the actual word.
@@ -162,7 +163,7 @@ class WordTranslatePage extends BabelPage
     // Return immediately when no form controls are changed.
     if (empty($changes)) return;
 
-    Abc::$DL->abcBabelWordTranslateWord($this->usrId, $this->wrdId, $this->actLanId, $values['wdt_text']);
+    Nub::$DL->abcBabelWordTranslateWord($this->usrId, $this->wrdId, $this->actLanId, $values['wdt_text']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

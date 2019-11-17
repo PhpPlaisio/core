@@ -1,14 +1,15 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\System;
+namespace Plaisio\Core\Page\System;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Core\Page\TabPage;
-use SetBased\Abc\Form\Control\SelectControl;
-use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Response\SeeOtherResponse;
+use Plaisio\C;
+use Plaisio\Core\Form\CoreForm;
+use Plaisio\Core\Page\TabPage;
+use Plaisio\Form\Control\SelectControl;
+use Plaisio\Form\Control\TextControl;
+use Plaisio\Kernel\Nub;
+use Plaisio\Response\SeeOtherResponse;
 
 /**
  * Abstract parent page for inserting or modifying a page group.
@@ -77,7 +78,7 @@ abstract class TabBasePage extends TabPage
     $this->form = new CoreForm();
 
     // Create select box for (known) page titles.
-    $titles = Abc::$DL->abcBabelWordGroupGetAllWords(C::WDG_ID_PAGE_GROUP_TITLE, $this->lanId);
+    $titles = Nub::$DL->abcBabelWordGroupGetAllWords(C::WDG_ID_PAGE_GROUP_TITLE, $this->lanId);
     $input  = new SelectControl('wrd_id');
     $input->setOptions($titles, 'wrd_id', 'wdt_text');
     $input->setEmptyOption();

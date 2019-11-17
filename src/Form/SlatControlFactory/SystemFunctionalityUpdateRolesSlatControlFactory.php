@@ -1,21 +1,22 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Form\SlatControlFactory;
+namespace Plaisio\Core\Form\SlatControlFactory;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\Core\TableColumn\Company\RoleTableColumn;
-use SetBased\Abc\Core\TableColumn\System\RoleGroupTableColumn;
-use SetBased\Abc\Form\Control\CheckboxControl;
-use SetBased\Abc\Form\Control\LouverControl;
-use SetBased\Abc\Form\Control\SlatControl;
-use SetBased\Abc\Form\Control\SlatControlFactory;
-use SetBased\Abc\Form\Control\TableColumnControl;
-use SetBased\Abc\Form\SlatJoint\CheckboxSlatJoint;
-use SetBased\Abc\Form\SlatJoint\InvisibleSlatJoint;
-use SetBased\Abc\Form\SlatJoint\TableColumnSlatJoint;
-use SetBased\Abc\Obfuscator\Obfuscator;
-use SetBased\Abc\Table\TableColumn\NumericTableColumn;
-use SetBased\Abc\Table\TableColumn\TextTableColumn;
+use Plaisio\Core\TableColumn\Company\RoleTableColumn;
+use Plaisio\Core\TableColumn\System\RoleGroupTableColumn;
+use Plaisio\Form\Control\CheckboxControl;
+use Plaisio\Form\Control\LouverControl;
+use Plaisio\Form\Control\SlatControl;
+use Plaisio\Form\Control\SlatControlFactory;
+use Plaisio\Form\Control\TableColumnControl;
+use Plaisio\Form\SlatJoint\CheckboxSlatJoint;
+use Plaisio\Form\SlatJoint\InvisibleSlatJoint;
+use Plaisio\Form\SlatJoint\TableColumnSlatJoint;
+use Plaisio\Kernel\Nub;
+use Plaisio\Obfuscator\Obfuscator;
+use Plaisio\Table\TableColumn\NumericTableColumn;
+use Plaisio\Table\TableColumn\TextTableColumn;
 
 /**
  * Slat control factory for creating slat controls for updating the pages that a functionality grants access to.
@@ -59,7 +60,7 @@ class SystemFunctionalityUpdateRolesSlatControlFactory extends SlatControlFactor
     $slat_joint = new CheckboxSlatJoint('Grant');
     $this->addSlatJoint('rol_enabled', $slat_joint);
 
-    $this->rolIdObfuscator = Abc::getObfuscator('rol');
+    $this->rolIdObfuscator = Nub::getObfuscator('rol');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

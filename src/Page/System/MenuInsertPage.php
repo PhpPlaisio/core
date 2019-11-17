@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\System;
+namespace Plaisio\Core\Page\System;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
+use Plaisio\C;
+use Plaisio\Kernel\Nub;
 
 /**
  * Page for inserting a menu entry.
@@ -29,8 +30,8 @@ class MenuInsertPage extends MenuBasePage
    */
   public static function getUrl(): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_MENU_INSERT, 'pag');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_MENU_INSERT, 'pag');
 
     return $url;
   }
@@ -49,14 +50,14 @@ class MenuInsertPage extends MenuBasePage
 
     if ($values['mnu_title'])
     {
-      $wrd_id = Abc::$DL->abcBabelWordInsertWord(C::WDG_ID_MENU, null, null, $values['mnu_title']);
+      $wrd_id = Nub::$DL->abcBabelWordInsertWord(C::WDG_ID_MENU, null, null, $values['mnu_title']);
     }
     else
     {
       $wrd_id = $values['wrd_id'];
     }
 
-    Abc::$DL->abcSystemMenuInsert($wrd_id,
+    Nub::$DL->abcSystemMenuInsert($wrd_id,
                                   $values['pag_id'],
                                   $values['mnu_level'],
                                   $values['mnu_group'],

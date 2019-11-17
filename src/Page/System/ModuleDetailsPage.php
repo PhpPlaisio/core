@@ -1,18 +1,19 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\System;
+namespace Plaisio\Core\Page\System;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Page\TabPage;
-use SetBased\Abc\Core\Table\CoreDetailTable;
-use SetBased\Abc\Core\Table\CoreOverviewTable;
-use SetBased\Abc\Core\TableAction\System\ModuleUpdateCompaniesTableAction;
-use SetBased\Abc\Core\TableAction\System\ModuleUpdateTableAction;
-use SetBased\Abc\Core\TableColumn\Company\CompanyTableColumn;
-use SetBased\Abc\Core\TableColumn\Company\FunctionalityTableColumn;
-use SetBased\Abc\Table\TableRow\IntegerTableRow;
-use SetBased\Abc\Table\TableRow\TextTableRow;
+use Plaisio\C;
+use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Table\CoreDetailTable;
+use Plaisio\Core\Table\CoreOverviewTable;
+use Plaisio\Core\TableAction\System\ModuleUpdateCompaniesTableAction;
+use Plaisio\Core\TableAction\System\ModuleUpdateTableAction;
+use Plaisio\Core\TableColumn\Company\CompanyTableColumn;
+use Plaisio\Core\TableColumn\Company\FunctionalityTableColumn;
+use Plaisio\Kernel\Nub;
+use Plaisio\Table\TableRow\IntegerTableRow;
+use Plaisio\Table\TableRow\TextTableRow;
 
 /**
  * Page with the details of a module.
@@ -42,11 +43,11 @@ class ModuleDetailsPage extends TabPage
   {
     parent::__construct();
 
-    $this->mdlId = Abc::$cgi->getManId('mdl', 'mdl');
+    $this->mdlId = Nub::$cgi->getManId('mdl', 'mdl');
 
-    $this->details = Abc::$DL->abcSystemModuleGetDetails($this->mdlId, $this->lanId);
+    $this->details = Nub::$DL->abcSystemModuleGetDetails($this->mdlId, $this->lanId);
 
-    Abc::$assets->appendPageTitle($this->details['mdl_name']);
+    Nub::$assets->appendPageTitle($this->details['mdl_name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -59,9 +60,9 @@ class ModuleDetailsPage extends TabPage
    */
   public static function getUrl(int $mdlId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_MODULE_DETAILS, 'pag');
-    $url .= Abc::$cgi->putId('mdl', $mdlId, 'mdl');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_MODULE_DETAILS, 'pag');
+    $url .= Nub::$cgi->putId('mdl', $mdlId, 'mdl');
 
     return $url;
   }
@@ -85,7 +86,7 @@ class ModuleDetailsPage extends TabPage
    */
   private function showCompanies(): void
   {
-    $functions = Abc::$DL->abcSystemModuleGetGrantedCompanies($this->mdlId);
+    $functions = Nub::$DL->abcSystemModuleGetGrantedCompanies($this->mdlId);
 
     $table = new CoreOverviewTable();
 
@@ -124,7 +125,7 @@ class ModuleDetailsPage extends TabPage
    */
   private function showFunctionalities(): void
   {
-    $functions = Abc::$DL->abcSystemModuleGetFunctions($this->mdlId, $this->lanId);
+    $functions = Nub::$DL->abcSystemModuleGetFunctions($this->mdlId, $this->lanId);
 
     $table = new CoreOverviewTable();
 

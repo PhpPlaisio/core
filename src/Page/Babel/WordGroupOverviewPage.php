@@ -1,15 +1,16 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Babel;
+namespace Plaisio\Core\Page\Babel;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Table\CoreOverviewTable;
-use SetBased\Abc\Core\TableAction\Babel\WordGroupInsertTableAction;
-use SetBased\Abc\Core\TableColumn\Babel\WordGroupTableColumn;
-use SetBased\Abc\Core\TableColumn\Babel\WordGroupUpdateIconTableColumn;
-use SetBased\Abc\Table\TableColumn\NumericTableColumn;
-use SetBased\Abc\Table\TableColumn\TextTableColumn;
+use Plaisio\C;
+use Plaisio\Core\Table\CoreOverviewTable;
+use Plaisio\Core\TableAction\Babel\WordGroupInsertTableAction;
+use Plaisio\Core\TableColumn\Babel\WordGroupTableColumn;
+use Plaisio\Core\TableColumn\Babel\WordGroupUpdateIconTableColumn;
+use Plaisio\Kernel\Nub;
+use Plaisio\Table\TableColumn\NumericTableColumn;
+use Plaisio\Table\TableColumn\TextTableColumn;
 
 /**
  * Page show an overview of all word groups.
@@ -26,9 +27,9 @@ class WordGroupOverviewPage extends BabelPage
    */
   public static function getUrl(?int $targetLanId = null): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_GROUP_OVERVIEW, 'pag');
-    $url .= Abc::$cgi->putId('act_lan', $targetLanId, 'lan');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_GROUP_OVERVIEW, 'pag');
+    $url .= Nub::$cgi->putId('act_lan', $targetLanId, 'lan');
 
     return $url;
   }
@@ -53,7 +54,7 @@ class WordGroupOverviewPage extends BabelPage
    */
   private function showWordGroups(): void
   {
-    $groups = Abc::$DL->abcBabelWordGroupGetAll($this->actLanId);
+    $groups = Nub::$DL->abcBabelWordGroupGetAll($this->actLanId);
 
     $table = new CoreOverviewTable();
 

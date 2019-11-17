@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\System;
+namespace Plaisio\Core\Page\System;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
+use Plaisio\C;
+use Plaisio\Kernel\Nub;
 
 /**
  * Page for updating the details of a target page.
@@ -26,8 +27,8 @@ class PageUpdatePage extends PageBasePage
   {
     parent::__construct();
 
-    $this->targetPagId = Abc::$cgi->getManId('tar_pag', 'pag');
-    $this->details     = Abc::$DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
+    $this->targetPagId = Nub::$cgi->getManId('tar_pag', 'pag');
+    $this->details     = Nub::$DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -41,9 +42,9 @@ class PageUpdatePage extends PageBasePage
    */
   public static function getUrl(int $pagId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_PAGE_UPDATE, 'pag');
-    $url .= Abc::$cgi->putId('tar_pag', $pagId, 'pag');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_PAGE_UPDATE, 'pag');
+    $url .= Nub::$cgi->putId('tar_pag', $pagId, 'pag');
 
     return $url;
   }
@@ -62,14 +63,14 @@ class PageUpdatePage extends PageBasePage
 
     if ($values['pag_title'])
     {
-      $wrd_id = Abc::$DL->abcBabelWordInsertWord(C::WDG_ID_PAGE_TITLE, null, null, $values['pag_title']);
+      $wrd_id = Nub::$DL->abcBabelWordInsertWord(C::WDG_ID_PAGE_TITLE, null, null, $values['pag_title']);
     }
     else
     {
       $wrd_id = $values['wrd_id'];
     }
 
-    Abc::$DL->abcSystemPageUpdateDetails($this->targetPagId,
+    Nub::$DL->abcSystemPageUpdateDetails($this->targetPagId,
                                          $wrd_id,
                                          $values['ptb_id'],
                                          $values['pag_id_org'],

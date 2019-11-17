@@ -1,12 +1,13 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Company;
+namespace Plaisio\Core\Page\Company;
 
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Core\Page\TabPage;
-use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Response\SeeOtherResponse;
+use Plaisio\C;
+use Plaisio\Core\Form\CoreForm;
+use Plaisio\Core\Page\TabPage;
+use Plaisio\Form\Control\TextControl;
+use Plaisio\Response\SeeOtherResponse;
 
 /**
  * Abstract parent page for inserting and updating the details of a company.

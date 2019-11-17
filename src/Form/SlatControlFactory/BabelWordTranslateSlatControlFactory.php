@@ -1,19 +1,20 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Form\SlatControlFactory;
+namespace Plaisio\Core\Form\SlatControlFactory;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Form\Control\LouverControl;
-use SetBased\Abc\Form\Control\SlatControl;
-use SetBased\Abc\Form\Control\SlatControlFactory;
-use SetBased\Abc\Form\Control\TableColumnControl;
-use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Form\SlatJoint\TableColumnSlatJoint;
-use SetBased\Abc\Form\SlatJoint\TextSlatJoint;
-use SetBased\Abc\Obfuscator\Obfuscator;
-use SetBased\Abc\Table\TableColumn\NumericTableColumn;
-use SetBased\Abc\Table\TableColumn\TextTableColumn;
+use Plaisio\C;
+use Plaisio\Form\Control\LouverControl;
+use Plaisio\Form\Control\SlatControl;
+use Plaisio\Form\Control\SlatControlFactory;
+use Plaisio\Form\Control\TableColumnControl;
+use Plaisio\Form\Control\TextControl;
+use Plaisio\Form\SlatJoint\TableColumnSlatJoint;
+use Plaisio\Form\SlatJoint\TextSlatJoint;
+use Plaisio\Kernel\Nub;
+use Plaisio\Obfuscator\Obfuscator;
+use Plaisio\Table\TableColumn\NumericTableColumn;
+use Plaisio\Table\TableColumn\TextTableColumn;
 
 /**
  * Slat control factory for creating slat controls for translating words.
@@ -37,8 +38,8 @@ class BabelWordTranslateSlatControlFactory extends SlatControlFactory
    */
   public function __construct(int $lanId, int $targetLanId)
   {
-    $ref_language = Abc::$DL->abcBabelLanguageGetName($lanId, $lanId);
-    $act_language = Abc::$DL->abcBabelLanguageGetName($targetLanId, $lanId);
+    $ref_language = Nub::$DL->abcBabelLanguageGetName($lanId, $lanId);
+    $act_language = Nub::$DL->abcBabelLanguageGetName($targetLanId, $lanId);
 
     // Create slat joint for table column with word ID.
     $table_column = new NumericTableColumn('ID', 'wrd_id');
@@ -52,7 +53,7 @@ class BabelWordTranslateSlatControlFactory extends SlatControlFactory
     $table_column = new TextSlatJoint($act_language);
     $this->addSlatJoint('act_wdt_text', $table_column);
 
-    $this->wrdIdObfuscator = Abc::getObfuscator('wrd');
+    $this->wrdIdObfuscator = Nub::getObfuscator('wrd');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

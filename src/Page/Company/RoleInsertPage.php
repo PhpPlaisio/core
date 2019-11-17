@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Company;
+namespace Plaisio\Core\Page\Company;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
+use Plaisio\C;
+use Plaisio\Kernel\Nub;
 
 /**
  * Page for inserting a new role.
@@ -31,9 +32,9 @@ class RoleInsertPage extends RoleBasePage
    */
   public static function getUrl(int $targetCmpId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_ROLE_INSERT, 'pag');
-    $url .= Abc::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_ROLE_INSERT, 'pag');
+    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }
@@ -46,7 +47,7 @@ class RoleInsertPage extends RoleBasePage
   {
     $values = $this->form->getValues();
 
-    $this->rolId = Abc::$DL->abcCompanyRoleInsert($this->targetCmpId,
+    $this->rolId = Nub::$DL->abcCompanyRoleInsert($this->targetCmpId,
                                                   $values['rlg_id'],
                                                   $values['rol_name'],
                                                   $values['rol_weight'],

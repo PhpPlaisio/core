@@ -1,15 +1,16 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Company;
+namespace Plaisio\Core\Page\Company;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Table\CoreOverviewTable;
-use SetBased\Abc\Core\TableAction\Company\RoleInsertTableAction;
-use SetBased\Abc\Core\TableColumn\Company\RoleTableColumn;
-use SetBased\Abc\Core\TableColumn\Company\RoleUpdateIconTableColumn;
-use SetBased\Abc\Core\TableColumn\System\RoleGroupTableColumn;
-use SetBased\Abc\Table\TableColumn\NumericTableColumn;
+use Plaisio\C;
+use Plaisio\Core\Table\CoreOverviewTable;
+use Plaisio\Core\TableAction\Company\RoleInsertTableAction;
+use Plaisio\Core\TableColumn\Company\RoleTableColumn;
+use Plaisio\Core\TableColumn\Company\RoleUpdateIconTableColumn;
+use Plaisio\Core\TableColumn\System\RoleGroupTableColumn;
+use Plaisio\Kernel\Nub;
+use Plaisio\Table\TableColumn\NumericTableColumn;
 
 /**
  * Page with an overview of all roles of the target company.
@@ -26,9 +27,9 @@ class RoleOverviewPage extends CompanyPage
    */
   public static function getUrl(int $targetCmpId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_ROLE_OVERVIEW, 'pag');
-    $url .= Abc::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_ROLE_OVERVIEW, 'pag');
+    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }
@@ -39,7 +40,7 @@ class RoleOverviewPage extends CompanyPage
    */
   protected function echoTabContent(): void
   {
-    $roles = Abc::$DL->abcCompanyRoleGetAll($this->targetCmpId, $this->lanId);
+    $roles = Nub::$DL->abcCompanyRoleGetAll($this->targetCmpId, $this->lanId);
 
     $table = new CoreOverviewTable();
 

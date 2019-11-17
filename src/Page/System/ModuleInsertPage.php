@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\System;
+namespace Plaisio\Core\Page\System;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
+use Plaisio\C;
+use Plaisio\Kernel\Nub;
 
 /**
  * Page for inserting a module.
@@ -29,8 +30,8 @@ class ModuleInsertPage extends ModuleBasePage
    */
   public static function getUrl(): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_MODULE_INSERT, 'pag');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_MODULE_INSERT, 'pag');
 
     return $url;
   }
@@ -50,7 +51,7 @@ class ModuleInsertPage extends ModuleBasePage
     if ($values['mdl_name'])
     {
       // New module name. Insert word en retrieve wrd_id of the new word.
-      $wrd_id = Abc::$DL->abcBabelWordInsertWord(C::WDG_ID_MODULE, null, null, $values['mdl_name']);
+      $wrd_id = Nub::$DL->abcBabelWordInsertWord(C::WDG_ID_MODULE, null, null, $values['mdl_name']);
     }
     else
     {
@@ -59,7 +60,7 @@ class ModuleInsertPage extends ModuleBasePage
     }
 
     // Create the new module in the database.
-    $this->mdlId = Abc::$DL->abcSystemModuleInsert($wrd_id);
+    $this->mdlId = Nub::$DL->abcSystemModuleInsert($wrd_id);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

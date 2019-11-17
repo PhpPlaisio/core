@@ -1,10 +1,11 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\TableColumn\Babel;
+namespace Plaisio\Core\TableColumn\Babel;
 
-use SetBased\Abc\Core\Page\Babel\WordGroupDetailsPage;
-use SetBased\Abc\Helper\Html;
-use SetBased\Abc\Table\TableColumn\DualTableColumn;
+use Plaisio\Core\Page\Babel\WordGroupDetailsPage;
+use Plaisio\Helper\Html;
+use Plaisio\Table\TableColumn\DualTableColumn;
 
 /**
  * A dual table column with the ID and name of a word group.

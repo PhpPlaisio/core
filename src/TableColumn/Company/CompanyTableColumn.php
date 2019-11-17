@@ -1,10 +1,11 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\TableColumn\Company;
+namespace Plaisio\Core\TableColumn\Company;
 
-use SetBased\Abc\Core\Page\Company\CompanyDetailsPage;
-use SetBased\Abc\Helper\Html;
-use SetBased\Abc\Table\TableColumn\DualTableColumn;
+use Plaisio\Core\Page\Company\CompanyDetailsPage;
+use Plaisio\Helper\Html;
+use Plaisio\Table\TableColumn\DualTableColumn;
 
 /**
  * A dual table column with the ID and name of a company.

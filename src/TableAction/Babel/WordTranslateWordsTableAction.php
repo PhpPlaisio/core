@@ -1,10 +1,11 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\TableAction\Babel;
+namespace Plaisio\Core\TableAction\Babel;
 
-use SetBased\Abc\Core\Page\Babel\WordTranslateWordsPage;
-use SetBased\Abc\Core\TableAction\TableAction;
-use SetBased\Abc\Helper\Html;
+use Plaisio\Core\Page\Babel\WordTranslateWordsPage;
+use Plaisio\Core\TableAction\TableAction;
+use Plaisio\Helper\Html;
 
 /**
  * Table action action for translation all words in a word group.

@@ -1,6 +1,7 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\TableColumn;
+namespace Plaisio\Core\TableColumn;
 
 /**
  * Abstract table column with icon linking to page with details or information of an entity.

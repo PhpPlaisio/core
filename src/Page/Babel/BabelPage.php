@@ -1,14 +1,15 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Babel;
+namespace Plaisio\Core\Page\Babel;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Core\Page\TabPage;
-use SetBased\Abc\Form\Control\SelectControl;
-use SetBased\Abc\Form\Form;
-use SetBased\Abc\Response\SeeOtherResponse;
+use Plaisio\C;
+use Plaisio\Core\Form\CoreForm;
+use Plaisio\Core\Page\TabPage;
+use Plaisio\Form\Control\SelectControl;
+use Plaisio\Form\Form;
+use Plaisio\Kernel\Nub;
+use Plaisio\Response\SeeOtherResponse;
 
 /**
  * Abstract parent page for all Babel pages.
@@ -39,7 +40,7 @@ abstract class BabelPage extends TabPage
     parent::__construct();
 
     $this->refLanId = C::LAN_ID_BABEL_REFERENCE;
-    $this->actLanId = Abc::$cgi->getManId('act_lan', 'lan', $this->lanId);
+    $this->actLanId = Nub::$cgi->getManId('act_lan', 'lan', $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -48,7 +49,7 @@ abstract class BabelPage extends TabPage
    */
   public function selectLanguage(): void
   {
-    $languages = Abc::$DL->abcBabelLanguageGetAllLanguages($this->refLanId);
+    $languages = Nub::$DL->abcBabelLanguageGetAllLanguages($this->refLanId);
 
     // If translator is authorized for 1 language return immediately.
     if (count($languages)==1)
@@ -81,7 +82,7 @@ abstract class BabelPage extends TabPage
     $this->actLanId = $values['babel']['act_lan_id'];
 
     $get            = $_GET;
-    $get['act_lan'] = Abc::obfuscate($this->actLanId, 'lan');
+    $get['act_lan'] = Nub::obfuscate($this->actLanId, 'lan');
 
     $url = '';
     foreach ($get as $name => $value)
@@ -100,7 +101,7 @@ abstract class BabelPage extends TabPage
     // Input for language.
     $input = new SelectControl('act_lan_id');
     $input->setOptions($languages, 'lan_id', 'lan_name');
-    $input->setOptionsObfuscator(Abc::getObfuscator('lan'));
+    $input->setOptionsObfuscator(Nub::getObfuscator('lan'));
     $input->setValue($this->actLanId);
     $form->addFormControl($input, C::WRD_ID_LANGUAGE, true);
 

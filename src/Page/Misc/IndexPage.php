@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Misc;
+namespace Plaisio\Core\Page\Misc;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\Core\Page\TabPage;
+use Plaisio\Core\Page\TabPage;
+use Plaisio\Kernel\Nub;
 
 /**
  * The home page.
@@ -18,7 +19,7 @@ class IndexPage extends TabPage
    */
   public static function getUrl(): string
   {
-    $url = Abc::$cgi->putLeader();
+    $url = Nub::$cgi->putLeader();
 
     return ($url==='') ? '/' : $url;
   }
@@ -29,7 +30,7 @@ class IndexPage extends TabPage
    */
   public function echoPage(): void
   {
-    if (Abc::$session->isAnonymous())
+    if (Nub::$session->isAnonymous())
     {
       $this->showAnonymousPage();
     }

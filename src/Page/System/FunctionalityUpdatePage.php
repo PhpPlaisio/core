@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\System;
+namespace Plaisio\Core\Page\System;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
+use Plaisio\C;
+use Plaisio\Kernel\Nub;
 
 /**
  * Page for updating the details of a functionality.
@@ -26,8 +27,8 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
   {
     parent::__construct();
 
-    $this->funId       = Abc::$cgi->getManId('fun', 'fun');
-    $this->details     = Abc::$DL->abcSystemFunctionalityGetDetails($this->funId, $this->lanId);
+    $this->funId       = Nub::$cgi->getManId('fun', 'fun');
+    $this->details     = Nub::$DL->abcSystemFunctionalityGetDetails($this->funId, $this->lanId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -41,9 +42,9 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
    */
   public static function getUrl(int $funId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_UPDATE, 'pag');
-    $url .= Abc::$cgi->putId('fun', $funId, 'fun');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_UPDATE, 'pag');
+    $url .= Nub::$cgi->putId('fun', $funId, 'fun');
 
     return $url;
   }
@@ -62,14 +63,14 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
 
     if ($values['fun_name'])
     {
-      $wrd_id = Abc::$DL->abcBabelWordInsertWord(C::WDG_ID_FUNCTIONALITIES, null, null, $values['fun_name']);
+      $wrd_id = Nub::$DL->abcBabelWordInsertWord(C::WDG_ID_FUNCTIONALITIES, null, null, $values['fun_name']);
     }
     else
     {
       $wrd_id = $values['wrd_id'];
     }
 
-    Abc::$DL->abcSystemFunctionalityUpdateDetails($this->funId, $values['mdl_id'], $wrd_id);
+    Nub::$DL->abcSystemFunctionalityUpdateDetails($this->funId, $values['mdl_id'], $wrd_id);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

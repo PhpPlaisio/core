@@ -1,20 +1,21 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\System;
+namespace Plaisio\Core\Page\System;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Form\Control\CoreButtonControl;
-use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Core\Form\SlatControlFactory\SystemFunctionalityUpdateRolesSlatControlFactory;
-use SetBased\Abc\Core\Page\TabPage;
-use SetBased\Abc\Core\Table\CoreDetailTable;
-use SetBased\Abc\Form\Control\FieldSet;
-use SetBased\Abc\Form\Control\LouverControl;
-use SetBased\Abc\Form\Control\SubmitControl;
-use SetBased\Abc\Response\SeeOtherResponse;
-use SetBased\Abc\Table\TableRow\IntegerTableRow;
-use SetBased\Abc\Table\TableRow\TextTableRow;
+use Plaisio\C;
+use Plaisio\Core\Form\Control\CoreButtonControl;
+use Plaisio\Core\Form\CoreForm;
+use Plaisio\Core\Form\SlatControlFactory\SystemFunctionalityUpdateRolesSlatControlFactory;
+use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Table\CoreDetailTable;
+use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\LouverControl;
+use Plaisio\Form\Control\SubmitControl;
+use Plaisio\Kernel\Nub;
+use Plaisio\Response\SeeOtherResponse;
+use Plaisio\Table\TableRow\IntegerTableRow;
+use Plaisio\Table\TableRow\TextTableRow;
 
 /**
  * Page for granting/revoking access to/from a functionality to roles.
@@ -51,11 +52,11 @@ class FunctionalityUpdateRolesPage extends TabPage
   {
     parent::__construct();
 
-    $this->funId = Abc::$cgi->getManId('fun', 'fun');
+    $this->funId = Nub::$cgi->getManId('fun', 'fun');
 
-    $this->details = Abc::$DL->abcSystemFunctionalityGetDetails($this->funId, $this->lanId);
+    $this->details = Nub::$DL->abcSystemFunctionalityGetDetails($this->funId, $this->lanId);
 
-    Abc::$assets->appendPageTitle($this->details['fun_name']);
+    Nub::$assets->appendPageTitle($this->details['fun_name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -68,9 +69,9 @@ class FunctionalityUpdateRolesPage extends TabPage
    */
   public static function getUrl(int $funId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_UPDATE_ROLES, 'pag');
-    $url .= Abc::$cgi->putId('fun', $funId, 'fun');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_UPDATE_ROLES, 'pag');
+    $url .= Nub::$cgi->putId('fun', $funId, 'fun');
 
     return $url;
   }
@@ -94,7 +95,7 @@ class FunctionalityUpdateRolesPage extends TabPage
   private function createForm(): void
   {
     // Get all available roles.
-    $roles = Abc::$DL->abcSystemFunctionalityGetAvailableRoles($this->funId, $this->lanId);
+    $roles = Nub::$DL->abcSystemFunctionalityGetAvailableRoles($this->funId, $this->lanId);
 
     // Create form.
     $this->form = new CoreForm();
@@ -111,7 +112,7 @@ class FunctionalityUpdateRolesPage extends TabPage
     $button = new CoreButtonControl();
     $submit = new SubmitControl('submit');
     $submit->setMethod('handleForm');
-    $submit->setValue(Abc::$babel->getWord(C::WRD_ID_BUTTON_UPDATE));
+    $submit->setValue(Nub::$babel->getWord(C::WRD_ID_BUTTON_UPDATE));
     $button->addFormControl($submit);
 
     // Put everything together in a LouverControl.
@@ -142,16 +143,16 @@ class FunctionalityUpdateRolesPage extends TabPage
     {
       if ($values['data'][$rol_id]['rol_enabled'])
       {
-        Abc::$DL->abcCompanyRoleInsertFunctionality($values['data'][$rol_id]['cmp_id'], $rol_id, $this->funId);
+        Nub::$DL->abcCompanyRoleInsertFunctionality($values['data'][$rol_id]['cmp_id'], $rol_id, $this->funId);
       }
       else
       {
-        Abc::$DL->abcCompanyRoleDeleteFunctionality($values['data'][$rol_id]['cmp_id'], $rol_id, $this->funId);
+        Nub::$DL->abcCompanyRoleDeleteFunctionality($values['data'][$rol_id]['cmp_id'], $rol_id, $this->funId);
       }
     }
 
     // Use brute force to proper profiles.
-    Abc::$DL->abcProfileProper();
+    Nub::$DL->abcProfileProper();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

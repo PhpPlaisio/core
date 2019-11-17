@@ -1,21 +1,22 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\System;
+namespace Plaisio\Core\Page\System;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Form\Control\CoreButtonControl;
-use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Core\Form\SlatControlFactory\SystemPageUpdateFunctionalitiesSlatControlFactory;
-use SetBased\Abc\Core\Page\TabPage;
-use SetBased\Abc\Core\Table\CoreDetailTable;
-use SetBased\Abc\Core\TableRow\System\PageDetailsTableRow;
-use SetBased\Abc\Form\Control\FieldSet;
-use SetBased\Abc\Form\Control\LouverControl;
-use SetBased\Abc\Form\Control\SubmitControl;
-use SetBased\Abc\Response\SeeOtherResponse;
-use SetBased\Abc\Table\TableRow\IntegerTableRow;
-use SetBased\Abc\Table\TableRow\TextTableRow;
+use Plaisio\C;
+use Plaisio\Core\Form\Control\CoreButtonControl;
+use Plaisio\Core\Form\CoreForm;
+use Plaisio\Core\Form\SlatControlFactory\SystemPageUpdateFunctionalitiesSlatControlFactory;
+use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Table\CoreDetailTable;
+use Plaisio\Core\TableRow\System\PageDetailsTableRow;
+use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\LouverControl;
+use Plaisio\Form\Control\SubmitControl;
+use Plaisio\Kernel\Nub;
+use Plaisio\Response\SeeOtherResponse;
+use Plaisio\Table\TableRow\IntegerTableRow;
+use Plaisio\Table\TableRow\TextTableRow;
 
 /**
  * Page for modifying the functionalities that grant access to a target page.
@@ -52,8 +53,8 @@ class PageUpdateFunctionalitiesPage extends TabPage
   {
     parent::__construct();
 
-    $this->targetPagId = Abc::$cgi->getManId('tar_pag', 'pag');
-    $this->details     = Abc::$DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
+    $this->targetPagId = Nub::$cgi->getManId('tar_pag', 'pag');
+    $this->details     = Nub::$DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -66,9 +67,9 @@ class PageUpdateFunctionalitiesPage extends TabPage
    */
   public static function getUrl(int $pagId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_PAGE_UPDATE_FUNCTIONALITIES, 'pag');
-    $url .= Abc::$cgi->putId('tar_pag', $pagId, 'pag');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_PAGE_UPDATE_FUNCTIONALITIES, 'pag');
+    $url .= Nub::$cgi->putId('tar_pag', $pagId, 'pag');
 
     return $url;
   }
@@ -89,16 +90,16 @@ class PageUpdateFunctionalitiesPage extends TabPage
     {
       if ($values['data'][$fun_id]['fun_checked'])
       {
-        Abc::$DL->abcSystemFunctionalityInsertPage($fun_id, $this->targetPagId);
+        Nub::$DL->abcSystemFunctionalityInsertPage($fun_id, $this->targetPagId);
       }
       else
       {
-        Abc::$DL->abcSystemFunctionalityDeletePage($fun_id, $this->targetPagId);
+        Nub::$DL->abcSystemFunctionalityDeletePage($fun_id, $this->targetPagId);
       }
     }
 
     // Use brute force to proper profiles.
-    Abc::$DL->abcProfileProper();
+    Nub::$DL->abcProfileProper();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -120,7 +121,7 @@ class PageUpdateFunctionalitiesPage extends TabPage
   private function createForm(): void
   {
     // Get all functionalities.
-    $pages = Abc::$DL->abcSystemPageGetAvailableFunctionalities($this->targetPagId, $this->lanId);
+    $pages = Nub::$DL->abcSystemPageGetAvailableFunctionalities($this->targetPagId, $this->lanId);
 
     // Create form.
     $this->form = new CoreForm();
@@ -137,7 +138,7 @@ class PageUpdateFunctionalitiesPage extends TabPage
     $button = new CoreButtonControl();
     $submit = new SubmitControl('submit');
     $submit->setMethod('handleForm');
-    $submit->setValue(Abc::$babel->getWord(C::WRD_ID_BUTTON_UPDATE));
+    $submit->setValue(Nub::$babel->getWord(C::WRD_ID_BUTTON_UPDATE));
     $button->addFormControl($submit);
 
     // Put everything together in a LouverControl.
@@ -187,7 +188,7 @@ class PageUpdateFunctionalitiesPage extends TabPage
    */
   private function showPageDetails(): void
   {
-    $details = Abc::$DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
+    $details = Nub::$DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
     $table   = new CoreDetailTable();
 
     // Add row with the ID of the page.

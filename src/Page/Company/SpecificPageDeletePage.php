@@ -1,12 +1,13 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Company;
+namespace Plaisio\Core\Page\Company;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Page\CorePage;
-use SetBased\Abc\Response\Response;
-use SetBased\Abc\Response\SeeOtherResponse;
+use Plaisio\C;
+use Plaisio\Kernel\Nub;
+use Plaisio\Page\CorePage;
+use Plaisio\Response\Response;
+use Plaisio\Response\SeeOtherResponse;
 
 /**
  * Page for deleting a company specific page that overrides a standard page.
@@ -36,8 +37,8 @@ class SpecificPageDeletePage extends CorePage
   {
     parent::__construct();
 
-    $this->targetCmpId = Abc::$cgi->getManId('cmp', 'cmp');
-    $this->targetPagId = Abc::$cgi->getManId('tar_pag', 'pag');
+    $this->targetCmpId = Nub::$cgi->getManId('cmp', 'cmp');
+    $this->targetPagId = Nub::$cgi->getManId('tar_pag', 'pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -51,10 +52,10 @@ class SpecificPageDeletePage extends CorePage
    */
   public static function getUrl(int $targetCmpId, int $targetPagId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_DELETE, 'pag');
-    $url .= Abc::$cgi->putId('cmp', $targetCmpId, 'cmp');
-    $url .= Abc::$cgi->putId('tar_pag', $targetPagId, 'pag');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_DELETE, 'pag');
+    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url .= Nub::$cgi->putId('tar_pag', $targetPagId, 'pag');
 
     return $url;
   }
@@ -65,7 +66,7 @@ class SpecificPageDeletePage extends CorePage
    */
   public function handleRequest(): Response
   {
-    Abc::$DL->abcCompanySpecificPageDelete($this->targetCmpId, $this->targetPagId);
+    Nub::$DL->abcCompanySpecificPageDelete($this->targetCmpId, $this->targetPagId);
 
     $this->response = new SeeOtherResponse(SpecificPageOverviewPage::getUrl($this->targetCmpId));
 

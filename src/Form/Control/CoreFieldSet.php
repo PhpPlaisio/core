@@ -1,14 +1,15 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Form\Control;
+namespace Plaisio\Core\Form\Control;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\Form\Control\ComplexControl;
-use SetBased\Abc\Form\Control\FieldSet;
-use SetBased\Abc\Form\Control\PushControl;
-use SetBased\Abc\Form\Control\ResetControl;
-use SetBased\Abc\Form\Control\SubmitControl;
-use SetBased\Abc\Helper\Html;
+use Plaisio\Form\Control\ComplexControl;
+use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\PushControl;
+use Plaisio\Form\Control\ResetControl;
+use Plaisio\Form\Control\SubmitControl;
+use Plaisio\Helper\Html;
+use Plaisio\Kernel\Nub;
 
 /**
  * Fieldset for visible form controls in core form.
@@ -96,7 +97,7 @@ class CoreFieldSet extends FieldSet
     }
 
     $input = new SubmitControl($name);
-    $input->setValue((is_int($wrdId)) ? Abc::$babel->getWord($wrdId) : $wrdId);
+    $input->setValue((is_int($wrdId)) ? Nub::$babel->getWord($wrdId) : $wrdId);
     $this->buttonControl->addFormControl($input);
 
     return $input;

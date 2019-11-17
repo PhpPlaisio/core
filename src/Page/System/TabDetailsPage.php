@@ -1,16 +1,17 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\System;
+namespace Plaisio\Core\Page\System;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Page\TabPage;
-use SetBased\Abc\Core\Table\CoreDetailTable;
-use SetBased\Abc\Core\Table\CoreOverviewTable;
-use SetBased\Abc\Core\TableColumn\System\PageTableColumn;
-use SetBased\Abc\Table\TableColumn\TextTableColumn;
-use SetBased\Abc\Table\TableRow\IntegerTableRow;
-use SetBased\Abc\Table\TableRow\TextTableRow;
+use Plaisio\C;
+use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Table\CoreDetailTable;
+use Plaisio\Core\Table\CoreOverviewTable;
+use Plaisio\Core\TableColumn\System\PageTableColumn;
+use Plaisio\Kernel\Nub;
+use Plaisio\Table\TableColumn\TextTableColumn;
+use Plaisio\Table\TableRow\IntegerTableRow;
+use Plaisio\Table\TableRow\TextTableRow;
 
 /**
  * Page with information about a page group.
@@ -33,7 +34,7 @@ class TabDetailsPage extends TabPage
   {
     parent::__construct();
 
-    $this->tabId = Abc::$cgi->getManId('ptb', 'ptb');
+    $this->tabId = Nub::$cgi->getManId('ptb', 'ptb');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -46,9 +47,9 @@ class TabDetailsPage extends TabPage
    */
   public static function getUrl(int $ptbId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_TAB_DETAILS, 'pag');
-    $url .= Abc::$cgi->putId('ptb', $ptbId, 'ptb');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_TAB_DETAILS, 'pag');
+    $url .= Nub::$cgi->putId('ptb', $ptbId, 'ptb');
 
     return $url;
   }
@@ -71,7 +72,7 @@ class TabDetailsPage extends TabPage
    */
   private function showDetails(): void
   {
-    $details = Abc::$DL->abcSystemTabGetDetails($this->tabId, $this->lanId);
+    $details = Nub::$DL->abcSystemTabGetDetails($this->tabId, $this->lanId);
     $table   = new CoreDetailTable();
 
     // Add row with the ID of the tab.
@@ -92,7 +93,7 @@ class TabDetailsPage extends TabPage
    */
   private function showMasterPages(): void
   {
-    $pages = Abc::$DL->abcSystemTabGetMasterPages($this->tabId, $this->lanId);
+    $pages = Nub::$DL->abcSystemTabGetMasterPages($this->tabId, $this->lanId);
 
     $table = new CoreOverviewTable();
 

@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Admin;
+namespace Plaisio\Core\Page\Admin;
 
-use SetBased\Abc\Core\Page\TabPage;
+use Plaisio\Core\Page\TabPage;
 
 abstract class AdminPage extends TabPage
 {

@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\TableAction\System;
+namespace Plaisio\Core\TableAction\System;
 
-use SetBased\Abc\Core\Page\System\ModuleUpdateCompaniesPage;
-use SetBased\Abc\Core\TableAction\UpdateItemTableAction;
+use Plaisio\Core\Page\System\ModuleUpdateCompaniesPage;
+use Plaisio\Core\TableAction\UpdateItemTableAction;
 
 /**
  * Table action for granting or revoking a module to companies.

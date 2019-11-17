@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\TableColumn\Company;
+namespace Plaisio\Core\TableColumn\Company;
 
-use SetBased\Abc\Core\Page\Company\SpecificPageDeletePage;
-use SetBased\Abc\Core\TableColumn\DeleteIconTableColumn;
+use Plaisio\Core\Page\Company\SpecificPageDeletePage;
+use Plaisio\Core\TableColumn\DeleteIconTableColumn;
 
 /**
  * Table with column for deleting a company specific page that overrides a standard page.

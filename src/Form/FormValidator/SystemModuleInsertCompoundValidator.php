@@ -1,10 +1,11 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Form\FormValidator;
+namespace Plaisio\Core\Form\FormValidator;
 
-use SetBased\Abc\Form\Control\CompoundControl;
-use SetBased\Abc\Form\Control\SimpleControl;
-use SetBased\Abc\Form\Validator\CompoundValidator;
+use Plaisio\Form\Control\CompoundControl;
+use Plaisio\Form\Control\SimpleControl;
+use Plaisio\Form\Validator\CompoundValidator;
 
 /**
  * Form validator for the form for inserting or updating a module.

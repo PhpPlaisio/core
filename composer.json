@@ -1,28 +1,28 @@
 {
-  "name": "setbased/abc-core",
-  "description": "ABC-Framework: (Development) Core",
+  "name": "plaisio/core",
+  "description": "PhpPlaisio: (Development) Core",
   "keywords": [
-    "ABC-Framework",
+    "PhpPlaisio",
     "Core"
   ],
   "license": "MIT",
   "require": {
     "php": ">=7.1.0",
     "ext-curl": "*",
-    "setbased/abc": "^0.10.0",
-    "setbased/abc-babel-core": "^0.10.0",
-    "setbased/abc-company": "^1.1.0",
-    "setbased/abc-exception": "^2.0.0",
-    "setbased/abc-form": "^0.11.0",
-    "setbased/abc-form-louver": "^0.11.0",
-    "setbased/abc-helper-password": "^2.0.0",
-    "setbased/abc-html": "^2.0.0",
-    "setbased/abc-page-core": "^0.11.2",
-    "setbased/abc-profile": "^1.1.0",
-    "setbased/abc-response-core": "^0.1.0",
-    "setbased/abc-table-detail": "^0.10.0",
-    "setbased/abc-table-overview": "^0.11.0",
-    "setbased/abc-user": "^1.1.0",
+    "plaisio/kernel": "^1.0.0",
+    "plaisio/babel-core": "^1.0.0",
+    "plaisio/db-company": "^1.0.0",
+    "plaisio/exception": "^1.0.0",
+    "plaisio/form": "^0.11.0",
+    "plaisio/form-louver": "^0.11.0",
+    "plaisio/helper-password": "^1.0.0",
+    "plaisio/helper-html": "^1.0.0",
+    "plaisio/page-core": "^1.0.0",
+    "plaisio/db-profile": "^1.0.0",
+    "plaisio/response-core": "^1.0.0",
+    "plaisio/table-detail": "^1.0.0",
+    "plaisio/table-overview": "^1.0.0",
+    "plaisio/db-user": "^1.0.0",
     "setbased/exception": "^2.0.0"
   },
   "require-dev": {
@@ -32,12 +32,12 @@
   },
   "autoload": {
     "psr-4": {
-      "SetBased\\Abc\\Core\\": "src/"
+      "Plaisio\\Core\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "SetBased\\Abc\\Core\\Test\\": "test/"
+      "Plaisio\\Core\\Test\\": "test/"
     },
     "classmap": [
       "test/C.php"

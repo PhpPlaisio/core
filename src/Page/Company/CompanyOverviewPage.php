@@ -1,15 +1,16 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Company;
+namespace Plaisio\Core\Page\Company;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Page\TabPage;
-use SetBased\Abc\Core\Table\CoreOverviewTable;
-use SetBased\Abc\Core\TableAction\Company\CompanyInsertTableAction;
-use SetBased\Abc\Core\TableColumn\Company\CompanyTableColumn;
-use SetBased\Abc\Core\TableColumn\Company\CompanyUpdateIconTableColumn;
-use SetBased\Abc\Table\TableColumn\TextTableColumn;
+use Plaisio\C;
+use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Table\CoreOverviewTable;
+use Plaisio\Core\TableAction\Company\CompanyInsertTableAction;
+use Plaisio\Core\TableColumn\Company\CompanyTableColumn;
+use Plaisio\Core\TableColumn\Company\CompanyUpdateIconTableColumn;
+use Plaisio\Kernel\Nub;
+use Plaisio\Table\TableColumn\TextTableColumn;
 
 /**
  * Page with an overview of all companies.
@@ -24,8 +25,8 @@ class CompanyOverviewPage extends TabPage
    */
   public static function getUrl(): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_OVERVIEW, 'pag');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_OVERVIEW, 'pag');
 
     return $url;
   }
@@ -36,7 +37,7 @@ class CompanyOverviewPage extends TabPage
    */
   protected function echoTabContent(): void
   {
-    $companies = Abc::$DL->abcCompanyGetAll();
+    $companies = Nub::$DL->abcCompanyGetAll();
 
     $table = new CoreOverviewTable();
 

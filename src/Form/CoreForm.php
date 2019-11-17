@@ -1,14 +1,15 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Form;
+namespace Plaisio\Core\Form;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\Core\Form\Control\CoreFieldSet;
-use SetBased\Abc\Core\Form\Validator\MandatoryValidator;
-use SetBased\Abc\Form\Control\Control;
-use SetBased\Abc\Form\Control\PushControl;
-use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Form\Form;
+use Plaisio\Core\Form\Control\CoreFieldSet;
+use Plaisio\Core\Form\Validator\MandatoryValidator;
+use Plaisio\Form\Control\Control;
+use Plaisio\Form\Control\PushControl;
+use Plaisio\Form\Control\TextControl;
+use Plaisio\Form\Form;
+use Plaisio\Kernel\Nub;
 
 /**
  * Form class for all forms in the core of ABC.
@@ -82,7 +83,7 @@ class CoreForm extends Form
 
       if ($wrdId!==null)
       {
-        $control->setFakeAttribute('_abc_label', (is_int($wrdId)) ? Abc::$babel->getWord($wrdId) : $wrdId);
+        $control->setFakeAttribute('_abc_label', (is_int($wrdId)) ? Nub::$babel->getWord($wrdId) : $wrdId);
       }
 
       if ($mandatory)
@@ -139,7 +140,7 @@ class CoreForm extends Form
    */
   public function setTitle(int $wrdId): void
   {
-    $this->visibleFieldSet->setTitle(Abc::$babel->getWord($wrdId));
+    $this->visibleFieldSet->setTitle(Nub::$babel->getWord($wrdId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

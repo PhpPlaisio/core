@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\System;
+namespace Plaisio\Core\Page\System;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
+use Plaisio\C;
+use Plaisio\Kernel\Nub;
 
 /**
  * Page for inserting a new role group.
@@ -28,8 +29,8 @@ class RoleGroupInsertPage extends RoleGroupBasePage
    */
   public static function getUrl(): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_INSERT, 'pag');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_INSERT, 'pag');
 
     return $url;
   }
@@ -44,14 +45,14 @@ class RoleGroupInsertPage extends RoleGroupBasePage
 
     if ($values['rlg_name']!==null)
     {
-      $wrdId = Abc::$DL->abcBabelWordInsertWord(C::WDG_ID_ROLE_GROUP, null, null, $values['rlg_name']);
+      $wrdId = Nub::$DL->abcBabelWordInsertWord(C::WDG_ID_ROLE_GROUP, null, null, $values['rlg_name']);
     }
     else
     {
       $wrdId = $values['wrd_id'];
     }
 
-    $this->rlgId = Abc::$DL->abcSystemRoleGroupInsert($wrdId,
+    $this->rlgId = Nub::$DL->abcSystemRoleGroupInsert($wrdId,
                                                       $values['rlg_weight'],
                                                       $values['rlg_label']);
   }

@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Babel;
+namespace Plaisio\Core\Page\Babel;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
+use Plaisio\C;
+use Plaisio\Kernel\Nub;
 
 /**
  * Page for updating the details of a word group.
@@ -26,8 +27,8 @@ class WordGroupUpdatePage extends WordGroupBasePage
   {
     parent::__construct();
 
-    $this->wdgId       = Abc::$cgi->getManId('wdg', 'wdg');
-    $this->details     = Abc::$DL->abcBabelWordGroupGetDetails($this->wdgId);
+    $this->wdgId       = Nub::$cgi->getManId('wdg', 'wdg');
+    $this->details     = Nub::$DL->abcBabelWordGroupGetDetails($this->wdgId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -41,10 +42,10 @@ class WordGroupUpdatePage extends WordGroupBasePage
    */
   public static function getUrl(int $wdgId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_GROUP_UPDATE, 'pag');
-    $url .= Abc::$cgi->putId('wdg', $wdgId, 'wdg');
-    $url .= Abc::$cgi->putId('act_lan', C::LAN_ID_BABEL_REFERENCE, 'lan');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_GROUP_UPDATE, 'pag');
+    $url .= Nub::$cgi->putId('wdg', $wdgId, 'wdg');
+    $url .= Nub::$cgi->putId('act_lan', C::LAN_ID_BABEL_REFERENCE, 'lan');
 
     return $url;
   }
@@ -57,7 +58,7 @@ class WordGroupUpdatePage extends WordGroupBasePage
   {
     $values = $this->form->getValues();
 
-    Abc::$DL->abcBabelWordGroupUpdateDetails($this->wdgId, $values['wdg_name'], $values['wdg_label']);
+    Nub::$DL->abcBabelWordGroupUpdateDetails($this->wdgId, $values['wdg_name'], $values['wdg_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

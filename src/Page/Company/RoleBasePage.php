@@ -1,13 +1,14 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Company;
+namespace Plaisio\Core\Page\Company;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Form\Control\SelectControl;
-use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Response\SeeOtherResponse;
+use Plaisio\C;
+use Plaisio\Core\Form\CoreForm;
+use Plaisio\Form\Control\SelectControl;
+use Plaisio\Form\Control\TextControl;
+use Plaisio\Kernel\Nub;
+use Plaisio\Response\SeeOtherResponse;
 
 /**
  * Abstract parent page for inserting and updating details of a role for the target company.
@@ -72,7 +73,7 @@ abstract class RoleBasePage extends CompanyPage
     $this->form = new CoreForm();
 
     // Input for role group.
-    $roleGroups = Abc::$DL->abcSystemRoleGroupGetAll($this->lanId);
+    $roleGroups = Nub::$DL->abcSystemRoleGroupGetAll($this->lanId);
     $input      = new SelectControl('rlg_id');
     $input->setOptions($roleGroups, 'rlg_id', 'rlg_name');
     $this->form->addFormControl($input, 'Role Group', true);

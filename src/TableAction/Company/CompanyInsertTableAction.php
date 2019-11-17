@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\TableAction\Company;
+namespace Plaisio\Core\TableAction\Company;
 
-use SetBased\Abc\Core\Page\Company\CompanyInsertPage;
-use SetBased\Abc\Core\TableAction\InsertItemTableAction;
+use Plaisio\Core\Page\Company\CompanyInsertPage;
+use Plaisio\Core\TableAction\InsertItemTableAction;
 
 /**
  * Table action for inserting a company.

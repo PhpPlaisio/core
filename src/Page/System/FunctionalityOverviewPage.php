@@ -1,15 +1,16 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\System;
+namespace Plaisio\Core\Page\System;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Page\TabPage;
-use SetBased\Abc\Core\Table\CoreOverviewTable;
-use SetBased\Abc\Core\TableAction\System\FunctionalityInsertTableAction;
-use SetBased\Abc\Core\TableColumn\Company\FunctionalityTableColumn;
-use SetBased\Abc\Core\TableColumn\Company\ModuleTableColumn;
-use SetBased\Abc\Core\TableColumn\System\FunctionalityUpdateIconTableColumn;
+use Plaisio\C;
+use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Table\CoreOverviewTable;
+use Plaisio\Core\TableAction\System\FunctionalityInsertTableAction;
+use Plaisio\Core\TableColumn\Company\FunctionalityTableColumn;
+use Plaisio\Core\TableColumn\Company\ModuleTableColumn;
+use Plaisio\Core\TableColumn\System\FunctionalityUpdateIconTableColumn;
+use Plaisio\Kernel\Nub;
 
 /**
  * Page with an overview all functionalities.
@@ -24,8 +25,8 @@ class FunctionalityOverviewPage extends TabPage
    */
   public static function getUrl(): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_OVERVIEW, 'pag');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_OVERVIEW, 'pag');
 
     return $url;
   }
@@ -36,7 +37,7 @@ class FunctionalityOverviewPage extends TabPage
    */
   protected function echoTabContent(): void
   {
-    $functionalities = Abc::$DL->abcSystemFunctionalityGetAll($this->lanId);
+    $functionalities = Nub::$DL->abcSystemFunctionalityGetAll($this->lanId);
 
     $table = new CoreOverviewTable();
     $table->addTableAction('default', new FunctionalityInsertTableAction());

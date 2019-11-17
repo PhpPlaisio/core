@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\TableColumn;
+namespace Plaisio\Core\TableColumn;
 
-use SetBased\Abc\Helper\Html;
-use SetBased\Abc\Table\TableColumn\TableColumn;
+use Plaisio\Helper\Html;
+use Plaisio\Table\TableColumn\TableColumn;
 
 /**
  * Abstract table column for columns with icons.

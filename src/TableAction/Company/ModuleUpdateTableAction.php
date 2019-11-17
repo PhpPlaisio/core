@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\TableAction\Company;
+namespace Plaisio\Core\TableAction\Company;
 
-use SetBased\Abc\Core\Page\Company\ModuleUpdatePage;
-use SetBased\Abc\Core\TableAction\UpdateItemTableAction;
+use Plaisio\Core\Page\Company\ModuleUpdatePage;
+use Plaisio\Core\TableAction\UpdateItemTableAction;
 
 /**
  * Table action for setting the enabled modules of a company.

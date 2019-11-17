@@ -1,20 +1,21 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Babel;
+namespace Plaisio\Core\Page\Babel;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Table\CoreDetailTable;
-use SetBased\Abc\Core\Table\CoreOverviewTable;
-use SetBased\Abc\Core\TableAction\Babel\WordInsertTableAction;
-use SetBased\Abc\Core\TableAction\Babel\WordTranslateWordsTableAction;
-use SetBased\Abc\Core\TableColumn\Babel\WordDeleteIconTableColumn;
-use SetBased\Abc\Core\TableColumn\Babel\WordTranslateIconTableColumn;
-use SetBased\Abc\Core\TableColumn\Babel\WordUpdateIconTableColumn;
-use SetBased\Abc\Table\TableColumn\NumericTableColumn;
-use SetBased\Abc\Table\TableColumn\TextTableColumn;
-use SetBased\Abc\Table\TableRow\IntegerTableRow;
-use SetBased\Abc\Table\TableRow\TextTableRow;
+use Plaisio\C;
+use Plaisio\Core\Table\CoreDetailTable;
+use Plaisio\Core\Table\CoreOverviewTable;
+use Plaisio\Core\TableAction\Babel\WordInsertTableAction;
+use Plaisio\Core\TableAction\Babel\WordTranslateWordsTableAction;
+use Plaisio\Core\TableColumn\Babel\WordDeleteIconTableColumn;
+use Plaisio\Core\TableColumn\Babel\WordTranslateIconTableColumn;
+use Plaisio\Core\TableColumn\Babel\WordUpdateIconTableColumn;
+use Plaisio\Kernel\Nub;
+use Plaisio\Table\TableColumn\NumericTableColumn;
+use Plaisio\Table\TableColumn\TextTableColumn;
+use Plaisio\Table\TableRow\IntegerTableRow;
+use Plaisio\Table\TableRow\TextTableRow;
 
 /**
  * Page with an overview of all words in a word group.
@@ -44,11 +45,11 @@ class WordGroupDetailsPage extends BabelPage
   {
     parent::__construct();
 
-    $this->wdgId = Abc::$cgi->getManId('wdg', 'wdg');
+    $this->wdgId = Nub::$cgi->getManId('wdg', 'wdg');
 
-    $this->details = Abc::$DL->abcBabelWordGroupGetDetails($this->wdgId);
+    $this->details = Nub::$DL->abcBabelWordGroupGetDetails($this->wdgId);
 
-    Abc::$assets->appendPageTitle($this->details['wdg_name']);
+    Nub::$assets->appendPageTitle($this->details['wdg_name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -62,10 +63,10 @@ class WordGroupDetailsPage extends BabelPage
    */
   public static function getUrl(int $wdgId, int $targetLanId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_GROUP_DETAILS, 'pag');
-    $url .= Abc::$cgi->putId('wdg', $wdgId, 'wdg');
-    $url .= Abc::$cgi->putId('act_lan', $targetLanId, 'lan');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_GROUP_DETAILS, 'pag');
+    $url .= Nub::$cgi->putId('wdg', $wdgId, 'wdg');
+    $url .= Nub::$cgi->putId('act_lan', $targetLanId, 'lan');
 
     return $url;
   }
@@ -111,12 +112,12 @@ class WordGroupDetailsPage extends BabelPage
   {
     // Determine whether the user is a translator.
     $is_translator = ($this->actLanId!=$this->refLanId &&
-      Abc::$DL->abcAuthGetPageAuth($this->cmpId, $this->proId, C::PAG_ID_BABEL_WORD_TRANSLATE));
+      Nub::$DL->abcAuthGetPageAuth($this->cmpId, $this->proId, C::PAG_ID_BABEL_WORD_TRANSLATE));
 
-    $words = Abc::$DL->abcBabelWordGroupGetAllWordsTranslator($this->wdgId, $this->actLanId);
+    $words = Nub::$DL->abcBabelWordGroupGetAllWordsTranslator($this->wdgId, $this->actLanId);
 
-    $ref_language = Abc::$DL->abcBabelLanguageGetName($this->refLanId, $this->refLanId);
-    $act_language = Abc::$DL->abcBabelLanguageGetName($this->actLanId, $this->refLanId);
+    $ref_language = Nub::$DL->abcBabelLanguageGetName($this->refLanId, $this->refLanId);
+    $act_language = Nub::$DL->abcBabelLanguageGetName($this->actLanId, $this->refLanId);
 
     $table = new CoreOverviewTable();
 
@@ -163,7 +164,7 @@ class WordGroupDetailsPage extends BabelPage
     $table->addColumn(new WordUpdateIconTableColumn());
 
     // Show link to delete the word.
-    if (Abc::$DL->abcAuthGetPageAuth($this->cmpId, $this->proId, C::PAG_ID_BABEL_WORD_DELETE))
+    if (Nub::$DL->abcAuthGetPageAuth($this->cmpId, $this->proId, C::PAG_ID_BABEL_WORD_DELETE))
     {
       $table->addColumn(new WordDeleteIconTableColumn());
     }

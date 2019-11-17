@@ -1,16 +1,17 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\System;
+namespace Plaisio\Core\Page\System;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Page\TabPage;
-use SetBased\Abc\Core\Table\CoreOverviewTable;
-use SetBased\Abc\Core\TableAction\System\RoleGroupInsertTableAction;
-use SetBased\Abc\Core\TableColumn\System\RoleGroupTableColumn;
-use SetBased\Abc\Core\TableColumn\System\RoleGroupUpdateIconTableColumn;
-use SetBased\Abc\Table\TableColumn\NumericTableColumn;
-use SetBased\Abc\Table\TableColumn\TextTableColumn;
+use Plaisio\C;
+use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Table\CoreOverviewTable;
+use Plaisio\Core\TableAction\System\RoleGroupInsertTableAction;
+use Plaisio\Core\TableColumn\System\RoleGroupTableColumn;
+use Plaisio\Core\TableColumn\System\RoleGroupUpdateIconTableColumn;
+use Plaisio\Kernel\Nub;
+use Plaisio\Table\TableColumn\NumericTableColumn;
+use Plaisio\Table\TableColumn\TextTableColumn;
 
 /**
  * Page with an overview of all role groups.
@@ -25,8 +26,8 @@ class RoleGroupOverviewPage extends TabPage
    */
   public static function getUrl(): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_OVERVIEW, 'pag');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_OVERVIEW, 'pag');
 
     return $url;
   }
@@ -37,7 +38,7 @@ class RoleGroupOverviewPage extends TabPage
    */
   protected function echoTabContent(): void
   {
-    $roles = Abc::$DL->abcSystemRoleGroupGetAll($this->lanId);
+    $roles = Nub::$DL->abcSystemRoleGroupGetAll($this->lanId);
 
     $table = new CoreOverviewTable();
 

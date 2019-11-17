@@ -1,12 +1,13 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page;
+namespace Plaisio\Core\Page;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\Helper\Html;
-use SetBased\Abc\Page\CorePage;
-use SetBased\Abc\Response\BaseResponse;
-use SetBased\Abc\Response\Response;
+use Plaisio\Helper\Html;
+use Plaisio\Kernel\Nub;
+use Plaisio\Page\CorePage;
+use Plaisio\Response\BaseResponse;
+use Plaisio\Response\Response;
 
 /**
  * Abstract parent page for all core pages of ABC.
@@ -41,22 +42,22 @@ abstract class TabPage extends CorePage
   {
     parent::__construct();
 
-    Abc::$assets->cssAppendSource('abc/reset.css');
-    Abc::$assets->cssAppendSource('abc/layout.css');
-    Abc::$assets->cssAppendSource('abc/main-menu.css');
-    Abc::$assets->cssAppendSource('abc/secondary-menu.css');
-    Abc::$assets->cssAppendSource('abc/dashboard.css');
-    Abc::$assets->cssAppendSource('abc/content.css');
-    Abc::$assets->cssAppendSource('abc/style.css');
-    Abc::$assets->cssAppendSource('abc/overview_table.css');
-    Abc::$assets->cssAppendSource('abc/detail_table.css');
-    Abc::$assets->cssAppendSource('abc/input_table.css');
+    Nub::$assets->cssAppendSource('abc/reset.css');
+    Nub::$assets->cssAppendSource('abc/layout.css');
+    Nub::$assets->cssAppendSource('abc/main-menu.css');
+    Nub::$assets->cssAppendSource('abc/secondary-menu.css');
+    Nub::$assets->cssAppendSource('abc/dashboard.css');
+    Nub::$assets->cssAppendSource('abc/content.css');
+    Nub::$assets->cssAppendSource('abc/style.css');
+    Nub::$assets->cssAppendSource('abc/overview_table.css');
+    Nub::$assets->cssAppendSource('abc/detail_table.css');
+    Nub::$assets->cssAppendSource('abc/input_table.css');
 
-    Abc::$assets->jsAdmSetPageSpecificMain(__CLASS__);
+    Nub::$assets->jsAdmSetPageSpecificMain(__CLASS__);
 
-    Abc::$assets->setPageTitle(Abc::$abc->getPageGroupTitle().
+    Nub::$assets->setPageTitle(Nub::$nub->getPageGroupTitle().
                                ' - '.
-                               Abc::$assets->getPageTitle());
+                               Nub::$assets->getPageTitle());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -134,18 +135,18 @@ abstract class TabPage extends CorePage
     echo '<!DOCTYPE html>';
     echo Html::generateTag('html',
                            ['xmlns'    => 'http://www.w3.org/1999/xhtml',
-                            'xml:lang' => Abc::$babel->getLang(),
-                            'lang'     => Abc::$babel->getLang()]);
+                            'xml:lang' => Nub::$babel->getLang(),
+                            'lang'     => Nub::$babel->getLang()]);
     echo '<head>';
 
     // Echo the meta tags.
-    Abc::$assets->echoMetaTags();
+    Nub::$assets->echoMetaTags();
 
     // Echo the title of the XHTML document.
-    Abc::$assets->echoPageTitle();
+    Nub::$assets->echoPageTitle();
 
     // Echo style sheets (if any).
-    Abc::$assets->echoCascadingStyleSheets();
+    Nub::$assets->echoCascadingStyleSheets();
 
     echo '</head><body>';
   }
@@ -157,7 +158,7 @@ abstract class TabPage extends CorePage
    */
   protected function echoPageTrailer(): void
   {
-    Abc::$assets->echoJavaScript();
+    Nub::$assets->echoJavaScript();
 
     echo '</body></html>';
   }
@@ -176,7 +177,7 @@ abstract class TabPage extends CorePage
    */
   protected function echoTabs(): void
   {
-    $pag_id_org = Abc::$abc->getPagIdOrg();
+    $pag_id_org = Nub::$nub->getPagIdOrg();
 
     $this->getPageTabs();
 
@@ -204,8 +205,8 @@ abstract class TabPage extends CorePage
    */
   protected function getPageTabs(): void
   {
-    $this->tabs = Abc::$DL->abcAuthGetPageTabs($this->cmpId,
-                                               Abc::$abc->getPtbId(),
+    $this->tabs = Nub::$DL->abcAuthGetPageTabs($this->cmpId,
+                                               Nub::$nub->getPtbId(),
                                                $this->proId,
                                                $this->lanId);
     foreach ($this->tabs as &$tab)
@@ -224,7 +225,7 @@ abstract class TabPage extends CorePage
    */
   protected function getTabUrl(int $pagId): ?string
   {
-    return Abc::$cgi->putId('pag', $pagId, 'pag');
+    return Nub::$cgi->putId('pag', $pagId, 'pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -239,8 +240,8 @@ abstract class TabPage extends CorePage
    */
   private function echoMainMenu(): void
   {
-    $items       = Abc::$DL->abcAuthGetMenu($this->cmpId, $this->proId, $this->lanId);
-    $page_mnu_id = Abc::$abc->getMnuId();
+    $items       = Nub::$DL->abcAuthGetMenu($this->cmpId, $this->proId, $this->lanId);
+    $page_mnu_id = Nub::$nub->getMnuId();
 
     echo '<ul>';
     $last_group = 0;
@@ -252,7 +253,7 @@ abstract class TabPage extends CorePage
       }
       else
       {
-        $link = Abc::$cgi->putId('pag', $item['pag_id'], 'pag');
+        $link = Nub::$cgi->putId('pag', $item['pag_id'], 'pag');
       }
       $link .= $item['mnu_link'];
 

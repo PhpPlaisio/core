@@ -1,13 +1,14 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Company;
+namespace Plaisio\Core\Page\Company;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Table\CoreDetailTable;
-use SetBased\Abc\Core\TableAction\Company\CompanyUpdateTableAction;
-use SetBased\Abc\Table\TableRow\IntegerTableRow;
-use SetBased\Abc\Table\TableRow\TextTableRow;
+use Plaisio\C;
+use Plaisio\Core\Table\CoreDetailTable;
+use Plaisio\Core\TableAction\Company\CompanyUpdateTableAction;
+use Plaisio\Kernel\Nub;
+use Plaisio\Table\TableRow\IntegerTableRow;
+use Plaisio\Table\TableRow\TextTableRow;
 
 /**
  * Page with details of a company.
@@ -30,7 +31,7 @@ class CompanyDetailsPage extends CompanyPage
   {
     parent::__construct();
 
-    $this->details = Abc::$DL->abcCompanyGetDetails($this->targetCmpId);
+    $this->details = Nub::$DL->abcCompanyGetDetails($this->targetCmpId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -43,9 +44,9 @@ class CompanyDetailsPage extends CompanyPage
    */
   public static function getUrl(int $targetCmpId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_DETAILS, 'pag');
-    $url .= Abc::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_DETAILS, 'pag');
+    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }

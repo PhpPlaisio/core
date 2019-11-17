@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\TableAction\Company;
+namespace Plaisio\Core\TableAction\Company;
 
-use SetBased\Abc\Core\Page\Company\CompanyUpdatePage;
-use SetBased\Abc\Core\TableAction\UpdateItemTableAction;
+use Plaisio\Core\Page\Company\CompanyUpdatePage;
+use Plaisio\Core\TableAction\UpdateItemTableAction;
 
 /**
  * Table action for updating the details of a company.

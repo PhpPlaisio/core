@@ -1,15 +1,16 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\System;
+namespace Plaisio\Core\Page\System;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Page\TabPage;
-use SetBased\Abc\Core\Table\CoreOverviewTable;
-use SetBased\Abc\Core\TableAction\System\PageInsertTableAction;
-use SetBased\Abc\Core\TableColumn\System\PageTableColumn;
-use SetBased\Abc\Core\TableColumn\System\PageUpdateIconTableColumn;
-use SetBased\Abc\Table\TableColumn\TextTableColumn;
+use Plaisio\C;
+use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Table\CoreOverviewTable;
+use Plaisio\Core\TableAction\System\PageInsertTableAction;
+use Plaisio\Core\TableColumn\System\PageTableColumn;
+use Plaisio\Core\TableColumn\System\PageUpdateIconTableColumn;
+use Plaisio\Kernel\Nub;
+use Plaisio\Table\TableColumn\TextTableColumn;
 
 /**
  * Page with an overview all pages.
@@ -24,8 +25,8 @@ class PageOverviewPage extends TabPage
    */
   public static function getUrl(): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_PAGE_OVERVIEW, 'pag');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_PAGE_OVERVIEW, 'pag');
 
     return $url;
   }
@@ -36,7 +37,7 @@ class PageOverviewPage extends TabPage
    */
   protected function echoTabContent(): void
   {
-    $pages = Abc::$DL->abcSystemPageGetAll($this->lanId);
+    $pages = Nub::$DL->abcSystemPageGetAll($this->lanId);
 
     $table = new CoreOverviewTable();
     $table->addTableAction('default', new PageInsertTableAction());

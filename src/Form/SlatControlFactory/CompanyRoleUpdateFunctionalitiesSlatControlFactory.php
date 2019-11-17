@@ -1,17 +1,18 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Form\SlatControlFactory;
+namespace Plaisio\Core\Form\SlatControlFactory;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\Form\Control\CheckboxControl;
-use SetBased\Abc\Form\Control\LouverControl;
-use SetBased\Abc\Form\Control\SlatControl;
-use SetBased\Abc\Form\Control\SlatControlFactory;
-use SetBased\Abc\Form\Control\TableColumnControl;
-use SetBased\Abc\Form\SlatJoint\CheckboxSlatJoint;
-use SetBased\Abc\Form\SlatJoint\TableColumnSlatJoint;
-use SetBased\Abc\Obfuscator\Obfuscator;
-use SetBased\Abc\Table\TableColumn\TextTableColumn;
+use Plaisio\Form\Control\CheckboxControl;
+use Plaisio\Form\Control\LouverControl;
+use Plaisio\Form\Control\SlatControl;
+use Plaisio\Form\Control\SlatControlFactory;
+use Plaisio\Form\Control\TableColumnControl;
+use Plaisio\Form\SlatJoint\CheckboxSlatJoint;
+use Plaisio\Form\SlatJoint\TableColumnSlatJoint;
+use Plaisio\Kernel\Nub;
+use Plaisio\Obfuscator\Obfuscator;
+use Plaisio\Table\TableColumn\TextTableColumn;
 
 /**
  * Slat control factory for creating slat joints for updating enabled functionalities.
@@ -46,7 +47,7 @@ class CompanyRoleUpdateFunctionalitiesSlatControlFactory extends SlatControlFact
     $table_column = new CheckboxSlatJoint('Enable');
     $this->addSlatJoint('fun_enabled', $table_column);
 
-    $this->funIdObfuscator = Abc::getObfuscator('fun');
+    $this->funIdObfuscator = Nub::getObfuscator('fun');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

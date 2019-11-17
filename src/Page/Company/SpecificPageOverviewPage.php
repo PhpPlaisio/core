@@ -1,16 +1,17 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Company;
+namespace Plaisio\Core\Page\Company;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Table\CoreOverviewTable;
-use SetBased\Abc\Core\TableAction\Company\SpecificPageInsertTableAction;
-use SetBased\Abc\Core\TableColumn\Company\SpecificPageDeleteIconTableColumn;
-use SetBased\Abc\Core\TableColumn\Company\SpecificPageUpdateIconTableColumn;
-use SetBased\Abc\Core\TableColumn\System\PageDetailsIconTableColumn;
-use SetBased\Abc\Table\TableColumn\NumericTableColumn;
-use SetBased\Abc\Table\TableColumn\TextTableColumn;
+use Plaisio\C;
+use Plaisio\Core\Table\CoreOverviewTable;
+use Plaisio\Core\TableAction\Company\SpecificPageInsertTableAction;
+use Plaisio\Core\TableColumn\Company\SpecificPageDeleteIconTableColumn;
+use Plaisio\Core\TableColumn\Company\SpecificPageUpdateIconTableColumn;
+use Plaisio\Core\TableColumn\System\PageDetailsIconTableColumn;
+use Plaisio\Kernel\Nub;
+use Plaisio\Table\TableColumn\NumericTableColumn;
+use Plaisio\Table\TableColumn\TextTableColumn;
 
 /**
  * Page with an overview of all company specific pages for the target company.
@@ -33,7 +34,7 @@ class SpecificPageOverviewPage extends CompanyPage
   {
     parent::__construct();
 
-    $this->pages = Abc::$DL->abcCompanySpecificPageGetAll($this->targetCmpId, $this->lanId);
+    $this->pages = Nub::$DL->abcCompanySpecificPageGetAll($this->targetCmpId, $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -46,9 +47,9 @@ class SpecificPageOverviewPage extends CompanyPage
    */
   public static function getUrl(int $targetCmpId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_OVERVIEW, 'pag');
-    $url .= Abc::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_OVERVIEW, 'pag');
+    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }

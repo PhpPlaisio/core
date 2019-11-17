@@ -1,12 +1,13 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Company;
+namespace Plaisio\Core\Page\Company;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Table\CoreOverviewTable;
-use SetBased\Abc\Core\TableAction\Company\ModuleUpdateTableAction;
-use SetBased\Abc\Core\TableColumn\Company\ModuleTableColumn;
+use Plaisio\C;
+use Plaisio\Core\Table\CoreOverviewTable;
+use Plaisio\Core\TableAction\Company\ModuleUpdateTableAction;
+use Plaisio\Core\TableColumn\Company\ModuleTableColumn;
+use Plaisio\Kernel\Nub;
 
 /**
  * Page with an overview of the enabled modules of a company.
@@ -23,9 +24,9 @@ class ModuleOverviewPage extends CompanyPage
    */
   public static function getUrl(int $targetCmpId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_MODULE_OVERVIEW, 'pag');
-    $url .= Abc::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_MODULE_OVERVIEW, 'pag');
+    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }
@@ -36,7 +37,7 @@ class ModuleOverviewPage extends CompanyPage
    */
   protected function echoTabContent(): void
   {
-    $modules = Abc::$DL->abcCompanyModuleGetAllEnabled($this->targetCmpId, $this->lanId);
+    $modules = Nub::$DL->abcCompanyModuleGetAllEnabled($this->targetCmpId, $this->lanId);
 
     $table = new CoreOverviewTable();
 

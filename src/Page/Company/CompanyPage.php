@@ -1,14 +1,15 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Company;
+namespace Plaisio\Core\Page\Company;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Core\Page\TabPage;
-use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Helper\Html;
-use SetBased\Abc\Response\SeeOtherResponse;
+use Plaisio\C;
+use Plaisio\Core\Form\CoreForm;
+use Plaisio\Core\Page\TabPage;
+use Plaisio\Form\Control\TextControl;
+use Plaisio\Helper\Html;
+use Plaisio\Kernel\Nub;
+use Plaisio\Response\SeeOtherResponse;
 use SetBased\Exception\LogicException;
 
 /**
@@ -39,7 +40,7 @@ abstract class CompanyPage extends TabPage
   {
     parent::__construct();
 
-    $this->targetCmpId = Abc::$cgi->getManId('cmp', 'cmp');
+    $this->targetCmpId = Nub::$cgi->getManId('cmp', 'cmp');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -53,9 +54,9 @@ abstract class CompanyPage extends TabPage
    */
   public static function getChildUrl(int $pagId, ?int $targetCmpId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', $pagId, 'pag');
-    $url .= Abc::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', $pagId, 'pag');
+    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }
@@ -69,7 +70,7 @@ abstract class CompanyPage extends TabPage
     // Return immediately if the cmp_id is not set.
     if (!$this->targetCmpId) return;
 
-    $this->companyDetails = Abc::$DL->abcCompanyGetDetails($this->targetCmpId);
+    $this->companyDetails = Nub::$DL->abcCompanyGetDetails($this->targetCmpId);
 
     echo '<div id="dashboard">';
     echo '<div id="info">';
@@ -92,7 +93,7 @@ abstract class CompanyPage extends TabPage
   {
     if ($this->targetCmpId)
     {
-      Abc::$assets->appendPageTitle($this->companyDetails['cmp_abbr']);
+      Nub::$assets->appendPageTitle($this->companyDetails['cmp_abbr']);
     }
     else
     {
@@ -123,10 +124,10 @@ abstract class CompanyPage extends TabPage
   protected function handleCompanyForm(CoreForm $form): void
   {
     $values            = $form->getValues();
-    $this->targetCmpId = Abc::$DL->abcCompanyGetCmpIdByCmpAbbr($values['cmp_abbr']);
+    $this->targetCmpId = Nub::$DL->abcCompanyGetCmpIdByCmpAbbr($values['cmp_abbr']);
     if ($this->targetCmpId!==null)
     {
-      $this->response = new SeeOtherResponse(self::getChildUrl(Abc::$requestHandler->getPagId(), $this->targetCmpId));
+      $this->response = new SeeOtherResponse(self::getChildUrl(Nub::$requestHandler->getPagId(), $this->targetCmpId));
     }
   }
 

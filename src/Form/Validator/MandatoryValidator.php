@@ -1,13 +1,14 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Form\Validator;
+namespace Plaisio\Core\Form\Validator;
 
-use SetBased\Abc\Form\Control\Control;
+use Plaisio\Form\Control\Control;
 
 /**
  * Validator for validating that a form control has been filled out.
  */
-class MandatoryValidator extends \SetBased\Abc\Form\Validator\MandatoryValidator
+class MandatoryValidator extends \Plaisio\Form\Validator\MandatoryValidator
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

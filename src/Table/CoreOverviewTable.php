@@ -1,14 +1,15 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Table;
+namespace Plaisio\Core\Table;
 
-use SetBased\Abc\Core\TableAction\RowCountTableAction;
-use SetBased\Abc\Core\TableAction\TableAction;
-use SetBased\Abc\Helper\Html;
-use SetBased\Abc\Table\OverviewTable;
+use Plaisio\Core\TableAction\RowCountTableAction;
+use Plaisio\Core\TableAction\TableAction;
+use Plaisio\Helper\Html;
+use Plaisio\Table\OverviewTable;
 
 /**
- * Extends \SetBased\Abc\Table\OverviewTable with table actions.
+ * Extends \Plaisio\Table\OverviewTable with table actions.
  */
 class CoreOverviewTable extends OverviewTable
 {

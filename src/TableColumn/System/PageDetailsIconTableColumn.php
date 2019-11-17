@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\TableColumn\System;
+namespace Plaisio\Core\TableColumn\System;
 
-use SetBased\Abc\Core\Page\System\PageDetailsPage;
-use SetBased\Abc\Core\TableColumn\DetailsIconTableColumn;
+use Plaisio\Core\Page\System\PageDetailsPage;
+use Plaisio\Core\TableColumn\DetailsIconTableColumn;
 
 /**
  * Table column with icon linking to page with information about a (target) page.

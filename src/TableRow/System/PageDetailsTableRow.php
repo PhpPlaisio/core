@@ -1,10 +1,11 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\TableRow\System;
+namespace Plaisio\Core\TableRow\System;
 
-use SetBased\Abc\Core\Page\System\PageDetailsPage;
-use SetBased\Abc\Helper\Html;
-use SetBased\Abc\Table\DetailTable;
+use Plaisio\Core\Page\System\PageDetailsPage;
+use Plaisio\Helper\Html;
+use Plaisio\Table\DetailTable;
 
 /**
  * Table row showing the original page of a page.

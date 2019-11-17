@@ -1,10 +1,11 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\TableColumn\System;
+namespace Plaisio\Core\TableColumn\System;
 
-use SetBased\Abc\Core\Page\System\RoleGroupDetailsPage;
-use SetBased\Abc\Helper\Html;
-use SetBased\Abc\Table\TableColumn\DualTableColumn;
+use Plaisio\Core\Page\System\RoleGroupDetailsPage;
+use Plaisio\Helper\Html;
+use Plaisio\Table\TableColumn\DualTableColumn;
 
 /**
  * A dual table column with the ID and name of a role group.

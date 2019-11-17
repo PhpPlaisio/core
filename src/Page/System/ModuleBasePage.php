@@ -1,15 +1,16 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\System;
+namespace Plaisio\Core\Page\System;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Core\Form\FormValidator\SystemModuleInsertCompoundValidator;
-use SetBased\Abc\Core\Page\TabPage;
-use SetBased\Abc\Form\Control\SelectControl;
-use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Response\SeeOtherResponse;
+use Plaisio\C;
+use Plaisio\Core\Form\CoreForm;
+use Plaisio\Core\Form\FormValidator\SystemModuleInsertCompoundValidator;
+use Plaisio\Core\Page\TabPage;
+use Plaisio\Form\Control\SelectControl;
+use Plaisio\Form\Control\TextControl;
+use Plaisio\Kernel\Nub;
+use Plaisio\Response\SeeOtherResponse;
 
 /**
  * Abstract parent class for inserting or updating the details of a module.
@@ -69,7 +70,7 @@ abstract class ModuleBasePage extends TabPage
    */
   private function createForm(): void
   {
-    $words = Abc::$DL->abcBabelWordGroupGetAllWords(C::WDG_ID_MODULE, $this->lanId);
+    $words = Nub::$DL->abcBabelWordGroupGetAllWords(C::WDG_ID_MODULE, $this->lanId);
 
     $this->form = new CoreForm();
 

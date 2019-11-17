@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Form\Control;
+namespace Plaisio\Core\Form\Control;
 
-use SetBased\Abc\Form\Control\ComplexControl;
+use Plaisio\Form\Control\ComplexControl;
 
 /**
  * A complex control with buttons.

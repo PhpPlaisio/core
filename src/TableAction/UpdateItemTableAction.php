@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\TableAction;
+namespace Plaisio\Core\TableAction;
 
-use SetBased\Abc\Helper\Html;
+use Plaisio\Helper\Html;
 
 /**
  * Parent class for table actions for updating certain items.

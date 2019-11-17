@@ -1,18 +1,20 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Babel;
+namespace Plaisio\Core\Page\Babel;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Core\Table\CoreDetailTable;
-use SetBased\Abc\Form\Control\SelectControl;
-use SetBased\Abc\Form\Control\SpanControl;
-use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Helper\Html;
-use SetBased\Abc\Response\SeeOtherResponse;
-use SetBased\Abc\Table\TableRow\IntegerTableRow;
-use SetBased\Abc\Table\TableRow\TextTableRow;
+use Plaisio\C;
+use Plaisio\Core\Form\CoreForm;
+use Plaisio\Core\Table\CoreDetailTable;
+use Plaisio\Form\Control\SelectControl;
+use Plaisio\Form\Control\SpanControl;
+use Plaisio\Form\Control\TextControl;
+use Plaisio\Helper\Html;
+use Plaisio\Kernel\Nub;
+use Plaisio\Response\SeeOtherResponse;
+use Plaisio\Table\TableRow\IntegerTableRow;
+use Plaisio\Table\TableRow\TextTableRow;
+use SetBased\Helper\Cast;
 
 /**
  * Abstract parent page for pages for inserting and updating a word.
@@ -83,12 +85,12 @@ abstract class WordBasePage extends BabelPage
    */
   private function createForm(): void
   {
-    $ref_language = Abc::$DL->abcBabelLanguageGetName($this->refLanId, $this->refLanId);
+    $ref_language = Nub::$DL->abcBabelLanguageGetName($this->refLanId, $this->refLanId);
 
     $this->form = new CoreForm();
 
     // Create from control for word group name.
-    $word_groups = Abc::$DL->abcBabelWordGroupGetAll($this->refLanId);
+    $word_groups = Nub::$DL->abcBabelWordGroupGetAll($this->refLanId);
     $input       = new SelectControl('wdg_id');
     $input->setOptions($word_groups, 'wdg_id', 'wdg_name');
     $input->setValue($this->wdgId);
@@ -98,7 +100,7 @@ abstract class WordBasePage extends BabelPage
     if ($this->wrdId)
     {
       $input = new SpanControl('wrd_id');
-      $input->setInnerText($this->wrdId);
+      $input->setInnerText(Cast::toOptString($this->wrdId));
       $this->form->addFormControl($input, 'ID');
     }
 
@@ -127,7 +129,7 @@ abstract class WordBasePage extends BabelPage
    */
   private function echoWordGroupInfo(): void
   {
-    $group = Abc::$DL->abcBabelWordGroupGetDetails($this->wdgId);
+    $group = Nub::$DL->abcBabelWordGroupGetDetails($this->wdgId);
 
     $table = new CoreDetailTable();
 

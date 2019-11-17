@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\TableColumn\Babel;
+namespace Plaisio\Core\TableColumn\Babel;
 
-use SetBased\Abc\Core\Page\Babel\WordDeletePage;
-use SetBased\Abc\Core\TableColumn\DeleteIconTableColumn;
+use Plaisio\Core\Page\Babel\WordDeletePage;
+use Plaisio\Core\TableColumn\DeleteIconTableColumn;
 
 /**
  * Table column with icon to delete a word.

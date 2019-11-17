@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\TableAction\Babel;
+namespace Plaisio\Core\TableAction\Babel;
 
-use SetBased\Abc\Core\Page\Babel\WordInsertPage;
-use SetBased\Abc\Core\TableAction\InsertItemTableAction;
+use Plaisio\Core\Page\Babel\WordInsertPage;
+use Plaisio\Core\TableAction\InsertItemTableAction;
 
 /**
  * Table action for inserting a word.

@@ -1,13 +1,14 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Company;
+namespace Plaisio\Core\Page\Company;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Form\Control\HtmlControl;
-use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Response\SeeOtherResponse;
+use Plaisio\C;
+use Plaisio\Core\Form\CoreForm;
+use Plaisio\Form\Control\HtmlControl;
+use Plaisio\Form\Control\TextControl;
+use Plaisio\Kernel\Nub;
+use Plaisio\Response\SeeOtherResponse;
 
 /**
  * Page for updating the details of a company specific page that overrides a standard page.
@@ -44,9 +45,9 @@ class SpecificPageUpdatePage extends CompanyPage
   {
     parent::__construct();
 
-    $this->targetPagId = Abc::$cgi->getManId('tar_pag', 'pag');
+    $this->targetPagId = Nub::$cgi->getManId('tar_pag', 'pag');
 
-    $this->targetPageDetails = Abc::$DL->abcCompanySpecificPageGetDetails($this->targetCmpId,
+    $this->targetPageDetails = Nub::$DL->abcCompanySpecificPageGetDetails($this->targetCmpId,
                                                                           $this->targetPagId,
                                                                           $this->lanId);
   }
@@ -62,10 +63,10 @@ class SpecificPageUpdatePage extends CompanyPage
    */
   public static function getUrl(int $targetCmpId, int $targetPagId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_UPDATE, 'pag');
-    $url .= Abc::$cgi->putId('cmp', $targetCmpId, 'cmp');
-    $url .= Abc::$cgi->putId('tar_pag', $targetPagId, 'pag');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_UPDATE, 'pag');
+    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url .= Nub::$cgi->putId('tar_pag', $targetPagId, 'pag');
 
     return $url;
   }
@@ -80,7 +81,7 @@ class SpecificPageUpdatePage extends CompanyPage
 
     $values = $this->form->getValues();
 
-    Abc::$DL->abcCompanySpecificPageUpdate($this->targetCmpId, $this->targetPagId, $values['pag_class_child']);
+    Nub::$DL->abcCompanySpecificPageUpdate($this->targetCmpId, $this->targetPagId, $values['pag_class_child']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

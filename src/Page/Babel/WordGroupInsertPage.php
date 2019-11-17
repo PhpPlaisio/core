@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Babel;
+namespace Plaisio\Core\Page\Babel;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
+use Plaisio\C;
+use Plaisio\Kernel\Nub;
 
 /**
  * Page for inserting a word group.
@@ -29,9 +30,9 @@ class WordGroupInsertPage extends WordGroupBasePage
    */
   public static function getUrl(): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_GROUP_INSERT, 'pag');
-    $url .= Abc::$cgi->putId('act_lan', C::LAN_ID_BABEL_REFERENCE, 'lan');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_GROUP_INSERT, 'pag');
+    $url .= Nub::$cgi->putId('act_lan', C::LAN_ID_BABEL_REFERENCE, 'lan');
 
     return $url;
   }
@@ -44,7 +45,7 @@ class WordGroupInsertPage extends WordGroupBasePage
   {
     $values = $this->form->getValues();
 
-    $this->wdgId = Abc::$DL->abcBabelWordGroupInsertDetails($values['wdg_name'], $values['wdg_label']);
+    $this->wdgId = Nub::$DL->abcBabelWordGroupInsertDetails($values['wdg_name'], $values['wdg_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

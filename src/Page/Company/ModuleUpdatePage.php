@@ -1,16 +1,17 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Company;
+namespace Plaisio\Core\Page\Company;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Form\Control\CoreButtonControl;
-use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Core\Form\SlatControlFactory\CompanyModulesUpdateSlatControlFactory;
-use SetBased\Abc\Form\Control\FieldSet;
-use SetBased\Abc\Form\Control\LouverControl;
-use SetBased\Abc\Form\Control\SubmitControl;
-use SetBased\Abc\Response\SeeOtherResponse;
+use Plaisio\C;
+use Plaisio\Core\Form\Control\CoreButtonControl;
+use Plaisio\Core\Form\CoreForm;
+use Plaisio\Core\Form\SlatControlFactory\CompanyModulesUpdateSlatControlFactory;
+use Plaisio\Form\Control\FieldSet;
+use Plaisio\Form\Control\LouverControl;
+use Plaisio\Form\Control\SubmitControl;
+use Plaisio\Kernel\Nub;
+use Plaisio\Response\SeeOtherResponse;
 
 /**
  * Page for enabling and disabling the modules for a company.
@@ -35,9 +36,9 @@ class ModuleUpdatePage extends CompanyPage
    */
   public static function getUrl(int $targetCmpId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_MODULE_UPDATE, 'pag');
-    $url .= Abc::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_MODULE_UPDATE, 'pag');
+    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }
@@ -59,7 +60,7 @@ class ModuleUpdatePage extends CompanyPage
   private function createForm(): void
   {
     // Get all available modules.
-    $modules = Abc::$DL->abcCompanyModuleGetAllAvailable($this->targetCmpId, $this->lanId);
+    $modules = Nub::$DL->abcCompanyModuleGetAllAvailable($this->targetCmpId, $this->lanId);
 
     // Create the form.
     $this->form = new CoreForm();
@@ -76,7 +77,7 @@ class ModuleUpdatePage extends CompanyPage
     $button = new CoreButtonControl();
     $submit = new SubmitControl('submit');
     $submit->setMethod('handleForm');
-    $submit->setValue(Abc::$babel->getWord(C::WRD_ID_BUTTON_OK));
+    $submit->setValue(Nub::$babel->getWord(C::WRD_ID_BUTTON_OK));
     $button->addFormControl($submit);
 
     // Put everything together in a LoverControl.
@@ -107,16 +108,16 @@ class ModuleUpdatePage extends CompanyPage
     {
       if ($values['data'][$mdl_id]['mdl_enabled'])
       {
-        Abc::$DL->abcCompanyModuleEnable($this->targetCmpId, $mdl_id);
+        Nub::$DL->abcCompanyModuleEnable($this->targetCmpId, $mdl_id);
       }
       else
       {
-        Abc::$DL->abcCompanyModuleDisable($this->targetCmpId, $mdl_id);
+        Nub::$DL->abcCompanyModuleDisable($this->targetCmpId, $mdl_id);
       }
     }
 
     // Use brute force to proper profiles.
-    Abc::$DL->abcProfileProper();
+    Nub::$DL->abcProfileProper();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

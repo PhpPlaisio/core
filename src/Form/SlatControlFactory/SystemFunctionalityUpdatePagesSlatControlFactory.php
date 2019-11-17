@@ -1,18 +1,19 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Form\SlatControlFactory;
+namespace Plaisio\Core\Form\SlatControlFactory;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\Form\Control\CheckboxControl;
-use SetBased\Abc\Form\Control\LouverControl;
-use SetBased\Abc\Form\Control\SlatControl;
-use SetBased\Abc\Form\Control\SlatControlFactory;
-use SetBased\Abc\Form\Control\TableColumnControl;
-use SetBased\Abc\Form\SlatJoint\CheckboxSlatJoint;
-use SetBased\Abc\Form\SlatJoint\TableColumnSlatJoint;
-use SetBased\Abc\Obfuscator\Obfuscator;
-use SetBased\Abc\Table\TableColumn\NumericTableColumn;
-use SetBased\Abc\Table\TableColumn\TextTableColumn;
+use Plaisio\Form\Control\CheckboxControl;
+use Plaisio\Form\Control\LouverControl;
+use Plaisio\Form\Control\SlatControl;
+use Plaisio\Form\Control\SlatControlFactory;
+use Plaisio\Form\Control\TableColumnControl;
+use Plaisio\Form\SlatJoint\CheckboxSlatJoint;
+use Plaisio\Form\SlatJoint\TableColumnSlatJoint;
+use Plaisio\Kernel\Nub;
+use Plaisio\Obfuscator\Obfuscator;
+use Plaisio\Table\TableColumn\NumericTableColumn;
+use Plaisio\Table\TableColumn\TextTableColumn;
 
 /**
  * Slat control factory for creating slat controls for updating the pages that a functionality grants access to.
@@ -45,7 +46,7 @@ class SystemFunctionalityUpdatePagesSlatControlFactory extends SlatControlFactor
     $table_column = new CheckboxSlatJoint('Enable');
     $this->addSlatJoint('pag_enabled', $table_column);
 
-    $this->pagIdObfuscator = Abc::getObfuscator('pag');
+    $this->pagIdObfuscator = Nub::getObfuscator('pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

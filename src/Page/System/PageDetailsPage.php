@@ -1,21 +1,22 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\System;
+namespace Plaisio\Core\Page\System;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Page\TabPage;
-use SetBased\Abc\Core\Table\CoreDetailTable;
-use SetBased\Abc\Core\Table\CoreOverviewTable;
-use SetBased\Abc\Core\TableAction\System\PageUpdateFunctionalitiesTableAction;
-use SetBased\Abc\Core\TableAction\System\PageUpdateTableAction;
-use SetBased\Abc\Core\TableColumn\Company\CompanyTableColumn;
-use SetBased\Abc\Core\TableColumn\Company\FunctionalityTableColumn;
-use SetBased\Abc\Core\TableColumn\Company\ModuleTableColumn;
-use SetBased\Abc\Core\TableColumn\Company\RoleTableColumn;
-use SetBased\Abc\Core\TableRow\System\PageDetailsTableRow;
-use SetBased\Abc\Table\TableRow\IntegerTableRow;
-use SetBased\Abc\Table\TableRow\TextTableRow;
+use Plaisio\C;
+use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Table\CoreDetailTable;
+use Plaisio\Core\Table\CoreOverviewTable;
+use Plaisio\Core\TableAction\System\PageUpdateFunctionalitiesTableAction;
+use Plaisio\Core\TableAction\System\PageUpdateTableAction;
+use Plaisio\Core\TableColumn\Company\CompanyTableColumn;
+use Plaisio\Core\TableColumn\Company\FunctionalityTableColumn;
+use Plaisio\Core\TableColumn\Company\ModuleTableColumn;
+use Plaisio\Core\TableColumn\Company\RoleTableColumn;
+use Plaisio\Core\TableRow\System\PageDetailsTableRow;
+use Plaisio\Kernel\Nub;
+use Plaisio\Table\TableRow\IntegerTableRow;
+use Plaisio\Table\TableRow\TextTableRow;
 
 /**
  * Page with information about a (target) page.
@@ -38,7 +39,7 @@ class PageDetailsPage extends TabPage
   {
     parent::__construct();
 
-    $this->targetPagId = Abc::$cgi->getManId('tar_pag', 'pag');
+    $this->targetPagId = Nub::$cgi->getManId('tar_pag', 'pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -51,9 +52,9 @@ class PageDetailsPage extends TabPage
    */
   public static function getUrl(int $pagId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_PAGE_DETAILS, 'pag');
-    $url .= Abc::$cgi->putId('tar_pag', $pagId, 'pag');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_PAGE_DETAILS, 'pag');
+    $url .= Nub::$cgi->putId('tar_pag', $pagId, 'pag');
 
     return $url;
   }
@@ -78,7 +79,7 @@ class PageDetailsPage extends TabPage
    */
   private function showDetails(): void
   {
-    $details = Abc::$DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
+    $details = Nub::$DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
     $table   = new CoreDetailTable();
 
     // Add table action for updating the page details.
@@ -117,7 +118,7 @@ class PageDetailsPage extends TabPage
    */
   private function showFunctionalities(): void
   {
-    $roles = Abc::$DL->abcSystemPageGetGrantedFunctionalities($this->targetPagId, $this->lanId);
+    $roles = Nub::$DL->abcSystemPageGetGrantedFunctionalities($this->targetPagId, $this->lanId);
 
     $table = new CoreOverviewTable();
 
@@ -139,7 +140,7 @@ class PageDetailsPage extends TabPage
    */
   private function showGrantedRoles(): void
   {
-    $roles = Abc::$DL->abcSystemPageGetGrantedRoles($this->targetPagId);
+    $roles = Nub::$DL->abcSystemPageGetGrantedRoles($this->targetPagId);
 
     $table = new CoreOverviewTable();
 

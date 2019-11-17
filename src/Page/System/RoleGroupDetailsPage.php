@@ -1,17 +1,18 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\System;
+namespace Plaisio\Core\Page\System;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Page\TabPage;
-use SetBased\Abc\Core\Table\CoreDetailTable;
-use SetBased\Abc\Core\Table\CoreOverviewTable;
-use SetBased\Abc\Core\TableAction\System\RoleGroupUpdateTableAction;
-use SetBased\Abc\Core\TableColumn\Company\CompanyTableColumn;
-use SetBased\Abc\Core\TableColumn\Company\RoleTableColumn;
-use SetBased\Abc\Table\TableRow\IntegerTableRow;
-use SetBased\Abc\Table\TableRow\TextTableRow;
+use Plaisio\C;
+use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Table\CoreDetailTable;
+use Plaisio\Core\Table\CoreOverviewTable;
+use Plaisio\Core\TableAction\System\RoleGroupUpdateTableAction;
+use Plaisio\Core\TableColumn\Company\CompanyTableColumn;
+use Plaisio\Core\TableColumn\Company\RoleTableColumn;
+use Plaisio\Kernel\Nub;
+use Plaisio\Table\TableRow\IntegerTableRow;
+use Plaisio\Table\TableRow\TextTableRow;
 
 /**
  * Page with the details of a all role group.
@@ -48,9 +49,9 @@ class RoleGroupDetailsPage extends TabPage
   {
     parent::__construct();
 
-    $this->rlgId     = Abc::$cgi->getManId('rlg', 'rlg');
-    $this->roleGroup = Abc::$DL->abcSystemRoleGroupGetDetails($this->rlgId, $this->lanId);
-    $this->roles     = Abc::$DL->abcSystemRoleGroupGetRoles($this->rlgId);
+    $this->rlgId     = Nub::$cgi->getManId('rlg', 'rlg');
+    $this->roleGroup = Nub::$DL->abcSystemRoleGroupGetDetails($this->rlgId, $this->lanId);
+    $this->roles     = Nub::$DL->abcSystemRoleGroupGetRoles($this->rlgId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -63,9 +64,9 @@ class RoleGroupDetailsPage extends TabPage
    */
   public static function getUrl(int $rlgId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_DETAILS, 'pag');
-    $url .= Abc::$cgi->putId('rlg', $rlgId, 'rlg');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_DETAILS, 'pag');
+    $url .= Nub::$cgi->putId('rlg', $rlgId, 'rlg');
 
     return $url;
   }

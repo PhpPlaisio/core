@@ -1,12 +1,14 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Babel;
+namespace Plaisio\Core\Page\Babel;
 
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Form\Control\SpanControl;
-use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Response\SeeOtherResponse;
+use Plaisio\C;
+use Plaisio\Core\Form\CoreForm;
+use Plaisio\Form\Control\SpanControl;
+use Plaisio\Form\Control\TextControl;
+use Plaisio\Response\SeeOtherResponse;
+use SetBased\Helper\Cast;
 
 /**
  * Abstract parent page for inserting and updating a word group.
@@ -74,7 +76,7 @@ abstract class WordGroupBasePage extends BabelPage
     if ($this->wdgId)
     {
       $input = new SpanControl('wdg_id');
-      $input->setInnerText($this->wdgId);
+      $input->setInnerText(Cast::toOptString($this->wdgId));
       $this->form->addFormControl($input, 'ID');
     }
 

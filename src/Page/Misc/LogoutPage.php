@@ -1,12 +1,13 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Misc;
+namespace Plaisio\Core\Page\Misc;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Page\CorePage;
-use SetBased\Abc\Response\Response;
-use SetBased\Abc\Response\SeeOtherResponse;
+use Plaisio\C;
+use Plaisio\Kernel\Nub;
+use Plaisio\Page\CorePage;
+use Plaisio\Response\Response;
+use Plaisio\Response\SeeOtherResponse;
 
 /**
  * Page for logging off from the website.
@@ -21,8 +22,8 @@ class LogoutPage extends CorePage
    */
   public static function getUrl(): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_MISC_LOGOUT, 'pag');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_MISC_LOGOUT, 'pag');
 
     return $url;
   }
@@ -34,7 +35,7 @@ class LogoutPage extends CorePage
    */
   public function handleRequest(): Response
   {
-    Abc::$session->logout();
+    Nub::$session->logout();
 
     $this->response = new SeeOtherResponse('/');
 

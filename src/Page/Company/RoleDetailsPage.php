@@ -1,19 +1,20 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Company;
+namespace Plaisio\Core\Page\Company;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Table\CoreDetailTable;
-use SetBased\Abc\Core\Table\CoreOverviewTable;
-use SetBased\Abc\Core\TableAction\Company\RoleUpdateFunctionalitiesTableAction;
-use SetBased\Abc\Core\TableAction\Company\RoleUpdateTableAction;
-use SetBased\Abc\Core\TableColumn\Company\FunctionalityTableColumn;
-use SetBased\Abc\Core\TableColumn\Company\ModuleTableColumn;
-use SetBased\Abc\Core\TableColumn\System\PageTableColumn;
-use SetBased\Abc\Table\TableColumn\TextTableColumn;
-use SetBased\Abc\Table\TableRow\IntegerTableRow;
-use SetBased\Abc\Table\TableRow\TextTableRow;
+use Plaisio\C;
+use Plaisio\Core\Table\CoreDetailTable;
+use Plaisio\Core\Table\CoreOverviewTable;
+use Plaisio\Core\TableAction\Company\RoleUpdateFunctionalitiesTableAction;
+use Plaisio\Core\TableAction\Company\RoleUpdateTableAction;
+use Plaisio\Core\TableColumn\Company\FunctionalityTableColumn;
+use Plaisio\Core\TableColumn\Company\ModuleTableColumn;
+use Plaisio\Core\TableColumn\System\PageTableColumn;
+use Plaisio\Kernel\Nub;
+use Plaisio\Table\TableColumn\TextTableColumn;
+use Plaisio\Table\TableRow\IntegerTableRow;
+use Plaisio\Table\TableRow\TextTableRow;
 
 /**
  * Page with information about a role.
@@ -36,7 +37,7 @@ class RoleDetailsPage extends CompanyPage
   {
     parent::__construct();
 
-    $this->rolId = Abc::$cgi->getManId('rol', 'rol');
+    $this->rolId = Nub::$cgi->getManId('rol', 'rol');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -50,10 +51,10 @@ class RoleDetailsPage extends CompanyPage
    */
   public static function getUrl(int $targetCmpId, int $rolId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_ROLE_DETAILS, 'pag');
-    $url .= Abc::$cgi->putId('cmp', $targetCmpId, 'cmp');
-    $url .= Abc::$cgi->putId('rol', $rolId, 'rol');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_ROLE_DETAILS, 'pag');
+    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url .= Nub::$cgi->putId('rol', $rolId, 'rol');
 
     return $url;
   }
@@ -77,7 +78,7 @@ class RoleDetailsPage extends CompanyPage
    */
   private function showFunctionalities(): void
   {
-    $functionalities = Abc::$DL->abcCompanyRoleGetFunctionalities($this->targetCmpId, $this->rolId, $this->lanId);
+    $functionalities = Nub::$DL->abcCompanyRoleGetFunctionalities($this->targetCmpId, $this->rolId, $this->lanId);
 
     $table = new CoreOverviewTable();
 
@@ -104,7 +105,7 @@ class RoleDetailsPage extends CompanyPage
    */
   private function showPages(): void
   {
-    $pages = Abc::$DL->abcCompanyRoleGetPages($this->targetCmpId, $this->rolId, $this->lanId);
+    $pages = Nub::$DL->abcCompanyRoleGetPages($this->targetCmpId, $this->rolId, $this->lanId);
 
     $table = new CoreOverviewTable();
 
@@ -128,7 +129,7 @@ class RoleDetailsPage extends CompanyPage
    */
   private function showRole(): void
   {
-    $details = Abc::$DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId, $this->lanId);
+    $details = Nub::$DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId, $this->lanId);
 
     $table = new CoreDetailTable();
 

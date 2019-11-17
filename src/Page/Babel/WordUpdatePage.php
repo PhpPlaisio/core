@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Babel;
+namespace Plaisio\Core\Page\Babel;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
+use Plaisio\C;
+use Plaisio\Kernel\Nub;
 
 /**
  * Page for updating the details of a word.
@@ -26,8 +27,8 @@ class WordUpdatePage extends WordBasePage
   {
     parent::__construct();
 
-    $this->wrdId       = Abc::$cgi->getManId('wrd', 'wrd');
-    $this->details     = Abc::$DL->abcBabelWordGetDetails($this->wrdId, $this->actLanId);
+    $this->wrdId       = Nub::$cgi->getManId('wrd', 'wrd');
+    $this->details     = Nub::$DL->abcBabelWordGetDetails($this->wrdId, $this->actLanId);
     $this->wdgId       = $this->details['wdg_id'];
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
@@ -43,10 +44,10 @@ class WordUpdatePage extends WordBasePage
    */
   public static function getUrl(int $wrdId, ?string $redirect = null): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_UPDATE, 'pag');
-    $url .= Abc::$cgi->putId('wrd', $wrdId, 'wrd');
-    $url .= Abc::$cgi->putUrl('redirect', $redirect);
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_UPDATE, 'pag');
+    $url .= Nub::$cgi->putId('wrd', $wrdId, 'wrd');
+    $url .= Nub::$cgi->putUrl('redirect', $redirect);
 
     return $url;
   }
@@ -63,7 +64,7 @@ class WordUpdatePage extends WordBasePage
     // Return immediately when no form controls are changed.
     if (empty($changes)) return;
 
-    Abc::$DL->abcBabelWordUpdateDetails($this->wrdId,
+    Nub::$DL->abcBabelWordUpdateDetails($this->wrdId,
                                         $values['wdg_id'],
                                         $values['wrd_label'],
                                         $values['wrd_comment'],

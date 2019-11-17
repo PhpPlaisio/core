@@ -1,20 +1,21 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\System;
+namespace Plaisio\Core\Page\System;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Page\TabPage;
-use SetBased\Abc\Core\Table\CoreDetailTable;
-use SetBased\Abc\Core\Table\CoreOverviewTable;
-use SetBased\Abc\Core\TableAction\System\FunctionalityUpdatePagesTableAction;
-use SetBased\Abc\Core\TableAction\System\FunctionalityUpdateRolesTableAction;
-use SetBased\Abc\Core\TableColumn\Company\CompanyTableColumn;
-use SetBased\Abc\Core\TableColumn\Company\RoleTableColumn;
-use SetBased\Abc\Core\TableColumn\System\PageTableColumn;
-use SetBased\Abc\Table\TableColumn\TextTableColumn;
-use SetBased\Abc\Table\TableRow\IntegerTableRow;
-use SetBased\Abc\Table\TableRow\TextTableRow;
+use Plaisio\C;
+use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Table\CoreDetailTable;
+use Plaisio\Core\Table\CoreOverviewTable;
+use Plaisio\Core\TableAction\System\FunctionalityUpdatePagesTableAction;
+use Plaisio\Core\TableAction\System\FunctionalityUpdateRolesTableAction;
+use Plaisio\Core\TableColumn\Company\CompanyTableColumn;
+use Plaisio\Core\TableColumn\Company\RoleTableColumn;
+use Plaisio\Core\TableColumn\System\PageTableColumn;
+use Plaisio\Kernel\Nub;
+use Plaisio\Table\TableColumn\TextTableColumn;
+use Plaisio\Table\TableRow\IntegerTableRow;
+use Plaisio\Table\TableRow\TextTableRow;
 
 /**
  * Page with information about a functionality.
@@ -44,11 +45,11 @@ class FunctionalityDetailsPage extends TabPage
   {
     parent::__construct();
 
-    $this->funId = Abc::$cgi->getManId('fun', 'fun');
+    $this->funId = Nub::$cgi->getManId('fun', 'fun');
 
-    $this->details = Abc::$DL->abcSystemFunctionalityGetDetails($this->funId, $this->lanId);
+    $this->details = Nub::$DL->abcSystemFunctionalityGetDetails($this->funId, $this->lanId);
 
-    Abc::$assets->appendPageTitle($this->details['fun_name']);
+    Nub::$assets->appendPageTitle($this->details['fun_name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -61,9 +62,9 @@ class FunctionalityDetailsPage extends TabPage
    */
   public static function getUrl(int $funId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_DETAILS, 'pag');
-    $url .= Abc::$cgi->putId('fun', $funId, 'fun');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_DETAILS, 'pag');
+    $url .= Nub::$cgi->putId('fun', $funId, 'fun');
 
     return $url;
   }
@@ -107,7 +108,7 @@ class FunctionalityDetailsPage extends TabPage
    */
   private function showPages(): void
   {
-    $pages = Abc::$DL->abcSystemFunctionalityGetPages($this->funId, $this->lanId);
+    $pages = Nub::$DL->abcSystemFunctionalityGetPages($this->funId, $this->lanId);
 
     $table = new CoreOverviewTable();
     $table->addTableAction('default', new FunctionalityUpdatePagesTableAction($this->funId));
@@ -132,7 +133,7 @@ class FunctionalityDetailsPage extends TabPage
    */
   private function showRoles(): void
   {
-    $roles = Abc::$DL->abcSystemFunctionalityGetRoles($this->funId);
+    $roles = Nub::$DL->abcSystemFunctionalityGetRoles($this->funId);
 
     $table = new CoreOverviewTable();
 

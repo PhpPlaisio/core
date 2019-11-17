@@ -1,19 +1,20 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Misc;
+namespace Plaisio\Core\Page\Misc;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Form\Control\PasswordControl;
-use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Form\Form;
-use SetBased\Abc\Helper\Html;
-use SetBased\Abc\Helper\Password;
-use SetBased\Abc\Page\CorePage;
-use SetBased\Abc\Response\BaseResponse;
-use SetBased\Abc\Response\Response;
-use SetBased\Abc\Response\SeeOtherResponse;
+use Plaisio\C;
+use Plaisio\Core\Form\CoreForm;
+use Plaisio\Form\Control\PasswordControl;
+use Plaisio\Form\Control\TextControl;
+use Plaisio\Form\Form;
+use Plaisio\Helper\Html;
+use Plaisio\Helper\Password;
+use Plaisio\Kernel\Nub;
+use Plaisio\Page\CorePage;
+use Plaisio\Response\BaseResponse;
+use Plaisio\Response\Response;
+use Plaisio\Response\SeeOtherResponse;
 
 /**
  * Page for logging on the website.
@@ -43,7 +44,7 @@ class LoginPage extends CorePage
   {
     parent::__construct();
 
-    $this->redirect = Abc::$cgi->getManUrl('redirect', '/');
+    $this->redirect = Nub::$cgi->getManUrl('redirect', '/');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -56,9 +57,9 @@ class LoginPage extends CorePage
    */
   public static function getUrl(?string $redirect = null): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_MISC_LOGIN, 'pag');
-    $url .= Abc::$cgi->putUrl('redirect', $redirect);
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_MISC_LOGIN, 'pag');
+    $url .= Nub::$cgi->putUrl('redirect', $redirect);
 
     return $url;
   }
@@ -176,7 +177,7 @@ class LoginPage extends CorePage
     $values = $this->form->getValues();
 
     // Phase 1: Validate the user is allowed to login (except for password validation).
-    $response = Abc::$DL->abcSessionLogin1($this->cmpId, $values['usr_name']);
+    $response = Nub::$DL->abcSessionLogin1($this->cmpId, $values['usr_name']);
     $lgr_id   = $response['lgr_id'];
 
     if ($lgr_id==C::LGR_ID_GRANTED)
@@ -189,13 +190,13 @@ class LoginPage extends CorePage
     if ($lgr_id==C::LGR_ID_GRANTED)
     {
       // The user has logged on successfully.
-      Abc::$session->login($response['usr_id']);
+      Nub::$session->login($response['usr_id']);
 
       // First verify that the hash is sill up to date.
       if (Password::passwordNeedsRehash($response['usr_password_hash']))
       {
         $hash = Password::passwordHash($values['usr_password']);
-        Abc::$DL->abcUserPasswordUpdateHash($this->cmpId, $response['usr_id'], $hash);
+        Nub::$DL->abcUserPasswordUpdateHash($this->cmpId, $response['usr_id'], $hash);
       }
 
       $this->response = new SeeOtherResponse($this->redirect);
@@ -217,7 +218,7 @@ class LoginPage extends CorePage
     echo '<head>';
     echo '<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>';
 
-    Abc::$assets->echoCascadingStyleSheets();
+    Nub::$assets->echoCascadingStyleSheets();
 
     echo '</head><body>';
   }

@@ -1,13 +1,15 @@
 <?php
+declare(strict_types=1);
 
-namespace SetBased\Abc\Core\Page\Company;
+namespace Plaisio\Core\Page\Company;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\C;
-use SetBased\Abc\Core\Form\CoreForm;
-use SetBased\Abc\Form\Control\SelectControl;
-use SetBased\Abc\Form\Control\TextControl;
-use SetBased\Abc\Response\SeeOtherResponse;
+use Plaisio\C;
+use Plaisio\Core\Form\CoreForm;
+use Plaisio\Form\Control\SelectControl;
+use Plaisio\Form\Control\TextControl;
+use Plaisio\Kernel\Nub;
+use Plaisio\Response\SeeOtherResponse;
+use SetBased\Helper\Cast;
 
 /**
  * Page for inserting a company specific page that overrides a standard page.
@@ -32,9 +34,9 @@ class SpecificPageInsertPage extends CompanyPage
    */
   public static function getUrl(int $targetCmpId): string
   {
-    $url = Abc::$cgi->putLeader();
-    $url .= Abc::$cgi->putId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_INSERT, 'pag');
-    $url .= Abc::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url = Nub::$cgi->putLeader();
+    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_INSERT, 'pag');
+    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }
@@ -47,7 +49,7 @@ class SpecificPageInsertPage extends CompanyPage
   {
     $values = $this->form->getValues();
 
-    Abc::$DL->abcCompanySpecificPageInsert($this->targetCmpId, $values['prt_pag_id'], $values['pag_class_child']);
+    Nub::$DL->abcCompanySpecificPageInsert($this->targetCmpId, $values['prt_pag_id'], $values['pag_class_child']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -66,19 +68,19 @@ class SpecificPageInsertPage extends CompanyPage
    */
   private function createForm(): void
   {
-    $pages = Abc::$DL->abcSystemPageGetAll($this->lanId);
+    $pages = Nub::$DL->abcSystemPageGetAll($this->lanId);
 
     $this->form = new CoreForm();
 
     // Input for parent class.
     $input = new SelectControl('prt_pag_id');
     $input->setOptions($pages, 'pag_id', 'pag_class');
-    $input->setOptionsObfuscator(Abc::getObfuscator('pag'));
+    $input->setOptionsObfuscator(Nub::getObfuscator('pag'));
     $this->form->addFormControl($input, 'Parent Class');
 
     // Input for company specific page.
     $input = new TextControl('pag_class_child');
-    $input->setAttrMax(C::LEN_PAG_CLASS);
+    $input->setAttrMax(Cast::toOptString(C::LEN_PAG_CLASS));
     $this->form->addFormControl($input, 'Child Class');
 
     // Create a submit button.
