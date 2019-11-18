@@ -9,6 +9,7 @@ use Plaisio\Form\Control\SpanControl;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Kernel\Nub;
 use Plaisio\Response\SeeOtherResponse;
+use SetBased\Helper\Cast;
 
 /**
  * Page for translating a single word.
@@ -112,7 +113,7 @@ class WordTranslatePage extends BabelPage
 
     // Show word group ID
     $input = new SpanControl('wrd_id');
-    $input->setInnerText($this->details['wdg_id']);
+    $input->setInnerText(Cast::toOptString($this->details['wdg_id']));
     $this->form->addFormControl($input, 'ID Group');
 
     // Show label
