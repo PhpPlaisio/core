@@ -15,6 +15,7 @@ use Plaisio\Kernel\Nub;
 use Plaisio\Obfuscator\Obfuscator;
 use Plaisio\Table\TableColumn\NumericTableColumn;
 use Plaisio\Table\TableColumn\TextTableColumn;
+use SetBased\Helper\Cast;
 
 /**
  * Slat control factory for creating slat controls for translating words.
@@ -62,7 +63,7 @@ class BabelWordTranslateSlatControlFactory extends SlatControlFactory
    */
   public function createRow(LouverControl $louverControl, array $data): SlatControl
   {
-    $row = new SlatControl($data['wrd_id']);
+    $row = new SlatControl(Cast::toOptString($data['wrd_id']));
     $row->setObfuscator($this->wrdIdObfuscator);
     $louverControl->addFormControl($row);
 

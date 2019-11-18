@@ -14,6 +14,7 @@ use Plaisio\Kernel\Nub;
 use Plaisio\Obfuscator\Obfuscator;
 use Plaisio\Table\TableColumn\NumericTableColumn;
 use Plaisio\Table\TableColumn\TextTableColumn;
+use SetBased\Helper\Cast;
 
 /**
  * Slat control factory for creating slat controls for updating the functionality that grant access to a page.
@@ -63,7 +64,7 @@ class SystemPageUpdateFunctionalitiesSlatControlFactory extends SlatControlFacto
    */
   public function createRow(LouverControl $louverControl, array $data): SlatControl
   {
-    $row = new SlatControl($data['fun_id']);
+    $row = new SlatControl(Cast::toOptString($data['fun_id']));
     $row->setObfuscator($this->funIdObfuscator);
     $louverControl->addFormControl($row);
 

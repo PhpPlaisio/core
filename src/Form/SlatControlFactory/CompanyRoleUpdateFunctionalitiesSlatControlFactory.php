@@ -13,6 +13,7 @@ use Plaisio\Form\SlatJoint\TableColumnSlatJoint;
 use Plaisio\Kernel\Nub;
 use Plaisio\Obfuscator\Obfuscator;
 use Plaisio\Table\TableColumn\TextTableColumn;
+use SetBased\Helper\Cast;
 
 /**
  * Slat control factory for creating slat joints for updating enabled functionalities.
@@ -56,7 +57,7 @@ class CompanyRoleUpdateFunctionalitiesSlatControlFactory extends SlatControlFact
    */
   public function createRow(LouverControl $louverControl, array $data): SlatControl
   {
-    $row = new SlatControl($data['fun_id']);
+    $row = new SlatControl(Cast::toOptString($data['fun_id']));
     $row->setObfuscator($this->funIdObfuscator);
     $louverControl->addFormControl($row);
 
