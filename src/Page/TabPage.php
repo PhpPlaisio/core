@@ -86,7 +86,7 @@ abstract class TabPage extends CorePage
     // Buffer for actual contents.
     ob_start();
 
-    $this->echoMainContent();
+    $this->echoPageContent();
 
     $contents = ob_get_clean();
 
@@ -128,13 +128,13 @@ abstract class TabPage extends CorePage
   /**
    * Echos the main content of the page, e.g. the dashboard, the tabs (secondary menu), and tab content.
    */
-  protected function echoMainContent(): void
+  protected function echoPageContent(): void
   {
     $this->echoDashboard();
 
     $this->showIconBar();
 
-    echo '<nav id="secondary-menu" class="clearfix">';
+    echo '<nav class="secondary-menu clearfix">';
     $this->echoTabs();
     echo '</nav>';
 
