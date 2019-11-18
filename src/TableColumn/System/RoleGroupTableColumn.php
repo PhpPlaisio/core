@@ -6,6 +6,7 @@ namespace Plaisio\Core\TableColumn\System;
 use Plaisio\Core\Page\System\RoleGroupDetailsPage;
 use Plaisio\Helper\Html;
 use Plaisio\Table\TableColumn\DualTableColumn;
+use SetBased\Helper\Cast;
 
 /**
  * A dual table column with the ID and name of a role group.
@@ -32,7 +33,7 @@ class RoleGroupTableColumn extends DualTableColumn
     $url = RoleGroupDetailsPage::getUrl($row['rlg_id']);
 
     $ret = '<td class="number link">';
-    $ret .= Html::generateElement('a', ['href' => $url], $row['rlg_id']);
+    $ret .= Html::generateElement('a', ['href' => $url], Cast::toOptString($row['rlg_id']));
     $ret .= '</td>';
 
     $ret .= Html::generateElement('td', [], $row['rlg_name']);

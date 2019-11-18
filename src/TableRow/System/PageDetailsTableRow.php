@@ -6,6 +6,7 @@ namespace Plaisio\Core\TableRow\System;
 use Plaisio\Core\Page\System\PageDetailsPage;
 use Plaisio\Helper\Html;
 use Plaisio\Table\DetailTable;
+use SetBased\Helper\Cast;
 
 /**
  * Table row showing the original page of a page.
@@ -24,7 +25,7 @@ class PageDetailsTableRow
   {
     if ($data['pag_id_org']!==null)
     {
-      $a = Html::generateElement('a', ['href' => PageDetailsPage::getUrl($data['pag_id_org'])], $data['pag_id_org']);
+      $a = Html::generateElement('a', ['href' => PageDetailsPage::getUrl($data['pag_id_org'])], Cast::toOptString($data['pag_id_org']));
 
       $table->addRow($header, ['class' => 'text'], $a, true);
     }

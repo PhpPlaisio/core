@@ -6,6 +6,7 @@ namespace Plaisio\Core\TableColumn\System;
 use Plaisio\Core\Page\System\PageDetailsPage;
 use Plaisio\Helper\Html;
 use Plaisio\Table\TableColumn\DualTableColumn;
+use SetBased\Helper\Cast;
 
 /**
  * A dual table column with the ID and class of a page.
@@ -32,7 +33,7 @@ class PageTableColumn extends DualTableColumn
     $url = PageDetailsPage::getUrl($row['pag_id']);
 
     $ret = '<td class="number link">';
-    $ret .= Html::generateElement('a', ['href' => $url], $row['pag_id']);
+    $ret .= Html::generateElement('a', ['href' => $url], Cast::toOptString($row['pag_id']));
     $ret .= '</td>';
 
     $ret .= Html::generateElement('td', [], $row['pag_class']);

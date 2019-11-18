@@ -6,6 +6,7 @@ namespace Plaisio\Core\TableColumn\Company;
 use Plaisio\Core\Page\System\FunctionalityDetailsPage;
 use Plaisio\Helper\Html;
 use Plaisio\Table\TableColumn\DualTableColumn;
+use SetBased\Helper\Cast;
 
 /**
  * A dual table column with the ID and name of a functionality.
@@ -32,7 +33,7 @@ class FunctionalityTableColumn extends DualTableColumn
     $url = FunctionalityDetailsPage::getUrl($row['fun_id']);
 
     $ret = '<td class="number link">';
-    $ret .= Html::generateElement('a', ['href' => $url], $row['fun_id']);
+    $ret .= Html::generateElement('a', ['href' => $url], Cast::toOptString($row['fun_id']));
     $ret .= '</td>';
 
     $ret .= Html::generateElement('td', [], $row['fun_name']);
