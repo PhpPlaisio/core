@@ -100,7 +100,7 @@ class RoleGroupDetailsPage extends TabPage
     TextTableRow::addRow($table, 'Name', $this->roleGroup['rlg_name']);
 
     // Show weight of the role group.
-    TextTableRow::addRow($table, 'Weight', $this->roleGroup['rlg_weight']);
+    IntegerTableRow::addRow($table, 'Weight', $this->roleGroup['rlg_weight']);
 
     // Show label of the role group.
     TextTableRow::addRow($table, 'Label', $this->roleGroup['rlg_label']);
