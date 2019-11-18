@@ -42,16 +42,33 @@ abstract class TabPage extends CorePage
   {
     parent::__construct();
 
-    Nub::$assets->cssAppendSource('abc/reset.css');
-    Nub::$assets->cssAppendSource('abc/layout.css');
-    Nub::$assets->cssAppendSource('abc/main-menu.css');
-    Nub::$assets->cssAppendSource('abc/secondary-menu.css');
-    Nub::$assets->cssAppendSource('abc/dashboard.css');
-    Nub::$assets->cssAppendSource('abc/content.css');
-    Nub::$assets->cssAppendSource('abc/style.css');
-    Nub::$assets->cssAppendSource('abc/overview_table.css');
-    Nub::$assets->cssAppendSource('abc/detail_table.css');
-    Nub::$assets->cssAppendSource('abc/input_table.css');
+    Nub::$assets->cssAppendSource('reset.css');
+    Nub::$assets->cssAppendSource('ui-lightness/jquery-ui.css');
+    Nub::$assets->cssAppendSource('style.css');
+    Nub::$assets->cssAppendSource('grid.css');
+    Nub::$assets->cssAppendSource('grid-large.css');
+    Nub::$assets->cssAppendSource('grid-small.css');
+    Nub::$assets->cssAppendSource('layout.css');
+    Nub::$assets->cssAppendSource('main-menu-large.css');
+    Nub::$assets->cssAppendSource('main-menu-small.css');
+    Nub::$assets->cssAppendSource('main-menu-icon-large.css');
+    Nub::$assets->cssAppendSource('main-menu-icon-small.css');
+    Nub::$assets->cssAppendSource('secondary-menu.css');
+    Nub::$assets->cssAppendSource('icon-bar.css');
+    Nub::$assets->cssAppendSource('detail-table.css');
+    Nub::$assets->cssAppendSource('overview-table.css');
+    Nub::$assets->cssAppendSource('overview-table-content-types.css');
+    Nub::$assets->cssAppendSource('overview-table-menu.css');
+    Nub::$assets->cssAppendSource('overview-table-large.css');
+    Nub::$assets->cssAppendSource('overview-table-large-content-types.css');
+    Nub::$assets->cssAppendSource('overview-table-large-filter.css');
+    Nub::$assets->cssAppendSource('overview-table-large-sort.css');
+    Nub::$assets->cssAppendSource('overview-table-small.css');
+    Nub::$assets->cssAppendSource('overview-table-small-content-types.css');
+    Nub::$assets->cssAppendSource('overview-table-small-filter.css');
+    Nub::$assets->cssAppendSource('input-table.css');
+    Nub::$assets->cssAppendSource('input-table-small.css');
+    Nub::$assets->cssAppendSource('button.css');
 
     Nub::$assets->jsAdmSetPageSpecificMain(__CLASS__);
 
@@ -82,12 +99,12 @@ abstract class TabPage extends CorePage
     ob_start();
 
     $this->echoPageLeader();
-    echo '<div id="main-content">';
+    echo '<div class="grid-container">';
+    echo '<div class="grid-main">';
     echo $contents;
     echo '</div>';
-    echo '<nav id="main-menu">';
     $this->echoMainMenu();
-    echo '</nav>';
+    echo '</div>';
     $this->echoPageTrailer();
 
     $contents = ob_get_clean();
@@ -121,7 +138,7 @@ abstract class TabPage extends CorePage
     $this->echoTabs();
     echo '</nav>';
 
-    echo '<div id="content">';
+    echo '<div class="layout-content">';
     $this->echoTabContent();
     echo '</div>';
   }
@@ -243,11 +260,22 @@ abstract class TabPage extends CorePage
     $items       = Nub::$DL->abcAuthGetMenu($this->cmpId, $this->proId, $this->lanId);
     $page_mnu_id = Nub::$nub->getMnuId();
 
-    echo '<ul>';
+    echo '<nav class="grid-main-menu">';
+
+    echo '<div class="main-menu-icon">';
+    echo '<div class="menu-bar1"></div>';
+    echo '<div class="menu-bar2"></div>';
+    echo '<div class="menu-bar3"></div>';
+    echo '</div>';
+
+    echo '<ul class="menu menu-has-submenu menu-root">';
+
     $last_group = 0;
     foreach ($items as $i => $item)
     {
-      if (isset($item['pag_alias']))
+      $attributes = ['class' => 'menu'];
+
+      if ($item['pag_alias']!==null)
       {
         $link = '/'.$item['pag_alias'];
       }
@@ -257,27 +285,36 @@ abstract class TabPage extends CorePage
       }
       $link .= $item['mnu_link'];
 
-      $class = 'menu_'.$item['mnu_level'];
-
-      if ($i==0) $class .= ' first';
-
-      if ($i==count($items) - 1) $class .= ' last';
-
-      if ($item['mnu_id']==$page_mnu_id) $class .= ' menu_active';
-
-      if ($item['mnu_group']<>$last_group) $class .= ' group_first';
-
-      if (!isset($items[$i + 1]) || $item['mnu_group']<>$items[$i + 1]['mnu_group'])
+      if ($item['mnu_id']==$page_mnu_id)
       {
-        $class .= ' group_last';
+        $attributes['class'] .= ' menu-active';
       }
 
-      $a = Html::generateElement('a', ['href' => $link], Html::txt2Html($item['mnu_text']));
-      echo Html::generateElement('li', ['class' => $class], $a, true);
+      if ($item['mnu_group']>$last_group)
+      {
+        if ($last_group<>0)
+        {
+          echo '</li></ul>';
+        }
+
+        echo Html::generateTag('li', ['class' => 'menu menu-has-submenu']);
+        echo Html::generateElement('a', ['class' => 'menu'], $groups[$item['mnu_group']]['mnu_text'] ?? null, true);
+        echo '<ul class="menu menu-submenu">';
+      }
+
+      $a = Html::generateElement('a', ['class' => 'menu', 'href' => $link], Html::txt2Html($item['mnu_text']));
+      echo Html::generateElement('li', $attributes, $a, true);
 
       $last_group = $item['mnu_group'];
     }
+
+    if ($last_group<>0)
+    {
+      echo '</li></ul>';
+    }
+
     echo '</ul>';
+    echo '</nav>';;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

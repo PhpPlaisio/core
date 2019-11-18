@@ -72,7 +72,7 @@ class WordGroupOverviewPage extends BabelPage
     // Show total words to be translated in the word group.
     if ($this->actLanId!=$this->refLanId)
     {
-      $table->addColumn(new TextTableColumn('To Do', 'n2'));
+      $table->addColumn(new NumericTableColumn('To Do', 'n2'));
     }
 
     // Add link to the modify the word group.
