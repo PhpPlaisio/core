@@ -268,8 +268,6 @@ abstract class TabPage extends CorePage
     echo '<div class="menu-bar3"></div>';
     echo '</div>';
 
-    echo '<ul class="menu menu-has-submenu menu-root">';
-
     $last_group = 0;
     foreach ($items as $i => $item)
     {
@@ -294,7 +292,7 @@ abstract class TabPage extends CorePage
       {
         if ($last_group<>0)
         {
-          echo '</li></ul>';
+          echo '</ul>';
         }
 
         echo Html::generateTag('li', ['class' => 'menu menu-has-submenu']);
@@ -310,10 +308,9 @@ abstract class TabPage extends CorePage
 
     if ($last_group<>0)
     {
-      echo '</li></ul>';
+      echo '</ul>';
     }
 
-    echo '</ul>';
     echo '</nav>';;
   }
 
