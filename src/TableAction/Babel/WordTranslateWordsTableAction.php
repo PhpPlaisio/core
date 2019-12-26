@@ -28,6 +28,7 @@ class WordTranslateWordsTableAction implements TableAction
   protected $url;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    *
@@ -36,8 +37,7 @@ class WordTranslateWordsTableAction implements TableAction
    */
   public function __construct(int $wdgId, int $targetLanId)
   {
-    $this->url = WordTranslateWordsPage::getUrl($wdgId, $targetLanId);
-
+    $this->url   = WordTranslateWordsPage::getUrl($wdgId, $targetLanId);
     $this->title = 'Translate words';
   }
 
@@ -47,14 +47,9 @@ class WordTranslateWordsTableAction implements TableAction
    */
   public function getHtml(): string
   {
-    $ret = '<a';
-    $ret .= Html::generateAttribute('href', $this->url);
-    $ret .= '><img';
-    $ret .= Html::generateAttribute('title', $this->title);
-    $ret .= Html::generateAttribute('src', ICON_BABEL_FISH);
-    $ret .= ' width="16" height="16" alt="translate"/></a>';
-
-    return $ret;
+    return Html::generateElement('a', ['href'  => $this->url,
+                                       'title' => $this->title,
+                                       'class' => ['icons-medium', 'icons-medium-babel-fish']]);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -5,6 +5,7 @@ namespace Plaisio\Core\TableColumn;
 
 use Plaisio\Helper\Html;
 use Plaisio\Table\TableColumn\TableColumn;
+use SetBased\Helper\Cast;
 
 /**
  * Table column for cells with an icon for boolean values.
@@ -55,8 +56,9 @@ class BoolIconTableColumn extends TableColumn
     {
       case $row[$this->fieldName]===1:
       case $row[$this->fieldName]==='1':
+      case $row[$this->fieldName]===true:
         $attributes['data-value'] = 1;
-        $html                     = '<img src="'.ICON_SMALL_TRUE.'" alt="1"/>';
+        $html = Html::generateElement('span', ['class' => ['icons-small', 'icons-small-true']]);
         break;
 
       case $row[$this->fieldName]===0:
@@ -65,12 +67,19 @@ class BoolIconTableColumn extends TableColumn
       case $row[$this->fieldName]===null:
       case $row[$this->fieldName]===false:
         $attributes['data-value'] = 0;
-        $html                     = ($this->showFalse) ? '<img src="'.ICON_SMALL_FALSE.'" alt="0"/>' : '';
+        if ($this->showFalse)
+        {
+          $html = Html::generateElement('span', ['class' => ['icons-small', 'icons-small-false']]);
+        }
+        else
+        {
+          $html ='';
+        }
         break;
 
       default:
         $attributes['data-value'] = $row[$this->fieldName];
-        $html                     = Html::txt2Html($row[$this->fieldName]);
+        $html                     = Html::txt2Html(Cast::toOptString($row[$this->fieldName]));
     }
 
     return Html::generateElement('td', $attributes, $html, true);

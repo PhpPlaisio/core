@@ -10,14 +10,11 @@ abstract class DetailsIconTableColumn extends IconTableColumn
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Object constructor.
+   * @inheritdoc
    */
-  public function __construct()
+  public function getClasses(array $row): array
   {
-    parent::__construct();
-
-    $this->iconUrl  = ICON_SMALL_DETAILS;
-    $this->altValue = 'details';
+    return ['icons-small', 'icons-small-details'];
   }
 
   //--------------------------------------------------------------------------------------------------------------------

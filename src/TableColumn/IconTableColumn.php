@@ -13,25 +13,11 @@ abstract class IconTableColumn extends TableColumn
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The value of the alt attribute of the icon.
-   *
-   * @var
-   */
-  protected $altValue;
-
-  /**
    * If set the will be prompted with an confirm message before the link is followed.
    *
    * @var string
    */
   protected $confirmMessage;
-
-  /**
-   * The URL of the icon.
-   *
-   * @var string
-   */
-  protected $iconUrl;
 
   /**
    * If set to true the icon is a download link (e.g. a PDF file).
@@ -57,27 +43,25 @@ abstract class IconTableColumn extends TableColumn
    */
   public function getHtmlCell(array $row): string
   {
-    $url = $this->getUrl($row);
+    $url     = $this->getUrl($row);
+    $classes = $this->getClasses($row);
 
     $ret = '<td>';
 
     if ($url!==null)
     {
-      $ret .= Html::generateTag('a',
-                                ['href'   => $url,
-                                 'class'  => 'icon_action',
-                                 'target' => ($this->isDownloadLink) ? '_blank' : null]);
+      $classes[] = 'icon_action';
+      $ret       .= Html::generateElement('a',
+                                          ['href'                 => $url,
+                                           'class'                => $classes,
+                                           'target'               => ($this->isDownloadLink) ? '_blank' : null,
+                                           'data-confirm-message' => $this->confirmMessage]);
     }
-
-    $ret .= Html::generateVoidElement('img',
-                                      ['src'                  => $this->iconUrl,
-                                       'width'                => '12',
-                                       'height'               => '12',
-                                       'class'                => 'icon',
-                                       'alt'                  => $this->altValue,
-                                       'data-confirm-message' => $this->confirmMessage]);
-
-    if ($url!==null) $ret .= '</a>';
+    else
+    {
+      $classes[] = 'inactive';
+      $ret       .= Html::generateElement('span', ['class' => $classes]);
+    }
 
     $ret .= '</td>';
 
@@ -86,13 +70,26 @@ abstract class IconTableColumn extends TableColumn
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the URL of the link of the icon for the row.
+   * Returns the URL of the link of the icon for a row.
    *
-   * @param array $row The data row.
+   * @param array $row The data of the table row.
    *
    * @return string|null
    */
   abstract public function getUrl(array $row): ?string;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the classes for the table cell content.
+   *
+   * @param array $row The data of the table row.
+   *
+   * @return array
+   */
+  protected function getClasses(array $row): array
+  {
+    return [];
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
 }

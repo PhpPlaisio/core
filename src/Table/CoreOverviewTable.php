@@ -75,12 +75,7 @@ class CoreOverviewTable extends OverviewTable
         // Add a separator between groups of table actions.
         if (!$first_group)
         {
-          $ret .= Html::generateVoidElement('img',
-                                            ['class'  => 'noaction',
-                                             'scr'    => ICON_SEPARATOR,
-                                             'width'  => 16,
-                                             'height' => 16,
-                                             'alt'    => '|']);
+          $ret .= Html::generateElement('span', ['class' => ['noaction', 'icons-medium', 'icons-medium-separator']]);
         }
 
         // Generate HTML code for all table actions groups.

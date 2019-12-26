@@ -10,7 +10,6 @@ use Plaisio\Core\TableColumn\Babel\WordGroupTableColumn;
 use Plaisio\Core\TableColumn\Babel\WordGroupUpdateIconTableColumn;
 use Plaisio\Kernel\Nub;
 use Plaisio\Table\TableColumn\NumericTableColumn;
-use Plaisio\Table\TableColumn\TextTableColumn;
 
 /**
  * Page show an overview of all word groups.

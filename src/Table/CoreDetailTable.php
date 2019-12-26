@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\Table;
 
 use Plaisio\Core\TableAction\TableAction;
+use Plaisio\Helper\Html;
 use Plaisio\Table\DetailTable;
 
 /**
@@ -68,7 +69,7 @@ class CoreDetailTable extends DetailTable
         // Add a separator between groups of table actions.
         if (!$first_group)
         {
-          $ret .= '<img class="noaction" src="'.ICON_SEPARATOR.'" width="16" height="16" alt="|"/>';
+          $ret .= Html::generateElement('span', ['class' => ['noaction', 'icons-medium', 'icons-medium-separator']]);
         }
 
         // Generate HTML code for all table actions groups.

@@ -31,14 +31,9 @@ class UploadItemTableAction implements TableAction
    */
   public function getHtml(): string
   {
-    $ret = '<a';
-    $ret .= Html::generateAttribute('href', $this->url);
-    $ret .= '><img';
-    $ret .= Html::generateAttribute('title', $this->title);
-    $ret .= Html::generateAttribute('src', ICON_UPLOAD);
-    $ret .= ' width="16" height="16" alt="upload"/></a>';
-
-    return $ret;
+    return Html::generateElement('a', ['href'  => $this->url,
+                                       'title' => $this->title,
+                                       'class' => ['icons-medium', 'icons-medium-upload']]);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -29,9 +29,16 @@ class WordTranslateIconTableColumn extends IconTableColumn
   {
     parent::__construct();
 
-    $this->iconUrl  = ICON_SMALL_BABEL_FISH;
-    $this->altValue = 'translate';
     $this->actLanId = $targetLanId;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * @inheritdoc
+   */
+  public function getClasses(array $row): array
+  {
+    return ['icons-small', 'icons-small-babel-fish'];
   }
 
   //--------------------------------------------------------------------------------------------------------------------

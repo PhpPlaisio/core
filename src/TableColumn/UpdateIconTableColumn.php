@@ -10,14 +10,11 @@ abstract class UpdateIconTableColumn extends IconTableColumn
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Object constructor.
+   * @inheritdoc
    */
-  public function __construct()
+  public function getClasses(array $row): array
   {
-    parent::__construct();
-
-    $this->iconUrl  = ICON_SMALL_EDIT;
-    $this->altValue = 'edit';
+    return ['icons-small', 'icons-small-edit'];
   }
 
   //--------------------------------------------------------------------------------------------------------------------

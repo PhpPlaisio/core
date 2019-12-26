@@ -69,6 +69,9 @@ abstract class TabPage extends CorePage
     Nub::$assets->cssAppendSource('input-table.css');
     Nub::$assets->cssAppendSource('input-table-small.css');
     Nub::$assets->cssAppendSource('button.css');
+    Nub::$assets->cssAppendSource('icons.css');
+    Nub::$assets->cssAppendSource('icons-small.css');
+    Nub::$assets->cssAppendSource('icons-medium.css');
 
     Nub::$assets->jsAdmSetPageSpecificMain(__CLASS__);
 
