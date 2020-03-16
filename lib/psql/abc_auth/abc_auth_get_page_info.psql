@@ -11,7 +11,7 @@ create procedure abc_auth_get_page_info(in p_cmp_id    @abc_auth_company.cmp_id%
                                         in p_pag_id    @aut_page.pag_id%type@,
                                         in p_pro_id    @abc_auth_profile.pro_id%type@,
                                         in p_lan_id    @abc_babel_language.lan_id%type@,
-                                        in p_pag_alias @aut_page.pag_alias%type@)
+                                        in p_pag_alias @aut_page.pag_alias%sort@)
 reads sql data
 -- type: row0
 begin
