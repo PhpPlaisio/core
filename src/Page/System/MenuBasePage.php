@@ -68,10 +68,10 @@ abstract class MenuBasePage extends TabPage
     $this->form = new CoreForm();
 
     // Create select box for (known) page titles.
-    $titles = Nub::$DL->abcBabelWordGroupGetAllWords(C::WDG_ID_MENU, $this->lanId);
+    $titles = Nub::$nub->DL->abcBabelWordGroupGetAllWords(C::WDG_ID_MENU, $this->lanId);
     $input  = new SelectControl('wrd_id');
     $input->setOptions($titles, 'wrd_id', 'wdt_text');
-    $input->setOptionsObfuscator(Nub::getObfuscator('wrd'));
+    $input->setOptionsObfuscator(Nub::$nub->getObfuscator('wrd'));
     $input->setEmptyOption();
     $this->form->addFormControl($input, 'Menu Title');
 
@@ -81,11 +81,11 @@ abstract class MenuBasePage extends TabPage
     $this->form->addFormControl($input, 'Menu Title');
 
     // Create select box for chose page for menu.
-    $pages = Nub::$DL->abcSystemPageGetAll($this->lanId);
+    $pages = Nub::$nub->DL->abcSystemPageGetAll($this->lanId);
     $input = new SelectControl('pag_id');
     $input->setOptions($pages, 'pag_id', 'pag_class');
     $input->setEmptyOption();
-    $input->setOptionsObfuscator(Nub::getObfuscator('pag'));
+    $input->setOptionsObfuscator(Nub::$nub->getObfuscator('pag'));
     $this->form->addFormControl($input, 'Page Class', true);
 
     // Create text form control for input menu level.
@@ -131,7 +131,7 @@ abstract class MenuBasePage extends TabPage
 
       default:
         $this->form->defaultHandler($method);
-    };
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

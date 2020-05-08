@@ -30,8 +30,8 @@ class ModuleInsertPage extends ModuleBasePage
    */
   public static function getUrl(): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_MODULE_INSERT, 'pag');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_MODULE_INSERT, 'pag');
 
     return $url;
   }
@@ -51,7 +51,7 @@ class ModuleInsertPage extends ModuleBasePage
     if ($values['mdl_name'])
     {
       // New module name. Insert word en retrieve wrd_id of the new word.
-      $wrd_id = Nub::$DL->abcBabelWordInsertWord(C::WDG_ID_MODULE, null, null, $values['mdl_name']);
+      $wrd_id = Nub::$nub->DL->abcBabelWordInsertWord(C::WDG_ID_MODULE, null, null, $values['mdl_name']);
     }
     else
     {
@@ -60,7 +60,7 @@ class ModuleInsertPage extends ModuleBasePage
     }
 
     // Create the new module in the database.
-    $this->mdlId = Nub::$DL->abcSystemModuleInsert($wrd_id);
+    $this->mdlId = Nub::$nub->DL->abcSystemModuleInsert($wrd_id);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

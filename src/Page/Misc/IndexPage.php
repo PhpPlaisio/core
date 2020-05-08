@@ -19,7 +19,7 @@ class IndexPage extends TabPage
    */
   public static function getUrl(): string
   {
-    $url = Nub::$cgi->putLeader();
+    $url = Nub::$nub->cgi->putLeader();
 
     return ($url==='') ? '/' : $url;
   }
@@ -30,7 +30,7 @@ class IndexPage extends TabPage
    */
   public function echoPage(): void
   {
-    if (Nub::$session->isAnonymous())
+    if (Nub::$nub->session->isAnonymous())
     {
       $this->showAnonymousPage();
     }

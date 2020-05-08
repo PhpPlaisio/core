@@ -71,8 +71,8 @@ abstract class FunctionalityBasePage extends TabPage
    */
   private function createForm(): void
   {
-    $modules = Nub::$DL->abcSystemModuleGetAll($this->lanId);
-    $words   = Nub::$DL->abcBabelWordGroupGetAllWords(C::WDG_ID_FUNCTIONALITIES, $this->lanId);
+    $modules = Nub::$nub->DL->abcSystemModuleGetAll($this->lanId);
+    $words   = Nub::$nub->DL->abcBabelWordGroupGetAllWords(C::WDG_ID_FUNCTIONALITIES, $this->lanId);
 
     $this->form = new CoreForm();
 
@@ -112,7 +112,7 @@ abstract class FunctionalityBasePage extends TabPage
 
       default:
         $this->form->defaultHandler($method);
-    };
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

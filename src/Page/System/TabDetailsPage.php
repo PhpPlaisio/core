@@ -34,7 +34,7 @@ class TabDetailsPage extends TabPage
   {
     parent::__construct();
 
-    $this->tabId = Nub::$cgi->getManId('ptb', 'ptb');
+    $this->tabId = Nub::$nub->cgi->getManId('ptb', 'ptb');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -47,9 +47,9 @@ class TabDetailsPage extends TabPage
    */
   public static function getUrl(int $ptbId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_TAB_DETAILS, 'pag');
-    $url .= Nub::$cgi->putId('ptb', $ptbId, 'ptb');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_TAB_DETAILS, 'pag');
+    $url .= Nub::$nub->cgi->putId('ptb', $ptbId, 'ptb');
 
     return $url;
   }
@@ -72,7 +72,7 @@ class TabDetailsPage extends TabPage
    */
   private function showDetails(): void
   {
-    $details = Nub::$DL->abcSystemTabGetDetails($this->tabId, $this->lanId);
+    $details = Nub::$nub->DL->abcSystemTabGetDetails($this->tabId, $this->lanId);
     $table   = new CoreDetailTable();
 
     // Add row with the ID of the tab.
@@ -93,7 +93,7 @@ class TabDetailsPage extends TabPage
    */
   private function showMasterPages(): void
   {
-    $pages = Nub::$DL->abcSystemTabGetMasterPages($this->tabId, $this->lanId);
+    $pages = Nub::$nub->DL->abcSystemTabGetMasterPages($this->tabId, $this->lanId);
 
     $table = new CoreOverviewTable();
 

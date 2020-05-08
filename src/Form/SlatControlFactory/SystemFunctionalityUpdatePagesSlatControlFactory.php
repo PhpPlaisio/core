@@ -47,7 +47,7 @@ class SystemFunctionalityUpdatePagesSlatControlFactory extends SlatControlFactor
     $table_column = new CheckboxSlatJoint('Enable');
     $this->addSlatJoint('pag_enabled', $table_column);
 
-    $this->pagIdObfuscator = Nub::getObfuscator('pag');
+    $this->pagIdObfuscator = Nub::$nub->getObfuscator('pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

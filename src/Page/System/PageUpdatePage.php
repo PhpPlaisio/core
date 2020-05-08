@@ -28,8 +28,8 @@ class PageUpdatePage extends PageBasePage
   {
     parent::__construct();
 
-    $this->targetPagId = Nub::$cgi->getManId('tar_pag', 'pag');
-    $this->details     = Nub::$DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
+    $this->targetPagId = Nub::$nub->cgi->getManId('tar_pag', 'pag');
+    $this->details     = Nub::$nub->DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -43,9 +43,9 @@ class PageUpdatePage extends PageBasePage
    */
   public static function getUrl(int $pagId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_PAGE_UPDATE, 'pag');
-    $url .= Nub::$cgi->putId('tar_pag', $pagId, 'pag');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_PAGE_UPDATE, 'pag');
+    $url .= Nub::$nub->cgi->putId('tar_pag', $pagId, 'pag');
 
     return $url;
   }
@@ -64,22 +64,22 @@ class PageUpdatePage extends PageBasePage
 
     if ($values['pag_title'])
     {
-      $wrd_id = Nub::$DL->abcBabelWordInsertWord(C::WDG_ID_PAGE_TITLE, null, null, $values['pag_title']);
+      $wrd_id = Nub::$nub->DL->abcBabelWordInsertWord(C::WDG_ID_PAGE_TITLE, null, null, $values['pag_title']);
     }
     else
     {
       $wrd_id = $values['wrd_id'];
     }
 
-    Nub::$DL->abcSystemPageUpdateDetails($this->targetPagId,
-                                         $wrd_id,
-                                         $values['ptb_id'],
-                                         $values['pag_id_org'],
-                                         $values['mnu_id'],
-                                         $values['pag_alias'],
-                                         $values['pag_class'],
-                                         $values['pag_label'],
-                                         Cast::toOptInt($values['pag_weight']));
+    Nub::$nub->DL->abcSystemPageUpdateDetails($this->targetPagId,
+                                              $wrd_id,
+                                              $values['ptb_id'],
+                                              $values['pag_id_org'],
+                                              $values['mnu_id'],
+                                              $values['pag_alias'],
+                                              $values['pag_class'],
+                                              $values['pag_label'],
+                                              Cast::toOptInt($values['pag_weight']));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

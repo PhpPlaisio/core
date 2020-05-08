@@ -7,6 +7,24 @@ ABC_AUTH_PROFILE.cmp_id        5
 ABC_AUTH_PROFILE.pro_flags    10
 ABC_AUTH_PROFILE.pro_rol_ids 100
 
+ABC_AUTH_SESSION.ses_id                    10
+ABC_AUTH_SESSION.cmp_id                     5
+ABC_AUTH_SESSION.lan_id                     3
+ABC_AUTH_SESSION.usr_id                    10
+ABC_AUTH_SESSION.ses_session_token         64
+ABC_AUTH_SESSION.ses_csrf_token            64
+ABC_AUTH_SESSION.ses_last_request          20
+ABC_AUTH_SESSION.ses_data          4294967295
+
+ABC_AUTH_SESSION_NAMED.ses_id           10
+ABC_AUTH_SESSION_NAMED.cmp_id            5
+ABC_AUTH_SESSION_NAMED.ans_name        128
+ABC_AUTH_SESSION_NAMED.ans_data 4294967295
+
+ABC_AUTH_SESSION_NAMED_LOCK.ses_id    10
+ABC_AUTH_SESSION_NAMED_LOCK.cmp_id     5
+ABC_AUTH_SESSION_NAMED_LOCK.ans_name 128
+
 ABC_AUTH_USER.usr_id            10
 ABC_AUTH_USER.cmp_id             5
 ABC_AUTH_USER.lan_id             3
@@ -57,113 +75,6 @@ ABC_BABEL_WORD_TEXT.lan_id         3
 ABC_BABEL_WORD_TEXT.wdt_text      80 LEN_WDT_TEXT
 ABC_BABEL_WORD_TEXT.wdt_timestamp 16
 
-AUT_CONFIG.cfg_id                  5
-AUT_CONFIG.cmp_id                  5
-AUT_CONFIG.ccl_id                  5
-AUT_CONFIG.cfg_mandatory           3
-AUT_CONFIG.cfg_show_to_company     3
-AUT_CONFIG.cfg_modify_by_company   3
-AUT_CONFIG.cfg_description       400
-AUT_CONFIG.cfg_label              50
-
-AUT_CONFIG_CLASS.ccl_id      5
-AUT_CONFIG_CLASS.ccl_type   10
-AUT_CONFIG_CLASS.ccl_class 128
-
-AUT_CONFIG_VALUE.cmp_id       5
-AUT_CONFIG_VALUE.cfg_id       5
-AUT_CONFIG_VALUE.cfg_value 4000
-
-AUT_FLAG.rfl_id        3
-AUT_FLAG.rfl_flag     10
-AUT_FLAG.rfl_name     80
-AUT_FLAG.rfl_function  3
-
-AUT_FUNCTIONALITY.fun_id 5
-AUT_FUNCTIONALITY.mdl_id 5
-AUT_FUNCTIONALITY.wrd_id 5
-
-AUT_MENU.mnu_id      5
-AUT_MENU.wrd_id      5
-AUT_MENU.pag_id      5
-AUT_MENU.mnu_level   3 LEN_MNU_LEVEL
-AUT_MENU.mnu_group   5 LEN_MNU_GROUP
-AUT_MENU.mnu_weight  5 LEN_MNU_WEIGHT
-AUT_MENU.mnu_link   64 LEN_MNU_LINK
-
-AUT_MODULE.mdl_id 5
-AUT_MODULE.wrd_id 5
-
-AUT_MODULE_COMPANY.cmp_id 5
-AUT_MODULE_COMPANY.mdl_id 5
-
-AUT_PAGE.pag_id       5
-AUT_PAGE.pag_id_org   5
-AUT_PAGE.ptb_id       3
-AUT_PAGE.mnu_id       5
-AUT_PAGE.wrd_id       5
-AUT_PAGE.pag_alias   32 LEN_PAG_ALIAS
-AUT_PAGE.pag_class  128 LEN_PAG_CLASS
-AUT_PAGE.pag_label  128 LEN_PAG_LABEL
-AUT_PAGE.pag_weight  10 LEN_PAG_WEIGHT
-
-AUT_PAGE_COMPANY.pag_id      5
-AUT_PAGE_COMPANY.cmp_id      5
-AUT_PAGE_COMPANY.pag_class 128
-
-AUT_PAGE_TAB.ptb_id     3
-AUT_PAGE_TAB.wrd_id     5
-AUT_PAGE_TAB.ptb_label 30 LEN_PTB_LABEL
-
-AUT_PAG_FUN.pag_id 5
-AUT_PAG_FUN.fun_id 5
-
-AUT_PRO_PAG.pag_id 5
-AUT_PRO_PAG.pro_id 5
-
-AUT_PRO_ROL.cmp_id 5
-AUT_PRO_ROL.pro_id 5
-AUT_PRO_ROL.rol_id 5
-
-AUT_ROLE.rol_id      5
-AUT_ROLE.cmp_id      5
-AUT_ROLE.rlg_id      5
-AUT_ROLE.rol_weight  5 LEN_ROL_WEIGHT
-AUT_ROLE.rol_name   32 LEN_ROL_NAME
-AUT_ROLE.rol_label  50 LEN_ROL_LABEL
-
-AUT_ROLE_GROUP.rlg_id      5
-AUT_ROLE_GROUP.wrd_id      5
-AUT_ROLE_GROUP.rlg_weight  5 LEN_RLG_WEIGHT
-AUT_ROLE_GROUP.rlg_label  50 LEN_RLG_LABEL
-
-AUT_ROL_FLG.rfl_id 3
-AUT_ROL_FLG.rol_id 5
-
-AUT_ROL_FUN.cmp_id 5
-AUT_ROL_FUN.fun_id 5
-AUT_ROL_FUN.rol_id 5
-
-AUT_USR_ROL.cmp_id          5
-AUT_USR_ROL.usr_id         10
-AUT_USR_ROL.rol_id          5
-AUT_USR_ROL.aur_date_start 10
-AUT_USR_ROL.aur_date_stop  10
-
-LOG_EVENT.lev_id       10
-LOG_EVENT.cmp_id        5
-LOG_EVENT.let_id        3
-LOG_EVENT.ses_id       10
-LOG_EVENT.usr_id       10
-LOG_EVENT.lev_datetime 16
-LOG_EVENT.lev_ip       10
-LOG_EVENT.lev_arg1     64
-LOG_EVENT.lev_arg2     64
-
-LOG_EVENT_TYPE.let_id     3
-LOG_EVENT_TYPE.wrd_id     5
-LOG_EVENT_TYPE.let_label 50
-
 information_schema.ALL_PLUGINS.PLUGIN_NAME                    64
 information_schema.ALL_PLUGINS.PLUGIN_VERSION                 20
 information_schema.ALL_PLUGINS.PLUGIN_STATUS                  16
@@ -187,6 +98,12 @@ information_schema.CHARACTER_SETS.CHARACTER_SET_NAME   32
 information_schema.CHARACTER_SETS.DEFAULT_COLLATE_NAME 32
 information_schema.CHARACTER_SETS.DESCRIPTION          60
 information_schema.CHARACTER_SETS.MAXLEN               19
+
+information_schema.CHECK_CONSTRAINTS.CONSTRAINT_CATALOG 512
+information_schema.CHECK_CONSTRAINTS.CONSTRAINT_SCHEMA   64
+information_schema.CHECK_CONSTRAINTS.TABLE_NAME          64
+information_schema.CHECK_CONSTRAINTS.CONSTRAINT_NAME     64
+information_schema.CHECK_CONSTRAINTS.CHECK_CLAUSE        64
 
 information_schema.COLLATIONS.COLLATION_NAME     32
 information_schema.COLLATIONS.CHARACTER_SET_NAME 32
@@ -215,9 +132,11 @@ information_schema.COLUMNS.CHARACTER_SET_NAME               32
 information_schema.COLUMNS.COLLATION_NAME                   32
 information_schema.COLUMNS.COLUMN_TYPE              4294967295
 information_schema.COLUMNS.COLUMN_KEY                        3
-information_schema.COLUMNS.EXTRA                            27
+information_schema.COLUMNS.EXTRA                            30
 information_schema.COLUMNS.PRIVILEGES                       80
 information_schema.COLUMNS.COLUMN_COMMENT                 1024
+information_schema.COLUMNS.IS_GENERATED                      6
+information_schema.COLUMNS.GENERATION_EXPRESSION    4294967295
 
 information_schema.COLUMN_PRIVILEGES.GRANTEE        190
 information_schema.COLUMN_PRIVILEGES.TABLE_CATALOG  512
@@ -262,7 +181,7 @@ information_schema.EVENTS.COLLATION_CONNECTION         32
 information_schema.EVENTS.DATABASE_COLLATION           32
 
 information_schema.FILES.FILE_ID               19
-information_schema.FILES.FILE_NAME             64
+information_schema.FILES.FILE_NAME            512
 information_schema.FILES.FILE_TYPE             20
 information_schema.FILES.TABLESPACE_NAME       64
 information_schema.FILES.TABLE_CATALOG         64
@@ -389,30 +308,31 @@ information_schema.PLUGINS.LOAD_OPTION                    64
 information_schema.PLUGINS.PLUGIN_MATURITY                12
 information_schema.PLUGINS.PLUGIN_AUTH_VERSION            80
 
-information_schema.PROCESSLIST.ID                    19
-information_schema.PROCESSLIST.USER                 128
-information_schema.PROCESSLIST.HOST                  64
-information_schema.PROCESSLIST.DB                    64
-information_schema.PROCESSLIST.COMMAND               16
-information_schema.PROCESSLIST.TIME                  10
-information_schema.PROCESSLIST.STATE                 64
-information_schema.PROCESSLIST.INFO          4294967295
-information_schema.PROCESSLIST.TIME_MS               22
-information_schema.PROCESSLIST.STAGE                  3
-information_schema.PROCESSLIST.MAX_STAGE              3
-information_schema.PROCESSLIST.PROGRESS               7
-information_schema.PROCESSLIST.MEMORY_USED           10
-information_schema.PROCESSLIST.EXAMINED_ROWS         10
-information_schema.PROCESSLIST.QUERY_ID              19
-information_schema.PROCESSLIST.INFO_BINARY        65535
-information_schema.PROCESSLIST.TID                   19
+information_schema.PROCESSLIST.ID                      19
+information_schema.PROCESSLIST.USER                   128
+information_schema.PROCESSLIST.HOST                    64
+information_schema.PROCESSLIST.DB                      64
+information_schema.PROCESSLIST.COMMAND                 16
+information_schema.PROCESSLIST.TIME                    10
+information_schema.PROCESSLIST.STATE                   64
+information_schema.PROCESSLIST.INFO            4294967295
+information_schema.PROCESSLIST.TIME_MS                 23
+information_schema.PROCESSLIST.STAGE                    3
+information_schema.PROCESSLIST.MAX_STAGE                3
+information_schema.PROCESSLIST.PROGRESS                 8
+information_schema.PROCESSLIST.MEMORY_USED             19
+information_schema.PROCESSLIST.MAX_MEMORY_USED         19
+information_schema.PROCESSLIST.EXAMINED_ROWS           10
+information_schema.PROCESSLIST.QUERY_ID                19
+information_schema.PROCESSLIST.INFO_BINARY          65535
+information_schema.PROCESSLIST.TID                     19
 
 information_schema.PROFILING.QUERY_ID            10
 information_schema.PROFILING.SEQ                 10
 information_schema.PROFILING.STATE               30
-information_schema.PROFILING.DURATION             9
-information_schema.PROFILING.CPU_USER             9
-information_schema.PROFILING.CPU_SYSTEM           9
+information_schema.PROFILING.DURATION            10
+information_schema.PROFILING.CPU_USER            10
+information_schema.PROFILING.CPU_SYSTEM          10
 information_schema.PROFILING.CONTEXT_VOLUNTARY   10
 information_schema.PROFILING.CONTEXT_INVOLUNTARY 10
 information_schema.PROFILING.BLOCK_OPS_IN        10
@@ -442,7 +362,7 @@ information_schema.ROUTINES.SPECIFIC_NAME                    64
 information_schema.ROUTINES.ROUTINE_CATALOG                 512
 information_schema.ROUTINES.ROUTINE_SCHEMA                   64
 information_schema.ROUTINES.ROUTINE_NAME                     64
-information_schema.ROUTINES.ROUTINE_TYPE                      9
+information_schema.ROUTINES.ROUTINE_TYPE                     13
 information_schema.ROUTINES.DATA_TYPE                        64
 information_schema.ROUTINES.CHARACTER_MAXIMUM_LENGTH         10
 information_schema.ROUTINES.CHARACTER_OCTET_LENGTH           10
@@ -520,27 +440,29 @@ information_schema.SYSTEM_VARIABLES.ENUM_VALUE_LIST       4294967295
 information_schema.SYSTEM_VARIABLES.READ_ONLY                      3
 information_schema.SYSTEM_VARIABLES.COMMAND_LINE_ARGUMENT         64
 
-information_schema.TABLES.TABLE_CATALOG    512
-information_schema.TABLES.TABLE_SCHEMA      64
-information_schema.TABLES.TABLE_NAME        64
-information_schema.TABLES.TABLE_TYPE        64
-information_schema.TABLES.ENGINE            64
-information_schema.TABLES.VERSION           20
-information_schema.TABLES.ROW_FORMAT        10
-information_schema.TABLES.TABLE_ROWS        20
-information_schema.TABLES.AVG_ROW_LENGTH    20
-information_schema.TABLES.DATA_LENGTH       20
-information_schema.TABLES.MAX_DATA_LENGTH   20
-information_schema.TABLES.INDEX_LENGTH      20
-information_schema.TABLES.DATA_FREE         20
-information_schema.TABLES.AUTO_INCREMENT    20
-information_schema.TABLES.CREATE_TIME       16
-information_schema.TABLES.UPDATE_TIME       16
-information_schema.TABLES.CHECK_TIME        16
-information_schema.TABLES.TABLE_COLLATION   32
-information_schema.TABLES.CHECKSUM          20
-information_schema.TABLES.CREATE_OPTIONS  2048
-information_schema.TABLES.TABLE_COMMENT   2048
+information_schema.TABLES.TABLE_CATALOG     512
+information_schema.TABLES.TABLE_SCHEMA       64
+information_schema.TABLES.TABLE_NAME         64
+information_schema.TABLES.TABLE_TYPE         64
+information_schema.TABLES.ENGINE             64
+information_schema.TABLES.VERSION            20
+information_schema.TABLES.ROW_FORMAT         10
+information_schema.TABLES.TABLE_ROWS         20
+information_schema.TABLES.AVG_ROW_LENGTH     20
+information_schema.TABLES.DATA_LENGTH        20
+information_schema.TABLES.MAX_DATA_LENGTH    20
+information_schema.TABLES.INDEX_LENGTH       20
+information_schema.TABLES.DATA_FREE          20
+information_schema.TABLES.AUTO_INCREMENT     20
+information_schema.TABLES.CREATE_TIME        16
+information_schema.TABLES.UPDATE_TIME        16
+information_schema.TABLES.CHECK_TIME         16
+information_schema.TABLES.TABLE_COLLATION    32
+information_schema.TABLES.CHECKSUM           20
+information_schema.TABLES.CREATE_OPTIONS   2048
+information_schema.TABLES.TABLE_COMMENT    2048
+information_schema.TABLES.MAX_INDEX_LENGTH   20
+information_schema.TABLES.TEMPORARY           1
 
 information_schema.TABLESPACES.TABLESPACE_NAME      64
 information_schema.TABLESPACES.ENGINE               64
@@ -659,22 +581,6 @@ information_schema.INDEX_STATISTICS.ROWS_READ     19
 information_schema.INNODB_SYS_DATAFILES.SPACE   10
 information_schema.INNODB_SYS_DATAFILES.PATH  4000
 
-information_schema.TABLE_STATISTICS.TABLE_SCHEMA           192
-information_schema.TABLE_STATISTICS.TABLE_NAME             192
-information_schema.TABLE_STATISTICS.ROWS_READ               19
-information_schema.TABLE_STATISTICS.ROWS_CHANGED            19
-information_schema.TABLE_STATISTICS.ROWS_CHANGED_X_INDEXES  19
-
-information_schema.INNODB_SYS_TABLESTATS.TABLE_ID           20
-information_schema.INNODB_SYS_TABLESTATS.NAME              193
-information_schema.INNODB_SYS_TABLESTATS.STATS_INITIALIZED 193
-information_schema.INNODB_SYS_TABLESTATS.NUM_ROWS           20
-information_schema.INNODB_SYS_TABLESTATS.CLUST_INDEX_SIZE   20
-information_schema.INNODB_SYS_TABLESTATS.OTHER_INDEX_SIZE   20
-information_schema.INNODB_SYS_TABLESTATS.MODIFIED_COUNTER   20
-information_schema.INNODB_SYS_TABLESTATS.AUTOINC            20
-information_schema.INNODB_SYS_TABLESTATS.REF_COUNT          10
-
 information_schema.USER_STATISTICS.USER                        128
 information_schema.USER_STATISTICS.TOTAL_CONNECTIONS            10
 information_schema.USER_STATISTICS.CONCURRENT_CONNECTIONS       10
@@ -701,63 +607,15 @@ information_schema.USER_STATISTICS.EMPTY_QUERIES                19
 information_schema.USER_STATISTICS.TOTAL_SSL_CONNECTIONS        20
 information_schema.USER_STATISTICS.MAX_STATEMENT_TIME_EXCEEDED  19
 
-information_schema.INNODB_SYS_INDEXES.INDEX_ID  20
-information_schema.INNODB_SYS_INDEXES.NAME     193
-information_schema.INNODB_SYS_INDEXES.TABLE_ID  20
-information_schema.INNODB_SYS_INDEXES.TYPE      10
-information_schema.INNODB_SYS_INDEXES.N_FIELDS  10
-information_schema.INNODB_SYS_INDEXES.PAGE_NO   10
-information_schema.INNODB_SYS_INDEXES.SPACE     10
-
-information_schema.XTRADB_RSEG.rseg_id   20
-information_schema.XTRADB_RSEG.space_id  20
-information_schema.XTRADB_RSEG.zip_size  20
-information_schema.XTRADB_RSEG.page_no   20
-information_schema.XTRADB_RSEG.max_size  20
-information_schema.XTRADB_RSEG.curr_size 20
-
-information_schema.INNODB_CMP_PER_INDEX.database_name   192
-information_schema.INNODB_CMP_PER_INDEX.table_name      192
-information_schema.INNODB_CMP_PER_INDEX.index_name      192
-information_schema.INNODB_CMP_PER_INDEX.compress_ops     10
-information_schema.INNODB_CMP_PER_INDEX.compress_ops_ok  10
-information_schema.INNODB_CMP_PER_INDEX.compress_time    10
-information_schema.INNODB_CMP_PER_INDEX.uncompress_ops   10
-information_schema.INNODB_CMP_PER_INDEX.uncompress_time  10
-
-information_schema.INNODB_TRX.trx_id                       18
-information_schema.INNODB_TRX.trx_state                    13
-information_schema.INNODB_TRX.trx_started                  16
-information_schema.INNODB_TRX.trx_requested_lock_id        81
-information_schema.INNODB_TRX.trx_wait_started             16
-information_schema.INNODB_TRX.trx_weight                   20
-information_schema.INNODB_TRX.trx_mysql_thread_id          20
-information_schema.INNODB_TRX.trx_query                  1024
-information_schema.INNODB_TRX.trx_operation_state          64
-information_schema.INNODB_TRX.trx_tables_in_use            20
-information_schema.INNODB_TRX.trx_tables_locked            20
-information_schema.INNODB_TRX.trx_lock_structs             20
-information_schema.INNODB_TRX.trx_lock_memory_bytes        20
-information_schema.INNODB_TRX.trx_rows_locked              20
-information_schema.INNODB_TRX.trx_rows_modified            20
-information_schema.INNODB_TRX.trx_concurrency_tickets      20
-information_schema.INNODB_TRX.trx_isolation_level          16
-information_schema.INNODB_TRX.trx_unique_checks            10
-information_schema.INNODB_TRX.trx_foreign_key_checks       10
-information_schema.INNODB_TRX.trx_last_foreign_key_error  256
-information_schema.INNODB_TRX.trx_adaptive_hash_latched    10
-information_schema.INNODB_TRX.trx_adaptive_hash_timeout    20
-information_schema.INNODB_TRX.trx_is_read_only             10
-information_schema.INNODB_TRX.trx_autocommit_non_locking   10
-
-information_schema.CHANGED_PAGE_BITMAPS.dummy 20
-
-information_schema.INNODB_FT_BEING_DELETED.DOC_ID 20
-
-information_schema.INNODB_LOCK_WAITS.requesting_trx_id 18
-information_schema.INNODB_LOCK_WAITS.requested_lock_id 81
-information_schema.INNODB_LOCK_WAITS.blocking_trx_id   18
-information_schema.INNODB_LOCK_WAITS.blocking_lock_id  81
+information_schema.INNODB_SYS_TABLESTATS.TABLE_ID           20
+information_schema.INNODB_SYS_TABLESTATS.NAME              193
+information_schema.INNODB_SYS_TABLESTATS.STATS_INITIALIZED 193
+information_schema.INNODB_SYS_TABLESTATS.NUM_ROWS           20
+information_schema.INNODB_SYS_TABLESTATS.CLUST_INDEX_SIZE   20
+information_schema.INNODB_SYS_TABLESTATS.OTHER_INDEX_SIZE   20
+information_schema.INNODB_SYS_TABLESTATS.MODIFIED_COUNTER   20
+information_schema.INNODB_SYS_TABLESTATS.AUTOINC            20
+information_schema.INNODB_SYS_TABLESTATS.REF_COUNT          10
 
 information_schema.INNODB_LOCKS.lock_id       81
 information_schema.INNODB_LOCKS.lock_trx_id   18
@@ -770,6 +628,39 @@ information_schema.INNODB_LOCKS.lock_page     20
 information_schema.INNODB_LOCKS.lock_rec      20
 information_schema.INNODB_LOCKS.lock_data   8192
 
+information_schema.TokuDB_fractal_tree_block_map.dictionary_name       256
+information_schema.TokuDB_fractal_tree_block_map.internal_file_name    256
+information_schema.TokuDB_fractal_tree_block_map.checkpoint_count       19
+information_schema.TokuDB_fractal_tree_block_map.blocknum               19
+information_schema.TokuDB_fractal_tree_block_map.offset                 19
+information_schema.TokuDB_fractal_tree_block_map.size                   19
+information_schema.TokuDB_fractal_tree_block_map.table_schema          256
+information_schema.TokuDB_fractal_tree_block_map.table_name            256
+information_schema.TokuDB_fractal_tree_block_map.table_dictionary_name 256
+
+information_schema.INNODB_CMPMEM.page_size            10
+information_schema.INNODB_CMPMEM.buffer_pool_instance 10
+information_schema.INNODB_CMPMEM.pages_used           10
+information_schema.INNODB_CMPMEM.pages_free           10
+information_schema.INNODB_CMPMEM.relocation_ops       19
+information_schema.INNODB_CMPMEM.relocation_time      10
+
+information_schema.INNODB_CMP_PER_INDEX.database_name   192
+information_schema.INNODB_CMP_PER_INDEX.table_name      192
+information_schema.INNODB_CMP_PER_INDEX.index_name      192
+information_schema.INNODB_CMP_PER_INDEX.compress_ops     10
+information_schema.INNODB_CMP_PER_INDEX.compress_ops_ok  10
+information_schema.INNODB_CMP_PER_INDEX.compress_time    10
+information_schema.INNODB_CMP_PER_INDEX.uncompress_ops   10
+information_schema.INNODB_CMP_PER_INDEX.uncompress_time  10
+
+information_schema.INNODB_CMP.page_size       10
+information_schema.INNODB_CMP.compress_ops    10
+information_schema.INNODB_CMP.compress_ops_ok 10
+information_schema.INNODB_CMP.compress_time   10
+information_schema.INNODB_CMP.uncompress_ops  10
+information_schema.INNODB_CMP.uncompress_time 10
+
 information_schema.INNODB_TABLESPACES_ENCRYPTION.SPACE                         10
 information_schema.INNODB_TABLESPACES_ENCRYPTION.NAME                         655
 information_schema.INNODB_TABLESPACES_ENCRYPTION.ENCRYPTION_SCHEME             10
@@ -781,48 +672,37 @@ information_schema.INNODB_TABLESPACES_ENCRYPTION.KEY_ROTATION_MAX_PAGE_NUMBER  2
 information_schema.INNODB_TABLESPACES_ENCRYPTION.CURRENT_KEY_ID                10
 information_schema.INNODB_TABLESPACES_ENCRYPTION.ROTATING_OR_FLUSHING          10
 
-information_schema.XTRADB_INTERNAL_HASH_TABLES.INTERNAL_HASH_TABLE_NAME 100
-information_schema.XTRADB_INTERNAL_HASH_TABLES.TOTAL_MEMORY              20
-information_schema.XTRADB_INTERNAL_HASH_TABLES.CONSTANT_MEMORY           20
-information_schema.XTRADB_INTERNAL_HASH_TABLES.VARIABLE_MEMORY           20
+information_schema.INNODB_CMP_RESET.page_size       10
+information_schema.INNODB_CMP_RESET.compress_ops    10
+information_schema.INNODB_CMP_RESET.compress_ops_ok 10
+information_schema.INNODB_CMP_RESET.compress_time   10
+information_schema.INNODB_CMP_RESET.uncompress_ops  10
+information_schema.INNODB_CMP_RESET.uncompress_time 10
 
-information_schema.INNODB_SYS_FIELDS.INDEX_ID  20
-information_schema.INNODB_SYS_FIELDS.NAME     193
-information_schema.INNODB_SYS_FIELDS.POS       10
+information_schema.TokuDB_lock_waits.requesting_trx_id                 19
+information_schema.TokuDB_lock_waits.blocking_trx_id                   19
+information_schema.TokuDB_lock_waits.lock_waits_dname                 256
+information_schema.TokuDB_lock_waits.lock_waits_key_left              256
+information_schema.TokuDB_lock_waits.lock_waits_key_right             256
+information_schema.TokuDB_lock_waits.lock_waits_start_time             19
+information_schema.TokuDB_lock_waits.lock_waits_table_schema          256
+information_schema.TokuDB_lock_waits.lock_waits_table_name            256
+information_schema.TokuDB_lock_waits.lock_waits_table_dictionary_name 256
 
-information_schema.INNODB_CMPMEM_RESET.page_size            10
-information_schema.INNODB_CMPMEM_RESET.buffer_pool_instance 10
-information_schema.INNODB_CMPMEM_RESET.pages_used           10
-information_schema.INNODB_CMPMEM_RESET.pages_free           10
-information_schema.INNODB_CMPMEM_RESET.relocation_ops       19
-information_schema.INNODB_CMPMEM_RESET.relocation_time      10
+information_schema.TABLE_STATISTICS.TABLE_SCHEMA           192
+information_schema.TABLE_STATISTICS.TABLE_NAME             192
+information_schema.TABLE_STATISTICS.ROWS_READ               19
+information_schema.TABLE_STATISTICS.ROWS_CHANGED            19
+information_schema.TABLE_STATISTICS.ROWS_CHANGED_X_INDEXES  19
 
-information_schema.INNODB_CMP.page_size       10
-information_schema.INNODB_CMP.compress_ops    10
-information_schema.INNODB_CMP.compress_ops_ok 10
-information_schema.INNODB_CMP.compress_time   10
-information_schema.INNODB_CMP.uncompress_ops  10
-information_schema.INNODB_CMP.uncompress_time 10
-
-information_schema.INNODB_FT_INDEX_TABLE.WORD         337
-information_schema.INNODB_FT_INDEX_TABLE.FIRST_DOC_ID  20
-information_schema.INNODB_FT_INDEX_TABLE.LAST_DOC_ID   20
-information_schema.INNODB_FT_INDEX_TABLE.DOC_COUNT     20
-information_schema.INNODB_FT_INDEX_TABLE.DOC_ID        20
-information_schema.INNODB_FT_INDEX_TABLE.POSITION      20
-
-information_schema.INNODB_SYS_TABLESPACES.SPACE          10
-information_schema.INNODB_SYS_TABLESPACES.NAME          655
-information_schema.INNODB_SYS_TABLESPACES.FLAG           10
-information_schema.INNODB_SYS_TABLESPACES.FILE_FORMAT    10
-information_schema.INNODB_SYS_TABLESPACES.ROW_FORMAT     22
-information_schema.INNODB_SYS_TABLESPACES.PAGE_SIZE      10
-information_schema.INNODB_SYS_TABLESPACES.ZIP_PAGE_SIZE  10
-
-information_schema.INNODB_MUTEXES.NAME        4000
-information_schema.INNODB_MUTEXES.CREATE_FILE 4000
-information_schema.INNODB_MUTEXES.CREATE_LINE   10
-information_schema.INNODB_MUTEXES.OS_WAITS      20
+information_schema.INNODB_SYS_INDEXES.INDEX_ID         20
+information_schema.INNODB_SYS_INDEXES.NAME            193
+information_schema.INNODB_SYS_INDEXES.TABLE_ID         20
+information_schema.INNODB_SYS_INDEXES.TYPE             10
+information_schema.INNODB_SYS_INDEXES.N_FIELDS         10
+information_schema.INNODB_SYS_INDEXES.PAGE_NO          10
+information_schema.INNODB_SYS_INDEXES.SPACE            10
+information_schema.INNODB_SYS_INDEXES.MERGE_THRESHOLD  10
 
 information_schema.INNODB_BUFFER_PAGE_LRU.POOL_ID               20
 information_schema.INNODB_BUFFER_PAGE_LRU.LRU_POSITION          20
@@ -845,17 +725,235 @@ information_schema.INNODB_BUFFER_PAGE_LRU.IO_FIX                64
 information_schema.INNODB_BUFFER_PAGE_LRU.IS_OLD                 3
 information_schema.INNODB_BUFFER_PAGE_LRU.FREE_PAGE_CLOCK       20
 
-information_schema.INNODB_SYS_FOREIGN_COLS.ID           193
-information_schema.INNODB_SYS_FOREIGN_COLS.FOR_COL_NAME 193
-information_schema.INNODB_SYS_FOREIGN_COLS.REF_COL_NAME 193
-information_schema.INNODB_SYS_FOREIGN_COLS.POS           10
+information_schema.ROCKSDB_CFSTATS.CF_NAME   193
+information_schema.ROCKSDB_CFSTATS.STAT_TYPE 193
+information_schema.ROCKSDB_CFSTATS.VALUE      19
 
-information_schema.INNODB_CMP_RESET.page_size       10
-information_schema.INNODB_CMP_RESET.compress_ops    10
-information_schema.INNODB_CMP_RESET.compress_ops_ok 10
-information_schema.INNODB_CMP_RESET.compress_time   10
-information_schema.INNODB_CMP_RESET.uncompress_ops  10
-information_schema.INNODB_CMP_RESET.uncompress_time 10
+information_schema.INNODB_CMPMEM_RESET.page_size            10
+information_schema.INNODB_CMPMEM_RESET.buffer_pool_instance 10
+information_schema.INNODB_CMPMEM_RESET.pages_used           10
+information_schema.INNODB_CMPMEM_RESET.pages_free           10
+information_schema.INNODB_CMPMEM_RESET.relocation_ops       19
+information_schema.INNODB_CMPMEM_RESET.relocation_time      10
+
+information_schema.TokuDB_background_job_status.id               19
+information_schema.TokuDB_background_job_status.database_name   256
+information_schema.TokuDB_background_job_status.table_name      256
+information_schema.TokuDB_background_job_status.job_type        256
+information_schema.TokuDB_background_job_status.job_params      256
+information_schema.TokuDB_background_job_status.scheduler        32
+information_schema.TokuDB_background_job_status.scheduled_time   16
+information_schema.TokuDB_background_job_status.started_time     16
+information_schema.TokuDB_background_job_status.status         1024
+
+information_schema.INNODB_SYS_COLUMNS.TABLE_ID  20
+information_schema.INNODB_SYS_COLUMNS.NAME     193
+information_schema.INNODB_SYS_COLUMNS.POS       20
+information_schema.INNODB_SYS_COLUMNS.MTYPE     10
+information_schema.INNODB_SYS_COLUMNS.PRTYPE    10
+information_schema.INNODB_SYS_COLUMNS.LEN       10
+
+information_schema.ROCKSDB_GLOBAL_INFO.TYPE  513
+information_schema.ROCKSDB_GLOBAL_INFO.NAME  513
+information_schema.ROCKSDB_GLOBAL_INFO.VALUE 513
+
+information_schema.INNODB_CMP_PER_INDEX_RESET.database_name   192
+information_schema.INNODB_CMP_PER_INDEX_RESET.table_name      192
+information_schema.INNODB_CMP_PER_INDEX_RESET.index_name      192
+information_schema.INNODB_CMP_PER_INDEX_RESET.compress_ops     10
+information_schema.INNODB_CMP_PER_INDEX_RESET.compress_ops_ok  10
+information_schema.INNODB_CMP_PER_INDEX_RESET.compress_time    10
+information_schema.INNODB_CMP_PER_INDEX_RESET.uncompress_ops   10
+information_schema.INNODB_CMP_PER_INDEX_RESET.uncompress_time  10
+
+information_schema.ROCKSDB_CF_OPTIONS.CF_NAME     193
+information_schema.ROCKSDB_CF_OPTIONS.OPTION_TYPE 193
+information_schema.ROCKSDB_CF_OPTIONS.VALUE       193
+
+information_schema.INNODB_FT_INDEX_CACHE.WORD         337
+information_schema.INNODB_FT_INDEX_CACHE.FIRST_DOC_ID  20
+information_schema.INNODB_FT_INDEX_CACHE.LAST_DOC_ID   20
+information_schema.INNODB_FT_INDEX_CACHE.DOC_COUNT     20
+information_schema.INNODB_FT_INDEX_CACHE.DOC_ID        20
+information_schema.INNODB_FT_INDEX_CACHE.POSITION      20
+
+information_schema.INNODB_SYS_TABLES.TABLE_ID       20
+information_schema.INNODB_SYS_TABLES.NAME          655
+information_schema.INNODB_SYS_TABLES.FLAG           10
+information_schema.INNODB_SYS_TABLES.N_COLS         10
+information_schema.INNODB_SYS_TABLES.SPACE          10
+information_schema.INNODB_SYS_TABLES.ROW_FORMAT     12
+information_schema.INNODB_SYS_TABLES.ZIP_PAGE_SIZE  10
+information_schema.INNODB_SYS_TABLES.SPACE_TYPE     10
+
+information_schema.INNODB_FT_BEING_DELETED.DOC_ID 20
+
+information_schema.ROCKSDB_COMPACTION_STATS.CF_NAME 193
+information_schema.ROCKSDB_COMPACTION_STATS.LEVEL   513
+information_schema.ROCKSDB_COMPACTION_STATS.TYPE    513
+information_schema.ROCKSDB_COMPACTION_STATS.VALUE     8
+
+information_schema.INNODB_TRX.trx_id                       18
+information_schema.INNODB_TRX.trx_state                    13
+information_schema.INNODB_TRX.trx_started                  16
+information_schema.INNODB_TRX.trx_requested_lock_id        81
+information_schema.INNODB_TRX.trx_wait_started             16
+information_schema.INNODB_TRX.trx_weight                   20
+information_schema.INNODB_TRX.trx_mysql_thread_id          20
+information_schema.INNODB_TRX.trx_query                  1024
+information_schema.INNODB_TRX.trx_operation_state          64
+information_schema.INNODB_TRX.trx_tables_in_use            20
+information_schema.INNODB_TRX.trx_tables_locked            20
+information_schema.INNODB_TRX.trx_lock_structs             20
+information_schema.INNODB_TRX.trx_lock_memory_bytes        20
+information_schema.INNODB_TRX.trx_rows_locked              20
+information_schema.INNODB_TRX.trx_rows_modified            20
+information_schema.INNODB_TRX.trx_concurrency_tickets      20
+information_schema.INNODB_TRX.trx_isolation_level          16
+information_schema.INNODB_TRX.trx_unique_checks            10
+information_schema.INNODB_TRX.trx_foreign_key_checks       10
+information_schema.INNODB_TRX.trx_last_foreign_key_error  256
+information_schema.INNODB_TRX.trx_is_read_only             10
+information_schema.INNODB_TRX.trx_autocommit_non_locking   10
+
+information_schema.ROCKSDB_SST_PROPS.SST_NAME             193
+information_schema.ROCKSDB_SST_PROPS.COLUMN_FAMILY         10
+information_schema.ROCKSDB_SST_PROPS.DATA_BLOCKS           19
+information_schema.ROCKSDB_SST_PROPS.ENTRIES               19
+information_schema.ROCKSDB_SST_PROPS.RAW_KEY_SIZE          19
+information_schema.ROCKSDB_SST_PROPS.RAW_VALUE_SIZE        19
+information_schema.ROCKSDB_SST_PROPS.DATA_BLOCK_SIZE       19
+information_schema.ROCKSDB_SST_PROPS.INDEX_BLOCK_SIZE      19
+information_schema.ROCKSDB_SST_PROPS.INDEX_PARTITIONS      10
+information_schema.ROCKSDB_SST_PROPS.TOP_LEVEL_INDEX_SIZE  19
+information_schema.ROCKSDB_SST_PROPS.FILTER_BLOCK_SIZE     19
+information_schema.ROCKSDB_SST_PROPS.COMPRESSION_ALGO     193
+information_schema.ROCKSDB_SST_PROPS.CREATION_TIME         19
+information_schema.ROCKSDB_SST_PROPS.FILE_CREATION_TIME    19
+information_schema.ROCKSDB_SST_PROPS.OLDEST_KEY_TIME       19
+information_schema.ROCKSDB_SST_PROPS.FILTER_POLICY        193
+information_schema.ROCKSDB_SST_PROPS.COMPRESSION_OPTIONS  193
+
+information_schema.ROCKSDB_DEADLOCK.DEADLOCK_ID     19
+information_schema.ROCKSDB_DEADLOCK.TIMESTAMP       19
+information_schema.ROCKSDB_DEADLOCK.TRANSACTION_ID  19
+information_schema.ROCKSDB_DEADLOCK.CF_NAME        193
+information_schema.ROCKSDB_DEADLOCK.WAITING_KEY    513
+information_schema.ROCKSDB_DEADLOCK.LOCK_TYPE      193
+information_schema.ROCKSDB_DEADLOCK.INDEX_NAME     193
+information_schema.ROCKSDB_DEADLOCK.TABLE_NAME     193
+information_schema.ROCKSDB_DEADLOCK.ROLLED_BACK     19
+
+information_schema.INNODB_FT_DEFAULT_STOPWORD.value 18
+
+information_schema.INNODB_FT_CONFIG.KEY   193
+information_schema.INNODB_FT_CONFIG.VALUE 193
+
+information_schema.ROCKSDB_DBSTATS.STAT_TYPE 193
+information_schema.ROCKSDB_DBSTATS.VALUE      19
+
+information_schema.INNODB_SYS_TABLESPACES.SPACE           10
+information_schema.INNODB_SYS_TABLESPACES.NAME           655
+information_schema.INNODB_SYS_TABLESPACES.FLAG            10
+information_schema.INNODB_SYS_TABLESPACES.ROW_FORMAT      22
+information_schema.INNODB_SYS_TABLESPACES.PAGE_SIZE       10
+information_schema.INNODB_SYS_TABLESPACES.ZIP_PAGE_SIZE   10
+information_schema.INNODB_SYS_TABLESPACES.SPACE_TYPE      10
+information_schema.INNODB_SYS_TABLESPACES.FS_BLOCK_SIZE   10
+information_schema.INNODB_SYS_TABLESPACES.FILE_SIZE       20
+information_schema.INNODB_SYS_TABLESPACES.ALLOCATED_SIZE  20
+
+information_schema.TokuDB_fractal_tree_info.dictionary_name         256
+information_schema.TokuDB_fractal_tree_info.internal_file_name      256
+information_schema.TokuDB_fractal_tree_info.bt_num_blocks_allocated  19
+information_schema.TokuDB_fractal_tree_info.bt_num_blocks_in_use     19
+information_schema.TokuDB_fractal_tree_info.bt_size_allocated        19
+information_schema.TokuDB_fractal_tree_info.bt_size_in_use           19
+information_schema.TokuDB_fractal_tree_info.table_schema            256
+information_schema.TokuDB_fractal_tree_info.table_name              256
+information_schema.TokuDB_fractal_tree_info.table_dictionary_name   256
+
+information_schema.ROCKSDB_PERF_CONTEXT.TABLE_SCHEMA   193
+information_schema.ROCKSDB_PERF_CONTEXT.TABLE_NAME     193
+information_schema.ROCKSDB_PERF_CONTEXT.PARTITION_NAME 193
+information_schema.ROCKSDB_PERF_CONTEXT.STAT_TYPE      193
+information_schema.ROCKSDB_PERF_CONTEXT.VALUE           19
+
+information_schema.ROCKSDB_INDEX_FILE_MAP.COLUMN_FAMILY         10
+information_schema.ROCKSDB_INDEX_FILE_MAP.INDEX_NUMBER          10
+information_schema.ROCKSDB_INDEX_FILE_MAP.SST_NAME             193
+information_schema.ROCKSDB_INDEX_FILE_MAP.NUM_ROWS              19
+information_schema.ROCKSDB_INDEX_FILE_MAP.DATA_SIZE             19
+information_schema.ROCKSDB_INDEX_FILE_MAP.ENTRY_DELETES         19
+information_schema.ROCKSDB_INDEX_FILE_MAP.ENTRY_SINGLEDELETES   19
+information_schema.ROCKSDB_INDEX_FILE_MAP.ENTRY_MERGES          19
+information_schema.ROCKSDB_INDEX_FILE_MAP.ENTRY_OTHERS          19
+information_schema.ROCKSDB_INDEX_FILE_MAP.DISTINCT_KEYS_PREFIX 800
+
+information_schema.INNODB_TABLESPACES_SCRUBBING.SPACE                          20
+information_schema.INNODB_TABLESPACES_SCRUBBING.NAME                          655
+information_schema.INNODB_TABLESPACES_SCRUBBING.COMPRESSED                     10
+information_schema.INNODB_TABLESPACES_SCRUBBING.LAST_SCRUB_COMPLETED           16
+information_schema.INNODB_TABLESPACES_SCRUBBING.CURRENT_SCRUB_STARTED          16
+information_schema.INNODB_TABLESPACES_SCRUBBING.CURRENT_SCRUB_ACTIVE_THREADS   10
+information_schema.INNODB_TABLESPACES_SCRUBBING.CURRENT_SCRUB_PAGE_NUMBER      20
+information_schema.INNODB_TABLESPACES_SCRUBBING.CURRENT_SCRUB_MAX_PAGE_NUMBER  20
+
+information_schema.INNODB_SYS_SEMAPHORE_WAITS.THREAD_ID          20
+information_schema.INNODB_SYS_SEMAPHORE_WAITS.OBJECT_NAME      4000
+information_schema.INNODB_SYS_SEMAPHORE_WAITS.FILE             4000
+information_schema.INNODB_SYS_SEMAPHORE_WAITS.LINE               10
+information_schema.INNODB_SYS_SEMAPHORE_WAITS.WAIT_TIME          20
+information_schema.INNODB_SYS_SEMAPHORE_WAITS.WAIT_OBJECT        20
+information_schema.INNODB_SYS_SEMAPHORE_WAITS.WAIT_TYPE          16
+information_schema.INNODB_SYS_SEMAPHORE_WAITS.HOLDER_THREAD_ID   20
+information_schema.INNODB_SYS_SEMAPHORE_WAITS.HOLDER_FILE      4000
+information_schema.INNODB_SYS_SEMAPHORE_WAITS.HOLDER_LINE        10
+information_schema.INNODB_SYS_SEMAPHORE_WAITS.CREATED_FILE     4000
+information_schema.INNODB_SYS_SEMAPHORE_WAITS.CREATED_LINE       10
+information_schema.INNODB_SYS_SEMAPHORE_WAITS.WRITER_THREAD      20
+information_schema.INNODB_SYS_SEMAPHORE_WAITS.RESERVATION_MODE   16
+information_schema.INNODB_SYS_SEMAPHORE_WAITS.READERS            10
+information_schema.INNODB_SYS_SEMAPHORE_WAITS.WAITERS_FLAG       20
+information_schema.INNODB_SYS_SEMAPHORE_WAITS.LOCK_WORD          20
+information_schema.INNODB_SYS_SEMAPHORE_WAITS.LAST_WRITER_FILE 4000
+information_schema.INNODB_SYS_SEMAPHORE_WAITS.LAST_WRITER_LINE   10
+information_schema.INNODB_SYS_SEMAPHORE_WAITS.OS_WAIT_COUNT      10
+
+information_schema.INNODB_SYS_FIELDS.INDEX_ID  20
+information_schema.INNODB_SYS_FIELDS.NAME     193
+information_schema.INNODB_SYS_FIELDS.POS       10
+
+information_schema.ROCKSDB_LOCKS.COLUMN_FAMILY_ID  10
+information_schema.ROCKSDB_LOCKS.TRANSACTION_ID    10
+information_schema.ROCKSDB_LOCKS.KEY              513
+information_schema.ROCKSDB_LOCKS.MODE              32
+
+information_schema.INNODB_METRICS.NAME            193
+information_schema.INNODB_METRICS.SUBSYSTEM       193
+information_schema.INNODB_METRICS.COUNT            19
+information_schema.INNODB_METRICS.MAX_COUNT        19
+information_schema.INNODB_METRICS.MIN_COUNT        19
+information_schema.INNODB_METRICS.AVG_COUNT        12
+information_schema.INNODB_METRICS.COUNT_RESET      19
+information_schema.INNODB_METRICS.MAX_COUNT_RESET  19
+information_schema.INNODB_METRICS.MIN_COUNT_RESET  19
+information_schema.INNODB_METRICS.AVG_COUNT_RESET  12
+information_schema.INNODB_METRICS.TIME_ENABLED     16
+information_schema.INNODB_METRICS.TIME_DISABLED    16
+information_schema.INNODB_METRICS.TIME_ELAPSED     19
+information_schema.INNODB_METRICS.TIME_RESET       16
+information_schema.INNODB_METRICS.STATUS          193
+information_schema.INNODB_METRICS.TYPE            193
+information_schema.INNODB_METRICS.COMMENT         193
+
+information_schema.INNODB_FT_DELETED.DOC_ID 20
+
+information_schema.TokuDB_file_map.dictionary_name       256
+information_schema.TokuDB_file_map.internal_file_name    256
+information_schema.TokuDB_file_map.table_schema          256
+information_schema.TokuDB_file_map.table_name            256
+information_schema.TokuDB_file_map.table_dictionary_name 256
 
 information_schema.INNODB_BUFFER_POOL_STATS.POOL_ID                          20
 information_schema.INNODB_BUFFER_POOL_STATS.POOL_SIZE                        20
@@ -890,12 +988,13 @@ information_schema.INNODB_BUFFER_POOL_STATS.LRU_IO_CURRENT                   20
 information_schema.INNODB_BUFFER_POOL_STATS.UNCOMPRESS_TOTAL                 20
 information_schema.INNODB_BUFFER_POOL_STATS.UNCOMPRESS_CURRENT               20
 
-information_schema.INNODB_FT_INDEX_CACHE.WORD         337
-information_schema.INNODB_FT_INDEX_CACHE.FIRST_DOC_ID  20
-information_schema.INNODB_FT_INDEX_CACHE.LAST_DOC_ID   20
-information_schema.INNODB_FT_INDEX_CACHE.DOC_COUNT     20
-information_schema.INNODB_FT_INDEX_CACHE.DOC_ID        20
-information_schema.INNODB_FT_INDEX_CACHE.POSITION      20
+information_schema.INNODB_LOCK_WAITS.requesting_trx_id 18
+information_schema.INNODB_LOCK_WAITS.requested_lock_id 81
+information_schema.INNODB_LOCK_WAITS.blocking_trx_id   18
+information_schema.INNODB_LOCK_WAITS.blocking_lock_id  81
+
+information_schema.ROCKSDB_PERF_CONTEXT_GLOBAL.STAT_TYPE 193
+information_schema.ROCKSDB_PERF_CONTEXT_GLOBAL.VALUE      19
 
 information_schema.INNODB_SYS_FOREIGN.ID       193
 information_schema.INNODB_SYS_FOREIGN.FOR_NAME 193
@@ -903,51 +1002,9 @@ information_schema.INNODB_SYS_FOREIGN.REF_NAME 193
 information_schema.INNODB_SYS_FOREIGN.N_COLS    10
 information_schema.INNODB_SYS_FOREIGN.TYPE      10
 
-information_schema.INNODB_METRICS.NAME            193
-information_schema.INNODB_METRICS.SUBSYSTEM       193
-information_schema.INNODB_METRICS.COUNT            19
-information_schema.INNODB_METRICS.MAX_COUNT        19
-information_schema.INNODB_METRICS.MIN_COUNT        19
-information_schema.INNODB_METRICS.AVG_COUNT        12
-information_schema.INNODB_METRICS.COUNT_RESET      19
-information_schema.INNODB_METRICS.MAX_COUNT_RESET  19
-information_schema.INNODB_METRICS.MIN_COUNT_RESET  19
-information_schema.INNODB_METRICS.AVG_COUNT_RESET  12
-information_schema.INNODB_METRICS.TIME_ENABLED     16
-information_schema.INNODB_METRICS.TIME_DISABLED    16
-information_schema.INNODB_METRICS.TIME_ELAPSED     19
-information_schema.INNODB_METRICS.TIME_RESET       16
-information_schema.INNODB_METRICS.STATUS          193
-information_schema.INNODB_METRICS.TYPE            193
-information_schema.INNODB_METRICS.COMMENT         193
-
-information_schema.INNODB_FT_DEFAULT_STOPWORD.value 18
-
-information_schema.INNODB_CMPMEM.page_size            10
-information_schema.INNODB_CMPMEM.buffer_pool_instance 10
-information_schema.INNODB_CMPMEM.pages_used           10
-information_schema.INNODB_CMPMEM.pages_free           10
-information_schema.INNODB_CMPMEM.relocation_ops       19
-information_schema.INNODB_CMPMEM.relocation_time      10
-
-information_schema.INNODB_SYS_TABLES.TABLE_ID       20
-information_schema.INNODB_SYS_TABLES.NAME          655
-information_schema.INNODB_SYS_TABLES.FLAG           10
-information_schema.INNODB_SYS_TABLES.N_COLS         10
-information_schema.INNODB_SYS_TABLES.SPACE          10
-information_schema.INNODB_SYS_TABLES.FILE_FORMAT    10
-information_schema.INNODB_SYS_TABLES.ROW_FORMAT     12
-information_schema.INNODB_SYS_TABLES.ZIP_PAGE_SIZE  10
-
-information_schema.INNODB_SYS_COLUMNS.TABLE_ID  20
-information_schema.INNODB_SYS_COLUMNS.NAME     193
-information_schema.INNODB_SYS_COLUMNS.POS       20
-information_schema.INNODB_SYS_COLUMNS.MTYPE     10
-information_schema.INNODB_SYS_COLUMNS.PRTYPE    10
-information_schema.INNODB_SYS_COLUMNS.LEN       10
-
-information_schema.INNODB_FT_CONFIG.KEY   193
-information_schema.INNODB_FT_CONFIG.VALUE 193
+information_schema.INNODB_SYS_VIRTUAL.TABLE_ID 20
+information_schema.INNODB_SYS_VIRTUAL.POS      10
+information_schema.INNODB_SYS_VIRTUAL.BASE_POS 10
 
 information_schema.INNODB_BUFFER_PAGE.POOL_ID               20
 information_schema.INNODB_BUFFER_PAGE.BLOCK_ID              20
@@ -970,68 +1027,69 @@ information_schema.INNODB_BUFFER_PAGE.IO_FIX                64
 information_schema.INNODB_BUFFER_PAGE.IS_OLD                 3
 information_schema.INNODB_BUFFER_PAGE.FREE_PAGE_CLOCK       20
 
-information_schema.INNODB_CMP_PER_INDEX_RESET.database_name   192
-information_schema.INNODB_CMP_PER_INDEX_RESET.table_name      192
-information_schema.INNODB_CMP_PER_INDEX_RESET.index_name      192
-information_schema.INNODB_CMP_PER_INDEX_RESET.compress_ops     10
-information_schema.INNODB_CMP_PER_INDEX_RESET.compress_ops_ok  10
-information_schema.INNODB_CMP_PER_INDEX_RESET.compress_time    10
-information_schema.INNODB_CMP_PER_INDEX_RESET.uncompress_ops   10
-information_schema.INNODB_CMP_PER_INDEX_RESET.uncompress_time  10
+information_schema.ROCKSDB_DDL.TABLE_SCHEMA      193
+information_schema.ROCKSDB_DDL.TABLE_NAME        193
+information_schema.ROCKSDB_DDL.PARTITION_NAME    193
+information_schema.ROCKSDB_DDL.INDEX_NAME        193
+information_schema.ROCKSDB_DDL.COLUMN_FAMILY      10
+information_schema.ROCKSDB_DDL.INDEX_NUMBER       10
+information_schema.ROCKSDB_DDL.INDEX_TYPE          5
+information_schema.ROCKSDB_DDL.KV_FORMAT_VERSION   5
+information_schema.ROCKSDB_DDL.TTL_DURATION       19
+information_schema.ROCKSDB_DDL.INDEX_FLAGS        19
+information_schema.ROCKSDB_DDL.CF                193
+information_schema.ROCKSDB_DDL.AUTO_INCREMENT     20
 
-information_schema.XTRADB_READ_VIEW.READ_VIEW_UNDO_NUMBER          20
-information_schema.XTRADB_READ_VIEW.READ_VIEW_LOW_LIMIT_TRX_NUMBER 18
-information_schema.XTRADB_READ_VIEW.READ_VIEW_UPPER_LIMIT_TRX_ID   18
-information_schema.XTRADB_READ_VIEW.READ_VIEW_LOW_LIMIT_TRX_ID     18
+information_schema.INNODB_FT_INDEX_TABLE.WORD         337
+information_schema.INNODB_FT_INDEX_TABLE.FIRST_DOC_ID  20
+information_schema.INNODB_FT_INDEX_TABLE.LAST_DOC_ID   20
+information_schema.INNODB_FT_INDEX_TABLE.DOC_COUNT     20
+information_schema.INNODB_FT_INDEX_TABLE.DOC_ID        20
+information_schema.INNODB_FT_INDEX_TABLE.POSITION      20
 
-information_schema.INNODB_SYS_SEMAPHORE_WAITS.THREAD_ID          20
-information_schema.INNODB_SYS_SEMAPHORE_WAITS.OBJECT_NAME      4000
-information_schema.INNODB_SYS_SEMAPHORE_WAITS.FILE             4000
-information_schema.INNODB_SYS_SEMAPHORE_WAITS.LINE               10
-information_schema.INNODB_SYS_SEMAPHORE_WAITS.WAIT_TIME          20
-information_schema.INNODB_SYS_SEMAPHORE_WAITS.WAIT_OBJECT        20
-information_schema.INNODB_SYS_SEMAPHORE_WAITS.WAIT_TYPE          16
-information_schema.INNODB_SYS_SEMAPHORE_WAITS.HOLDER_THREAD_ID   20
-information_schema.INNODB_SYS_SEMAPHORE_WAITS.HOLDER_FILE      4000
-information_schema.INNODB_SYS_SEMAPHORE_WAITS.HOLDER_LINE        10
-information_schema.INNODB_SYS_SEMAPHORE_WAITS.CREATED_FILE     4000
-information_schema.INNODB_SYS_SEMAPHORE_WAITS.CREATED_LINE       10
-information_schema.INNODB_SYS_SEMAPHORE_WAITS.WRITER_THREAD      20
-information_schema.INNODB_SYS_SEMAPHORE_WAITS.RESERVATION_MODE   16
-information_schema.INNODB_SYS_SEMAPHORE_WAITS.READERS            10
-information_schema.INNODB_SYS_SEMAPHORE_WAITS.WAITERS_FLAG       20
-information_schema.INNODB_SYS_SEMAPHORE_WAITS.LOCK_WORD          20
-information_schema.INNODB_SYS_SEMAPHORE_WAITS.LAST_READER_FILE 4000
-information_schema.INNODB_SYS_SEMAPHORE_WAITS.LAST_READER_LINE   10
-information_schema.INNODB_SYS_SEMAPHORE_WAITS.LAST_WRITER_FILE 4000
-information_schema.INNODB_SYS_SEMAPHORE_WAITS.LAST_WRITER_LINE   10
-information_schema.INNODB_SYS_SEMAPHORE_WAITS.OS_WAIT_COUNT      10
+information_schema.TokuDB_trx.trx_id              19
+information_schema.TokuDB_trx.trx_mysql_thread_id 19
+information_schema.TokuDB_trx.trx_time            19
 
-information_schema.INNODB_CHANGED_PAGES.space_id  10
-information_schema.INNODB_CHANGED_PAGES.page_id   10
-information_schema.INNODB_CHANGED_PAGES.start_lsn 20
-information_schema.INNODB_CHANGED_PAGES.end_lsn   20
+information_schema.user_variables.VARIABLE_NAME        64
+information_schema.user_variables.VARIABLE_VALUE     2048
+information_schema.user_variables.VARIABLE_TYPE        64
+information_schema.user_variables.CHARACTER_SET_NAME   32
 
-information_schema.INNODB_FT_DELETED.DOC_ID 20
+information_schema.ROCKSDB_TRX.TRANSACTION_ID            19
+information_schema.ROCKSDB_TRX.STATE                    193
+information_schema.ROCKSDB_TRX.NAME                     193
+information_schema.ROCKSDB_TRX.WRITE_COUNT               19
+information_schema.ROCKSDB_TRX.LOCK_COUNT                19
+information_schema.ROCKSDB_TRX.TIMEOUT_SEC               10
+information_schema.ROCKSDB_TRX.WAITING_KEY              513
+information_schema.ROCKSDB_TRX.WAITING_COLUMN_FAMILY_ID  10
+information_schema.ROCKSDB_TRX.IS_REPLICATION            10
+information_schema.ROCKSDB_TRX.SKIP_TRX_API              10
+information_schema.ROCKSDB_TRX.READ_ONLY                 10
+information_schema.ROCKSDB_TRX.HAS_DEADLOCK_DETECTION    10
+information_schema.ROCKSDB_TRX.NUM_ONGOING_BULKLOAD      10
+information_schema.ROCKSDB_TRX.THREAD_ID                 10
+information_schema.ROCKSDB_TRX.QUERY                    193
 
-information_schema.INNODB_TABLESPACES_SCRUBBING.SPACE                          20
-information_schema.INNODB_TABLESPACES_SCRUBBING.NAME                          655
-information_schema.INNODB_TABLESPACES_SCRUBBING.COMPRESSED                     10
-information_schema.INNODB_TABLESPACES_SCRUBBING.LAST_SCRUB_COMPLETED           16
-information_schema.INNODB_TABLESPACES_SCRUBBING.CURRENT_SCRUB_STARTED          16
-information_schema.INNODB_TABLESPACES_SCRUBBING.CURRENT_SCRUB_ACTIVE_THREADS   10
-information_schema.INNODB_TABLESPACES_SCRUBBING.CURRENT_SCRUB_PAGE_NUMBER      20
-information_schema.INNODB_TABLESPACES_SCRUBBING.CURRENT_SCRUB_MAX_PAGE_NUMBER  20
+information_schema.INNODB_SYS_FOREIGN_COLS.ID           193
+information_schema.INNODB_SYS_FOREIGN_COLS.FOR_COL_NAME 193
+information_schema.INNODB_SYS_FOREIGN_COLS.REF_COL_NAME 193
+information_schema.INNODB_SYS_FOREIGN_COLS.POS           10
 
-sample01.BAR_USER.usr_id            10
-sample01.BAR_USER.ust_id             3
-sample01.BAR_USER.usr_name          40
-sample01.BAR_USER.usr_password_hash 60
-sample01.BAR_USER.usr_email         80
+information_schema.INNODB_MUTEXES.NAME        4000
+information_schema.INNODB_MUTEXES.CREATE_FILE 4000
+information_schema.INNODB_MUTEXES.CREATE_LINE   10
+information_schema.INNODB_MUTEXES.OS_WAITS      20
 
-sample01.BAR_USER_STATUS.ust_id           3
-sample01.BAR_USER_STATUS.ust_description 40
-sample01.BAR_USER_STATUS.ust_label       20
+information_schema.TokuDB_locks.locks_trx_id                 19
+information_schema.TokuDB_locks.locks_mysql_thread_id        19
+information_schema.TokuDB_locks.locks_dname                 256
+information_schema.TokuDB_locks.locks_key_left              256
+information_schema.TokuDB_locks.locks_key_right             256
+information_schema.TokuDB_locks.locks_table_schema          256
+information_schema.TokuDB_locks.locks_table_name            256
+information_schema.TokuDB_locks.locks_table_dictionary_name 256
 
 test.ABC_AUTH_COMPANY.cmp_id     5
 test.ABC_AUTH_COMPANY.cmp_abbr  15
@@ -1041,6 +1099,24 @@ test.ABC_AUTH_PROFILE.pro_id        5
 test.ABC_AUTH_PROFILE.cmp_id        5
 test.ABC_AUTH_PROFILE.pro_flags    10
 test.ABC_AUTH_PROFILE.pro_rol_ids 100
+
+test.ABC_AUTH_SESSION.ses_id                    10
+test.ABC_AUTH_SESSION.cmp_id                     5
+test.ABC_AUTH_SESSION.lan_id                     3
+test.ABC_AUTH_SESSION.usr_id                    10
+test.ABC_AUTH_SESSION.ses_session_token         64
+test.ABC_AUTH_SESSION.ses_csrf_token            64
+test.ABC_AUTH_SESSION.ses_last_request          20
+test.ABC_AUTH_SESSION.ses_data          4294967295
+
+test.ABC_AUTH_SESSION_NAMED.ses_id           10
+test.ABC_AUTH_SESSION_NAMED.cmp_id            5
+test.ABC_AUTH_SESSION_NAMED.ans_name        128
+test.ABC_AUTH_SESSION_NAMED.ans_data 4294967295
+
+test.ABC_AUTH_SESSION_NAMED_LOCK.ses_id    10
+test.ABC_AUTH_SESSION_NAMED_LOCK.cmp_id     5
+test.ABC_AUTH_SESSION_NAMED_LOCK.ans_name 128
 
 test.ABC_AUTH_USER.usr_id            10
 test.ABC_AUTH_USER.cmp_id             5
@@ -1092,110 +1168,15 @@ test.ABC_BABEL_WORD_TEXT.lan_id         3
 test.ABC_BABEL_WORD_TEXT.wdt_text      80
 test.ABC_BABEL_WORD_TEXT.wdt_timestamp 16
 
-test.AUT_CONFIG.cfg_id                  5
-test.AUT_CONFIG.cmp_id                  5
-test.AUT_CONFIG.ccl_id                  5
-test.AUT_CONFIG.cfg_mandatory           3
-test.AUT_CONFIG.cfg_show_to_company     3
-test.AUT_CONFIG.cfg_modify_by_company   3
-test.AUT_CONFIG.cfg_description       400
-test.AUT_CONFIG.cfg_label              50
+test_audit.TABLE1.c1  3
+test_audit.TABLE1.c2  5
+test_audit.TABLE1.c4 20
 
-test.AUT_CONFIG_CLASS.ccl_id      5
-test.AUT_CONFIG_CLASS.ccl_type   10
-test.AUT_CONFIG_CLASS.ccl_class 128
+test_audit.TABLE2.c1 10
+test_audit.TABLE2.c2 20
+test_audit.TABLE2.c3 30
 
-test.AUT_CONFIG_VALUE.cmp_id       5
-test.AUT_CONFIG_VALUE.cfg_id       5
-test.AUT_CONFIG_VALUE.cfg_value 4000
-
-test.AUT_FLAG.rfl_id        3
-test.AUT_FLAG.rfl_flag     10
-test.AUT_FLAG.rfl_name     80
-test.AUT_FLAG.rfl_function  3
-
-test.AUT_FUNCTIONALITY.fun_id 5
-test.AUT_FUNCTIONALITY.mdl_id 5
-test.AUT_FUNCTIONALITY.wrd_id 5
-
-test.AUT_MENU.mnu_id      5
-test.AUT_MENU.wrd_id      5
-test.AUT_MENU.pag_id      5
-test.AUT_MENU.mnu_level   3
-test.AUT_MENU.mnu_group   5
-test.AUT_MENU.mnu_weight  5
-test.AUT_MENU.mnu_link   64
-
-test.AUT_MODULE.mdl_id 5
-test.AUT_MODULE.wrd_id 5
-
-test.AUT_MODULE_COMPANY.cmp_id 5
-test.AUT_MODULE_COMPANY.mdl_id 5
-
-test.AUT_PAGE.pag_id       5
-test.AUT_PAGE.pag_id_org   5
-test.AUT_PAGE.ptb_id       3
-test.AUT_PAGE.mnu_id       5
-test.AUT_PAGE.wrd_id       5
-test.AUT_PAGE.pag_alias   32
-test.AUT_PAGE.pag_class  128
-test.AUT_PAGE.pag_label  128
-test.AUT_PAGE.pag_weight  10
-
-test.AUT_PAGE_COMPANY.pag_id      5
-test.AUT_PAGE_COMPANY.cmp_id      5
-test.AUT_PAGE_COMPANY.pag_class 128
-
-test.AUT_PAGE_TAB.ptb_id     3
-test.AUT_PAGE_TAB.wrd_id     5
-test.AUT_PAGE_TAB.ptb_label 30
-
-test.AUT_PAG_FUN.pag_id 5
-test.AUT_PAG_FUN.fun_id 5
-
-test.AUT_PRO_PAG.pag_id 5
-test.AUT_PRO_PAG.pro_id 5
-
-test.AUT_PRO_ROL.cmp_id 5
-test.AUT_PRO_ROL.pro_id 5
-test.AUT_PRO_ROL.rol_id 5
-
-test.AUT_ROLE.rol_id      5
-test.AUT_ROLE.cmp_id      5
-test.AUT_ROLE.rlg_id      5
-test.AUT_ROLE.rol_weight  5
-test.AUT_ROLE.rol_name   32
-test.AUT_ROLE.rol_label  50
-
-test.AUT_ROLE_GROUP.rlg_id      5
-test.AUT_ROLE_GROUP.wrd_id      5
-test.AUT_ROLE_GROUP.rlg_weight  5
-test.AUT_ROLE_GROUP.rlg_label  50
-
-test.AUT_ROL_FLG.rfl_id 3
-test.AUT_ROL_FLG.rol_id 5
-
-test.AUT_ROL_FUN.cmp_id 5
-test.AUT_ROL_FUN.fun_id 5
-test.AUT_ROL_FUN.rol_id 5
-
-test.AUT_USR_ROL.cmp_id          5
-test.AUT_USR_ROL.usr_id         10
-test.AUT_USR_ROL.rol_id          5
-test.AUT_USR_ROL.aur_date_start 10
-test.AUT_USR_ROL.aur_date_stop  10
-
-test.LOG_EVENT.lev_id       10
-test.LOG_EVENT.cmp_id        5
-test.LOG_EVENT.let_id        3
-test.LOG_EVENT.ses_id       10
-test.LOG_EVENT.usr_id       10
-test.LOG_EVENT.lev_datetime 16
-test.LOG_EVENT.lev_ip       10
-test.LOG_EVENT.lev_arg1     64
-test.LOG_EVENT.lev_arg2     64
-
-test.LOG_EVENT_TYPE.let_id     3
-test.LOG_EVENT_TYPE.wrd_id     5
-test.LOG_EVENT_TYPE.let_label 50
+test_data.TABLE1.c1  3
+test_data.TABLE1.c2  5
+test_data.TABLE1.c4 20
 

@@ -114,9 +114,7 @@ class CoreOverviewTable extends OverviewTable
     if (count($rows)<=3) $this->filter = false;
 
     // Generate the HTML code for the table.
-    $ret = parent::getHtmlTable($rows);
-
-    return $ret;
+    return parent::getHtmlTable($rows);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

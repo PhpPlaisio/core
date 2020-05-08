@@ -34,8 +34,8 @@ class MenuUpdatePage extends MenuBasePage
   {
     parent::__construct();
 
-    $this->mnuId       = Nub::$cgi->getManId('mnu', 'mnu');
-    $this->details     = Nub::$DL->abcSystemMenuGetDetails($this->mnuId, $this->lanId);
+    $this->mnuId       = Nub::$nub->cgi->getManId('mnu', 'mnu');
+    $this->details     = Nub::$nub->DL->abcSystemMenuGetDetails($this->mnuId, $this->lanId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -49,9 +49,9 @@ class MenuUpdatePage extends MenuBasePage
    */
   public static function getUrl(int $mnuId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_MENU_MODIFY, 'pag');
-    $url .= Nub::$cgi->putId('mnu', $mnuId, 'mnu');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_MENU_MODIFY, 'pag');
+    $url .= Nub::$nub->cgi->putId('mnu', $mnuId, 'mnu');
 
     return $url;
   }
@@ -70,20 +70,20 @@ class MenuUpdatePage extends MenuBasePage
 
     if ($values['mnu_title'])
     {
-      $wrd_id = Nub::$DL->abcBabelWordInsertWord(C::WDG_ID_MENU, null, null, $values['mnu_title']);
+      $wrd_id = Nub::$nub->DL->abcBabelWordInsertWord(C::WDG_ID_MENU, null, null, $values['mnu_title']);
     }
     else
     {
       $wrd_id = $values['wrd_id'];
     }
 
-    Nub::$DL->abcSystemMenuUpdate($this->mnuId,
-                                  $wrd_id,
-                                  $values['pag_id'],
-                                  $values['mnu_level'],
-                                  $values['mnu_group'],
-                                  $values['mnu_weight'],
-                                  $values['mnu_link']);
+    Nub::$nub->DL->abcSystemMenuUpdate($this->mnuId,
+                                       $wrd_id,
+                                       $values['pag_id'],
+                                       $values['mnu_level'],
+                                       $values['mnu_group'],
+                                       $values['mnu_weight'],
+                                       $values['mnu_link']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

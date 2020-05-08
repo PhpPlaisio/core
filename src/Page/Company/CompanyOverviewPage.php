@@ -25,8 +25,8 @@ class CompanyOverviewPage extends TabPage
    */
   public static function getUrl(): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_OVERVIEW, 'pag');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_COMPANY_OVERVIEW, 'pag');
 
     return $url;
   }
@@ -37,7 +37,7 @@ class CompanyOverviewPage extends TabPage
    */
   protected function echoTabContent(): void
   {
-    $companies = Nub::$DL->abcCompanyGetAll();
+    $companies = Nub::$nub->DL->abcCompanyGetAll();
 
     $table = new CoreOverviewTable();
 

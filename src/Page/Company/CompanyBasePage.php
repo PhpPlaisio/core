@@ -100,7 +100,7 @@ abstract class CompanyBasePage extends TabPage
 
       default:
         $this->form->defaultHandler($method);
-    };
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

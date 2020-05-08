@@ -48,7 +48,7 @@ class WordTranslateWordsPage extends BabelPage
   {
     parent::__construct();
 
-    $this->wdgId = Nub::$cgi->getManId('wdg', 'wdg');
+    $this->wdgId = Nub::$nub->cgi->getManId('wdg', 'wdg');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -62,10 +62,10 @@ class WordTranslateWordsPage extends BabelPage
    */
   public static function getUrl(int $wdgId, int $lanId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_TRANSLATE_WORDS, 'pag');
-    $url .= Nub::$cgi->putId('wdg', $wdgId, 'wdg');
-    $url .= Nub::$cgi->putId('act_lan', $lanId, 'lan');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_BABEL_WORD_TRANSLATE_WORDS, 'pag');
+    $url .= Nub::$nub->cgi->putId('wdg', $wdgId, 'wdg');
+    $url .= Nub::$nub->cgi->putId('act_lan', $lanId, 'lan');
 
     return $url;
   }
@@ -86,7 +86,7 @@ class WordTranslateWordsPage extends BabelPage
    */
   private function createForm(): void
   {
-    $words = Nub::$DL->abcBabelWordGroupGetAllWordsTranslator($this->wdgId, $this->actLanId);
+    $words = Nub::$nub->DL->abcBabelWordGroupGetAllWordsTranslator($this->wdgId, $this->actLanId);
 
     $this->form = new CoreForm();
 
@@ -102,7 +102,7 @@ class WordTranslateWordsPage extends BabelPage
     $button = new CoreButtonControl();
     $submit = new SubmitControl('submit');
     $submit->setMethod('handleForm');
-    $submit->setValue(Nub::$babel->getWord(C::WRD_ID_BUTTON_TRANSLATE));
+    $submit->setValue(Nub::$nub->babel->getWord(C::WRD_ID_BUTTON_TRANSLATE));
     $button->addFormControl($submit);
 
     // Put everything together in a LoverControl.
@@ -131,7 +131,7 @@ class WordTranslateWordsPage extends BabelPage
 
     foreach ($changes['data'] as $wrd_id => $changed)
     {
-      Nub::$DL->abcBabelWordTranslateWord($this->usrId, $wrd_id, $this->actLanId, $values['data'][$wrd_id]['act_wdt_text']);
+      Nub::$nub->DL->abcBabelWordTranslateWord($this->usrId, $wrd_id, $this->actLanId, $values['data'][$wrd_id]['act_wdt_text']);
     }
   }
 
@@ -150,7 +150,7 @@ class WordTranslateWordsPage extends BabelPage
 
       default:
         $this->form->defaultHandler($method);
-    };
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

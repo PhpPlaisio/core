@@ -25,8 +25,8 @@ class PageOverviewPage extends TabPage
    */
   public static function getUrl(): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_PAGE_OVERVIEW, 'pag');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_PAGE_OVERVIEW, 'pag');
 
     return $url;
   }
@@ -37,7 +37,7 @@ class PageOverviewPage extends TabPage
    */
   protected function echoTabContent(): void
   {
-    $pages = Nub::$DL->abcSystemPageGetAll($this->lanId);
+    $pages = Nub::$nub->DL->abcSystemPageGetAll($this->lanId);
 
     $table = new CoreOverviewTable();
     $table->addTableAction('default', new PageInsertTableAction());

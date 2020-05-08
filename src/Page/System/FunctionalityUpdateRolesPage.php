@@ -52,11 +52,11 @@ class FunctionalityUpdateRolesPage extends TabPage
   {
     parent::__construct();
 
-    $this->funId = Nub::$cgi->getManId('fun', 'fun');
+    $this->funId = Nub::$nub->cgi->getManId('fun', 'fun');
 
-    $this->details = Nub::$DL->abcSystemFunctionalityGetDetails($this->funId, $this->lanId);
+    $this->details = Nub::$nub->DL->abcSystemFunctionalityGetDetails($this->funId, $this->lanId);
 
-    Nub::$assets->appendPageTitle($this->details['fun_name']);
+    Nub::$nub->assets->appendPageTitle($this->details['fun_name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -69,9 +69,9 @@ class FunctionalityUpdateRolesPage extends TabPage
    */
   public static function getUrl(int $funId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_UPDATE_ROLES, 'pag');
-    $url .= Nub::$cgi->putId('fun', $funId, 'fun');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_UPDATE_ROLES, 'pag');
+    $url .= Nub::$nub->cgi->putId('fun', $funId, 'fun');
 
     return $url;
   }
@@ -95,7 +95,7 @@ class FunctionalityUpdateRolesPage extends TabPage
   private function createForm(): void
   {
     // Get all available roles.
-    $roles = Nub::$DL->abcSystemFunctionalityGetAvailableRoles($this->funId, $this->lanId);
+    $roles = Nub::$nub->DL->abcSystemFunctionalityGetAvailableRoles($this->funId, $this->lanId);
 
     // Create form.
     $this->form = new CoreForm();
@@ -112,7 +112,7 @@ class FunctionalityUpdateRolesPage extends TabPage
     $button = new CoreButtonControl();
     $submit = new SubmitControl('submit');
     $submit->setMethod('handleForm');
-    $submit->setValue(Nub::$babel->getWord(C::WRD_ID_BUTTON_UPDATE));
+    $submit->setValue(Nub::$nub->babel->getWord(C::WRD_ID_BUTTON_UPDATE));
     $button->addFormControl($submit);
 
     // Put everything together in a LouverControl.
@@ -143,16 +143,16 @@ class FunctionalityUpdateRolesPage extends TabPage
     {
       if ($values['data'][$rol_id]['rol_enabled'])
       {
-        Nub::$DL->abcCompanyRoleInsertFunctionality($values['data'][$rol_id]['cmp_id'], $rol_id, $this->funId);
+        Nub::$nub->DL->abcCompanyRoleInsertFunctionality($values['data'][$rol_id]['cmp_id'], $rol_id, $this->funId);
       }
       else
       {
-        Nub::$DL->abcCompanyRoleDeleteFunctionality($values['data'][$rol_id]['cmp_id'], $rol_id, $this->funId);
+        Nub::$nub->DL->abcCompanyRoleDeleteFunctionality($values['data'][$rol_id]['cmp_id'], $rol_id, $this->funId);
       }
     }
 
     // Use brute force to proper profiles.
-    Nub::$DL->abcProfileProper();
+    Nub::$nub->DL->abcProfileProper();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -170,7 +170,7 @@ class FunctionalityUpdateRolesPage extends TabPage
 
       default:
         $this->form->defaultHandler($method);
-    };
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

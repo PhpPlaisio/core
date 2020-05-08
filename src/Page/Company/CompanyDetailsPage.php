@@ -31,7 +31,7 @@ class CompanyDetailsPage extends CompanyPage
   {
     parent::__construct();
 
-    $this->details = Nub::$DL->abcCompanyGetDetails($this->targetCmpId);
+    $this->details = Nub::$nub->DL->abcCompanyGetDetails($this->targetCmpId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -44,9 +44,9 @@ class CompanyDetailsPage extends CompanyPage
    */
   public static function getUrl(int $targetCmpId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_DETAILS, 'pag');
-    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_COMPANY_DETAILS, 'pag');
+    $url .= Nub::$nub->cgi->putId('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }

@@ -27,8 +27,8 @@ class RoleUpdatePage extends RoleBasePage
   {
     parent::__construct();
 
-    $this->rolId       = Nub::$cgi->getManId('rol', 'rol');
-    $this->details     = Nub::$DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId, $this->lanId);
+    $this->rolId       = Nub::$nub->cgi->getManId('rol', 'rol');
+    $this->details     = Nub::$nub->DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId, $this->lanId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -43,10 +43,10 @@ class RoleUpdatePage extends RoleBasePage
    */
   public static function getUrl(int $targetCmpId, int $rolId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_ROLE_UPDATE, 'pag');
-    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
-    $url .= Nub::$cgi->putId('rol', $rolId, 'rol');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_COMPANY_ROLE_UPDATE, 'pag');
+    $url .= Nub::$nub->cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url .= Nub::$nub->cgi->putId('rol', $rolId, 'rol');
 
     return $url;
   }
@@ -63,12 +63,12 @@ class RoleUpdatePage extends RoleBasePage
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
 
-    Nub::$DL->abcCompanyRoleUpdate($this->targetCmpId,
-                                   $this->rolId,
-                                   $values['rlg_id'],
-                                   $values['rol_name'],
-                                   $values['rol_weight'],
-                                   $values['rol_label']);
+    Nub::$nub->DL->abcCompanyRoleUpdate($this->targetCmpId,
+                                        $this->rolId,
+                                        $values['rlg_id'],
+                                        $values['rol_name'],
+                                        $values['rol_weight'],
+                                        $values['rol_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

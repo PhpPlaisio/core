@@ -32,9 +32,9 @@ class RoleInsertPage extends RoleBasePage
    */
   public static function getUrl(int $targetCmpId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_ROLE_INSERT, 'pag');
-    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_COMPANY_ROLE_INSERT, 'pag');
+    $url .= Nub::$nub->cgi->putId('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }
@@ -47,11 +47,11 @@ class RoleInsertPage extends RoleBasePage
   {
     $values = $this->form->getValues();
 
-    $this->rolId = Nub::$DL->abcCompanyRoleInsert($this->targetCmpId,
-                                                  $values['rlg_id'],
-                                                  $values['rol_name'],
-                                                  $values['rol_weight'],
-                                                  $values['rol_label']);
+    $this->rolId = Nub::$nub->DL->abcCompanyRoleInsert($this->targetCmpId,
+                                                       $values['rlg_id'],
+                                                       $values['rol_name'],
+                                                       $values['rol_weight'],
+                                                       $values['rol_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

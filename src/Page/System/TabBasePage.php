@@ -78,7 +78,7 @@ abstract class TabBasePage extends TabPage
     $this->form = new CoreForm();
 
     // Create select box for (known) page titles.
-    $titles = Nub::$DL->abcBabelWordGroupGetAllWords(C::WDG_ID_PAGE_GROUP_TITLE, $this->lanId);
+    $titles = Nub::$nub->DL->abcBabelWordGroupGetAllWords(C::WDG_ID_PAGE_GROUP_TITLE, $this->lanId);
     $input  = new SelectControl('wrd_id');
     $input->setOptions($titles, 'wrd_id', 'wdt_text');
     $input->setEmptyOption();
@@ -113,7 +113,7 @@ abstract class TabBasePage extends TabPage
 
       default:
         $this->form->defaultHandler($method);
-    };
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

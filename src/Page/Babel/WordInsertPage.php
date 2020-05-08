@@ -19,7 +19,7 @@ class WordInsertPage extends WordBasePage
   {
     parent::__construct();
 
-    $this->wdgId       = Nub::$cgi->getManId('wdg', 'wdg');
+    $this->wdgId       = Nub::$nub->cgi->getManId('wdg', 'wdg');
     $this->buttonWrdId = C::WRD_ID_BUTTON_INSERT;
   }
 
@@ -33,10 +33,10 @@ class WordInsertPage extends WordBasePage
    */
   public static function getUrl(int $wdgId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_INSERT, 'pag');
-    $url .= Nub::$cgi->putId('wdg', $wdgId, 'wdg');
-    $url .= Nub::$cgi->putId('act_lan', C::LAN_ID_BABEL_REFERENCE, 'lan');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_BABEL_WORD_INSERT, 'pag');
+    $url .= Nub::$nub->cgi->putId('wdg', $wdgId, 'wdg');
+    $url .= Nub::$nub->cgi->putId('act_lan', C::LAN_ID_BABEL_REFERENCE, 'lan');
 
     return $url;
   }
@@ -49,10 +49,10 @@ class WordInsertPage extends WordBasePage
   {
     $values = $this->form->getValues();
 
-    $this->wrdId = Nub::$DL->abcBabelWordInsertWord($this->wdgId,
-                                                    $values['wrd_label'],
-                                                    $values['wrd_comment'],
-                                                    $values['wdt_text']);
+    $this->wrdId = Nub::$nub->DL->abcBabelWordInsertWord($this->wdgId,
+                                                         $values['wrd_label'],
+                                                         $values['wrd_comment'],
+                                                         $values['wdt_text']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

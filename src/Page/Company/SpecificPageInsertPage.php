@@ -34,9 +34,9 @@ class SpecificPageInsertPage extends CompanyPage
    */
   public static function getUrl(int $targetCmpId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_INSERT, 'pag');
-    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_INSERT, 'pag');
+    $url .= Nub::$nub->cgi->putId('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }
@@ -49,7 +49,7 @@ class SpecificPageInsertPage extends CompanyPage
   {
     $values = $this->form->getValues();
 
-    Nub::$DL->abcCompanySpecificPageInsert($this->targetCmpId, $values['prt_pag_id'], $values['pag_class_child']);
+    Nub::$nub->DL->abcCompanySpecificPageInsert($this->targetCmpId, $values['prt_pag_id'], $values['pag_class_child']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -68,14 +68,14 @@ class SpecificPageInsertPage extends CompanyPage
    */
   private function createForm(): void
   {
-    $pages = Nub::$DL->abcSystemPageGetAll($this->lanId);
+    $pages = Nub::$nub->DL->abcSystemPageGetAll($this->lanId);
 
     $this->form = new CoreForm();
 
     // Input for parent class.
     $input = new SelectControl('prt_pag_id');
     $input->setOptions($pages, 'pag_id', 'pag_class');
-    $input->setOptionsObfuscator(Nub::getObfuscator('pag'));
+    $input->setOptionsObfuscator(Nub::$nub->getObfuscator('pag'));
     $this->form->addFormControl($input, 'Parent Class');
 
     // Input for company specific page.
@@ -102,7 +102,7 @@ class SpecificPageInsertPage extends CompanyPage
 
       default:
         $this->form->defaultHandler($method);
-    };
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

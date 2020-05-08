@@ -45,11 +45,11 @@ class WordGroupDetailsPage extends BabelPage
   {
     parent::__construct();
 
-    $this->wdgId = Nub::$cgi->getManId('wdg', 'wdg');
+    $this->wdgId = Nub::$nub->cgi->getManId('wdg', 'wdg');
 
-    $this->details = Nub::$DL->abcBabelWordGroupGetDetails($this->wdgId);
+    $this->details = Nub::$nub->DL->abcBabelWordGroupGetDetails($this->wdgId);
 
-    Nub::$assets->appendPageTitle($this->details['wdg_name']);
+    Nub::$nub->assets->appendPageTitle($this->details['wdg_name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -63,10 +63,10 @@ class WordGroupDetailsPage extends BabelPage
    */
   public static function getUrl(int $wdgId, int $targetLanId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_GROUP_DETAILS, 'pag');
-    $url .= Nub::$cgi->putId('wdg', $wdgId, 'wdg');
-    $url .= Nub::$cgi->putId('act_lan', $targetLanId, 'lan');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_BABEL_WORD_GROUP_DETAILS, 'pag');
+    $url .= Nub::$nub->cgi->putId('wdg', $wdgId, 'wdg');
+    $url .= Nub::$nub->cgi->putId('act_lan', $targetLanId, 'lan');
 
     return $url;
   }
@@ -112,12 +112,12 @@ class WordGroupDetailsPage extends BabelPage
   {
     // Determine whether the user is a translator.
     $is_translator = ($this->actLanId!=$this->refLanId &&
-      Nub::$DL->abcAuthGetPageAuth($this->cmpId, $this->proId, C::PAG_ID_BABEL_WORD_TRANSLATE));
+      Nub::$nub->DL->abcAuthGetPageAuth($this->cmpId, $this->proId, C::PAG_ID_BABEL_WORD_TRANSLATE));
 
-    $words = Nub::$DL->abcBabelWordGroupGetAllWordsTranslator($this->wdgId, $this->actLanId);
+    $words = Nub::$nub->DL->abcBabelWordGroupGetAllWordsTranslator($this->wdgId, $this->actLanId);
 
-    $ref_language = Nub::$DL->abcBabelLanguageGetName($this->refLanId, $this->refLanId);
-    $act_language = Nub::$DL->abcBabelLanguageGetName($this->actLanId, $this->refLanId);
+    $ref_language = Nub::$nub->DL->abcBabelLanguageGetName($this->refLanId, $this->refLanId);
+    $act_language = Nub::$nub->DL->abcBabelLanguageGetName($this->actLanId, $this->refLanId);
 
     $table = new CoreOverviewTable();
 
@@ -164,7 +164,7 @@ class WordGroupDetailsPage extends BabelPage
     $table->addColumn(new WordUpdateIconTableColumn());
 
     // Show link to delete the word.
-    if (Nub::$DL->abcAuthGetPageAuth($this->cmpId, $this->proId, C::PAG_ID_BABEL_WORD_DELETE))
+    if (Nub::$nub->DL->abcAuthGetPageAuth($this->cmpId, $this->proId, C::PAG_ID_BABEL_WORD_DELETE))
     {
       $table->addColumn(new WordDeleteIconTableColumn());
     }

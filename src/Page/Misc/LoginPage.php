@@ -44,7 +44,7 @@ class LoginPage extends CorePage
   {
     parent::__construct();
 
-    $this->redirect = Nub::$cgi->getManUrl('redirect', '/');
+    $this->redirect = Nub::$nub->cgi->getManUrl('redirect', '/');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -57,9 +57,9 @@ class LoginPage extends CorePage
    */
   public static function getUrl(?string $redirect = null): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_MISC_LOGIN, 'pag');
-    $url .= Nub::$cgi->putUrl('redirect', $redirect);
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_MISC_LOGIN, 'pag');
+    $url .= Nub::$nub->cgi->putUrl('redirect', $redirect);
 
     return $url;
   }
@@ -152,7 +152,7 @@ class LoginPage extends CorePage
 
       default:
         $this->form->defaultHandler($method);
-    };
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -177,7 +177,7 @@ class LoginPage extends CorePage
     $values = $this->form->getValues();
 
     // Phase 1: Validate the user is allowed to login (except for password validation).
-    $response = Nub::$DL->abcSessionLogin1($this->cmpId, $values['usr_name']);
+    $response = Nub::$nub->DL->abcSessionLogin1($this->cmpId, $values['usr_name']);
     $lgr_id   = $response['lgr_id'];
 
     if ($lgr_id==C::LGR_ID_GRANTED)
@@ -190,13 +190,13 @@ class LoginPage extends CorePage
     if ($lgr_id==C::LGR_ID_GRANTED)
     {
       // The user has logged on successfully.
-      Nub::$session->login($response['usr_id']);
+      Nub::$nub->session->login($response['usr_id']);
 
       // First verify that the hash is sill up to date.
       if (Password::passwordNeedsRehash($response['usr_password_hash']))
       {
         $hash = Password::passwordHash($values['usr_password']);
-        Nub::$DL->abcUserPasswordUpdateHash($this->cmpId, $response['usr_id'], $hash);
+        Nub::$nub->DL->abcUserPasswordUpdateHash($this->cmpId, $response['usr_id'], $hash);
       }
 
       $this->response = new SeeOtherResponse($this->redirect);
@@ -218,7 +218,7 @@ class LoginPage extends CorePage
     echo '<head>';
     echo '<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>';
 
-    Nub::$assets->echoCascadingStyleSheets();
+    Nub::$nub->assets->echoCascadingStyleSheets();
 
     echo '</head><body>';
   }

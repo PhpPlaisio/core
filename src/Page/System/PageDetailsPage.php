@@ -39,7 +39,7 @@ class PageDetailsPage extends TabPage
   {
     parent::__construct();
 
-    $this->targetPagId = Nub::$cgi->getManId('tar_pag', 'pag');
+    $this->targetPagId = Nub::$nub->cgi->getManId('tar_pag', 'pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -52,9 +52,9 @@ class PageDetailsPage extends TabPage
    */
   public static function getUrl(int $pagId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_PAGE_DETAILS, 'pag');
-    $url .= Nub::$cgi->putId('tar_pag', $pagId, 'pag');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_PAGE_DETAILS, 'pag');
+    $url .= Nub::$nub->cgi->putId('tar_pag', $pagId, 'pag');
 
     return $url;
   }
@@ -79,7 +79,7 @@ class PageDetailsPage extends TabPage
    */
   private function showDetails(): void
   {
-    $details = Nub::$DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
+    $details = Nub::$nub->DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
     $table   = new CoreDetailTable();
 
     // Add table action for updating the page details.
@@ -118,7 +118,7 @@ class PageDetailsPage extends TabPage
    */
   private function showFunctionalities(): void
   {
-    $roles = Nub::$DL->abcSystemPageGetGrantedFunctionalities($this->targetPagId, $this->lanId);
+    $roles = Nub::$nub->DL->abcSystemPageGetGrantedFunctionalities($this->targetPagId, $this->lanId);
 
     $table = new CoreOverviewTable();
 
@@ -140,7 +140,7 @@ class PageDetailsPage extends TabPage
    */
   private function showGrantedRoles(): void
   {
-    $roles = Nub::$DL->abcSystemPageGetGrantedRoles($this->targetPagId);
+    $roles = Nub::$nub->DL->abcSystemPageGetGrantedRoles($this->targetPagId);
 
     $table = new CoreOverviewTable();
 

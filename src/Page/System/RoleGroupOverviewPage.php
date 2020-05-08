@@ -26,8 +26,8 @@ class RoleGroupOverviewPage extends TabPage
    */
   public static function getUrl(): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_OVERVIEW, 'pag');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_OVERVIEW, 'pag');
 
     return $url;
   }
@@ -38,7 +38,7 @@ class RoleGroupOverviewPage extends TabPage
    */
   protected function echoTabContent(): void
   {
-    $roles = Nub::$DL->abcSystemRoleGroupGetAll($this->lanId);
+    $roles = Nub::$nub->DL->abcSystemRoleGroupGetAll($this->lanId);
 
     $table = new CoreOverviewTable();
 

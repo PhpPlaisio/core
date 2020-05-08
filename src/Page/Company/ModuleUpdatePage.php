@@ -36,9 +36,9 @@ class ModuleUpdatePage extends CompanyPage
    */
   public static function getUrl(int $targetCmpId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_MODULE_UPDATE, 'pag');
-    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_COMPANY_MODULE_UPDATE, 'pag');
+    $url .= Nub::$nub->cgi->putId('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }
@@ -60,7 +60,7 @@ class ModuleUpdatePage extends CompanyPage
   private function createForm(): void
   {
     // Get all available modules.
-    $modules = Nub::$DL->abcCompanyModuleGetAllAvailable($this->targetCmpId, $this->lanId);
+    $modules = Nub::$nub->DL->abcCompanyModuleGetAllAvailable($this->targetCmpId, $this->lanId);
 
     // Create the form.
     $this->form = new CoreForm();
@@ -77,7 +77,7 @@ class ModuleUpdatePage extends CompanyPage
     $button = new CoreButtonControl();
     $submit = new SubmitControl('submit');
     $submit->setMethod('handleForm');
-    $submit->setValue(Nub::$babel->getWord(C::WRD_ID_BUTTON_OK));
+    $submit->setValue(Nub::$nub->babel->getWord(C::WRD_ID_BUTTON_OK));
     $button->addFormControl($submit);
 
     // Put everything together in a LoverControl.
@@ -108,16 +108,16 @@ class ModuleUpdatePage extends CompanyPage
     {
       if ($values['data'][$mdl_id]['mdl_enabled'])
       {
-        Nub::$DL->abcCompanyModuleEnable($this->targetCmpId, $mdl_id);
+        Nub::$nub->DL->abcCompanyModuleEnable($this->targetCmpId, $mdl_id);
       }
       else
       {
-        Nub::$DL->abcCompanyModuleDisable($this->targetCmpId, $mdl_id);
+        Nub::$nub->DL->abcCompanyModuleDisable($this->targetCmpId, $mdl_id);
       }
     }
 
     // Use brute force to proper profiles.
-    Nub::$DL->abcProfileProper();
+    Nub::$nub->DL->abcProfileProper();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -135,7 +135,7 @@ class ModuleUpdatePage extends CompanyPage
 
       default:
         $this->form->defaultHandler($method);
-    };
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

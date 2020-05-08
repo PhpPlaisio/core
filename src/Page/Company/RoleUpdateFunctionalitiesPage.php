@@ -48,9 +48,9 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
   {
     parent::__construct();
 
-    $this->rolId = Nub::$cgi->getManId('rol', 'rol');
+    $this->rolId = Nub::$nub->cgi->getManId('rol', 'rol');
 
-    $this->details = Nub::$DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId, $this->lanId);
+    $this->details = Nub::$nub->DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId, $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -64,10 +64,10 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
    */
   public static function getUrl(int $targetCmpId, int $rolId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_ROLE_UPDATE_FUNCTIONALITIES, 'pag');
-    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
-    $url .= Nub::$cgi->putId('rol', $rolId, 'rol');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_COMPANY_ROLE_UPDATE_FUNCTIONALITIES, 'pag');
+    $url .= Nub::$nub->cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url .= Nub::$nub->cgi->putId('rol', $rolId, 'rol');
 
     return $url;
   }
@@ -89,7 +89,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
   private function createForm(): void
   {
     // Get all available functionalities.
-    $pages = Nub::$DL->abcCompanyRoleGetAvailableFunctionalities($this->targetCmpId, $this->rolId, $this->lanId);
+    $pages = Nub::$nub->DL->abcCompanyRoleGetAvailableFunctionalities($this->targetCmpId, $this->rolId, $this->lanId);
 
     // Create form.
     $this->form = new CoreForm();
@@ -106,7 +106,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
     $button = new CoreButtonControl();
     $submit = new SubmitControl('submit');
     $submit->setMethod('handleForm');
-    $submit->setValue(Nub::$babel->getWord(C::WRD_ID_BUTTON_UPDATE));
+    $submit->setValue(Nub::$nub->babel->getWord(C::WRD_ID_BUTTON_UPDATE));
     $button->addFormControl($submit);
 
     // Put everything together in a LouverControl.
@@ -137,16 +137,16 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
     {
       if ($values['data'][$fun_id]['fun_enabled'])
       {
-        Nub::$DL->abcCompanyRoleInsertFunctionality($this->targetCmpId, $this->rolId, $fun_id);
+        Nub::$nub->DL->abcCompanyRoleInsertFunctionality($this->targetCmpId, $this->rolId, $fun_id);
       }
       else
       {
-        Nub::$DL->abcCompanyRoleDeleteFunctionality($this->targetCmpId, $this->rolId, $fun_id);
+        Nub::$nub->DL->abcCompanyRoleDeleteFunctionality($this->targetCmpId, $this->rolId, $fun_id);
       }
     }
 
     // Use brute force to proper profiles.
-    Nub::$DL->abcProfileProper();
+    Nub::$nub->DL->abcProfileProper();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -164,7 +164,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
 
       default:
         $this->form->defaultHandler($method);
-    };
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

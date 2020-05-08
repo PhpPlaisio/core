@@ -85,12 +85,12 @@ abstract class WordBasePage extends BabelPage
    */
   private function createForm(): void
   {
-    $ref_language = Nub::$DL->abcBabelLanguageGetName($this->refLanId, $this->refLanId);
+    $ref_language = Nub::$nub->DL->abcBabelLanguageGetName($this->refLanId, $this->refLanId);
 
     $this->form = new CoreForm();
 
     // Create from control for word group name.
-    $word_groups = Nub::$DL->abcBabelWordGroupGetAll($this->refLanId);
+    $word_groups = Nub::$nub->DL->abcBabelWordGroupGetAll($this->refLanId);
     $input       = new SelectControl('wdg_id');
     $input->setOptions($word_groups, 'wdg_id', 'wdg_name');
     $input->setValue($this->wdgId);
@@ -129,7 +129,7 @@ abstract class WordBasePage extends BabelPage
    */
   private function echoWordGroupInfo(): void
   {
-    $group = Nub::$DL->abcBabelWordGroupGetDetails($this->wdgId);
+    $group = Nub::$nub->DL->abcBabelWordGroupGetDetails($this->wdgId);
 
     $table = new CoreDetailTable();
 
@@ -157,7 +157,7 @@ abstract class WordBasePage extends BabelPage
 
       default:
         $this->form->defaultHandler($method);
-    };
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

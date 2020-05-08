@@ -49,9 +49,9 @@ class RoleGroupDetailsPage extends TabPage
   {
     parent::__construct();
 
-    $this->rlgId     = Nub::$cgi->getManId('rlg', 'rlg');
-    $this->roleGroup = Nub::$DL->abcSystemRoleGroupGetDetails($this->rlgId, $this->lanId);
-    $this->roles     = Nub::$DL->abcSystemRoleGroupGetRoles($this->rlgId);
+    $this->rlgId     = Nub::$nub->cgi->getManId('rlg', 'rlg');
+    $this->roleGroup = Nub::$nub->DL->abcSystemRoleGroupGetDetails($this->rlgId, $this->lanId);
+    $this->roles     = Nub::$nub->DL->abcSystemRoleGroupGetRoles($this->rlgId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -64,9 +64,9 @@ class RoleGroupDetailsPage extends TabPage
    */
   public static function getUrl(int $rlgId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_DETAILS, 'pag');
-    $url .= Nub::$cgi->putId('rlg', $rlgId, 'rlg');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_DETAILS, 'pag');
+    $url .= Nub::$nub->cgi->putId('rlg', $rlgId, 'rlg');
 
     return $url;
   }

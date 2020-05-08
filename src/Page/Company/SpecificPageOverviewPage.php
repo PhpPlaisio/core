@@ -34,7 +34,7 @@ class SpecificPageOverviewPage extends CompanyPage
   {
     parent::__construct();
 
-    $this->pages = Nub::$DL->abcCompanySpecificPageGetAll($this->targetCmpId, $this->lanId);
+    $this->pages = Nub::$nub->DL->abcCompanySpecificPageGetAll($this->targetCmpId, $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -47,9 +47,9 @@ class SpecificPageOverviewPage extends CompanyPage
    */
   public static function getUrl(int $targetCmpId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_OVERVIEW, 'pag');
-    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_OVERVIEW, 'pag');
+    $url .= Nub::$nub->cgi->putId('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }

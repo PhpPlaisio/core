@@ -27,8 +27,8 @@ class RoleGroupUpdatePage extends RoleGroupBasePage
   {
     parent::__construct();
 
-    $this->rlgId     = Nub::$cgi->getManId('rlg', 'rlg');
-    $this->roleGroup = Nub::$DL->abcSystemRoleGroupGetDetails($this->rlgId, $this->lanId);
+    $this->rlgId     = Nub::$nub->cgi->getManId('rlg', 'rlg');
+    $this->roleGroup = Nub::$nub->DL->abcSystemRoleGroupGetDetails($this->rlgId, $this->lanId);
 
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
@@ -43,9 +43,9 @@ class RoleGroupUpdatePage extends RoleGroupBasePage
    */
   public static function getUrl(int $rlgId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_UPDATE, 'pag');
-    $url .= Nub::$cgi->putId('rlg', $rlgId, 'rlg');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_UPDATE, 'pag');
+    $url .= Nub::$nub->cgi->putId('rlg', $rlgId, 'rlg');
 
     return $url;
   }
@@ -60,17 +60,17 @@ class RoleGroupUpdatePage extends RoleGroupBasePage
 
     if ($values['rlg_name']!==null)
     {
-      $wrdId = Nub::$DL->abcBabelWordInsertWord(C::WDG_ID_ROLE_GROUP, null, null, $values['rlg_name']);
+      $wrdId = Nub::$nub->DL->abcBabelWordInsertWord(C::WDG_ID_ROLE_GROUP, null, null, $values['rlg_name']);
     }
     else
     {
       $wrdId = $values['wrd_id'];
     }
 
-    $this->rlgId = Nub::$DL->abcSystemRoleGroupUpdate($this->rlgId,
-                                                      $wrdId,
-                                                      $values['rlg_weight'],
-                                                      $values['rlg_label']);
+    $this->rlgId = Nub::$nub->DL->abcSystemRoleGroupUpdate($this->rlgId,
+                                                           $wrdId,
+                                                           $values['rlg_weight'],
+                                                           $values['rlg_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

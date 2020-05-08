@@ -61,7 +61,7 @@ class SystemFunctionalityUpdateRolesSlatControlFactory extends SlatControlFactor
     $slat_joint = new CheckboxSlatJoint('Grant');
     $this->addSlatJoint('rol_enabled', $slat_joint);
 
-    $this->rolIdObfuscator = Nub::getObfuscator('rol');
+    $this->rolIdObfuscator = Nub::$nub->getObfuscator('rol');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -39,8 +39,8 @@ class BabelWordTranslateSlatControlFactory extends SlatControlFactory
    */
   public function __construct(int $lanId, int $targetLanId)
   {
-    $ref_language = Nub::$DL->abcBabelLanguageGetName($lanId, $lanId);
-    $act_language = Nub::$DL->abcBabelLanguageGetName($targetLanId, $lanId);
+    $ref_language = Nub::$nub->DL->abcBabelLanguageGetName($lanId, $lanId);
+    $act_language = Nub::$nub->DL->abcBabelLanguageGetName($targetLanId, $lanId);
 
     // Create slat joint for table column with word ID.
     $table_column = new NumericTableColumn('ID', 'wrd_id');
@@ -54,7 +54,7 @@ class BabelWordTranslateSlatControlFactory extends SlatControlFactory
     $table_column = new TextSlatJoint($act_language);
     $this->addSlatJoint('act_wdt_text', $table_column);
 
-    $this->wrdIdObfuscator = Nub::getObfuscator('wrd');
+    $this->wrdIdObfuscator = Nub::$nub->getObfuscator('wrd');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

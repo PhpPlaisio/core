@@ -48,7 +48,7 @@ class SystemModuleUpdateCompaniesSlatControlFactory extends SlatControlFactory
     $table_column = new CheckboxSlatJoint('Grant');
     $this->addSlatJoint('mdl_granted', $table_column);
 
-    $this->cmpIdObfuscator = Nub::getObfuscator('cmp');
+    $this->cmpIdObfuscator = Nub::$nub->getObfuscator('cmp');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -83,7 +83,7 @@ class CoreForm extends Form
 
       if ($wrdId!==null)
       {
-        $control->setFakeAttribute('_abc_label', (is_int($wrdId)) ? Nub::$babel->getWord($wrdId) : $wrdId);
+        $control->setFakeAttribute('_abc_label', (is_int($wrdId)) ? Nub::$nub->babel->getWord($wrdId) : $wrdId);
       }
 
       if ($mandatory)
@@ -140,7 +140,7 @@ class CoreForm extends Form
    */
   public function setTitle(int $wrdId): void
   {
-    $this->visibleFieldSet->setTitle(Nub::$babel->getWord($wrdId));
+    $this->visibleFieldSet->setTitle(Nub::$nub->babel->getWord($wrdId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

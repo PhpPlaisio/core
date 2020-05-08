@@ -28,7 +28,6 @@ class WordTranslateWordsTableAction implements TableAction
   protected $url;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    *

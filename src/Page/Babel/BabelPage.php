@@ -40,7 +40,7 @@ abstract class BabelPage extends TabPage
     parent::__construct();
 
     $this->refLanId = C::LAN_ID_BABEL_REFERENCE;
-    $this->actLanId = Nub::$cgi->getManId('act_lan', 'lan', $this->lanId);
+    $this->actLanId = Nub::$nub->cgi->getManId('act_lan', 'lan', $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ abstract class BabelPage extends TabPage
    */
   public function selectLanguage(): void
   {
-    $languages = Nub::$DL->abcBabelLanguageGetAllLanguages($this->refLanId);
+    $languages = Nub::$nub->DL->abcBabelLanguageGetAllLanguages($this->refLanId);
 
     // If translator is authorized for 1 language return immediately.
     if (count($languages)==1)
@@ -69,7 +69,7 @@ abstract class BabelPage extends TabPage
 
       default:
         $form->defaultHandler($method);
-    };
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -82,7 +82,7 @@ abstract class BabelPage extends TabPage
     $this->actLanId = $values['babel']['act_lan_id'];
 
     $get            = $_GET;
-    $get['act_lan'] = Nub::obfuscate($this->actLanId, 'lan');
+    $get['act_lan'] = Nub::$nub->obfuscate($this->actLanId, 'lan');
 
     $url = '';
     foreach ($get as $name => $value)
@@ -101,7 +101,7 @@ abstract class BabelPage extends TabPage
     // Input for language.
     $input = new SelectControl('act_lan_id');
     $input->setOptions($languages, 'lan_id', 'lan_name');
-    $input->setOptionsObfuscator(Nub::getObfuscator('lan'));
+    $input->setOptionsObfuscator(Nub::$nub->getObfuscator('lan'));
     $input->setValue($this->actLanId);
     $form->addFormControl($input, C::WRD_ID_LANGUAGE, true);
 

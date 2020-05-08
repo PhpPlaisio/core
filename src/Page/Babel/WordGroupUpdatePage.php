@@ -27,8 +27,8 @@ class WordGroupUpdatePage extends WordGroupBasePage
   {
     parent::__construct();
 
-    $this->wdgId       = Nub::$cgi->getManId('wdg', 'wdg');
-    $this->details     = Nub::$DL->abcBabelWordGroupGetDetails($this->wdgId);
+    $this->wdgId       = Nub::$nub->cgi->getManId('wdg', 'wdg');
+    $this->details     = Nub::$nub->DL->abcBabelWordGroupGetDetails($this->wdgId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -42,10 +42,10 @@ class WordGroupUpdatePage extends WordGroupBasePage
    */
   public static function getUrl(int $wdgId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_GROUP_UPDATE, 'pag');
-    $url .= Nub::$cgi->putId('wdg', $wdgId, 'wdg');
-    $url .= Nub::$cgi->putId('act_lan', C::LAN_ID_BABEL_REFERENCE, 'lan');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_BABEL_WORD_GROUP_UPDATE, 'pag');
+    $url .= Nub::$nub->cgi->putId('wdg', $wdgId, 'wdg');
+    $url .= Nub::$nub->cgi->putId('act_lan', C::LAN_ID_BABEL_REFERENCE, 'lan');
 
     return $url;
   }
@@ -58,7 +58,7 @@ class WordGroupUpdatePage extends WordGroupBasePage
   {
     $values = $this->form->getValues();
 
-    Nub::$DL->abcBabelWordGroupUpdateDetails($this->wdgId, $values['wdg_name'], $values['wdg_label']);
+    Nub::$nub->DL->abcBabelWordGroupUpdateDetails($this->wdgId, $values['wdg_name'], $values['wdg_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

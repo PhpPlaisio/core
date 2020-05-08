@@ -45,11 +45,11 @@ class SpecificPageUpdatePage extends CompanyPage
   {
     parent::__construct();
 
-    $this->targetPagId = Nub::$cgi->getManId('tar_pag', 'pag');
+    $this->targetPagId = Nub::$nub->cgi->getManId('tar_pag', 'pag');
 
-    $this->targetPageDetails = Nub::$DL->abcCompanySpecificPageGetDetails($this->targetCmpId,
-                                                                          $this->targetPagId,
-                                                                          $this->lanId);
+    $this->targetPageDetails = Nub::$nub->DL->abcCompanySpecificPageGetDetails($this->targetCmpId,
+                                                                               $this->targetPagId,
+                                                                               $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -63,10 +63,10 @@ class SpecificPageUpdatePage extends CompanyPage
    */
   public static function getUrl(int $targetCmpId, int $targetPagId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_UPDATE, 'pag');
-    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
-    $url .= Nub::$cgi->putId('tar_pag', $targetPagId, 'pag');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_UPDATE, 'pag');
+    $url .= Nub::$nub->cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url .= Nub::$nub->cgi->putId('tar_pag', $targetPagId, 'pag');
 
     return $url;
   }
@@ -81,7 +81,7 @@ class SpecificPageUpdatePage extends CompanyPage
 
     $values = $this->form->getValues();
 
-    Nub::$DL->abcCompanySpecificPageUpdate($this->targetCmpId, $this->targetPagId, $values['pag_class_child']);
+    Nub::$nub->DL->abcCompanySpecificPageUpdate($this->targetCmpId, $this->targetPagId, $values['pag_class_child']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -141,7 +141,7 @@ class SpecificPageUpdatePage extends CompanyPage
 
       default:
         $this->form->defaultHandler($method);
-    };
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

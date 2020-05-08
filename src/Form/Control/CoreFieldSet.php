@@ -97,7 +97,7 @@ class CoreFieldSet extends FieldSet
     }
 
     $input = new SubmitControl($name);
-    $input->setValue((is_int($wrdId)) ? Nub::$babel->getWord($wrdId) : $wrdId);
+    $input->setValue((is_int($wrdId)) ? Nub::$nub->babel->getWord($wrdId) : $wrdId);
     $this->buttonControl->addFormControl($input);
 
     return $input;

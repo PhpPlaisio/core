@@ -74,11 +74,11 @@ abstract class PageBasePage extends TabPage
     $this->form = new CoreForm();
 
     // Create select box for (known) page titles.
-    $titles = Nub::$DL->abcBabelWordGroupGetAllWords(C::WDG_ID_PAGE_TITLE, $this->lanId);
+    $titles = Nub::$nub->DL->abcBabelWordGroupGetAllWords(C::WDG_ID_PAGE_TITLE, $this->lanId);
     $input  = new SelectControl('wrd_id');
     $input->setOptions($titles, 'wrd_id', 'wdt_text');
     $input->setEmptyOption();
-    $input->setOptionsObfuscator(Nub::getObfuscator('wrd'));
+    $input->setOptionsObfuscator(Nub::$nub->getObfuscator('wrd'));
     $this->form->addFormControl($input, 'Title');
 
     // Create text box for (new) page title.
@@ -88,26 +88,26 @@ abstract class PageBasePage extends TabPage
     /** @todo Add validator: either wrd_id is not empty or pag_title is not empty */
 
     // Create form control for page tab group.
-    $tabs  = Nub::$DL->abcSystemTabGetAll($this->lanId);
+    $tabs  = Nub::$nub->DL->abcSystemTabGetAll($this->lanId);
     $input = new SelectControl('ptb_id');
     $input->setOptions($tabs, 'ptb_id', 'ptb_label');
     $input->setEmptyOption();
     $this->form->addFormControl($input, 'Page Tab');
 
     // Create form control for original page.
-    $pages = Nub::$DL->abcSystemPageGetAllMasters($this->lanId);
+    $pages = Nub::$nub->DL->abcSystemPageGetAllMasters($this->lanId);
     $input = new SelectControl('pag_id_org');
     $input->setOptions($pages, 'pag_id', 'pag_class');
     $input->setEmptyOption();
-    $input->setOptionsObfuscator(Nub::getObfuscator('pag'));
+    $input->setOptionsObfuscator(Nub::$nub->getObfuscator('pag'));
     $this->form->addFormControl($input, 'Original Page');
 
     // Create form control for menu item with which the page is associated..
-    $menus = Nub::$DL->abcSystemMenuGetAllEntries($this->lanId);
+    $menus = Nub::$nub->DL->abcSystemMenuGetAllEntries($this->lanId);
     $input = new SelectControl('mnu_id');
     $input->setOptions($menus, 'mnu_id', 'mnu_name');
     $input->setEmptyOption();
-    $input->setOptionsObfuscator(Nub::getObfuscator('mnu'));
+    $input->setOptionsObfuscator(Nub::$nub->getObfuscator('mnu'));
     $this->form->addFormControl($input, 'Menu');
 
     // Create form control for page alias.
@@ -150,7 +150,7 @@ abstract class PageBasePage extends TabPage
 
       default:
         $this->form->defaultHandler($method);
-    };
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

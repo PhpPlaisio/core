@@ -22,8 +22,8 @@ class LogoutPage extends CorePage
    */
   public static function getUrl(): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_MISC_LOGOUT, 'pag');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_MISC_LOGOUT, 'pag');
 
     return $url;
   }
@@ -35,7 +35,7 @@ class LogoutPage extends CorePage
    */
   public function handleRequest(): Response
   {
-    Nub::$session->logout();
+    Nub::$nub->session->logout();
 
     $this->response = new SeeOtherResponse('/');
 

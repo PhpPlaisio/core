@@ -30,8 +30,8 @@ class MenuInsertPage extends MenuBasePage
    */
   public static function getUrl(): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_MENU_INSERT, 'pag');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_MENU_INSERT, 'pag');
 
     return $url;
   }
@@ -50,19 +50,19 @@ class MenuInsertPage extends MenuBasePage
 
     if ($values['mnu_title'])
     {
-      $wrd_id = Nub::$DL->abcBabelWordInsertWord(C::WDG_ID_MENU, null, null, $values['mnu_title']);
+      $wrd_id = Nub::$nub->DL->abcBabelWordInsertWord(C::WDG_ID_MENU, null, null, $values['mnu_title']);
     }
     else
     {
       $wrd_id = $values['wrd_id'];
     }
 
-    Nub::$DL->abcSystemMenuInsert($wrd_id,
-                                  $values['pag_id'],
-                                  $values['mnu_level'],
-                                  $values['mnu_group'],
-                                  $values['mnu_weight'],
-                                  $values['mnu_link']);
+    Nub::$nub->DL->abcSystemMenuInsert($wrd_id,
+                                       $values['pag_id'],
+                                       $values['mnu_level'],
+                                       $values['mnu_group'],
+                                       $values['mnu_weight'],
+                                       $values['mnu_link']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

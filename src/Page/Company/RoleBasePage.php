@@ -73,7 +73,7 @@ abstract class RoleBasePage extends CompanyPage
     $this->form = new CoreForm();
 
     // Input for role group.
-    $roleGroups = Nub::$DL->abcSystemRoleGroupGetAll($this->lanId);
+    $roleGroups = Nub::$nub->DL->abcSystemRoleGroupGetAll($this->lanId);
     $input      = new SelectControl('rlg_id');
     $input->setOptions($roleGroups, 'rlg_id', 'rlg_name');
     $this->form->addFormControl($input, 'Role Group', true);
@@ -112,7 +112,7 @@ abstract class RoleBasePage extends CompanyPage
 
       default:
         $this->form->defaultHandler($method);
-    };
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

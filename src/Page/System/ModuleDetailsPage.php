@@ -43,11 +43,11 @@ class ModuleDetailsPage extends TabPage
   {
     parent::__construct();
 
-    $this->mdlId = Nub::$cgi->getManId('mdl', 'mdl');
+    $this->mdlId = Nub::$nub->cgi->getManId('mdl', 'mdl');
 
-    $this->details = Nub::$DL->abcSystemModuleGetDetails($this->mdlId, $this->lanId);
+    $this->details = Nub::$nub->DL->abcSystemModuleGetDetails($this->mdlId, $this->lanId);
 
-    Nub::$assets->appendPageTitle($this->details['mdl_name']);
+    Nub::$nub->assets->appendPageTitle($this->details['mdl_name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -60,9 +60,9 @@ class ModuleDetailsPage extends TabPage
    */
   public static function getUrl(int $mdlId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_MODULE_DETAILS, 'pag');
-    $url .= Nub::$cgi->putId('mdl', $mdlId, 'mdl');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_MODULE_DETAILS, 'pag');
+    $url .= Nub::$nub->cgi->putId('mdl', $mdlId, 'mdl');
 
     return $url;
   }
@@ -86,7 +86,7 @@ class ModuleDetailsPage extends TabPage
    */
   private function showCompanies(): void
   {
-    $functions = Nub::$DL->abcSystemModuleGetGrantedCompanies($this->mdlId);
+    $functions = Nub::$nub->DL->abcSystemModuleGetGrantedCompanies($this->mdlId);
 
     $table = new CoreOverviewTable();
 
@@ -125,7 +125,7 @@ class ModuleDetailsPage extends TabPage
    */
   private function showFunctionalities(): void
   {
-    $functions = Nub::$DL->abcSystemModuleGetFunctions($this->mdlId, $this->lanId);
+    $functions = Nub::$nub->DL->abcSystemModuleGetFunctions($this->mdlId, $this->lanId);
 
     $table = new CoreOverviewTable();
 

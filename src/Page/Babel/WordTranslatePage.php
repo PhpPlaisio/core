@@ -53,10 +53,10 @@ class WordTranslatePage extends BabelPage
   {
     parent::__construct();
 
-    $this->wrdId    = Nub::$cgi->getManId('wrd', 'wrd');
-    $this->redirect = Nub::$cgi->getOptUrl('redirect');
+    $this->wrdId    = Nub::$nub->cgi->getManId('wrd', 'wrd');
+    $this->redirect = Nub::$nub->cgi->getOptUrl('redirect');
 
-    $this->details = Nub::$DL->abcBabelWordGetDetails($this->wrdId, $this->actLanId);
+    $this->details = Nub::$nub->DL->abcBabelWordGetDetails($this->wrdId, $this->actLanId);
 
     if ($this->redirect===null)
     {
@@ -76,11 +76,11 @@ class WordTranslatePage extends BabelPage
    */
   public static function getUrl(int $wrdId, int $lanId, ?string $redirect = null): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_TRANSLATE, 'pag');
-    $url .= Nub::$cgi->putId('wrd', $wrdId, 'wrd');
-    $url .= Nub::$cgi->putId('act_lan', $lanId, 'lan');
-    $url .= Nub::$cgi->putUrl('redirect', $redirect);
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_BABEL_WORD_TRANSLATE, 'pag');
+    $url .= Nub::$nub->cgi->putId('wrd', $wrdId, 'wrd');
+    $url .= Nub::$nub->cgi->putId('act_lan', $lanId, 'lan');
+    $url .= Nub::$nub->cgi->putUrl('redirect', $redirect);
 
     return $url;
   }
@@ -101,8 +101,8 @@ class WordTranslatePage extends BabelPage
    */
   private function createForm(): void
   {
-    $refLanguage = Nub::$DL->abcBabelLanguageGetName($this->refLanId, $this->refLanId);
-    $actLanguage = Nub::$DL->abcBabelLanguageGetName($this->actLanId, $this->refLanId);
+    $refLanguage = Nub::$nub->DL->abcBabelLanguageGetName($this->refLanId, $this->refLanId);
+    $actLanguage = Nub::$nub->DL->abcBabelLanguageGetName($this->actLanId, $this->refLanId);
 
     $this->form = new CoreForm();
 
@@ -130,16 +130,16 @@ class WordTranslatePage extends BabelPage
     // @todo Show data.
 
     // Show word in reference language.
-    Nub::$babel->pushLanguage($this->refLanId);
+    Nub::$nub->babel->pushLanguage($this->refLanId);
     try
     {
       $input = new SpanControl('ref_language');
-      $input->setInnerText(Nub::$babel->getWord($this->wrdId));
+      $input->setInnerText(Nub::$nub->babel->getWord($this->wrdId));
       $this->form->addFormControl($input, $refLanguage);
     }
     finally
     {
-      Nub::$babel->popLanguage();
+      Nub::$nub->babel->popLanguage();
     }
 
     // Create form control for the actual word.
@@ -164,7 +164,7 @@ class WordTranslatePage extends BabelPage
     // Return immediately when no form controls are changed.
     if (empty($changes)) return;
 
-    Nub::$DL->abcBabelWordTranslateWord($this->usrId, $this->wrdId, $this->actLanId, $values['wdt_text']);
+    Nub::$nub->DL->abcBabelWordTranslateWord($this->usrId, $this->wrdId, $this->actLanId, $values['wdt_text']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -182,7 +182,7 @@ class WordTranslatePage extends BabelPage
 
       default:
         $this->form->defaultHandler($method);
-    };
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

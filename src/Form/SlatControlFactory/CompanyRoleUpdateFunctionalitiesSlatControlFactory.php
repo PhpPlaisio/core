@@ -48,7 +48,7 @@ class CompanyRoleUpdateFunctionalitiesSlatControlFactory extends SlatControlFact
     $table_column = new CheckboxSlatJoint('Enable');
     $this->addSlatJoint('fun_enabled', $table_column);
 
-    $this->funIdObfuscator = Nub::getObfuscator('fun');
+    $this->funIdObfuscator = Nub::$nub->getObfuscator('fun');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

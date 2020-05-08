@@ -58,7 +58,7 @@ class BoolIconTableColumn extends TableColumn
       case $row[$this->fieldName]==='1':
       case $row[$this->fieldName]===true:
         $attributes['data-value'] = 1;
-        $html = Html::generateElement('span', ['class' => ['icons-small', 'icons-small-true']]);
+        $html                     = Html::generateElement('span', ['class' => ['icons-small', 'icons-small-true']]);
         break;
 
       case $row[$this->fieldName]===0:
@@ -73,7 +73,7 @@ class BoolIconTableColumn extends TableColumn
         }
         else
         {
-          $html ='';
+          $html = '';
         }
         break;
 

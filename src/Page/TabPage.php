@@ -42,42 +42,42 @@ abstract class TabPage extends CorePage
   {
     parent::__construct();
 
-    Nub::$assets->cssAppendSource('reset.css');
-    Nub::$assets->cssAppendSource('ui-lightness/jquery-ui.css');
-    Nub::$assets->cssAppendSource('style.css');
-    Nub::$assets->cssAppendSource('grid.css');
-    Nub::$assets->cssAppendSource('grid-large.css');
-    Nub::$assets->cssAppendSource('grid-small.css');
-    Nub::$assets->cssAppendSource('layout.css');
-    Nub::$assets->cssAppendSource('main-menu-large.css');
-    Nub::$assets->cssAppendSource('main-menu-small.css');
-    Nub::$assets->cssAppendSource('main-menu-icon-large.css');
-    Nub::$assets->cssAppendSource('main-menu-icon-small.css');
-    Nub::$assets->cssAppendSource('secondary-menu.css');
-    Nub::$assets->cssAppendSource('icon-bar.css');
-    Nub::$assets->cssAppendSource('detail-table.css');
-    Nub::$assets->cssAppendSource('overview-table.css');
-    Nub::$assets->cssAppendSource('overview-table-content-types.css');
-    Nub::$assets->cssAppendSource('overview-table-menu.css');
-    Nub::$assets->cssAppendSource('overview-table-large.css');
-    Nub::$assets->cssAppendSource('overview-table-large-content-types.css');
-    Nub::$assets->cssAppendSource('overview-table-large-filter.css');
-    Nub::$assets->cssAppendSource('overview-table-large-sort.css');
-    Nub::$assets->cssAppendSource('overview-table-small.css');
-    Nub::$assets->cssAppendSource('overview-table-small-content-types.css');
-    Nub::$assets->cssAppendSource('overview-table-small-filter.css');
-    Nub::$assets->cssAppendSource('input-table.css');
-    Nub::$assets->cssAppendSource('input-table-small.css');
-    Nub::$assets->cssAppendSource('button.css');
-    Nub::$assets->cssAppendSource('icons.css');
-    Nub::$assets->cssAppendSource('icons-small.css');
-    Nub::$assets->cssAppendSource('icons-medium.css');
+    Nub::$nub->assets->cssAppendSource('reset.css');
+    Nub::$nub->assets->cssAppendSource('ui-lightness/jquery-ui.css');
+    Nub::$nub->assets->cssAppendSource('style.css');
+    Nub::$nub->assets->cssAppendSource('grid.css');
+    Nub::$nub->assets->cssAppendSource('grid-large.css');
+    Nub::$nub->assets->cssAppendSource('grid-small.css');
+    Nub::$nub->assets->cssAppendSource('layout.css');
+    Nub::$nub->assets->cssAppendSource('main-menu-large.css');
+    Nub::$nub->assets->cssAppendSource('main-menu-small.css');
+    Nub::$nub->assets->cssAppendSource('main-menu-icon-large.css');
+    Nub::$nub->assets->cssAppendSource('main-menu-icon-small.css');
+    Nub::$nub->assets->cssAppendSource('secondary-menu.css');
+    Nub::$nub->assets->cssAppendSource('icon-bar.css');
+    Nub::$nub->assets->cssAppendSource('detail-table.css');
+    Nub::$nub->assets->cssAppendSource('overview-table.css');
+    Nub::$nub->assets->cssAppendSource('overview-table-content-types.css');
+    Nub::$nub->assets->cssAppendSource('overview-table-menu.css');
+    Nub::$nub->assets->cssAppendSource('overview-table-large.css');
+    Nub::$nub->assets->cssAppendSource('overview-table-large-content-types.css');
+    Nub::$nub->assets->cssAppendSource('overview-table-large-filter.css');
+    Nub::$nub->assets->cssAppendSource('overview-table-large-sort.css');
+    Nub::$nub->assets->cssAppendSource('overview-table-small.css');
+    Nub::$nub->assets->cssAppendSource('overview-table-small-content-types.css');
+    Nub::$nub->assets->cssAppendSource('overview-table-small-filter.css');
+    Nub::$nub->assets->cssAppendSource('input-table.css');
+    Nub::$nub->assets->cssAppendSource('input-table-small.css');
+    Nub::$nub->assets->cssAppendSource('button.css');
+    Nub::$nub->assets->cssAppendSource('icons.css');
+    Nub::$nub->assets->cssAppendSource('icons-small.css');
+    Nub::$nub->assets->cssAppendSource('icons-medium.css');
 
-    Nub::$assets->jsAdmSetPageSpecificMain(__CLASS__);
+    Nub::$nub->assets->jsAdmSetPageSpecificMain(__CLASS__);
 
-    Nub::$assets->setPageTitle(Nub::$nub->getPageGroupTitle().
-                               ' - '.
-                               Nub::$assets->getPageTitle());
+    Nub::$nub->assets->setPageTitle(Nub::$nub->pageInfo['ptb_title'].
+                                    ' - '.
+                                    Nub::$nub->assets->getPageTitle());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -155,18 +155,18 @@ abstract class TabPage extends CorePage
     echo '<!DOCTYPE html>';
     echo Html::generateTag('html',
                            ['xmlns'    => 'http://www.w3.org/1999/xhtml',
-                            'xml:lang' => Nub::$babel->getLang(),
-                            'lang'     => Nub::$babel->getLang()]);
+                            'xml:lang' => Nub::$nub->babel->getLang(),
+                            'lang'     => Nub::$nub->babel->getLang()]);
     echo '<head>';
 
     // Echo the meta tags.
-    Nub::$assets->echoMetaTags();
+    Nub::$nub->assets->echoMetaTags();
 
     // Echo the title of the XHTML document.
-    Nub::$assets->echoPageTitle();
+    Nub::$nub->assets->echoPageTitle();
 
     // Echo style sheets (if any).
-    Nub::$assets->echoCascadingStyleSheets();
+    Nub::$nub->assets->echoCascadingStyleSheets();
 
     echo '</head><body>';
   }
@@ -178,7 +178,7 @@ abstract class TabPage extends CorePage
    */
   protected function echoPageTrailer(): void
   {
-    Nub::$assets->echoJavaScript();
+    Nub::$nub->assets->echoJavaScript();
 
     echo '</body></html>';
   }
@@ -197,7 +197,7 @@ abstract class TabPage extends CorePage
    */
   protected function echoTabs(): void
   {
-    $pag_id_org = Nub::$nub->getPagIdOrg();
+    $pag_id_org = Nub::$nub->pageInfo['pag_id_org'];
 
     $this->getPageTabs();
 
@@ -225,10 +225,10 @@ abstract class TabPage extends CorePage
    */
   protected function getPageTabs(): void
   {
-    $this->tabs = Nub::$DL->abcAuthGetPageTabs($this->cmpId,
-                                               Nub::$nub->getPtbId(),
-                                               $this->proId,
-                                               $this->lanId);
+    $this->tabs = Nub::$nub->DL->abcAuthGetPageTabs($this->cmpId,
+                                                    Nub::$nub->pageInfo['ptb_id'],
+                                                    $this->proId,
+                                                    $this->lanId);
     foreach ($this->tabs as &$tab)
     {
       $tab['url'] = $this->getTabUrl($tab['pag_id']);
@@ -245,7 +245,7 @@ abstract class TabPage extends CorePage
    */
   protected function getTabUrl(int $pagId): ?string
   {
-    return Nub::$cgi->putId('pag', $pagId, 'pag');
+    return Nub::$nub->cgi->putId('pag', $pagId, 'pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -260,8 +260,8 @@ abstract class TabPage extends CorePage
    */
   private function echoMainMenu(): void
   {
-    $items       = Nub::$DL->abcAuthGetMenu($this->cmpId, $this->proId, $this->lanId);
-    $page_mnu_id = Nub::$nub->getMnuId();
+    $items       = Nub::$nub->DL->abcAuthGetMenu($this->cmpId, $this->proId, $this->lanId);
+    $page_mnu_id = Nub::$nub->pageInfo['mnu_id'];
 
     echo '<nav class="grid-main-menu">';
 
@@ -282,7 +282,7 @@ abstract class TabPage extends CorePage
       }
       else
       {
-        $link = Nub::$cgi->putId('pag', $item['pag_id'], 'pag');
+        $link = Nub::$nub->cgi->putId('pag', $item['pag_id'], 'pag');
       }
       $link .= $item['mnu_link'];
 
@@ -314,7 +314,7 @@ abstract class TabPage extends CorePage
       echo '</ul>';
     }
 
-    echo '</nav>';;
+    echo '</nav>';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

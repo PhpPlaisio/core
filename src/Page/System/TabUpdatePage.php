@@ -34,8 +34,8 @@ class TabUpdatePage extends TabBasePage
   {
     parent::__construct();
 
-    $this->ptbId       = Nub::$cgi->getManId('ptb', 'ptb');
-    $this->details     = Nub::$DL->abcSystemTabGetDetails($this->ptbId, $this->lanId);
+    $this->ptbId       = Nub::$nub->cgi->getManId('ptb', 'ptb');
+    $this->details     = Nub::$nub->DL->abcSystemTabGetDetails($this->ptbId, $this->lanId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -49,9 +49,9 @@ class TabUpdatePage extends TabBasePage
    */
   public static function getUrl(int $ptbId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_TAB_UPDATE, 'pag');
-    $url .= Nub::$cgi->putId('ptb', $ptbId, 'ptb');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_TAB_UPDATE, 'pag');
+    $url .= Nub::$nub->cgi->putId('ptb', $ptbId, 'ptb');
 
     return $url;
   }
@@ -70,14 +70,14 @@ class TabUpdatePage extends TabBasePage
 
     if ($values['ptb_title'])
     {
-      $wrd_id = Nub::$DL->abcBabelWordInsertWord(C::WDG_ID_PAGE_GROUP_TITLE, null, null, $values['ptb_title']);
+      $wrd_id = Nub::$nub->DL->abcBabelWordInsertWord(C::WDG_ID_PAGE_GROUP_TITLE, null, null, $values['ptb_title']);
     }
     else
     {
       $wrd_id = $values['wrd_id'];
     }
 
-    Nub::$DL->abcSystemTabUpdateDetails($this->ptbId, $wrd_id, $values['ptb_label']);
+    Nub::$nub->DL->abcSystemTabUpdateDetails($this->ptbId, $wrd_id, $values['ptb_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

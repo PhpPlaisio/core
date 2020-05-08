@@ -52,11 +52,11 @@ class ModuleUpdateCompaniesPage extends TabPage
   {
     parent::__construct();
 
-    $this->modId = Nub::$cgi->getManId('mdl', 'mdl');
+    $this->modId = Nub::$nub->cgi->getManId('mdl', 'mdl');
 
-    $this->details = Nub::$DL->abcSystemModuleGetDetails($this->modId, $this->lanId);
+    $this->details = Nub::$nub->DL->abcSystemModuleGetDetails($this->modId, $this->lanId);
 
-    Nub::$assets->appendPageTitle($this->details['mdl_name']);
+    Nub::$nub->assets->appendPageTitle($this->details['mdl_name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -69,9 +69,9 @@ class ModuleUpdateCompaniesPage extends TabPage
    */
   public static function getUrl(int $modId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_MODULE_UPDATE_COMPANIES, 'pag');
-    $url .= Nub::$cgi->putId('mdl', $modId, 'mdl');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_MODULE_UPDATE_COMPANIES, 'pag');
+    $url .= Nub::$nub->cgi->putId('mdl', $modId, 'mdl');
 
     return $url;
   }
@@ -95,7 +95,7 @@ class ModuleUpdateCompaniesPage extends TabPage
   private function createForm(): void
   {
     // Get all available pages.
-    $pages = Nub::$DL->abcSystemModuleGetAvailableCompanies($this->modId);
+    $pages = Nub::$nub->DL->abcSystemModuleGetAvailableCompanies($this->modId);
 
     // Create form.
     $this->form = new CoreForm();
@@ -112,7 +112,7 @@ class ModuleUpdateCompaniesPage extends TabPage
     $button = new CoreButtonControl();
     $submit = new SubmitControl('submit');
     $submit->setMethod('handleForm');
-    $submit->setValue(Nub::$babel->getWord(C::WRD_ID_BUTTON_UPDATE));
+    $submit->setValue(Nub::$nub->babel->getWord(C::WRD_ID_BUTTON_UPDATE));
     $button->addFormControl($submit);
 
     // Put everything together in a LouverControl.
@@ -143,16 +143,16 @@ class ModuleUpdateCompaniesPage extends TabPage
     {
       if ($values['data'][$cmp_id]['mdl_granted'])
       {
-        Nub::$DL->abcCompanyModuleEnable($cmp_id, $this->modId);
+        Nub::$nub->DL->abcCompanyModuleEnable($cmp_id, $this->modId);
       }
       else
       {
-        Nub::$DL->abcCompanyModuleDisable($cmp_id, $this->modId);
+        Nub::$nub->DL->abcCompanyModuleDisable($cmp_id, $this->modId);
       }
     }
 
     // Use brute force to proper profiles.
-    Nub::$DL->abcProfileProper();
+    Nub::$nub->DL->abcProfileProper();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -170,7 +170,7 @@ class ModuleUpdateCompaniesPage extends TabPage
 
       default:
         $this->form->defaultHandler($method);
-    };
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

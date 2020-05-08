@@ -30,9 +30,9 @@ class WordGroupInsertPage extends WordGroupBasePage
    */
   public static function getUrl(): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_GROUP_INSERT, 'pag');
-    $url .= Nub::$cgi->putId('act_lan', C::LAN_ID_BABEL_REFERENCE, 'lan');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_BABEL_WORD_GROUP_INSERT, 'pag');
+    $url .= Nub::$nub->cgi->putId('act_lan', C::LAN_ID_BABEL_REFERENCE, 'lan');
 
     return $url;
   }
@@ -45,7 +45,7 @@ class WordGroupInsertPage extends WordGroupBasePage
   {
     $values = $this->form->getValues();
 
-    $this->wdgId = Nub::$DL->abcBabelWordGroupInsertDetails($values['wdg_name'], $values['wdg_label']);
+    $this->wdgId = Nub::$nub->DL->abcBabelWordGroupInsertDetails($values['wdg_name'], $values['wdg_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

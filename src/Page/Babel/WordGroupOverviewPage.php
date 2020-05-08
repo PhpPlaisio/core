@@ -26,9 +26,9 @@ class WordGroupOverviewPage extends BabelPage
    */
   public static function getUrl(?int $targetLanId = null): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_GROUP_OVERVIEW, 'pag');
-    $url .= Nub::$cgi->putId('act_lan', $targetLanId, 'lan');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_BABEL_WORD_GROUP_OVERVIEW, 'pag');
+    $url .= Nub::$nub->cgi->putId('act_lan', $targetLanId, 'lan');
 
     return $url;
   }
@@ -53,7 +53,7 @@ class WordGroupOverviewPage extends BabelPage
    */
   private function showWordGroups(): void
   {
-    $groups = Nub::$DL->abcBabelWordGroupGetAll($this->actLanId);
+    $groups = Nub::$nub->DL->abcBabelWordGroupGetAll($this->actLanId);
 
     $table = new CoreOverviewTable();
 

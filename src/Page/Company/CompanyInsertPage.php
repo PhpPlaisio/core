@@ -28,8 +28,8 @@ class CompanyInsertPage extends CompanyBasePage
    */
   public static function getUrl(): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_INSERT, 'pag');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_COMPANY_INSERT, 'pag');
 
     return $url;
   }
@@ -42,7 +42,7 @@ class CompanyInsertPage extends CompanyBasePage
   {
     $values = $this->form->getValues();
 
-    $this->targetCmpId = Nub::$DL->abcCompanyInsert($values['cmp_abbr'], $values['cmp_label']);
+    $this->targetCmpId = Nub::$nub->DL->abcCompanyInsert($values['cmp_abbr'], $values['cmp_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

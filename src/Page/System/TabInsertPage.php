@@ -30,8 +30,8 @@ class TabInsertPage extends TabBasePage
    */
   public static function getUrl(): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_TAB_INSERT, 'pag');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_TAB_INSERT, 'pag');
 
     return $url;
   }
@@ -45,14 +45,14 @@ class TabInsertPage extends TabBasePage
     $values = $this->form->getValues();
     if ($values['ptb_title'])
     {
-      $wrd_id = Nub::$DL->abcBabelWordInsertWord(C::WDG_ID_PAGE_GROUP_TITLE, null, null, $values['ptb_title']);
+      $wrd_id = Nub::$nub->DL->abcBabelWordInsertWord(C::WDG_ID_PAGE_GROUP_TITLE, null, null, $values['ptb_title']);
     }
     else
     {
       $wrd_id = $values['wrd_id'];
     }
 
-    Nub::$DL->abcSystemTabInsertDetails($wrd_id, $values['ptb_label']);
+    Nub::$nub->DL->abcSystemTabInsertDetails($wrd_id, $values['ptb_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -45,11 +45,11 @@ class FunctionalityDetailsPage extends TabPage
   {
     parent::__construct();
 
-    $this->funId = Nub::$cgi->getManId('fun', 'fun');
+    $this->funId = Nub::$nub->cgi->getManId('fun', 'fun');
 
-    $this->details = Nub::$DL->abcSystemFunctionalityGetDetails($this->funId, $this->lanId);
+    $this->details = Nub::$nub->DL->abcSystemFunctionalityGetDetails($this->funId, $this->lanId);
 
-    Nub::$assets->appendPageTitle($this->details['fun_name']);
+    Nub::$nub->assets->appendPageTitle($this->details['fun_name']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -62,9 +62,9 @@ class FunctionalityDetailsPage extends TabPage
    */
   public static function getUrl(int $funId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_DETAILS, 'pag');
-    $url .= Nub::$cgi->putId('fun', $funId, 'fun');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_DETAILS, 'pag');
+    $url .= Nub::$nub->cgi->putId('fun', $funId, 'fun');
 
     return $url;
   }
@@ -108,7 +108,7 @@ class FunctionalityDetailsPage extends TabPage
    */
   private function showPages(): void
   {
-    $pages = Nub::$DL->abcSystemFunctionalityGetPages($this->funId, $this->lanId);
+    $pages = Nub::$nub->DL->abcSystemFunctionalityGetPages($this->funId, $this->lanId);
 
     $table = new CoreOverviewTable();
     $table->addTableAction('default', new FunctionalityUpdatePagesTableAction($this->funId));
@@ -133,7 +133,7 @@ class FunctionalityDetailsPage extends TabPage
    */
   private function showRoles(): void
   {
-    $roles = Nub::$DL->abcSystemFunctionalityGetRoles($this->funId);
+    $roles = Nub::$nub->DL->abcSystemFunctionalityGetRoles($this->funId);
 
     $table = new CoreOverviewTable();
 

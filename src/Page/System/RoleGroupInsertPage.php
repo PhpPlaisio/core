@@ -29,8 +29,8 @@ class RoleGroupInsertPage extends RoleGroupBasePage
    */
   public static function getUrl(): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_INSERT, 'pag');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_ROLE_GROUP_INSERT, 'pag');
 
     return $url;
   }
@@ -45,16 +45,16 @@ class RoleGroupInsertPage extends RoleGroupBasePage
 
     if ($values['rlg_name']!==null)
     {
-      $wrdId = Nub::$DL->abcBabelWordInsertWord(C::WDG_ID_ROLE_GROUP, null, null, $values['rlg_name']);
+      $wrdId = Nub::$nub->DL->abcBabelWordInsertWord(C::WDG_ID_ROLE_GROUP, null, null, $values['rlg_name']);
     }
     else
     {
       $wrdId = $values['wrd_id'];
     }
 
-    $this->rlgId = Nub::$DL->abcSystemRoleGroupInsert($wrdId,
-                                                      $values['rlg_weight'],
-                                                      $values['rlg_label']);
+    $this->rlgId = Nub::$nub->DL->abcSystemRoleGroupInsert($wrdId,
+                                                           $values['rlg_weight'],
+                                                           $values['rlg_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

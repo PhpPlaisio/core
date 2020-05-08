@@ -26,8 +26,8 @@ class ModuleOverviewPage extends TabPage
    */
   public static function getUrl(): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_MODULE_OVERVIEW, 'pag');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_MODULE_OVERVIEW, 'pag');
 
     return $url;
   }
@@ -38,7 +38,7 @@ class ModuleOverviewPage extends TabPage
    */
   protected function echoTabContent(): void
   {
-    $modules = Nub::$DL->abcSystemModuleGetAll($this->lanId);
+    $modules = Nub::$nub->DL->abcSystemModuleGetAll($this->lanId);
 
     $table = new CoreOverviewTable();
 

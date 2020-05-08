@@ -37,7 +37,7 @@ class RoleDetailsPage extends CompanyPage
   {
     parent::__construct();
 
-    $this->rolId = Nub::$cgi->getManId('rol', 'rol');
+    $this->rolId = Nub::$nub->cgi->getManId('rol', 'rol');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -51,10 +51,10 @@ class RoleDetailsPage extends CompanyPage
    */
   public static function getUrl(int $targetCmpId, int $rolId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_ROLE_DETAILS, 'pag');
-    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
-    $url .= Nub::$cgi->putId('rol', $rolId, 'rol');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_COMPANY_ROLE_DETAILS, 'pag');
+    $url .= Nub::$nub->cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url .= Nub::$nub->cgi->putId('rol', $rolId, 'rol');
 
     return $url;
   }
@@ -78,7 +78,7 @@ class RoleDetailsPage extends CompanyPage
    */
   private function showFunctionalities(): void
   {
-    $functionalities = Nub::$DL->abcCompanyRoleGetFunctionalities($this->targetCmpId, $this->rolId, $this->lanId);
+    $functionalities = Nub::$nub->DL->abcCompanyRoleGetFunctionalities($this->targetCmpId, $this->rolId, $this->lanId);
 
     $table = new CoreOverviewTable();
 
@@ -105,7 +105,7 @@ class RoleDetailsPage extends CompanyPage
    */
   private function showPages(): void
   {
-    $pages = Nub::$DL->abcCompanyRoleGetPages($this->targetCmpId, $this->rolId, $this->lanId);
+    $pages = Nub::$nub->DL->abcCompanyRoleGetPages($this->targetCmpId, $this->rolId, $this->lanId);
 
     $table = new CoreOverviewTable();
 
@@ -129,7 +129,7 @@ class RoleDetailsPage extends CompanyPage
    */
   private function showRole(): void
   {
-    $details = Nub::$DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId, $this->lanId);
+    $details = Nub::$nub->DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId, $this->lanId);
 
     $table = new CoreDetailTable();
 

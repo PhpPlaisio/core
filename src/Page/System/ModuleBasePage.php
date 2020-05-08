@@ -70,7 +70,7 @@ abstract class ModuleBasePage extends TabPage
    */
   private function createForm(): void
   {
-    $words = Nub::$DL->abcBabelWordGroupGetAllWords(C::WDG_ID_MODULE, $this->lanId);
+    $words = Nub::$nub->DL->abcBabelWordGroupGetAllWords(C::WDG_ID_MODULE, $this->lanId);
 
     $this->form = new CoreForm();
 
@@ -110,7 +110,7 @@ abstract class ModuleBasePage extends TabPage
 
       default:
         $this->form->defaultHandler($method);
-    };
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

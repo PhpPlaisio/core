@@ -109,7 +109,7 @@ abstract class WordGroupBasePage extends BabelPage
 
       default:
         $this->form->defaultHandler($method);
-    };
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

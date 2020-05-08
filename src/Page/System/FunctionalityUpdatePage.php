@@ -27,8 +27,8 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
   {
     parent::__construct();
 
-    $this->funId       = Nub::$cgi->getManId('fun', 'fun');
-    $this->details     = Nub::$DL->abcSystemFunctionalityGetDetails($this->funId, $this->lanId);
+    $this->funId       = Nub::$nub->cgi->getManId('fun', 'fun');
+    $this->details     = Nub::$nub->DL->abcSystemFunctionalityGetDetails($this->funId, $this->lanId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -42,9 +42,9 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
    */
   public static function getUrl(int $funId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_UPDATE, 'pag');
-    $url .= Nub::$cgi->putId('fun', $funId, 'fun');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_UPDATE, 'pag');
+    $url .= Nub::$nub->cgi->putId('fun', $funId, 'fun');
 
     return $url;
   }
@@ -63,14 +63,14 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
 
     if ($values['fun_name'])
     {
-      $wrd_id = Nub::$DL->abcBabelWordInsertWord(C::WDG_ID_FUNCTIONALITIES, null, null, $values['fun_name']);
+      $wrd_id = Nub::$nub->DL->abcBabelWordInsertWord(C::WDG_ID_FUNCTIONALITIES, null, null, $values['fun_name']);
     }
     else
     {
       $wrd_id = $values['wrd_id'];
     }
 
-    Nub::$DL->abcSystemFunctionalityUpdateDetails($this->funId, $values['mdl_id'], $wrd_id);
+    Nub::$nub->DL->abcSystemFunctionalityUpdateDetails($this->funId, $values['mdl_id'], $wrd_id);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

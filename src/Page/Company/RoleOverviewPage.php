@@ -27,9 +27,9 @@ class RoleOverviewPage extends CompanyPage
    */
   public static function getUrl(int $targetCmpId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_ROLE_OVERVIEW, 'pag');
-    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_COMPANY_ROLE_OVERVIEW, 'pag');
+    $url .= Nub::$nub->cgi->putId('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }
@@ -40,7 +40,7 @@ class RoleOverviewPage extends CompanyPage
    */
   protected function echoTabContent(): void
   {
-    $roles = Nub::$DL->abcCompanyRoleGetAll($this->targetCmpId, $this->lanId);
+    $roles = Nub::$nub->DL->abcCompanyRoleGetAll($this->targetCmpId, $this->lanId);
 
     $table = new CoreOverviewTable();
 

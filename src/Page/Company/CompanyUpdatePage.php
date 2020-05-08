@@ -27,8 +27,8 @@ class CompanyUpdatePage extends CompanyBasePage
   {
     parent::__construct();
 
-    $this->targetCmpId = Nub::$cgi->getManId('cmp', 'cmp');
-    $this->details     = Nub::$DL->abcCompanyGetDetails($this->targetCmpId);
+    $this->targetCmpId = Nub::$nub->cgi->getManId('cmp', 'cmp');
+    $this->details     = Nub::$nub->DL->abcCompanyGetDetails($this->targetCmpId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -42,9 +42,9 @@ class CompanyUpdatePage extends CompanyBasePage
    */
   public static function getUrl(int $targetCmpId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_UPDATE, 'pag');
-    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_COMPANY_UPDATE, 'pag');
+    $url .= Nub::$nub->cgi->putId('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }
@@ -61,7 +61,7 @@ class CompanyUpdatePage extends CompanyBasePage
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
 
-    Nub::$DL->abcCompanyUpdate($this->targetCmpId, $values['cmp_abbr'], $values['cmp_label']);
+    Nub::$nub->DL->abcCompanyUpdate($this->targetCmpId, $values['cmp_abbr'], $values['cmp_label']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

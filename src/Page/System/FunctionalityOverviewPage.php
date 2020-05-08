@@ -25,8 +25,8 @@ class FunctionalityOverviewPage extends TabPage
    */
   public static function getUrl(): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_OVERVIEW, 'pag');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_FUNCTIONALITY_OVERVIEW, 'pag');
 
     return $url;
   }
@@ -37,7 +37,7 @@ class FunctionalityOverviewPage extends TabPage
    */
   protected function echoTabContent(): void
   {
-    $functionalities = Nub::$DL->abcSystemFunctionalityGetAll($this->lanId);
+    $functionalities = Nub::$nub->DL->abcSystemFunctionalityGetAll($this->lanId);
 
     $table = new CoreOverviewTable();
     $table->addTableAction('default', new FunctionalityInsertTableAction());

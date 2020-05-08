@@ -74,11 +74,11 @@ abstract class RoleGroupBasePage extends TabPage
     $this->form = new CoreForm();
 
     // Create select box for (known) role group names.
-    $titles = Nub::$DL->abcBabelWordGroupGetAllWords(C::WDG_ID_ROLE_GROUP, $this->lanId);
+    $titles = Nub::$nub->DL->abcBabelWordGroupGetAllWords(C::WDG_ID_ROLE_GROUP, $this->lanId);
     $input  = new SelectControl('wrd_id');
     $input->setOptions($titles, 'wrd_id', 'wdt_text');
     $input->setEmptyOption();
-    $input->setOptionsObfuscator(Nub::getObfuscator('wrd'));
+    $input->setOptionsObfuscator(Nub::$nub->getObfuscator('wrd'));
     $this->form->addFormControl($input, 'Name');
 
     // Create text box for (new) page title.
@@ -116,7 +116,7 @@ abstract class RoleGroupBasePage extends TabPage
 
       default:
         $this->form->defaultHandler($method);
-    };
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

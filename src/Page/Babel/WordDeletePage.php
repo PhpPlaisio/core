@@ -29,7 +29,7 @@ class WordDeletePage extends BabelPage
   {
     parent::__construct();
 
-    $this->wrdId = Nub::$cgi->getManId('wrd', 'wrd');
+    $this->wrdId = Nub::$nub->cgi->getManId('wrd', 'wrd');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -42,9 +42,9 @@ class WordDeletePage extends BabelPage
    */
   public static function getUrl(int $wrdId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_BABEL_WORD_DELETE, 'pag');
-    $url .= Nub::$cgi->putId('wrd', $wrdId, 'wrd');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_BABEL_WORD_DELETE, 'pag');
+    $url .= Nub::$nub->cgi->putId('wrd', $wrdId, 'wrd');
 
     return $url;
   }
@@ -55,9 +55,9 @@ class WordDeletePage extends BabelPage
    */
   public function handleRequest(): Response
   {
-    $details = Nub::$DL->abcBabelWordGetDetails($this->wrdId, $this->lanId);
+    $details = Nub::$nub->DL->abcBabelWordGetDetails($this->wrdId, $this->lanId);
 
-    Nub::$DL->abcBabelWordDeleteWord($this->wrdId);
+    Nub::$nub->DL->abcBabelWordDeleteWord($this->wrdId);
 
     $this->response = new SeeOtherResponse(WordGroupDetailsPage::getUrl($details['wdg_id'], $this->actLanId));
 

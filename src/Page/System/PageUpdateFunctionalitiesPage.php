@@ -53,8 +53,8 @@ class PageUpdateFunctionalitiesPage extends TabPage
   {
     parent::__construct();
 
-    $this->targetPagId = Nub::$cgi->getManId('tar_pag', 'pag');
-    $this->details     = Nub::$DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
+    $this->targetPagId = Nub::$nub->cgi->getManId('tar_pag', 'pag');
+    $this->details     = Nub::$nub->DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -67,9 +67,9 @@ class PageUpdateFunctionalitiesPage extends TabPage
    */
   public static function getUrl(int $pagId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_PAGE_UPDATE_FUNCTIONALITIES, 'pag');
-    $url .= Nub::$cgi->putId('tar_pag', $pagId, 'pag');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_PAGE_UPDATE_FUNCTIONALITIES, 'pag');
+    $url .= Nub::$nub->cgi->putId('tar_pag', $pagId, 'pag');
 
     return $url;
   }
@@ -90,16 +90,16 @@ class PageUpdateFunctionalitiesPage extends TabPage
     {
       if ($values['data'][$fun_id]['fun_checked'])
       {
-        Nub::$DL->abcSystemFunctionalityInsertPage($fun_id, $this->targetPagId);
+        Nub::$nub->DL->abcSystemFunctionalityInsertPage($fun_id, $this->targetPagId);
       }
       else
       {
-        Nub::$DL->abcSystemFunctionalityDeletePage($fun_id, $this->targetPagId);
+        Nub::$nub->DL->abcSystemFunctionalityDeletePage($fun_id, $this->targetPagId);
       }
     }
 
     // Use brute force to proper profiles.
-    Nub::$DL->abcProfileProper();
+    Nub::$nub->DL->abcProfileProper();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -121,7 +121,7 @@ class PageUpdateFunctionalitiesPage extends TabPage
   private function createForm(): void
   {
     // Get all functionalities.
-    $pages = Nub::$DL->abcSystemPageGetAvailableFunctionalities($this->targetPagId, $this->lanId);
+    $pages = Nub::$nub->DL->abcSystemPageGetAvailableFunctionalities($this->targetPagId, $this->lanId);
 
     // Create form.
     $this->form = new CoreForm();
@@ -138,7 +138,7 @@ class PageUpdateFunctionalitiesPage extends TabPage
     $button = new CoreButtonControl();
     $submit = new SubmitControl('submit');
     $submit->setMethod('handleForm');
-    $submit->setValue(Nub::$babel->getWord(C::WRD_ID_BUTTON_UPDATE));
+    $submit->setValue(Nub::$nub->babel->getWord(C::WRD_ID_BUTTON_UPDATE));
     $button->addFormControl($submit);
 
     // Put everything together in a LouverControl.
@@ -168,7 +168,7 @@ class PageUpdateFunctionalitiesPage extends TabPage
 
       default:
         $this->form->defaultHandler($method);
-    };
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -188,7 +188,7 @@ class PageUpdateFunctionalitiesPage extends TabPage
    */
   private function showPageDetails(): void
   {
-    $details = Nub::$DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
+    $details = Nub::$nub->DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
     $table   = new CoreDetailTable();
 
     // Add row with the ID of the page.

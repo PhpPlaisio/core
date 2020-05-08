@@ -25,8 +25,8 @@ class ModuleUpdatePage extends ModuleBasePage
   {
     parent::__construct();
 
-    $this->mdlId       = Nub::$cgi->getManId('mdl', 'mdl');
-    $this->details     = Nub::$DL->abcSystemModuleGetDetails($this->mdlId, $this->lanId);
+    $this->mdlId       = Nub::$nub->cgi->getManId('mdl', 'mdl');
+    $this->details     = Nub::$nub->DL->abcSystemModuleGetDetails($this->mdlId, $this->lanId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -40,9 +40,9 @@ class ModuleUpdatePage extends ModuleBasePage
    */
   public static function getUrl(int $mdlId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_SYSTEM_MODULE_UPDATE, 'pag');
-    $url .= Nub::$cgi->putId('mdl', $mdlId, 'mdl');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_MODULE_UPDATE, 'pag');
+    $url .= Nub::$nub->cgi->putId('mdl', $mdlId, 'mdl');
 
     return $url;
   }
@@ -62,7 +62,7 @@ class ModuleUpdatePage extends ModuleBasePage
     if ($values['mdl_name'])
     {
       // New module name. Insert word en retrieve wrd_id of the new word.
-      $wrd_id = Nub::$DL->abcBabelWordInsertWord(C::WDG_ID_MODULE, null, null, $values['mdl_name']);
+      $wrd_id = Nub::$nub->DL->abcBabelWordInsertWord(C::WDG_ID_MODULE, null, null, $values['mdl_name']);
     }
     else
     {
@@ -71,7 +71,7 @@ class ModuleUpdatePage extends ModuleBasePage
     }
 
     // Create the new module in the database.
-    Nub::$DL->abcSystemModuleModify($this->mdlId, $wrd_id);
+    Nub::$nub->DL->abcSystemModuleModify($this->mdlId, $wrd_id);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

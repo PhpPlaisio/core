@@ -24,9 +24,9 @@ class ModuleOverviewPage extends CompanyPage
    */
   public static function getUrl(int $targetCmpId): string
   {
-    $url = Nub::$cgi->putLeader();
-    $url .= Nub::$cgi->putId('pag', C::PAG_ID_COMPANY_MODULE_OVERVIEW, 'pag');
-    $url .= Nub::$cgi->putId('cmp', $targetCmpId, 'cmp');
+    $url = Nub::$nub->cgi->putLeader();
+    $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_COMPANY_MODULE_OVERVIEW, 'pag');
+    $url .= Nub::$nub->cgi->putId('cmp', $targetCmpId, 'cmp');
 
     return $url;
   }
@@ -37,7 +37,7 @@ class ModuleOverviewPage extends CompanyPage
    */
   protected function echoTabContent(): void
   {
-    $modules = Nub::$DL->abcCompanyModuleGetAllEnabled($this->targetCmpId, $this->lanId);
+    $modules = Nub::$nub->DL->abcCompanyModuleGetAllEnabled($this->targetCmpId, $this->lanId);
 
     $table = new CoreOverviewTable();
 
