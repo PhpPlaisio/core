@@ -78,7 +78,7 @@ abstract class PageBasePage extends TabPage
     $input  = new SelectControl('wrd_id');
     $input->setOptions($titles, 'wrd_id', 'wdt_text');
     $input->setEmptyOption();
-    $input->setOptionsObfuscator(Nub::$nub->getObfuscator('wrd'));
+    $input->setOptionsObfuscator(Nub::$nub->obfuscator::create('wrd'));
     $this->form->addFormControl($input, 'Title');
 
     // Create text box for (new) page title.
@@ -99,7 +99,7 @@ abstract class PageBasePage extends TabPage
     $input = new SelectControl('pag_id_org');
     $input->setOptions($pages, 'pag_id', 'pag_class');
     $input->setEmptyOption();
-    $input->setOptionsObfuscator(Nub::$nub->getObfuscator('pag'));
+    $input->setOptionsObfuscator(Nub::$nub->obfuscator::create('pag'));
     $this->form->addFormControl($input, 'Original Page');
 
     // Create form control for menu item with which the page is associated..
@@ -107,7 +107,7 @@ abstract class PageBasePage extends TabPage
     $input = new SelectControl('mnu_id');
     $input->setOptions($menus, 'mnu_id', 'mnu_name');
     $input->setEmptyOption();
-    $input->setOptionsObfuscator(Nub::$nub->getObfuscator('mnu'));
+    $input->setOptionsObfuscator(Nub::$nub->obfuscator::create('mnu'));
     $this->form->addFormControl($input, 'Menu');
 
     // Create form control for page alias.

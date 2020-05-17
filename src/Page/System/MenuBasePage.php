@@ -71,7 +71,7 @@ abstract class MenuBasePage extends TabPage
     $titles = Nub::$nub->DL->abcBabelWordGroupGetAllWords(C::WDG_ID_MENU, $this->lanId);
     $input  = new SelectControl('wrd_id');
     $input->setOptions($titles, 'wrd_id', 'wdt_text');
-    $input->setOptionsObfuscator(Nub::$nub->getObfuscator('wrd'));
+    $input->setOptionsObfuscator(Nub::$nub->obfuscator::create('wrd'));
     $input->setEmptyOption();
     $this->form->addFormControl($input, 'Menu Title');
 
@@ -85,7 +85,7 @@ abstract class MenuBasePage extends TabPage
     $input = new SelectControl('pag_id');
     $input->setOptions($pages, 'pag_id', 'pag_class');
     $input->setEmptyOption();
-    $input->setOptionsObfuscator(Nub::$nub->getObfuscator('pag'));
+    $input->setOptionsObfuscator(Nub::$nub->obfuscator::create('pag'));
     $this->form->addFormControl($input, 'Page Class', true);
 
     // Create text form control for input menu level.

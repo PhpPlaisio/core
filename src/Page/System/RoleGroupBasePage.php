@@ -78,7 +78,7 @@ abstract class RoleGroupBasePage extends TabPage
     $input  = new SelectControl('wrd_id');
     $input->setOptions($titles, 'wrd_id', 'wdt_text');
     $input->setEmptyOption();
-    $input->setOptionsObfuscator(Nub::$nub->getObfuscator('wrd'));
+    $input->setOptionsObfuscator(Nub::$nub->obfuscator::create('wrd'));
     $this->form->addFormControl($input, 'Name');
 
     // Create text box for (new) page title.

@@ -7,24 +7,6 @@ ABC_AUTH_PROFILE.cmp_id        5
 ABC_AUTH_PROFILE.pro_flags    10
 ABC_AUTH_PROFILE.pro_rol_ids 100
 
-ABC_AUTH_SESSION.ses_id                    10
-ABC_AUTH_SESSION.cmp_id                     5
-ABC_AUTH_SESSION.lan_id                     3
-ABC_AUTH_SESSION.usr_id                    10
-ABC_AUTH_SESSION.ses_session_token         64
-ABC_AUTH_SESSION.ses_csrf_token            64
-ABC_AUTH_SESSION.ses_last_request          20
-ABC_AUTH_SESSION.ses_data          4294967295
-
-ABC_AUTH_SESSION_NAMED.ses_id           10
-ABC_AUTH_SESSION_NAMED.cmp_id            5
-ABC_AUTH_SESSION_NAMED.ans_name        128
-ABC_AUTH_SESSION_NAMED.ans_data 4294967295
-
-ABC_AUTH_SESSION_NAMED_LOCK.ses_id    10
-ABC_AUTH_SESSION_NAMED_LOCK.cmp_id     5
-ABC_AUTH_SESSION_NAMED_LOCK.ans_name 128
-
 ABC_AUTH_USER.usr_id            10
 ABC_AUTH_USER.cmp_id             5
 ABC_AUTH_USER.lan_id             3
@@ -74,6 +56,99 @@ ABC_BABEL_WORD_TEXT.wrd_id         5
 ABC_BABEL_WORD_TEXT.lan_id         3
 ABC_BABEL_WORD_TEXT.wdt_text      80 LEN_WDT_TEXT
 ABC_BABEL_WORD_TEXT.wdt_timestamp 16
+
+AUT_CONFIG.cfg_id                  5
+AUT_CONFIG.cmp_id                  5
+AUT_CONFIG.ccl_id                  5
+AUT_CONFIG.cfg_mandatory           3
+AUT_CONFIG.cfg_show_to_company     3
+AUT_CONFIG.cfg_modify_by_company   3
+AUT_CONFIG.cfg_description       400
+AUT_CONFIG.cfg_label              50
+
+AUT_CONFIG_CLASS.ccl_id      5
+AUT_CONFIG_CLASS.ccl_type   10
+AUT_CONFIG_CLASS.ccl_class 128
+
+AUT_CONFIG_VALUE.cmp_id       5
+AUT_CONFIG_VALUE.cfg_id       5
+AUT_CONFIG_VALUE.cfg_value 4000
+
+AUT_FLAG.rfl_id        3
+AUT_FLAG.rfl_flag     10
+AUT_FLAG.rfl_name     80
+AUT_FLAG.rfl_function  3
+
+AUT_FUNCTIONALITY.fun_id 5
+AUT_FUNCTIONALITY.mdl_id 5
+AUT_FUNCTIONALITY.wrd_id 5
+
+AUT_MENU.mnu_id      5
+AUT_MENU.wrd_id      5
+AUT_MENU.pag_id      5
+AUT_MENU.mnu_level   3
+AUT_MENU.mnu_group   5
+AUT_MENU.mnu_weight  5
+AUT_MENU.mnu_link   64
+
+AUT_MODULE.mdl_id 5
+AUT_MODULE.wrd_id 5
+
+AUT_MODULE_COMPANY.cmp_id 5
+AUT_MODULE_COMPANY.mdl_id 5
+
+AUT_PAGE.pag_id       5
+AUT_PAGE.pag_id_org   5
+AUT_PAGE.ptb_id       3
+AUT_PAGE.mnu_id       5
+AUT_PAGE.wrd_id       5
+AUT_PAGE.pag_alias   32
+AUT_PAGE.pag_class  128
+AUT_PAGE.pag_label  128
+AUT_PAGE.pag_weight  10
+
+AUT_PAGE_COMPANY.pag_id      5
+AUT_PAGE_COMPANY.cmp_id      5
+AUT_PAGE_COMPANY.pag_class 128
+
+AUT_PAGE_TAB.ptb_id     3
+AUT_PAGE_TAB.wrd_id     5
+AUT_PAGE_TAB.ptb_label 30
+
+AUT_PAG_FUN.pag_id 5
+AUT_PAG_FUN.fun_id 5
+
+AUT_PRO_PAG.pag_id 5
+AUT_PRO_PAG.pro_id 5
+
+AUT_PRO_ROL.cmp_id 5
+AUT_PRO_ROL.pro_id 5
+AUT_PRO_ROL.rol_id 5
+
+AUT_ROLE.rol_id      5
+AUT_ROLE.cmp_id      5
+AUT_ROLE.rlg_id      5
+AUT_ROLE.rol_weight  5
+AUT_ROLE.rol_name   32
+AUT_ROLE.rol_label  50
+
+AUT_ROLE_GROUP.rlg_id      5
+AUT_ROLE_GROUP.wrd_id      5
+AUT_ROLE_GROUP.rlg_weight  5
+AUT_ROLE_GROUP.rlg_label  50
+
+AUT_ROL_FLG.rfl_id 3
+AUT_ROL_FLG.rol_id 5
+
+AUT_ROL_FUN.cmp_id 5
+AUT_ROL_FUN.fun_id 5
+AUT_ROL_FUN.rol_id 5
+
+AUT_USR_ROL.cmp_id          5
+AUT_USR_ROL.usr_id         10
+AUT_USR_ROL.rol_id          5
+AUT_USR_ROL.aur_date_start 10
+AUT_USR_ROL.aur_date_stop  10
 
 information_schema.ALL_PLUGINS.PLUGIN_NAME                    64
 information_schema.ALL_PLUGINS.PLUGIN_VERSION                 20
@@ -1100,24 +1175,6 @@ test.ABC_AUTH_PROFILE.cmp_id        5
 test.ABC_AUTH_PROFILE.pro_flags    10
 test.ABC_AUTH_PROFILE.pro_rol_ids 100
 
-test.ABC_AUTH_SESSION.ses_id                    10
-test.ABC_AUTH_SESSION.cmp_id                     5
-test.ABC_AUTH_SESSION.lan_id                     3
-test.ABC_AUTH_SESSION.usr_id                    10
-test.ABC_AUTH_SESSION.ses_session_token         64
-test.ABC_AUTH_SESSION.ses_csrf_token            64
-test.ABC_AUTH_SESSION.ses_last_request          20
-test.ABC_AUTH_SESSION.ses_data          4294967295
-
-test.ABC_AUTH_SESSION_NAMED.ses_id           10
-test.ABC_AUTH_SESSION_NAMED.cmp_id            5
-test.ABC_AUTH_SESSION_NAMED.ans_name        128
-test.ABC_AUTH_SESSION_NAMED.ans_data 4294967295
-
-test.ABC_AUTH_SESSION_NAMED_LOCK.ses_id    10
-test.ABC_AUTH_SESSION_NAMED_LOCK.cmp_id     5
-test.ABC_AUTH_SESSION_NAMED_LOCK.ans_name 128
-
 test.ABC_AUTH_USER.usr_id            10
 test.ABC_AUTH_USER.cmp_id             5
 test.ABC_AUTH_USER.lan_id             3
@@ -1167,6 +1224,99 @@ test.ABC_BABEL_WORD_TEXT.wrd_id         5
 test.ABC_BABEL_WORD_TEXT.lan_id         3
 test.ABC_BABEL_WORD_TEXT.wdt_text      80
 test.ABC_BABEL_WORD_TEXT.wdt_timestamp 16
+
+test.AUT_CONFIG.cfg_id                  5
+test.AUT_CONFIG.cmp_id                  5
+test.AUT_CONFIG.ccl_id                  5
+test.AUT_CONFIG.cfg_mandatory           3
+test.AUT_CONFIG.cfg_show_to_company     3
+test.AUT_CONFIG.cfg_modify_by_company   3
+test.AUT_CONFIG.cfg_description       400
+test.AUT_CONFIG.cfg_label              50
+
+test.AUT_CONFIG_CLASS.ccl_id      5
+test.AUT_CONFIG_CLASS.ccl_type   10
+test.AUT_CONFIG_CLASS.ccl_class 128
+
+test.AUT_CONFIG_VALUE.cmp_id       5
+test.AUT_CONFIG_VALUE.cfg_id       5
+test.AUT_CONFIG_VALUE.cfg_value 4000
+
+test.AUT_FLAG.rfl_id        3
+test.AUT_FLAG.rfl_flag     10
+test.AUT_FLAG.rfl_name     80
+test.AUT_FLAG.rfl_function  3
+
+test.AUT_FUNCTIONALITY.fun_id 5
+test.AUT_FUNCTIONALITY.mdl_id 5
+test.AUT_FUNCTIONALITY.wrd_id 5
+
+test.AUT_MENU.mnu_id      5
+test.AUT_MENU.wrd_id      5
+test.AUT_MENU.pag_id      5
+test.AUT_MENU.mnu_level   3
+test.AUT_MENU.mnu_group   5
+test.AUT_MENU.mnu_weight  5
+test.AUT_MENU.mnu_link   64
+
+test.AUT_MODULE.mdl_id 5
+test.AUT_MODULE.wrd_id 5
+
+test.AUT_MODULE_COMPANY.cmp_id 5
+test.AUT_MODULE_COMPANY.mdl_id 5
+
+test.AUT_PAGE.pag_id       5
+test.AUT_PAGE.pag_id_org   5
+test.AUT_PAGE.ptb_id       3
+test.AUT_PAGE.mnu_id       5
+test.AUT_PAGE.wrd_id       5
+test.AUT_PAGE.pag_alias   32
+test.AUT_PAGE.pag_class  128
+test.AUT_PAGE.pag_label  128
+test.AUT_PAGE.pag_weight  10
+
+test.AUT_PAGE_COMPANY.pag_id      5
+test.AUT_PAGE_COMPANY.cmp_id      5
+test.AUT_PAGE_COMPANY.pag_class 128
+
+test.AUT_PAGE_TAB.ptb_id     3
+test.AUT_PAGE_TAB.wrd_id     5
+test.AUT_PAGE_TAB.ptb_label 30
+
+test.AUT_PAG_FUN.pag_id 5
+test.AUT_PAG_FUN.fun_id 5
+
+test.AUT_PRO_PAG.pag_id 5
+test.AUT_PRO_PAG.pro_id 5
+
+test.AUT_PRO_ROL.cmp_id 5
+test.AUT_PRO_ROL.pro_id 5
+test.AUT_PRO_ROL.rol_id 5
+
+test.AUT_ROLE.rol_id      5
+test.AUT_ROLE.cmp_id      5
+test.AUT_ROLE.rlg_id      5
+test.AUT_ROLE.rol_weight  5
+test.AUT_ROLE.rol_name   32
+test.AUT_ROLE.rol_label  50
+
+test.AUT_ROLE_GROUP.rlg_id      5
+test.AUT_ROLE_GROUP.wrd_id      5
+test.AUT_ROLE_GROUP.rlg_weight  5
+test.AUT_ROLE_GROUP.rlg_label  50
+
+test.AUT_ROL_FLG.rfl_id 3
+test.AUT_ROL_FLG.rol_id 5
+
+test.AUT_ROL_FUN.cmp_id 5
+test.AUT_ROL_FUN.fun_id 5
+test.AUT_ROL_FUN.rol_id 5
+
+test.AUT_USR_ROL.cmp_id          5
+test.AUT_USR_ROL.usr_id         10
+test.AUT_USR_ROL.rol_id          5
+test.AUT_USR_ROL.aur_date_start 10
+test.AUT_USR_ROL.aur_date_stop  10
 
 test_audit.TABLE1.c1  3
 test_audit.TABLE1.c2  5

@@ -54,7 +54,7 @@ class BabelWordTranslateSlatControlFactory extends SlatControlFactory
     $table_column = new TextSlatJoint($act_language);
     $this->addSlatJoint('act_wdt_text', $table_column);
 
-    $this->wrdIdObfuscator = Nub::$nub->getObfuscator('wrd');
+    $this->wrdIdObfuscator = Nub::$nub->obfuscator::create('wrd');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

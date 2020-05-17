@@ -75,7 +75,7 @@ class SpecificPageInsertPage extends CompanyPage
     // Input for parent class.
     $input = new SelectControl('prt_pag_id');
     $input->setOptions($pages, 'pag_id', 'pag_class');
-    $input->setOptionsObfuscator(Nub::$nub->getObfuscator('pag'));
+    $input->setOptionsObfuscator(Nub::$nub->obfuscator::create('pag'));
     $this->form->addFormControl($input, 'Parent Class');
 
     // Input for company specific page.

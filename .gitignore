@@ -1,7 +1,5 @@
 /.idea/
-/bin/phing
-/bin/phpunit
-/bin/stratum
+/bin/
 /composer.lock
 /doc/
 /test/TestDataLayer.php

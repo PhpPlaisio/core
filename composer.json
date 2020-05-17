@@ -10,24 +10,27 @@
     "php": ">=7.3",
     "ext-curl": "*",
     "plaisio/babel-core": "^1.2",
+    "plaisio/cgi": "^1.2",
     "plaisio/db-company": "^1.1",
     "plaisio/db-profile": "^1.1",
     "plaisio/db-user": "^1.1",
     "plaisio/exception": "^1.1",
-    "plaisio/form": "^0.11.4",
-    "plaisio/form-louver": "^0.11.1",
+    "plaisio/form": "^0.11.5",
+    "plaisio/form-louver": "^0.11.3",
     "plaisio/helper-html": "^1.1",
     "plaisio/helper-password": "^1.1",
-    "plaisio/kernel": "^2.0",
+    "plaisio/kernel": "^3.1.1",
     "plaisio/page-core": "^1.2",
+    "plaisio/request-handler": "^1.2",
     "plaisio/response-core": "^1.1",
-    "plaisio/table-detail": "^1.2",
-    "plaisio/table-overview": "^1.2",
+    "plaisio/table-detail": "^1.3",
+    "plaisio/table-overview": "^1.3",
     "setbased/exception": "^2.1",
-    "setbased/php-stratum-mysql": "^5.0"
+    "setbased/php-stratum-mysql": "^5.1"
   },
   "require-dev": {
     "phing/phing": "^2.0",
+    "plaisio/console": "^2.0.1",
     "setbased/php-stratum": "^6.0"
   },
   "autoload": {

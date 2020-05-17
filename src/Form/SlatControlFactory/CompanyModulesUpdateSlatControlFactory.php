@@ -42,7 +42,7 @@ class CompanyModulesUpdateSlatControlFactory extends SlatControlFactory
     $table_column = new CheckboxSlatJoint('Enable');
     $this->addSlatJoint('mdl_enabled', $table_column);
 
-    $this->mdlIdObfuscator = Nub::$nub->getObfuscator('mdl');
+    $this->mdlIdObfuscator = Nub::$nub->obfuscator::create('mdl');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

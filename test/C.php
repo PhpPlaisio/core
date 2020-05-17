@@ -92,10 +92,6 @@ class C
    *
    * Below this doc block constants will be inserted by PhpStratum.
    */
-  const CMP_ID_PLAISIO        =   2;
-  const CMP_ID_SYS            =   1;
-  const LAN_ID_EN             =   1;
-  const LAN_ID_NL             =   2;
   const LEN_CMP_ABBR          =  15;
   const LEN_CMP_LABEL         =  20;
   const LEN_USR_NAME          =  64;

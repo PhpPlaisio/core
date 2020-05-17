@@ -10,6 +10,7 @@ use Plaisio\Form\Control\SelectControl;
 use Plaisio\Form\Form;
 use Plaisio\Kernel\Nub;
 use Plaisio\Response\SeeOtherResponse;
+use SetBased\Helper\Cast;
 
 /**
  * Abstract parent page for all Babel pages.
@@ -79,10 +80,10 @@ abstract class BabelPage extends TabPage
   protected function handleSelectLanguage(Form $form): void
   {
     $values         = $form->getValues();
-    $this->actLanId = $values['babel']['act_lan_id'];
+    $this->actLanId = Cast::toOptInt($values['babel']['act_lan_id']);
 
     $get            = $_GET;
-    $get['act_lan'] = Nub::$nub->obfuscate($this->actLanId, 'lan');
+    $get['act_lan'] = Nub::$nub->obfuscator::encode($this->actLanId, 'lan');
 
     $url = '';
     foreach ($get as $name => $value)
@@ -101,7 +102,7 @@ abstract class BabelPage extends TabPage
     // Input for language.
     $input = new SelectControl('act_lan_id');
     $input->setOptions($languages, 'lan_id', 'lan_name');
-    $input->setOptionsObfuscator(Nub::$nub->getObfuscator('lan'));
+    $input->setOptionsObfuscator(Nub::$nub->obfuscator::create('lan'));
     $input->setValue($this->actLanId);
     $form->addFormControl($input, C::WRD_ID_LANGUAGE, true);
 
