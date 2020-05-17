@@ -1,0 +1,12 @@
+<database>
+    <provides>
+        <table>AUT_PAGE</table>
+        <table>AUT_PAGE_COMPANY</table>
+    </provides>
+    <requires>
+        <table>ABC_AUTH_COMPANY</table>
+    </requires>
+    <scripts>
+        <script>lib/ddl/0100_create_tables.sql</script>
+    </scripts>
+</database>
