@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Core\Page;
 
+use Plaisio\C;
 use Plaisio\Helper\Html;
 use Plaisio\Kernel\Nub;
 use Plaisio\Page\CorePage;
@@ -35,6 +36,7 @@ abstract class TabPage extends CorePage
   protected $tabs;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    */
@@ -258,12 +260,9 @@ abstract class TabPage extends CorePage
   /**
    * Echos the main menu.
    */
-  private function echoMainMenu(): void
+  private function echoAdminMenu(): void
   {
-    $items       = Nub::$nub->DL->abcAuthGetMenu($this->cmpId, $this->proId, $this->lanId);
-    $page_mnu_id = Nub::$nub->pageInfo['mnu_id'];
-
-    echo '<nav class="grid-main-menu">';
+    echo '<div class="grid-main-menu">';
 
     echo '<div class="main-menu-icon">';
     echo '<div class="menu-bar1"></div>';
@@ -271,50 +270,8 @@ abstract class TabPage extends CorePage
     echo '<div class="menu-bar3"></div>';
     echo '</div>';
 
-    $last_group = 0;
-    foreach ($items as $i => $item)
-    {
-      $attributes = ['class' => 'menu'];
-
-      if ($item['pag_alias']!==null)
-      {
-        $link = '/'.$item['pag_alias'];
-      }
-      else
-      {
-        $link = Nub::$nub->cgi->putId('pag', $item['pag_id'], 'pag');
-      }
-      $link .= $item['mnu_link'];
-
-      if ($item['mnu_id']==$page_mnu_id)
-      {
-        $attributes['class'] .= ' menu-active';
-      }
-
-      if ($item['mnu_group']>$last_group)
-      {
-        if ($last_group<>0)
-        {
-          echo '</ul>';
-        }
-
-        echo Html::generateTag('li', ['class' => 'menu menu-has-submenu']);
-        echo Html::generateElement('a', ['class' => 'menu'], $groups[$item['mnu_group']]['mnu_text'] ?? null, true);
-        echo '<ul class="menu menu-submenu">';
-      }
-
-      $a = Html::generateElement('a', ['class' => 'menu', 'href' => $link], Html::txt2Html($item['mnu_text']));
-      echo Html::generateElement('li', $attributes, $a, true);
-
-      $last_group = $item['mnu_group'];
-    }
-
-    if ($last_group<>0)
-    {
-      echo '</ul>';
-    }
-
-    echo '</nav>';
+    echo Nub::$nub->menu->menu(C::MNU_ID_ADMIN);
+    echo '</div>';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

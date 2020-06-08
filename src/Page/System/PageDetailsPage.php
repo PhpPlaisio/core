@@ -97,9 +97,6 @@ class PageDetailsPage extends TabPage
     // Add row with the ID of the parent page of the page.
     PageDetailsTableRow::addRow($table, 'Original Page', $details);
 
-    // Add row with the menu item of the page.
-    TextTableRow::addRow($table, 'Menu', $details['mnu_name']);
-
     // Add row with the alias of the page.
     TextTableRow::addRow($table, 'Alias', $details['pag_alias']);
 

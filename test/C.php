@@ -17,6 +17,7 @@ class C
   const LEN_PASSWORD = 0;
 
   // grep C:: `find src -name "*.php"` | awk 'match($0, /C::[A-Z_]+/) {print "const " substr($0, RSTART+3, RLENGTH-3) " = 0;"}'|sort -u
+  const MNU_ID_ADMIN = 0;
   const PAG_ID_BABEL_WORD_DELETE = 0;
   const PAG_ID_BABEL_WORD_GROUP_DETAILS = 0;
   const PAG_ID_BABEL_WORD_GROUP_INSERT = 0;
@@ -43,16 +44,12 @@ class C
   const PAG_ID_COMPANY_UPDATE = 0;
   const PAG_ID_MISC_LOGIN = 0;
   const PAG_ID_MISC_LOGOUT = 0;
-  const PAG_ID_MISC_W = 0;
   const PAG_ID_SYSTEM_FUNCTIONALITY_DETAILS = 0;
   const PAG_ID_SYSTEM_FUNCTIONALITY_INSERT = 0;
   const PAG_ID_SYSTEM_FUNCTIONALITY_OVERVIEW = 0;
   const PAG_ID_SYSTEM_FUNCTIONALITY_UPDATE = 0;
   const PAG_ID_SYSTEM_FUNCTIONALITY_UPDATE_PAGES = 0;
   const PAG_ID_SYSTEM_FUNCTIONALITY_UPDATE_ROLES = 0;
-  const PAG_ID_SYSTEM_MENU_INSERT = 0;
-  const PAG_ID_SYSTEM_MENU_MODIFY = 0;
-  const PAG_ID_SYSTEM_MENU_OVERVIEW = 0;
   const PAG_ID_SYSTEM_MODULE_DETAILS = 0;
   const PAG_ID_SYSTEM_MODULE_INSERT = 0;
   const PAG_ID_SYSTEM_MODULE_OVERVIEW = 0;
@@ -72,7 +69,6 @@ class C
   const PAG_ID_SYSTEM_TAB_OVERVIEW = 0;
   const PAG_ID_SYSTEM_TAB_UPDATE = 0;
   const WDG_ID_FUNCTIONALITIES = 0;
-  const WDG_ID_MENU = 0;
   const WDG_ID_MODULE = 0;
   const WDG_ID_PAGE_GROUP_TITLE = 0;
   const WDG_ID_PAGE_TITLE = 0;
@@ -94,6 +90,16 @@ class C
    */
   const LEN_CMP_ABBR          =  15;
   const LEN_CMP_LABEL         =  20;
+  const LEN_PAG_ALIAS         =  32;
+  const LEN_PAG_CLASS         = 128;
+  const LEN_PAG_LABEL         = 128;
+  const LEN_PAG_WEIGHT        =  10;
+  const LEN_PTB_LABEL         =  30;
+  const LEN_RLG_LABEL         =  50;
+  const LEN_RLG_WEIGHT        =   5;
+  const LEN_ROL_LABEL         =  50;
+  const LEN_ROL_NAME          =  32;
+  const LEN_ROL_WEIGHT        =   5;
   const LEN_USR_NAME          =  64;
   const LEN_USR_PASSWORD_HASH =  60;
   const LEN_WDG_LABEL         =  30;

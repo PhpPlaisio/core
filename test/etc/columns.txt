@@ -83,14 +83,6 @@ AUT_FUNCTIONALITY.fun_id 5
 AUT_FUNCTIONALITY.mdl_id 5
 AUT_FUNCTIONALITY.wrd_id 5
 
-AUT_MENU.mnu_id      5
-AUT_MENU.wrd_id      5
-AUT_MENU.pag_id      5
-AUT_MENU.mnu_level   3
-AUT_MENU.mnu_group   5
-AUT_MENU.mnu_weight  5
-AUT_MENU.mnu_link   64
-
 AUT_MODULE.mdl_id 5
 AUT_MODULE.wrd_id 5
 
@@ -102,10 +94,10 @@ AUT_PAGE.pag_id_org   5
 AUT_PAGE.ptb_id       3
 AUT_PAGE.mnu_id       5
 AUT_PAGE.wrd_id       5
-AUT_PAGE.pag_alias   32
-AUT_PAGE.pag_class  128
-AUT_PAGE.pag_label  128
-AUT_PAGE.pag_weight  10
+AUT_PAGE.pag_alias   32 LEN_PAG_ALIAS
+AUT_PAGE.pag_class  128 LEN_PAG_CLASS
+AUT_PAGE.pag_label  128 LEN_PAG_LABEL
+AUT_PAGE.pag_weight  10 LEN_PAG_WEIGHT
 
 AUT_PAGE_COMPANY.pag_id      5
 AUT_PAGE_COMPANY.cmp_id      5
@@ -113,7 +105,7 @@ AUT_PAGE_COMPANY.pag_class 128
 
 AUT_PAGE_TAB.ptb_id     3
 AUT_PAGE_TAB.wrd_id     5
-AUT_PAGE_TAB.ptb_label 30
+AUT_PAGE_TAB.ptb_label 30 LEN_PTB_LABEL
 
 AUT_PAG_FUN.pag_id 5
 AUT_PAG_FUN.fun_id 5
@@ -128,14 +120,14 @@ AUT_PRO_ROL.rol_id 5
 AUT_ROLE.rol_id      5
 AUT_ROLE.cmp_id      5
 AUT_ROLE.rlg_id      5
-AUT_ROLE.rol_weight  5
-AUT_ROLE.rol_name   32
-AUT_ROLE.rol_label  50
+AUT_ROLE.rol_weight  5 LEN_ROL_WEIGHT
+AUT_ROLE.rol_name   32 LEN_ROL_NAME
+AUT_ROLE.rol_label  50 LEN_ROL_LABEL
 
 AUT_ROLE_GROUP.rlg_id      5
 AUT_ROLE_GROUP.wrd_id      5
-AUT_ROLE_GROUP.rlg_weight  5
-AUT_ROLE_GROUP.rlg_label  50
+AUT_ROLE_GROUP.rlg_weight  5 LEN_RLG_WEIGHT
+AUT_ROLE_GROUP.rlg_label  50 LEN_RLG_LABEL
 
 AUT_ROL_FLG.rfl_id 3
 AUT_ROL_FLG.rol_id 5
@@ -1250,14 +1242,6 @@ test.AUT_FLAG.rfl_function  3
 test.AUT_FUNCTIONALITY.fun_id 5
 test.AUT_FUNCTIONALITY.mdl_id 5
 test.AUT_FUNCTIONALITY.wrd_id 5
-
-test.AUT_MENU.mnu_id      5
-test.AUT_MENU.wrd_id      5
-test.AUT_MENU.pag_id      5
-test.AUT_MENU.mnu_level   3
-test.AUT_MENU.mnu_group   5
-test.AUT_MENU.mnu_weight  5
-test.AUT_MENU.mnu_link   64
 
 test.AUT_MODULE.mdl_id 5
 test.AUT_MODULE.wrd_id 5

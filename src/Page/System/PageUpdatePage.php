@@ -75,7 +75,6 @@ class PageUpdatePage extends PageBasePage
                                               $wrd_id,
                                               $values['ptb_id'],
                                               $values['pag_id_org'],
-                                              $values['mnu_id'],
                                               $values['pag_alias'],
                                               $values['pag_class'],
                                               $values['pag_label'],

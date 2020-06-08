@@ -5,7 +5,6 @@
  * @param p_wrd_id      The ID of the word of the page title.
  * @param p_ptb_id      The ID of the page tab to which the page belongs (optional).
  * @param p_pag_id_org  The ID of master page of the page (optional).
- * @param p_mnu_id      The ID menu associated with the page.
  * @param p_pag_alias   The alias of the page.
  * @param p_pag_class   The class of the page.
  * @param p_pag_label   The label of the page.
@@ -15,7 +14,6 @@ create procedure abc_system_page_update_details(in p_pag_id     @aut_page.pag_id
                                                 in p_wrd_id     @aut_page.wrd_id%type@,
                                                 in p_ptb_id     @aut_page.ptb_id%type@,
                                                 in p_pag_id_org @aut_page.pag_id%type@,
-                                                in p_mnu_id     @aut_page.mnu_id%type@,
                                                 in p_pag_alias  @aut_page.pag_alias%type@,
                                                 in p_pag_class  @aut_page.pag_class%type@,
                                                 in p_pag_label  @aut_page.pag_label%type@,
@@ -31,7 +29,6 @@ begin
   set wrd_id       = p_wrd_id
   ,   ptb_id       = p_ptb_id
   ,   pag_id_org   = p_pag_id_org
-  ,   mnu_id       = p_mnu_id
   ,   pag_alias    = p_pag_alias
   ,   pag_class    = p_pag_class
   ,   pag_label    = p_pag_label

@@ -20,6 +20,7 @@
     "plaisio/helper-html": "^1.1",
     "plaisio/helper-password": "^1.1",
     "plaisio/kernel": "^3.1.1",
+    "plaisio/menu": "dev-master",
     "plaisio/page-core": "^1.2.1",
     "plaisio/request-handler": "^1.2",
     "plaisio/response-core": "^1.1",
@@ -28,6 +29,8 @@
     "setbased/exception": "^2.1",
     "setbased/php-stratum-mysql": "^5.1"
   },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "require-dev": {
     "phing/phing": "^2.0",
     "plaisio/console": "^2.0.1",

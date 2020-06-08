@@ -203,9 +203,6 @@ class PageUpdateFunctionalitiesPage extends TabPage
     // Add row with the ID of the parent page of the page.
     PageDetailsTableRow::addRow($table, 'Original Page', $details);
 
-    // Add row with the menu item of the page.
-    TextTableRow::addRow($table, 'Menu', $details['mnu_name']);
-
     // Add row with the class name of the page.
     TextTableRow::addRow($table, 'Class', $details['pag_class']);
 

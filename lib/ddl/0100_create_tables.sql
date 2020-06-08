@@ -2,10 +2,10 @@
 /* DDL SCRIPT                                                                     */
 /*================================================================================*/
 /*  Title    : ABC Framework                                                      */
-/*  FileName : abc-core.ecm                                                       */
+/*  FileName : core.ecm                                                           */
 /*  Platform : MySQL 5                                                            */
 /*  Version  : Concept                                                            */
-/*  Date     : donderdag 30 november 2017                                         */
+/*  Date     : maandag 8 juni 2020                                                */
 /*================================================================================*/
 /*================================================================================*/
 /* CREATE TABLES                                                                  */
@@ -103,6 +103,14 @@ CREATE TABLE `AUT_FUNCTIONALITY` (
 )
 engine=innodb;
 
+CREATE TABLE `AUT_MODULE_COMPANY` (
+  `cmp_id` SMALLINT UNSIGNED NOT NULL,
+  `mdl_id` SMALLINT UNSIGNED NOT NULL,
+  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`cmp_id`, `mdl_id`),
+  CONSTRAINT `SECONDARY` UNIQUE (`mdl_id`, `cmp_id`)
+)
+engine=innodb;
+
 CREATE TABLE `AUT_PAGE_TAB` (
   `ptb_id` TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
   `wrd_id` SMALLINT UNSIGNED NOT NULL,
@@ -143,25 +151,6 @@ The PHP constant name of this page.
 COMMENT ON COLUMN `AUT_PAGE`.`pag_weight`
 The weight for sorting.
 */
-
-CREATE TABLE `AUT_MENU` (
-  `mnu_id` SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
-  `wrd_id` SMALLINT UNSIGNED NOT NULL,
-  `pag_id` SMALLINT UNSIGNED NOT NULL,
-  `mnu_level` TINYINT NOT NULL,
-  `mnu_group` SMALLINT NOT NULL,
-  `mnu_weight` SMALLINT NOT NULL,
-  `mnu_link` VARCHAR(64),
-  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`mnu_id`)
-);
-
-CREATE TABLE `AUT_MODULE_COMPANY` (
-  `cmp_id` SMALLINT UNSIGNED NOT NULL,
-  `mdl_id` SMALLINT UNSIGNED NOT NULL,
-  CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`cmp_id`, `mdl_id`),
-  CONSTRAINT `SECONDARY` UNIQUE (`mdl_id`, `cmp_id`)
-)
-engine=innodb;
 
 CREATE TABLE `AUT_PAG_FUN` (
   `pag_id` SMALLINT UNSIGNED NOT NULL,
@@ -271,6 +260,10 @@ CREATE INDEX `IX_AUT_FUNCTIONALITY1` ON `AUT_FUNCTIONALITY` (`mdl_id`);
 
 CREATE INDEX `IX_AUT_FUNCTIONALITY2` ON `AUT_FUNCTIONALITY` (`wrd_id`);
 
+CREATE INDEX `IX_AUT_MODULE_COMPANY1` ON `AUT_MODULE_COMPANY` (`mdl_id`);
+
+CREATE INDEX `IX_AUT_MODULE_COMPANY2` ON `AUT_MODULE_COMPANY` (`cmp_id`);
+
 CREATE INDEX `IX_AUT_PAGE_TAB1` ON `AUT_PAGE_TAB` (`wrd_id`);
 
 CREATE INDEX `IX_AUT_PAGE1` ON `AUT_PAGE` (`ptb_id`);
@@ -280,14 +273,6 @@ CREATE INDEX `IX_AUT_PAGE2` ON `AUT_PAGE` (`pag_id_org`);
 CREATE INDEX `mnu_id` ON `AUT_PAGE` (`mnu_id`);
 
 CREATE INDEX `wrd_id` ON `AUT_PAGE` (`wrd_id`);
-
-CREATE INDEX `pag_id` ON `AUT_MENU` (`pag_id`);
-
-CREATE INDEX `wrd_id` ON `AUT_MENU` (`wrd_id`);
-
-CREATE INDEX `IX_AUT_MODULE_COMPANY1` ON `AUT_MODULE_COMPANY` (`mdl_id`);
-
-CREATE INDEX `IX_AUT_MODULE_COMPANY2` ON `AUT_MODULE_COMPANY` (`cmp_id`);
 
 CREATE INDEX `IX_AUT_PAGE_COMPANY1` ON `AUT_PAGE_COMPANY` (`pag_id`);
 
@@ -339,6 +324,14 @@ ALTER TABLE `AUT_FUNCTIONALITY`
   ADD CONSTRAINT `FK_AUT_FUNCTIONALITY_AUT_MODULE`
   FOREIGN KEY (`mdl_id`) REFERENCES `AUT_MODULE` (`mdl_id`);
 
+ALTER TABLE `AUT_MODULE_COMPANY`
+  ADD CONSTRAINT `FK_AUT_MODULE_COMPANY_ABC_AUTH_COMPANY`
+  FOREIGN KEY (`cmp_id`) REFERENCES `ABC_AUTH_COMPANY` (`cmp_id`);
+
+ALTER TABLE `AUT_MODULE_COMPANY`
+  ADD CONSTRAINT `FK_AUT_MODULE_COMPANY_AUT_MODULE`
+  FOREIGN KEY (`mdl_id`) REFERENCES `AUT_MODULE` (`mdl_id`);
+
 ALTER TABLE `AUT_PAGE_TAB`
   ADD CONSTRAINT `FK_AUT_PAGE_TAB_ABC_BABEL_WORD`
   FOREIGN KEY (`wrd_id`) REFERENCES `ABC_BABEL_WORD` (`wrd_id`);
@@ -350,38 +343,12 @@ ALTER TABLE `AUT_PAGE`
   ON DELETE NO ACTION;
 
 ALTER TABLE `AUT_PAGE`
-  ADD CONSTRAINT `AUT_PAGE_ibfk_4`
-  FOREIGN KEY (`mnu_id`) REFERENCES `AUT_MENU` (`mnu_id`)
-  ON UPDATE NO ACTION
-  ON DELETE NO ACTION;
-
-ALTER TABLE `AUT_PAGE`
   ADD CONSTRAINT `FK_AUT_PAGE_AUT_PAGE`
   FOREIGN KEY (`pag_id_org`) REFERENCES `AUT_PAGE` (`pag_id`);
 
 ALTER TABLE `AUT_PAGE`
   ADD CONSTRAINT `FK_AUT_PAGE_AUT_PAGE_TAB`
   FOREIGN KEY (`ptb_id`) REFERENCES `AUT_PAGE_TAB` (`ptb_id`);
-
-ALTER TABLE `AUT_MENU`
-  ADD CONSTRAINT `FK_AUT_MENU_ABC_BABEL_WORD`
-  FOREIGN KEY (`wrd_id`) REFERENCES `ABC_BABEL_WORD` (`wrd_id`)
-  ON UPDATE NO ACTION
-  ON DELETE NO ACTION;
-
-ALTER TABLE `AUT_MENU`
-  ADD CONSTRAINT `AUT_MENU_ibfk_5`
-  FOREIGN KEY (`pag_id`) REFERENCES `AUT_PAGE` (`pag_id`)
-  ON UPDATE NO ACTION
-  ON DELETE NO ACTION;
-
-ALTER TABLE `AUT_MODULE_COMPANY`
-  ADD CONSTRAINT `FK_AUT_MODULE_COMPANY_ABC_AUTH_COMPANY`
-  FOREIGN KEY (`cmp_id`) REFERENCES `ABC_AUTH_COMPANY` (`cmp_id`);
-
-ALTER TABLE `AUT_MODULE_COMPANY`
-  ADD CONSTRAINT `FK_AUT_MODULE_COMPANY_AUT_MODULE`
-  FOREIGN KEY (`mdl_id`) REFERENCES `AUT_MODULE` (`mdl_id`);
 
 ALTER TABLE `AUT_PAG_FUN`
   ADD CONSTRAINT `FK_AUT_PAG_FUN_AUT_FUNCTIONALITY`

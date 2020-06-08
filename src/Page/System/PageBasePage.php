@@ -102,14 +102,6 @@ abstract class PageBasePage extends TabPage
     $input->setOptionsObfuscator(Nub::$nub->obfuscator::create('pag'));
     $this->form->addFormControl($input, 'Original Page');
 
-    // Create form control for menu item with which the page is associated..
-    $menus = Nub::$nub->DL->abcSystemMenuGetAllEntries($this->lanId);
-    $input = new SelectControl('mnu_id');
-    $input->setOptions($menus, 'mnu_id', 'mnu_name');
-    $input->setEmptyOption();
-    $input->setOptionsObfuscator(Nub::$nub->obfuscator::create('mnu'));
-    $this->form->addFormControl($input, 'Menu');
-
     // Create form control for page alias.
     $input = new TextControl('pag_alias');
     $input->setAttrMaxLength(C::LEN_PAG_ALIAS);

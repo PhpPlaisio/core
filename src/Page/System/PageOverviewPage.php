@@ -56,9 +56,6 @@ class PageOverviewPage extends TabPage
     // Show label of the page.
     $table->addColumn(new TextTableColumn('Label', 'pag_label'));
 
-    // Show associated menu item of the page.
-    $table->addColumn(new TextTableColumn('Menu', 'mnu_name'));
-
     // Show page tab of the page.
     $table->addColumn(new TextTableColumn('Page Tab', 'ptb_label'));
 

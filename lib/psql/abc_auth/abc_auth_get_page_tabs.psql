@@ -1,5 +1,5 @@
 /**
- * Selects the page tabs (or sub-menu) for a user.
+ * Selects the page tabs for a user.
  *
  * @param p_cmp_id The ID of the company of the user (safe guard).
  * @param p_ptb_id The ID of the page tab.

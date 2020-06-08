@@ -56,7 +56,6 @@ class PageInsertPage extends PageBasePage
     $this->targetPagId = Nub::$nub->DL->abcSystemPageInsertDetails($wrd_id,
                                                                    $values['ptb_id'],
                                                                    $values['pag_id_org'],
-                                                                   $values['mnu_id'],
                                                                    $values['pag_alias'],
                                                                    $values['pag_class'],
                                                                    $values['pag_label'],
