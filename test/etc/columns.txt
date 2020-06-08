@@ -92,7 +92,6 @@ AUT_MODULE_COMPANY.mdl_id 5
 AUT_PAGE.pag_id       5
 AUT_PAGE.pag_id_org   5
 AUT_PAGE.ptb_id       3
-AUT_PAGE.mnu_id       5
 AUT_PAGE.wrd_id       5
 AUT_PAGE.pag_alias   32 LEN_PAG_ALIAS
 AUT_PAGE.pag_class  128 LEN_PAG_CLASS
@@ -1252,7 +1251,6 @@ test.AUT_MODULE_COMPANY.mdl_id 5
 test.AUT_PAGE.pag_id       5
 test.AUT_PAGE.pag_id_org   5
 test.AUT_PAGE.ptb_id       3
-test.AUT_PAGE.mnu_id       5
 test.AUT_PAGE.wrd_id       5
 test.AUT_PAGE.pag_alias   32
 test.AUT_PAGE.pag_class  128

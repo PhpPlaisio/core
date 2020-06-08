@@ -12,7 +12,6 @@ begin
   select pag.pag_id
   ,      pag.ptb_id
   ,      pag.pag_id_org
-  ,      pag.mnu_id
   ,      pag.wrd_id
   ,      pag.pag_alias
   ,      pag.pag_class
