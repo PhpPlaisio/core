@@ -108,7 +108,7 @@ abstract class TabPage extends CorePage
     echo '<div class="grid-main">';
     echo $contents;
     echo '</div>';
-    $this->echoMainMenu();
+    $this->echoAdminMenu();
     echo '</div>';
     $this->echoPageTrailer();
 
