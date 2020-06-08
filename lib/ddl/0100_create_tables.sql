@@ -123,7 +123,6 @@ CREATE TABLE `AUT_PAGE` (
   `pag_id` SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
   `pag_id_org` SMALLINT UNSIGNED,
   `ptb_id` TINYINT UNSIGNED,
-  `mnu_id` SMALLINT UNSIGNED,
   `wrd_id` SMALLINT UNSIGNED NOT NULL,
   `pag_alias` VARCHAR(32),
   `pag_class` VARCHAR(128) NOT NULL,
@@ -269,8 +268,6 @@ CREATE INDEX `IX_AUT_PAGE_TAB1` ON `AUT_PAGE_TAB` (`wrd_id`);
 CREATE INDEX `IX_AUT_PAGE1` ON `AUT_PAGE` (`ptb_id`);
 
 CREATE INDEX `IX_AUT_PAGE2` ON `AUT_PAGE` (`pag_id_org`);
-
-CREATE INDEX `mnu_id` ON `AUT_PAGE` (`mnu_id`);
 
 CREATE INDEX `wrd_id` ON `AUT_PAGE` (`wrd_id`);
 
