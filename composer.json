@@ -20,7 +20,7 @@
     "plaisio/helper-html": "^1.1",
     "plaisio/helper-password": "^1.1",
     "plaisio/kernel": "^3.1.1",
-    "plaisio/menu": "1.0",
+    "plaisio/menu": "^1.0",
     "plaisio/page-core": "^1.2.1",
     "plaisio/request-handler": "^1.2",
     "plaisio/response-core": "^1.1",
