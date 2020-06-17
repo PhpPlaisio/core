@@ -80,7 +80,7 @@ abstract class BabelPage extends TabPage
   protected function handleSelectLanguage(Form $form): void
   {
     $values         = $form->getValues();
-    $this->actLanId = Cast::toOptInt($values['babel']['act_lan_id']);
+    $this->actLanId = Cast::toOptInt($values['act_lan_id']);
 
     $get            = $_GET;
     $get['act_lan'] = Nub::$nub->obfuscator::encode($this->actLanId, 'lan');
@@ -97,7 +97,7 @@ abstract class BabelPage extends TabPage
   //--------------------------------------------------------------------------------------------------------------------
   private function createSelectLanguageForm(array $languages): Form
   {
-    $form = new CoreForm('babel');
+    $form = new CoreForm();
 
     // Input for language.
     $input = new SelectControl('act_lan_id');
@@ -107,7 +107,7 @@ abstract class BabelPage extends TabPage
     $form->addFormControl($input, C::WRD_ID_LANGUAGE, true);
 
     // Create a submit button.
-    $form->addSubmitButton(C::WRD_ID_BUTTON_OK, 'handleSelectLanguage');
+    $form->addSubmitButton(C::WRD_ID_BUTTON_OK, 'handleSelectLanguage', 'change-language');
 
     return $form;
   }
