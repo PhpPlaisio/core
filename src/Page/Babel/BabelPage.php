@@ -97,7 +97,7 @@ abstract class BabelPage extends TabPage
   //--------------------------------------------------------------------------------------------------------------------
   private function createSelectLanguageForm(array $languages): Form
   {
-    $form = new CoreForm('babel', false);
+    $form = new CoreForm('babel');
 
     // Input for language.
     $input = new SelectControl('act_lan_id');
