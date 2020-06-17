@@ -8,12 +8,12 @@
     <target name="kernel">
         <exec executable="bin/plaisio" checkreturn="true" passthru="true">
             <arg value="--ansi"/>
-            <arg value="plaisio:kernel-data-layer-type"/>
-            <arg value="\Plaisio\Core\Test\TestDataLayer"/>
+            <arg value="plaisio:kernel-properties"/>
         </exec>
         <exec executable="bin/plaisio" checkreturn="true" passthru="true">
             <arg value="--ansi"/>
-            <arg value="plaisio:kernel-properties"/>
+            <arg value="plaisio:kernel-data-layer-type"/>
+            <arg value="\\Plaisio\\Core\\Test\\TestDataLayer"/>
         </exec>
     </target>
 
