@@ -76,7 +76,7 @@ abstract class TabPage extends CorePage
     $this->echoTabs();
     echo '</nav>';
 
-    echo '<div class="layout-content">';
+    echo '<div class="content">';
     $this->echoTabContent();
     echo '</div>';
   }
