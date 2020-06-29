@@ -64,7 +64,6 @@ class IndexPage extends TabPage
     echo '<style type="text/css" media="all">';
     echo "  @import url('/css/reset.css');";
     echo "  @import url('/css/style.css');";
-    echo "  @import url('/css/splash.css');";
     echo '</style>';
     echo '</head>';
     echo '<body>';
