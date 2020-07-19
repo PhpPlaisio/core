@@ -83,13 +83,13 @@ class CoreForm extends Form
 
       if ($wrdId!==null)
       {
-        $control->setFakeAttribute('_abc_label', (is_int($wrdId)) ? Nub::$nub->babel->getWord($wrdId) : $wrdId);
+        $control->setFakeAttribute('_plaisio_label', (is_int($wrdId)) ? Nub::$nub->babel->getWord($wrdId) : $wrdId);
       }
 
       if ($mandatory)
       {
         $control->addValidator(new MandatoryValidator(0));
-        $control->setFakeAttribute('_abc_mandatory', true);
+        $control->setFakeAttribute('_plaisio_mandatory', true);
       }
     }
   }

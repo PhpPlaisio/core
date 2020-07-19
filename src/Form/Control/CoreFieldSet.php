@@ -6,7 +6,6 @@ namespace Plaisio\Core\Form\Control;
 use Plaisio\Form\Control\ComplexControl;
 use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\PushControl;
-use Plaisio\Form\Control\ResetControl;
 use Plaisio\Form\Control\SubmitControl;
 use Plaisio\Helper\Html;
 use Plaisio\Kernel\Nub;
@@ -29,50 +28,14 @@ class CoreFieldSet extends FieldSet
    *
    * @var ComplexControl
    */
-  private $buttonControl;
+  private $buttonGroupControl;
 
   /**
    * The title of the in the header of the form of this field set.
    *
-   * @var string
+   * @var string|null
    */
   private $htmlTitle;
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Adds a button control to this fieldset.
-   *
-   * @param string      $submitButtonText The text of the submit button.
-   * @param string|null $resetButtonText  The text of the reset button. If null no reset button will be created.
-   * @param string      $submitName       The name of the submit button.
-   * @param string      $resetName        The name of the reset button.
-   *
-   * @return ComplexControl
-   */
-  public function addButton(string $submitButtonText = 'OK',
-                            ?string $resetButtonText = null,
-                            string $submitName = 'submit',
-                            string $resetName = 'reset'): ComplexControl
-  {
-    $this->buttonControl = new CoreButtonControl();
-
-    // Create submit button.
-    $submit = new SubmitControl($submitName);
-    $submit->setValue($submitButtonText);
-    $this->buttonControl->addFormControl($submit);
-
-    // Create reset button.
-    if ($resetButtonText!==null)
-    {
-      $reset = new ResetControl($resetName);
-      $reset->setValue($resetButtonText);
-      $this->buttonControl->addFormControl($reset);
-    }
-
-    $this->addFormControl($this->buttonControl);
-
-    return $this->buttonControl;
-  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -90,15 +53,15 @@ class CoreFieldSet extends FieldSet
   public function addSubmitButton($wrdId, string $name = 'submit'): PushControl
   {
     // If necessary create a button form control.
-    if (!$this->buttonControl)
+    if ($this->buttonGroupControl===null)
     {
-      $this->buttonControl = new CoreButtonControl();
-      $this->addFormControl($this->buttonControl);
+      $this->buttonGroupControl = new ComplexControl();
+      $this->addFormControl($this->buttonGroupControl);
     }
 
     $input = new SubmitControl($name);
     $input->setValue((is_int($wrdId)) ? Nub::$nub->babel->getWord($wrdId) : $wrdId);
-    $this->buttonControl->addFormControl($input);
+    $this->buttonGroupControl->addFormControl($input);
 
     return $input;
   }
@@ -117,7 +80,7 @@ class CoreFieldSet extends FieldSet
 
     $childAttributes = ['class' => static::$class];
 
-    if ($this->htmlTitle)
+    if ($this->htmlTitle!==null)
     {
       $ret .= Html::generateTag('thead', $childAttributes);
       $ret .= Html::generateTag('tr', $childAttributes);
@@ -129,12 +92,12 @@ class CoreFieldSet extends FieldSet
     $ret .= Html::generateTag('tbody', $childAttributes);
     foreach ($this->controls as $control)
     {
-      if ($control!==$this->buttonControl)
+      if ($control!==$this->buttonGroupControl)
       {
         $ret       .= Html::generateTag('tr', $childAttributes);
         $ret       .= '<th>';
-        $ret       .= Html::txt2Html($control->getAttribute('_abc_label'));
-        $mandatory = $control->getAttribute('_abc_mandatory');
+        $ret       .= Html::txt2Html($control->getAttribute('_plaisio_label'));
+        $mandatory = $control->getAttribute('_plaisio_mandatory');
         if (!empty($mandatory)) $ret .= '<span class="mandatory">*</span>';
         $ret .= '</th>';
 
@@ -161,13 +124,14 @@ class CoreFieldSet extends FieldSet
     }
     $ret .= '</tbody>';
 
-    if ($this->buttonControl)
+    if ($this->buttonGroupControl!==null)
     {
       $ret .= Html::generateTag('tfoot', $childAttributes);
       $ret .= Html::generateTag('tr', $childAttributes);
-      $ret .= '<td colspan="2">';
-      $ret .= $this->buttonControl->getHtml();
-      $ret .= '</td>';
+      $ret .= '<td colspan="2" class="button-group">';
+      $ret .= '<div class="button-group">';
+      $ret .= $this->buttonGroupControl->getHtml();
+      $ret .= '</div>';
       $ret .= '</tr>';
       $ret .= '</tfoot>';
     }
