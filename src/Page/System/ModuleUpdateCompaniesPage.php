@@ -4,14 +4,10 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
-use Plaisio\Core\Form\Control\CoreButtonControl;
-use Plaisio\Core\Form\CoreForm;
 use Plaisio\Core\Form\SlatControlFactory\SystemModuleUpdateCompaniesSlatControlFactory;
 use Plaisio\Core\Page\TabPage;
 use Plaisio\Core\Table\CoreDetailTable;
-use Plaisio\Form\Control\FieldSet;
-use Plaisio\Form\Control\LouverControl;
-use Plaisio\Form\Control\SubmitControl;
+use Plaisio\Form\LouverForm;
 use Plaisio\Kernel\Nub;
 use Plaisio\Response\SeeOtherResponse;
 use Plaisio\Table\TableRow\IntegerTableRow;
@@ -33,7 +29,7 @@ class ModuleUpdateCompaniesPage extends TabPage
   /**
    * The form shown on this page.
    *
-   * @var CoreForm
+   * @var LouverForm
    */
   private $form;
 
@@ -45,6 +41,7 @@ class ModuleUpdateCompaniesPage extends TabPage
   private $modId;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    */
@@ -94,37 +91,13 @@ class ModuleUpdateCompaniesPage extends TabPage
    */
   private function createForm(): void
   {
-    // Get all available pages.
     $pages = Nub::$nub->DL->abcSystemModuleGetAvailableCompanies($this->modId);
 
-    // Create form.
-    $this->form = new CoreForm();
-
-    // Add field set.
-    $field_set = new FieldSet('');
-    $this->form->addFieldSet($field_set);
-
-    // Create factory.
-    $factory = new SystemModuleUpdateCompaniesSlatControlFactory();
-    $factory->enableFilter();
-
-    // Add submit button.
-    $button = new CoreButtonControl();
-    $submit = new SubmitControl('submit');
-    $submit->setMethod('handleForm');
-    $submit->setValue(Nub::$nub->babel->getWord(C::WRD_ID_BUTTON_UPDATE));
-    $button->addFormControl($submit);
-
-    // Put everything together in a LouverControl.
-    $louver = new LouverControl('data');
-    $louver->addClass('overview_table');
-    $louver->setRowFactory($factory);
-    $louver->setFooterControl($button);
-    $louver->setData($pages);
-    $louver->populate();
-
-    // Add the lover control to the form.
-    $field_set->addFormControl($louver);
+    $this->form = new LouverForm();
+    $this->form->setFactory(new SystemModuleUpdateCompaniesSlatControlFactory())
+               ->setData($pages)
+               ->addSubmitButton(C::WRD_ID_BUTTON_UPDATE, 'handleForm')
+               ->populate();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

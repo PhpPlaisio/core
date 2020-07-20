@@ -26,22 +26,6 @@ class IndexPage extends TabPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @inheritdoc
-   */
-  public function echoPage(): void
-  {
-    if (Nub::$nub->session->isAnonymous())
-    {
-      $this->showAnonymousPage();
-    }
-    else
-    {
-      parent::echoPage();
-    }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Shows the page content for an identified user, i.e. a user that has logged in.
    */
   protected function echoTabContent(): void

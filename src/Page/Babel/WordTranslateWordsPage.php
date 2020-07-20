@@ -4,12 +4,9 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\Babel;
 
 use Plaisio\C;
-use Plaisio\Core\Form\Control\CoreButtonControl;
 use Plaisio\Core\Form\CoreForm;
 use Plaisio\Core\Form\SlatControlFactory\BabelWordTranslateSlatControlFactory;
-use Plaisio\Form\Control\FieldSet;
-use Plaisio\Form\Control\LouverControl;
-use Plaisio\Form\Control\SubmitControl;
+use Plaisio\Form\LouverForm;
 use Plaisio\Kernel\Nub;
 use Plaisio\Response\SeeOtherResponse;
 
@@ -41,6 +38,7 @@ class WordTranslateWordsPage extends BabelPage
   protected $wdgId;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    */
@@ -88,33 +86,11 @@ class WordTranslateWordsPage extends BabelPage
   {
     $words = Nub::$nub->DL->abcBabelWordGroupGetAllWordsTranslator($this->wdgId, $this->actLanId);
 
-    $this->form = new CoreForm();
-
-    // Add field set.
-    $field_set = new FieldSet('');
-    $this->form->addFieldSet($field_set);
-
-    // Create factory.
-    $factory = new BabelWordTranslateSlatControlFactory($this->refLanId, $this->actLanId);
-    $factory->enableFilter();
-
-    // Add submit button.
-    $button = new CoreButtonControl();
-    $submit = new SubmitControl('submit');
-    $submit->setMethod('handleForm');
-    $submit->setValue(Nub::$nub->babel->getWord(C::WRD_ID_BUTTON_TRANSLATE));
-    $button->addFormControl($submit);
-
-    // Put everything together in a LoverControl.
-    $louver = new LouverControl('data');
-    $louver->addClass('overview_table');
-    $louver->setRowFactory($factory);
-    $louver->setFooterControl($button);
-    $louver->setData($words);
-    $louver->populate();
-
-    // Add the LouverControl the the form.
-    $field_set->addFormControl($louver);
+    $this->form = new LouverForm();
+    $this->form->setFactory(new  BabelWordTranslateSlatControlFactory($this->refLanId, $this->actLanId))
+               ->setData($words)
+               ->addSubmitButton(C::WRD_ID_BUTTON_TRANSLATE, 'handleForm')
+               ->populate();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

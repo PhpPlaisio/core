@@ -4,12 +4,8 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\Company;
 
 use Plaisio\C;
-use Plaisio\Core\Form\Control\CoreButtonControl;
-use Plaisio\Core\Form\CoreForm;
 use Plaisio\Core\Form\SlatControlFactory\CompanyModulesUpdateSlatControlFactory;
-use Plaisio\Form\Control\FieldSet;
-use Plaisio\Form\Control\LouverControl;
-use Plaisio\Form\Control\SubmitControl;
+use Plaisio\Form\LouverForm;
 use Plaisio\Kernel\Nub;
 use Plaisio\Response\SeeOtherResponse;
 
@@ -22,11 +18,12 @@ class ModuleUpdatePage extends CompanyPage
   /**
    * The form shown on this page.
    *
-   * @var CoreForm
+   * @var LouverForm
    */
   private $form;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Returns the URL of this page.
    *
@@ -62,34 +59,11 @@ class ModuleUpdatePage extends CompanyPage
     // Get all available modules.
     $modules = Nub::$nub->DL->abcCompanyModuleGetAllAvailable($this->targetCmpId, $this->lanId);
 
-    // Create the form.
-    $this->form = new CoreForm();
-
-    // Add field set.
-    $field_set = new FieldSet('');
-    $this->form->addFieldSet($field_set);
-
-    // Create factory.
-    $factory = new CompanyModulesUpdateSlatControlFactory();
-    $factory->enableFilter();
-
-    // Add submit button.
-    $button = new CoreButtonControl();
-    $submit = new SubmitControl('submit');
-    $submit->setMethod('handleForm');
-    $submit->setValue(Nub::$nub->babel->getWord(C::WRD_ID_BUTTON_OK));
-    $button->addFormControl($submit);
-
-    // Put everything together in a LoverControl.
-    $louver = new LouverControl('data');
-    $louver->addClass('overview_table');
-    $louver->setRowFactory($factory);
-    $louver->setFooterControl($button);
-    $louver->setData($modules);
-    $louver->populate();
-
-    // Add the LouverControl the the form.
-    $field_set->addFormControl($louver);
+    $this->form = new LouverForm();
+    $this->form->setFactory(new CompanyModulesUpdateSlatControlFactory())
+               ->setData($modules)
+               ->addSubmitButton(C::WRD_ID_BUTTON_UPDATE, 'handleForm')
+               ->populate();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
