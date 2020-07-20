@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Plaisio\Core\Form\SlatControlFactory;
 
 use Plaisio\C;
-use Plaisio\Form\Control\LouverControl;
 use Plaisio\Form\Control\SlatControl;
 use Plaisio\Form\Control\SlatControlFactory;
 use Plaisio\Form\Control\TableColumnControl;
@@ -61,11 +60,10 @@ class BabelWordTranslateSlatControlFactory extends SlatControlFactory
   /**
    * @inheritdoc
    */
-  public function createRow(LouverControl $louverControl, array $data): SlatControl
+  public function createRow(array $data): SlatControl
   {
     $row = new SlatControl(Cast::toOptString($data['wrd_id']));
     $row->setObfuscator($this->wrdIdObfuscator);
-    $louverControl->addFormControl($row);
 
     /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'wrd_id');

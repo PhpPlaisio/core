@@ -6,7 +6,6 @@ namespace Plaisio\Core\Form\SlatControlFactory;
 use Plaisio\Core\TableColumn\Company\RoleTableColumn;
 use Plaisio\Core\TableColumn\System\RoleGroupTableColumn;
 use Plaisio\Form\Control\CheckboxControl;
-use Plaisio\Form\Control\LouverControl;
 use Plaisio\Form\Control\SlatControl;
 use Plaisio\Form\Control\SlatControlFactory;
 use Plaisio\Form\Control\TableColumnControl;
@@ -68,11 +67,10 @@ class SystemFunctionalityUpdateRolesSlatControlFactory extends SlatControlFactor
   /**
    * @inheritdoc
    */
-  public function createRow(LouverControl $louverControl, array $data): SlatControl
+  public function createRow(array $data): SlatControl
   {
     $row = new SlatControl(Cast::toOptString($data['rol_id']));
     $row->setObfuscator($this->rolIdObfuscator);
-    $louverControl->addFormControl($row);
 
     /** @var TableColumnControl $control */
     $control = $this->createFormControl($row, 'cmp_id');
