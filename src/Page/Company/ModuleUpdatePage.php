@@ -23,7 +23,6 @@ class ModuleUpdatePage extends CompanyPage
   private $form;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Returns the URL of this page.
    *

@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
-use Plaisio\Core\Form\CoreForm;
 use Plaisio\Core\Form\SlatControlFactory\SystemPageUpdateFunctionalitiesSlatControlFactory;
 use Plaisio\Core\Page\TabPage;
 use Plaisio\Core\Table\CoreDetailTable;
@@ -31,7 +30,7 @@ class PageUpdateFunctionalitiesPage extends TabPage
   /**
    * The form shown on this page.
    *
-   * @var CoreForm
+   * @var LouverForm
    */
   private $form;
 
@@ -43,7 +42,6 @@ class PageUpdateFunctionalitiesPage extends TabPage
   private $targetPagId;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    */

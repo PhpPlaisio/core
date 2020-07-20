@@ -37,7 +37,6 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
   private $rolId;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    */

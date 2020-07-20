@@ -34,7 +34,6 @@ class FunctionalityUpdatePagesPage extends TabPage
   private $funId;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    */

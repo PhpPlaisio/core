@@ -41,7 +41,6 @@ class ModuleUpdateCompaniesPage extends TabPage
   private $modId;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    */

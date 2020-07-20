@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\Babel;
 
 use Plaisio\C;
-use Plaisio\Core\Form\CoreForm;
 use Plaisio\Core\Form\SlatControlFactory\BabelWordTranslateSlatControlFactory;
 use Plaisio\Form\LouverForm;
 use Plaisio\Kernel\Nub;
@@ -26,7 +25,7 @@ class WordTranslateWordsPage extends BabelPage
   /**
    * The form shown on this page.
    *
-   * @var CoreForm
+   * @var LouverForm
    */
   protected $form;
 
@@ -38,7 +37,6 @@ class WordTranslateWordsPage extends BabelPage
   protected $wdgId;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    */
