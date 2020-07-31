@@ -33,7 +33,7 @@ class RoleGroupTableColumn extends DualTableColumn
     $url = RoleGroupDetailsPage::getUrl($row['rlg_id']);
 
     $ret = '<td class="number link">';
-    $ret .= Html::generateElement('a', ['href' => $url], Cast::toOptString($row['rlg_id']));
+    $ret .= Html::generateElement('a', ['href' => $url], $row['rlg_id']);
     $ret .= '</td>';
 
     $ret .= Html::generateElement('td', [], $row['rlg_name']);

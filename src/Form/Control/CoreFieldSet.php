@@ -147,7 +147,7 @@ class CoreFieldSet extends FieldSet
   /**
    * Sets the title of the form of this field set.
    *
-   * @param string $title
+   * @param string|null $title
    */
   public function setTitle(?string $title): void
   {

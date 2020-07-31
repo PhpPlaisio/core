@@ -44,7 +44,7 @@ class WordGroupTableColumn extends DualTableColumn
     $url = WordGroupDetailsPage::getUrl($row['wdg_id'], $this->lanIdTarget);
 
     $ret = '<td class="number link">';
-    $ret .= Html::generateElement('a', ['href' => $url], Cast::toOptString($row['wdg_id']));
+    $ret .= Html::generateElement('a', ['href' => $url], $row['wdg_id']);
     $ret .= '</td>';
 
     $ret .= Html::generateElement('td', [], $row['wdg_name']);

@@ -33,7 +33,7 @@ class ModuleTableColumn extends DualTableColumn
     $url = ModuleDetailsPage::getUrl($row['mdl_id']);
 
     $ret = '<td class="number link">';
-    $ret .= Html::generateElement('a', ['href' => $url], Cast::toOptString($row['mdl_id']));
+    $ret .= Html::generateElement('a', ['href' => $url], $row['mdl_id']);
     $ret .= '</td>';
 
     $ret .= Html::generateElement('td', [], $row['mdl_name']);

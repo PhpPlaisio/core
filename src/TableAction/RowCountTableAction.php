@@ -36,7 +36,7 @@ class RowCountTableAction implements TableAction
    */
   public function getHtml(): string
   {
-    return Html::generateElement('span', ['class' => 'row_count'], Cast::toOptString($this->rowCount));
+    return Html::generateElement('span', ['class' => 'row_count'], $this->rowCount);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

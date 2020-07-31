@@ -33,7 +33,7 @@ class FunctionalityTableColumn extends DualTableColumn
     $url = FunctionalityDetailsPage::getUrl($row['fun_id']);
 
     $ret = '<td class="number link">';
-    $ret .= Html::generateElement('a', ['href' => $url], Cast::toOptString($row['fun_id']));
+    $ret .= Html::generateElement('a', ['href' => $url], $row['fun_id']);
     $ret .= '</td>';
 
     $ret .= Html::generateElement('td', [], $row['fun_name']);

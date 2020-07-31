@@ -33,7 +33,7 @@ class PageTableColumn extends DualTableColumn
     $url = PageDetailsPage::getUrl($row['pag_id']);
 
     $ret = '<td class="number link">';
-    $ret .= Html::generateElement('a', ['href' => $url], Cast::toOptString($row['pag_id']));
+    $ret .= Html::generateElement('a', ['href' => $url], $row['pag_id']);
     $ret .= '</td>';
 
     $ret .= Html::generateElement('td', [], $row['pag_class']);

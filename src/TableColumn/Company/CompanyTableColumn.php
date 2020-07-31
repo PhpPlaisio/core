@@ -33,7 +33,7 @@ class CompanyTableColumn extends DualTableColumn
     $url = CompanyDetailsPage::getUrl($row['cmp_id']);
 
     $ret = '<td class="number link">';
-    $ret .= Html::generateElement('a', ['href' => $url], Cast::toOptString($row['cmp_id']));
+    $ret .= Html::generateElement('a', ['href' => $url], $row['cmp_id']);
     $ret .= '</td>';
 
     $ret .= Html::generateElement('td', [], $row['cmp_abbr']);
