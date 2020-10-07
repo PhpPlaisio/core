@@ -100,7 +100,7 @@ abstract class WordBasePage extends BabelPage
     if ($this->wrdId!==null)
     {
       $input = new SpanControl('wrd_id');
-      $input->setInnerText(Cast::toOptString($this->wrdId));
+      $input->setInnerText($this->wrdId);
       $this->form->addFormControl($input, 'ID');
     }
 

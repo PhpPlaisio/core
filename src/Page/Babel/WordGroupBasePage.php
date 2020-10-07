@@ -76,7 +76,7 @@ abstract class WordGroupBasePage extends BabelPage
     if ($this->wdgId!==null)
     {
       $input = new SpanControl('wdg_id');
-      $input->setInnerText(Cast::toOptString($this->wdgId));
+      $input->setInnerText($this->wdgId);
       $this->form->addFormControl($input, 'ID');
     }
 

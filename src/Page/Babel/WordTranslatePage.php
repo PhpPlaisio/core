@@ -109,7 +109,7 @@ class WordTranslatePage extends BabelPage
 
     // Show word group ID
     $input = new SpanControl('wrd_id');
-    $input->setInnerText(Cast::toOptString($this->details['wdg_id']));
+    $input->setInnerText($this->details['wdg_id']);
     $this->form->addFormControl($input, 'ID Group');
 
     // Show label
