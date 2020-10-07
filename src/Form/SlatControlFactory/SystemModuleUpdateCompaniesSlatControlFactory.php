@@ -26,7 +26,7 @@ class SystemModuleUpdateCompaniesSlatControlFactory extends SlatControlFactory
    *
    * @var Obfuscator
    */
-  private $cmpIdObfuscator;
+  private Obfuscator $cmpIdObfuscator;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

@@ -22,14 +22,14 @@ abstract class TabBasePage extends TabPage
    *
    * @var int
    */
-  protected $buttonWrdId;
+  protected int $buttonWrdId;
 
   /**
    * The form shown on this page.
    *
    * @var CoreForm
    */
-  protected $form;
+  protected CoreForm $form;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

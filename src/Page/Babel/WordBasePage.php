@@ -27,28 +27,28 @@ abstract class WordBasePage extends BabelPage
    *
    * @var int
    */
-  protected $buttonWrdId;
+  protected int $buttonWrdId;
 
   /**
    * The form shown on this page.
    *
    * @var CoreForm.
    */
-  protected $form;
+  protected CoreForm $form;
 
   /**
    * The ID of word group of the word (only used for creating a new word).
    *
    * @var int
    */
-  protected $wdgId;
+  protected int $wdgId;
 
   /**
    * The ID of the word.
    *
-   * @var int
+   * @var int|null
    */
-  protected $wrdId;
+  protected ?int $wrdId = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -97,7 +97,7 @@ abstract class WordBasePage extends BabelPage
     $this->form->addFormControl($input, 'Word Group', true);
 
     // Create form control for ID.
-    if ($this->wrdId)
+    if ($this->wrdId!==null)
     {
       $input = new SpanControl('wrd_id');
       $input->setInnerText(Cast::toOptString($this->wrdId));

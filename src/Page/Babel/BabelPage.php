@@ -23,14 +23,14 @@ abstract class BabelPage extends TabPage
    *
    * @var int
    */
-  protected $actLanId;
+  protected int $actLanId;
 
   /**
    * The language ID from which the word/text/topic is been translated.
    *
    * @var int
    */
-  protected $refLanId;
+  protected int $refLanId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -80,7 +80,7 @@ abstract class BabelPage extends TabPage
   protected function handleSelectLanguage(Form $form): void
   {
     $values         = $form->getValues();
-    $this->actLanId = Cast::toOptInt($values['act_lan_id']);
+    $this->actLanId = Cast::toManInt($values['act_lan_id']);
 
     $get            = $_GET;
     $get['act_lan'] = Nub::$nub->obfuscator::encode($this->actLanId, 'lan');

@@ -21,21 +21,21 @@ class SpecificPageUpdatePage extends CompanyPage
    *
    * @var CoreForm
    */
-  protected $form;
+  protected CoreForm $form;
 
   /**
    * The ID of the target page.
    *
    * @var int
    */
-  private $targetPagId;
+  private int $targetPagId;
 
   /**
    * The details om the company specific page.
    *
    * @var array
    */
-  private $targetPageDetails;
+  private array $targetPageDetails;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

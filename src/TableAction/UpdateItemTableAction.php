@@ -14,16 +14,16 @@ class UpdateItemTableAction implements TableAction
   /**
    * The title of the icon of the table action.
    *
-   * @var string|null
+   * @var string
    */
-  protected $title;
+  protected string $title;
 
   /**
    * The URL of the table action.
    *
-   * @var string|null
+   * @var string
    */
-  protected $url;
+  protected string $url;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

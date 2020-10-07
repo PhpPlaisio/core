@@ -27,7 +27,7 @@ class BabelWordTranslateSlatControlFactory extends SlatControlFactory
    *
    * @var Obfuscator
    */
-  private $wrdIdObfuscator;
+  private Obfuscator $wrdIdObfuscator;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

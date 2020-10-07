@@ -16,7 +16,7 @@ class RowCountTableAction implements TableAction
    *
    * @var int
    */
-  protected $rowCount;
+  protected int $rowCount;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

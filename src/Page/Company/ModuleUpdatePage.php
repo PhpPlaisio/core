@@ -20,7 +20,7 @@ class ModuleUpdatePage extends CompanyPage
    *
    * @var LouverForm
    */
-  private $form;
+  private LouverForm $form;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

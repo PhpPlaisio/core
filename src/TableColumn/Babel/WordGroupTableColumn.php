@@ -18,7 +18,7 @@ class WordGroupTableColumn extends DualTableColumn
    *
    * @var int
    */
-  private $lanIdTarget;
+  private int $lanIdTarget;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

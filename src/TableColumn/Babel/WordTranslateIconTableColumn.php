@@ -17,7 +17,7 @@ class WordTranslateIconTableColumn extends IconTableColumn
    *
    * @var int
    */
-  private $actLanId;
+  private int $actLanId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

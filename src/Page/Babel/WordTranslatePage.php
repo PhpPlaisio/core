@@ -22,28 +22,28 @@ class WordTranslatePage extends BabelPage
    *
    * @var array
    */
-  protected $details;
+  protected array $details;
 
   /**
    * The form shown on this page.
    *
    * @var CoreForm
    */
-  protected $form;
+  protected CoreForm $form;
 
   /**
    * The ID of the word to be translated.
    *
    * @var int
    */
-  protected $wrdId;
+  protected int $wrdId;
 
   /**
    * The URL to return after the word has been translated.
    *
    * @var string
    */
-  private $redirect;
+  private string $redirect;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -54,14 +54,10 @@ class WordTranslatePage extends BabelPage
     parent::__construct();
 
     $this->wrdId    = Nub::$nub->cgi->getManId('wrd', 'wrd');
-    $this->redirect = Nub::$nub->cgi->getOptUrl('redirect');
+    $this->redirect = Nub::$nub->cgi->getOptUrl('redirect') ?? WordGroupDetailsPage::getUrl($this->details['wdg_id'],
+                                                                                            $this->actLanId);
 
     $this->details = Nub::$nub->DL->abcBabelWordGetDetails($this->wrdId, $this->actLanId);
-
-    if ($this->redirect===null)
-    {
-      $this->redirect = WordGroupDetailsPage::getUrl($this->details['wdg_id'], $this->actLanId);
-    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------

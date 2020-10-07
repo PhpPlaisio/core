@@ -21,21 +21,21 @@ class CoreFieldSet extends FieldSet
    *
    * @var string|null
    */
-  public static $class = 'input-table';
+  public static ?string $class = 'input-table';
 
   /**
    * The complex form control holding the buttons of this fieldset.
    *
-   * @var ComplexControl
+   * @var ComplexControl|null
    */
-  private $buttonGroupControl;
+  private ?ComplexControl $buttonGroupControl = null;
 
   /**
    * The title of the in the header of the form of this field set.
    *
    * @var string|null
    */
-  private $htmlTitle;
+  private ?string $htmlTitle = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

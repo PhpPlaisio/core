@@ -24,14 +24,14 @@ class FunctionalityUpdatePagesPage extends TabPage
    *
    * @var LouverForm
    */
-  private $form;
+  private LouverForm $form;
 
   /**
    * The ID of the functionality of which the pages that belong to it will be modified.
    *
    * @var int
    */
-  private $funId;
+  private int $funId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

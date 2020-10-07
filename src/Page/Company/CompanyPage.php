@@ -3,14 +3,9 @@ declare(strict_types=1);
 
 namespace Plaisio\Core\Page\Company;
 
-use Plaisio\C;
-use Plaisio\Core\Form\CoreForm;
 use Plaisio\Core\Page\TabPage;
-use Plaisio\Form\Control\TextControl;
 use Plaisio\Helper\Html;
 use Plaisio\Kernel\Nub;
-use Plaisio\Response\SeeOtherResponse;
-use SetBased\Exception\LogicException;
 
 /**
  * Abstract parent page for pages about companies.
@@ -23,14 +18,14 @@ abstract class CompanyPage extends TabPage
    *
    * @var array
    */
-  protected $companyDetails;
+  protected array $companyDetails;
 
   /**
    * The ID of the company of which data is shown on this page (i.e. the target company).
    *
    * @var int
    */
-  protected $targetCmpId;
+  protected int $targetCmpId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -41,6 +36,10 @@ abstract class CompanyPage extends TabPage
     parent::__construct();
 
     $this->targetCmpId = Nub::$nub->cgi->getManId('cmp', 'cmp');
+
+    $this->companyDetails = Nub::$nub->DL->abcCompanyGetDetails($this->targetCmpId);
+
+    Nub::$nub->assets->appendPageTitle($this->companyDetails['cmp_abbr']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -67,11 +66,6 @@ abstract class CompanyPage extends TabPage
    */
   protected function echoDashboard(): void
   {
-    // Return immediately if the cmp_id is not set.
-    if (!$this->targetCmpId) return;
-
-    $this->companyDetails = Nub::$nub->DL->abcCompanyGetDetails($this->targetCmpId);
-
     echo '<div id="dashboard">';
     echo '<div id="info">';
 
@@ -89,86 +83,9 @@ abstract class CompanyPage extends TabPage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
-  {
-    if ($this->targetCmpId)
-    {
-      Nub::$nub->assets->appendPageTitle($this->companyDetails['cmp_abbr']);
-    }
-    else
-    {
-      $this->getCompany();
-    }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * @inheritdoc
-   */
   protected function getTabUrl(int $pagId): ?string
   {
-    if ($this->targetCmpId || $pagId==C::PAG_ID_COMPANY_OVERVIEW)
-    {
-      return self::getChildUrl($pagId, $this->targetCmpId);
-    }
-
-    return null;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Handle the form submit of the form for selecting a company.
-   *
-   * @param CoreForm $form The form.
-   */
-  protected function handleCompanyForm(CoreForm $form): void
-  {
-    $values            = $form->getValues();
-    $this->targetCmpId = Nub::$nub->DL->abcCompanyGetCmpIdByCmpAbbr($values['cmp_abbr']);
-    if ($this->targetCmpId!==null)
-    {
-      $this->response = new SeeOtherResponse(self::getChildUrl(Nub::$nub->requestHandler->getPagId(), $this->targetCmpId));
-    }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Creates the form for selecting the target company.
-   *
-   * @return CoreForm
-   */
-  private function createCompanyForm(): CoreForm
-  {
-    $form = new CoreForm();
-
-    // Create input control for Company abbreviation.
-    $input = new TextControl('cmp_abbr');
-    $input->setAttrMaxLength(C::LEN_CMP_ABBR);
-    $form->addFormControl($input, 'Company', true);
-
-    // Create "OK" submit button.
-    $form->addSubmitButton(C::WRD_ID_BUTTON_OK, 'handleCompanyForm');
-
-    return $form;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Sets the target company.
-   */
-  private function getCompany(): void
-  {
-    $form   = $this->createCompanyForm();
-    $method = $form->execute();
-    switch ($method)
-    {
-      case 'handleForm':
-        $this->handleCompanyForm($form);
-        break;
-
-      default:
-        throw new LogicException("Unknown form method '%s'.", $method);
-    }
+    return self::getChildUrl($pagId, $this->targetCmpId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

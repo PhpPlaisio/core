@@ -25,21 +25,21 @@ class RoleGroupDetailsPage extends TabPage
    *
    * @var int
    */
-  private $rlgId;
+  private int $rlgId;
 
   /**
    * The details of the role group.
    *
    * @var array
    */
-  private $roleGroup;
+  private array $roleGroup;
 
   /**
    * The details of roles in the role group.
    *
    * @var array
    */
-  private $roles;
+  private array $roles;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

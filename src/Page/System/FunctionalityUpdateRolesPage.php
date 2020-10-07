@@ -24,21 +24,21 @@ class FunctionalityUpdateRolesPage extends TabPage
    *
    * @var array
    */
-  private $details;
+  private array $details;
 
   /**
    * The form shown on this page.
    *
    * @var LouverForm
    */
-  private $form;
+  private LouverForm $form;
 
   /**
    * The ID of the functionality of which the pages that belong to it will be modified.
    *
    * @var int
    */
-  private $funId;
+  private int $funId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

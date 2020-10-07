@@ -20,21 +20,21 @@ class WordTranslateWordsPage extends BabelPage
    *
    * @var array
    */
-  protected $details;
+  protected array $details;
 
   /**
    * The form shown on this page.
    *
    * @var LouverForm
    */
-  protected $form;
+  protected LouverForm $form;
 
   /**
    * The ID of the word group.
    *
    * @var int
    */
-  protected $wdgId;
+  protected int $wdgId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

@@ -18,14 +18,14 @@ class BoolIconTableColumn extends TableColumn
    *
    * @var string
    */
-  protected $fieldName;
+  protected string $fieldName;
 
   /**
    * If set false values are shown explicitly. Otherwise when the value evaluates to false an empty cell is shown.
    *
    * @var bool
    */
-  private $showFalse;
+  private bool $showFalse;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

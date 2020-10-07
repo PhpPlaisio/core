@@ -21,7 +21,7 @@ class CompanyDetailsPage extends CompanyPage
    *
    * @var array
    */
-  private $details;
+  private array $details;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

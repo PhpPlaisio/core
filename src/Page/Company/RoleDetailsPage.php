@@ -27,7 +27,7 @@ class RoleDetailsPage extends CompanyPage
    *
    * @var int
    */
-  protected $rolId;
+  protected int $rolId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

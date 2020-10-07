@@ -24,21 +24,21 @@ class ModuleUpdateCompaniesPage extends TabPage
    *
    * @var array
    */
-  private $details;
+  private array $details;
 
   /**
    * The form shown on this page.
    *
    * @var LouverForm
    */
-  private $form;
+  private LouverForm $form;
 
   /**
    * The ID of the module that will be granted or revoked to or from companies.
    *
    * @var int
    */
-  private $modId;
+  private int $modId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

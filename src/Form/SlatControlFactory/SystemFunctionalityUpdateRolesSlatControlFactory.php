@@ -29,7 +29,7 @@ class SystemFunctionalityUpdateRolesSlatControlFactory extends SlatControlFactor
    *
    * @var Obfuscator
    */
-  private $rolIdObfuscator;
+  private Obfuscator $rolIdObfuscator;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

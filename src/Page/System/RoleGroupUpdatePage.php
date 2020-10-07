@@ -17,7 +17,7 @@ class RoleGroupUpdatePage extends RoleGroupBasePage
    *
    * @var array
    */
-  private $roleGroup;
+  private array $roleGroup;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

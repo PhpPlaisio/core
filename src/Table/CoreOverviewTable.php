@@ -19,14 +19,14 @@ class CoreOverviewTable extends OverviewTable
    *
    * @var bool
    */
-  protected $showTableActions = true;
+  protected bool $showTableActions = true;
 
   /**
    * Array with all table actions of this table.
    *
    * @var array
    */
-  protected $tablesActionGroups = [];
+  protected array $tablesActionGroups = [];
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

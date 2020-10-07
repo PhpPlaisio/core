@@ -29,7 +29,7 @@ class PageDetailsPage extends TabPage
    *
    * @var int
    */
-  protected $targetPagId;
+  protected int $targetPagId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

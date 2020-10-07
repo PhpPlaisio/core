@@ -22,7 +22,7 @@ class SpecificPageInsertPage extends CompanyPage
    *
    * @var CoreForm
    */
-  protected $form;
+  protected CoreForm $form;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

@@ -26,7 +26,7 @@ class SystemFunctionalityUpdatePagesSlatControlFactory extends SlatControlFactor
    *
    * @var Obfuscator
    */
-  private $pagIdObfuscator;
+  private Obfuscator $pagIdObfuscator;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

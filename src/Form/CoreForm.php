@@ -22,14 +22,14 @@ class CoreForm extends Form
    *
    * @var int
    */
-  public static $maxTextSize = 80;
+  public static int $maxTextSize = 80;
 
   /**
    * FieldSet for all form control elements not of type "hidden".
    *
    * @var CoreFieldSet
    */
-  protected $visibleFieldSet;
+  protected CoreFieldSet $visibleFieldSet;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

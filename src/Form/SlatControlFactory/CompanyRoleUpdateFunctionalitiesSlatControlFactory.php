@@ -25,7 +25,7 @@ class CompanyRoleUpdateFunctionalitiesSlatControlFactory extends SlatControlFact
    *
    * @var Obfuscator
    */
-  private $funIdObfuscator;
+  private Obfuscator $funIdObfuscator;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

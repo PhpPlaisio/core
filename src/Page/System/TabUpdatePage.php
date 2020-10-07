@@ -17,14 +17,14 @@ class TabUpdatePage extends TabBasePage
    *
    * @var array
    */
-  private $details;
+  private array $details;
 
   /**
    * The ID of the page group.
    *
    * @var int
    */
-  private $ptbId;
+  private int $ptbId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

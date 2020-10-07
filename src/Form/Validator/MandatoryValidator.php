@@ -16,7 +16,7 @@ class MandatoryValidator extends \Plaisio\Form\Validator\MandatoryValidator
    *
    * @var int
    */
-  private $txtId;
+  private int $txtId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

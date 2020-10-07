@@ -17,21 +17,21 @@ abstract class TabPage extends CorePage
   /**
    * If set disabled tabs (i.e. tabs in $tabs field 'url' is empty) are shown. Otherwise, disabled tabs are hidden.
    */
-  protected $showDisabledTabs = true;
+  protected bool $showDisabledTabs = true;
 
   /**
    * If set the tab content is shown.
    *
    * @var bool
    */
-  protected $showTabContent = false;
+  protected bool $showTabContent = false;
 
   /**
    * The tabs of the core page.
    *
    * @var array[]
    */
-  protected $tabs;
+  protected array $tabs;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

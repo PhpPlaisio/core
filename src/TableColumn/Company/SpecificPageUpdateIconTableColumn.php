@@ -18,7 +18,7 @@ class SpecificPageUpdateIconTableColumn extends UpdateIconTableColumn
    *
    * @var int
    */
-  private $targetCmpId;
+  private int $targetCmpId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

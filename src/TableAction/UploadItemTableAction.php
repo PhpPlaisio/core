@@ -16,14 +16,14 @@ class UploadItemTableAction implements TableAction
    *
    * @var string
    */
-  protected $title;
+  protected string $title;
 
   /**
    * The URL of the table action.
    *
    * @var string
    */
-  protected $url;
+  protected string $url;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

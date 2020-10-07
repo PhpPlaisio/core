@@ -15,7 +15,7 @@ class ModuleUpdatePage extends ModuleBasePage
   /**
    * @var array The details of the module.
    */
-  private $details;
+  private array $details;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

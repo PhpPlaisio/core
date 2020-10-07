@@ -15,16 +15,16 @@ abstract class IconTableColumn extends TableColumn
   /**
    * If set the will be prompted with an confirm message before the link is followed.
    *
-   * @var string
+   * @var string|null
    */
-  protected $confirmMessage;
+  protected ?string $confirmMessage = null;
 
   /**
    * If set to true the icon is a download link (e.g. a PDF file).
    *
    * @var bool
    */
-  protected $isDownloadLink = false;
+  protected bool $isDownloadLink = false;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

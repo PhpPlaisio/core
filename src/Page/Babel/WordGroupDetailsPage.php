@@ -28,14 +28,14 @@ class WordGroupDetailsPage extends BabelPage
    *
    * @var array
    */
-  private $details;
+  private array $details;
 
   /**
    * The ID of the word group shown on this page.
    *
    * @var int
    */
-  private $wdgId;
+  private int $wdgId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

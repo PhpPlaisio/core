@@ -18,7 +18,7 @@ class PageUpdatePage extends PageBasePage
    *
    * @var array
    */
-  private $details;
+  private array $details;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

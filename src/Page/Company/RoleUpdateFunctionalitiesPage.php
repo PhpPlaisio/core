@@ -20,21 +20,21 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
    *
    * @var array
    */
-  private $details;
+  private array $details;
 
   /**
    * The form shown on this page.
    *
    * @var LouverForm
    */
-  private $form;
+  private LouverForm $form;
 
   /**
    * The ID of the role.
    *
    * @var int
    */
-  private $rolId;
+  private int $rolId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

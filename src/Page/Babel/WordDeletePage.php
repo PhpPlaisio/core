@@ -19,7 +19,7 @@ class WordDeletePage extends BabelPage
    *
    * @var int
    */
-  private $wrdId;
+  private int $wrdId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

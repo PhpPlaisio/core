@@ -17,7 +17,7 @@ class FunctionalityUpdatePage extends FunctionalityBasePage
    *
    * @var array
    */
-  private $details;
+  private array $details;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

@@ -22,21 +22,21 @@ abstract class RoleGroupBasePage extends TabPage
    *
    * @var int
    */
-  protected $buttonWrdId;
+  protected int $buttonWrdId;
 
   /**
    * The form shown on this page.
    *
    * @var CoreForm
    */
-  protected $form;
+  protected CoreForm $form;
 
   /**
    * The ID of the role group that is been inserted or updated.
    *
    * @var int
    */
-  protected $rlgId;
+  protected int $rlgId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

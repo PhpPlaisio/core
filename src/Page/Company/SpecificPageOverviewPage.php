@@ -24,7 +24,7 @@ class SpecificPageOverviewPage extends CompanyPage
    *
    * @var array[]
    */
-  private $pages;
+  private array $pages;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

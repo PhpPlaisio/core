@@ -21,21 +21,21 @@ abstract class RoleBasePage extends CompanyPage
    *
    * @var int
    */
-  protected $buttonWrdId;
+  protected int $buttonWrdId;
 
   /**
    * The form shown on this page.
    *
    * @var CoreForm
    */
-  protected $form;
+  protected CoreForm $form;
 
   /**
    * The ID of the role that is been inserted or updated.
    *
    * @var int
    */
-  protected $rolId;
+  protected int $rolId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

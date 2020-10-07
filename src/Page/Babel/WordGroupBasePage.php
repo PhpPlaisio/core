@@ -21,21 +21,21 @@ abstract class WordGroupBasePage extends BabelPage
    *
    * @var int
    */
-  protected $buttonWrdId;
+  protected int $buttonWrdId;
 
   /**
    * The form shown on this page.
    *
    * @var CoreForm
    */
-  protected $form;
+  protected CoreForm $form;
 
   /**
    * The ID of the word group.
    *
-   * @var int
+   * @var int|null
    */
-  protected $wdgId;
+  protected ?int $wdgId = null;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -73,7 +73,7 @@ abstract class WordGroupBasePage extends BabelPage
     $this->form = new CoreForm();
 
     // Show word group ID (update only).
-    if ($this->wdgId)
+    if ($this->wdgId!==null)
     {
       $input = new SpanControl('wdg_id');
       $input->setInnerText(Cast::toOptString($this->wdgId));

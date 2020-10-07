@@ -26,14 +26,14 @@ class ModuleDetailsPage extends TabPage
    *
    * @var array
    */
-  private $details;
+  private array $details;
 
   /**
    * The ID of the functionality.
    *
    * @var int
    */
-  private $mdlId;
+  private int $mdlId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

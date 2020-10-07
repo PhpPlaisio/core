@@ -23,19 +23,19 @@ abstract class ModuleBasePage extends TabPage
    *
    * @var int
    */
-  protected $buttonWrdId;
+  protected int $buttonWrdId;
 
   /**
    * The form shown on this page.
    *
    * @var CoreForm
    */
-  protected $form;
+  protected CoreForm $form;
 
   /**
    * @var int The ID of de module to be updated or inserted.
    */
-  protected $mdlId;
+  protected int $mdlId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
