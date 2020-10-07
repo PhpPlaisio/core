@@ -6,7 +6,6 @@ namespace Plaisio\Core\TableRow\System;
 use Plaisio\Core\Page\System\PageDetailsPage;
 use Plaisio\Helper\Html;
 use Plaisio\Table\DetailTable;
-use SetBased\Helper\Cast;
 
 /**
  * Table row showing the original page of a page.

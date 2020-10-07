@@ -31,14 +31,14 @@ class BoolIconTableColumn extends TableColumn
   /**
    * Object constructor.
    *
-   * @param string|int|null $headerText The header text of this table column.
+   * @param string|int|null $header     The header text of this table column.
    * @param string          $fieldName  The key to be used for getting the value from the data row.
    * @param bool            $showFalse  If set for false values an icon is shown, otherwise the cell is empty for
    *                                    false values.
    */
-  public function __construct($headerText, string $fieldName, bool $showFalse = false)
+  public function __construct($header, string $fieldName, bool $showFalse = false)
   {
-    parent::__construct('bool', $headerText);
+    parent::__construct('bool', $header);
 
     $this->fieldName = $fieldName;
     $this->showFalse = $showFalse;

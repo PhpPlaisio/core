@@ -6,7 +6,6 @@ namespace Plaisio\Core\TableColumn\Babel;
 use Plaisio\Core\Page\Babel\WordGroupDetailsPage;
 use Plaisio\Helper\Html;
 use Plaisio\Table\TableColumn\DualTableColumn;
-use SetBased\Helper\Cast;
 
 /**
  * A dual table column with the ID and name of a word group.
@@ -25,12 +24,12 @@ class WordGroupTableColumn extends DualTableColumn
   /**
    * Object constructor.
    *
-   * @param string|int|null $headerText  The header of this column.
+   * @param string|int|null $header      The header of this column.
    * @param int             $lanIdTarget The ID of the target language.
    */
-  public function __construct($headerText, int $lanIdTarget)
+  public function __construct($header, int $lanIdTarget)
   {
-    parent::__construct('numeric', 'text', $headerText);
+    parent::__construct('numeric', 'text', $header);
 
     $this->lanIdTarget = $lanIdTarget;
   }

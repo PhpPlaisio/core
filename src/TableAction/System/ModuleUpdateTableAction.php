@@ -17,7 +17,7 @@ class ModuleUpdateTableAction extends UpdateItemTableAction
    *
    * @param int $mdlId The ID of the module.
    */
-  public function __construct($mdlId)
+  public function __construct(int $mdlId)
   {
     $this->url = ModuleUpdatePage::getUrl($mdlId);
 

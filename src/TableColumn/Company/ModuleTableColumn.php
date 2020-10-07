@@ -6,7 +6,6 @@ namespace Plaisio\Core\TableColumn\Company;
 use Plaisio\Core\Page\System\ModuleDetailsPage;
 use Plaisio\Helper\Html;
 use Plaisio\Table\TableColumn\DualTableColumn;
-use SetBased\Helper\Cast;
 
 /**
  * A dual table column with the ID and name of a module.
@@ -17,11 +16,11 @@ class ModuleTableColumn extends DualTableColumn
   /**
    * Object constructor.
    *
-   * @param string|int|null $headerText The header of this column.
+   * @param string|int|null $header The header of this column.
    */
-  public function __construct($headerText)
+  public function __construct($header)
   {
-    parent::__construct('numeric', 'text', $headerText);
+    parent::__construct('numeric', 'text', $header);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

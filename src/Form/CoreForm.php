@@ -98,14 +98,14 @@ class CoreForm extends Form
   /**
    * Adds a submit button to this form.
    *
-   * @param int|string $wrdId     Depending on the type:
-   *                              <ul>
-   *                              <li>int:    The ID of the word of the button text.
-   *                              <li>string: The text of the button.
-   *                              </ul>
-   * @param string     $method    The name of method for handling the form submit.
-   * @param string     $name      The name of the submit button.
-   * @param string     $class     The class(es) of the submit button.
+   * @param int|string  $wrdId  Depending on the type:
+   *                            <ul>
+   *                            <li>int:    The ID of the word of the button text.
+   *                            <li>string: The text of the button.
+   *                            </ul>
+   * @param string      $method The name of method for handling the form submit.
+   * @param string      $name   The name of the submit button.
+   * @param string|null $class  The class(es) of the submit button.
    *
    * @return PushControl
    */

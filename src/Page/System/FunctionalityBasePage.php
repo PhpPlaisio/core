@@ -83,7 +83,7 @@ abstract class FunctionalityBasePage extends TabPage
     $this->form->addFormControl($input, 'Module', true);
 
     // Input for functionality name.
-    // @todo Make control for reusing a word or create a new word. 
+    // @todo Make control for reusing a word or create a new word.
     $input = new SelectControl('wrd_id');
     $input->setOptions($words, 'wrd_id', 'wdt_text');
     $input->setEmptyOption();

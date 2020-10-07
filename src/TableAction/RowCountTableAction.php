@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Plaisio\Core\TableAction;
 
 use Plaisio\Helper\Html;
-use SetBased\Helper\Cast;
 
 /**
  * A pseudo table action showing the row count in a (overview) table body.

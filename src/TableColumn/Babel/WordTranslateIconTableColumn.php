@@ -25,7 +25,7 @@ class WordTranslateIconTableColumn extends IconTableColumn
    *
    * @param int $targetLanId The ID of the target language.
    */
-  public function __construct($targetLanId)
+  public function __construct(int $targetLanId)
   {
     parent::__construct();
 
