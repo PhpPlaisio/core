@@ -5,6 +5,7 @@ namespace Plaisio\Core\Page\Company;
 
 use Plaisio\C;
 use Plaisio\Kernel\Nub;
+use SetBased\Helper\Cast;
 
 /**
  * Page for inserting a new role.
@@ -50,7 +51,7 @@ class RoleInsertPage extends RoleBasePage
     $this->rolId = Nub::$nub->DL->abcCompanyRoleInsert($this->targetCmpId,
                                                        $values['rlg_id'],
                                                        $values['rol_name'],
-                                                       $values['rol_weight'],
+                                                       Cast::toOptInt($values['rol_weight']),
                                                        $values['rol_label']);
   }
 
