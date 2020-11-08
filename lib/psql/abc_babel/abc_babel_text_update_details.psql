@@ -6,6 +6,8 @@
  * @param p_txt_label   The new label of the text.
  * @param p_txt_comment The new comment of the text.
  * @param p_ttt_text    The new value of the text.
+ *
+ * @type none
  */
 create procedure abc_babel_text_update_details(in p_txt_id      @abc_babel_text.txt_id%type@,
                                                in p_ttg_id      @abc_babel_text.ttg_id%type@,
@@ -13,7 +15,6 @@ create procedure abc_babel_text_update_details(in p_txt_id      @abc_babel_text.
                                                in p_txt_comment @abc_babel_text.txt_comment%type@,
                                                in p_ttt_text    @abc_babel_text_text.ttt_text%type@ )
 modifies sql data
--- type: none
 begin
   update ABC_BABEL_TEXT
   set ttg_id      = p_ttg_id

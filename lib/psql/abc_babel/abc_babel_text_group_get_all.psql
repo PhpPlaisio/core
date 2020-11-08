@@ -2,10 +2,11 @@
  * Selects all text groups.
  *
  * @param p_lan_id The ID of the target language.
+ *
+ * @type rows
  */
 create procedure abc_babel_text_group_get_all(in p_lan_id @abc_babel_language.lan_id%type@)
 reads sql data
--- type: rows
 begin
   select ttg.ttg_id
   ,      ttg.ttg_name

@@ -1,10 +1,11 @@
 /**
  * Creates temporary table TMP_PROFILE5 with new and obsolete profiles pages and inserts new profile pages and removes
  * obsolete profile pages.
+ *
+ * @type hidden
  */
 create procedure abc_profile_proper5()
 modifies sql data
--- type: hidden
 begin
   drop temporary table if exists TMP_PROFILE5;
 
@@ -66,5 +67,3 @@ begin
   where  tmp_diff > 0
   ;
 end
-
-

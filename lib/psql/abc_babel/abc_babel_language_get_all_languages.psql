@@ -2,10 +2,11 @@
  * Selects all languages.
  *
  * @param p_lan_id The ID of the language for linguistic entities.
+ *
+ * @type rows
  */
 create procedure abc_babel_language_get_all_languages(in p_lan_id @abc_babel_language.lan_id%type@)
 reads sql data
--- type: rows
 begin
   select lan.lan_id
   ,      lan.lan_locale

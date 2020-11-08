@@ -2,10 +2,11 @@
  * Selects all word groups.
  *
  * @param p_lan_id The ID of the target language.
+ *
+ * @type rows
  */
 create procedure abc_babel_word_group_get_all(in p_lan_id @abc_babel_language.lan_id%type@)
 reads sql data
--- type: rows
 begin
   select wdg.wdg_id
   ,      wdg.wdg_name

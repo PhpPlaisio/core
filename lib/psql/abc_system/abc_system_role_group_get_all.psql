@@ -2,10 +2,11 @@
  * Selects all role groups.
  *
  * @param p_lan_id The ID of the language use for linguistic entities.
+ *
+ * @type rows
  */
 create procedure abc_system_role_group_get_all(in p_lan_id @abc_babel_language.lan_id%type@)
 reads sql data
--- type: rows
 begin
   select rlg.rlg_id
   ,      rlg.wrd_id

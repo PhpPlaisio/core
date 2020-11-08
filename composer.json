@@ -29,7 +29,7 @@
     "plaisio/table-overview": "^3.0.1",
     "plaisio/web-assets": "^2.0",
     "setbased/exception": "^2.1",
-    "setbased/php-stratum-mysql": "^5.1"
+    "setbased/php-stratum-mysql": "^6.0"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,

@@ -2,10 +2,11 @@
  * Selects the details of a word group.
  *
  * @param p_wdg_id The ID of the word group.
+ *
+ * @type row1
  */
 create procedure abc_babel_word_group_get_details(in p_wdg_id @abc_babel_word_group.wdg_id%type@)
 reads sql data
--- type: row1
 begin
   select wdg_id
   ,      wdg_name

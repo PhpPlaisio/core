@@ -3,11 +3,12 @@
  *
  * @param p_wgd_id The ID of the word group.
  * @param p_lan_id The ID of the target language.
+ *
+ * @type rows
  */
 create procedure abc_babel_word_group_get_all_words(in p_wgd_id @ABC_BABEL_WORD_group.wdg_id%type@
 ,                                                   in p_lan_id @abc_babel_language.lan_id%type@ )
 reads sql data
--- type: rows
 begin
   select wrd.wrd_id
   ,      wd1.wdt_text

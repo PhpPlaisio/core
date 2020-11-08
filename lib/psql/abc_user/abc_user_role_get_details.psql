@@ -4,12 +4,13 @@
  * @param p_cmp_id The ID of the company (safeguard).
  * @param p_usr_id The ID of the user.
  * @param p_rol_id The ID of the role.
+ *
+ * @type row0
  */
 create procedure abc_user_role_get_details(in p_cmp_id @aut_usr_rol.cmp_id%type@,
                                            in p_usr_id @aut_usr_rol.usr_id%type@,
                                            in p_rol_id @aut_usr_rol.rol_id%type@)
 reads sql data
--- type: row0
 begin
   select rol.rol_id
   ,      rol.rol_weight

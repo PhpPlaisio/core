@@ -4,12 +4,13 @@
  * @param p_cmp_id The ID of the company (safeguard).
  * @param p_rol_id The ID of the role.
  * @param p_lan_id The ID of the language use for linguistic entities.
+ *
+ * @type row1
  */
 create procedure abc_company_role_get_details(in p_cmp_id @abc_auth_company.cmp_id%type@,
                                               in p_rol_id @aut_role.rol_id%type@,
                                               in p_lan_id @abc_babel_language.lan_id%type@)
 reads sql data
--- type: row1
 begin
   select rol.rol_id
   ,      rol.rol_weight

@@ -8,6 +8,10 @@
  * @param p_pag_class   The class of the new page.
  * @param p_pag_label   The label of the new page.
  * @param p_pag_weight  The weight of the page inside a page group.
+ *
+ * @type singleton1
+ *
+ * @return int
  */
 create procedure abc_system_page_insert_details(in p_wrd_id     @aut_page.wrd_id%type@,
                                                 in p_ptb_id     @aut_page.ptb_id%type@,
@@ -17,8 +21,6 @@ create procedure abc_system_page_insert_details(in p_wrd_id     @aut_page.wrd_id
                                                 in p_pag_label  @aut_page.pag_label%type@,
                                                 in p_pag_weight @aut_page.pag_weight%type@)
 modifies sql data
--- type:   singleton1
--- return: int
 begin
   declare l_pag_id @aut_page.pag_id%type@;
 

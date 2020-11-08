@@ -1,9 +1,10 @@
 /**
  * Updates the profiles of all users.
+ *
+ * @type hidden
  */
 create procedure abc_profile_proper6()
 modifies sql data
--- type: hidden
 begin
   -- Update user's profiles.
   update     ABC_AUTH_USER    usr
@@ -22,5 +23,3 @@ begin
   and usr.pro_id is not null
   ;
 end
-
-

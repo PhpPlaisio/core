@@ -2,10 +2,11 @@
  * Deletes a word.
  *
  * @param p_wrd_id The ID of the word to be be deleted.
+ *
+ * @type none
  */
 create procedure abc_babel_word_delete_word(in p_wrd_id @abc_babel_word.wrd_id%type@)
 modifies sql data
--- type: none
 begin
   delete from ABC_BABEL_WORD_TEXT
   where wrd_id = p_wrd_id

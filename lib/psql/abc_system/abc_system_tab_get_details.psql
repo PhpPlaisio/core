@@ -3,11 +3,12 @@
  *
  * @param p_ptb_id The ID of the page tab.
  * @param p_lan_id The ID of the language for linguistic entities.
+ *
+ * @type row1
  */
 create procedure abc_system_tab_get_details(in p_ptb_id @aut_page_tab.ptb_id%type@,
                                             in p_lan_id @abc_babel_language.lan_id%type@)
 reads sql data
--- type: row1
 begin
   select ptb.ptb_id
   ,      ptb.wrd_id

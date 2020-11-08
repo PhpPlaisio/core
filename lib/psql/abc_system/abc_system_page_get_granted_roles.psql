@@ -2,10 +2,11 @@
  * Selects the roles that are granted access to a page.
  *
  * @param p_pag_id The ID of the page.
+ *
+ * @type rows
  */
 create procedure abc_system_page_get_granted_roles(in p_pag_id @aut_page.pag_id%type@)
 reads sql data
--- type: rows
 begin
   select distinct cmp.cmp_id
   ,               cmp.cmp_abbr

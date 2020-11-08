@@ -2,10 +2,11 @@
  * Selects all companies include a flag indicating that company is granted a module.
  *
  * @param p_mdl_id The ID of the module.
+ *
+ * @type rows
  */
 create procedure abc_system_module_get_available_companies(in p_mdl_id @aut_module.mdl_id%type@)
 reads sql data
--- type: rows
 begin
   select cmp.cmp_id
   ,      cmp.cmp_abbr

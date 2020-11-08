@@ -2,10 +2,11 @@
  * Selects the details of a company.
  *
  * @param p_cmp_id The ID of the company.
+ *
+ * @type row1
  */
 create procedure abc_company_get_details( in p_cmp_id @abc_auth_company.cmp_id%type@ )
 reads sql data
--- type: row1
 begin
   select cmp_id
   ,      cmp_abbr

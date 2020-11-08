@@ -6,6 +6,8 @@
  * @param p_wrd_label   The new label of the word.
  * @param p_wrd_comment The new comment of the word.
  * @param p_wdt_text    The new value of the word.
+ *
+ * @type none
  */
 create procedure abc_babel_word_update_details(in p_wrd_id      @abc_babel_word.wrd_id%type@,
                                                in p_wdg_id      @abc_babel_word.wdg_id%type@,
@@ -13,7 +15,6 @@ create procedure abc_babel_word_update_details(in p_wrd_id      @abc_babel_word.
                                                in p_wrd_comment @abc_babel_word.wrd_comment%type@,
                                                in p_wdt_text    @abc_babel_word_text.wdt_text%type@)
 modifies sql data
--- type: none
 begin
   update ABC_BABEL_WORD
   set wdg_id      = p_wdg_id

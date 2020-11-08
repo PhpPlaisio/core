@@ -6,6 +6,10 @@
  * @param p_rol_name   The name of the role.
  * @param p_rol_weight The weight of the role.
  * @param p_rol_label  The label of the role.
+ *
+ * @type singleton1
+ *
+ * @return int
  */
 create procedure abc_company_role_insert(in p_cmp_id     @abc_auth_company.cmp_id%type@,
                                          in p_rlg_id     @aut_role.rlg_id%type@,
@@ -13,8 +17,6 @@ create procedure abc_company_role_insert(in p_cmp_id     @abc_auth_company.cmp_i
                                          in p_rol_weight @aut_role.rol_weight%type@,
                                          in p_rol_label  @aut_role.rol_label%type@)
 modifies sql data
--- type:   singleton1
--- return: int
 begin
   insert into AUT_ROLE( cmp_id
   ,                     rlg_id

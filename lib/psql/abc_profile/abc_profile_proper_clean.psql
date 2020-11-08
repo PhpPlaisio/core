@@ -1,10 +1,11 @@
 /**
  * Recomputes all profiles and makes tables AUT_PRO_ROL and AUT_PRO_PAG proper as SP abc_profile_proper() but it removes
  * obsolete profiles.
+ *
+ * @type none
  */
 create procedure abc_profile_proper_clean()
 modifies sql data
--- type: none
 begin
   call abc_profile_proper();
 

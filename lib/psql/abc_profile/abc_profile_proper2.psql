@@ -1,9 +1,10 @@
 /**
  * Creates temporary table TMP_PROFILE2 with all unique profiles.
+ *
+ * @type hidden
  */
 create procedure abc_profile_proper2()
 modifies sql data
--- type: hidden
 begin
   drop temporary table if exists TMP_PROFILE2;
 
@@ -24,5 +25,3 @@ begin
   ,        tmp_rol_ids
   ;
 end
-
-

@@ -4,12 +4,13 @@
  * @param p_wdg_id    The ID of the word group.
  * @param p_wdg_name  The new name of the word group.
  * @param p_wdg_label The new label of the word group.
+ *
+ * @type none
  */
 create procedure abc_babel_word_group_update_details(in p_wdg_id    @abc_babel_word_group.wdg_id%type@,
                                                      in p_wdg_name  @abc_babel_word_group.wdg_name%type@,
                                                      in p_wdg_label @abc_babel_word_group.wdg_label%type@)
 modifies sql data
--- type: none
 begin
   update ABC_BABEL_WORD_GROUP
   set wdg_name  = p_wdg_name

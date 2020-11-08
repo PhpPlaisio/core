@@ -3,11 +3,12 @@
  *
  * @param p_fun_id The ID of the functionality.
  * @param p_lan_id The ID of the language for linguistic entities.
+ *
+ * @type row1
  */
 create procedure abc_system_functionality_get_details(in p_fun_id @aut_functionality.fun_id%type@,
                                                       in p_lan_id @abc_babel_language.lan_id%type@)
 reads sql data
--- type: row1
 begin
   select mdl.mdl_id     mdl_id
   ,      fun.fun_id     fun_id

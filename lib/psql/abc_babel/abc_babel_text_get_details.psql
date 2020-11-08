@@ -3,11 +3,12 @@
  *
  * @param p_txt_id The ID of the text.
  * @param p_lan_id The ID of the reference language.
+ *
+ * @type row1
  */
 create procedure abc_babel_text_get_details(in p_txt_id @abc_babel_text.txt_id%type@
 ,                                           in p_lan_id @abc_babel_language.lan_id%type@)
 reads sql data
--- type: row1
 begin
   select txt.txt_timestamp
   ,      txt.txt_comment

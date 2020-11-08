@@ -3,11 +3,12 @@
  *
  * @param p_cmp_id The ID of the company (safeguard).
  * @param p_usr_id The ID of the user.
+ *
+ * @type none
  */
 create procedure abc_profile_proper_user(in p_cmp_id @abc_auth_user.cmp_id%type@,
                                          in p_usr_id @abc_auth_user.usr_id%type@)
 modifies sql data
--- type: none
 begin
   declare l_pro_id      @abc_auth_profile.pro_id%type@;
   declare l_pro_rol_ids @abc_auth_profile.pro_rol_ids%type@;

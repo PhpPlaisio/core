@@ -3,11 +3,12 @@
  *
  * @param p_pag_id The ID of the page.
  * @param p_lan_id The ID of the language for linguistic entities.
+ *
+ * @type rows
  */
 create procedure abc_system_page_get_granted_functionalities(in p_pag_id @aut_page.pag_id%type@,
                                                              in p_lan_id @abc_babel_language.lan_id%type@)
 reads sql data
--- type: rows
 begin
   select fun.fun_id
   ,      mdl.mdl_id

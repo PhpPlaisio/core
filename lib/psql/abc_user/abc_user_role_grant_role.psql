@@ -6,6 +6,8 @@
  * @param p_rol_id         The ID of the role.
  * @param p_aur_date_start The date from which the role is granted.
  * @param p_aur_date_stop  The date after which the role is revoked.
+ *
+ * @type none
  */
 create procedure abc_user_role_grant_role(in p_cmp_id         @aut_usr_rol.cmp_id%type@,
                                           in p_usr_id         @aut_usr_rol.usr_id%type@,
@@ -13,7 +15,6 @@ create procedure abc_user_role_grant_role(in p_cmp_id         @aut_usr_rol.cmp_i
                                           in p_aur_date_start @aut_usr_rol.aur_date_start%type@,
                                           in p_aur_date_stop  @aut_usr_rol.aur_date_stop%type@)
 modifies sql data
--- type: none
 begin
   set p_aur_date_start = ifnull(p_aur_date_start, curdate());
   set p_aur_date_stop  = ifnull(p_aur_date_stop, @OPEN_DATE_STOP@);

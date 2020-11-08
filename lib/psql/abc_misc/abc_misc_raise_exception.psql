@@ -2,10 +2,11 @@
  * Raises an exception.
  *
  * @param p_message The message of the exception.
+ *
+ * @type hidden
  */
 create procedure abc_misc_raise_exception( in p_message varchar(255) )
 reads sql data
--- type: hidden
 begin
   declare i int;
 

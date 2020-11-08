@@ -5,13 +5,14 @@
  * @param p_wrd_id     @todo describe parameter
  * @param p_rlg_weight @todo describe parameter
  * @param p_rlg_label  @todo describe parameter
+ *
+ * @type none
  */
 create procedure abc_system_role_group_update(in p_rlg_id     @aut_role_group.rlg_id%type@,
                                               in p_wrd_id     @aut_role_group.wrd_id%type@,
                                               in p_rlg_weight @aut_role_group.rlg_weight%type@,
                                               in p_rlg_label  @aut_role_group.rlg_label%type@)
 modifies sql data
--- type: none
 begin
   update AUT_ROLE_GROUP
   set    wrd_id = p_wrd_id

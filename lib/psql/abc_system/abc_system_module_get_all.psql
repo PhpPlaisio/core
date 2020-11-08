@@ -2,10 +2,11 @@
  * Selects all modules.
  *
  * @param p_lan_id The ID of the language used for names.
+ *
+ * @type rows
  */
 create procedure abc_system_module_get_all(in p_lan_id @abc_babel_language.lan_id%type@)
 reads sql data
--- type: rows
 begin
   select mdl.mdl_id
   ,      wd1.wdt_text   mdl_name

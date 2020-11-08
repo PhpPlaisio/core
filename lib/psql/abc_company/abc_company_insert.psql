@@ -3,12 +3,14 @@
  *
  * @param p_cmp_abbr  The abbreviation of the new company.
  * @param p_cmp_label The label of the new company.
+ *
+ * @type singleton1
+ *
+ * @return int
  */
 create procedure abc_company_insert(in p_cmp_abbr  @abc_auth_company.cmp_abbr%type@,
                                     in p_cmp_label @abc_auth_company.cmp_label%type@)
 modifies sql data
--- type:   singleton1
--- return: int
 begin
   declare l_cmp_id @abc_auth_company.cmp_id%type@;
 

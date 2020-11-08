@@ -2,10 +2,11 @@
  * Selects all roles in a role group.
  *
  * @param p_rlg_id The ID of the role group.
+ *
+ * @type rows
  */
 create procedure abc_system_role_group_get_roles(in p_rlg_id @aut_role_group.rlg_id%type@)
 reads sql data
--- type: rows
 begin
   select cmp.cmp_id
   ,      cmp.cmp_abbr

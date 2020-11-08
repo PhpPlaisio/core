@@ -4,12 +4,13 @@
  * @param p_ttg_id    The ID of the text group.
  * @param p_ttg_name  The new name of the text group.
  * @param p_ttg_label The new label of the text group.
+ *
+ * @type none
  */
 create procedure abc_babel_text_group_update_details(in p_ttg_id    @abc_babel_text_group.ttg_id%type@,
                                                      in p_ttg_name  @abc_babel_text_group.ttg_name%type@,
                                                      in p_ttg_label @abc_babel_text_group.ttg_label%type@)
 modifies sql data
--- type: none
 begin
   update ABC_BABEL_TEXT_GROUP
   set ttg_name  = p_ttg_name

@@ -5,14 +5,16 @@
  * @param p_wrd_label   The label of the new word.
  * @param p_wrd_comment The comment on the new word.
  * @param p_wdt_text    The value of the new word.
+ *
+ * @type singleton1
+ *
+ * @return int
  */
 create procedure abc_babel_word_insert_word(in p_wdg_id      @abc_babel_word_group.wdg_id%type@,
                                             in p_wrd_label   @abc_babel_word.wrd_label%type@,
                                             in p_wrd_comment @abc_babel_word.wrd_comment%type@,
                                             in p_wdt_text    @abc_babel_word_text.wdt_text%type@)
 modifies sql data
--- type:   singleton1
--- return: int
 begin
   declare l_wrd_id @ABC_BABEL_WORD.wrd_id%type@;
 

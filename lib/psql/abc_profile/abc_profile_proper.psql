@@ -1,9 +1,10 @@
 /**
  * Recomputes all profiles and makes tables AUT_PRO_ROL and AUT_PRO_PAG proper.
+ *
+ * @type none
  */
 create procedure abc_profile_proper()
 modifies sql data
--- type: none
 begin
   -- Create a temporary table with all profiles of all users.
   call abc_profile_proper1();

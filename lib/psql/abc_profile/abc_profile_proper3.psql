@@ -1,9 +1,10 @@
 /**
  * Creates temporary table TMP_PROFILE3 with new and obsolete profiles and inserts new profiles.
+ *
+ * @type hidden
  */
 create procedure abc_profile_proper3()
 modifies sql data
--- type: hidden
 begin
   drop temporary table if exists TMP_PROFILE3;
 

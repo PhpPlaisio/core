@@ -4,12 +4,13 @@
  * @param p_txt_id   The ID of text that has been translated.
  * @param p_lan_id   The ID of the language in which the text has been translated.
  * @param p_ttt_text The translated text.
+ *
+ * @type none
  */
 create procedure abc_babel_text_translate_text(in p_txt_id   @abc_babel_text_text.txt_id%type@
 ,                                              in p_lan_id   @abc_babel_text_text.lan_id%type@
 ,                                              in p_ttt_text @abc_babel_text_text.ttt_text%type@)
 modifies sql data
--- type: none
 begin
   -- Update text in the specified language.
   update ABC_BABEL_TEXT_TEXT

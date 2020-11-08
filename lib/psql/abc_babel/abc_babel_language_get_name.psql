@@ -3,12 +3,14 @@
  *
  * @param p_lan_id_act The ID of the language of which the name is selected.
  * @param p_lan_id     The ID of the language for linguistic entities.
+ *
+ * @type singleton0
+ *
+ * @return string|null
  */
 create procedure abc_babel_language_get_name(in p_lan_id_act @abc_babel_language.lan_id%type@
 ,                                            in p_lan_id     @abc_babel_language.lan_id%type@)
 reads sql data
--- type:   singleton0
--- return: string|null
 begin
   select wdt_text
   from       ABC_BABEL_LANGUAGE  lan

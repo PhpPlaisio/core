@@ -3,11 +3,12 @@
  *
  * @param p_cmp_id The ID of the company (safeguard).
  * @param p_usr_id The ID of the user.
+ *
+ * @type rows
  */
 create procedure abc_user_role_get_all(in p_cmp_id @abc_auth_user.cmp_id%type@,
                                        in p_usr_id @abc_auth_user.usr_id%type@)
 reads sql data
--- type: rows
 begin
   select rol.rol_id
   ,      rol.rol_weight

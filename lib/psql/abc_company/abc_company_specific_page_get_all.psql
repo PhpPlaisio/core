@@ -3,11 +3,12 @@
  *
  * @param p_cmp_id The ID of the company.
  * @param p_lan_id The ID of the language for linguistic entities.
+ *
+ * @type rows
  */
 create procedure abc_company_specific_page_get_all(in p_cmp_id @abc_auth_company.cmp_id%type@,
                                                    in p_lan_id @abc_babel_word.wrd_id%type@)
 reads sql data
--- type: rows
 begin
   select apc.pag_id      pag_id
   ,      bwt.wdt_text    pag_title

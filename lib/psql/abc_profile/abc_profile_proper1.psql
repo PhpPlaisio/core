@@ -1,9 +1,10 @@
 /**
  * Creates temporary table TMP_PROFILE1 with all profiles of all users.
+ *
+ * @type hidden
  */
 create procedure abc_profile_proper1()
 modifies sql data
--- type: hidden
 begin
   drop temporary table if exists TMP_PROFILE1;
 
@@ -31,5 +32,3 @@ begin
   ,        aur.usr_id
   ;
 end
-
-
