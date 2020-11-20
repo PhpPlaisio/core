@@ -24,7 +24,7 @@
     "plaisio/page-core": "^1.2.1",
     "plaisio/page-decorator": "1.0",
     "plaisio/request-handler": "^1.2",
-    "plaisio/response-core": "^1.1",
+    "plaisio/response-core": "^1.1 || ^2.0",
     "plaisio/table-detail": "^1.3",
     "plaisio/table-overview": "^3.0.1",
     "plaisio/web-assets": "^2.0",
