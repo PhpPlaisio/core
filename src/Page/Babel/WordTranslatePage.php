@@ -9,7 +9,6 @@ use Plaisio\Form\Control\SpanControl;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Kernel\Nub;
 use Plaisio\Response\SeeOtherResponse;
-use SetBased\Helper\Cast;
 
 /**
  * Page for translating a single word.
@@ -54,10 +53,9 @@ class WordTranslatePage extends BabelPage
     parent::__construct();
 
     $this->wrdId    = Nub::$nub->cgi->getManId('wrd', 'wrd');
+    $this->details  = Nub::$nub->DL->abcBabelWordGetDetails($this->wrdId, $this->actLanId);
     $this->redirect = Nub::$nub->cgi->getOptUrl('redirect') ?? WordGroupDetailsPage::getUrl($this->details['wdg_id'],
                                                                                             $this->actLanId);
-
-    $this->details = Nub::$nub->DL->abcBabelWordGetDetails($this->wrdId, $this->actLanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
