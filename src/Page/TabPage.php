@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page;
 
 use Plaisio\Helper\Html;
+use Plaisio\Helper\OB;
 use Plaisio\Kernel\Nub;
 use Plaisio\Page\CorePage;
 use Plaisio\Response\Response;
@@ -39,15 +40,14 @@ abstract class TabPage extends CorePage
    */
   public function handleRequest(): Response
   {
+    $ob        = new OB();
     $decorator = Nub::$nub->pageDecorator->create('core');
 
-    ob_start();
     $this->echoPageContent();
-    $content = ob_get_clean();
 
     if ($this->response===null)
     {
-      $this->response = $decorator->decorate($content);
+      $this->response = $decorator->decorate($ob->getClean());
     }
 
     return $this->response;

@@ -18,6 +18,7 @@
     "plaisio/form": "^0.12.1",
     "plaisio/form-louver": "^0.12.5",
     "plaisio/helper-html": "^1.2",
+    "plaisio/helper-ob": "^1.0",
     "plaisio/helper-password": "^1.1",
     "plaisio/kernel": "^3.1.1",
     "plaisio/menu": "^1.0",
