@@ -88,6 +88,8 @@ abstract class IconTableColumn extends TableColumn
    */
   protected function getClasses(array $row): array
   {
+    unset($row);
+
     return [];
   }
 

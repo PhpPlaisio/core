@@ -14,7 +14,6 @@ use Plaisio\Kernel\Nub;
 use Plaisio\Response\SeeOtherResponse;
 use Plaisio\Table\TableRow\IntegerTableRow;
 use Plaisio\Table\TableRow\TextTableRow;
-use SetBased\Helper\Cast;
 
 /**
  * Abstract parent page for pages for inserting and updating a word.

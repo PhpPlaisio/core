@@ -8,7 +8,6 @@ use Plaisio\Core\Form\CoreForm;
 use Plaisio\Form\Control\SpanControl;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Response\SeeOtherResponse;
-use SetBased\Helper\Cast;
 
 /**
  * Abstract parent page for inserting and updating a word group.
