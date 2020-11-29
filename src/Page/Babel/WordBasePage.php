@@ -6,8 +6,8 @@ namespace Plaisio\Core\Page\Babel;
 use Plaisio\C;
 use Plaisio\Core\Form\CoreForm;
 use Plaisio\Core\Table\CoreDetailTable;
+use Plaisio\Form\Control\HtmlControl;
 use Plaisio\Form\Control\SelectControl;
-use Plaisio\Form\Control\SpanControl;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Helper\Html;
 use Plaisio\Kernel\Nub;
@@ -98,8 +98,8 @@ abstract class WordBasePage extends BabelPage
     // Create form control for ID.
     if ($this->wrdId!==null)
     {
-      $input = new SpanControl('wrd_id');
-      $input->setInnerText($this->wrdId);
+      $input = new HtmlControl('wrd_id');
+      $input->setText($this->wrdId);
       $this->form->addFormControl($input, 'ID');
     }
 

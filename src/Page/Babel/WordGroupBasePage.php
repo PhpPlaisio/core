@@ -5,7 +5,7 @@ namespace Plaisio\Core\Page\Babel;
 
 use Plaisio\C;
 use Plaisio\Core\Form\CoreForm;
-use Plaisio\Form\Control\SpanControl;
+use Plaisio\Form\Control\HtmlControl;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Response\SeeOtherResponse;
 
@@ -74,8 +74,8 @@ abstract class WordGroupBasePage extends BabelPage
     // Show word group ID (update only).
     if ($this->wdgId!==null)
     {
-      $input = new SpanControl('wdg_id');
-      $input->setInnerText($this->wdgId);
+      $input = new HtmlControl('wdg_id');
+      $input->setText($this->wdgId);
       $this->form->addFormControl($input, 'ID');
     }
 

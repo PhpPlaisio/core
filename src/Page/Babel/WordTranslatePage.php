@@ -5,7 +5,7 @@ namespace Plaisio\Core\Page\Babel;
 
 use Plaisio\C;
 use Plaisio\Core\Form\CoreForm;
-use Plaisio\Form\Control\SpanControl;
+use Plaisio\Form\Control\HtmlControl;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Kernel\Nub;
 use Plaisio\Response\SeeOtherResponse;
@@ -101,23 +101,23 @@ class WordTranslatePage extends BabelPage
     $this->form = new CoreForm();
 
     // Show word group name.
-    $input = new SpanControl('word_group');
-    $input->setInnerText($this->details['wdg_name']);
+    $input = new HtmlControl('word_group');
+    $input->setText($this->details['wdg_name']);
     $this->form->addFormControl($input, 'Word Group');
 
     // Show word group ID
-    $input = new SpanControl('wrd_id');
-    $input->setInnerText($this->details['wdg_id']);
+    $input = new HtmlControl('wrd_id');
+    $input->setText($this->details['wdg_id']);
     $this->form->addFormControl($input, 'ID Group');
 
     // Show label
-    $input = new SpanControl('label');
-    $input->setInnerText($this->details['wrd_label']);
+    $input = new HtmlControl('label');
+    $input->setText($this->details['wrd_label']);
     $this->form->addFormControl($input, 'Label');
 
     // Show comment.
-    $input = new SpanControl('comment');
-    $input->setInnerText($this->details['wrd_comment']);
+    $input = new HtmlControl('comment');
+    $input->setText($this->details['wrd_comment']);
     $this->form->addFormControl($input, 'Comment');
 
     // Show data
@@ -127,8 +127,8 @@ class WordTranslatePage extends BabelPage
     Nub::$nub->babel->pushLanguage($this->refLanId);
     try
     {
-      $input = new SpanControl('ref_language');
-      $input->setInnerText(Nub::$nub->babel->getWord($this->wrdId));
+      $input = new HtmlControl('ref_language');
+      $input->setText(Nub::$nub->babel->getWord($this->wrdId));
       $this->form->addFormControl($input, $refLanguage);
     }
     finally
