@@ -104,17 +104,17 @@ class SpecificPageUpdatePage extends CompanyPage
 
     // Show the ID of the page.
     $input = new HtmlControl('pag_id');
-    $input->setHtml($this->targetPageDetails['pag_id']);
+    $input->setText($this->targetPageDetails['pag_id']);
     $this->form->addFormControl($input, 'ID');
 
     // Show the title of the page.
     $input = new HtmlControl('pag_title');
-    $input->setHtml($this->targetPageDetails['pag_title']);
+    $input->setText($this->targetPageDetails['pag_title']);
     $this->form->addFormControl($input, 'Title');
 
     // Show the parent class name of the page.
     $input = new HtmlControl('pag_class_parent');
-    $input->setHtml($this->targetPageDetails['pag_class_parent']);
+    $input->setText($this->targetPageDetails['pag_class_parent']);
     $this->form->addFormControl($input, 'Parent Class');
 
     // Create text control for the child class name.
