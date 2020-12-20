@@ -17,7 +17,7 @@
     "plaisio/exception": "^1.1",
     "plaisio/form": "^0.14.1",
     "plaisio/form-louver": "^0.13.0",
-    "plaisio/helper-html": "^1.3.1",
+    "plaisio/helper-html": "^1.4.0",
     "plaisio/helper-ob": "^1.1.1",
     "plaisio/kernel": "^3.1.1",
     "plaisio/menu": "^1.0",

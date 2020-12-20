@@ -74,17 +74,21 @@ class CoreFieldSet extends FieldSet
   {
     $this->addClass(static::$class);
 
+    $childAttributes   = ['class' => static::$class];
+    $errorAttributes   = ['class' => [static::$class, 'error']];
+    $buttonAttributes  = ['class' => [static::$class, 'button-group']];
+    $buttonAttributes2 = ['class' => [static::$class, 'button-group'], 'colspan' => 2];
+
     $ret = $this->getHtmlStartTag();
-
     $ret .= Html::generateTag('table', $this->attributes);
-
-    $childAttributes = ['class' => static::$class];
 
     if ($this->htmlTitle!==null)
     {
       $ret .= Html::generateTag('thead', $childAttributes);
       $ret .= Html::generateTag('tr', $childAttributes);
-      $ret .= '<th colspan="2">'.$this->htmlTitle.'</th>';
+      $ret .= '<th colspan="2">';
+      $ret .= $this->htmlTitle;
+      $ret .= '</th>';
       $ret .= '</tr>';
       $ret .= '</thead>';
     }
@@ -94,27 +98,33 @@ class CoreFieldSet extends FieldSet
     {
       if ($control!==$this->buttonGroupControl)
       {
-        $ret       .= Html::generateTag('tr', $childAttributes);
-        $ret       .= '<th>';
-        $ret       .= Html::txt2Html($control->getAttribute('_plaisio_label'));
-        $mandatory = $control->getAttribute('_plaisio_mandatory');
-        if (!empty($mandatory)) $ret .= '<span class="mandatory">*</span>';
+        $id        = $control->getId();
+        $mandatory = !empty($control->getAttribute('_plaisio_mandatory'));
+        $errors    = $control->getErrorMessages(true);
+
+        $labelAttributes = ['for' => $id, 'class' => []];
+        if ($mandatory) $labelAttributes['class'][] = 'mandatory';
+        if (!empty($errors)) $labelAttributes['class'][] = 'error';
+
+        $ret .= Html::generateTag('tr', $childAttributes);
+        $ret .= Html::generateTag('th', $childAttributes);
+        $ret .= Html::generateTag('label', $labelAttributes);
+        $ret .= Html::txt2Html($control->getAttribute('_plaisio_label'));
+        $ret .= '</label>';
         $ret .= '</th>';
 
         $ret .= Html::generateTag('td', $childAttributes);
         $ret .= $control->getHtml();
         $ret .= '</td>';
 
-        $messages = $control->getErrorMessages(true);
-        if ($messages)
+         if (!empty($errors))
         {
-          $ret   .= '<td class="error">';
-          $first = true;
-          foreach ($messages as $err)
+          $ret .= Html::generateTag('td', $errorAttributes);
+          foreach ($errors as $error)
           {
-            if ($first) $first = false;
-            else        $ret .= '<br/>';
-            $ret .= Html::txt2Html($err);
+            $ret .= '<div>';
+            $ret .= Html::txt2Html($error);
+            $ret .= '</div>';
           }
           $ret .= '</td>';
         }
@@ -126,10 +136,10 @@ class CoreFieldSet extends FieldSet
 
     if ($this->buttonGroupControl!==null)
     {
-      $ret .= Html::generateTag('tfoot', $childAttributes);
-      $ret .= Html::generateTag('tr', $childAttributes);
-      $ret .= '<td colspan="2" class="button-group">';
-      $ret .= '<div class="button-group">';
+      $ret .= Html::generateTag('tfoot', $buttonAttributes);
+      $ret .= Html::generateTag('tr', $buttonAttributes);
+      $ret .= Html::generateTag('td', $buttonAttributes2);
+      $ret .= Html::generateTag('div', $buttonAttributes);
       $ret .= $this->buttonGroupControl->getHtml();
       $ret .= '</div>';
       $ret .= '</tr>';
