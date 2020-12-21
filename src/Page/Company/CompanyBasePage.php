@@ -74,12 +74,12 @@ abstract class CompanyBasePage extends TabPage
     // Create form control for company name.
     $input = new TextControl('cmp_abbr');
     $input->setAttrMaxLength(C::LEN_CMP_ABBR);
-    $this->form->addFormControl($input, 'CompanyPage Abbreviation');
+    $this->form->addFormControl($input, 'CompanyPage Abbreviation', true);
 
     // Create form control for comment.
     $input = new TextControl('cmp_label');
     $input->setAttrMaxLength(C::LEN_CMP_LABEL);
-    $this->form->addFormControl($input, 'Label');
+    $this->form->addFormControl($input, 'Label', true);
 
     // Create a submit button.
     $this->form->addSubmitButton($this->buttonWrdId, 'handleForm');

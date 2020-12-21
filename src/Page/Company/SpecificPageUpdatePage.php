@@ -119,6 +119,7 @@ class SpecificPageUpdatePage extends CompanyPage
 
     // Create text control for the child class name.
     $input = new TextControl('pag_class_child');
+    $input->setAttrMaxLength(C::LEN_PAG_CLASS);
     $input->setValue($this->targetPageDetails['pag_class_child']);
     $this->form->addFormControl($input, 'Child Class');
 

@@ -80,7 +80,7 @@ class SpecificPageInsertPage extends CompanyPage
 
     // Input for company specific page.
     $input = new TextControl('pag_class_child');
-    $input->setAttrMax(Cast::toOptString(C::LEN_PAG_CLASS));
+    $input->setAttrMaxLength(C::LEN_PAG_CLASS);
     $this->form->addFormControl($input, 'Child Class');
 
     // Create a submit button.
