@@ -142,6 +142,7 @@ class CoreFieldSet extends FieldSet
       $ret .= Html::generateTag('div', $buttonAttributes);
       $ret .= $this->buttonGroupControl->getHtml();
       $ret .= '</div>';
+      $ret .= '</td>';
       $ret .= '</tr>';
       $ret .= '</tfoot>';
     }
