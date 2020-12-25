@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
+use Plaisio\Core\Form\Control\WeightControl;
 use Plaisio\Core\Form\CoreForm;
 use Plaisio\Core\Page\TabPage;
 use Plaisio\Form\Control\SelectControl;
@@ -88,8 +89,7 @@ abstract class RoleGroupBasePage extends TabPage
     /** @todo Add validator: either wrd_id is not empty or wdg_name is not empty */
 
     // Input for weight.
-    $input = new TextControl('rlg_weight');
-    $input->setAttrMaxLength(C::LEN_RLG_WEIGHT);
+    $input = new WeightControl('rlg_weight');
     $this->form->addFormControl($input, 'Weight');
 
     // Input for label.

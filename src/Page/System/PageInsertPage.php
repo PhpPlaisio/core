@@ -5,7 +5,6 @@ namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
 use Plaisio\Kernel\Nub;
-use SetBased\Helper\Cast;
 
 /**
  * Page for inserting a page.
@@ -59,7 +58,7 @@ class PageInsertPage extends PageBasePage
                                                                    $values['pag_alias'],
                                                                    $values['pag_class'],
                                                                    $values['pag_label'],
-                                                                   Cast::toOptInt($values['pag_weight']));
+                                                                   $values['pag_weight']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

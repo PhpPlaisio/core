@@ -117,7 +117,7 @@ class CoreFieldSet extends FieldSet
         $ret .= $control->getHtml();
         $ret .= '</td>';
 
-         if (!empty($errors))
+        if (!empty($errors))
         {
           $ret .= Html::generateTag('td', $errorAttributes);
           foreach ($errors as $error)

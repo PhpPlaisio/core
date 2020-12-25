@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
+use Plaisio\Core\Form\Control\WeightControl;
 use Plaisio\Core\Form\CoreForm;
 use Plaisio\Core\Page\TabPage;
 use Plaisio\Form\Control\SelectControl;
@@ -118,9 +119,7 @@ abstract class PageBasePage extends TabPage
     $this->form->addFormControl($input, 'Label');
 
     // Create form control for the weight of the page (inside a tab group).
-    /** @todo validate weight is a number and/or form control or validator for numeric input. */
-    $input = new TextControl('pag_weight');
-    $input->setAttrMaxLength(C::LEN_PAG_WEIGHT);
+    $input = new WeightControl('pag_weight');
     $this->form->addFormControl($input, 'Weight');
 
     // Create a submit button.

@@ -10,7 +10,6 @@ use Plaisio\Form\Control\SelectControl;
 use Plaisio\Form\Form;
 use Plaisio\Kernel\Nub;
 use Plaisio\Response\SeeOtherResponse;
-use SetBased\Helper\Cast;
 
 /**
  * Abstract parent page for all Babel pages.
@@ -80,7 +79,7 @@ abstract class BabelPage extends TabPage
   protected function handleSelectLanguage(Form $form): void
   {
     $values         = $form->getValues();
-    $this->actLanId = Cast::toManInt($values['act_lan_id']);
+    $this->actLanId = $values['act_lan_id'];
 
     $get            = $_GET;
     $get['act_lan'] = Nub::$nub->obfuscator::encode($this->actLanId, 'lan');

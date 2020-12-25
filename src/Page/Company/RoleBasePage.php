@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\Company;
 
 use Plaisio\C;
+use Plaisio\Core\Form\Control\WeightControl;
 use Plaisio\Core\Form\CoreForm;
 use Plaisio\Form\Control\SelectControl;
 use Plaisio\Form\Control\TextControl;
@@ -84,8 +85,7 @@ abstract class RoleBasePage extends CompanyPage
     $this->form->addFormControl($input, 'Name', true);
 
     // Input for weight.
-    $input = new TextControl('rol_weight');
-    $input->setAttrMaxLength(C::LEN_ROL_WEIGHT);
+    $input = new WeightControl('rol_weight');
     $this->form->addFormControl($input, 'Weight');
 
     // Input for label.
