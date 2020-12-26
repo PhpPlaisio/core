@@ -5,6 +5,7 @@ namespace Plaisio\Core\Page\Babel;
 
 use Plaisio\C;
 use Plaisio\Core\Form\CoreForm;
+use Plaisio\Form\Control\DatabaseLabelControl;
 use Plaisio\Form\Control\HtmlControl;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Response\SeeOtherResponse;
@@ -85,8 +86,7 @@ abstract class WordGroupBasePage extends BabelPage
     $this->form->addFormControl($input, 'Name', true);
 
     // Input for the label of the word group.
-    $input = new TextControl('wdg_label');
-    $input->setAttrMaxLength(C::LEN_WRD_LABEL);
+    $input = new DatabaseLabelControl('wdg_label', 'WDG_ID', C::LEN_WDG_LABEL);
     $this->form->addFormControl($input, 'Label');
 
     // Create a submit button.

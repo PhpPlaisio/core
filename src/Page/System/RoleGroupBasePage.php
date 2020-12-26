@@ -7,6 +7,7 @@ use Plaisio\C;
 use Plaisio\Core\Form\Control\WeightControl;
 use Plaisio\Core\Form\CoreForm;
 use Plaisio\Core\Page\TabPage;
+use Plaisio\Form\Control\DatabaseLabelControl;
 use Plaisio\Form\Control\SelectControl;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Kernel\Nub;
@@ -88,14 +89,13 @@ abstract class RoleGroupBasePage extends TabPage
     $this->form->addFormControl($input, 'Name');
     /** @todo Add validator: either wrd_id is not empty or wdg_name is not empty */
 
+    // Input for label.
+    $input = new DatabaseLabelControl('rlg_label', 'RLG_ID', C::LEN_RLG_LABEL);
+    $this->form->addFormControl($input, 'Label');
+
     // Input for weight.
     $input = new WeightControl('rlg_weight');
     $this->form->addFormControl($input, 'Weight');
-
-    // Input for label.
-    $input = new TextControl('rlg_label');
-    $input->setAttrMaxLength(C::LEN_RLG_LABEL);
-    $this->form->addFormControl($input, 'Label');
 
     // Create a submit button.
     $this->form->addSubmitButton($this->buttonWrdId, 'handleForm');

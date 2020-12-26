@@ -39,7 +39,10 @@
     </target>
 
     <target name="unit" depends="unit-before">
-        <echo message=""/>
+        <exec executable="bin/phpunit" passthru="true" checkreturn="true">
+            <arg value="--bootstrap=test/bootstrap.php"/>
+            <arg value="test"/>
+        </exec>
     </target>
 
     <target name="build">

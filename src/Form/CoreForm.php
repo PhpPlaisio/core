@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace Plaisio\Core\Form;
 
 use Plaisio\Core\Form\Control\CoreFieldSet;
-use Plaisio\Core\Form\Validator\MandatoryValidator;
 use Plaisio\Form\Control\Control;
 use Plaisio\Form\Control\PushControl;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Form\Form;
+use Plaisio\Form\Validator\MandatoryValidator;
 use Plaisio\Kernel\Nub;
 
 /**
@@ -88,7 +88,7 @@ class CoreForm extends Form
 
       if ($mandatory)
       {
-        $control->addValidator(new MandatoryValidator(0));
+        $control->addValidator(new MandatoryValidator());
         $control->setFakeAttribute('_plaisio_mandatory', true);
       }
     }

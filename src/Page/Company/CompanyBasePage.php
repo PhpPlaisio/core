@@ -6,6 +6,7 @@ namespace Plaisio\Core\Page\Company;
 use Plaisio\C;
 use Plaisio\Core\Form\CoreForm;
 use Plaisio\Core\Page\TabPage;
+use Plaisio\Form\Control\DatabaseLabelControl;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Response\SeeOtherResponse;
 
@@ -77,8 +78,7 @@ abstract class CompanyBasePage extends TabPage
     $this->form->addFormControl($input, 'CompanyPage Abbreviation', true);
 
     // Create form control for comment.
-    $input = new TextControl('cmp_label');
-    $input->setAttrMaxLength(C::LEN_CMP_LABEL);
+    $input = new DatabaseLabelControl('cmp_label', 'CMP_ID', C::LEN_CMP_LABEL);
     $this->form->addFormControl($input, 'Label', true);
 
     // Create a submit button.

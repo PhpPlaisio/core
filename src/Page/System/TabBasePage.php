@@ -6,6 +6,7 @@ namespace Plaisio\Core\Page\System;
 use Plaisio\C;
 use Plaisio\Core\Form\CoreForm;
 use Plaisio\Core\Page\TabPage;
+use Plaisio\Form\Control\DatabaseLabelControl;
 use Plaisio\Form\Control\SelectControl;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Kernel\Nub;
@@ -90,8 +91,7 @@ abstract class TabBasePage extends TabPage
     $this->form->addFormControl($input, 'Title');
 
     // Create form control for the page label.
-    $input = new TextControl('ptb_label');
-    $input->setAttrMaxLength(C::LEN_PTB_LABEL);
+    $input = new DatabaseLabelControl('ptb_label', 'PTB_ID', C::LEN_PTB_LABEL);
     $this->form->addFormControl($input, 'Label');
 
     // Create a submit button.

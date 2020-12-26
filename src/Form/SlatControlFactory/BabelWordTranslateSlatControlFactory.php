@@ -65,18 +65,18 @@ class BabelWordTranslateSlatControlFactory extends SlatControlFactory
     $row = new SlatControl(Cast::toOptString($data['wrd_id']));
     $row->setObfuscator($this->wrdIdObfuscator);
 
-    /** @var TableColumnControl $control */
-    $control = $this->createFormControl($row, 'wrd_id');
-    $control->setValue($data);
+    /** @var TableColumnControl $input */
+    $input = $this->createFormControl($row, 'wrd_id');
+    $input->setValue($data);
 
-    /** @var TableColumnControl $control */
-    $control = $this->createFormControl($row, 'ref_wdt_text');
-    $control->setValue($data);
+    /** @var TableColumnControl $input */
+    $input = $this->createFormControl($row, 'ref_wdt_text');
+    $input->setValue($data);
 
-    /** @var TextControl $control */
-    $control = $this->createFormControl($row, 'act_wdt_text');
-    $control->setValue($data['act_wdt_text']);
-    $control->setAttrSize(C::LEN_WDT_TEXT);
+    /** @var TextControl $input */
+    $input = $this->createFormControl($row, 'act_wdt_text');
+    $input->setAttrMaxLength(C::LEN_WDT_TEXT);
+    $input->setValue($data['act_wdt_text']);
 
     return $row;
   }

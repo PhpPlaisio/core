@@ -6,6 +6,7 @@ namespace Plaisio\Core\Page\Babel;
 use Plaisio\C;
 use Plaisio\Core\Form\CoreForm;
 use Plaisio\Core\Table\CoreDetailTable;
+use Plaisio\Form\Control\DatabaseLabelControl;
 use Plaisio\Form\Control\HtmlControl;
 use Plaisio\Form\Control\SelectControl;
 use Plaisio\Form\Control\TextControl;
@@ -103,11 +104,6 @@ abstract class WordBasePage extends BabelPage
       $this->form->addFormControl($input, 'ID');
     }
 
-    // Create form control for label.
-    $input = new TextControl('wrd_label');
-    $input->setAttrMaxLength(C::LEN_WRD_LABEL);
-    $this->form->addFormControl($input, 'Label');
-
     // Input for the actual word.
     $input = new TextControl('wdt_text');
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
@@ -117,6 +113,10 @@ abstract class WordBasePage extends BabelPage
     $input = new TextControl('wrd_comment');
     $input->setAttrMaxLength(C::LEN_WRD_COMMENT);
     $this->form->addFormControl($input, 'Remark');
+
+    // Create form control for label.
+    $input = new DatabaseLabelControl('wrd_label', 'WRD_ID', C::LEN_WRD_LABEL);
+    $this->form->addFormControl($input, 'Label');
 
     // Create a submit button.
     $this->form->addSubmitButton($this->buttonWrdId, 'handleForm');

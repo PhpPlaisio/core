@@ -7,6 +7,7 @@ use Plaisio\C;
 use Plaisio\Core\Form\Control\WeightControl;
 use Plaisio\Core\Form\CoreForm;
 use Plaisio\Core\Page\TabPage;
+use Plaisio\Form\Control\DatabaseLabelControl;
 use Plaisio\Form\Control\SelectControl;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Kernel\Nub;
@@ -114,8 +115,7 @@ abstract class PageBasePage extends TabPage
     $this->form->addFormControl($input, 'Class', true);
 
     // Create form control for the page label.
-    $input = new TextControl('pag_label');
-    $input->setAttrMaxLength(C::LEN_PAG_LABEL);
+    $input = new DatabaseLabelControl('pag_label', 'PAG_ID', C::LEN_PAG_LABEL);
     $this->form->addFormControl($input, 'Label');
 
     // Create form control for the weight of the page (inside a tab group).

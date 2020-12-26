@@ -135,7 +135,7 @@ class WordGroupDetailsPage extends BabelPage
 
     // Show label of word.
     // Show target text.
-    if ($this->actLanId==$this->refLanId)
+    if ($this->actLanId===$this->refLanId)
     {
       $table->addColumn(new TextTableColumn('Label', 'wrd_label'));
     }
@@ -146,7 +146,7 @@ class WordGroupDetailsPage extends BabelPage
     $table->addColumn($column);
 
     // Show target text.
-    if ($this->actLanId!=$this->refLanId)
+    if ($this->actLanId!==$this->refLanId)
     {
       $table->addColumn(new TextTableColumn($act_language, 'act_wdt_text'));
     }
