@@ -10,6 +10,7 @@ use Plaisio\Form\Control\TableColumnControl;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Form\SlatJoint\TableColumnSlatJoint;
 use Plaisio\Form\SlatJoint\TextSlatJoint;
+use Plaisio\Form\Validator\MandatoryValidator;
 use Plaisio\Kernel\Nub;
 use Plaisio\Obfuscator\Obfuscator;
 use Plaisio\Table\TableColumn\NumericTableColumn;
@@ -77,6 +78,7 @@ class BabelWordTranslateSlatControlFactory extends SlatControlFactory
     $input = $this->createFormControl($row, 'act_wdt_text');
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
     $input->setValue($data['act_wdt_text']);
+    $input->addValidator(new MandatoryValidator());
 
     return $row;
   }
