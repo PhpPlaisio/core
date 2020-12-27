@@ -78,23 +78,22 @@ abstract class TabBasePage extends TabPage
   {
     $this->form = new CoreForm();
 
-    // Create select box for (known) page titles.
+    // Input for (known) page titles.
     $titles = Nub::$nub->DL->abcBabelWordGroupGetAllWords(C::WDG_ID_PAGE_GROUP_TITLE, $this->lanId);
     $input  = new SelectControl('wrd_id');
     $input->setOptions($titles, 'wrd_id', 'wdt_text');
     $input->setEmptyOption();
     $this->form->addFormControl($input, 'Title');
 
-    // Create text box for (new) page title.
+    // Input for (new) page title.
     $input = new TextControl('ptb_title');
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
     $this->form->addFormControl($input, 'Title');
 
-    // Create form control for the page label.
+    // Input for the page label.
     $input = new DatabaseLabelControl('ptb_label', 'PTB_ID', C::LEN_PTB_LABEL);
-    $this->form->addFormControl($input, 'Label');
+    $this->form->addFormControl($input, 'Label', true);
 
-    // Create a submit button.
     $this->form->addSubmitButton($this->buttonWrdId, 'handleForm');
   }
 
