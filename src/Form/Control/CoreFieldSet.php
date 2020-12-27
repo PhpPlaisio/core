@@ -7,6 +7,7 @@ use Plaisio\Form\Control\ComplexControl;
 use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\PushControl;
 use Plaisio\Form\Control\SubmitControl;
+use Plaisio\Form\Walker\PrepareWalker;
 use Plaisio\Helper\Html;
 use Plaisio\Kernel\Nub;
 
@@ -38,6 +39,7 @@ class CoreFieldSet extends FieldSet
   private ?string $htmlTitle = null;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Adds a submit button to this fieldset.
    *
@@ -75,9 +77,10 @@ class CoreFieldSet extends FieldSet
     $this->addClass(static::$class);
 
     $childAttributes   = ['class' => static::$class];
-    $errorAttributes   = ['class' => [static::$class, 'error']];
-    $buttonAttributes  = ['class' => [static::$class, 'button-group']];
-    $buttonAttributes2 = ['class' => [static::$class, 'button-group'], 'colspan' => 2];
+    $errorAttributes   = ['class' => [static::$class, static::$class.'-error']];
+    $errorsAttributes  = ['class' => [static::$class, static::$class.'-errors']];
+    $buttonAttributes  = ['class' => [static::$class, static::$class.'-button']];
+    $buttonAttributes2 = ['class' => [static::$class, static::$class.'-button'], 'colspan' => 2];
 
     $ret = $this->getHtmlStartTag();
     $ret .= Html::generateTag('table', $this->attributes);
@@ -115,20 +118,19 @@ class CoreFieldSet extends FieldSet
 
         $ret .= Html::generateTag('td', $childAttributes);
         $ret .= $control->getHtml();
-        $ret .= '</td>';
 
         if (!empty($errors))
         {
-          $ret .= Html::generateTag('td', $errorAttributes);
+          $ret .= Html::generateTag('div', $errorsAttributes);
           foreach ($errors as $error)
           {
-            $ret .= '<div>';
+            $ret .= Html::generateTag('span', $errorAttributes);
             $ret .= Html::txt2Html($error);
-            $ret .= '</div>';
+            $ret .= '</span>';
           }
-          $ret .= '</td>';
+          $ret .= '</div>';
         }
-
+        $ret .= '</td>';
         $ret .= '</tr>';
       }
     }
@@ -152,6 +154,22 @@ class CoreFieldSet extends FieldSet
     $ret .= $this->getHtmlEndTag();
 
     return $ret;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Prepares this form complex control for HTML code generation or loading submitted values.
+   *
+   * @param PrepareWalker $walker The object for walking the control tree.
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function prepare(PrepareWalker $walker): void
+  {
+    $walker->setModuleClass(self::$class);
+
+    parent::prepare($walker);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

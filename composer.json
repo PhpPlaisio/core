@@ -16,8 +16,8 @@
     "plaisio/db-profile": "^1.1",
     "plaisio/db-user": "^1.1",
     "plaisio/exception": "^1.1",
-    "plaisio/form": "^0.31.0",
-    "plaisio/form-louver": "^0.14.1",
+    "plaisio/form": "9999999-dev",
+    "plaisio/form-louver": "9999999-dev",
     "plaisio/helper-html": "^1.4.0",
     "plaisio/helper-ob": "^1.1.1",
     "plaisio/kernel": "^3.1.1",
@@ -31,8 +31,6 @@
     "setbased/exception": "^2.1.2",
     "setbased/php-stratum-mysql": "^6.3.0"
   },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
   "require-dev": {
     "phing/phing": "^2.16.3",
     "plaisio/console": "^2.4.8",
