@@ -7,7 +7,7 @@ use Plaisio\C;
 use Plaisio\Core\Page\TabPage;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\System\ModuleInsertTableAction;
-use Plaisio\Core\TableColumn\Company\ModuleTableColumn;
+use Plaisio\Core\TableColumn\System\ModuleTableColumn;
 use Plaisio\Core\TableColumn\System\ModuleUpdateIconTableColumn;
 use Plaisio\Kernel\Nub;
 
@@ -47,7 +47,7 @@ class ModuleOverviewPage extends TabPage
 
     // Show the ID and the name of the module.
     $column = new ModuleTableColumn('Module');
-    $column->setSortOrder(1);
+    $column->setSortOrder1(1);
     $table->addColumn($column);
 
     // Add column with icon to modify the details of the module.

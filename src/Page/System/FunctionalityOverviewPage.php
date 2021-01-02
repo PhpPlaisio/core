@@ -7,9 +7,9 @@ use Plaisio\C;
 use Plaisio\Core\Page\TabPage;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\System\FunctionalityInsertTableAction;
-use Plaisio\Core\TableColumn\Company\FunctionalityTableColumn;
-use Plaisio\Core\TableColumn\Company\ModuleTableColumn;
+use Plaisio\Core\TableColumn\System\FunctionalityTableColumn;
 use Plaisio\Core\TableColumn\System\FunctionalityUpdateIconTableColumn;
+use Plaisio\Core\TableColumn\System\ModuleTableColumn;
 use Plaisio\Kernel\Nub;
 
 /**
@@ -44,12 +44,12 @@ class FunctionalityOverviewPage extends TabPage
 
     // Show the ID and the name of the module.
     $column = new ModuleTableColumn('Module');
-    $column->setSortOrder(1);
+    $column->setSortOrder1(1);
     $table->addColumn($column);
 
     // Show ID and name of the functionality.
     $column = new FunctionalityTableColumn('Functionality');
-    $column->setSortOrder(2);
+    $column->setSortOrder1(2);
     $table->addColumn($column);
 
     // Add column with icon adn link to update the details of the functionality.

@@ -82,10 +82,9 @@ class FunctionalityUpdatePagesPage extends TabPage
     $pages = Nub::$nub->DL->abcSystemFunctionalityGetAvailablePages($this->funId);
 
     $this->form = new LouverForm();
-    $this->form->setFactory(new SystemFunctionalityUpdatePagesSlatControlFactory())
-               ->setData($pages)
+    $this->form->setRowFactory(new SystemFunctionalityUpdatePagesSlatControlFactory())
                ->addSubmitButton(C::WRD_ID_BUTTON_UPDATE, 'handleForm')
-               ->populate();
+               ->populate($pages);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -100,9 +99,9 @@ class FunctionalityUpdatePagesPage extends TabPage
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
 
-    foreach ($changes['data'] as $pag_id => $dummy)
+    foreach ($changes as $pag_id => $dummy)
     {
-      if ($values['data'][$pag_id]['pag_enabled'])
+      if ($values[$pag_id]['pag_enabled'])
       {
         Nub::$nub->DL->abcSystemFunctionalityInsertPage($this->funId, $pag_id);
       }

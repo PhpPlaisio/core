@@ -5,10 +5,8 @@ namespace Plaisio\Core\Form\SlatControlFactory;
 
 use Plaisio\Form\Control\CheckboxControl;
 use Plaisio\Form\Control\SlatControl;
-use Plaisio\Form\Control\SlatControlFactory;
-use Plaisio\Form\Control\TableColumnControl;
+use Plaisio\Form\SlatJointFactory\SlatControlFactory;
 use Plaisio\Form\SlatJoint\CheckboxSlatJoint;
-use Plaisio\Form\SlatJoint\TableColumnSlatJoint;
 use Plaisio\Kernel\Nub;
 use Plaisio\Obfuscator\Obfuscator;
 use Plaisio\Table\TableColumn\TextTableColumn;
@@ -33,13 +31,13 @@ class CompanyModulesUpdateSlatControlFactory extends SlatControlFactory
    */
   public function __construct()
   {
+    parent::__construct();
+
     // Create slat joint for table column with name of module.
-    $table_column = new TextTableColumn('Module', 'mdl_name');
-    $this->addSlatJoint('mdl_name', new TableColumnSlatJoint($table_column));
+    $this->addColumn(new TextTableColumn('Module', 'mdl_name'));
 
     // Create slat joint with checkbox for enabled or disabled module.
-    $table_column = new CheckboxSlatJoint('Enable');
-    $this->addSlatJoint('mdl_enabled', $table_column);
+    $this->addSlatJoint(new CheckboxSlatJoint('mdl_enabled', 'Enable'));
 
     $this->mdlIdObfuscator = Nub::$nub->obfuscator::create('mdl');
   }
@@ -52,10 +50,6 @@ class CompanyModulesUpdateSlatControlFactory extends SlatControlFactory
   {
     $row = new SlatControl(Cast::toOptString($data['mdl_id']));
     $row->setObfuscator($this->mdlIdObfuscator);
-
-    /** @var TableColumnControl $control */
-    $control = $this->createFormControl($row, 'mdl_name');
-    $control->setValue($data);
 
     /** @var CheckboxControl $control */
     $control = $this->createFormControl($row, 'mdl_enabled');

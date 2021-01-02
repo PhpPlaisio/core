@@ -93,10 +93,9 @@ class FunctionalityUpdateRolesPage extends TabPage
     $roles = Nub::$nub->DL->abcSystemFunctionalityGetAvailableRoles($this->funId, $this->lanId);
 
     $this->form = new LouverForm();
-    $this->form->setFactory(new SystemFunctionalityUpdateRolesSlatControlFactory())
-               ->setData($roles)
+    $this->form->setRowFactory(new SystemFunctionalityUpdateRolesSlatControlFactory())
                ->addSubmitButton(C::WRD_ID_BUTTON_UPDATE, 'handleForm')
-               ->populate();
+               ->populate($roles);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -111,15 +110,16 @@ class FunctionalityUpdateRolesPage extends TabPage
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
 
-    foreach ($changes['data'] as $rol_id => $dummy)
+
+    foreach ($changes as $rol_id => $dummy)
     {
-      if ($values['data'][$rol_id]['rol_enabled'])
+      if ($values[$rol_id]['rol_enabled'])
       {
-        Nub::$nub->DL->abcCompanyRoleInsertFunctionality($values['data'][$rol_id]['cmp_id'], $rol_id, $this->funId);
+        Nub::$nub->DL->abcCompanyRoleInsertFunctionality($values[$rol_id]['cmp_id'], $rol_id, $this->funId);
       }
       else
       {
-        Nub::$nub->DL->abcCompanyRoleDeleteFunctionality($values['data'][$rol_id]['cmp_id'], $rol_id, $this->funId);
+        Nub::$nub->DL->abcCompanyRoleDeleteFunctionality($values[$rol_id]['cmp_id'], $rol_id, $this->funId);
       }
     }
 

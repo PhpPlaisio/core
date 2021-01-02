@@ -4,13 +4,14 @@ declare(strict_types=1);
 namespace Plaisio\Core\TableColumn;
 
 use Plaisio\Helper\Html;
-use Plaisio\Table\TableColumn\TableColumn;
+use Plaisio\Table\TableColumn\UniTableColumn;
+use Plaisio\Table\Walker\RenderWalker;
 use SetBased\Helper\Cast;
 
 /**
  * Table column for cells with an icon for boolean values.
  */
-class BoolIconTableColumn extends TableColumn
+class BoolIconTableColumn extends UniTableColumn
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -48,9 +49,9 @@ class BoolIconTableColumn extends TableColumn
   /**
    * @inheritdoc
    */
-  public function getHtmlCell(array $row): string
+  public function getHtmlCell(RenderWalker $walker, array $row): string
   {
-    $attributes = ['class' => 'bool'];
+    $attributes = ['class' => $walker->getClasses('bool')];
 
     switch (true)
     {

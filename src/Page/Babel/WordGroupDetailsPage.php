@@ -12,7 +12,7 @@ use Plaisio\Core\TableColumn\Babel\WordDeleteIconTableColumn;
 use Plaisio\Core\TableColumn\Babel\WordTranslateIconTableColumn;
 use Plaisio\Core\TableColumn\Babel\WordUpdateIconTableColumn;
 use Plaisio\Kernel\Nub;
-use Plaisio\Table\TableColumn\NumericTableColumn;
+use Plaisio\Table\TableColumn\NumberTableColumn;
 use Plaisio\Table\TableColumn\TextTableColumn;
 use Plaisio\Table\TableRow\IntegerTableRow;
 use Plaisio\Table\TableRow\TextTableRow;
@@ -131,7 +131,7 @@ class WordGroupDetailsPage extends BabelPage
     }
 
     // Show word ID.
-    $table->addColumn(new NumericTableColumn('ID', 'wrd_id'));
+    $table->addColumn(new NumberTableColumn('ID', 'wrd_id'));
 
     // Show label of word.
     // Show target text.

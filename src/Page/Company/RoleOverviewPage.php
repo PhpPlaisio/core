@@ -10,7 +10,7 @@ use Plaisio\Core\TableColumn\Company\RoleTableColumn;
 use Plaisio\Core\TableColumn\Company\RoleUpdateIconTableColumn;
 use Plaisio\Core\TableColumn\System\RoleGroupTableColumn;
 use Plaisio\Kernel\Nub;
-use Plaisio\Table\TableColumn\NumericTableColumn;
+use Plaisio\Table\TableColumn\NumberTableColumn;
 use Plaisio\Table\TableColumn\TextTableColumn;
 
 /**
@@ -55,7 +55,7 @@ class RoleOverviewPage extends CompanyPage
     $table->addColumn(new RoleTableColumn('Role'));
 
     // Show the weight of the role.
-    $table->addColumn(new NumericTableColumn('Weight', 'rol_weight'));
+    $table->addColumn(new NumberTableColumn('Weight', 'rol_weight'));
 
     // Show the label of the role.
     $table->addColumn(new TextTableColumn('Label', 'rol_label'));

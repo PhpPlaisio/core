@@ -1,11 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Plaisio\Core\TableColumn\Company;
+namespace Plaisio\Core\TableColumn\System;
 
 use Plaisio\Core\Page\System\ModuleDetailsPage;
 use Plaisio\Helper\Html;
 use Plaisio\Table\TableColumn\DualTableColumn;
+use Plaisio\Table\Walker\RenderWalker;
 
 /**
  * A dual table column with the ID and name of a module.
@@ -27,15 +28,13 @@ class ModuleTableColumn extends DualTableColumn
   /**
    * @inheritdoc
    */
-  public function getHtmlCell(array $row): string
+  public function getHtmlCell(RenderWalker $walker, array $row): string
   {
-    $url = ModuleDetailsPage::getUrl($row['mdl_id']);
+    $url    = ModuleDetailsPage::getUrl($row['mdl_id']);
+    $inner1 = Html::generateElement('a', ['href' => $url], $row['mdl_id']);
 
-    $ret = '<td class="number link">';
-    $ret .= Html::generateElement('a', ['href' => $url], $row['mdl_id']);
-    $ret .= '</td>';
-
-    $ret .= Html::generateElement('td', [], $row['mdl_name']);
+    $ret = Html::generateElement('td', ['class' => $walker->getClasses('number')], $inner1, true);
+    $ret .= Html::generateElement('td', ['class' => $walker->getClasses('text')], $row['mdl_name']);
 
     return $ret;
   }

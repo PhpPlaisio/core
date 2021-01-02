@@ -4,12 +4,13 @@ declare(strict_types=1);
 namespace Plaisio\Core\TableColumn;
 
 use Plaisio\Helper\Html;
-use Plaisio\Table\TableColumn\TableColumn;
+use Plaisio\Table\TableColumn\UniTableColumn;
+use Plaisio\Table\Walker\RenderWalker;
 
 /**
  * Abstract table column for columns with icons.
  */
-abstract class IconTableColumn extends TableColumn
+abstract class IconTableColumn extends UniTableColumn
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -41,21 +42,20 @@ abstract class IconTableColumn extends TableColumn
   /**
    * @inheritdoc
    */
-  public function getHtmlCell(array $row): string
+  public function getHtmlCell(RenderWalker $walker, array $row): string
   {
     $url     = $this->getUrl($row);
     $classes = $this->getClasses($row);
 
-    $ret = '<td>';
+    $ret = Html::generateTag('td', ['class' => $walker->getClasses('icon')]);
 
     if ($url!==null)
     {
-      $classes[] = 'icon_action';
-      $ret       .= Html::generateElement('a',
-                                          ['href'                 => $url,
-                                           'class'                => $classes,
-                                           'target'               => ($this->isDownloadLink) ? '_blank' : null,
-                                           'data-confirm-message' => $this->confirmMessage]);
+      $ret .= Html::generateElement('a',
+                                    ['href'                 => $url,
+                                     'class'                => $classes,
+                                     'target'               => ($this->isDownloadLink) ? '_blank' : null,
+                                     'data-confirm-message' => $this->confirmMessage]);
     }
     else
     {

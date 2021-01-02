@@ -6,7 +6,7 @@ namespace Plaisio\Core\Page\Company;
 use Plaisio\C;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\Company\ModuleUpdateTableAction;
-use Plaisio\Core\TableColumn\Company\ModuleTableColumn;
+use Plaisio\Core\TableColumn\System\ModuleTableColumn;
 use Plaisio\Kernel\Nub;
 
 /**
@@ -46,7 +46,7 @@ class ModuleOverviewPage extends CompanyPage
 
     // Show the ID and the name of the module.
     $column = new ModuleTableColumn('Module');
-    $column->setSortOrder(1);
+    $column->setSortOrder1(1);
     $table->addColumn($column);
 
     // Generate the HTML code for the table.

@@ -5,13 +5,11 @@ namespace Plaisio\Core\Form\SlatControlFactory;
 
 use Plaisio\Form\Control\CheckboxControl;
 use Plaisio\Form\Control\SlatControl;
-use Plaisio\Form\Control\SlatControlFactory;
-use Plaisio\Form\Control\TableColumnControl;
+use Plaisio\Form\SlatJointFactory\SlatControlFactory;
 use Plaisio\Form\SlatJoint\CheckboxSlatJoint;
-use Plaisio\Form\SlatJoint\TableColumnSlatJoint;
 use Plaisio\Kernel\Nub;
 use Plaisio\Obfuscator\Obfuscator;
-use Plaisio\Table\TableColumn\NumericTableColumn;
+use Plaisio\Table\TableColumn\NumberTableColumn;
 use Plaisio\Table\TableColumn\TextTableColumn;
 use SetBased\Helper\Cast;
 
@@ -34,25 +32,22 @@ class SystemPageUpdateFunctionalitiesSlatControlFactory extends SlatControlFacto
    */
   public function __construct()
   {
+    parent::__construct();
+
     // Create slat joint for table column with module ID.
-    $table_column = new NumericTableColumn('ID', 'mdl_id');
-    $this->addSlatJoint('mdl_id', new TableColumnSlatJoint($table_column));
+    $this->addColumn(new NumberTableColumn('ID', 'mdl_id'));
 
     // Create slat joint for table column with name of module.
-    $table_column = new TextTableColumn('Module', 'mdl_name');
-    $this->addSlatJoint('mdl_name', new TableColumnSlatJoint($table_column));
+    $this->addColumn(new TextTableColumn('Module', 'mdl_name'));
 
     // Create slat joint for table column with functionality ID.
-    $table_column = new NumericTableColumn('ID', 'fun_id');
-    $this->addSlatJoint('fun_id', new TableColumnSlatJoint($table_column));
+    $this->addColumn(new NumberTableColumn('ID', 'fun_id'));
 
     // Create slat joint for table column with name of functionality.
-    $table_column = new TextTableColumn('Functionality', 'fun_name');
-    $this->addSlatJoint('fun_name', new TableColumnSlatJoint($table_column));
+    $this->addColumn(new TextTableColumn('Functionality', 'fun_name'));
 
     // Create slat joint with checkbox for enabled or disabled page.
-    $table_column = new CheckboxSlatJoint('Enable');
-    $this->addSlatJoint('fun_checked', $table_column);
+    $this->addSlatJoint(new CheckboxSlatJoint('fun_checked', 'Enable'));
 
     $this->funIdObfuscator = Nub::$nub->obfuscator::create('fun');
   }
@@ -65,22 +60,6 @@ class SystemPageUpdateFunctionalitiesSlatControlFactory extends SlatControlFacto
   {
     $row = new SlatControl(Cast::toOptString($data['fun_id']));
     $row->setObfuscator($this->funIdObfuscator);
-
-    /** @var TableColumnControl $control */
-    $control = $this->createFormControl($row, 'mdl_id');
-    $control->setValue($data);
-
-    /** @var TableColumnControl $control */
-    $control = $this->createFormControl($row, 'mdl_name');
-    $control->setValue($data);
-
-    /** @var TableColumnControl $control */
-    $control = $this->createFormControl($row, 'fun_id');
-    $control->setValue($data);
-
-    /** @var TableColumnControl $control */
-    $control = $this->createFormControl($row, 'fun_name');
-    $control->setValue($data);
 
     /** @var CheckboxControl $control */
     $control = $this->createFormControl($row, 'fun_checked');

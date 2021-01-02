@@ -8,8 +8,8 @@ use Plaisio\Core\Table\CoreDetailTable;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\Company\RoleUpdateFunctionalitiesTableAction;
 use Plaisio\Core\TableAction\Company\RoleUpdateTableAction;
-use Plaisio\Core\TableColumn\Company\FunctionalityTableColumn;
-use Plaisio\Core\TableColumn\Company\ModuleTableColumn;
+use Plaisio\Core\TableColumn\System\FunctionalityTableColumn;
+use Plaisio\Core\TableColumn\System\ModuleTableColumn;
 use Plaisio\Core\TableColumn\System\PageTableColumn;
 use Plaisio\Kernel\Nub;
 use Plaisio\Table\TableColumn\TextTableColumn;
@@ -87,12 +87,12 @@ class RoleDetailsPage extends CompanyPage
 
     // Show the ID and the name of the module.
     $column = new ModuleTableColumn('Module');
-    $column->setSortOrder(1);
+    $column->setSortOrder1(1);
     $table->addColumn($column);
 
     // Show the ID and the name of the functionality.
     $column = new FunctionalityTableColumn('Functionality');
-    $column->setSortOrder(2);
+    $column->setSortOrder1(2);
     $table->addColumn($column);
 
     // Generate the HTML code for the table.
@@ -111,7 +111,7 @@ class RoleDetailsPage extends CompanyPage
 
     // Show the ID and class of the page
     $column = new PageTableColumn('Page');
-    $column->setSortOrder(1);
+    $column->setSortOrder1(1);
     $table->addColumn($column);
 
     // Show title of page.

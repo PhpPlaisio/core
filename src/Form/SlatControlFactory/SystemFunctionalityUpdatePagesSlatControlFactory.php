@@ -5,13 +5,11 @@ namespace Plaisio\Core\Form\SlatControlFactory;
 
 use Plaisio\Form\Control\CheckboxControl;
 use Plaisio\Form\Control\SlatControl;
-use Plaisio\Form\Control\SlatControlFactory;
-use Plaisio\Form\Control\TableColumnControl;
+use Plaisio\Form\SlatJointFactory\SlatControlFactory;
 use Plaisio\Form\SlatJoint\CheckboxSlatJoint;
-use Plaisio\Form\SlatJoint\TableColumnSlatJoint;
 use Plaisio\Kernel\Nub;
 use Plaisio\Obfuscator\Obfuscator;
-use Plaisio\Table\TableColumn\NumericTableColumn;
+use Plaisio\Table\TableColumn\NumberTableColumn;
 use Plaisio\Table\TableColumn\TextTableColumn;
 use SetBased\Helper\Cast;
 
@@ -34,17 +32,16 @@ class SystemFunctionalityUpdatePagesSlatControlFactory extends SlatControlFactor
    */
   public function __construct()
   {
+    parent::__construct();
+
     // Create slat joint for table column with page ID.
-    $table_column = new NumericTableColumn('ID', 'pag_id');
-    $this->addSlatJoint('pag_id', new TableColumnSlatJoint($table_column));
+    $this->addColumn(new NumberTableColumn('ID', 'pag_id'));
 
     // Create slat joint for table column with name of class.
-    $table_column = new TextTableColumn('Name', 'pag_class');
-    $this->addSlatJoint('pag_class', new TableColumnSlatJoint($table_column));
+    $this->addColumn(new TextTableColumn('Name', 'pag_class'));
 
     // Create slat joint with checkbox for enabled or disabled page.
-    $table_column = new CheckboxSlatJoint('Enable');
-    $this->addSlatJoint('pag_enabled', $table_column);
+    $this->addSlatJoint(new CheckboxSlatJoint('pag_enabled', 'Enable'));
 
     $this->pagIdObfuscator = Nub::$nub->obfuscator::create('pag');
   }
@@ -57,14 +54,6 @@ class SystemFunctionalityUpdatePagesSlatControlFactory extends SlatControlFactor
   {
     $row = new SlatControl(Cast::toOptString($data['pag_id']));
     $row->setObfuscator($this->pagIdObfuscator);
-
-    /** @var TableColumnControl $control */
-    $control = $this->createFormControl($row, 'pag_id');
-    $control->setValue($data);
-
-    /** @var TableColumnControl $control */
-    $control = $this->createFormControl($row, 'pag_class');
-    $control->setValue($data);
 
     /** @var CheckboxControl $control */
     $control = $this->createFormControl($row, 'pag_enabled');

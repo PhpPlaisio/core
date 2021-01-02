@@ -4,10 +4,11 @@ declare(strict_types=1);
 namespace Plaisio\Core\Form\Control;
 
 use Plaisio\Form\Control\ComplexControl;
+use Plaisio\Form\Control\Control;
 use Plaisio\Form\Control\FieldSet;
 use Plaisio\Form\Control\PushControl;
 use Plaisio\Form\Control\SubmitControl;
-use Plaisio\Form\Walker\PrepareWalker;
+use Plaisio\Form\Walker\RenderWalker;
 use Plaisio\Helper\Html;
 use Plaisio\Kernel\Nub;
 
@@ -20,9 +21,9 @@ class CoreFieldSet extends FieldSet
   /**
    * The class used in the generated HTML code.
    *
-   * @var string|null
+   * @var string
    */
-  public static ?string $class = 'input-table';
+  public static string $class = 'it';
 
   /**
    * The complex form control holding the buttons of this fieldset.
@@ -39,7 +40,6 @@ class CoreFieldSet extends FieldSet
   private ?string $htmlTitle = null;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Adds a submit button to this fieldset.
    *
@@ -72,15 +72,21 @@ class CoreFieldSet extends FieldSet
   /**
    * @inheritdoc
    */
-  public function getHtml(): string
+  public function getHtml(RenderWalker $walker): string
   {
-    $this->addClass(static::$class);
+    $myWalker = new RenderWalker(self::$class, self::$class);
 
-    $childAttributes   = ['class' => static::$class];
-    $errorAttributes   = ['class' => [static::$class, static::$class.'-error']];
-    $errorsAttributes  = ['class' => [static::$class, static::$class.'-errors']];
-    $buttonAttributes  = ['class' => [static::$class, static::$class.'-button']];
-    $buttonAttributes2 = ['class' => [static::$class, static::$class.'-button'], 'colspan' => 2];
+    $this->addClasses($myWalker->getClasses());
+
+    $buttonAttributes  = ['class' => $myWalker->getClasses('button')];
+    $buttonAttributes2 = ['class' => $myWalker->getClasses('button'), 'colspan' => 2];
+    $childAttributes   = ['class' => $myWalker->getClasses()];
+    $childAttributes2  = ['class' => $myWalker->getClasses(), 'colspan' => 2];
+    $errorAttributes   = ['class' => $myWalker->getClasses('error')];
+    $errorsAttributes  = ['class' => $myWalker->getClasses('errors')];
+    $headerAttributes  = ['class' => $myWalker->getClasses('header')];
+    $inputAttributes   = ['class' => $myWalker->getClasses('input')];
+    $rowAttributes     = ['class' => $myWalker->getClasses('row')];
 
     $ret = $this->getHtmlStartTag();
     $ret .= Html::generateTag('table', $this->attributes);
@@ -89,7 +95,7 @@ class CoreFieldSet extends FieldSet
     {
       $ret .= Html::generateTag('thead', $childAttributes);
       $ret .= Html::generateTag('tr', $childAttributes);
-      $ret .= '<th colspan="2">';
+      $ret .= Html::generateTag('th', $childAttributes2);
       $ret .= $this->htmlTitle;
       $ret .= '</th>';
       $ret .= '</tr>';
@@ -101,24 +107,29 @@ class CoreFieldSet extends FieldSet
     {
       if ($control!==$this->buttonGroupControl)
       {
-        $id        = $control->getId();
-        $mandatory = !empty($control->getAttribute('_plaisio_mandatory'));
-        $errors    = $control->getErrorMessages(true);
+        $id = $control->getId();
 
-        $labelAttributes = ['for' => $id, 'class' => []];
-        if ($mandatory) $labelAttributes['class'][] = 'mandatory';
-        if (!empty($errors)) $labelAttributes['class'][] = 'error';
+        $labelAttributes = ['for' => $id, 'class' => $myWalker->getClasses()];
+        if (!empty($control->getAttribute('_plaisio_mandatory')))
+        {
+          $labelAttributes['class'][] = Control::$isMandatoryClass;
+        }
+        if ($control->isError())
+        {
+          $labelAttributes['class'][] = Control::$isErrorClass;
+        }
 
-        $ret .= Html::generateTag('tr', $childAttributes);
-        $ret .= Html::generateTag('th', $childAttributes);
+        $ret .= Html::generateTag('tr', $rowAttributes);
+        $ret .= Html::generateTag('th', $headerAttributes);
         $ret .= Html::generateTag('label', $labelAttributes);
         $ret .= Html::txt2Html($control->getAttribute('_plaisio_label'));
         $ret .= '</label>';
         $ret .= '</th>';
 
-        $ret .= Html::generateTag('td', $childAttributes);
-        $ret .= $control->getHtml();
+        $ret .= Html::generateTag('td', $inputAttributes);
+        $ret .= $control->getHtml($walker);
 
+        $errors = $control->getErrorMessages();
         if (!empty($errors))
         {
           $ret .= Html::generateTag('div', $errorsAttributes);
@@ -142,7 +153,7 @@ class CoreFieldSet extends FieldSet
       $ret .= Html::generateTag('tr', $buttonAttributes);
       $ret .= Html::generateTag('td', $buttonAttributes2);
       $ret .= Html::generateTag('div', $buttonAttributes);
-      $ret .= $this->buttonGroupControl->getHtml();
+      $ret .= $this->buttonGroupControl->getHtml($myWalker);
       $ret .= '</div>';
       $ret .= '</td>';
       $ret .= '</tr>';
@@ -154,22 +165,6 @@ class CoreFieldSet extends FieldSet
     $ret .= $this->getHtmlEndTag();
 
     return $ret;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Prepares this form complex control for HTML code generation or loading submitted values.
-   *
-   * @param PrepareWalker $walker The object for walking the control tree.
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function prepare(PrepareWalker $walker): void
-  {
-    $walker->setModuleClass(self::$class);
-
-    parent::prepare($walker);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

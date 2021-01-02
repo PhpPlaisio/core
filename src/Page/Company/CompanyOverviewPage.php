@@ -46,7 +46,7 @@ class CompanyOverviewPage extends TabPage
 
     // Show company ID and abbreviation of the company.
     $column = new CompanyTableColumn(C::WRD_ID_COMPANY);
-    $column->setSortOrder(1);
+    $column->setSortOrder1(1);
     $table->addColumn($column);
 
     // Show label of the company.

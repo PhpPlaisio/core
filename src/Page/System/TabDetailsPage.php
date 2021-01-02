@@ -99,7 +99,7 @@ class TabDetailsPage extends TabPage
 
     // Show the ID and class of the page.
     $column = new PageTableColumn('Page');
-    $column->setSortOrder(1);
+    $column->setSortOrder1(1);
     $table->addColumn($column);
 
     // Show title of page.

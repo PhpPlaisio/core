@@ -10,7 +10,7 @@ use Plaisio\Core\TableColumn\Company\SpecificPageDeleteIconTableColumn;
 use Plaisio\Core\TableColumn\Company\SpecificPageUpdateIconTableColumn;
 use Plaisio\Core\TableColumn\System\PageDetailsIconTableColumn;
 use Plaisio\Kernel\Nub;
-use Plaisio\Table\TableColumn\NumericTableColumn;
+use Plaisio\Table\TableColumn\NumberTableColumn;
 use Plaisio\Table\TableColumn\TextTableColumn;
 
 /**
@@ -65,7 +65,7 @@ class SpecificPageOverviewPage extends CompanyPage
     $table->addTableAction('default', new SpecificPageInsertTableAction($this->targetCmpId));
 
     // Add column with ID and class of the parent page.
-    $table->addColumn(new NumericTableColumn('ID', 'pag_id'));
+    $table->addColumn(new NumberTableColumn('ID', 'pag_id'));
 
     // Add column with page title.
     $table->addColumn(new TextTableColumn('Title', 'pag_title'));

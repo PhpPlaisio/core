@@ -85,10 +85,9 @@ class WordTranslateWordsPage extends BabelPage
     $words = Nub::$nub->DL->abcBabelWordGroupGetAllWordsTranslator($this->wdgId, $this->actLanId);
 
     $this->form = new LouverForm();
-    $this->form->setFactory(new  BabelWordTranslateSlatControlFactory($this->refLanId, $this->actLanId))
-               ->setData($words)
+    $this->form->setRowFactory(new  BabelWordTranslateSlatControlFactory($this->refLanId, $this->actLanId))
                ->addSubmitButton(C::WRD_ID_BUTTON_TRANSLATE, 'handleForm')
-               ->populate();
+               ->populate($words);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -100,12 +99,11 @@ class WordTranslateWordsPage extends BabelPage
     $values  = $this->form->getValues();
     $changes = $this->form->getChangedControls();
 
-    // If no changes are submitted return immediately.
     if (empty($changes)) return;
 
-    foreach ($changes['data'] as $wrd_id => $changed)
+    foreach ($changes as $wrdId => $changed)
     {
-      Nub::$nub->DL->abcBabelWordTranslateWord($this->usrId, $wrd_id, $this->actLanId, $values['data'][$wrd_id]['act_wdt_text']);
+      Nub::$nub->DL->abcBabelWordTranslateWord($this->usrId, $wrdId, $this->actLanId, $values[$wrdId]['act_wdt_text']);
     }
   }
 

@@ -87,10 +87,9 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
     $pages = Nub::$nub->DL->abcCompanyRoleGetAvailableFunctionalities($this->targetCmpId, $this->rolId, $this->lanId);
 
     $this->form = new LouverForm();
-    $this->form->setFactory(new CompanyRoleUpdateFunctionalitiesSlatControlFactory())
-               ->setData($pages)
+    $this->form->setRowFactory(new CompanyRoleUpdateFunctionalitiesSlatControlFactory())
                ->addSubmitButton(C::WRD_ID_BUTTON_UPDATE, 'handleForm')
-               ->populate();
+               ->populate($pages);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -105,9 +104,9 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
 
-    foreach ($changes['data'] as $fun_id => $dummy)
+    foreach ($changes as $fun_id => $dummy)
     {
-      if ($values['data'][$fun_id]['fun_enabled'])
+      if ($values[$fun_id]['fun_enabled'])
       {
         Nub::$nub->DL->abcCompanyRoleInsertFunctionality($this->targetCmpId, $this->rolId, $fun_id);
       }

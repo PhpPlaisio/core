@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\TableAction;
 
 use Plaisio\Helper\Html;
+use Plaisio\Table\Walker\RenderWalker;
 
 /**
  * A pseudo table action showing the row count in a (overview) table body.
@@ -33,9 +34,9 @@ class RowCountTableAction implements TableAction
   /**
    * @inheritdoc
    */
-  public function getHtml(): string
+  public function getHtml(RenderWalker $walker): string
   {
-    return Html::generateElement('span', ['class' => 'row_count'], $this->rowCount);
+    return Html::generateElement('span', ['class' => $walker->getClasses('table-menu-row-count')], $this->rowCount);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

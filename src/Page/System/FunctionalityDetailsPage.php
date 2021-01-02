@@ -115,7 +115,7 @@ class FunctionalityDetailsPage extends TabPage
 
     // Show the ID and class of the page.
     $column = new PageTableColumn('Page');
-    $column->setSortOrder(1);
+    $column->setSortOrder1(1);
     $table->addColumn($column);
 
     // Show title of page.
@@ -142,7 +142,7 @@ class FunctionalityDetailsPage extends TabPage
 
     // Show ID and abbreviation of the company.
     $column = new CompanyTableColumn(C::WRD_ID_COMPANY);
-    $column->setSortOrder(1);
+    $column->setSortOrder1(1);
     $table->addColumn($column);
 
     // Show role ID and name

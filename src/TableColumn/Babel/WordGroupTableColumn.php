@@ -6,6 +6,7 @@ namespace Plaisio\Core\TableColumn\Babel;
 use Plaisio\Core\Page\Babel\WordGroupDetailsPage;
 use Plaisio\Helper\Html;
 use Plaisio\Table\TableColumn\DualTableColumn;
+use Plaisio\Table\Walker\RenderWalker;
 
 /**
  * A dual table column with the ID and name of a word group.
@@ -38,15 +39,13 @@ class WordGroupTableColumn extends DualTableColumn
   /**
    * @inheritdoc
    */
-  public function getHtmlCell(array $row): string
+  public function getHtmlCell(RenderWalker $walker, array $row): string
   {
     $url = WordGroupDetailsPage::getUrl($row['wdg_id'], $this->lanIdTarget);
+    $inner1 = Html::generateElement('a', ['href' => $url], $row['wdg_id']);
 
-    $ret = '<td class="number link">';
-    $ret .= Html::generateElement('a', ['href' => $url], $row['wdg_id']);
-    $ret .= '</td>';
-
-    $ret .= Html::generateElement('td', [], $row['wdg_name']);
+    $ret = Html::generateElement('td', ['class' => $walker->getClasses('number')], $inner1, true);
+    $ret .= Html::generateElement('td', ['class' => $walker->getClasses('text')], $row['wdg_name']);
 
     return $ret;
   }

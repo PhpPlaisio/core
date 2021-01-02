@@ -44,7 +44,6 @@ class FunctionalityInsertPage extends FunctionalityBasePage
     $changes = $this->form->getChangedControls();
     $values  = $this->form->getValues();
 
-    // Return immediately if no changes are submitted.
     if (empty($changes)) return;
 
     if ($values['fun_name'])

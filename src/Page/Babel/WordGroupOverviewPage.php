@@ -9,7 +9,7 @@ use Plaisio\Core\TableAction\Babel\WordGroupInsertTableAction;
 use Plaisio\Core\TableColumn\Babel\WordGroupTableColumn;
 use Plaisio\Core\TableColumn\Babel\WordGroupUpdateIconTableColumn;
 use Plaisio\Kernel\Nub;
-use Plaisio\Table\TableColumn\NumericTableColumn;
+use Plaisio\Table\TableColumn\NumberTableColumn;
 
 /**
  * Page show an overview of all word groups.
@@ -62,16 +62,16 @@ class WordGroupOverviewPage extends BabelPage
 
     // Show ID and name of the word group
     $column = new WordGroupTableColumn('Word Group', $this->actLanId);
-    $column->setSortOrder(1);
+    $column->setSortOrder1(1);
     $table->addColumn($column);
 
     // Show total words in the word group.
-    $table->addColumn(new NumericTableColumn('# Words', 'n1'));
+    $table->addColumn(new NumberTableColumn('# Words', 'n1'));
 
     // Show total words to be translated in the word group.
-    if ($this->actLanId!=$this->refLanId)
+    if ($this->actLanId!==$this->refLanId)
     {
-      $table->addColumn(new NumericTableColumn('To Do', 'n2'));
+      $table->addColumn(new NumberTableColumn('To Do', 'n2'));
     }
 
     // Add link to the modify the word group.

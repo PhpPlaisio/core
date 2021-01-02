@@ -6,6 +6,7 @@ namespace Plaisio\Core\Table;
 use Plaisio\Core\TableAction\TableAction;
 use Plaisio\Helper\Html;
 use Plaisio\Table\DetailTable;
+use Plaisio\Table\Walker\RenderWalker;
 
 /**
  * Extends \Plaisio\Table\DetailTable with table actions.
@@ -56,12 +57,14 @@ class CoreDetailTable extends DetailTable
    */
   public function getHtmlHeader(): string
   {
-    $ret = null;
+    $ret = '';
+    $walker = new RenderWalker('dt', null);
 
     if ($this->showTableActions)
     {
-      $ret .= '<tr class="table_actions">';
-      $ret .= '<td colspan="2">';
+      $classes   = $walker->getClasses('table-menu');
+      $ret       .= Html::generateTag('tr', ['class' => $classes]);
+      $ret       .= Html::generateTag('td', ['class' => $classes, 'colspan' => 2]);
 
       $first_group = true;
       foreach ($this->tablesActionGroups as $group)
@@ -76,7 +79,7 @@ class CoreDetailTable extends DetailTable
         /** @var TableAction $action */
         foreach ($group as $action)
         {
-          $ret .= $action->getHtml();
+          $ret .= $action->getHtml($walker);
         }
 
         if ($first_group) $first_group = false;

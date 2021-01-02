@@ -10,7 +10,7 @@ use Plaisio\Core\TableAction\System\TabInsertTableAction;
 use Plaisio\Core\TableColumn\System\TabDetailsIconTableColumn;
 use Plaisio\Core\TableColumn\System\TabUpdateIconTableColumn;
 use Plaisio\Kernel\Nub;
-use Plaisio\Table\TableColumn\NumericTableColumn;
+use Plaisio\Table\TableColumn\NumberTableColumn;
 use Plaisio\Table\TableColumn\TextTableColumn;
 
 /**
@@ -46,7 +46,7 @@ class TabOverviewPage extends TabPage
     $table->addTableAction('default', new TabInsertTableAction());
 
     // Show page tab ID.
-    $table->addColumn(new NumericTableColumn('ID', 'ptb_id'));
+    $table->addColumn(new NumberTableColumn('ID', 'ptb_id'));
 
     // Show label title of the page tab.
     $column = new TextTableColumn('Title', 'ptb_title');

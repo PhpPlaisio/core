@@ -10,7 +10,7 @@ use Plaisio\Core\TableAction\System\RoleGroupInsertTableAction;
 use Plaisio\Core\TableColumn\System\RoleGroupTableColumn;
 use Plaisio\Core\TableColumn\System\RoleGroupUpdateIconTableColumn;
 use Plaisio\Kernel\Nub;
-use Plaisio\Table\TableColumn\NumericTableColumn;
+use Plaisio\Table\TableColumn\NumberTableColumn;
 use Plaisio\Table\TableColumn\TextTableColumn;
 
 /**
@@ -49,7 +49,7 @@ class RoleGroupOverviewPage extends TabPage
     $table->addColumn(new RoleGroupTableColumn('Role Group'));
 
     // Show the weight of the role group.
-    $column = new NumericTableColumn('Weight', 'rlg_weight');
+    $column = new NumberTableColumn('Weight', 'rlg_weight');
     $column->setSortOrder(1);
     $table->addColumn($column);
 

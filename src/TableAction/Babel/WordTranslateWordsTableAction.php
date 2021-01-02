@@ -6,6 +6,7 @@ namespace Plaisio\Core\TableAction\Babel;
 use Plaisio\Core\Page\Babel\WordTranslateWordsPage;
 use Plaisio\Core\TableAction\TableAction;
 use Plaisio\Helper\Html;
+use Plaisio\Table\Walker\RenderWalker;
 
 /**
  * Table action action for translation all words in a word group.
@@ -44,11 +45,13 @@ class WordTranslateWordsTableAction implements TableAction
   /**
    * @inheritdoc
    */
-  public function getHtml(): string
+  public function getHtml(RenderWalker $walker): string
   {
-    return Html::generateElement('a', ['href'  => $this->url,
-                                       'title' => $this->title,
-                                       'class' => ['icons-medium', 'icons-medium-babel-fish']]);
+    $classes   = $walker->getClasses('table-menu-icon');
+    $classes[] = 'icons-medium';
+    $classes[] = 'icons-medium-babel-fish';
+
+    return Html::generateElement('a', ['href' => $this->url, 'title' => $this->title, 'class' => $classes]);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

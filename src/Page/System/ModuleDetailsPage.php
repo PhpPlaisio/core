@@ -10,7 +10,7 @@ use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\System\ModuleUpdateCompaniesTableAction;
 use Plaisio\Core\TableAction\System\ModuleUpdateTableAction;
 use Plaisio\Core\TableColumn\Company\CompanyTableColumn;
-use Plaisio\Core\TableColumn\Company\FunctionalityTableColumn;
+use Plaisio\Core\TableColumn\System\FunctionalityTableColumn;
 use Plaisio\Kernel\Nub;
 use Plaisio\Table\TableRow\IntegerTableRow;
 use Plaisio\Table\TableRow\TextTableRow;

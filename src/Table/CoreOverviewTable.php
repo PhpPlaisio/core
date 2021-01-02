@@ -7,6 +7,7 @@ use Plaisio\Core\TableAction\RowCountTableAction;
 use Plaisio\Core\TableAction\TableAction;
 use Plaisio\Helper\Html;
 use Plaisio\Table\OverviewTable;
+use Plaisio\Table\Walker\RenderWalker;
 
 /**
  * Extends \Plaisio\Table\OverviewTable with table actions.
@@ -54,51 +55,6 @@ class CoreOverviewTable extends OverviewTable
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the inner HTML code of the header for this table.
-   *
-   * @return string
-   */
-  public function getHtmlHeader(): string
-  {
-    $ret = null;
-
-    if ($this->showTableActions)
-    {
-      $colspan = $this->getNumberOfColumns();
-
-      $ret .= '<tr class="table_actions">';
-      $ret .= Html::generateTag('td', ['colspan' => $colspan]);
-
-      $first_group = true;
-      foreach ($this->tablesActionGroups as $group)
-      {
-        // Add a separator between groups of table actions.
-        if (!$first_group)
-        {
-          $ret .= Html::generateElement('span', ['class' => ['noaction', 'icons-medium', 'icons-medium-separator']]);
-        }
-
-        // Generate HTML code for all table actions groups.
-        /** @var $action Object */
-        foreach ($group as $action)
-        {
-          $ret .= $action->getHtml();
-        }
-
-        if ($first_group) $first_group = false;
-      }
-
-      $ret .= '</td>';
-      $ret .= '</tr>';
-    }
-
-    $ret .= parent::getHtmlHeader();
-
-    return $ret;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Returns the outer HTML code of this table.
    *
    * @param array[] $rows The data shown in the table.
@@ -126,6 +82,53 @@ class CoreOverviewTable extends OverviewTable
   public function setShowTableActions(bool $flag): void
   {
     $this->showTableActions = $flag;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the inner HTML code of the header for this table.
+   *
+   * @return string
+   */
+  protected function getHtmlInnerHeader(): string
+  {
+    $ret    = '';
+    $walker = new RenderWalker($this->moduleClass, $this->subModuleClass);
+
+    if ($this->showTableActions)
+    {
+      $colspan = $this->getNumberOfColumns();
+
+      $classes   = $walker->getClasses('table-menu');
+      $ret       .= Html::generateTag('tr', ['class' => $classes]);
+      $ret       .= Html::generateTag('td', ['class' => $classes, 'colspan' => $colspan]);
+
+      $first_group = true;
+      foreach ($this->tablesActionGroups as $group)
+      {
+        // Add a separator between groups of table actions.
+        if (!$first_group)
+        {
+          $ret .= Html::generateElement('span', ['class' => ['noaction', 'icons-medium', 'icons-medium-separator']]);
+        }
+
+        // Generate HTML code for all table actions groups.
+        /** @var $action Object */
+        foreach ($group as $action)
+        {
+          $ret .= $action->getHtml($walker);
+        }
+
+        if ($first_group) $first_group = false;
+      }
+
+      $ret .= '</td>';
+      $ret .= '</tr>';
+    }
+
+    $ret .= parent::getHtmlInnerHeader();
+
+    return $ret;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

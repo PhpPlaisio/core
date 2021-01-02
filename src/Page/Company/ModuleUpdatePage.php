@@ -59,10 +59,9 @@ class ModuleUpdatePage extends CompanyPage
     $modules = Nub::$nub->DL->abcCompanyModuleGetAllAvailable($this->targetCmpId, $this->lanId);
 
     $this->form = new LouverForm();
-    $this->form->setFactory(new CompanyModulesUpdateSlatControlFactory())
-               ->setData($modules)
+    $this->form->setRowFactory(new CompanyModulesUpdateSlatControlFactory())
                ->addSubmitButton(C::WRD_ID_BUTTON_UPDATE, 'handleForm')
-               ->populate();
+               ->populate($modules);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -77,15 +76,15 @@ class ModuleUpdatePage extends CompanyPage
     // If no changes are submitted return immediately.
     if (empty($changes)) return;
 
-    foreach ($changes['data'] as $mdl_id => $dummy)
+    foreach ($changes as $mdlId => $dummy)
     {
-      if ($values['data'][$mdl_id]['mdl_enabled'])
+      if ($values[$mdlId]['mdl_enabled'])
       {
-        Nub::$nub->DL->abcCompanyModuleEnable($this->targetCmpId, $mdl_id);
+        Nub::$nub->DL->abcCompanyModuleEnable($this->targetCmpId, $mdlId);
       }
       else
       {
-        Nub::$nub->DL->abcCompanyModuleDisable($this->targetCmpId, $mdl_id);
+        Nub::$nub->DL->abcCompanyModuleDisable($this->targetCmpId, $mdlId);
       }
     }
 

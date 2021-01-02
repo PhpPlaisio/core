@@ -93,10 +93,9 @@ class ModuleUpdateCompaniesPage extends TabPage
     $pages = Nub::$nub->DL->abcSystemModuleGetAvailableCompanies($this->modId);
 
     $this->form = new LouverForm();
-    $this->form->setFactory(new SystemModuleUpdateCompaniesSlatControlFactory())
-               ->setData($pages)
+    $this->form->setRowFactory(new SystemModuleUpdateCompaniesSlatControlFactory())
                ->addSubmitButton(C::WRD_ID_BUTTON_UPDATE, 'handleForm')
-               ->populate();
+               ->populate($pages);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -111,9 +110,9 @@ class ModuleUpdateCompaniesPage extends TabPage
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
 
-    foreach ($changes['data'] as $cmp_id => $dummy)
+    foreach ($changes as $cmp_id => $dummy)
     {
-      if ($values['data'][$cmp_id]['mdl_granted'])
+      if ($values[$cmp_id]['mdl_granted'])
       {
         Nub::$nub->DL->abcCompanyModuleEnable($cmp_id, $this->modId);
       }
