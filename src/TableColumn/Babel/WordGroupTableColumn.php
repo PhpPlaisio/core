@@ -30,7 +30,7 @@ class WordGroupTableColumn extends DualTableColumn
    */
   public function __construct($header, int $lanIdTarget)
   {
-    parent::__construct('numeric', 'text', $header);
+    parent::__construct('number', 'text', $header);
 
     $this->lanIdTarget = $lanIdTarget;
   }

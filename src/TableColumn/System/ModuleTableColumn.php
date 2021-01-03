@@ -21,7 +21,7 @@ class ModuleTableColumn extends DualTableColumn
    */
   public function __construct($header)
   {
-    parent::__construct('numeric', 'text', $header);
+    parent::__construct('number', 'text', $header);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
