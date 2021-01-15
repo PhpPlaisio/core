@@ -110,7 +110,6 @@ class FunctionalityUpdateRolesPage extends TabPage
     // Return immediately if no changes are submitted.
     if (empty($changes)) return;
 
-
     foreach ($changes as $rol_id => $dummy)
     {
       if ($values[$rol_id]['rol_enabled'])

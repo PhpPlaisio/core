@@ -6,7 +6,7 @@ namespace Plaisio\Core\TableAction\Babel;
 use Plaisio\Core\Page\Babel\WordTranslateWordsPage;
 use Plaisio\Core\TableAction\TableAction;
 use Plaisio\Helper\Html;
-use Plaisio\Table\Walker\RenderWalker;
+use Plaisio\Helper\RenderWalker;
 
 /**
  * Table action action for translation all words in a word group.

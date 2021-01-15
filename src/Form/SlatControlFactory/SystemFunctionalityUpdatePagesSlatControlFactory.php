@@ -5,8 +5,8 @@ namespace Plaisio\Core\Form\SlatControlFactory;
 
 use Plaisio\Form\Control\CheckboxControl;
 use Plaisio\Form\Control\SlatControl;
-use Plaisio\Form\SlatJointFactory\SlatControlFactory;
 use Plaisio\Form\SlatJoint\CheckboxSlatJoint;
+use Plaisio\Form\SlatJointFactory\SlatControlFactory;
 use Plaisio\Kernel\Nub;
 use Plaisio\Obfuscator\Obfuscator;
 use Plaisio\Table\TableColumn\NumberTableColumn;

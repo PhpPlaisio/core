@@ -7,7 +7,6 @@ use Plaisio\Core\TableAction\RowCountTableAction;
 use Plaisio\Core\TableAction\TableAction;
 use Plaisio\Helper\Html;
 use Plaisio\Table\OverviewTable;
-use Plaisio\Table\Walker\RenderWalker;
 
 /**
  * Extends \Plaisio\Table\OverviewTable with table actions.
@@ -35,6 +34,8 @@ class CoreOverviewTable extends OverviewTable
    */
   public function __construct()
   {
+    parent::__construct();
+
     // Enable filtering by default.
     $this->filter = true;
 
@@ -93,15 +94,14 @@ class CoreOverviewTable extends OverviewTable
   protected function getHtmlInnerHeader(): string
   {
     $ret    = '';
-    $walker = new RenderWalker($this->moduleClass, $this->subModuleClass);
 
     if ($this->showTableActions)
     {
       $colspan = $this->getNumberOfColumns();
 
-      $classes   = $walker->getClasses('table-menu');
-      $ret       .= Html::generateTag('tr', ['class' => $classes]);
-      $ret       .= Html::generateTag('td', ['class' => $classes, 'colspan' => $colspan]);
+      $classes = $this->renderWalker->getClasses('table-menu');
+      $ret     .= Html::generateTag('tr', ['class' => $classes]);
+      $ret     .= Html::generateTag('td', ['class' => $classes, 'colspan' => $colspan]);
 
       $first_group = true;
       foreach ($this->tablesActionGroups as $group)
@@ -116,7 +116,7 @@ class CoreOverviewTable extends OverviewTable
         /** @var $action Object */
         foreach ($group as $action)
         {
-          $ret .= $action->getHtml($walker);
+          $ret .= $action->getHtml($this->renderWalker);
         }
 
         if ($first_group) $first_group = false;

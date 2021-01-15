@@ -50,15 +50,15 @@ class CoreForm extends Form
    * Adds a form control to thi form.
    *
    * @param Control         $control   The from control
-   * @param int|string|null $wrdId     Depending on the type:
+   * @param int|string|null $label     Depending on the type:
    *                                   <ul>
    *                                   <li>int:    The wrd_id of the legend of the form control.
    *                                   <li>string: The legend of the form control.
    *                                   <li>null:   The form control has no legend.
    *                                   </ul>
-   * @param bool            $mandatory If true the form control is mandatory.
+   * @param bool            $mandatory Whether the form control is mandatory.
    */
-  public function addFormControl(Control $control, $wrdId = null, bool $mandatory = false)
+  public function addFormControl(Control $control, $label = null, bool $mandatory = false)
   {
     if ($control->isHidden())
     {
@@ -79,18 +79,14 @@ class CoreForm extends Form
         }
       }
 
-      $this->visibleFieldSet->addFormControl($control);
-
-      if ($wrdId!==null)
-      {
-        $control->setFakeAttribute('_plaisio_label', (is_int($wrdId)) ? Nub::$nub->babel->getWord($wrdId) : $wrdId);
-      }
-
       if ($mandatory)
       {
         $control->addValidator(new MandatoryValidator());
-        $control->setFakeAttribute('_plaisio_mandatory', true);
       }
+
+      $this->visibleFieldSet->addFormControl($control,
+                                             (is_int($label)) ? Nub::$nub->babel->getWord($label) : $label,
+                                             $mandatory);
     }
   }
 

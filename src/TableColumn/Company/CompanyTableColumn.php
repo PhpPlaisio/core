@@ -5,8 +5,8 @@ namespace Plaisio\Core\TableColumn\Company;
 
 use Plaisio\Core\Page\Company\CompanyDetailsPage;
 use Plaisio\Helper\Html;
+use Plaisio\Helper\RenderWalker;
 use Plaisio\Table\TableColumn\DualTableColumn;
-use Plaisio\Table\Walker\RenderWalker;
 
 /**
  * A dual table column with the ID and name of a company.
@@ -30,7 +30,7 @@ class CompanyTableColumn extends DualTableColumn
    */
   public function getHtmlCell(RenderWalker $walker, array $row): string
   {
-    $url = CompanyDetailsPage::getUrl($row['cmp_id']);
+    $url    = CompanyDetailsPage::getUrl($row['cmp_id']);
     $inner1 = Html::generateElement('a', ['href' => $url], $row['cmp_id']);
 
     $ret = Html::generateElement('td', ['class' => $walker->getClasses('number')], $inner1, true);

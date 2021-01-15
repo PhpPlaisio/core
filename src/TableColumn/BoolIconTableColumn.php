@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace Plaisio\Core\TableColumn;
 
 use Plaisio\Helper\Html;
+use Plaisio\Helper\RenderWalker;
 use Plaisio\Table\TableColumn\UniTableColumn;
-use Plaisio\Table\Walker\RenderWalker;
 use SetBased\Helper\Cast;
 
 /**

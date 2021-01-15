@@ -6,7 +6,6 @@ namespace Plaisio\Core\Table;
 use Plaisio\Core\TableAction\TableAction;
 use Plaisio\Helper\Html;
 use Plaisio\Table\DetailTable;
-use Plaisio\Table\Walker\RenderWalker;
 
 /**
  * Extends \Plaisio\Table\DetailTable with table actions.
@@ -34,6 +33,8 @@ class CoreDetailTable extends DetailTable
    */
   public function __construct()
   {
+    parent::__construct();
+
     $this->tablesActionGroups['default'] = [];
   }
 
@@ -57,14 +58,12 @@ class CoreDetailTable extends DetailTable
    */
   public function getHtmlHeader(): string
   {
-    $ret = '';
-    $walker = new RenderWalker('dt', null);
-
+    $ret    = '';
     if ($this->showTableActions)
     {
-      $classes   = $walker->getClasses('table-menu');
-      $ret       .= Html::generateTag('tr', ['class' => $classes]);
-      $ret       .= Html::generateTag('td', ['class' => $classes, 'colspan' => 2]);
+      $classes = $this->renderWalker->getClasses('table-menu');
+      $ret     .= Html::generateTag('tr', ['class' => $classes]);
+      $ret     .= Html::generateTag('td', ['class' => $classes, 'colspan' => 2]);
 
       $first_group = true;
       foreach ($this->tablesActionGroups as $group)
@@ -79,7 +78,7 @@ class CoreDetailTable extends DetailTable
         /** @var TableAction $action */
         foreach ($group as $action)
         {
-          $ret .= $action->getHtml($walker);
+          $ret .= $action->getHtml($this->renderWalker);
         }
 
         if ($first_group) $first_group = false;

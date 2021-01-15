@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Core\TableAction;
 
-use Plaisio\Table\Walker\RenderWalker;
+use Plaisio\Helper\RenderWalker;
 
 /**
  * Interface for table actions.

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\TableAction;
 
 use Plaisio\Helper\Html;
-use Plaisio\Table\Walker\RenderWalker;
+use Plaisio\Helper\RenderWalker;
 
 /**
  * Parent class for table actions for inserting certain items.

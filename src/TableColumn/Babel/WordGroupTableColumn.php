@@ -5,8 +5,8 @@ namespace Plaisio\Core\TableColumn\Babel;
 
 use Plaisio\Core\Page\Babel\WordGroupDetailsPage;
 use Plaisio\Helper\Html;
+use Plaisio\Helper\RenderWalker;
 use Plaisio\Table\TableColumn\DualTableColumn;
-use Plaisio\Table\Walker\RenderWalker;
 
 /**
  * A dual table column with the ID and name of a word group.
@@ -41,7 +41,7 @@ class WordGroupTableColumn extends DualTableColumn
    */
   public function getHtmlCell(RenderWalker $walker, array $row): string
   {
-    $url = WordGroupDetailsPage::getUrl($row['wdg_id'], $this->lanIdTarget);
+    $url    = WordGroupDetailsPage::getUrl($row['wdg_id'], $this->lanIdTarget);
     $inner1 = Html::generateElement('a', ['href' => $url], $row['wdg_id']);
 
     $ret = Html::generateElement('td', ['class' => $walker->getClasses('number')], $inner1, true);

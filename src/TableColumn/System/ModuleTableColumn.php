@@ -5,8 +5,8 @@ namespace Plaisio\Core\TableColumn\System;
 
 use Plaisio\Core\Page\System\ModuleDetailsPage;
 use Plaisio\Helper\Html;
+use Plaisio\Helper\RenderWalker;
 use Plaisio\Table\TableColumn\DualTableColumn;
-use Plaisio\Table\Walker\RenderWalker;
 
 /**
  * A dual table column with the ID and name of a module.

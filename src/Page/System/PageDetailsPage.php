@@ -119,7 +119,7 @@ class PageDetailsPage extends TabPage
 
     $table = new CoreOverviewTable();
 
-    // Table action for modify the functionalities that grant access to the page whow on this page.
+    // Table action for modify the functionalities that grant access to the page shown on this page.
     $table->addTableAction('default', new PageUpdateFunctionalitiesTableAction($this->targetPagId));
 
     // Show the ID and name of the module.

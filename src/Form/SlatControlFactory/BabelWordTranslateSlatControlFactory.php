@@ -5,9 +5,9 @@ namespace Plaisio\Core\Form\SlatControlFactory;
 
 use Plaisio\C;
 use Plaisio\Form\Control\SlatControl;
-use Plaisio\Form\SlatJointFactory\SlatControlFactory;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Form\SlatJoint\TextSlatJoint;
+use Plaisio\Form\SlatJointFactory\SlatControlFactory;
 use Plaisio\Form\Validator\MandatoryValidator;
 use Plaisio\Kernel\Nub;
 use Plaisio\Obfuscator\Obfuscator;

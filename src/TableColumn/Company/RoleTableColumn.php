@@ -5,8 +5,8 @@ namespace Plaisio\Core\TableColumn\Company;
 
 use Plaisio\Core\Page\Company\RoleDetailsPage;
 use Plaisio\Helper\Html;
+use Plaisio\Helper\RenderWalker;
 use Plaisio\Table\TableColumn\DualTableColumn;
-use Plaisio\Table\Walker\RenderWalker;
 
 /**
  * A dual table column with the ID and the name of a role.

@@ -5,8 +5,8 @@ namespace Plaisio\Core\TableColumn\System;
 
 use Plaisio\Core\Page\System\RoleGroupDetailsPage;
 use Plaisio\Helper\Html;
+use Plaisio\Helper\RenderWalker;
 use Plaisio\Table\TableColumn\DualTableColumn;
-use Plaisio\Table\Walker\RenderWalker;
 
 /**
  * A dual table column with the ID and name of a role group.
@@ -30,7 +30,7 @@ class RoleGroupTableColumn extends DualTableColumn
    */
   public function getHtmlCell(RenderWalker $walker, array $row): string
   {
-    $url = RoleGroupDetailsPage::getUrl($row['rlg_id']);
+    $url    = RoleGroupDetailsPage::getUrl($row['rlg_id']);
     $inner1 = Html::generateElement('a', ['href' => $url], $row['rlg_id']);
 
     $ret = Html::generateElement('td', ['class' => $walker->getClasses('number')], $inner1, true);
