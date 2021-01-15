@@ -6,6 +6,7 @@ namespace Plaisio\Core\Form\SlatControlFactory;
 use Plaisio\Core\TableColumn\Company\RoleTableColumn;
 use Plaisio\Core\TableColumn\System\RoleGroupTableColumn;
 use Plaisio\Form\Control\CheckboxControl;
+use Plaisio\Form\Control\InvisibleControl;
 use Plaisio\Form\Control\SlatControl;
 use Plaisio\Form\SlatJoint\CheckboxSlatJoint;
 use Plaisio\Form\SlatJoint\InvisibleSlatJoint;
@@ -17,7 +18,7 @@ use Plaisio\Table\TableColumn\TextTableColumn;
 use SetBased\Helper\Cast;
 
 /**
- * Slat control factory for creating slat controls for updating the pages that a functionality grants access to.
+ * Slat control factory for creating slat controls for updating the roles a functionality is granted to.
  */
 class SystemFunctionalityUpdateRolesSlatControlFactory extends SlatControlFactory
 {
@@ -37,21 +38,22 @@ class SystemFunctionalityUpdateRolesSlatControlFactory extends SlatControlFactor
   {
     parent::__construct();
 
-    // Create slat joint for table column with page ID.
+    // Invisible cmp_id.
     $this->addSlatJoint(new InvisibleSlatJoint('cmp_id'));
 
+    // Show company ID.
     $this->addColumn(new NumberTableColumn('ID', 'cmp_id'));
 
-    // Create slat joint for table column with name of class.
+    // Show company abbreviation.
     $this->addColumn(new TextTableColumn('Company', 'cmp_abbr'));
 
-    // Create slat joint for table column with ID and name of role group.
+    // Show role group.
     $this->addColumn(new RoleGroupTableColumn('Role Group'));
 
-    // Create slat joint for table column with ID and name of role.
+    // Show role.
     $this->addColumn(new RoleTableColumn('Role'));
 
-    // Create slat joint with checkbox for enabled or disabled page.
+    // Checkbox for granting functionality.
     $this->addSlatJoint(new CheckboxSlatJoint('rol_enabled', 'Grant'));
 
     $this->rolIdObfuscator = Nub::$nub->obfuscator::create('rol');
@@ -66,6 +68,12 @@ class SystemFunctionalityUpdateRolesSlatControlFactory extends SlatControlFactor
     $row = new SlatControl(Cast::toOptString($data['rol_id']));
     $row->setObfuscator($this->rolIdObfuscator);
 
+    // Invisible cmp_id.
+    /** @var InvisibleControl $control */
+    $control = $this->createFormControl($row, 'cmp_id');
+    $control->setValue($data['cmp_id']);
+
+    // Checkbox for granting functionality.
     /** @var CheckboxControl $control */
     $control = $this->createFormControl($row, 'rol_enabled');
     $control->setValue($data['rol_enabled']);
