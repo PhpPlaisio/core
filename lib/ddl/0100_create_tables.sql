@@ -5,7 +5,7 @@
 /*  FileName : core.ecm                                                           */
 /*  Platform : MySQL 5                                                            */
 /*  Version  : Concept                                                            */
-/*  Date     : maandag 8 juni 2020                                                */
+/*  Date     : woensdag 17 maart 2021                                             */
 /*================================================================================*/
 /*================================================================================*/
 /* CREATE TABLES                                                                  */
@@ -196,7 +196,7 @@ CREATE TABLE `AUT_ROLE` (
   `cmp_id` SMALLINT UNSIGNED NOT NULL,
   `rlg_id` SMALLINT UNSIGNED NOT NULL,
   `rol_weight` SMALLINT NOT NULL,
-  `rol_name` VARCHAR(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `rol_name` VARCHAR(32) NOT NULL,
   `rol_label` VARCHAR(50) CHARACTER SET ascii COLLATE ascii_general_ci,
   CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`rol_id`)
 );
@@ -370,8 +370,7 @@ ALTER TABLE `AUT_PRO_PAG`
 
 ALTER TABLE `AUT_PRO_PAG`
   ADD CONSTRAINT `FK_AUT_PRO_PAG_AUT_PAGE`
-  FOREIGN KEY (`pag_id`) REFERENCES `AUT_PAGE` (`pag_id`)
-  ON DELETE CASCADE;
+  FOREIGN KEY (`pag_id`) REFERENCES `AUT_PAGE` (`pag_id`);
 
 ALTER TABLE `AUT_ROLE_GROUP`
   ADD CONSTRAINT `FK_AUT_ROLE_GROUP_ABC_BABEL_WORD`
