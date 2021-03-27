@@ -5,7 +5,7 @@ namespace Plaisio\Core\Page\Babel;
 
 use Plaisio\C;
 use Plaisio\Core\Form\CoreForm;
-use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Page\PlaisioCorePage;
 use Plaisio\Form\Control\SelectControl;
 use Plaisio\Form\Form;
 use Plaisio\Kernel\Nub;
@@ -14,22 +14,22 @@ use Plaisio\Response\SeeOtherResponse;
 /**
  * Abstract parent page for all Babel pages.
  */
-abstract class BabelPage extends TabPage
+abstract class BabelPage extends PlaisioCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * The language ID to which the word/text/topic is been translated.
-   *
-   * @var int
-   */
-  protected int $actLanId;
-
   /**
    * The language ID from which the word/text/topic is been translated.
    *
    * @var int
    */
-  protected int $refLanId;
+  protected int $lanIdRef;
+
+  /**
+   * The language ID to which the word/text/topic is been translated.
+   *
+   * @var int
+   */
+  protected int $lanIdTar;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -39,8 +39,8 @@ abstract class BabelPage extends TabPage
   {
     parent::__construct();
 
-    $this->refLanId = C::LAN_ID_BABEL_REFERENCE;
-    $this->actLanId = Nub::$nub->cgi->getManId('act_lan', 'lan', $this->lanId);
+    $this->lanIdRef = C::LAN_ID_BABEL_REFERENCE;
+    $this->lanIdTar = Nub::$nub->cgi->getManId('lan-target', 'lan', $this->lanIdRef);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -49,14 +49,14 @@ abstract class BabelPage extends TabPage
    */
   public function selectLanguage(): void
   {
-    $languages = Nub::$nub->DL->abcBabelLanguageGetAllLanguages($this->refLanId);
+    $languages = Nub::$nub->DL->abcBabelLanguageGetAllLanguages($this->lanIdRef);
 
     // If translator is authorized for 1 language return immediately.
     if (count($languages)==1)
     {
       $key = key($languages);
 
-      $this->actLanId = $languages[$key]['lan_id'];
+      $this->lanIdTar = $languages[$key]['lan_id'];
     }
 
     $form   = $this->createSelectLanguageForm($languages);
@@ -79,10 +79,10 @@ abstract class BabelPage extends TabPage
   protected function handleSelectLanguage(Form $form): void
   {
     $values         = $form->getValues();
-    $this->actLanId = $values['act_lan_id'];
+    $this->lanIdTar = $values['tar_lan_id'];
 
-    $get            = $_GET;
-    $get['act_lan'] = Nub::$nub->obfuscator::encode($this->actLanId, 'lan');
+    $get               = $_GET;
+    $get['lan-target'] = Nub::$nub->obfuscator::encode($this->lanIdTar, 'lan');
 
     $url = '';
     foreach ($get as $name => $value)
@@ -99,10 +99,10 @@ abstract class BabelPage extends TabPage
     $form = new CoreForm();
 
     // Input for language.
-    $input = new SelectControl('act_lan_id');
+    $input = new SelectControl('tar_lan_id');
     $input->setOptions($languages, 'lan_id', 'lan_name');
     $input->setOptionsObfuscator(Nub::$nub->obfuscator::create('lan'));
-    $input->setValue($this->actLanId);
+    $input->setValue($this->lanIdTar);
     $form->addFormControl($input, C::WRD_ID_LANGUAGE, true);
 
     // Create a submit button.

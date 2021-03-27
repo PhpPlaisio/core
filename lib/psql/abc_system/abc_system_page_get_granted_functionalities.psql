@@ -10,17 +10,18 @@ create procedure abc_system_page_get_granted_functionalities(in p_pag_id @aut_pa
                                                              in p_lan_id @abc_babel_language.lan_id%type@)
 reads sql data
 begin
-  select fun.fun_id
-  ,      mdl.mdl_id
+  select mdl.mdl_id
   ,      wd1.wdt_text   fun_name
+
+  ,      fun.fun_id
   ,      wd2.wdt_text   mdl_name
-  from            AUT_PAG_FUN         apf
-  inner join      AUT_FUNCTIONALITY   fun  on  fun.fun_id = apf.fun_id
-  inner join      ABC_BABEL_WORD_TEXT wd1  on  wd1.wrd_id = fun.wrd_id and
-                                               wd1.lan_id = p_lan_id
-  inner join      AUT_MODULE          mdl  on  mdl.mdl_id = fun.mdl_id
-  inner join      ABC_BABEL_WORD_TEXT wd2  on  wd2.wrd_id = mdl.wrd_id and
-                                               wd2.lan_id = p_lan_id
+  from   AUT_PAG_FUN         apf
+  join   AUT_FUNCTIONALITY   fun  on  fun.fun_id = apf.fun_id
+  join   ABC_BABEL_WORD_TEXT wd1  on  wd1.wrd_id = fun.wrd_id and
+                                      wd1.lan_id = p_lan_id
+  join   AUT_MODULE          mdl  on  mdl.mdl_id = fun.mdl_id
+  join   ABC_BABEL_WORD_TEXT wd2  on  wd2.wrd_id = mdl.wrd_id and
+                                      wd2.lan_id = p_lan_id
   where apf.pag_id = p_pag_id
   order by mdl_name
   ,        fun_name

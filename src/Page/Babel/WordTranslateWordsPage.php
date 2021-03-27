@@ -61,7 +61,7 @@ class WordTranslateWordsPage extends BabelPage
     $url = Nub::$nub->cgi->putLeader();
     $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_BABEL_WORD_TRANSLATE_WORDS, 'pag');
     $url .= Nub::$nub->cgi->putId('wdg', $wdgId, 'wdg');
-    $url .= Nub::$nub->cgi->putId('act_lan', $lanId, 'lan');
+    $url .= Nub::$nub->cgi->putId('lan-target', $lanId, 'lan');
 
     return $url;
   }
@@ -82,10 +82,10 @@ class WordTranslateWordsPage extends BabelPage
    */
   private function createForm(): void
   {
-    $words = Nub::$nub->DL->abcBabelWordGroupGetAllWordsTranslator($this->wdgId, $this->actLanId);
+    $words = Nub::$nub->DL->abcBabelWordGroupGetAllWordsTranslator($this->wdgId, $this->lanIdTar);
 
     $this->form = new LouverForm();
-    $this->form->setRowFactory(new  BabelWordTranslateSlatControlFactory($this->refLanId, $this->actLanId))
+    $this->form->setRowFactory(new  BabelWordTranslateSlatControlFactory($this->lanIdRef, $this->lanIdTar))
                ->addSubmitButton(C::WRD_ID_BUTTON_TRANSLATE, 'handleForm')
                ->populate($words);
   }
@@ -103,7 +103,7 @@ class WordTranslateWordsPage extends BabelPage
 
     foreach ($changes as $wrdId => $changed)
     {
-      Nub::$nub->DL->abcBabelWordTranslateWord($this->usrId, $wrdId, $this->actLanId, $values[$wrdId]['act_wdt_text']);
+      Nub::$nub->DL->abcBabelWordTranslateWord($this->usrId, $wrdId, $this->lanIdTar, $values[$wrdId]['tar_wdt_text']);
     }
   }
 
@@ -133,7 +133,7 @@ class WordTranslateWordsPage extends BabelPage
   {
     $this->databaseAction();
 
-    $this->response = new SeeOtherResponse(WordGroupDetailsPage::getUrl($this->wdgId, $this->actLanId));
+    $this->response = new SeeOtherResponse(WordGroupDetailsPage::getUrl($this->wdgId, $this->lanIdTar));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

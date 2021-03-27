@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
-use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Page\PlaisioCorePage;
 use Plaisio\Core\Table\CoreDetailTable;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\System\PageUpdateFunctionalitiesTableAction;
@@ -21,7 +21,7 @@ use Plaisio\Table\TableRow\TextTableRow;
 /**
  * Page with information about a (target) page.
  */
-class PageDetailsPage extends TabPage
+class PageDetailsPage extends PlaisioCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -29,7 +29,7 @@ class PageDetailsPage extends TabPage
    *
    * @var int
    */
-  protected int $targetPagId;
+  protected int $pagIdTarget;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -39,22 +39,22 @@ class PageDetailsPage extends TabPage
   {
     parent::__construct();
 
-    $this->targetPagId = Nub::$nub->cgi->getManId('tar_pag', 'pag');
+    $this->pagIdTarget = Nub::$nub->cgi->getManId('pag-target', 'pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL for this page.
    *
-   * @param int $pagId The Company shown on this page.
+   * @param int $pagIdTarget The ID of the target page.
    *
    * @return string
    */
-  public static function getUrl(int $pagId): string
+  public static function getUrl(int $pagIdTarget): string
   {
     $url = Nub::$nub->cgi->putLeader();
     $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_PAGE_DETAILS, 'pag');
-    $url .= Nub::$nub->cgi->putId('tar_pag', $pagId, 'pag');
+    $url .= Nub::$nub->cgi->putId('pag-target', $pagIdTarget, 'pag');
 
     return $url;
   }
@@ -65,12 +65,26 @@ class PageDetailsPage extends TabPage
    */
   protected function echoTabContent(): void
   {
-    $this->showDetails();
-
+    $this->showCompanies();
     $this->showFunctionalities();
-
+    $this->showDetails();
     $this->showGrantedRoles();
-    // XXX Show all child pages (if page is a master page).
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Echos an overview table with all companies that are granted this page.
+   */
+  private function showCompanies(): void
+  {
+    $companies = Nub::$nub->DL->abcSystemPageGetGrantedCompanies($this->pagIdTarget);
+
+    $table = new CoreOverviewTable();
+
+    // Show ID and abbreviation of the company
+    $table->addColumn(new CompanyTableColumn(C::WRD_ID_COMPANY));
+
+    echo $table->getHtmlTable($companies);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -79,11 +93,11 @@ class PageDetailsPage extends TabPage
    */
   private function showDetails(): void
   {
-    $details = Nub::$nub->DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
+    $details = Nub::$nub->DL->abcSystemPageGetDetails($this->pagIdTarget, $this->lanId);
     $table   = new CoreDetailTable();
 
     // Add table action for updating the page details.
-    $table->addTableAction('default', new PageUpdateTableAction($this->targetPagId));
+    $table->addTableAction('default', new PageUpdateTableAction($this->pagIdTarget));
 
     // Add row with the ID of the page.
     IntegerTableRow::addRow($table, 'ID', $details['pag_id']);
@@ -115,12 +129,12 @@ class PageDetailsPage extends TabPage
    */
   private function showFunctionalities(): void
   {
-    $roles = Nub::$nub->DL->abcSystemPageGetGrantedFunctionalities($this->targetPagId, $this->lanId);
+    $roles = Nub::$nub->DL->abcSystemPageGetGrantedFunctionalities($this->pagIdTarget, $this->lanId);
 
     $table = new CoreOverviewTable();
 
     // Table action for modify the functionalities that grant access to the page shown on this page.
-    $table->addTableAction('default', new PageUpdateFunctionalitiesTableAction($this->targetPagId));
+    $table->addTableAction('default', new PageUpdateFunctionalitiesTableAction($this->pagIdTarget));
 
     // Show the ID and name of the module.
     $table->addColumn(new ModuleTableColumn('Module'));
@@ -137,7 +151,7 @@ class PageDetailsPage extends TabPage
    */
   private function showGrantedRoles(): void
   {
-    $roles = Nub::$nub->DL->abcSystemPageGetGrantedRoles($this->targetPagId);
+    $roles = Nub::$nub->DL->abcSystemPageGetGrantedRoles($this->pagIdTarget);
 
     $table = new CoreOverviewTable();
 

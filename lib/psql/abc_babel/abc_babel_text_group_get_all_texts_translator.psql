@@ -2,12 +2,12 @@
  * Selects all text in a text group in the reference and target language.
  *
  * @param p_ttg_id     The ID of the text group.
- * @param p_lan_id_act The ID of the target language.
+ * @param p_lan_id_tar The ID of the target language.
  *
  * @type rows
  */
 create procedure abc_babel_text_group_get_all_texts_translator(in p_ttg_id     @abc_babel_text_group.ttg_id%type@,
-                                                               in p_lan_id_act @abc_babel_language.lan_id%type@)
+                                                               in p_lan_id_tar @abc_babel_language.lan_id%type@)
 reads sql data
 begin
   select txt.txt_id
@@ -19,7 +19,7 @@ begin
   ,      act.ttt_text                   act_ttt_text
   from       ABC_BABEL_TEXT      txt
   inner join ABC_BABEL_TEXT_TEXT act  on  act.txt_id = txt.txt_id and
-                                          act.lan_id = p_lan_id_act
+                                          act.lan_id = p_lan_id_tar
   inner join ABC_BABEL_TEXT_TEXT ref  on  ref.txt_id = txt.txt_id and
                                           ref.lan_id = @LAN_ID_BABEL_REFERENCE@
   where txt.ttg_id = p_ttg_id

@@ -1,0 +1,20 @@
+/**
+ * Selects all companies that are granted a functionality.
+ *
+ * @param p_fun_id The ID of the functionality.
+ *
+ * @type rows
+ */
+create procedure abc_system_functionality_get_granted_companies(in p_fun_id @aut_functionality.fun_id%type@)
+reads sql data
+begin
+  select distinct cmp.cmp_id
+  ,               cmp.cmp_abbr
+  from   AUT_FUNCTIONALITY  fun
+  join   AUT_MODULE         mdl  on  mdl.mdl_id = fun.mdl_id
+  join   AUT_MODULE_COMPANY amc  on  amc.mdl_id = mdl.mdl_id
+  join   ABC_AUTH_COMPANY   cmp  on  cmp.cmp_id = amc.cmp_id
+  where fun.fun_id = p_fun_id
+  order by cmp.cmp_abbr
+  ;
+end

@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\Company;
 
 use Plaisio\C;
-use Plaisio\Core\Form\Control\WeightControl;
 use Plaisio\Core\Form\CoreForm;
 use Plaisio\Form\Control\DatabaseLabelControl;
 use Plaisio\Form\Control\SelectControl;
 use Plaisio\Form\Control\TextControl;
+use Plaisio\Form\Control\WeightControl;
 use Plaisio\Kernel\Nub;
 use Plaisio\Response\SeeOtherResponse;
 

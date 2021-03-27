@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Plaisio\Core\Page\Admin;
 
-use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Page\PlaisioCorePage;
 
-abstract class AdminPage extends TabPage
+abstract class AdminPage extends PlaisioCorePage
 {
 }
 

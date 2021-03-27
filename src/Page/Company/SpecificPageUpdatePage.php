@@ -28,7 +28,7 @@ class SpecificPageUpdatePage extends CompanyPage
    *
    * @var int
    */
-  private int $targetPagId;
+  private int $pagIdTarget;
 
   /**
    * The details om the company specific page.
@@ -45,10 +45,10 @@ class SpecificPageUpdatePage extends CompanyPage
   {
     parent::__construct();
 
-    $this->targetPagId = Nub::$nub->cgi->getManId('tar_pag', 'pag');
+    $this->pagIdTarget = Nub::$nub->cgi->getManId('pag-target', 'pag');
 
     $this->targetPageDetails = Nub::$nub->DL->abcCompanySpecificPageGetDetails($this->targetCmpId,
-                                                                               $this->targetPagId,
+                                                                               $this->pagIdTarget,
                                                                                $this->lanId);
   }
 
@@ -57,16 +57,16 @@ class SpecificPageUpdatePage extends CompanyPage
    * Returns the URL of this page.
    *
    * @param int $targetCmpId The ID of the target company.
-   * @param int $targetPagId The ID of the page.
+   * @param int $pagIdTarget The ID of the page.
    *
    * @return string The URL of this page.
    */
-  public static function getUrl(int $targetCmpId, int $targetPagId): string
+  public static function getUrl(int $targetCmpId, int $pagIdTarget): string
   {
     $url = Nub::$nub->cgi->putLeader();
     $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_UPDATE, 'pag');
     $url .= Nub::$nub->cgi->putId('cmp', $targetCmpId, 'cmp');
-    $url .= Nub::$nub->cgi->putId('tar_pag', $targetPagId, 'pag');
+    $url .= Nub::$nub->cgi->putId('pag-target', $pagIdTarget, 'pag');
 
     return $url;
   }
@@ -81,7 +81,7 @@ class SpecificPageUpdatePage extends CompanyPage
 
     $values = $this->form->getValues();
 
-    Nub::$nub->DL->abcCompanySpecificPageUpdate($this->targetCmpId, $this->targetPagId, $values['pag_class_child']);
+    Nub::$nub->DL->abcCompanySpecificPageUpdate($this->targetCmpId, $this->pagIdTarget, $values['pag_class_child']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

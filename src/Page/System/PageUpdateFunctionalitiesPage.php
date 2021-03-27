@@ -5,7 +5,7 @@ namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
 use Plaisio\Core\Form\SlatControlFactory\SystemPageUpdateFunctionalitiesSlatControlFactory;
-use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Page\PlaisioCorePage;
 use Plaisio\Core\Table\CoreDetailTable;
 use Plaisio\Core\TableRow\System\PageDetailsTableRow;
 use Plaisio\Form\LouverForm;
@@ -17,7 +17,7 @@ use Plaisio\Table\TableRow\TextTableRow;
 /**
  * Page for modifying the functionalities that grant access to a target page.
  */
-class PageUpdateFunctionalitiesPage extends TabPage
+class PageUpdateFunctionalitiesPage extends PlaisioCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -39,7 +39,7 @@ class PageUpdateFunctionalitiesPage extends TabPage
    *
    * @var int
    */
-  private int $targetPagId;
+  private int $pagIdTarget;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -49,8 +49,8 @@ class PageUpdateFunctionalitiesPage extends TabPage
   {
     parent::__construct();
 
-    $this->targetPagId = Nub::$nub->cgi->getManId('tar_pag', 'pag');
-    $this->details     = Nub::$nub->DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
+    $this->pagIdTarget = Nub::$nub->cgi->getManId('pag-target', 'pag');
+    $this->details     = Nub::$nub->DL->abcSystemPageGetDetails($this->pagIdTarget, $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -65,7 +65,7 @@ class PageUpdateFunctionalitiesPage extends TabPage
   {
     $url = Nub::$nub->cgi->putLeader();
     $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_PAGE_UPDATE_FUNCTIONALITIES, 'pag');
-    $url .= Nub::$nub->cgi->putId('tar_pag', $pagId, 'pag');
+    $url .= Nub::$nub->cgi->putId('pag-target', $pagId, 'pag');
 
     return $url;
   }
@@ -86,11 +86,11 @@ class PageUpdateFunctionalitiesPage extends TabPage
     {
       if ($values[$fun_id]['fun_checked'])
       {
-        Nub::$nub->DL->abcSystemFunctionalityInsertPage($fun_id, $this->targetPagId);
+        Nub::$nub->DL->abcSystemFunctionalityInsertPage($fun_id, $this->pagIdTarget);
       }
       else
       {
-        Nub::$nub->DL->abcSystemFunctionalityDeletePage($fun_id, $this->targetPagId);
+        Nub::$nub->DL->abcSystemFunctionalityDeletePage($fun_id, $this->pagIdTarget);
       }
     }
 
@@ -116,7 +116,7 @@ class PageUpdateFunctionalitiesPage extends TabPage
    */
   private function createForm(): void
   {
-    $pages = Nub::$nub->DL->abcSystemPageGetAvailableFunctionalities($this->targetPagId, $this->lanId);
+    $pages = Nub::$nub->DL->abcSystemPageGetAvailableFunctionalities($this->pagIdTarget, $this->lanId);
 
     $this->form = new LouverForm();
     $this->form->setRowFactory(new SystemPageUpdateFunctionalitiesSlatControlFactory())
@@ -150,7 +150,7 @@ class PageUpdateFunctionalitiesPage extends TabPage
   {
     $this->databaseAction();
 
-    $this->response = new SeeOtherResponse(PageDetailsPage::getUrl($this->targetPagId));
+    $this->response = new SeeOtherResponse(PageDetailsPage::getUrl($this->pagIdTarget));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -159,7 +159,7 @@ class PageUpdateFunctionalitiesPage extends TabPage
    */
   private function showPageDetails(): void
   {
-    $details = Nub::$nub->DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
+    $details = Nub::$nub->DL->abcSystemPageGetDetails($this->pagIdTarget, $this->lanId);
     $table   = new CoreDetailTable();
 
     // Add row with the ID of the page.

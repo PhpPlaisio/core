@@ -5,7 +5,7 @@ namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
 use Plaisio\Core\Form\SlatControlFactory\SystemFunctionalityUpdateRolesSlatControlFactory;
-use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Page\PlaisioCorePage;
 use Plaisio\Core\Table\CoreDetailTable;
 use Plaisio\Form\LouverForm;
 use Plaisio\Kernel\Nub;
@@ -16,7 +16,7 @@ use Plaisio\Table\TableRow\TextTableRow;
 /**
  * Page for granting/revoking access to/from a functionality to roles.
  */
-class FunctionalityUpdateRolesPage extends TabPage
+class FunctionalityUpdateRolesPage extends PlaisioCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

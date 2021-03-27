@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
-use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Page\PlaisioCorePage;
 use Plaisio\Core\Table\CoreDetailTable;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\System\RoleGroupUpdateTableAction;
@@ -17,7 +17,7 @@ use Plaisio\Table\TableRow\TextTableRow;
 /**
  * Page with the details of a all role group.
  */
-class RoleGroupDetailsPage extends TabPage
+class RoleGroupDetailsPage extends PlaisioCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

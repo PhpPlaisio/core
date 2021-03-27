@@ -27,8 +27,8 @@ class PageUpdatePage extends PageBasePage
   {
     parent::__construct();
 
-    $this->targetPagId = Nub::$nub->cgi->getManId('tar_pag', 'pag');
-    $this->details     = Nub::$nub->DL->abcSystemPageGetDetails($this->targetPagId, $this->lanId);
+    $this->pagIdTarget = Nub::$nub->cgi->getManId('pag-target', 'pag');
+    $this->details     = Nub::$nub->DL->abcSystemPageGetDetails($this->pagIdTarget, $this->lanId);
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }
 
@@ -44,7 +44,7 @@ class PageUpdatePage extends PageBasePage
   {
     $url = Nub::$nub->cgi->putLeader();
     $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_SYSTEM_PAGE_UPDATE, 'pag');
-    $url .= Nub::$nub->cgi->putId('tar_pag', $pagId, 'pag');
+    $url .= Nub::$nub->cgi->putId('pag-target', $pagId, 'pag');
 
     return $url;
   }
@@ -70,7 +70,7 @@ class PageUpdatePage extends PageBasePage
       $wrd_id = $values['wrd_id'];
     }
 
-    Nub::$nub->DL->abcSystemPageUpdateDetails($this->targetPagId,
+    Nub::$nub->DL->abcSystemPageUpdateDetails($this->pagIdTarget,
                                               $wrd_id,
                                               $values['ptb_id'],
                                               $values['pag_id_org'],

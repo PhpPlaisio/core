@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Plaisio\Core\Page;
 
+use Plaisio\C;
 use Plaisio\Helper\Html;
 use Plaisio\Helper\OB;
 use Plaisio\Kernel\Nub;
@@ -10,9 +11,9 @@ use Plaisio\Page\CorePage;
 use Plaisio\Response\Response;
 
 /**
- * Abstract parent page for all core pages of ABC.
+ * Abstract parent page for all core pages of PhpPlaisio.
  */
-abstract class TabPage extends CorePage
+abstract class PlaisioCorePage extends CorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -33,6 +34,17 @@ abstract class TabPage extends CorePage
    * @var array[]
    */
   protected array $tabs;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * PlaisioCorePage constructor.
+   */
+  public function __construct()
+  {
+    parent::__construct();
+
+    $this->lanId = C::LAN_ID_BABEL_REFERENCE;
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -76,7 +88,7 @@ abstract class TabPage extends CorePage
     $this->echoTabs();
     echo '</nav>';
 
-    echo '<div class="content">';
+    echo '<div class="l-content">';
     $this->echoTabContent();
     echo '</div>';
   }

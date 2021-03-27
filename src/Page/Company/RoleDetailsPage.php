@@ -65,11 +65,9 @@ class RoleDetailsPage extends CompanyPage
    */
   protected function echoTabContent(): void
   {
-    $this->showRole();
-
     $this->showFunctionalities();
-
     $this->showPages();
+    $this->showRole();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

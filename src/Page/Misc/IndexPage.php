@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace Plaisio\Core\Page\Misc;
 
-use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Page\PlaisioCorePage;
 use Plaisio\Kernel\Nub;
 
 /**
  * The home page.
  */
-class IndexPage extends TabPage
+class IndexPage extends PlaisioCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

@@ -27,7 +27,7 @@ class SpecificPageDeletePage extends CorePage
    *
    * @var int
    */
-  private int $targetPagId;
+  private int $pagIdTarget;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -38,7 +38,7 @@ class SpecificPageDeletePage extends CorePage
     parent::__construct();
 
     $this->targetCmpId = Nub::$nub->cgi->getManId('cmp', 'cmp');
-    $this->targetPagId = Nub::$nub->cgi->getManId('tar_pag', 'pag');
+    $this->pagIdTarget = Nub::$nub->cgi->getManId('pag-target', 'pag');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -46,16 +46,16 @@ class SpecificPageDeletePage extends CorePage
    * Returns the URL of this page.
    *
    * @param int $targetCmpId The ID of the target company.
-   * @param int $targetPagId The ID of the page the must be deleted.
+   * @param int $pagIdTarget The ID of the page the must be deleted.
    *
    * @return string
    */
-  public static function getUrl(int $targetCmpId, int $targetPagId): string
+  public static function getUrl(int $targetCmpId, int $pagIdTarget): string
   {
     $url = Nub::$nub->cgi->putLeader();
     $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_COMPANY_SPECIFIC_PAGE_DELETE, 'pag');
     $url .= Nub::$nub->cgi->putId('cmp', $targetCmpId, 'cmp');
-    $url .= Nub::$nub->cgi->putId('tar_pag', $targetPagId, 'pag');
+    $url .= Nub::$nub->cgi->putId('pag-target', $pagIdTarget, 'pag');
 
     return $url;
   }
@@ -66,7 +66,7 @@ class SpecificPageDeletePage extends CorePage
    */
   public function handleRequest(): Response
   {
-    Nub::$nub->DL->abcCompanySpecificPageDelete($this->targetCmpId, $this->targetPagId);
+    Nub::$nub->DL->abcCompanySpecificPageDelete($this->targetCmpId, $this->pagIdTarget);
 
     $this->response = new SeeOtherResponse(SpecificPageOverviewPage::getUrl($this->targetCmpId));
 

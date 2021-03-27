@@ -32,24 +32,24 @@ class BabelWordTranslateSlatControlFactory extends SlatControlFactory
   /**
    * Object constructor.
    *
-   * @param int $lanId       The ID of the reference language.
-   * @param int $targetLanId The ID of the target language.
+   * @param int $lanIdRef The ID of the reference language.
+   * @param int $lanIdTar The ID of the target language.
    */
-  public function __construct(int $lanId, int $targetLanId)
+  public function __construct(int $lanIdRef, int $lanIdTar)
   {
     parent::__construct();
 
-    $ref_language = Nub::$nub->DL->abcBabelLanguageGetName($lanId, $lanId);
-    $act_language = Nub::$nub->DL->abcBabelLanguageGetName($targetLanId, $lanId);
+    $languageRef = Nub::$nub->DL->abcBabelLanguageGetName($lanIdRef, $lanIdRef);
+    $languageTar = Nub::$nub->DL->abcBabelLanguageGetName($lanIdTar, $lanIdRef);
 
     // Create slat joint for table column with word ID.
     $this->addColumn(new NumberTableColumn('ID', 'wrd_id'));
 
     // Create slat joint for table column with the word in the reference language.
-    $this->addColumn(new TextTableColumn($ref_language, 'ref_wdt_text'));
+    $this->addColumn(new TextTableColumn($languageRef, 'ref_wdt_text'));
 
     // Create slat joint with text form control for the word in the target language.
-    $this->addSlatJoint(new TextSlatJoint('act_wdt_text', $act_language));
+    $this->addSlatJoint(new TextSlatJoint('tar_wdt_text', $languageTar));
 
     $this->wrdIdObfuscator = Nub::$nub->obfuscator::create('wrd');
   }
@@ -64,9 +64,9 @@ class BabelWordTranslateSlatControlFactory extends SlatControlFactory
     $row->setObfuscator($this->wrdIdObfuscator);
 
     /** @var TextControl $input */
-    $input = $this->createFormControl($row, 'act_wdt_text');
+    $input = $this->createFormControl($row, 'tar_wdt_text');
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
-    $input->setValue($data['act_wdt_text']);
+    $input->setValue($data['tar_wdt_text']);
     $input->addValidator(new MandatoryValidator());
 
     return $row;

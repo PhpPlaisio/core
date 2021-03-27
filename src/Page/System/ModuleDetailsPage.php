@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
-use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Page\PlaisioCorePage;
 use Plaisio\Core\Table\CoreDetailTable;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\System\ModuleUpdateCompaniesTableAction;
@@ -18,7 +18,7 @@ use Plaisio\Table\TableRow\TextTableRow;
 /**
  * Page with the details of a module.
  */
-class ModuleDetailsPage extends TabPage
+class ModuleDetailsPage extends PlaisioCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -73,11 +73,9 @@ class ModuleDetailsPage extends TabPage
    */
   protected function echoTabContent(): void
   {
-    $this->showDetails();
-
-    $this->showFunctionalities();
-
     $this->showCompanies();
+    $this->showDetails();
+    $this->showFunctionalities();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -86,7 +84,7 @@ class ModuleDetailsPage extends TabPage
    */
   private function showCompanies(): void
   {
-    $functions = Nub::$nub->DL->abcSystemModuleGetGrantedCompanies($this->mdlId);
+    $companies = Nub::$nub->DL->abcSystemModuleGetGrantedCompanies($this->mdlId);
 
     $table = new CoreOverviewTable();
 
@@ -96,7 +94,7 @@ class ModuleDetailsPage extends TabPage
     // Show ID and abbreviation of the company
     $table->addColumn(new CompanyTableColumn(C::WRD_ID_COMPANY));
 
-    echo $table->getHtmlTable($functions);
+    echo $table->getHtmlTable($companies);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

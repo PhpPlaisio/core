@@ -32,12 +32,12 @@ class WordTranslateWordsTableAction implements TableAction
   /**
    * Object constructor.
    *
-   * @param int $wdgId       The ID of the word group of the new word.
-   * @param int $targetLanId The ID of the target language.
+   * @param int $wdgId    The ID of the word group of the new word.
+   * @param int $lanIdTar The ID of the target language.
    */
-  public function __construct(int $wdgId, int $targetLanId)
+  public function __construct(int $wdgId, int $lanIdTar)
   {
-    $this->url   = WordTranslateWordsPage::getUrl($wdgId, $targetLanId);
+    $this->url   = WordTranslateWordsPage::getUrl($wdgId, $lanIdTar);
     $this->title = 'Translate words';
   }
 
@@ -47,9 +47,7 @@ class WordTranslateWordsTableAction implements TableAction
    */
   public function getHtml(RenderWalker $walker): string
   {
-    $classes   = $walker->getClasses('table-menu-icon');
-    $classes[] = 'icons-medium';
-    $classes[] = 'icons-medium-babel-fish';
+    $classes   = $walker->getClasses('table-menu-icon', ['icons-medium', 'icons-medium-babel-fish']);
 
     return Html::generateElement('a', ['href' => $this->url, 'title' => $this->title, 'class' => $classes]);
   }

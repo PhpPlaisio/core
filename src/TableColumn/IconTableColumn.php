@@ -28,6 +28,7 @@ abstract class IconTableColumn extends UniTableColumn
   protected bool $isDownloadLink = false;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Object constructor.
    */
@@ -44,23 +45,21 @@ abstract class IconTableColumn extends UniTableColumn
    */
   public function getHtmlCell(RenderWalker $walker, array $row): string
   {
-    $url     = $this->getUrl($row);
-    $classes = $this->getClasses($row);
-
     $ret = Html::generateTag('td', ['class' => $walker->getClasses('icon')]);
 
+    $url = $this->getUrl($row);
     if ($url!==null)
     {
       $ret .= Html::generateElement('a',
                                     ['href'                 => $url,
-                                     'class'                => $classes,
+                                     'class'                => $this->getClasses($row),
                                      'target'               => ($this->isDownloadLink) ? '_blank' : null,
                                      'data-confirm-message' => $this->confirmMessage]);
     }
     else
     {
       $classes[] = 'inactive';
-      $ret       .= Html::generateElement('span', ['class' => $classes]);
+      $ret       .= Html::generateElement('span', ['class' => $this->getClasses($row)]);
     }
 
     $ret .= '</td>';

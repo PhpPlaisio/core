@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\Company;
 
 use Plaisio\C;
-use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Page\PlaisioCorePage;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\Company\CompanyInsertTableAction;
 use Plaisio\Core\TableColumn\Company\CompanyTableColumn;
@@ -15,7 +15,7 @@ use Plaisio\Table\TableColumn\TextTableColumn;
 /**
  * Page with an overview of all companies.
  */
-class CompanyOverviewPage extends TabPage
+class CompanyOverviewPage extends PlaisioCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

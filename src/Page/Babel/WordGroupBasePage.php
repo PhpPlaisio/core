@@ -17,13 +17,6 @@ abstract class WordGroupBasePage extends BabelPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The ID of the word for the text of the submit button of the form shown on this page.
-   *
-   * @var int
-   */
-  protected int $buttonWrdId;
-
-  /**
    * The form shown on this page.
    *
    * @var CoreForm
@@ -36,6 +29,13 @@ abstract class WordGroupBasePage extends BabelPage
    * @var int|null
    */
   protected ?int $wdgId = null;
+
+  /**
+   * The ID of the word for the text of the submit button of the form shown on this page.
+   *
+   * @var int
+   */
+  protected int $wrdIdButton;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -90,7 +90,7 @@ abstract class WordGroupBasePage extends BabelPage
     $this->form->addFormControl($input, 'Label');
 
     // Create a submit button.
-    $this->form->addSubmitButton($this->buttonWrdId, 'handleForm');
+    $this->form->addSubmitButton($this->wrdIdButton, 'handleForm');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -119,7 +119,7 @@ abstract class WordGroupBasePage extends BabelPage
   {
     $this->databaseAction();
 
-    $this->response = new SeeOtherResponse(WordGroupDetailsPage::getUrl($this->wdgId, $this->actLanId));
+    $this->response = new SeeOtherResponse(WordGroupDetailsPage::getUrl($this->wdgId, $this->lanIdTar));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -29,7 +29,7 @@ class WordGroupUpdatePage extends WordGroupBasePage
 
     $this->wdgId       = Nub::$nub->cgi->getManId('wdg', 'wdg');
     $this->details     = Nub::$nub->DL->abcBabelWordGroupGetDetails($this->wdgId);
-    $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
+    $this->wrdIdButton = C::WRD_ID_BUTTON_UPDATE;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ class WordGroupUpdatePage extends WordGroupBasePage
     $url = Nub::$nub->cgi->putLeader();
     $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_BABEL_WORD_GROUP_UPDATE, 'pag');
     $url .= Nub::$nub->cgi->putId('wdg', $wdgId, 'wdg');
-    $url .= Nub::$nub->cgi->putId('act_lan', C::LAN_ID_BABEL_REFERENCE, 'lan');
+    $url .= Nub::$nub->cgi->putId('lan-target', C::LAN_ID_BABEL_REFERENCE, 'lan');
 
     return $url;
   }

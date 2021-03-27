@@ -42,7 +42,6 @@ class CoreFieldSet extends FieldSet
   private ?string $htmlTitle = null;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    *

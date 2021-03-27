@@ -19,7 +19,7 @@ class WordGroupInsertPage extends WordGroupBasePage
   {
     parent::__construct();
 
-    $this->buttonWrdId = C::WRD_ID_BUTTON_INSERT;
+    $this->wrdIdButton = C::WRD_ID_BUTTON_INSERT;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ class WordGroupInsertPage extends WordGroupBasePage
   {
     $url = Nub::$nub->cgi->putLeader();
     $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_BABEL_WORD_GROUP_INSERT, 'pag');
-    $url .= Nub::$nub->cgi->putId('act_lan', C::LAN_ID_BABEL_REFERENCE, 'lan');
+    $url .= Nub::$nub->cgi->putId('lan-target', C::LAN_ID_BABEL_REFERENCE, 'lan');
 
     return $url;
   }

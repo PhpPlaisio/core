@@ -32,9 +32,7 @@ class UploadItemTableAction implements TableAction
    */
   public function getHtml(RenderWalker $walker): string
   {
-    $classes   = $walker->getClasses('table-menu-icon');
-    $classes[] = 'icons-medium';
-    $classes[] = 'icons-medium-upload';
+    $classes = $walker->getClasses('table-menu-icon', ['icons-medium', 'icons-medium-upload']);
 
     return Html::generateElement('a', ['href' => $this->url, 'title' => $this->title, 'class' => $classes]);
   }

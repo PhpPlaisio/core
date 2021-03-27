@@ -51,8 +51,6 @@ class BoolIconTableColumn extends UniTableColumn
    */
   public function getHtmlCell(RenderWalker $walker, array $row): string
   {
-    $attributes = ['class' => $walker->getClasses('bool')];
-
     switch (true)
     {
       case $row[$this->fieldName]===1:
@@ -83,7 +81,7 @@ class BoolIconTableColumn extends UniTableColumn
         $html                     = Html::txt2Html(Cast::toOptString($row[$this->fieldName]));
     }
 
-    return Html::generateElement('td', $attributes, $html, true);
+    return Html::generateElement('td', ['class' => $walker->getClasses('bool')], $html, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

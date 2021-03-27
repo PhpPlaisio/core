@@ -56,17 +56,17 @@ class WordGroupDetailsPage extends BabelPage
   /**
    * Returns the relative URL of this page.
    *
-   * @param int $wdgId       The ID of the word group.
-   * @param int $targetLanId The ID of the target language.
+   * @param int $wdgId    The ID of the word group.
+   * @param int $lanIdTar The ID of the target language.
    *
    * @return string
    */
-  public static function getUrl(int $wdgId, int $targetLanId): string
+  public static function getUrl(int $wdgId, int $lanIdTar): string
   {
     $url = Nub::$nub->cgi->putLeader();
     $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_BABEL_WORD_GROUP_DETAILS, 'pag');
     $url .= Nub::$nub->cgi->putId('wdg', $wdgId, 'wdg');
-    $url .= Nub::$nub->cgi->putId('act_lan', $targetLanId, 'lan');
+    $url .= Nub::$nub->cgi->putId('lan-target', $lanIdTar, 'lan');
 
     return $url;
   }
@@ -79,7 +79,7 @@ class WordGroupDetailsPage extends BabelPage
   {
     $this->selectLanguage();
 
-    if ($this->actLanId)
+    if ($this->lanIdTar)
     {
       $this->showWordGroupInfo();
 
@@ -111,13 +111,13 @@ class WordGroupDetailsPage extends BabelPage
   private function showWords(): void
   {
     // Determine whether the user is a translator.
-    $is_translator = ($this->actLanId!=$this->refLanId &&
+    $is_translator = ($this->lanIdTar!=$this->lanIdRef &&
       Nub::$nub->DL->abcAuthGetPageAuth($this->cmpId, $this->proId, C::PAG_ID_BABEL_WORD_TRANSLATE));
 
-    $words = Nub::$nub->DL->abcBabelWordGroupGetAllWordsTranslator($this->wdgId, $this->actLanId);
+    $words = Nub::$nub->DL->abcBabelWordGroupGetAllWordsTranslator($this->wdgId, $this->lanIdTar);
 
-    $ref_language = Nub::$nub->DL->abcBabelLanguageGetName($this->refLanId, $this->refLanId);
-    $act_language = Nub::$nub->DL->abcBabelLanguageGetName($this->actLanId, $this->refLanId);
+    $languageRef = Nub::$nub->DL->abcBabelLanguageGetName($this->lanIdRef, $this->lanIdRef);
+    $languageTar = Nub::$nub->DL->abcBabelLanguageGetName($this->lanIdTar, $this->lanIdRef);
 
     $table = new CoreOverviewTable();
 
@@ -127,28 +127,27 @@ class WordGroupDetailsPage extends BabelPage
     // Add action for translation all words in the word group.
     if ($is_translator)
     {
-      $table->addTableAction('default', new WordTranslateWordsTableAction($this->wdgId, $this->actLanId));
+      $table->addTableAction('default', new WordTranslateWordsTableAction($this->wdgId, $this->lanIdTar));
     }
 
     // Show word ID.
     $table->addColumn(new NumberTableColumn('ID', 'wrd_id'));
 
     // Show label of word.
-    // Show target text.
-    if ($this->actLanId===$this->refLanId)
+    if ($this->lanIdTar===$this->lanIdRef)
     {
       $table->addColumn(new TextTableColumn('Label', 'wrd_label'));
     }
 
     // Show reference text.
-    $column = new TextTableColumn($ref_language, 'ref_wdt_text');
+    $column = new TextTableColumn($languageRef, 'ref_wdt_text');
     $column->setSortOrder(1);
     $table->addColumn($column);
 
     // Show target text.
-    if ($this->actLanId!==$this->refLanId)
+    if ($this->lanIdTar!==$this->lanIdRef)
     {
-      $table->addColumn(new TextTableColumn($act_language, 'act_wdt_text'));
+      $table->addColumn(new TextTableColumn($languageTar, 'tar_wdt_text'));
     }
 
     // Show remark.
@@ -157,7 +156,7 @@ class WordGroupDetailsPage extends BabelPage
     // Show link to translate the word.
     if ($is_translator)
     {
-      $table->addColumn(new WordTranslateIconTableColumn($this->actLanId));
+      $table->addColumn(new WordTranslateIconTableColumn($this->lanIdTar));
     }
 
     // Show link to modify the word.

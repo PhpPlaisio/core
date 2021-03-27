@@ -59,7 +59,7 @@ class WordDeletePage extends BabelPage
 
     Nub::$nub->DL->abcBabelWordDeleteWord($this->wrdId);
 
-    $this->response = new SeeOtherResponse(WordGroupDetailsPage::getUrl($details['wdg_id'], $this->actLanId));
+    $this->response = new SeeOtherResponse(WordGroupDetailsPage::getUrl($details['wdg_id'], $this->lanIdTar));
 
     return $this->response;
   }

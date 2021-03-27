@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
-use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Page\PlaisioCorePage;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\System\TabInsertTableAction;
 use Plaisio\Core\TableColumn\System\TabDetailsIconTableColumn;
@@ -16,7 +16,7 @@ use Plaisio\Table\TableColumn\TextTableColumn;
 /**
  * Page with overview of all page groups.
  */
-class TabOverviewPage extends TabPage
+class TabOverviewPage extends PlaisioCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
-use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Page\PlaisioCorePage;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\System\RoleGroupInsertTableAction;
 use Plaisio\Core\TableColumn\System\RoleGroupTableColumn;
@@ -16,7 +16,7 @@ use Plaisio\Table\TableColumn\TextTableColumn;
 /**
  * Page with an overview of all role groups.
  */
-class RoleGroupOverviewPage extends TabPage
+class RoleGroupOverviewPage extends PlaisioCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

@@ -58,7 +58,7 @@ class CoreDetailTable extends DetailTable
    */
   public function getHtmlHeader(): string
   {
-    $ret    = '';
+    $ret = '';
     if ($this->showTableActions)
     {
       $classes = $this->renderWalker->getClasses('table-menu');
@@ -71,7 +71,7 @@ class CoreDetailTable extends DetailTable
         // Add a separator between groups of table actions.
         if (!$first_group)
         {
-          $ret .= Html::generateElement('span', ['class' => ['noaction', 'icons-medium', 'icons-medium-separator']]);
+          $ret .= Html::generateElement('span', ['class' => ['no-action', 'icons-medium', 'icons-medium-separator']]);
         }
 
         // Generate HTML code for all table actions groups.
@@ -89,21 +89,6 @@ class CoreDetailTable extends DetailTable
     }
 
     $ret .= parent::getHtmlHeader();
-
-    return $ret;
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the outer HTML code of this table.
-   *
-   * @return string
-   */
-  public function getHtmlTable(): string
-  {
-    $ret = '<div class="detail_table">';
-    $ret .= parent::getHtmlTable();
-    $ret .= '</div>';
 
     return $ret;
   }

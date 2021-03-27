@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
-use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Page\PlaisioCorePage;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\System\ModuleInsertTableAction;
 use Plaisio\Core\TableColumn\System\ModuleTableColumn;
@@ -16,7 +16,7 @@ use Plaisio\Kernel\Nub;
 /**
  * Page with overview of all modules.
  */
-class ModuleOverviewPage extends TabPage
+class ModuleOverviewPage extends PlaisioCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

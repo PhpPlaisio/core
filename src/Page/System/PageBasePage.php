@@ -4,19 +4,19 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
-use Plaisio\Core\Form\Control\WeightControl;
 use Plaisio\Core\Form\CoreForm;
-use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Page\PlaisioCorePage;
 use Plaisio\Form\Control\DatabaseLabelControl;
 use Plaisio\Form\Control\SelectControl;
 use Plaisio\Form\Control\TextControl;
+use Plaisio\Form\Control\WeightControl;
 use Plaisio\Kernel\Nub;
 use Plaisio\Response\SeeOtherResponse;
 
 /**
  * Abstract parent page for inserting or modifying a page.
  */
-abstract class PageBasePage extends TabPage
+abstract class PageBasePage extends PlaisioCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -38,7 +38,7 @@ abstract class PageBasePage extends TabPage
    *
    * @var int
    */
-  protected int $targetPagId;
+  protected int $pagIdTarget;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -152,7 +152,7 @@ abstract class PageBasePage extends TabPage
   {
     $this->databaseAction();
 
-    $this->response = new SeeOtherResponse(PageDetailsPage::getUrl($this->targetPagId));
+    $this->response = new SeeOtherResponse(PageDetailsPage::getUrl($this->pagIdTarget));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
-use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Page\PlaisioCorePage;
 use Plaisio\Core\Table\CoreDetailTable;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\System\FunctionalityUpdatePagesTableAction;
@@ -20,7 +20,7 @@ use Plaisio\Table\TableRow\TextTableRow;
 /**
  * Page with information about a functionality.
  */
-class FunctionalityDetailsPage extends TabPage
+class FunctionalityDetailsPage extends PlaisioCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -38,6 +38,7 @@ class FunctionalityDetailsPage extends TabPage
   private int $funId;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * @inheritdoc
    */
@@ -75,11 +76,50 @@ class FunctionalityDetailsPage extends TabPage
    */
   protected function echoTabContent(): void
   {
+    $this->showCompanies();
     $this->showDetails();
-
     $this->showPages();
+    $this->echoRoles();
+  }
 
-    $this->showRoles();
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Show the roles that are granted the functionality.
+   */
+  private function echoRoles(): void
+  {
+    $roles = Nub::$nub->DL->abcSystemFunctionalityGetRoles($this->funId);
+
+    $table = new CoreOverviewTable();
+
+    // Add table action for granting and revoking this functionality to/from roles.
+    $table->addTableAction('default', new FunctionalityUpdateRolesTableAction($this->funId));
+
+    // Show ID and abbreviation of the company.
+    $column = new CompanyTableColumn(C::WRD_ID_COMPANY);
+    $column->setSortOrder1(1);
+    $table->addColumn($column);
+
+    // Show role ID and name
+    $table->addColumn(new RoleTableColumn(C::WRD_ID_ROLE));
+
+    echo $table->getHtmlTable($roles);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Echos an overview table with all companies that are granted this module.
+   */
+  private function showCompanies(): void
+  {
+    $companies = Nub::$nub->DL->abcSystemFunctionalityGetGrantedCompanies($this->funId);
+
+    $table = new CoreOverviewTable();
+
+    // Show ID and abbreviation of the company
+    $table->addColumn(new CompanyTableColumn(C::WRD_ID_COMPANY));
+
+    echo $table->getHtmlTable($companies);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -125,30 +165,6 @@ class FunctionalityDetailsPage extends TabPage
     $table->addColumn(new TextTableColumn('Label', 'pag_label'));
 
     echo $table->getHtmlTable($pages);
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Show the roles that are granted the functionality.
-   */
-  private function showRoles(): void
-  {
-    $roles = Nub::$nub->DL->abcSystemFunctionalityGetRoles($this->funId);
-
-    $table = new CoreOverviewTable();
-
-    // Add table action for granting and revoking this functionality to/from roles.
-    $table->addTableAction('default', new FunctionalityUpdateRolesTableAction($this->funId));
-
-    // Show ID and abbreviation of the company.
-    $column = new CompanyTableColumn(C::WRD_ID_COMPANY);
-    $column->setSortOrder1(1);
-    $table->addColumn($column);
-
-    // Show role ID and name
-    $table->addColumn(new RoleTableColumn(C::WRD_ID_ROLE));
-
-    echo $table->getHtmlTable($roles);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

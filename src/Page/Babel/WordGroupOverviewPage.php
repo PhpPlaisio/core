@@ -20,15 +20,15 @@ class WordGroupOverviewPage extends BabelPage
   /**
    * Returns the relative URL for this page.
    *
-   * @param int|null $targetLanId
+   * @param int|null $lanIdTar
    *
    * @return string
    */
-  public static function getUrl(?int $targetLanId = null): string
+  public static function getUrl(?int $lanIdTar = null): string
   {
     $url = Nub::$nub->cgi->putLeader();
     $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_BABEL_WORD_GROUP_OVERVIEW, 'pag');
-    $url .= Nub::$nub->cgi->putId('act_lan', $targetLanId, 'lan');
+    $url .= Nub::$nub->cgi->putId('lan-target', $lanIdTar, 'lan');
 
     return $url;
   }
@@ -41,7 +41,7 @@ class WordGroupOverviewPage extends BabelPage
   {
     $this->selectLanguage();
 
-    if ($this->actLanId)
+    if ($this->lanIdTar)
     {
       $this->showWordGroups();
     }
@@ -53,7 +53,7 @@ class WordGroupOverviewPage extends BabelPage
    */
   private function showWordGroups(): void
   {
-    $groups = Nub::$nub->DL->abcBabelWordGroupGetAll($this->actLanId);
+    $groups = Nub::$nub->DL->abcBabelWordGroupGetAll($this->lanIdTar);
 
     $table = new CoreOverviewTable();
 
@@ -61,7 +61,7 @@ class WordGroupOverviewPage extends BabelPage
     $table->addTableAction('default', new WordGroupInsertTableAction());
 
     // Show ID and name of the word group
-    $column = new WordGroupTableColumn('Word Group', $this->actLanId);
+    $column = new WordGroupTableColumn('Word Group', $this->lanIdTar);
     $column->setSortOrder1(1);
     $table->addColumn($column);
 
@@ -69,7 +69,7 @@ class WordGroupOverviewPage extends BabelPage
     $table->addColumn(new NumberTableColumn('# Words', 'n1'));
 
     // Show total words to be translated in the word group.
-    if ($this->actLanId!==$this->refLanId)
+    if ($this->lanIdTar!==$this->lanIdRef)
     {
       $table->addColumn(new NumberTableColumn('To Do', 'n2'));
     }

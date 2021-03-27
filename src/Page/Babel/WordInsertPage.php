@@ -36,7 +36,7 @@ class WordInsertPage extends WordBasePage
     $url = Nub::$nub->cgi->putLeader();
     $url .= Nub::$nub->cgi->putId('pag', C::PAG_ID_BABEL_WORD_INSERT, 'pag');
     $url .= Nub::$nub->cgi->putId('wdg', $wdgId, 'wdg');
-    $url .= Nub::$nub->cgi->putId('act_lan', C::LAN_ID_BABEL_REFERENCE, 'lan');
+    $url .= Nub::$nub->cgi->putId('lan-target', C::LAN_ID_BABEL_REFERENCE, 'lan');
 
     return $url;
   }

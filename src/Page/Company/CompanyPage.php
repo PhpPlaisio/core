@@ -3,14 +3,14 @@ declare(strict_types=1);
 
 namespace Plaisio\Core\Page\Company;
 
-use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Page\PlaisioCorePage;
 use Plaisio\Helper\Html;
 use Plaisio\Kernel\Nub;
 
 /**
  * Abstract parent page for pages about companies.
  */
-abstract class CompanyPage extends TabPage
+abstract class CompanyPage extends PlaisioCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

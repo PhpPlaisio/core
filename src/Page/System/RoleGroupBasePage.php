@@ -4,19 +4,19 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
-use Plaisio\Core\Form\Control\WeightControl;
 use Plaisio\Core\Form\CoreForm;
-use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Page\PlaisioCorePage;
 use Plaisio\Form\Control\DatabaseLabelControl;
 use Plaisio\Form\Control\SelectControl;
 use Plaisio\Form\Control\TextControl;
+use Plaisio\Form\Control\WeightControl;
 use Plaisio\Kernel\Nub;
 use Plaisio\Response\SeeOtherResponse;
 
 /**
  * Abstract parent page for inserting and updating details of a role group for the target company.
  */
-abstract class RoleGroupBasePage extends TabPage
+abstract class RoleGroupBasePage extends PlaisioCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

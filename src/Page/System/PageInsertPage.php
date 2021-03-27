@@ -52,7 +52,7 @@ class PageInsertPage extends PageBasePage
       $wrd_id = $values['wrd_id'];
     }
 
-    $this->targetPagId = Nub::$nub->DL->abcSystemPageInsertDetails($wrd_id,
+    $this->pagIdTarget = Nub::$nub->DL->abcSystemPageInsertDetails($wrd_id,
                                                                    $values['ptb_id'],
                                                                    $values['pag_id_org'],
                                                                    $values['pag_alias'],

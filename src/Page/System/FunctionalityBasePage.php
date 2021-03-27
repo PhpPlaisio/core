@@ -5,7 +5,7 @@ namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
 use Plaisio\Core\Form\CoreForm;
-use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Page\PlaisioCorePage;
 use Plaisio\Form\Control\SelectControl;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Kernel\Nub;
@@ -14,7 +14,7 @@ use Plaisio\Response\SeeOtherResponse;
 /**
  * Abstract parent page for inserting and updating a functionality.
  */
-abstract class FunctionalityBasePage extends TabPage
+abstract class FunctionalityBasePage extends PlaisioCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

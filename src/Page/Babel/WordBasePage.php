@@ -10,7 +10,6 @@ use Plaisio\Form\Control\DatabaseLabelControl;
 use Plaisio\Form\Control\HtmlControl;
 use Plaisio\Form\Control\SelectControl;
 use Plaisio\Form\Control\TextControl;
-use Plaisio\Helper\Html;
 use Plaisio\Kernel\Nub;
 use Plaisio\Response\SeeOtherResponse;
 use Plaisio\Table\TableRow\IntegerTableRow;
@@ -85,12 +84,12 @@ abstract class WordBasePage extends BabelPage
    */
   private function createForm(): void
   {
-    $ref_language = Nub::$nub->DL->abcBabelLanguageGetName($this->refLanId, $this->refLanId);
+    $languageRef = Nub::$nub->DL->abcBabelLanguageGetName($this->lanIdRef, $this->lanIdRef);
 
     $this->form = new CoreForm();
 
     // Create from control for word group name.
-    $word_groups = Nub::$nub->DL->abcBabelWordGroupGetAll($this->refLanId);
+    $word_groups = Nub::$nub->DL->abcBabelWordGroupGetAll($this->lanIdRef);
     $input       = new SelectControl('wdg_id');
     $input->setOptions($word_groups, 'wdg_id', 'wdg_name');
     $input->setValue($this->wdgId);
@@ -107,7 +106,7 @@ abstract class WordBasePage extends BabelPage
     // Input for the actual word.
     $input = new TextControl('wdt_text');
     $input->setAttrMaxLength(C::LEN_WDT_TEXT);
-    $this->form->addFormControl($input, Html::txt2Html($ref_language), true);
+    $this->form->addFormControl($input, $languageRef, true);
 
     // Create form control for comment.
     $input = new TextControl('wrd_comment');
@@ -167,7 +166,7 @@ abstract class WordBasePage extends BabelPage
   {
     $this->databaseAction();
 
-    $this->response = new SeeOtherResponse(WordGroupDetailsPage::getUrl($this->wdgId, $this->actLanId));
+    $this->response = new SeeOtherResponse(WordGroupDetailsPage::getUrl($this->wdgId, $this->lanIdTar));
   }
 
   //--------------------------------------------------------------------------------------------------------------------

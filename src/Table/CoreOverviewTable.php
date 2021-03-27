@@ -93,7 +93,7 @@ class CoreOverviewTable extends OverviewTable
    */
   protected function getHtmlInnerHeader(): string
   {
-    $ret    = '';
+    $ret = '';
 
     if ($this->showTableActions)
     {
@@ -109,7 +109,7 @@ class CoreOverviewTable extends OverviewTable
         // Add a separator between groups of table actions.
         if (!$first_group)
         {
-          $ret .= Html::generateElement('span', ['class' => ['noaction', 'icons-medium', 'icons-medium-separator']]);
+          $ret .= Html::generateElement('span', ['class' => ['no-action', 'icons-medium', 'icons-medium-separator']]);
         }
 
         // Generate HTML code for all table actions groups.

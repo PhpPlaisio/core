@@ -28,7 +28,7 @@ class WordUpdatePage extends WordBasePage
     parent::__construct();
 
     $this->wrdId       = Nub::$nub->cgi->getManId('wrd', 'wrd');
-    $this->details     = Nub::$nub->DL->abcBabelWordGetDetails($this->wrdId, $this->actLanId);
+    $this->details     = Nub::$nub->DL->abcBabelWordGetDetails($this->wrdId, $this->lanIdTar);
     $this->wdgId       = $this->details['wdg_id'];
     $this->buttonWrdId = C::WRD_ID_BUTTON_UPDATE;
   }

@@ -19,20 +19,20 @@ class WordGroupTableColumn extends DualTableColumn
    *
    * @var int
    */
-  private int $lanIdTarget;
+  private int $lanIdTar;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Object constructor.
    *
-   * @param string|int|null $header      The header of this column.
-   * @param int             $lanIdTarget The ID of the target language.
+   * @param string|int|null $header   The header of this column.
+   * @param int             $lanIdTar The ID of the target language.
    */
-  public function __construct($header, int $lanIdTarget)
+  public function __construct($header, int $lanIdTar)
   {
     parent::__construct('number', 'text', $header);
 
-    $this->lanIdTarget = $lanIdTarget;
+    $this->lanIdTar = $lanIdTar;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ class WordGroupTableColumn extends DualTableColumn
    */
   public function getHtmlCell(RenderWalker $walker, array $row): string
   {
-    $url    = WordGroupDetailsPage::getUrl($row['wdg_id'], $this->lanIdTarget);
+    $url    = WordGroupDetailsPage::getUrl($row['wdg_id'], $this->lanIdTar);
     $inner1 = Html::generateElement('a', ['href' => $url], $row['wdg_id']);
 
     $ret = Html::generateElement('td', ['class' => $walker->getClasses('number')], $inner1, true);

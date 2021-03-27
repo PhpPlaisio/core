@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
-use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Page\PlaisioCorePage;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\System\FunctionalityInsertTableAction;
 use Plaisio\Core\TableColumn\System\FunctionalityTableColumn;
@@ -15,7 +15,7 @@ use Plaisio\Kernel\Nub;
 /**
  * Page with an overview all functionalities.
  */
-class FunctionalityOverviewPage extends TabPage
+class FunctionalityOverviewPage extends PlaisioCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

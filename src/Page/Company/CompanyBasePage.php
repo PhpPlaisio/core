@@ -5,7 +5,7 @@ namespace Plaisio\Core\Page\Company;
 
 use Plaisio\C;
 use Plaisio\Core\Form\CoreForm;
-use Plaisio\Core\Page\TabPage;
+use Plaisio\Core\Page\PlaisioCorePage;
 use Plaisio\Form\Control\DatabaseLabelControl;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Response\SeeOtherResponse;
@@ -13,7 +13,7 @@ use Plaisio\Response\SeeOtherResponse;
 /**
  * Abstract parent page for inserting and updating the details of a company.
  */
-abstract class CompanyBasePage extends TabPage
+abstract class CompanyBasePage extends PlaisioCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
