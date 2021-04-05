@@ -92,23 +92,6 @@ class WordTranslateWordsPage extends BabelPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Updates the translations of the words in the target language.
-   */
-  private function databaseAction(): void
-  {
-    $values  = $this->form->getValues();
-    $changes = $this->form->getChangedControls();
-
-    if (empty($changes)) return;
-
-    foreach ($changes as $wrdId => $changed)
-    {
-      Nub::$nub->DL->abcBabelWordTranslateWord($this->usrId, $wrdId, $this->lanIdTar, $values[$wrdId]['tar_wdt_text']);
-    }
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Executes the form shown on this page.
    */
   private function executeForm(): void
@@ -118,6 +101,8 @@ class WordTranslateWordsPage extends BabelPage
     {
       case 'handleForm':
         $this->handleForm();
+
+        $this->response = new SeeOtherResponse(WordGroupDetailsPage::getUrl($this->wdgId, $this->lanIdTar));
         break;
 
       default:
@@ -131,13 +116,21 @@ class WordTranslateWordsPage extends BabelPage
    */
   private function handleForm(): void
   {
-    $this->databaseAction();
+    $values  = $this->form->getValues();
+    $changes = $this->form->getChangedControls();
 
-    $this->response = new SeeOtherResponse(WordGroupDetailsPage::getUrl($this->wdgId, $this->lanIdTar));
+    if (empty($changes['data'])) return;
+
+    foreach ($changes['data'] as $wrdId => $changed)
+    {
+      Nub::$nub->DL->abcBabelWordTranslateWord($this->usrId,
+                                               $wrdId,
+                                               $this->lanIdTar,
+                                               $values['data'][$wrdId]['tar_wdt_text']);
+    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-

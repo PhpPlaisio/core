@@ -66,34 +66,6 @@ class ModuleUpdatePage extends CompanyPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   *  Handles the form submit.
-   */
-  private function databaseAction(): void
-  {
-    $values  = $this->form->getValues();
-    $changes = $this->form->getChangedControls();
-
-    // If no changes are submitted return immediately.
-    if (empty($changes)) return;
-
-    foreach ($changes as $mdlId => $dummy)
-    {
-      if ($values[$mdlId]['mdl_enabled'])
-      {
-        Nub::$nub->DL->abcCompanyModuleEnable($this->targetCmpId, $mdlId);
-      }
-      else
-      {
-        Nub::$nub->DL->abcCompanyModuleDisable($this->targetCmpId, $mdlId);
-      }
-    }
-
-    // Use brute force to proper profiles.
-    Nub::$nub->DL->abcProfileProper();
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Executes the form shown on this page.
    */
   private function executeForm(): void
@@ -103,6 +75,8 @@ class ModuleUpdatePage extends CompanyPage
     {
       case 'handleForm':
         $this->handleForm();
+
+        $this->response = new SeeOtherResponse(ModuleOverviewPage::getUrl($this->targetCmpId));
         break;
 
       default:
@@ -116,9 +90,26 @@ class ModuleUpdatePage extends CompanyPage
    */
   private function handleForm(): void
   {
-    $this->databaseAction();
+    $values  = $this->form->getValues();
+    $changes = $this->form->getChangedControls();
 
-    $this->response = new SeeOtherResponse(ModuleOverviewPage::getUrl($this->targetCmpId));
+    // If no changes are submitted return immediately.
+    if (empty($changes['data'])) return;
+
+    foreach ($changes['data'] as $mdlId => $dummy)
+    {
+      if ($values['data'][$mdlId]['mdl_enabled'])
+      {
+        Nub::$nub->DL->abcCompanyModuleEnable($this->targetCmpId, $mdlId);
+      }
+      else
+      {
+        Nub::$nub->DL->abcCompanyModuleDisable($this->targetCmpId, $mdlId);
+      }
+    }
+
+    // Use brute force to proper profiles.
+    Nub::$nub->DL->abcProfileProper();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

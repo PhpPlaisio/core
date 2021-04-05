@@ -100,34 +100,6 @@ class FunctionalityUpdateRolesPage extends PlaisioCorePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Handles the form submit, i.e. add or removes pages to the functionality.
-   */
-  private function databaseAction(): void
-  {
-    $changes = $this->form->getChangedControls();
-    $values  = $this->form->getValues();
-
-    // Return immediately if no changes are submitted.
-    if (empty($changes)) return;
-
-    foreach ($changes as $rol_id => $dummy)
-    {
-      if ($values[$rol_id]['rol_enabled'])
-      {
-        Nub::$nub->DL->abcCompanyRoleInsertFunctionality($values[$rol_id]['cmp_id'], $rol_id, $this->funId);
-      }
-      else
-      {
-        Nub::$nub->DL->abcCompanyRoleDeleteFunctionality($values[$rol_id]['cmp_id'], $rol_id, $this->funId);
-      }
-    }
-
-    // Use brute force to proper profiles.
-    Nub::$nub->DL->abcProfileProper();
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Executes the form shown on this page.
    */
   private function executeForm(): void
@@ -137,6 +109,8 @@ class FunctionalityUpdateRolesPage extends PlaisioCorePage
     {
       case 'handleForm':
         $this->handleForm();
+
+        $this->response = new SeeOtherResponse(FunctionalityDetailsPage::getUrl($this->funId));
         break;
 
       default:
@@ -150,9 +124,26 @@ class FunctionalityUpdateRolesPage extends PlaisioCorePage
    */
   private function handleForm(): void
   {
-    $this->databaseAction();
+    $changes = $this->form->getChangedControls();
+    $values  = $this->form->getValues();
 
-    $this->response = new SeeOtherResponse(FunctionalityDetailsPage::getUrl($this->funId));
+    // Return immediately if no changes are submitted.
+    if (empty($changes['data'])) return;
+
+    foreach ($changes['data'] as $rolId => $dummy)
+    {
+      if ($values['data'][$rolId]['rol_enabled'])
+      {
+        Nub::$nub->DL->abcCompanyRoleInsertFunctionality($values['data'][$rolId]['cmp_id'], $rolId, $this->funId);
+      }
+      else
+      {
+        Nub::$nub->DL->abcCompanyRoleDeleteFunctionality($values['data'][$rolId]['cmp_id'], $rolId, $this->funId);
+      }
+    }
+
+    // Use brute force to proper profiles.
+    Nub::$nub->DL->abcProfileProper();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -161,7 +152,6 @@ class FunctionalityUpdateRolesPage extends PlaisioCorePage
    */
   private function showFunctionality(): void
   {
-
     $table = new CoreDetailTable();
 
     // Add row for the ID of the function.

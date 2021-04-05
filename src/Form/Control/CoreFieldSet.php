@@ -113,8 +113,6 @@ class CoreFieldSet extends FieldSet
     $buttonAttributes2 = ['class' => $this->renderWalker->getClasses('button'), 'colspan' => 2];
     $childAttributes   = ['class' => $this->renderWalker->getClasses()];
     $childAttributes2  = ['class' => $this->renderWalker->getClasses(), 'colspan' => 2];
-    $errorAttributes   = ['class' => $this->renderWalker->getClasses('error')];
-    $errorsAttributes  = ['class' => $this->renderWalker->getClasses('errors')];
     $headerAttributes  = ['class' => $this->renderWalker->getClasses('header')];
     $inputAttributes   = ['class' => $this->renderWalker->getClasses('input')];
     $rowAttributes     = ['class' => $this->renderWalker->getClasses('row')];
@@ -162,10 +160,13 @@ class CoreFieldSet extends FieldSet
         $errors = $control->getErrorMessages();
         if (!empty($errors))
         {
-          $ret .= Html::generateTag('div', $errorsAttributes);
+          $error2Attributes  = ['class' => $this->renderWalker->getClasses('error-messages')];
+          $error3Attributes  = ['class' => $this->renderWalker->getClasses('error-message')];
+
+          $ret .= Html::generateTag('div', $error2Attributes);
           foreach ($errors as $error)
           {
-            $ret .= Html::generateTag('span', $errorAttributes);
+            $ret .= Html::generateTag('span', $error3Attributes);
             $ret .= Html::txt2Html($error);
             $ret .= '</span>';
           }

@@ -100,34 +100,6 @@ class ModuleUpdateCompaniesPage extends PlaisioCorePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Handles the form submit, i.e. add or removes pages to the functionality.
-   */
-  private function databaseAction(): void
-  {
-    $changes = $this->form->getChangedControls();
-    $values  = $this->form->getValues();
-
-    // Return immediately if no changes are submitted.
-    if (empty($changes)) return;
-
-    foreach ($changes as $cmp_id => $dummy)
-    {
-      if ($values[$cmp_id]['mdl_granted'])
-      {
-        Nub::$nub->DL->abcCompanyModuleEnable($cmp_id, $this->modId);
-      }
-      else
-      {
-        Nub::$nub->DL->abcCompanyModuleDisable($cmp_id, $this->modId);
-      }
-    }
-
-    // Use brute force to proper profiles.
-    Nub::$nub->DL->abcProfileProper();
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Executes the form shown on this page.
    */
   private function executeForm(): void
@@ -137,6 +109,8 @@ class ModuleUpdateCompaniesPage extends PlaisioCorePage
     {
       case 'handleForm':
         $this->handleForm();
+
+        $this->response = new SeeOtherResponse(ModuleDetailsPage::getUrl($this->modId));
         break;
 
       default:
@@ -150,9 +124,26 @@ class ModuleUpdateCompaniesPage extends PlaisioCorePage
    */
   private function handleForm(): void
   {
-    $this->databaseAction();
+    $changes = $this->form->getChangedControls();
+    $values  = $this->form->getValues();
 
-    $this->response = new SeeOtherResponse(ModuleDetailsPage::getUrl($this->modId));
+    // Return immediately if no changes are submitted.
+    if (empty($changes['data'])) return;
+
+    foreach ($changes['data'] as $cmpId => $dummy)
+    {
+      if ($values['data'][$cmpId]['mdl_granted'])
+      {
+        Nub::$nub->DL->abcCompanyModuleEnable($cmpId, $this->modId);
+      }
+      else
+      {
+        Nub::$nub->DL->abcCompanyModuleDisable($cmpId, $this->modId);
+      }
+    }
+
+    // Use brute force to proper profiles.
+    Nub::$nub->DL->abcProfileProper();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

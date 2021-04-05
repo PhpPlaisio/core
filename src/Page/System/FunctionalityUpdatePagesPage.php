@@ -89,34 +89,6 @@ class FunctionalityUpdatePagesPage extends PlaisioCorePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Handles the form submit, i.e. add or removes pages to the functionality.
-   */
-  private function databaseAction(): void
-  {
-    $changes = $this->form->getChangedControls();
-    $values  = $this->form->getValues();
-
-    // Return immediately if no changes are submitted.
-    if (empty($changes)) return;
-
-    foreach ($changes as $pag_id => $dummy)
-    {
-      if ($values[$pag_id]['pag_enabled'])
-      {
-        Nub::$nub->DL->abcSystemFunctionalityInsertPage($this->funId, $pag_id);
-      }
-      else
-      {
-        Nub::$nub->DL->abcSystemFunctionalityDeletePage($this->funId, $pag_id);
-      }
-    }
-
-    // Use brute force to proper profiles.
-    Nub::$nub->DL->abcProfileProper();
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Executes the form shown on this page.
    */
   private function executeForm(): void
@@ -126,6 +98,8 @@ class FunctionalityUpdatePagesPage extends PlaisioCorePage
     {
       case 'handleForm':
         $this->handleForm();
+
+        $this->response = new SeeOtherResponse(FunctionalityDetailsPage::getUrl($this->funId));
         break;
 
       default:
@@ -139,9 +113,26 @@ class FunctionalityUpdatePagesPage extends PlaisioCorePage
    */
   private function handleForm(): void
   {
-    $this->databaseAction();
+    $changes = $this->form->getChangedControls();
+    $values  = $this->form->getValues();
 
-    $this->response = new SeeOtherResponse(FunctionalityDetailsPage::getUrl($this->funId));
+    // Return immediately if no changes are submitted.
+    if (empty($changes['data'])) return;
+
+    foreach ($changes['data'] as $pagId => $dummy)
+    {
+      if ($values['data'][$pagId]['pag_enabled'])
+      {
+        Nub::$nub->DL->abcSystemFunctionalityInsertPage($this->funId, $pagId);
+      }
+      else
+      {
+        Nub::$nub->DL->abcSystemFunctionalityDeletePage($this->funId, $pagId);
+      }
+    }
+
+    // Use brute force to proper profiles.
+    Nub::$nub->DL->abcProfileProper();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

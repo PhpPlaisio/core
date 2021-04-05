@@ -94,34 +94,6 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Grants and revokes functionalities from the role.
-   */
-  private function databaseAction(): void
-  {
-    $changes = $this->form->getChangedControls();
-    $values  = $this->form->getValues();
-
-    // Return immediately if no changes are submitted.
-    if (empty($changes)) return;
-
-    foreach ($changes as $fun_id => $dummy)
-    {
-      if ($values[$fun_id]['fun_enabled'])
-      {
-        Nub::$nub->DL->abcCompanyRoleInsertFunctionality($this->targetCmpId, $this->rolId, $fun_id);
-      }
-      else
-      {
-        Nub::$nub->DL->abcCompanyRoleDeleteFunctionality($this->targetCmpId, $this->rolId, $fun_id);
-      }
-    }
-
-    // Use brute force to proper profiles.
-    Nub::$nub->DL->abcProfileProper();
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Executes the form shown on this page.
    */
   private function executeForm(): void
@@ -131,6 +103,8 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
     {
       case 'handleForm':
         $this->handleForm();
+
+        $this->response = new SeeOtherResponse(RoleDetailsPage::getUrl($this->targetCmpId, $this->rolId));
         break;
 
       default:
@@ -144,9 +118,26 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
    */
   private function handleForm(): void
   {
-    $this->databaseAction();
+    $changes = $this->form->getChangedControls();
+    $values  = $this->form->getValues();
 
-    $this->response = new SeeOtherResponse(RoleDetailsPage::getUrl($this->targetCmpId, $this->rolId));
+    // Return immediately if no changes are submitted.
+    if (empty($changes['data'])) return;
+
+    foreach ($changes['data'] as $funId => $dummy)
+    {
+      if ($values['data'][$funId]['fun_enabled'])
+      {
+        Nub::$nub->DL->abcCompanyRoleInsertFunctionality($this->targetCmpId, $this->rolId, $funId);
+      }
+      else
+      {
+        Nub::$nub->DL->abcCompanyRoleDeleteFunctionality($this->targetCmpId, $this->rolId, $funId);
+      }
+    }
+
+    // Use brute force to proper profiles.
+    Nub::$nub->DL->abcProfileProper();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
