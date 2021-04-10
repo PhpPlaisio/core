@@ -33,8 +33,8 @@ class ModuleTableColumn extends DualTableColumn
     $url    = ModuleDetailsPage::getUrl($row['mdl_id']);
     $inner1 = Html::generateElement('a', ['href' => $url], $row['mdl_id']);
 
-    $ret = Html::generateElement('td', ['class' => $walker->getClasses('number')], $inner1, true);
-    $ret .= Html::generateElement('td', ['class' => $walker->getClasses('text')], $row['mdl_name']);
+    $ret = Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'number'])], $inner1, true);
+    $ret .= Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'text'])], $row['mdl_name']);
 
     return $ret;
   }

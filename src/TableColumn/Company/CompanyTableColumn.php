@@ -33,8 +33,8 @@ class CompanyTableColumn extends DualTableColumn
     $url    = CompanyDetailsPage::getUrl($row['cmp_id']);
     $inner1 = Html::generateElement('a', ['href' => $url], $row['cmp_id']);
 
-    $ret = Html::generateElement('td', ['class' => $walker->getClasses('number')], $inner1, true);
-    $ret .= Html::generateElement('td', ['class' => $walker->getClasses('text')], $row['cmp_abbr']);
+    $ret = Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'number'])], $inner1, true);
+    $ret .= Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'text'])], $row['cmp_abbr']);
 
     return $ret;
   }

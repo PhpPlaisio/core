@@ -33,8 +33,8 @@ class RoleGroupTableColumn extends DualTableColumn
     $url    = RoleGroupDetailsPage::getUrl($row['rlg_id']);
     $inner1 = Html::generateElement('a', ['href' => $url], $row['rlg_id']);
 
-    $ret = Html::generateElement('td', ['class' => $walker->getClasses('number')], $inner1, true);
-    $ret .= Html::generateElement('td', ['class' => $walker->getClasses('text')], $row['rlg_name']);
+    $ret = Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'number'])], $inner1, true);
+    $ret .= Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'text'])], $row['rlg_name']);
 
     return $ret;
   }

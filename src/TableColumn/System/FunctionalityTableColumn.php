@@ -33,8 +33,8 @@ class FunctionalityTableColumn extends DualTableColumn
     $url    = FunctionalityDetailsPage::getUrl($row['fun_id']);
     $inner1 = Html::generateElement('a', ['href' => $url], $row['fun_id']);
 
-    $ret = Html::generateElement('td', ['class' => $walker->getClasses('number')], $inner1, true);
-    $ret .= Html::generateElement('td', ['class' => $walker->getClasses('text')], $row['fun_name']);
+    $ret = Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'number'])], $inner1, true);
+    $ret .= Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'text'])], $row['fun_name']);
 
     return $ret;
   }

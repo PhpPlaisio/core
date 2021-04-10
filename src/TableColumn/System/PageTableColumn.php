@@ -33,8 +33,8 @@ class PageTableColumn extends DualTableColumn
     $url    = PageDetailsPage::getUrl($row['pag_id']);
     $inner1 = Html::generateElement('a', ['href' => $url], $row['pag_id']);
 
-    $ret = Html::generateElement('td', ['class' => $walker->getClasses('number')], $inner1, true);
-    $ret .= Html::generateElement('td', ['class' => $walker->getClasses('text')], $row['pag_class']);
+    $ret = Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'number'])], $inner1, true);
+    $ret .= Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'text'])], $row['pag_class']);
 
     return $ret;
   }

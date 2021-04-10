@@ -81,7 +81,7 @@ class BoolIconTableColumn extends UniTableColumn
         $html                     = Html::txt2Html(Cast::toOptString($row[$this->fieldName]));
     }
 
-    return Html::generateElement('td', ['class' => $walker->getClasses('bool')], $html, true);
+    return Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'bool'])], $html, true);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

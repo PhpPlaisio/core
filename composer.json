@@ -24,8 +24,8 @@
     "plaisio/page-core": "^1.4.2",
     "plaisio/page-decorator": "^1.1.0",
     "plaisio/response-core": "^2.4.0",
-    "plaisio/table-detail": "^2.0.2",
-    "plaisio/table-overview": "^5.2.0",
+    "plaisio/table-detail": "^2.0.3",
+    "plaisio/table-overview": "^5.2.1",
     "plaisio/web-assets": "^2.0.0",
     "setbased/exception": "^2.2.0",
     "setbased/php-stratum-mysql": "^6.4.0"
