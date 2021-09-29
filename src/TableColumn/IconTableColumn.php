@@ -44,26 +44,30 @@ abstract class IconTableColumn extends UniTableColumn
    */
   public function getHtmlCell(RenderWalker $walker, array $row): string
   {
-    $ret = Html::generateTag('td', ['class' => $walker->getClasses(['cell', 'icon'])]);
-
     $url = $this->getUrl($row);
     if ($url!==null)
     {
-      $ret .= Html::generateElement('a',
-                                    ['href'                 => $url,
-                                     'class'                => $this->getClasses($row),
-                                     'target'               => ($this->isDownloadLink) ? '_blank' : null,
-                                     'data-confirm-message' => $this->confirmMessage]);
+      $inner = ['tag'  => 'a',
+                'attr' => ['href'                 => $url,
+                           'class'                => $this->getClasses($row),
+                           'target'               => ($this->isDownloadLink) ? '_blank' : null,
+                           'data-confirm-message' => $this->confirmMessage],
+                'html' => null];
     }
     else
     {
+      $classes   = $this->getClasses($row);
       $classes[] = 'inactive';
-      $ret       .= Html::generateElement('span', ['class' => $this->getClasses($row)]);
+      $inner     = ['tag'  => 'span',
+                    'attr' => ['class' => $classes],
+                    'html' => null];
     }
 
-    $ret .= '</td>';
+    $struct = ['tag'   => 'td',
+               'attr'  => ['class' => $walker->getClasses(['cell', 'icon'])],
+               'inner' => $inner];
 
-    return $ret;
+    return Html::generateNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
