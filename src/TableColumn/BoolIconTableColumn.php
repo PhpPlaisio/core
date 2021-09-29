@@ -6,7 +6,6 @@ namespace Plaisio\Core\TableColumn;
 use Plaisio\Helper\Html;
 use Plaisio\Helper\RenderWalker;
 use Plaisio\Table\TableColumn\UniTableColumn;
-use SetBased\Helper\Cast;
 
 /**
  * Table column for cells with an icon for boolean values.
@@ -56,8 +55,10 @@ class BoolIconTableColumn extends UniTableColumn
       case $row[$this->fieldName]===1:
       case $row[$this->fieldName]==='1':
       case $row[$this->fieldName]===true:
-        $attributes['data-value'] = 1;
-        $html                     = Html::generateElement('span', ['class' => ['icons-small', 'icons-small-true']]);
+        $value = 1;
+        $inner = ['tag'  => 'span',
+                  'attr' => ['class' => ['icons-small', 'icons-small-true']],
+                  'html' => null];
         break;
 
       case $row[$this->fieldName]===0:
@@ -65,23 +66,31 @@ class BoolIconTableColumn extends UniTableColumn
       case $row[$this->fieldName]==='':
       case $row[$this->fieldName]===null:
       case $row[$this->fieldName]===false:
-        $attributes['data-value'] = 0;
+        $value = 0;
         if ($this->showFalse)
         {
-          $html = Html::generateElement('span', ['class' => ['icons-small', 'icons-small-false']]);
+          $inner = ['tag'  => 'span',
+                    'attr' => ['class' => ['icons-small', 'icons-small-false']],
+                    'html' => null];
         }
         else
         {
-          $html = '';
+          $value = null;
+          $inner = null;
         }
         break;
 
       default:
-        $attributes['data-value'] = $row[$this->fieldName];
-        $html                     = Html::txt2Html(Cast::toOptString($row[$this->fieldName]));
+        $value = $row[$this->fieldName];
+        $inner = ['text' => $row[$this->fieldName]];
     }
 
-    return Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'bool'])], $html, true);
+    $struct = ['tag'   => 'td',
+               'attr'  => ['class'      => $walker->getClasses(['cell', 'bool']),
+                           'data-value' => $value],
+               'inner' => $inner];
+
+    return Html::generateNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
