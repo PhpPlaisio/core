@@ -49,7 +49,7 @@ class CoreForm extends Form
   /**
    * Adds a form control to thi form.
    *
-   * @param Control         $control   The from control
+   * @param Control         $control   The form control
    * @param int|string|null $label     Depending on the type:
    *                                   <ul>
    *                                   <li>int:    The wrd_id of the legend of the form control.

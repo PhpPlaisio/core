@@ -58,9 +58,9 @@ class CoreFieldSet extends FieldSet
   /**
    * Adds a form control to this complex form control.
    *
-   * @param Control     $control   The from control added.
-   * @param string|null $label     The label of the form control.
-   * @param bool        $mandatory Whether the form control is mandatory.
+   * @param Control         $control   The form control added.
+   * @param int|string|null $label     The label of the form control.
+   * @param bool            $mandatory Whether the form control is mandatory.
    *
    * @return $this
    */
@@ -87,7 +87,6 @@ class CoreFieldSet extends FieldSet
    */
   public function addSubmitButton($wrdId, string $name = 'submit'): PushControl
   {
-    // If necessary create a button form control.
     if ($this->buttonGroupControl===null)
     {
       $this->buttonGroupControl = new ComplexControl();
@@ -107,97 +106,15 @@ class CoreFieldSet extends FieldSet
    */
   public function getHtml(RenderWalker $walker): string
   {
-    $this->addClasses($this->renderWalker->getClasses());
+    $struct = ['tag'   => 'fieldset',
+               'attr'  => ['class' => $this->renderWalker->getClasses('fieldset-visible')],
+               'inner' => ['tag'   => 'table',
+                           'attr'  => ['class' => $this->renderWalker->getClasses('table')],
+                           'inner' => [$this->getStructHead(),
+                                       $this->getStructBody($walker),
+                                       $this->getStructFoot()]]];
 
-    $buttonAttributes  = ['class' => $this->renderWalker->getClasses('button')];
-    $buttonAttributes2 = ['class' => $this->renderWalker->getClasses('button'), 'colspan' => 2];
-    $childAttributes   = ['class' => $this->renderWalker->getClasses()];
-    $childAttributes2  = ['class' => $this->renderWalker->getClasses(), 'colspan' => 2];
-    $headerAttributes  = ['class' => $this->renderWalker->getClasses('header')];
-    $inputAttributes   = ['class' => $this->renderWalker->getClasses('input')];
-    $rowAttributes     = ['class' => $this->renderWalker->getClasses('row')];
-
-    $ret = $this->getHtmlStartTag();
-    $ret .= Html::generateTag('table', $this->attributes);
-
-    if ($this->htmlTitle!==null)
-    {
-      $ret .= Html::generateTag('thead', $childAttributes);
-      $ret .= Html::generateTag('tr', $childAttributes);
-      $ret .= Html::generateTag('th', $childAttributes2);
-      $ret .= $this->htmlTitle;
-      $ret .= '</th>';
-      $ret .= '</tr>';
-      $ret .= '</thead>';
-    }
-
-    $ret .= Html::generateTag('tbody', $childAttributes);
-    $key = 0;
-    foreach ($this->controls as $control)
-    {
-      if ($control!==$this->buttonGroupControl)
-      {
-        $labelAttributes = ['class' => $this->renderWalker->getClasses()];
-        if (!empty($this->addendum[$key]['mandatory']))
-        {
-          $labelAttributes['class'][] = Control::$isMandatoryClass;
-        }
-        if ($control->isError())
-        {
-          $labelAttributes['class'][] = Control::$isErrorClass;
-        }
-
-        $ret .= Html::generateTag('tr', $rowAttributes);
-        $ret .= Html::generateTag('th', $headerAttributes);
-        $ret .= Html::generateTag('label', $labelAttributes);
-        $ret .= Html::txt2Html($this->addendum[$key]['label']);
-        $ret .= '</label>';
-        $ret .= '</th>';
-
-        $ret .= Html::generateTag('td', $inputAttributes);
-        $ret .= $control->getHtml($walker);
-
-        $errors = $control->getErrorMessages();
-        if (!empty($errors))
-        {
-          $error2Attributes  = ['class' => $this->renderWalker->getClasses('error-messages')];
-          $error3Attributes  = ['class' => $this->renderWalker->getClasses('error-message')];
-
-          $ret .= Html::generateTag('div', $error2Attributes);
-          foreach ($errors as $error)
-          {
-            $ret .= Html::generateTag('span', $error3Attributes);
-            $ret .= Html::txt2Html($error);
-            $ret .= '</span>';
-          }
-          $ret .= '</div>';
-        }
-        $ret .= '</td>';
-        $ret .= '</tr>';
-
-        $key++;
-      }
-    }
-    $ret .= '</tbody>';
-
-    if ($this->buttonGroupControl!==null)
-    {
-      $ret .= Html::generateTag('tfoot', $buttonAttributes);
-      $ret .= Html::generateTag('tr', $buttonAttributes);
-      $ret .= Html::generateTag('td', $buttonAttributes2);
-      $ret .= Html::generateTag('div', $buttonAttributes);
-      $ret .= $this->buttonGroupControl->getHtml($this->renderWalker);
-      $ret .= '</div>';
-      $ret .= '</td>';
-      $ret .= '</tr>';
-      $ret .= '</tfoot>';
-    }
-
-    $ret .= '</table>';
-
-    $ret .= $this->getHtmlEndTag();
-
-    return $ret;
+    return Html::generateNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -209,6 +126,136 @@ class CoreFieldSet extends FieldSet
   public function setTitle(?string $title): void
   {
     $this->htmlTitle = Html::txt2Html($title);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the structure of the table body.
+   *
+   * @param RenderWalker $walker The render walker for form controls.
+   *
+   * @return array
+   */
+  private function getStructBody(RenderWalker $walker): array
+  {
+    return ['tag'   => 'body',
+            'attr'  => ['class' => $this->renderWalker->getClasses('body')],
+            'inner' => $this->getStructRows($walker)];
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the structure of the error messages of a form control.
+   *
+   * @param Control $control the form control.
+   *
+   * @return array|null
+   */
+  private function getStructErrors(Control $control): ?array
+  {
+    $errors = $control->getErrorMessages();
+
+    if (empty($errors)) return null;
+
+    $messages = [];
+    foreach ($errors as $error)
+    {
+      $messages[] = ['tag'  => 'span',
+                     'attr' => ['class' => $this->renderWalker->getClasses('error-message')],
+                     'text' => $error];
+    }
+
+    return ['tag'   => 'div',
+            'attr'  => ['class' => $this->renderWalker->getClasses('error-messages')],
+            'inner' => $messages];
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the structure for the table header.
+   *
+   * @return array|null
+   */
+  private function getStructFoot(): ?array
+  {
+    if ($this->buttonGroupControl===null) return null;
+
+    return ['tag'   => 'tfoot',
+            'attr'  => ['class' => $this->renderWalker->getClasses('buttons-foot')],
+            'inner' => ['tag'   => 'tr',
+                        'attr'  => ['class' => $this->renderWalker->getClasses('buttons-row')],
+                        'inner' => ['tag'   => 'td',
+                                    'attr'  => ['class'   => $this->renderWalker->getClasses('buttons-cell'),
+                                                'colspan' => 2],
+                                    'inner' => ['tag'  => 'div',
+                                                'attr' => ['class' => $this->renderWalker->getClasses('button-cell-wrapper')],
+                                                'html' => $this->buttonGroupControl->getHtml($this->renderWalker)]]]];
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the structure for the table footer.
+   *
+   * @return array|null
+   */
+  private function getStructHead(): ?array
+  {
+    if ($this->htmlTitle===null) return null;
+
+    return ['tag'   => 'thead',
+            'attr'  => ['class' => $this->renderWalker->getClasses('title-head')],
+            'inner' => ['tag'   => 'tr',
+                        'attr'  => ['class' => $this->renderWalker->getClasses('title-row')],
+                        'inner' => ['tag'  => 'th',
+                                    'attr' => ['class'   => $this->renderWalker->getClasses('title-cell'),
+                                               'colspan' => 2],
+                                    'html' => $this->htmlTitle]]];
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Return the structure of the table rows.
+   *
+   * @param RenderWalker $walker The render walker for form controls.
+   *
+   * @return array
+   */
+  private function getStructRows(RenderWalker $walker): array
+  {
+    $struct = [];
+
+    $key = 0;
+    foreach ($this->controls as $control)
+    {
+      if ($control!==$this->buttonGroupControl)
+      {
+        $classes = [];
+        if (!empty($this->addendum[$key]['mandatory']))
+        {
+          $classes[] = Control::$isMandatoryClass;
+        }
+        if ($control->isError())
+        {
+          $classes[] = Control::$isErrorClass;
+        }
+
+        $struct[] = ['tag'   => 'tr',
+                     'attr'  => ['class' => $this->renderWalker->getClasses('row')],
+                     'inner' => [['tag'   => 'th',
+                                  'attr'  => ['class' => $this->renderWalker->getClasses('header')],
+                                  'inner' => ['tag'  => 'label',
+                                              'attr' => ['class' => $this->renderWalker->getClasses('label', $classes)],
+                                              'text' => $this->addendum[$key]['label']]],
+                                 ['tag'   => 'td',
+                                  'attr'  => ['class' => $this->renderWalker->getClasses('cell')],
+                                  'inner' => [['html' => $control->getHtml($walker)],
+                                              $this->getStructErrors($control)]]]];
+
+        $key++;
+      }
+    }
+
+    return $struct;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
