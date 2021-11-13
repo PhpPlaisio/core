@@ -30,13 +30,17 @@ class ModuleTableColumn extends DualTableColumn
    */
   public function getHtmlCell(RenderWalker $walker, array $row): string
   {
-    $url    = ModuleDetailsPage::getUrl($row['mdl_id']);
-    $inner1 = Html::generateElement('a', ['href' => $url], $row['mdl_id']);
+    $struct = [['tag'   => 'td',
+                'attr'  => ['class' => $walker->getClasses(['cell', 'number'])],
+                'inner' => ['tag'  => 'a',
+                            'attr' => ['class' => 'link',
+                                       'href'  => ModuleDetailsPage::getUrl($row['mdl_id'])],
+                            'text' => $row['mdl_id']]],
+                ['tag'  => 'td',
+                 'attr' => ['class' => $walker->getClasses(['cell', 'text'])],
+                 'text' => $row['mdl_name']]];
 
-    $ret = Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'number'])], $inner1, true);
-    $ret .= Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'text'])], $row['mdl_name']);
-
-    return $ret;
+    return Html::generateNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

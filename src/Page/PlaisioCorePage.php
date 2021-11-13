@@ -84,7 +84,7 @@ abstract class PlaisioCorePage extends CorePage
 
     $this->showIconBar();
 
-    echo '<nav class="secondary-menu clearfix">';
+    echo '<nav class="secondary-menu">';
     $this->echoTabs();
     echo '</nav>';
 
@@ -111,14 +111,14 @@ abstract class PlaisioCorePage extends CorePage
 
     $this->getPageTabs();
 
-    echo '<ul>';
+    echo '<ul class="secondary-menu">';
     foreach ($this->tabs as $tab)
     {
 
       if ($tab['url']!==null)
       {
         $class = ($tab['pag_id']===$pag_id_org) ? $class = 'selected' : '';
-        echo '<li>';
+        echo '<li class="secondary-menu">';
         echo Html::generateElement('a', ['href' => $tab['url'], 'class' => $class], $tab['tab_name']);
         echo '</li>';
       }
@@ -126,7 +126,7 @@ abstract class PlaisioCorePage extends CorePage
       {
         if ($this->showDisabledTabs)
         {
-          echo '<li>';
+          echo '<li class="secondary-menu">';
           echo Html::generateElement('a', ['class' => 'disabled'], $tab['tab_name']);
           echo '</li>';
         }

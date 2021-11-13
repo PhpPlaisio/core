@@ -30,13 +30,17 @@ class CompanyTableColumn extends DualTableColumn
    */
   public function getHtmlCell(RenderWalker $walker, array $row): string
   {
-    $url    = CompanyDetailsPage::getUrl($row['cmp_id']);
-    $inner1 = Html::generateElement('a', ['href' => $url], $row['cmp_id']);
+    $struct = [['tag'   => 'td',
+                'attr'  => ['class' => $walker->getClasses(['cell', 'number'])],
+                'inner' => ['tag'  => 'a',
+                            'attr' => ['class' => 'link',
+                                       'href'  => CompanyDetailsPage::getUrl($row['cmp_id'])],
+                            'text' => $row['cmp_id']]],
+               ['tag'  => 'td',
+                'attr' => ['class' => $walker->getClasses(['cell', 'text'])],
+                'text' => $row['cmp_abbr']]];
 
-    $ret = Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'number'])], $inner1, true);
-    $ret .= Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'text'])], $row['cmp_abbr']);
-
-    return $ret;
+    return Html::generateNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

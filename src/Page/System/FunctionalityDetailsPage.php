@@ -38,7 +38,6 @@ class FunctionalityDetailsPage extends PlaisioCorePage
   private int $funId;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * @inheritdoc
    */

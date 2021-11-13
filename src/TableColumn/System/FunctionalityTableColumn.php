@@ -30,13 +30,17 @@ class FunctionalityTableColumn extends DualTableColumn
    */
   public function getHtmlCell(RenderWalker $walker, array $row): string
   {
-    $url    = FunctionalityDetailsPage::getUrl($row['fun_id']);
-    $inner1 = Html::generateElement('a', ['href' => $url], $row['fun_id']);
+    $struct = [['tag'   => 'td',
+                'attr'  => ['class' => $walker->getClasses(['cell', 'number'])],
+                'inner' => ['tag'  => 'a',
+                            'attr' => ['class' => 'link',
+                                       'href'  => FunctionalityDetailsPage::getUrl($row['fun_id'])],
+                            'text' => $row['fun_id']]],
+               ['tag'  => 'td',
+                'attr' => ['class' => $walker->getClasses(['cell', 'text'])],
+                'text' => $row['fun_name']]];
 
-    $ret = Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'number'])], $inner1, true);
-    $ret .= Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'text'])], $row['fun_name']);
-
-    return $ret;
+    return Html::generateNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

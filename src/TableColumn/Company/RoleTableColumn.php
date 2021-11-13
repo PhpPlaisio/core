@@ -30,13 +30,17 @@ class RoleTableColumn extends DualTableColumn
    */
   public function getHtmlCell(RenderWalker $walker, array $row): string
   {
-    $url    = RoleDetailsPage::getUrl($row['cmp_id'], $row['rol_id']);
-    $inner1 = Html::generateElement('a', ['href' => $url], $row['rol_id']);
+    $struct = [['tag'   => 'td',
+                'attr'  => ['class' => $walker->getClasses(['cell', 'number'])],
+                'inner' => ['tag'  => 'a',
+                            'attr' => ['class' => 'link',
+                                       'href'  => RoleDetailsPage::getUrl($row['cmp_id'], $row['rol_id'])],
+                            'text' => $row['rol_id']]],
+               ['tag'  => 'td',
+                'attr' => ['class' => $walker->getClasses(['cell', 'text'])],
+                'text' => $row['rol_name']]];
 
-    $ret = Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'number'])], $inner1, true);
-    $ret .= Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'text'])], $row['rol_name']);
-
-    return $ret;
+    return Html::generateNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

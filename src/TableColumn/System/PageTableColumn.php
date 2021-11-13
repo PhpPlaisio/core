@@ -30,13 +30,17 @@ class PageTableColumn extends DualTableColumn
    */
   public function getHtmlCell(RenderWalker $walker, array $row): string
   {
-    $url    = PageDetailsPage::getUrl($row['pag_id']);
-    $inner1 = Html::generateElement('a', ['href' => $url], $row['pag_id']);
+    $struct = [['tag'   => 'td',
+                'attr'  => ['class' => $walker->getClasses(['cell', 'number'])],
+                'inner' => ['tag'  => 'a',
+                            'attr' => ['class' => 'link',
+                                       'href'  => PageDetailsPage::getUrl($row['pag_id'])],
+                            'text' => $row['pag_id']]],
+               ['tag'  => 'td',
+                'attr' => ['class' => $walker->getClasses(['cell', 'text'])],
+                'text' => $row['pag_class']]];
 
-    $ret = Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'number'])], $inner1, true);
-    $ret .= Html::generateElement('td', ['class' => $walker->getClasses(['cell', 'text'])], $row['pag_class']);
-
-    return $ret;
+    return Html::generateNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
