@@ -181,11 +181,11 @@ class CoreFieldSet extends FieldSet
     if ($this->buttonGroupControl===null) return null;
 
     return ['tag'   => 'tfoot',
-            'attr'  => ['class' => $this->renderWalker->getClasses('buttons-foot')],
+            'attr'  => ['class' => $this->renderWalker->getClasses('button-foot')],
             'inner' => ['tag'   => 'tr',
-                        'attr'  => ['class' => $this->renderWalker->getClasses('buttons-row')],
+                        'attr'  => ['class' => $this->renderWalker->getClasses('button-row')],
                         'inner' => ['tag'   => 'td',
-                                    'attr'  => ['class'   => $this->renderWalker->getClasses('buttons-cell'),
+                                    'attr'  => ['class'   => $this->renderWalker->getClasses('button-cell'),
                                                 'colspan' => 2],
                                     'inner' => ['tag'  => 'div',
                                                 'attr' => ['class' => $this->renderWalker->getClasses('button-cell-wrapper')],
