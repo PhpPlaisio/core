@@ -34,7 +34,7 @@ class RowCountTableAction implements TableAction
   /**
    * @inheritdoc
    */
-  public function getHtml(RenderWalker $walker): string
+  public function htmlTableAction(RenderWalker $walker): string
   {
     $struct = ['tag'  => 'span',
                'attr' => ['class' => $walker->getClasses('table-menu-row-count')],

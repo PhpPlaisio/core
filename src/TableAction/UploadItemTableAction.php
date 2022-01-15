@@ -30,7 +30,7 @@ class UploadItemTableAction implements TableAction
   /**
    * @inheritdoc
    */
-  public function getHtml(RenderWalker $walker): string
+  public function htmlTableAction(RenderWalker $walker): string
   {
     $struct = ['tag'  => 'a',
                'attr' => ['class' => $walker->getClasses('table-menu-icon', ['icons-medium', 'icons-medium-upload']),

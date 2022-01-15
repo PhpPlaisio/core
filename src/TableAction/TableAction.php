@@ -18,7 +18,7 @@ interface TableAction
    *
    * @return string
    */
-  public function getHtml(RenderWalker $walker): string;
+  public function htmlTableAction(RenderWalker $walker): string;
 
   //--------------------------------------------------------------------------------------------------------------------
 }

@@ -77,7 +77,7 @@ class CoreDetailTable extends DetailTable
         /** @var TableAction $action */
         foreach ($group as $action)
         {
-          $inner .= $action->getHtml($this->renderWalker);
+          $inner .= $action->htmlTableAction($this->renderWalker);
         }
 
         $first = false;
