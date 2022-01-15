@@ -160,7 +160,7 @@ class ModuleUpdateCompaniesPage extends PlaisioCorePage
     // Add row for the module name.
     TextTableRow::addRow($table, 'Module', $this->details['mdl_name']);
 
-    echo $table->getHtmlTable();
+    echo $table->htmlTable();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

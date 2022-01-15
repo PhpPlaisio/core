@@ -39,7 +39,7 @@ abstract class CompanyBasePage extends PlaisioCorePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Must implemented by child pages to actually insert or update a company.
+   * Must be implemented by child pages to actually insert or update a company.
    *
    * @return void
    */

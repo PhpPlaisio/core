@@ -15,7 +15,7 @@ use Plaisio\Table\TableRow\IntegerTableRow;
 use Plaisio\Table\TableRow\TextTableRow;
 
 /**
- * Page with the details of a all role group.
+ * Page with the details of a role group.
  */
 class RoleGroupDetailsPage extends PlaisioCorePage
 {
@@ -106,7 +106,7 @@ class RoleGroupDetailsPage extends PlaisioCorePage
     TextTableRow::addRow($table, 'Label', $this->roleGroup['rlg_label']);
 
     // Show table.
-    echo $table->getHtmlTable();
+    echo $table->htmlTable();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -124,7 +124,7 @@ class RoleGroupDetailsPage extends PlaisioCorePage
     $table->addColumn(new RoleTableColumn(C::WRD_ID_ROLE));
 
     // Show the table.
-    echo $table->getHtmlTable($this->roles);
+    echo $table->htmlTable($this->roles);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

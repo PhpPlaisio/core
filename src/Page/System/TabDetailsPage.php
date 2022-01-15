@@ -84,7 +84,7 @@ class TabDetailsPage extends PlaisioCorePage
     // Add row with the label of the tab.
     TextTableRow::addRow($table, 'Label', $details['ptb_label']);
 
-    echo $table->getHtmlTable();
+    echo $table->htmlTable();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -108,7 +108,7 @@ class TabDetailsPage extends PlaisioCorePage
     // Show label of the page ID.
     $table->addColumn(new TextTableColumn('Label', 'pag_label'));
 
-    echo $table->getHtmlTable($pages);
+    echo $table->htmlTable($pages);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

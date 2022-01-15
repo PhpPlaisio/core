@@ -31,7 +31,7 @@ class SpecificPageUpdatePage extends CompanyPage
   private int $pagIdTarget;
 
   /**
-   * The details om the company specific page.
+   * The details of the company specific page.
    *
    * @var array
    */

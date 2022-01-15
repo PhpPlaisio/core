@@ -42,7 +42,7 @@ abstract class PageBasePage extends PlaisioCorePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Must implemented by child pages to actually insert or update a functionality.
+   * Must be implemented by child pages to actually insert or update a functionality.
    *
    * @return void
    */

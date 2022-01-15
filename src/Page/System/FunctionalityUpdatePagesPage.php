@@ -154,7 +154,7 @@ class FunctionalityUpdatePagesPage extends PlaisioCorePage
     // Add row for the name of the function.
     TextTableRow::addRow($table, 'Functionality', $details['fun_name']);
 
-    echo $table->getHtmlTable();
+    echo $table->htmlTable();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

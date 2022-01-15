@@ -21,13 +21,6 @@ class PageUpdateFunctionalitiesPage extends PlaisioCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The details of the target page.
-   *
-   * @var array
-   */
-  private array $details;
-
-  /**
    * The form shown on this page.
    *
    * @var LouverForm
@@ -50,14 +43,13 @@ class PageUpdateFunctionalitiesPage extends PlaisioCorePage
     parent::__construct();
 
     $this->pagIdTarget = Nub::$nub->cgi->getManId('pag-target', 'pag');
-    $this->details     = Nub::$nub->DL->abcSystemPageGetDetails($this->pagIdTarget, $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the relative URL to this page.
    *
-   * @param int $pagId The Id of the target page.
+   * @param int $pagId The ID of the target page.
    *
    * @return string
    */
@@ -171,7 +163,7 @@ class PageUpdateFunctionalitiesPage extends PlaisioCorePage
     // Add row with the label of the page.
     TextTableRow::addRow($table, 'Label', $details['pag_label']);
 
-    echo $table->getHtmlTable();
+    echo $table->htmlTable();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

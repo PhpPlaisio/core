@@ -62,7 +62,7 @@ class PageOverviewPage extends PlaisioCorePage
     // Show icon to modify the page.
     $table->addColumn(new PageUpdateIconTableColumn());
 
-    echo $table->getHtmlTable($pages);
+    echo $table->htmlTable($pages);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -56,46 +56,51 @@ class CoreDetailTable extends DetailTable
    *
    * @return string
    */
-  public function getHtmlHeader(): string
+  public function htmlHeader(): string
   {
-    $ret = '';
+    $html = '';
     if ($this->showTableActions)
     {
-      $classes = $this->renderWalker->getClasses('table-menu');
-      $ret     .= Html::generateTag('tr', ['class' => $classes]);
-      $ret     .= Html::generateTag('td', ['class' => $classes, 'colspan' => 2]);
-
-      $first_group = true;
+      $inner = '';
+      $first = true;
       foreach ($this->tablesActionGroups as $group)
       {
         // Add a separator between groups of table actions.
-        if (!$first_group)
+        if (!$first)
         {
-          $ret .= Html::generateElement('span', ['class' => ['no-action', 'icons-medium', 'icons-medium-separator']]);
+          $inner .= Html::htmlNested(['tag'  => 'span',
+                                      'attr' => ['class' => ['no-action', 'icons-medium', 'icons-medium-separator']],
+                                      'html' => null]);
         }
 
-        // Generate HTML code for all table actions groups.
+        // Generate the HTML code for all table actions groups.
         /** @var TableAction $action */
         foreach ($group as $action)
         {
-          $ret .= $action->getHtml($this->renderWalker);
+          $inner .= $action->getHtml($this->renderWalker);
         }
 
-        if ($first_group) $first_group = false;
+        $first = false;
       }
 
-      $ret .= '</td>';
-      $ret .= '</tr>';
+      $struct = ['tag'   => 'tr',
+                 'attr'  => ['class' => $this->renderWalker->getClasses('table-menu-row')],
+                 'inner' => ['tag'  => 'td',
+                             'attr' => ['class'   => $this->renderWalker->getClasses('table-menu-cell'),
+                                        'colspan' => 2],
+                             'html' => $inner]];
+
+      $html .= Html::htmlNested($struct);
     }
 
-    $ret .= parent::getHtmlHeader();
+    $html .= parent::htmlHeader();
 
-    return $ret;
+    return $html;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Set the flag for enabling or disabling table actions. By default table actions are shown.
+   * Set the flag for enabling or disabling table actions. By default, table actions are shown.
    *
    * @param bool $flag If empty table actions are not shown.
    */

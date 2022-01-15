@@ -6,6 +6,7 @@ namespace Plaisio\Core\Page;
 use Plaisio\C;
 use Plaisio\Helper\Html;
 use Plaisio\Helper\OB;
+use Plaisio\Helper\RenderWalker;
 use Plaisio\Kernel\Nub;
 use Plaisio\Page\CorePage;
 use Plaisio\Response\Response;
@@ -27,13 +28,6 @@ abstract class PlaisioCorePage extends CorePage
    * @var bool
    */
   protected bool $showTabContent = false;
-
-  /**
-   * The tabs of the core page.
-   *
-   * @var array[]
-   */
-  protected array $tabs;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -107,53 +101,64 @@ abstract class PlaisioCorePage extends CorePage
    */
   protected function echoTabs(): void
   {
-    $pag_id_org = Nub::$nub->pageInfo['pag_id_org'];
-
-    $this->getPageTabs();
-
-    echo '<ul class="secondary-menu">';
-    foreach ($this->tabs as $tab)
+    $pagIdOrg = Nub::$nub->pageInfo['pag_id_org'];
+    $tabs     = $this->getPageTabs();
+    $walker   = new RenderWalker('secondary-menu');
+    $items    = [];
+    foreach ($tabs as $tab)
     {
-
       if ($tab['url']!==null)
       {
-        $class = ($tab['pag_id']===$pag_id_org) ? $class = 'selected' : '';
-        echo '<li class="secondary-menu">';
-        echo Html::generateElement('a', ['href' => $tab['url'], 'class' => $class], $tab['tab_name']);
-        echo '</li>';
+        $additionalClass = ($tab['pag_id']==$pagIdOrg) ? 'selected' : null;
+        $items[]         = ['tag'   => 'li',
+                            'attr'  => ['class' => $walker->getClasses('item')],
+                            'inner' => ['tag'  => 'a',
+                                        'attr' => ['class' => $walker->getClasses('link', $additionalClass),
+                                                   'href'  => $tab['url']],
+                                        'text' => $tab['tab_name']]];
       }
-      else
+      elseif ($this->showDisabledTabs)
       {
-        if ($this->showDisabledTabs)
-        {
-          echo '<li class="secondary-menu">';
-          echo Html::generateElement('a', ['class' => 'disabled'], $tab['tab_name']);
-          echo '</li>';
-        }
+        $items[] = ['tag'   => 'li',
+                    'attr'  => ['class' => $walker->getClasses('item')],
+                    'inner' => ['tag'  => 'a',
+                                'attr' => ['class' => $walker->getClasses('link', 'disabled')],
+                                'text' => $tab['tab_name']]];
       }
 
-      if ($tab['pag_id']===$pag_id_org && $tab['url']!==null)
+      if ($tab['pag_id']===$pagIdOrg && $tab['url']!==null)
       {
         $this->showTabContent = true;
       }
     }
-    echo '</ul>';
+
+    $struct = ['tag'   => 'nav',
+               'attr'  => ['class' => $walker->getClasses('wrapper')],
+               'inner' => ['tag'   => 'ul',
+                           'attr'  => ['class' => $walker->getClasses('list')],
+                           'inner' => $items]];
+
+    echo Html::htmlNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Retrieves the tabs of page group of the current page.
+   *
+   * @return array[]
    */
-  protected function getPageTabs(): void
+  protected function getPageTabs(): array
   {
-    $this->tabs = Nub::$nub->DL->abcAuthGetPageTabs($this->cmpId,
-                                                    Nub::$nub->pageInfo['ptb_id'],
-                                                    $this->proId,
-                                                    $this->lanId);
-    foreach ($this->tabs as &$tab)
+    $tabs = Nub::$nub->DL->abcAuthGetPageTabs($this->cmpId,
+                                              Nub::$nub->pageInfo['ptb_id'],
+                                              $this->proId,
+                                              $this->lanId);
+    foreach ($tabs as &$tab)
     {
       $tab['url'] = $this->getTabUrl($tab['pag_id']);
     }
+
+    return $tabs;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

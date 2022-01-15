@@ -9,7 +9,7 @@ use Plaisio\Helper\Html;
 use Plaisio\Helper\RenderWalker;
 
 /**
- * Table action action for translation all words in a word group.
+ * Table action for translation all words in a word group.
  */
 class WordTranslateWordsTableAction implements TableAction
 {
@@ -47,9 +47,14 @@ class WordTranslateWordsTableAction implements TableAction
    */
   public function getHtml(RenderWalker $walker): string
   {
-    $classes   = $walker->getClasses('table-menu-icon', ['icons-medium', 'icons-medium-babel-fish']);
+    $struct = ['tag'  => 'a',
+               'attr' => ['class' => $walker->getClasses('table-menu-icon', ['icons-medium',
+                                                                             'icons-medium-babel-fish']),
+                          'href'  => $this->url,
+                          'title' => $this->title],
+               'html' => null];
 
-    return Html::generateElement('a', ['href' => $this->url, 'title' => $this->title, 'class' => $classes]);
+    return Html::htmlNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

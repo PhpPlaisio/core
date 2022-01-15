@@ -87,7 +87,7 @@ class SpecificPageOverviewPage extends CompanyPage
     // Show link to delete Company specific page.
     $table->addColumn(new SpecificPageDeleteIconTableColumn($this->targetCmpId));
 
-    echo $table->getHtmlTable($this->pages);
+    echo $table->htmlTable($this->pages);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

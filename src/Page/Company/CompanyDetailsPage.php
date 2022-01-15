@@ -80,7 +80,7 @@ class CompanyDetailsPage extends CompanyPage
     // Show label.
     TextTableRow::addRow($table, 'Label', $this->details['cmp_label']);
 
-    echo $table->getHtmlTable();
+    echo $table->htmlTable();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

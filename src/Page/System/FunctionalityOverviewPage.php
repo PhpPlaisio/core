@@ -56,7 +56,7 @@ class FunctionalityOverviewPage extends PlaisioCorePage
     $table->addColumn(new FunctionalityUpdateIconTableColumn());
 
     // Generate the HTML code for the table.
-    echo $table->getHtmlTable($functionalities);
+    echo $table->htmlTable($functionalities);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

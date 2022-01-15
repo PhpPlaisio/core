@@ -34,7 +34,7 @@ abstract class TabBasePage extends PlaisioCorePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Must implemented by child pages to actually insert or update a page group.
+   * Must be implemented by child pages to actually insert or update a page group.
    *
    * @return void
    */

@@ -28,7 +28,7 @@ class ModuleTableColumn extends DualTableColumn
   /**
    * @inheritdoc
    */
-  public function getHtmlCell(RenderWalker $walker, array $row): string
+  public function htmlCell(RenderWalker $walker, array $row): string
   {
     $struct = [['tag'   => 'td',
                 'attr'  => ['class' => $walker->getClasses(['cell', 'number'])],
@@ -36,11 +36,11 @@ class ModuleTableColumn extends DualTableColumn
                             'attr' => ['class' => 'link',
                                        'href'  => ModuleDetailsPage::getUrl($row['mdl_id'])],
                             'text' => $row['mdl_id']]],
-                ['tag'  => 'td',
-                 'attr' => ['class' => $walker->getClasses(['cell', 'text'])],
-                 'text' => $row['mdl_name']]];
+               ['tag'  => 'td',
+                'attr' => ['class' => $walker->getClasses(['cell', 'text'])],
+                'text' => $row['mdl_name']]];
 
-    return Html::generateNested($struct);
+    return Html::htmlNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

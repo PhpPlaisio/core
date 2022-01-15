@@ -51,7 +51,7 @@ abstract class WordBasePage extends BabelPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Must implemented by child pages to actually insert or update a word.
+   * Must be implemented by child pages to actually insert or update a word.
    *
    * @return void
    */
@@ -137,7 +137,7 @@ abstract class WordBasePage extends BabelPage
     // Add row for the name of the word group.
     TextTableRow::addRow($table, 'Word Group', $group['wdg_name']);
 
-    echo $table->getHtmlTable();
+    echo $table->htmlTable();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

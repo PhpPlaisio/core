@@ -36,7 +36,11 @@ class RowCountTableAction implements TableAction
    */
   public function getHtml(RenderWalker $walker): string
   {
-    return Html::generateElement('span', ['class' => $walker->getClasses('table-menu-row-count')], $this->rowCount);
+    $struct = ['tag'  => 'span',
+               'attr' => ['class' => $walker->getClasses('table-menu-row-count')],
+               'text' => $this->rowCount];
+
+    return Html::htmlNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

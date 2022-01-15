@@ -39,7 +39,7 @@ class WordGroupTableColumn extends DualTableColumn
   /**
    * @inheritdoc
    */
-  public function getHtmlCell(RenderWalker $walker, array $row): string
+  public function htmlCell(RenderWalker $walker, array $row): string
   {
     $struct = [['tag'   => 'td',
                 'attr'  => ['class' => $walker->getClasses(['cell', 'number'])],
@@ -51,7 +51,7 @@ class WordGroupTableColumn extends DualTableColumn
                 'attr' => ['class' => $walker->getClasses(['cell', 'text'])],
                 'text' => $row['wdg_name']]];
 
-    return Html::generateNested($struct);
+    return Html::htmlNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

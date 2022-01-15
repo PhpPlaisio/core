@@ -16,18 +16,18 @@ class SpecificPageDeletePage extends CorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The ID of the target company.
-   *
-   * @var int
-   */
-  private int $targetCmpId;
-
-  /**
    * The ID of the target page.
    *
    * @var int
    */
   private int $pagIdTarget;
+
+  /**
+   * The ID of the target company.
+   *
+   * @var int
+   */
+  private int $targetCmpId;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

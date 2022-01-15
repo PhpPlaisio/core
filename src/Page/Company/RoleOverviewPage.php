@@ -63,7 +63,7 @@ class RoleOverviewPage extends CompanyPage
     // Add link to the update the role.
     $table->addColumn(new RoleUpdateIconTableColumn());
 
-    echo $table->getHtmlTable($roles);
+    echo $table->htmlTable($roles);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

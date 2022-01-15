@@ -84,7 +84,7 @@ class PageDetailsPage extends PlaisioCorePage
     // Show ID and abbreviation of the company
     $table->addColumn(new CompanyTableColumn(C::WRD_ID_COMPANY));
 
-    echo $table->getHtmlTable($companies);
+    echo $table->htmlTable($companies);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -120,7 +120,7 @@ class PageDetailsPage extends PlaisioCorePage
     // Add row with the label of the page.
     TextTableRow::addRow($table, 'Label', $details['pag_label']);
 
-    echo $table->getHtmlTable();
+    echo $table->htmlTable();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -142,7 +142,7 @@ class PageDetailsPage extends PlaisioCorePage
     // Show the ID and name of the functionality.
     $table->addColumn(new FunctionalityTableColumn('Functionality'));
 
-    echo $table->getHtmlTable($roles);
+    echo $table->htmlTable($roles);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -161,7 +161,7 @@ class PageDetailsPage extends PlaisioCorePage
     // Show ID and name of the role.
     $table->addColumn(new RoleTableColumn(C::WRD_ID_ROLE));
 
-    echo $table->getHtmlTable($roles);
+    echo $table->htmlTable($roles);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -55,7 +55,7 @@ class CompanyOverviewPage extends PlaisioCorePage
     // Add link to the update the company.
     $table->addColumn(new CompanyUpdateIconTableColumn());
 
-    echo $table->getHtmlTable($companies);
+    echo $table->htmlTable($companies);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

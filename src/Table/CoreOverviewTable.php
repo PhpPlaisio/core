@@ -62,7 +62,7 @@ class CoreOverviewTable extends OverviewTable
    *
    * @return string
    */
-  public function getHtmlTable(array $rows): string
+  public function htmlTable(array $rows): string
   {
     // Always add row count to the default table actions.
     $this->addTableAction('default', new RowCountTableAction(count($rows)));
@@ -71,12 +71,12 @@ class CoreOverviewTable extends OverviewTable
     if (count($rows)<=3) $this->filter = false;
 
     // Generate the HTML code for the table.
-    return parent::getHtmlTable($rows);
+    return parent::htmlTable($rows);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Set the flag for enabling or disabling table actions. By default table actions are shown.
+   * Set the flag for enabling or disabling table actions. By default, table actions are shown.
    *
    * @param bool $flag If empty table actions are not shown.
    */
@@ -91,44 +91,46 @@ class CoreOverviewTable extends OverviewTable
    *
    * @return string
    */
-  protected function getHtmlInnerHeader(): string
+  protected function htmlHeader(): string
   {
-    $ret = '';
-
+    $html = '';
     if ($this->showTableActions)
     {
-      $colspan = $this->getNumberOfColumns();
-
-      $classes = $this->renderWalker->getClasses('table-menu');
-      $ret     .= Html::generateTag('tr', ['class' => $classes]);
-      $ret     .= Html::generateTag('td', ['class' => $classes, 'colspan' => $colspan]);
-
-      $first_group = true;
+      $inner = '';
+      $first = true;
       foreach ($this->tablesActionGroups as $group)
       {
         // Add a separator between groups of table actions.
-        if (!$first_group)
+        if (!$first)
         {
-          $ret .= Html::generateElement('span', ['class' => ['no-action', 'icons-medium', 'icons-medium-separator']]);
+          $inner .= Html::htmlNested(['tag'  => 'span',
+                                      'attr' => ['class' => ['no-action', 'icons-medium', 'icons-medium-separator']],
+                                      'html' => null]);
         }
 
-        // Generate HTML code for all table actions groups.
-        /** @var $action Object */
+        // Generate the HTML code for all table actions groups.
+        /** @var TableAction $action */
         foreach ($group as $action)
         {
-          $ret .= $action->getHtml($this->renderWalker);
+          $inner .= $action->getHtml($this->renderWalker);
         }
 
-        if ($first_group) $first_group = false;
+        $first = false;
       }
 
-      $ret .= '</td>';
-      $ret .= '</tr>';
+      $struct = ['tag'   => 'tr',
+                 'attr'  => ['class' => $this->renderWalker->getClasses('table-menu-row')],
+                 'inner' => ['tag'  => 'td',
+                             'attr' => ['class'   => $this->renderWalker->getClasses('table-menu-cell'),
+                                        'colspan' => 2],
+                             'html' => $inner]];
+
+      $html .= Html::htmlNested($struct);
     }
 
-    $ret .= parent::getHtmlInnerHeader();
+    $html .= parent::htmlHeader();
 
-    return $ret;
+    return $html;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

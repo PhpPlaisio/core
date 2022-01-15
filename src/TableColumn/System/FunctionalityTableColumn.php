@@ -28,7 +28,7 @@ class FunctionalityTableColumn extends DualTableColumn
   /**
    * @inheritdoc
    */
-  public function getHtmlCell(RenderWalker $walker, array $row): string
+  public function htmlCell(RenderWalker $walker, array $row): string
   {
     $struct = [['tag'   => 'td',
                 'attr'  => ['class' => $walker->getClasses(['cell', 'number'])],
@@ -40,7 +40,7 @@ class FunctionalityTableColumn extends DualTableColumn
                 'attr' => ['class' => $walker->getClasses(['cell', 'text'])],
                 'text' => $row['fun_name']]];
 
-    return Html::generateNested($struct);
+    return Html::htmlNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

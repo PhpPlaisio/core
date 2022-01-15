@@ -14,14 +14,14 @@ abstract class IconTableColumn extends UniTableColumn
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * If set the will be prompted with an confirm message before the link is followed.
+   * If set a confirmation message will be prompted before the link is followed.
    *
    * @var string|null
    */
   protected ?string $confirmMessage = null;
 
   /**
-   * If set to true the icon is a download link (e.g. a PDF file).
+   * Whether the icon is a download link (e.g. a PDF file).
    *
    * @var bool
    */
@@ -40,9 +40,19 @@ abstract class IconTableColumn extends UniTableColumn
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns the URL of the link of the icon for a row.
+   *
+   * @param array $row The data of the table row.
+   *
+   * @return string|null
+   */
+  abstract public function getUrl(array $row): ?string;
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * @inheritdoc
    */
-  public function getHtmlCell(RenderWalker $walker, array $row): string
+  public function htmlCell(RenderWalker $walker, array $row): string
   {
     $url = $this->getUrl($row);
     if ($url!==null)
@@ -67,18 +77,8 @@ abstract class IconTableColumn extends UniTableColumn
                'attr'  => ['class' => $walker->getClasses(['cell', 'icon'])],
                'inner' => $inner];
 
-    return Html::generateNested($struct);
+    return Html::htmlNested($struct);
   }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the URL of the link of the icon for a row.
-   *
-   * @param array $row The data of the table row.
-   *
-   * @return string|null
-   */
-  abstract public function getUrl(array $row): ?string;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**

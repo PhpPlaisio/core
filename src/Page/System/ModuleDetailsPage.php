@@ -94,7 +94,7 @@ class ModuleDetailsPage extends PlaisioCorePage
     // Show ID and abbreviation of the company
     $table->addColumn(new CompanyTableColumn(C::WRD_ID_COMPANY));
 
-    echo $table->getHtmlTable($companies);
+    echo $table->htmlTable($companies);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -114,7 +114,7 @@ class ModuleDetailsPage extends PlaisioCorePage
     // Add row for the name of the module.
     TextTableRow::addRow($table, 'Module', $this->details['mdl_name']);
 
-    echo $table->getHtmlTable();
+    echo $table->htmlTable();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -130,7 +130,7 @@ class ModuleDetailsPage extends PlaisioCorePage
     // Show ID and name of the functionality
     $table->addColumn(new FunctionalityTableColumn('Function'));
 
-    echo $table->getHtmlTable($functions);
+    echo $table->htmlTable($functions);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

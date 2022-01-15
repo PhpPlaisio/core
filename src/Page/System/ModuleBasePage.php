@@ -39,7 +39,7 @@ abstract class ModuleBasePage extends PlaisioCorePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Must implemented by child pages to actually insert or update a module.
+   * Must be implemented by child pages to actually insert or update a module.
    *
    * @return void
    */

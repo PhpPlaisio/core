@@ -94,7 +94,7 @@ class RoleDetailsPage extends CompanyPage
     $table->addColumn($column);
 
     // Generate the HTML code for the table.
-    echo $table->getHtmlTable($functionalities);
+    echo $table->htmlTable($functionalities);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -118,7 +118,7 @@ class RoleDetailsPage extends CompanyPage
     // Show label of the page ID.
     $table->addColumn(new TextTableColumn('Label', 'pag_label'));
 
-    echo $table->getHtmlTable($pages);
+    echo $table->htmlTable($pages);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -149,7 +149,7 @@ class RoleDetailsPage extends CompanyPage
     // Show label.
     TextTableRow::addRow($table, 'Label', $details['rol_label']);
 
-    echo $table->getHtmlTable();
+    echo $table->htmlTable();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

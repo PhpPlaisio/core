@@ -50,7 +50,7 @@ class ModuleOverviewPage extends CompanyPage
     $table->addColumn($column);
 
     // Generate the HTML code for the table.
-    echo $table->getHtmlTable($modules);
+    echo $table->htmlTable($modules);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

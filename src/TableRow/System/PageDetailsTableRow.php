@@ -24,7 +24,9 @@ class PageDetailsTableRow
   {
     if ($data['pag_id_org']!==null)
     {
-      $a = Html::generateElement('a', ['href' => PageDetailsPage::getUrl($data['pag_id_org'])], $data['pag_id_org']);
+      $a = Html::htmlNested(['tag'  => 'a',
+                             'attr' => ['href' => PageDetailsPage::getUrl($data['pag_id_org'])],
+                             'text' => $data['pag_id_org']]);
 
       $table->addRow($header, ['class' => $table->renderWalker->getClasses(['cell', 'text'])], $a, true);
     }

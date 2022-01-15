@@ -12,7 +12,7 @@ use Plaisio\Kernel\Nub;
 use Plaisio\Table\TableColumn\NumberTableColumn;
 
 /**
- * Page show an overview of all word groups.
+ * Page showing an overview of all word groups.
  */
 class WordGroupOverviewPage extends BabelPage
 {
@@ -74,10 +74,10 @@ class WordGroupOverviewPage extends BabelPage
       $table->addColumn(new NumberTableColumn('To Do', 'n2'));
     }
 
-    // Add link to the modify the word group.
+    // Add link to modify the word group.
     $table->addColumn(new WordGroupUpdateIconTableColumn());
 
-    echo $table->getHtmlTable($groups);
+    echo $table->htmlTable($groups);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

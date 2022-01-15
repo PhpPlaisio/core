@@ -59,11 +59,11 @@ class TabOverviewPage extends PlaisioCorePage
     // Show link to the details of the page tab.
     $table->addColumn(new TabDetailsIconTableColumn());
 
-    // Show link to the modify the page tab.
+    // Show link to modify the page tab.
     $table->addColumn(new TabUpdateIconTableColumn());
 
     // Generate the HTML code for the table.
-    echo $table->getHtmlTable($tabs);
+    echo $table->htmlTable($tabs);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

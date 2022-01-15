@@ -53,7 +53,7 @@ class ModuleOverviewPage extends PlaisioCorePage
     // Add column with icon to modify the details of the module.
     $table->addColumn(new ModuleUpdateIconTableColumn());
 
-    echo $table->getHtmlTable($modules);
+    echo $table->htmlTable($modules);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

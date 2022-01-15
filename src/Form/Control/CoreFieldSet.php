@@ -104,7 +104,7 @@ class CoreFieldSet extends FieldSet
   /**
    * @inheritdoc
    */
-  public function getHtml(RenderWalker $walker): string
+  public function htmlControl(RenderWalker $walker): string
   {
     $struct = ['tag'   => 'fieldset',
                'attr'  => ['class' => $this->renderWalker->getClasses('fieldset-visible')],
@@ -114,7 +114,7 @@ class CoreFieldSet extends FieldSet
                                        $this->getStructBody($walker),
                                        $this->getStructFoot()]]];
 
-    return Html::generateNested($struct);
+    return Html::htmlNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -189,7 +189,7 @@ class CoreFieldSet extends FieldSet
                                                 'colspan' => 2],
                                     'inner' => ['tag'  => 'div',
                                                 'attr' => ['class' => $this->renderWalker->getClasses('button-cell-wrapper')],
-                                                'html' => $this->buttonGroupControl->getHtml($this->renderWalker)]]]];
+                                                'html' => $this->buttonGroupControl->htmlControl($this->renderWalker)]]]];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -248,7 +248,7 @@ class CoreFieldSet extends FieldSet
                                               'text' => $this->addendum[$key]['label']]],
                                  ['tag'   => 'td',
                                   'attr'  => ['class' => $this->renderWalker->getClasses('cell')],
-                                  'inner' => [['html' => $control->getHtml($walker)],
+                                  'inner' => [['html' => $control->htmlControl($walker)],
                                               $this->getStructErrors($control)]]]];
 
         $key++;

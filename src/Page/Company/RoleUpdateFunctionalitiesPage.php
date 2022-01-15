@@ -16,13 +16,6 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The details of the role.
-   *
-   * @var array
-   */
-  private array $details;
-
-  /**
    * The form shown on this page.
    *
    * @var LouverForm
@@ -45,8 +38,6 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
     parent::__construct();
 
     $this->rolId = Nub::$nub->cgi->getManId('rol', 'rol');
-
-    $this->details = Nub::$nub->DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId, $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

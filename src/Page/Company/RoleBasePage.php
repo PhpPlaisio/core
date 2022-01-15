@@ -41,7 +41,7 @@ abstract class RoleBasePage extends CompanyPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Must implemented by child pages to actually insert or update a role of the target company.
+   * Must be implemented by child pages to actually insert or update a role of the target company.
    *
    * @return void
    */

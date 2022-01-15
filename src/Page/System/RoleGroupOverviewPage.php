@@ -59,7 +59,7 @@ class RoleGroupOverviewPage extends PlaisioCorePage
     // Add link to the update the role group.
     $table->addColumn(new RoleGroupUpdateIconTableColumn());
 
-    echo $table->getHtmlTable($roles);
+    echo $table->htmlTable($roles);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -21,7 +21,7 @@ class BoolIconTableColumn extends UniTableColumn
   protected string $fieldName;
 
   /**
-   * If set false values are shown explicitly. Otherwise when the value evaluates to false an empty cell is shown.
+   * If set false values are shown explicitly. Otherwise, when the value evaluates to false an empty cell is shown.
    *
    * @var bool
    */
@@ -48,7 +48,7 @@ class BoolIconTableColumn extends UniTableColumn
   /**
    * @inheritdoc
    */
-  public function getHtmlCell(RenderWalker $walker, array $row): string
+  public function htmlCell(RenderWalker $walker, array $row): string
   {
     switch (true)
     {
@@ -90,7 +90,7 @@ class BoolIconTableColumn extends UniTableColumn
                            'data-value' => $value],
                'inner' => $inner];
 
-    return Html::generateNested($struct);
+    return Html::htmlNested($struct);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

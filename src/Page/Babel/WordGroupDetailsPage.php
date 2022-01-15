@@ -101,7 +101,7 @@ class WordGroupDetailsPage extends BabelPage
     // Add row for the name of the word group.
     TextTableRow::addRow($table, 'Word Group', $this->details['wdg_name']);
 
-    echo $table->getHtmlTable();
+    echo $table->htmlTable();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -169,7 +169,7 @@ class WordGroupDetailsPage extends BabelPage
     }
 
     // Generate the HTML code for the table.
-    echo $table->getHtmlTable($words);
+    echo $table->htmlTable($words);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
