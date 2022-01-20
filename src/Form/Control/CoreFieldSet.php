@@ -110,9 +110,9 @@ class CoreFieldSet extends FieldSet
                'attr'  => ['class' => $this->renderWalker->getClasses('fieldset-visible')],
                'inner' => ['tag'   => 'table',
                            'attr'  => ['class' => $this->renderWalker->getClasses('table')],
-                           'inner' => [$this->getStructHead(),
-                                       $this->getStructBody($walker),
-                                       $this->getStructFoot()]]];
+                           'inner' => [$this->structHead(),
+                                       $this->structBody($walker),
+                                       $this->structFoot()]]];
 
     return Html::htmlNested($struct);
   }
@@ -136,11 +136,11 @@ class CoreFieldSet extends FieldSet
    *
    * @return array
    */
-  private function getStructBody(RenderWalker $walker): array
+  private function structBody(RenderWalker $walker): array
   {
-    return ['tag'   => 'body',
+    return ['tag'   => 'tbody',
             'attr'  => ['class' => $this->renderWalker->getClasses('body')],
-            'inner' => $this->getStructRows($walker)];
+            'inner' => $this->structRows($walker)];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -151,7 +151,7 @@ class CoreFieldSet extends FieldSet
    *
    * @return array|null
    */
-  private function getStructErrors(Control $control): ?array
+  private function structErrors(Control $control): ?array
   {
     $errors = $control->getErrorMessages();
 
@@ -176,7 +176,7 @@ class CoreFieldSet extends FieldSet
    *
    * @return array|null
    */
-  private function getStructFoot(): ?array
+  private function structFoot(): ?array
   {
     if ($this->buttonGroupControl===null) return null;
 
@@ -198,7 +198,7 @@ class CoreFieldSet extends FieldSet
    *
    * @return array|null
    */
-  private function getStructHead(): ?array
+  private function structHead(): ?array
   {
     if ($this->htmlTitle===null) return null;
 
@@ -220,7 +220,7 @@ class CoreFieldSet extends FieldSet
    *
    * @return array
    */
-  private function getStructRows(RenderWalker $walker): array
+  private function structRows(RenderWalker $walker): array
   {
     $struct = [];
 
@@ -249,7 +249,7 @@ class CoreFieldSet extends FieldSet
                                  ['tag'   => 'td',
                                   'attr'  => ['class' => $this->renderWalker->getClasses('cell')],
                                   'inner' => [['html' => $control->htmlControl($walker)],
-                                              $this->getStructErrors($control)]]]];
+                                              $this->structErrors($control)]]]];
 
         $key++;
       }
