@@ -91,7 +91,7 @@ class CoreOverviewTable extends OverviewTable
    *
    * @return string
    */
-  protected function htmlHeader(): string
+  protected function htmlInnerHeader(): string
   {
     $html = '';
     if ($this->showTableActions)
@@ -128,7 +128,7 @@ class CoreOverviewTable extends OverviewTable
       $html .= Html::htmlNested($struct);
     }
 
-    $html .= parent::htmlHeader();
+    $html .= parent::htmlInnerHeader();
 
     return $html;
   }
