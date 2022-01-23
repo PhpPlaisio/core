@@ -6,7 +6,7 @@ namespace Plaisio\Core\Page\System;
 use Plaisio\C;
 use Plaisio\Core\Form\CoreForm;
 use Plaisio\Core\Form\FormValidator\SystemModuleInsertCompoundValidator;
-use Plaisio\Core\Page\PlaisioCorePage;
+use Plaisio\Core\Page\CoreCorePage;
 use Plaisio\Form\Control\SelectControl;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Kernel\Nub;
@@ -15,7 +15,7 @@ use Plaisio\Response\SeeOtherResponse;
 /**
  * Abstract parent class for inserting or updating the details of a module.
  */
-abstract class ModuleBasePage extends PlaisioCorePage
+abstract class ModuleBasePage extends CoreCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -49,11 +49,13 @@ abstract class ModuleBasePage extends PlaisioCorePage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
     $this->createForm();
     $this->loadValues();
     $this->executeForm();
+
+    return $this->form->htmlFormEmptyIfValid();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

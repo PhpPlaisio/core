@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
-use Plaisio\Core\Page\PlaisioCorePage;
+use Plaisio\Core\Page\CoreCorePage;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\System\FunctionalityInsertTableAction;
 use Plaisio\Core\TableColumn\System\FunctionalityTableColumn;
@@ -15,7 +15,7 @@ use Plaisio\Kernel\Nub;
 /**
  * Page with an overview all functionalities.
  */
-class FunctionalityOverviewPage extends PlaisioCorePage
+class FunctionalityOverviewPage extends CoreCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -35,7 +35,7 @@ class FunctionalityOverviewPage extends PlaisioCorePage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
     $functionalities = Nub::$nub->DL->abcSystemFunctionalityGetAll($this->lanId);
 
@@ -56,7 +56,7 @@ class FunctionalityOverviewPage extends PlaisioCorePage
     $table->addColumn(new FunctionalityUpdateIconTableColumn());
 
     // Generate the HTML code for the table.
-    echo $table->htmlTable($functionalities);
+    return $table->htmlTable($functionalities);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

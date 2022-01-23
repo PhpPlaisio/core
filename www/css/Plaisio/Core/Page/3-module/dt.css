@@ -1,0 +1,51 @@
+.dt-table
+{
+  margin:          -2px;
+  empty-cells:     show;
+  border-spacing:  2px;
+  border-collapse: separate;
+}
+
+.dt-header
+{
+  font-weight:      bold;
+  padding:          5px;
+  text-align:       center;
+  vertical-align:   middle;
+  background-color: #d3dcee;
+}
+
+.dt-cell
+{
+  padding:          5px;
+  vertical-align:   middle;
+  background-color: #eeeeee;
+}
+
+.dt-row:hover > .dt-cell
+{
+  background-color: #b7f9b7;
+}
+
+.dt-row:hover > .dt-header
+{
+  color:            #333333;
+  background-color: #b7f9b7;
+}
+
+tr.dt-table-menu
+{
+  height: 20px;
+}
+
+.dt-table-menu-icon
+{
+  margin:         0 3px 0 0;
+  cursor:         pointer;
+  vertical-align: middle;
+}
+
+.dt-table-menu-icon.no-action
+{
+  cursor: auto;
+}

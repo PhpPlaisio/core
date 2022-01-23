@@ -1,0 +1,50 @@
+.ot-cell
+{
+  padding:        5px;
+  vertical-align: middle;
+}
+
+.ot-bool,
+.ot-control-checkbox
+{
+  text-align:     center;
+  vertical-align: middle;
+}
+
+.ot-currency,
+.ot-number
+{
+  text-align:           right;
+  vertical-align:       middle;
+  font-variant-numeric: proportional-nums;
+}
+
+.ot-currency:not(:empty):before
+{
+  float:         left;
+  padding-right: 4px;
+  content:       "€";
+}
+
+.ot-date,
+.ot-datetime
+{
+  text-align:           center;
+  vertical-align:       middle;
+  font-variant-numeric: proportional-nums;
+}
+
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+/*                                                                                                                    */
+/*                                                         Forms Controls                                             */
+/*                                                                                                                    */
+/* ------------------------------------------------------------------------------------------------------------------ */
+.ot-control-checkbox,
+.ot-control-date,
+.ot-control-select,
+.ot-control-text
+{
+  padding:    0 5px;
+  text-align: center;
+}

@@ -83,10 +83,12 @@ class WordTranslatePage extends BabelPage
   /**
    * @inheritdoc
    */
-  public function echoTabContent(): void
+  public function htmlTabContent(): ?string
   {
     $this->createForm();
     $this->executeForm();
+
+    return $this->form->htmlFormEmptyIfValid();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace Plaisio\Core\Page\Misc;
 
-use Plaisio\Core\Page\PlaisioCorePage;
+use Plaisio\Core\Page\CoreCorePage;
 use Plaisio\Kernel\Nub;
 
 /**
  * The home page.
  */
-class IndexPage extends PlaisioCorePage
+class IndexPage extends CoreCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -28,9 +28,9 @@ class IndexPage extends PlaisioCorePage
   /**
    * Shows the page content for an identified user, i.e. a user that has logged in.
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
-    echo 'System content';
+    return 'System content';
   }
 
   //--------------------------------------------------------------------------------------------------------------------

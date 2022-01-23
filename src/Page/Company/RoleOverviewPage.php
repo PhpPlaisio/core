@@ -39,7 +39,7 @@ class RoleOverviewPage extends CompanyPage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
     $roles = Nub::$nub->DL->abcCompanyRoleGetAll($this->targetCmpId, $this->lanId);
 
@@ -63,7 +63,7 @@ class RoleOverviewPage extends CompanyPage
     // Add link to the update the role.
     $table->addColumn(new RoleUpdateIconTableColumn());
 
-    echo $table->htmlTable($roles);
+    return $table->htmlTable($roles);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

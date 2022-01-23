@@ -1,0 +1,37 @@
+@media all and (max-width: 40em)
+{
+  .admin-menu-icon
+  {
+    display:  inline-block;
+    cursor:   pointer;
+    position: absolute;
+    top:      15px;
+    right:    10px;
+  }
+
+  .menu-bar1,
+  .menu-bar2,
+  .menu-bar3
+  {
+    width:            35px;
+    height:           5px;
+    background-color: #333333;
+    margin:           6px 0;
+    transition:       0.4s;
+  }
+
+  .menu-change .menu-bar1
+  {
+    transform: rotate(-45deg) translate(-9px, 6px);
+  }
+
+  .menu-change .menu-bar2
+  {
+    opacity: 0;
+  }
+
+  .menu-change .menu-bar3
+  {
+    transform: rotate(45deg) translate(-8px, -8px);
+  }
+}

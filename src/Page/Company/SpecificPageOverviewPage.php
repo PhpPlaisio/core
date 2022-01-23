@@ -58,7 +58,7 @@ class SpecificPageOverviewPage extends CompanyPage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
     $table = new CoreOverviewTable();
 
@@ -87,7 +87,7 @@ class SpecificPageOverviewPage extends CompanyPage
     // Show link to delete Company specific page.
     $table->addColumn(new SpecificPageDeleteIconTableColumn($this->targetCmpId));
 
-    echo $table->htmlTable($this->pages);
+    return $table->htmlTable($this->pages);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

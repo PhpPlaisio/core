@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\Company;
 
 use Plaisio\C;
-use Plaisio\Core\Page\PlaisioCorePage;
+use Plaisio\Core\Page\CoreCorePage;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\Company\CompanyInsertTableAction;
 use Plaisio\Core\TableColumn\Company\CompanyTableColumn;
@@ -15,7 +15,7 @@ use Plaisio\Table\TableColumn\TextTableColumn;
 /**
  * Page with an overview of all companies.
  */
-class CompanyOverviewPage extends PlaisioCorePage
+class CompanyOverviewPage extends CoreCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -35,7 +35,7 @@ class CompanyOverviewPage extends PlaisioCorePage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
     $companies = Nub::$nub->DL->abcCompanyGetAll();
 
@@ -55,16 +55,16 @@ class CompanyOverviewPage extends PlaisioCorePage
     // Add link to the update the company.
     $table->addColumn(new CompanyUpdateIconTableColumn());
 
-    echo $table->htmlTable($companies);
+    return $table->htmlTable($companies);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * CompanyOverviewPage constructor.
    */
-  protected function echoTabs(): void
+  protected function structSecondaryMenu(): ?array
   {
-    // Nothing to do.
+    return null;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
-use Plaisio\Core\Page\PlaisioCorePage;
+use Plaisio\Core\Page\CoreCorePage;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\System\ModuleInsertTableAction;
 use Plaisio\Core\TableColumn\System\ModuleTableColumn;
@@ -16,7 +16,7 @@ use Plaisio\Kernel\Nub;
 /**
  * Page with overview of all modules.
  */
-class ModuleOverviewPage extends PlaisioCorePage
+class ModuleOverviewPage extends CoreCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -36,7 +36,7 @@ class ModuleOverviewPage extends PlaisioCorePage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
     $modules = Nub::$nub->DL->abcSystemModuleGetAll($this->lanId);
 
@@ -53,7 +53,7 @@ class ModuleOverviewPage extends PlaisioCorePage
     // Add column with icon to modify the details of the module.
     $table->addColumn(new ModuleUpdateIconTableColumn());
 
-    echo $table->htmlTable($modules);
+    return $table->htmlTable($modules);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

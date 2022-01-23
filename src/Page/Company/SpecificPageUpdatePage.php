@@ -88,10 +88,12 @@ class SpecificPageUpdatePage extends CompanyPage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
     $this->createForm();
     $this->executeForm();
+
+    return $this->form->htmlFormEmptyIfValid();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,22 @@
+@media only screen and (min-width: 40em)
+{
+  .ot-filter-row
+  {
+    padding:          0;
+    background-color: #dddddd;
+  }
+
+  .ot-filter-text
+  {
+    visibility: hidden;
+    width:      1px;
+    margin:     0;
+    padding:    0;
+    border:     1px solid #d5d5d5;
+  }
+
+  .ot-filer-text:focus
+  {
+    border-color: #acacac;
+  }
+}

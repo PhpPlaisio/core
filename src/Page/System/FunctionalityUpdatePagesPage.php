@@ -5,7 +5,8 @@ namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
 use Plaisio\Core\Form\SlatControlFactory\SystemFunctionalityUpdatePagesSlatControlFactory;
-use Plaisio\Core\Page\PlaisioCorePage;
+use Plaisio\Core\Html\VerticalLayout;
+use Plaisio\Core\Page\CoreCorePage;
 use Plaisio\Core\Table\CoreDetailTable;
 use Plaisio\Form\LouverForm;
 use Plaisio\Kernel\Nub;
@@ -16,7 +17,7 @@ use Plaisio\Table\TableRow\TextTableRow;
 /**
  * Page for setting the pages that a functionality grants access.
  */
-class FunctionalityUpdatePagesPage extends PlaisioCorePage
+class FunctionalityUpdatePagesPage extends CoreCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -65,12 +66,24 @@ class FunctionalityUpdatePagesPage extends PlaisioCorePage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
-    $this->showFunctionality();
-
     $this->createForm();
     $this->executeForm();
+
+    if ($this->response===null)
+    {
+      $layout = new VerticalLayout();
+      $layout->addBlock($this->htmlFunctionality())
+             ->addBlock($this->form->htmlForm());
+      $html = $layout->html();
+    }
+    else
+    {
+      $html = null;
+    }
+
+    return $html;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -137,9 +150,9 @@ class FunctionalityUpdatePagesPage extends PlaisioCorePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Echos brief info about the functionality.
+   * Returns brief info about the functionality.
    */
-  private function showFunctionality(): void
+  private function htmlFunctionality(): string
   {
     $details = Nub::$nub->DL->abcSystemFunctionalityGetDetails($this->funId, $this->lanId);
 
@@ -154,7 +167,7 @@ class FunctionalityUpdatePagesPage extends PlaisioCorePage
     // Add row for the name of the function.
     TextTableRow::addRow($table, 'Functionality', $details['fun_name']);
 
-    echo $table->htmlTable();
+    return $table->htmlTable();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

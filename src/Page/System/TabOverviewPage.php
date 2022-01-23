@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
-use Plaisio\Core\Page\PlaisioCorePage;
+use Plaisio\Core\Page\CoreCorePage;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\System\TabInsertTableAction;
 use Plaisio\Core\TableColumn\System\TabDetailsIconTableColumn;
@@ -16,7 +16,7 @@ use Plaisio\Table\TableColumn\TextTableColumn;
 /**
  * Page with overview of all page groups.
  */
-class TabOverviewPage extends PlaisioCorePage
+class TabOverviewPage extends CoreCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -36,7 +36,7 @@ class TabOverviewPage extends PlaisioCorePage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
     $tabs = Nub::$nub->DL->abcSystemTabGetAll($this->lanId);
 
@@ -63,7 +63,7 @@ class TabOverviewPage extends PlaisioCorePage
     $table->addColumn(new TabUpdateIconTableColumn());
 
     // Generate the HTML code for the table.
-    echo $table->htmlTable($tabs);
+    return $table->htmlTable($tabs);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

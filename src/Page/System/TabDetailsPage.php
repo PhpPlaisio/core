@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
-use Plaisio\Core\Page\PlaisioCorePage;
+use Plaisio\Core\Html\VerticalLayout;
+use Plaisio\Core\Page\CoreCorePage;
 use Plaisio\Core\Table\CoreDetailTable;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableColumn\System\PageTableColumn;
@@ -16,7 +17,7 @@ use Plaisio\Table\TableRow\TextTableRow;
 /**
  * Page with information about a page group.
  */
-class TabDetailsPage extends PlaisioCorePage
+class TabDetailsPage extends CoreCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -58,19 +59,20 @@ class TabDetailsPage extends PlaisioCorePage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
-    $this->showDetails();
+    $layout = new VerticalLayout();
+    $layout->addBlock($this->htmlDetails())
+           ->addBlock($this->htmlMasterPages());
 
-    $this->showMasterPages();
-    // XXX Show all pages.
+    return $layout->html();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Echos the details of the page group.
+   * Returns the details of the page group.
    */
-  private function showDetails(): void
+  private function htmlDetails(): string
   {
     $details = Nub::$nub->DL->abcSystemTabGetDetails($this->tabId, $this->lanId);
     $table   = new CoreDetailTable();
@@ -84,14 +86,14 @@ class TabDetailsPage extends PlaisioCorePage
     // Add row with the label of the tab.
     TextTableRow::addRow($table, 'Label', $details['ptb_label']);
 
-    echo $table->htmlTable();
+    return $table->htmlTable();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Echos an overview of all master pages of the page group.
+   * Returns an overview of all master pages of the page group.
    */
-  private function showMasterPages(): void
+  private function htmlMasterPages(): string
   {
     $pages = Nub::$nub->DL->abcSystemTabGetMasterPages($this->tabId, $this->lanId);
 
@@ -108,7 +110,7 @@ class TabDetailsPage extends PlaisioCorePage
     // Show label of the page ID.
     $table->addColumn(new TextTableColumn('Label', 'pag_label'));
 
-    echo $table->htmlTable($pages);
+    return $table->htmlTable($pages);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

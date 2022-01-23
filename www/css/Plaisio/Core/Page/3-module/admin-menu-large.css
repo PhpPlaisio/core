@@ -1,0 +1,57 @@
+@media all and (min-width: 40em)
+{
+  div.grid-admin-menu
+  {
+    border-right: #333333 1px solid;
+    width:        120px;
+  }
+
+  ul.menu-admin.menu-level-0
+  {
+    border-top:       1px solid #777777;
+    white-space:      nowrap;
+    background-color: white;
+  }
+
+  li.menu-admin > a
+  {
+    padding:         5px 5px 5px 10px;
+    display:         block;
+    color:           #0000CC;
+    text-decoration: none;
+    margin-bottom:   2px;
+  }
+
+  li.menu-admin.menu-level-0 > a
+  {
+    padding:          4px 5px 4px 5px;
+    color:            white;
+    background-color: #828DA6;
+    font-weight:      bold;
+  }
+
+  li.menu-admin.menu-level-1:hover
+  {
+    text-decoration:  none;
+    background-color: #B7F9B7;
+  }
+
+  li.menu-admin.menu-level-1
+  {
+    padding:          0;
+    margin:           0;
+    list-style-type:  none;
+    color:            #0000CC;
+    background-color: #EAEAEA;
+  }
+
+  li.menu-admin.menu-active > a
+  {
+    background: #AAAAAA;
+  }
+
+  li.menu-admin.menu-active > a:hover
+  {
+    color: #333333;
+  }
+}

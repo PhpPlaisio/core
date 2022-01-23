@@ -55,16 +55,7 @@ class CompanyDetailsPage extends CompanyPage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
-  {
-    $this->showCompanyDetails();
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Show the details of the company.
-   */
-  private function showCompanyDetails(): void
+  protected function htmlTabContent(): ?string
   {
     $table = new CoreDetailTable();
 
@@ -80,7 +71,7 @@ class CompanyDetailsPage extends CompanyPage
     // Show label.
     TextTableRow::addRow($table, 'Label', $this->details['cmp_label']);
 
-    echo $table->htmlTable();
+    return $table->htmlTable();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

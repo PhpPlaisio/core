@@ -1,0 +1,152 @@
+.frm-form
+{
+  display: block;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+/*                                                                                                                    */
+/*                                                  input types                                                       */
+/*                                                                                                                    */
+/* ------------------------------------------------------------------------------------------------------------------ */
+.frm-date,
+.frm-http,
+.frm-integer,
+.frm-number,
+.frm-password,
+.frm-text,
+.frm-textarea,
+.frm-url
+{
+  margin:           0;
+  padding:          2px;
+  vertical-align:   middle;
+  border:           1px solid #999999;
+  outline:          transparent none;
+  background-color: white;
+}
+
+.frm-date:focus,
+.frm-http:focus,
+.frm-integer:focus,
+.frm-number:focus,
+.frm-password:focus,
+.frm-text:focus,
+.frm-textarea:focus,
+.frm-url:focus
+{
+  transition:   all 400ms ease 0s;
+  border-color: #666699;
+  outline:      1px solid #666699;
+}
+
+.frm-checkbox,
+.frm-radio
+{
+  margin:         2px;
+  vertical-align: middle;
+}
+
+.frm-checkbox:checked,
+.frm-radio:checked
+{
+  transition: all 400ms ease 0s;
+}
+
+.frm-checkbox:disabled,
+.frm-radio:disabled
+{
+  opacity: 0.5;
+}
+
+.frm-integer,
+.frm-number
+{
+  text-align: right;
+}
+
+.frm-checkboxes,
+.frm-radios
+{
+  margin:  0;
+  padding: 0;
+}
+
+label.frm-checkboxes,
+label.frm-radios
+{
+  margin:         0 5px 0 0;
+  vertical-align: middle;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------- */
+/*                                                                                                                  */
+/*                                                  Style for buttons                                               */
+/*                                                                                                                  */
+/* ---------------------------------------------------------------------------------------------------------------- */
+div.frm-button
+{
+  display:         flex;
+  flex-direction:  row;
+  justify-content: space-evenly;
+  padding:         8px 0;
+}
+
+td.frm-button
+{
+  background: transparent none;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------- */
+/*                                                                                                                  */
+/*                                                   labels                                                         */
+/*                                                                                                                  */
+/* ---------------------------------------------------------------------------------------------------------------- */
+label.it.is-mandatory:after
+{
+  content: '*';
+  color:   red;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------- */
+/*                                                                                                                  */
+/*                                                 errors                                                           */
+/*                                                                                                                  */
+/* ---------------------------------------------------------------------------------------------------------------- */
+label.is-error
+{
+  color: red;
+}
+
+.frm-date.is-error,
+.frm-http.is-error,
+.frm-integer.is-error,
+.frm-number.is-error,
+.frm-password.is-error,
+.frm-text.is-error,
+.frm-textarea.is-error,
+.frm-url.is-error
+{
+  border-color: red;
+}
+
+.frm-checkboxes.is-error,
+.frm-radios.is-error
+{
+  display: inline-block;
+  border:  1px solid red;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------- */
+/*                                                                                                                  */
+/*                                                  Style for buttons                                               */
+/*                                                                                                                  */
+/* ---------------------------------------------------------------------------------------------------------------- */
+.frm-button-cell-wrapper
+{
+  display:         flex;
+  flex-direction:  row;
+  justify-content: space-evenly;
+  padding:         8px 0;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------ */

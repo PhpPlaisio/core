@@ -1,0 +1,72 @@
+@media only screen and (max-width: 40em)
+{
+  .ot-table
+  {
+    width: 100%;
+  }
+
+  /* Force table to not be like tables anymore */
+  .ot-table,
+  .ot-thead,
+  .ot-tbody,
+  .ot-filter-row,
+  .ot-filter,
+  .ot-header,
+  .ot-row,
+  .ot-cell
+  {
+    display: block;
+  }
+
+  .ot-row
+  {
+    margin-bottom: 0.5em;
+  }
+
+  .ot-cell
+  {
+    min-height: 12px;
+  }
+
+  /* Hide table headers (but not display: none;, for accessibility) */
+  .ot-header
+  {
+    position: absolute;
+    top:      -9999px;
+    left:     -9999px;
+  }
+
+  .ot-cell,
+  .ot-filter
+  {
+    position:      relative;
+    padding-left:  35vw;
+    text-align:    left;
+    border:        none;
+    border-bottom: 1px solid white;
+  }
+
+  .ot-cell:before,
+  .ot-filter:before
+  {
+    font-family:      Arial, Helvetica, sans-serif;
+    font-weight:      bold;
+    position:         absolute;
+    top:              0;
+    bottom:           0;
+    left:             0;
+    overflow-x:       hidden;
+    width:            31vw;
+    padding:          5px 5px 5px 6px;
+    white-space:      nowrap;
+    background-color: #d3dcee;
+  }
+
+  .ot-filter-row
+  {
+    padding-top:      0;
+    padding-right:    0;
+    padding-bottom:   0;
+    background-color: #dddddd;
+  }
+}

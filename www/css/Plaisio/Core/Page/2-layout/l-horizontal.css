@@ -1,0 +1,7 @@
+.l-horizontal
+{
+  display:        flex;
+  align-items:    flex-start;
+  flex-direction: row;
+  gap:            1.5em;
+}

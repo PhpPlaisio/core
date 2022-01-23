@@ -5,7 +5,8 @@ namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
 use Plaisio\Core\Form\SlatControlFactory\SystemModuleUpdateCompaniesSlatControlFactory;
-use Plaisio\Core\Page\PlaisioCorePage;
+use Plaisio\Core\Html\VerticalLayout;
+use Plaisio\Core\Page\CoreCorePage;
 use Plaisio\Core\Table\CoreDetailTable;
 use Plaisio\Form\LouverForm;
 use Plaisio\Kernel\Nub;
@@ -16,7 +17,7 @@ use Plaisio\Table\TableRow\TextTableRow;
 /**
  * Page for granting or revoking a module to or from companies.
  */
-class ModuleUpdateCompaniesPage extends PlaisioCorePage
+class ModuleUpdateCompaniesPage extends CoreCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -76,12 +77,24 @@ class ModuleUpdateCompaniesPage extends PlaisioCorePage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
-    $this->showModule();
-
     $this->createForm();
     $this->executeForm();
+
+    if ($this->response===null)
+    {
+      $layout = new VerticalLayout();
+      $layout->addBlock($this->htmlModule())
+             ->addBlock($this->form->htmlForm());
+      $html = $layout->html();
+    }
+    else
+    {
+      $html = '';
+    }
+
+    return $html;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -148,9 +161,9 @@ class ModuleUpdateCompaniesPage extends PlaisioCorePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Echos brief info about the functionality.
+   * Returns info about the functionality.
    */
-  private function showModule(): void
+  private function htmlModule(): string
   {
     $table = new CoreDetailTable();
 
@@ -160,7 +173,7 @@ class ModuleUpdateCompaniesPage extends PlaisioCorePage
     // Add row for the module name.
     TextTableRow::addRow($table, 'Module', $this->details['mdl_name']);
 
-    echo $table->htmlTable();
+    return $table->htmlTable();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

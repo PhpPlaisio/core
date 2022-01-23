@@ -35,7 +35,7 @@ class ModuleOverviewPage extends CompanyPage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
     $modules = Nub::$nub->DL->abcCompanyModuleGetAllEnabled($this->targetCmpId, $this->lanId);
 
@@ -50,7 +50,7 @@ class ModuleOverviewPage extends CompanyPage
     $table->addColumn($column);
 
     // Generate the HTML code for the table.
-    echo $table->htmlTable($modules);
+    return $table->htmlTable($modules);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

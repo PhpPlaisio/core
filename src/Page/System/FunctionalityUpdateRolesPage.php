@@ -5,7 +5,8 @@ namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
 use Plaisio\Core\Form\SlatControlFactory\SystemFunctionalityUpdateRolesSlatControlFactory;
-use Plaisio\Core\Page\PlaisioCorePage;
+use Plaisio\Core\Html\VerticalLayout;
+use Plaisio\Core\Page\CoreCorePage;
 use Plaisio\Core\Table\CoreDetailTable;
 use Plaisio\Form\LouverForm;
 use Plaisio\Kernel\Nub;
@@ -16,7 +17,7 @@ use Plaisio\Table\TableRow\TextTableRow;
 /**
  * Page for granting/revoking access to/from a functionality to roles.
  */
-class FunctionalityUpdateRolesPage extends PlaisioCorePage
+class FunctionalityUpdateRolesPage extends CoreCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -76,12 +77,24 @@ class FunctionalityUpdateRolesPage extends PlaisioCorePage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
-    $this->showFunctionality();
-
     $this->createForm();
     $this->executeForm();
+
+    if ($this->response===null)
+    {
+      $layout = new VerticalLayout();
+      $layout->addBlock($this->htmlFunctionality())
+             ->addBlock($this->form->htmlForm());
+      $html = $layout->html();
+    }
+    else
+    {
+      $html = null;
+    }
+
+    return $html;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -148,9 +161,9 @@ class FunctionalityUpdateRolesPage extends PlaisioCorePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Echos brief info about the functionality.
+   * Returns brief info about the functionality.
    */
-  private function showFunctionality(): void
+  private function htmlFunctionality(): string
   {
     $table = new CoreDetailTable();
 
@@ -163,7 +176,7 @@ class FunctionalityUpdateRolesPage extends PlaisioCorePage
     // Add row for the name of the function.
     TextTableRow::addRow($table, 'Functionality', $this->details['fun_name']);
 
-    echo $table->htmlTable();
+    return $table->htmlTable();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

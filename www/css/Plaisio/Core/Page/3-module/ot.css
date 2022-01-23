@@ -1,0 +1,66 @@
+.ot-table
+{
+  margin:          -2px;
+  empty-cells:     show;
+  border-spacing:  2px;
+  border-collapse: separate;
+}
+
+.ot-header
+{
+  font-weight:      bold;
+  padding:          5px;
+  text-align:       center;
+  vertical-align:   middle;
+  background-color: #d3dcee;
+}
+
+.ot-row.is-even
+{
+  background-color: #eeeeee;
+}
+
+.ot-row.is-odd
+{
+  background-color: #d5d5d5;
+}
+
+.ot-row:hover
+{
+  background-color: #b7f9b7;
+}
+
+tr.ot-table-menu
+{
+  height: 20px;
+}
+
+.ot-table-menu-icon
+{
+  margin:         0 3px 0 0;
+  cursor:         pointer;
+  vertical-align: middle;
+}
+
+.ot-table-menu-icon.no-action
+{
+  cursor: auto;
+}
+
+.ot-table-menu-icon:hover,
+.ot-table-menu-item:hover
+{
+  background-color: #b7f9b7;
+}
+
+.ot-table-menu-row-count
+{
+  font-size:      12px;
+  display:        inline-block;
+  height:         12px;
+  margin:         0 3px 0 0;
+  padding:        2px 2px;
+  text-align:     center;
+  vertical-align: bottom;
+  border:         1px solid gray;
+}

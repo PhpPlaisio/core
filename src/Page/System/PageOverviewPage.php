@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
-use Plaisio\Core\Page\PlaisioCorePage;
+use Plaisio\Core\Page\CoreCorePage;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\System\PageInsertTableAction;
 use Plaisio\Core\TableColumn\System\PageTableColumn;
@@ -15,7 +15,7 @@ use Plaisio\Table\TableColumn\TextTableColumn;
 /**
  * Page with an overview all pages.
  */
-class PageOverviewPage extends PlaisioCorePage
+class PageOverviewPage extends CoreCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -35,7 +35,7 @@ class PageOverviewPage extends PlaisioCorePage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
     $pages = Nub::$nub->DL->abcSystemPageGetAll($this->lanId);
 
@@ -62,7 +62,7 @@ class PageOverviewPage extends PlaisioCorePage
     // Show icon to modify the page.
     $table->addColumn(new PageUpdateIconTableColumn());
 
-    echo $table->htmlTable($pages);
+    return $table->htmlTable($pages);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

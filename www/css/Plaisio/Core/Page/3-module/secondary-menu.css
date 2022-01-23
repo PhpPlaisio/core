@@ -1,0 +1,53 @@
+.secondary-menu-list
+{
+  display:        flex;
+  flex-direction: row;
+  flex-wrap:      wrap;
+  padding-left:   40px;
+  list-style:     none;
+  border-bottom:  1px solid #999999;
+  background:     #eeeeee;
+  gap:            4px;
+}
+
+.secondary-menu-link
+{
+  position:        relative;
+  display:         block;
+  margin:          5px 0 -1px;
+  padding:         4px 8px;
+  text-decoration: none;
+  color:           #333333;
+  border:          1px solid #777777;
+  border-bottom:   1px solid white;
+  border-radius:   6px 6px 0 0;
+  background:      #cbcbcb;
+}
+
+.secondary-menu-link:not(.is-selected)
+{
+  border-bottom: 0;
+}
+
+.secondary-menu-link.is-selected
+{
+  color:      #222222;
+  background: #fefeff; /* Equal to body.background */
+}
+
+.secondary-menu-link:hover
+{
+  text-decoration: none;
+}
+
+.secondary-menu-link:not(.is-selected):not(.is-disabled):hover
+{
+  color:      #333333;
+  background: #b7f9b7;
+}
+
+.secondary-menu-link.is-disabled
+{
+  color:      #777777;
+  background: #eeeeee; /* Equal to .secondary-menu.background */
+}

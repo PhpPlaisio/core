@@ -1,0 +1,7 @@
+@media only screen and (max-width: 40em)
+{
+  .ot-cell:before
+  {
+    color: black;
+  }
+}

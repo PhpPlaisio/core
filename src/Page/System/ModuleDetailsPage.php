@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
-use Plaisio\Core\Page\PlaisioCorePage;
+use Plaisio\Core\Html\VerticalLayout;
+use Plaisio\Core\Page\CoreCorePage;
 use Plaisio\Core\Table\CoreDetailTable;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\System\ModuleUpdateCompaniesTableAction;
@@ -18,7 +19,7 @@ use Plaisio\Table\TableRow\TextTableRow;
 /**
  * Page with the details of a module.
  */
-class ModuleDetailsPage extends PlaisioCorePage
+class ModuleDetailsPage extends CoreCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -71,18 +72,21 @@ class ModuleDetailsPage extends PlaisioCorePage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
-    $this->showCompanies();
-    $this->showDetails();
-    $this->showFunctionalities();
+    $layout = new VerticalLayout();
+    $layout->addBlock($this->showCompanies())
+           ->addBlock($this->showDetails())
+           ->addBlock($this->showFunctionalities());
+
+    return $layout->html();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Echos an overview table with all companies that are granted this module.
+   * Returns an overview table with all companies that are granted this module.
    */
-  private function showCompanies(): void
+  private function showCompanies(): string
   {
     $companies = Nub::$nub->DL->abcSystemModuleGetGrantedCompanies($this->mdlId);
 
@@ -94,14 +98,14 @@ class ModuleDetailsPage extends PlaisioCorePage
     // Show ID and abbreviation of the company
     $table->addColumn(new CompanyTableColumn(C::WRD_ID_COMPANY));
 
-    echo $table->htmlTable($companies);
+    return $table->htmlTable($companies);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Echos the details the module.
+   * Returns the details the module.
    */
-  private function showDetails(): void
+  private function showDetails(): string
   {
     $table = new CoreDetailTable();
 
@@ -114,14 +118,14 @@ class ModuleDetailsPage extends PlaisioCorePage
     // Add row for the name of the module.
     TextTableRow::addRow($table, 'Module', $this->details['mdl_name']);
 
-    echo $table->htmlTable();
+    return $table->htmlTable();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Echos an overview table with all functionalities provides by the module.
+   * Returns an overview table with all functionalities provides by the module.
    */
-  private function showFunctionalities(): void
+  private function showFunctionalities(): string
   {
     $functions = Nub::$nub->DL->abcSystemModuleGetFunctions($this->mdlId, $this->lanId);
 
@@ -130,7 +134,7 @@ class ModuleDetailsPage extends PlaisioCorePage
     // Show ID and name of the functionality
     $table->addColumn(new FunctionalityTableColumn('Function'));
 
-    echo $table->htmlTable($functions);
+    return $table->htmlTable($functions);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

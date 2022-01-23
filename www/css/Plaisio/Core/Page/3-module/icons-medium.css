@@ -1,0 +1,32 @@
+.icons-medium
+{
+  background-image: url(/css/Plaisio/Core/images/icons-medium.png);
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+}
+
+.icons-medium-add
+{
+  background-position: 0 0;
+}
+
+.icons-medium-babel-fish
+{
+  background-position: -16px 0;
+}
+
+.icons-medium-edit
+{
+  background-position: -32px 0;
+}
+
+.icons-medium-separator
+{
+  background-position: 0 -16px;
+}
+
+.icons-medium-upload
+{
+  background-position: -16px -16px;
+}

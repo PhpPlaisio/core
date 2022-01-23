@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
-use Plaisio\Core\Page\PlaisioCorePage;
+use Plaisio\Core\Page\CoreCorePage;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\System\RoleGroupInsertTableAction;
 use Plaisio\Core\TableColumn\System\RoleGroupTableColumn;
@@ -16,7 +16,7 @@ use Plaisio\Table\TableColumn\TextTableColumn;
 /**
  * Page with an overview of all role groups.
  */
-class RoleGroupOverviewPage extends PlaisioCorePage
+class RoleGroupOverviewPage extends CoreCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -36,7 +36,7 @@ class RoleGroupOverviewPage extends PlaisioCorePage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
     $roles = Nub::$nub->DL->abcSystemRoleGroupGetAll($this->lanId);
 
@@ -59,7 +59,7 @@ class RoleGroupOverviewPage extends PlaisioCorePage
     // Add link to the update the role group.
     $table->addColumn(new RoleGroupUpdateIconTableColumn());
 
-    echo $table->htmlTable($roles);
+    return $table->htmlTable($roles);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

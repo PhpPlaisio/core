@@ -5,6 +5,7 @@ namespace Plaisio\Core\Page\Babel;
 
 use Plaisio\C;
 use Plaisio\Core\Form\CoreForm;
+use Plaisio\Core\Html\VerticalLayout;
 use Plaisio\Core\Table\CoreDetailTable;
 use Plaisio\Form\Control\DatabaseLabelControl;
 use Plaisio\Form\Control\HtmlControl;
@@ -61,13 +62,25 @@ abstract class WordBasePage extends BabelPage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
-    $this->echoWordGroupInfo();
-
     $this->createForm();
     $this->setValues();
     $this->executeForm();
+
+    if ($this->response===null)
+    {
+      $layout = new VerticalLayout();
+      $layout->addBlock($this->htmlWordGroupInfo())
+             ->addBlock($this->form->htmlForm());
+      $html = $layout->html();
+    }
+    else
+    {
+      $html = '';
+    }
+
+    return $html;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -123,25 +136,6 @@ abstract class WordBasePage extends BabelPage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Echos brief info of the word group of the word.
-   */
-  private function echoWordGroupInfo(): void
-  {
-    $group = Nub::$nub->DL->abcBabelWordGroupGetDetails($this->wdgId);
-
-    $table = new CoreDetailTable();
-
-    // Add row for the ID of the word group.
-    IntegerTableRow::addRow($table, 'ID', $group['wdg_id']);
-
-    // Add row for the name of the word group.
-    TextTableRow::addRow($table, 'Word Group', $group['wdg_name']);
-
-    echo $table->htmlTable();
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * Executes the form shown on this page.
    */
   private function executeForm(): void
@@ -167,6 +161,25 @@ abstract class WordBasePage extends BabelPage
     $this->databaseAction();
 
     $this->response = new SeeOtherResponse(WordGroupDetailsPage::getUrl($this->wdgId, $this->lanIdTar));
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns brief info of the word group of the word.
+   */
+  private function htmlWordGroupInfo(): string
+  {
+    $group = Nub::$nub->DL->abcBabelWordGroupGetDetails($this->wdgId);
+
+    $table = new CoreDetailTable();
+
+    // Add row for the ID of the word group.
+    IntegerTableRow::addRow($table, 'ID', $group['wdg_id']);
+
+    // Add row for the name of the word group.
+    TextTableRow::addRow($table, 'Word Group', $group['wdg_name']);
+
+    return $table->htmlTable();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

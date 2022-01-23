@@ -3,14 +3,14 @@ declare(strict_types=1);
 
 namespace Plaisio\Core\Page\Company;
 
-use Plaisio\Core\Page\PlaisioCorePage;
-use Plaisio\Helper\Html;
+use Plaisio\Core\Page\CoreCorePage;
+use Plaisio\Helper\RenderWalker;
 use Plaisio\Kernel\Nub;
 
 /**
  * Abstract parent page for pages about companies.
  */
-abstract class CompanyPage extends PlaisioCorePage
+abstract class CompanyPage extends CoreCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -62,30 +62,26 @@ abstract class CompanyPage extends PlaisioCorePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Shows brief information about the target company.
-   */
-  protected function echoDashboard(): void
-  {
-    echo '<div id="dashboard">';
-    echo '<div id="info">';
-
-    echo '<div id="info0">';
-    echo Html::txt2Html($this->companyDetails['cmp_abbr']);
-    echo '<br/>';
-    echo '<br/>';
-    echo '</div>';
-
-    echo '</div>';
-    echo '</div>';
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
    * @inheritdoc
    */
   protected function getTabUrl(int $pagId): ?string
   {
     return self::getChildUrl($pagId, $this->targetCmpId);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Shows brief information about the target company.
+   */
+  protected function structDashboard(): ?array
+  {
+    $walker = new RenderWalker('dashboard');
+
+    return ['tag'   => 'div',
+            'attr'  => ['class' => $walker->getClasses('wrapper')],
+            'inner' => ['tag'  => 'div',
+                        'attr' => ['class' => $walker->getClasses('title')],
+                        'text' => $this->companyDetails['cmp_abbr']]];
   }
 
   //--------------------------------------------------------------------------------------------------------------------

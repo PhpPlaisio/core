@@ -5,7 +5,7 @@ namespace Plaisio\Core\Page\Company;
 
 use Plaisio\C;
 use Plaisio\Core\Form\CoreForm;
-use Plaisio\Core\Page\PlaisioCorePage;
+use Plaisio\Core\Page\CoreCorePage;
 use Plaisio\Form\Control\DatabaseLabelControl;
 use Plaisio\Form\Control\TextControl;
 use Plaisio\Response\SeeOtherResponse;
@@ -13,7 +13,7 @@ use Plaisio\Response\SeeOtherResponse;
 /**
  * Abstract parent page for inserting and updating the details of a company.
  */
-abstract class CompanyBasePage extends PlaisioCorePage
+abstract class CompanyBasePage extends CoreCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -49,11 +49,13 @@ abstract class CompanyBasePage extends PlaisioCorePage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
     $this->createForm();
     $this->loadValues();
     $this->executeForm();
+
+    return $this->form->htmlFormEmptyIfValid();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

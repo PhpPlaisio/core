@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\Babel;
 
 use Plaisio\C;
+use Plaisio\Core\Html\VerticalLayout;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\Babel\WordGroupInsertTableAction;
 use Plaisio\Core\TableColumn\Babel\WordGroupTableColumn;
@@ -37,21 +38,20 @@ class WordGroupOverviewPage extends BabelPage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
-    $this->selectLanguage();
+    $layout = new VerticalLayout();
+    $layout->addBlock($this->htmlSelectLanguage())
+           ->addBlock($this->htmlWordGroups());
 
-    if ($this->lanIdTar)
-    {
-      $this->showWordGroups();
-    }
+    return $layout->html();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Shows the overview of all word groups.
+   * Returns an overview of all word groups.
    */
-  private function showWordGroups(): void
+  private function htmlWordGroups(): string
   {
     $groups = Nub::$nub->DL->abcBabelWordGroupGetAll($this->lanIdTar);
 
@@ -77,7 +77,7 @@ class WordGroupOverviewPage extends BabelPage
     // Add link to modify the word group.
     $table->addColumn(new WordGroupUpdateIconTableColumn());
 
-    echo $table->htmlTable($groups);
+    return $table->htmlTable($groups);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

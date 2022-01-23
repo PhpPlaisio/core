@@ -1,0 +1,49 @@
+.grid-main
+{
+  grid-area: main;
+}
+
+.grid-header
+{
+  grid-area:  header;
+  background: #9999CC;
+  height:     72px;
+}
+
+.grid-info1
+{
+  grid-area:   info1;
+  background:  #666699;
+  height:      18px;
+  align-items: center;
+  padding:     1px 2px 1px 4px;
+  color:       #FFFFFF;
+  display:     flex;
+}
+
+.grid-info2
+{
+  grid-area:       info2;
+  background:      #666699;
+  height:          18px;
+  color:           #FFFFFF;
+  padding:         1px 2px;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+}
+
+.grid-info1 a,
+.grid-info2 a,
+.grid-info1 a:link:not(.btn),
+.grid-info1 a:visited:not(.btn),
+.grid-info2 a:link:not(.btn),
+.grid-info2 a:visited:not(.btn)
+{
+  color: #FFFFFF;
+}
+
+.grid-admin-menu
+{
+  grid-area: admin-menu;
+}

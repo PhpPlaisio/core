@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
-use Plaisio\Core\Page\PlaisioCorePage;
+use Plaisio\Core\Html\VerticalLayout;
+use Plaisio\Core\Page\CoreCorePage;
 use Plaisio\Core\Table\CoreDetailTable;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\System\RoleGroupUpdateTableAction;
@@ -17,7 +18,7 @@ use Plaisio\Table\TableRow\TextTableRow;
 /**
  * Page with the details of a role group.
  */
-class RoleGroupDetailsPage extends PlaisioCorePage
+class RoleGroupDetailsPage extends CoreCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -75,18 +76,20 @@ class RoleGroupDetailsPage extends PlaisioCorePage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
-    $this->echoDetails();
+    $layout = new VerticalLayout();
+    $layout->addBlock($this->htmlDetails())
+           ->addBlock($this->htmlRoles());
 
-    $this->echoRoles();
+    return $layout->html();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Shows the details of the role group.
+   * Return the details of the role group.
    */
-  private function echoDetails(): void
+  private function htmlDetails(): string
   {
     $table = new CoreDetailTable();
 
@@ -106,14 +109,14 @@ class RoleGroupDetailsPage extends PlaisioCorePage
     TextTableRow::addRow($table, 'Label', $this->roleGroup['rlg_label']);
 
     // Show table.
-    echo $table->htmlTable();
+    return $table->htmlTable();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Shows the roles in the role group.
+   * Return the roles in the role group.
    */
-  private function echoRoles(): void
+  private function htmlRoles(): string
   {
     $table = new CoreOverviewTable();
 
@@ -124,7 +127,7 @@ class RoleGroupDetailsPage extends PlaisioCorePage
     $table->addColumn(new RoleTableColumn(C::WRD_ID_ROLE));
 
     // Show the table.
-    echo $table->htmlTable($this->roles);
+    return $table->htmlTable($this->roles);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

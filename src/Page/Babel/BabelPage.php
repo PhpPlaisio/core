@@ -5,7 +5,7 @@ namespace Plaisio\Core\Page\Babel;
 
 use Plaisio\C;
 use Plaisio\Core\Form\CoreForm;
-use Plaisio\Core\Page\PlaisioCorePage;
+use Plaisio\Core\Page\CoreCorePage;
 use Plaisio\Form\Control\SelectControl;
 use Plaisio\Form\Form;
 use Plaisio\Kernel\Nub;
@@ -14,7 +14,7 @@ use Plaisio\Response\SeeOtherResponse;
 /**
  * Abstract parent page for all Babel pages.
  */
-abstract class BabelPage extends PlaisioCorePage
+abstract class BabelPage extends CoreCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -47,7 +47,7 @@ abstract class BabelPage extends PlaisioCorePage
   /**
    * Sets the target language. If the user is authorized for multiple languages a form is shown.
    */
-  public function selectLanguage(): void
+  public function htmlSelectLanguage(): string
   {
     $languages = Nub::$nub->DL->abcBabelLanguageGetAllLanguages($this->lanIdRef);
 
@@ -70,6 +70,8 @@ abstract class BabelPage extends PlaisioCorePage
       default:
         $form->defaultHandler($method);
     }
+
+    return $form->htmlForm();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

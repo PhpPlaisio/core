@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
-use Plaisio\Core\Page\PlaisioCorePage;
+use Plaisio\Core\Html\VerticalLayout;
+use Plaisio\Core\Page\CoreCorePage;
 use Plaisio\Core\Table\CoreDetailTable;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\System\PageUpdateFunctionalitiesTableAction;
@@ -21,7 +22,7 @@ use Plaisio\Table\TableRow\TextTableRow;
 /**
  * Page with information about a (target) page.
  */
-class PageDetailsPage extends PlaisioCorePage
+class PageDetailsPage extends CoreCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -63,19 +64,22 @@ class PageDetailsPage extends PlaisioCorePage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
-    $this->showCompanies();
-    $this->showFunctionalities();
-    $this->showDetails();
-    $this->showGrantedRoles();
+    $layout = new VerticalLayout();
+    $layout->addBlock($this->htmlCompanies())
+           ->addBlock($this->htmlFunctionalities())
+           ->addBlock($this->htmlDetails())
+           ->addBlock($this->htmlGrantedRoles());
+
+    return $layout->html();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Echos an overview table with all companies that are granted this page.
+   * Returns an overview table with all companies that are granted this page.
    */
-  private function showCompanies(): void
+  private function htmlCompanies(): string
   {
     $companies = Nub::$nub->DL->abcSystemPageGetGrantedCompanies($this->pagIdTarget);
 
@@ -84,14 +88,14 @@ class PageDetailsPage extends PlaisioCorePage
     // Show ID and abbreviation of the company
     $table->addColumn(new CompanyTableColumn(C::WRD_ID_COMPANY));
 
-    echo $table->htmlTable($companies);
+    return $table->htmlTable($companies);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Echos the details of a page.
+   * Returns the details of a page.
    */
-  private function showDetails(): void
+  private function htmlDetails(): string
   {
     $details = Nub::$nub->DL->abcSystemPageGetDetails($this->pagIdTarget, $this->lanId);
     $table   = new CoreDetailTable();
@@ -120,14 +124,14 @@ class PageDetailsPage extends PlaisioCorePage
     // Add row with the label of the page.
     TextTableRow::addRow($table, 'Label', $details['pag_label']);
 
-    echo $table->htmlTable();
+    return $table->htmlTable();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Echos functionalities that grant access to the page shown on this page.
+   * Returns functionalities that grant access to the page shown on this page.
    */
-  private function showFunctionalities(): void
+  private function htmlFunctionalities(): string
   {
     $roles = Nub::$nub->DL->abcSystemPageGetGrantedFunctionalities($this->pagIdTarget, $this->lanId);
 
@@ -142,14 +146,14 @@ class PageDetailsPage extends PlaisioCorePage
     // Show the ID and name of the functionality.
     $table->addColumn(new FunctionalityTableColumn('Functionality'));
 
-    echo $table->htmlTable($roles);
+    return $table->htmlTable($roles);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Echos roles that are granted access to the page shown on this page.
+   * Returns roles that are granted access to the page shown on this page.
    */
-  private function showGrantedRoles(): void
+  private function htmlGrantedRoles(): string
   {
     $roles = Nub::$nub->DL->abcSystemPageGetGrantedRoles($this->pagIdTarget);
 
@@ -161,7 +165,7 @@ class PageDetailsPage extends PlaisioCorePage
     // Show ID and name of the role.
     $table->addColumn(new RoleTableColumn(C::WRD_ID_ROLE));
 
-    echo $table->htmlTable($roles);
+    return $table->htmlTable($roles);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

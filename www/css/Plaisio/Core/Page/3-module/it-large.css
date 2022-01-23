@@ -1,0 +1,52 @@
+@media all and (min-width: 40em)
+{
+  /* ---------------------------------------------------------------------------------------------------------------- */
+  .it-fieldset-visible
+  {
+    display:     block;
+    width:       auto;
+    padding:     0;
+    white-space: nowrap;
+    border:      none;
+  }
+
+  .it-table
+  {
+    margin:          2px -2px;
+    empty-cells:     show;
+    border-spacing:  2px;
+    border-collapse: separate;
+  }
+
+  .it-header
+  {
+    font-weight:      bold;
+    padding:          5px;
+    text-align:       center;
+    vertical-align:   middle;
+    border:           none;
+    background-color: #d3dcee;
+  }
+
+  .it-cell
+  {
+    padding:          0 2px;
+    vertical-align:   middle;
+    background-color: #eeeeee;
+  }
+
+  /* ---------------------------------------------------------------------------------------------------------------- */
+  /*                                                                                                                  */
+  /*                                                  Style for buttons                                               */
+  /*                                                                                                                  */
+  /* ---------------------------------------------------------------------------------------------------------------- */
+  .it-button-cell-wrapper
+  {
+    display:         flex;
+    flex-direction:  row;
+    justify-content: space-evenly;
+    padding:         8px 0;
+  }
+
+  /* ---------------------------------------------------------------------------------------------------------------- */
+}

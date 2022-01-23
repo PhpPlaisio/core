@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\Company;
 
 use Plaisio\C;
+use Plaisio\Core\Html\VerticalLayout;
 use Plaisio\Core\Table\CoreDetailTable;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\Company\RoleUpdateFunctionalitiesTableAction;
@@ -63,18 +64,21 @@ class RoleDetailsPage extends CompanyPage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
-    $this->showFunctionalities();
-    $this->showPages();
-    $this->showRole();
+    $layout = new VerticalLayout();
+    $layout->addBlock($this->structFunctionalities())
+           ->addBlock($this->structPages())
+           ->addBlock($this->structRole());
+
+    return $layout->html();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Shows the functionalities that are granted to the role shown on this page.
+   * Returns the functionalities that are granted to the role shown on this page.
    */
-  private function showFunctionalities(): void
+  private function structFunctionalities(): string
   {
     $functionalities = Nub::$nub->DL->abcCompanyRoleGetFunctionalities($this->targetCmpId, $this->rolId, $this->lanId);
 
@@ -94,14 +98,14 @@ class RoleDetailsPage extends CompanyPage
     $table->addColumn($column);
 
     // Generate the HTML code for the table.
-    echo $table->htmlTable($functionalities);
+    return $table->htmlTable($functionalities);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Show the pages that the functionality shown on this page grants access to.
+   * Returns the pages that the functionality shown on this page grants access to.
    */
-  private function showPages(): void
+  private function structPages(): string
   {
     $pages = Nub::$nub->DL->abcCompanyRoleGetPages($this->targetCmpId, $this->rolId, $this->lanId);
 
@@ -118,14 +122,14 @@ class RoleDetailsPage extends CompanyPage
     // Show label of the page ID.
     $table->addColumn(new TextTableColumn('Label', 'pag_label'));
 
-    echo $table->htmlTable($pages);
+    return $table->htmlTable($pages);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Echos brief info about the role.
+   * Returns brief info about the role.
    */
-  private function showRole(): void
+  private function structRole(): string
   {
     $details = Nub::$nub->DL->abcCompanyRoleGetDetails($this->targetCmpId, $this->rolId, $this->lanId);
 
@@ -149,7 +153,7 @@ class RoleDetailsPage extends CompanyPage
     // Show label.
     TextTableRow::addRow($table, 'Label', $details['rol_label']);
 
-    echo $table->htmlTable();
+    return $table->htmlTable();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

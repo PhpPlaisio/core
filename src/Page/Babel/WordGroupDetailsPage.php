@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Plaisio\Core\Page\Babel;
 
 use Plaisio\C;
+use Plaisio\Core\Html\VerticalLayout;
 use Plaisio\Core\Table\CoreDetailTable;
 use Plaisio\Core\Table\CoreOverviewTable;
 use Plaisio\Core\TableAction\Babel\WordInsertTableAction;
@@ -75,23 +76,25 @@ class WordGroupDetailsPage extends BabelPage
   /**
    * @inheritdoc
    */
-  public function echoTabContent(): void
+  public function htmlTabContent(): ?string
   {
-    $this->selectLanguage();
+    $layout = new VerticalLayout();
+    $layout->addBlock($this->htmlSelectLanguage());
 
     if ($this->lanIdTar)
     {
-      $this->showWordGroupInfo();
-
-      $this->showWords();
+      $layout->addBlock($this->htmlWordGroupInfo());
+      $layout->addBlock($this->htmlWords());
     }
+
+    return $layout->html();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Echos brief info about the word group.
+   * Returns brief info about the word group.
    */
-  private function showWordGroupInfo(): void
+  private function htmlWordGroupInfo(): string
   {
     $table = new CoreDetailTable();
 
@@ -101,14 +104,14 @@ class WordGroupDetailsPage extends BabelPage
     // Add row for the name of the word group.
     TextTableRow::addRow($table, 'Word Group', $this->details['wdg_name']);
 
-    echo $table->htmlTable();
+    return $table->htmlTable();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Echos an overview of all words in a word group.
+   * Returns an overview of all words in a word group.
    */
-  private function showWords(): void
+  private function htmlWords(): string
   {
     // Determine whether the user is a translator.
     $is_translator = ($this->lanIdTar!=$this->lanIdRef &&
@@ -169,7 +172,7 @@ class WordGroupDetailsPage extends BabelPage
     }
 
     // Generate the HTML code for the table.
-    echo $table->htmlTable($words);
+    return $table->htmlTable($words);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

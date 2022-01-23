@@ -70,7 +70,7 @@ class WordDeletePage extends BabelPage
    *
    * @return void
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
     // Nothing to do.
   }

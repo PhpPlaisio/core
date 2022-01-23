@@ -5,7 +5,8 @@ namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
 use Plaisio\Core\Form\SlatControlFactory\SystemPageUpdateFunctionalitiesSlatControlFactory;
-use Plaisio\Core\Page\PlaisioCorePage;
+use Plaisio\Core\Html\VerticalLayout;
+use Plaisio\Core\Page\CoreCorePage;
 use Plaisio\Core\Table\CoreDetailTable;
 use Plaisio\Core\TableRow\System\PageDetailsTableRow;
 use Plaisio\Form\LouverForm;
@@ -17,7 +18,7 @@ use Plaisio\Table\TableRow\TextTableRow;
 /**
  * Page for modifying the functionalities that grant access to a target page.
  */
-class PageUpdateFunctionalitiesPage extends PlaisioCorePage
+class PageUpdateFunctionalitiesPage extends CoreCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -66,12 +67,24 @@ class PageUpdateFunctionalitiesPage extends PlaisioCorePage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
-    $this->showPageDetails();
-
     $this->createForm();
     $this->executeForm();
+
+    if ($this->response===null)
+    {
+      $layout = new VerticalLayout();
+      $layout->addBlock($this->htmlPageDetails())
+             ->addBlock($this->form->htmlForm());
+      $html = $layout->html();
+    }
+    else
+    {
+      $html = null;
+    }
+
+    return $html;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -138,9 +151,9 @@ class PageUpdateFunctionalitiesPage extends PlaisioCorePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Echos the details of the target page.
+   * Return the details of the target page.
    */
-  private function showPageDetails(): void
+  private function htmlPageDetails(): string
   {
     $details = Nub::$nub->DL->abcSystemPageGetDetails($this->pagIdTarget, $this->lanId);
     $table   = new CoreDetailTable();
@@ -163,7 +176,7 @@ class PageUpdateFunctionalitiesPage extends PlaisioCorePage
     // Add row with the label of the page.
     TextTableRow::addRow($table, 'Label', $details['pag_label']);
 
-    echo $table->htmlTable();
+    return $table->htmlTable();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

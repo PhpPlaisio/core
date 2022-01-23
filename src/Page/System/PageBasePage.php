@@ -5,7 +5,7 @@ namespace Plaisio\Core\Page\System;
 
 use Plaisio\C;
 use Plaisio\Core\Form\CoreForm;
-use Plaisio\Core\Page\PlaisioCorePage;
+use Plaisio\Core\Page\CoreCorePage;
 use Plaisio\Form\Control\DatabaseLabelControl;
 use Plaisio\Form\Control\SelectControl;
 use Plaisio\Form\Control\TextControl;
@@ -16,7 +16,7 @@ use Plaisio\Response\SeeOtherResponse;
 /**
  * Abstract parent page for inserting or modifying a page.
  */
-abstract class PageBasePage extends PlaisioCorePage
+abstract class PageBasePage extends CoreCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -52,11 +52,13 @@ abstract class PageBasePage extends PlaisioCorePage
   /**
    * @inheritdoc
    */
-  protected function echoTabContent(): void
+  protected function htmlTabContent(): ?string
   {
     $this->createForm();
     $this->loadValues();
     $this->executeForm();
+
+    return $this->form->htmlFormEmptyIfValid();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

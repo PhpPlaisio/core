@@ -1,0 +1,42 @@
+@media only screen and (min-width: 40em)
+{
+  .ot-header.is-sortable,
+  .ot-header.is-sortable-2
+  {
+    padding-right: 13px;
+    cursor:        pointer;
+    background:    #d3dcee url(/css/Plaisio/Core/images/ot-header-sortable.png) no-repeat right center;
+  }
+
+  .ot-header.is-sorted-asc,
+  .ot-header.is-sorted-2-asc
+  {
+    background-image: url(/css/Plaisio/Core/images/ot-header-down.png);
+  }
+
+  .ot-header.is-sorted-desc,
+  .ot-header.is-sorted-2-desc
+  {
+    background-image: url(/css/Plaisio/Core/images/ot-header-up.png);
+  }
+
+  .ot-header.is-sortable-1 > span
+  {
+    position:   relative;
+    top:        0;
+    left:       -4px;
+    float:      left;
+    width:      10px;
+    background: transparent url(/css/Plaisio/Core/images/ot-header-sortable.png) no-repeat left center;
+  }
+
+  .ot-header.is-sorted-1-asc > span
+  {
+    background-image: url(/css/Plaisio/Core/images/ot-header-down.png);
+  }
+
+  .ot-header.is-sorted-1-desc > span
+  {
+    background-image: url(/css/Plaisio/Core/images/ot-header-up.png);
+  }
+}
