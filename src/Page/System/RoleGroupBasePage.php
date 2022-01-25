@@ -34,7 +34,7 @@ abstract class RoleGroupBasePage extends CoreCorePage
   protected CoreForm $form;
 
   /**
-   * The ID of the role group that is been inserted or updated.
+   * The ID of the role group that is being inserted or updated.
    *
    * @var int
    */

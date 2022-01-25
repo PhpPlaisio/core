@@ -1,7 +1,7 @@
 /**
  * Selects info about a page for a user.
 
- * @param p_cmp_id    The ID of the company of the user (safe guard).
+ * @param p_cmp_id    The ID of the company of the user (safeguard).
  * @param p_pag_id    The ID of the page.
  * @param p_pro_id    The ID of the profile of the user.
  * @param p_lan_id    The ID of the language for linguistic entities.

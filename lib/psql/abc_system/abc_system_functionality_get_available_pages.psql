@@ -1,5 +1,5 @@
 /**
- * Selects all pages including a flag indication the the page is part of a functionality.
+ * Selects all pages including a flag indication the page is part of a functionality.
  *
  * @param p_fun_id The ID of the functionality.
  *

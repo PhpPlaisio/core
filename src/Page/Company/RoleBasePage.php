@@ -33,7 +33,7 @@ abstract class RoleBasePage extends CompanyPage
   protected CoreForm $form;
 
   /**
-   * The ID of the role that is been inserted or updated.
+   * The ID of the role that is being inserted or updated.
    *
    * @var int
    */

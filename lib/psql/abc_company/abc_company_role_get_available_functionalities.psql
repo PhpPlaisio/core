@@ -1,5 +1,5 @@
 /**
- * Selects all functionalities of all modules granted to a company including a flag indication the the functionality
+ * Selects all functionalities of all modules granted to a company including a flag indication the functionality
  * is granted to a role.
  *
  * @param p_cmp_id The ID of the company.

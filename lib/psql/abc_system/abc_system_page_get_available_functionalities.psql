@@ -1,5 +1,5 @@
 /**
- * Selects all functionalities including a flag indication the the functionality grant access to a page.
+ * Selects all functionalities including a flag indication the functionality grant access to a page.
  *
  * @param p_pag_id The ID of the page.
  * @param p_lan_id The ID of the language for linguistic entities.

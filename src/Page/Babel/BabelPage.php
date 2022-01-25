@@ -18,14 +18,14 @@ abstract class BabelPage extends CoreCorePage
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The language ID from which the word/text/topic is been translated.
+   * The language ID from which the word/text/topic is being translated.
    *
    * @var int
    */
   protected int $lanIdRef;
 
   /**
-   * The language ID to which the word/text/topic is been translated.
+   * The language ID to which the word/text/topic is being translated.
    *
    * @var int
    */

@@ -1,5 +1,5 @@
 /**
- * Selects all modules including a flag indication the the module is granted to the company.
+ * Selects all modules including a flag indication the module is granted to the company.
  *
  * @param p_cmp_id The ID of the company.
  * @param p_lan_id The ID of the language for linguistic entities.
