@@ -29,13 +29,34 @@ abstract class Layout
   /**
    * Adds an HTML block to this layout element.
    *
-   * @param string $html The HTML code of the block
+   * @param string|null $html The HTML code of the block.
    *
    * @return $this
    */
-  public function addBlock(string $html): self
+  public function addBlock(?string $html): self
   {
     $this->blocks .= $html;
+
+    return $this;
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Adds HTML blocks to this layout element.
+   *
+   * @param string[]|null $blocks The HTML code of the blocks.
+   *
+   * @return $this
+   */
+  public function addBlocks(?array $blocks): self
+  {
+    if (!empty($blocks))
+    {
+      foreach ($blocks as $block)
+      {
+        $this->addBlock($block);
+      }
+    }
 
     return $this;
   }
