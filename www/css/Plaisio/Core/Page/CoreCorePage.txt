@@ -25,10 +25,6 @@
 #                                                    Module
 #
 # ----------------------------------------------------------------------------------------------------------------------
-3-module/admin-menu-large.css
-3-module/admin-menu-small.css
-3-module/admin-menu-icon-large.css
-3-module/admin-menu-icon-small.css
 3-module/button.css
 3-module/dashboard.css
 3-module/dt.css
@@ -42,6 +38,10 @@
 3-module/it-small.css
 
 3-module/link.css
+3-module/menu-admin-large.css
+3-module/menu-admin-small.css
+3-module/menu-admin-icon-large.css
+3-module/menu-admin-icon-small.css
 3-module/nowrap.css
 
 3-module/ot.css

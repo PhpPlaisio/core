@@ -1,0 +1,91 @@
+@media all and (max-width: 40em)
+{
+  .menu-admin-nav
+  {
+    font-size:   larger;
+    position:    absolute;
+    top:         0;
+    right:       0;
+    white-space: nowrap;
+  }
+
+  .menu-admin-list.menu-level-0
+  {
+    position:         absolute;
+    top:              92px;
+    right:            0;
+    overflow:         hidden;
+    max-height:       0;
+    background-color: #f4f4f4;
+  }
+
+  .menu-admin-list.menu-level-0.menu-is-open
+  {
+    max-height: none;
+  }
+
+  .menu-admin-list.menu-level-1
+  {
+    position:         relative;
+    top:              auto;
+    left:             auto;
+    display:          inherit;
+    overflow:         hidden;
+    max-height:       0;
+    padding:          0;
+    border:           none;
+    background-color: #fdfdfd;
+  }
+
+  .menu-admin-list.menu-level-1.menu-is-open
+  {
+    max-height: none;
+  }
+
+  .menu-admin-item-link
+  {
+    font-size:       larger;
+    position:        relative;
+    display:         block;
+    padding:         0.8em;
+    text-decoration: none;
+    color:           #000000;
+    border-bottom:   1px solid #808080;
+    border-left:     1px solid #808080;
+  }
+
+  .menu-admin-item-link.menu-level-1
+  {
+    padding-left: 1.6em;
+  }
+
+  .menu-admin-item.menu-level-0
+  {
+    background-color: #efefef;
+  }
+
+  .menu-admin-item-link.menu-level-0:after
+  {
+    font-size: 1.5em;
+    position:  absolute;
+    top:       0;
+    right:     0;
+    padding:   0.4em 0.5em; /* half of padding above */
+    content:   '+';
+  }
+
+  .menu-admin-item-link.menu-level-0.menu-is-open:after
+  {
+    content: "-";
+  }
+
+  .menu-admin-item-link.menu-is-active
+  {
+    background: #aaaaaa;
+  }
+
+  .menu-admin-item-link:hover
+  {
+    background-color: #b7f9b7;
+  }
+}
