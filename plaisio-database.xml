@@ -1,8 +1,4 @@
 <database>
-    <provides>
-        <table>AUT_PAGE</table>
-        <table>AUT_PAGE_COMPANY</table>
-    </provides>
     <requires>
         <table>ABC_AUTH_COMPANY</table>
     </requires>

@@ -6,21 +6,22 @@
  *
  * @type row1
  */
-create procedure abc_system_functionality_get_details(in p_fun_id @aut_functionality.fun_id%type@,
+create procedure abc_system_functionality_get_details(in p_fun_id @ABC_AUTH_FUNCTIONALITY.fun_id%type@,
                                                       in p_lan_id @abc_babel_language.lan_id%type@)
 reads sql data
 begin
-  select mdl.mdl_id     mdl_id
-  ,      fun.fun_id     fun_id
-  ,      wd1.wrd_id     wrd_id
-  ,      wd1.wdt_text   fun_name
+  select mdl.mdl_id
   ,      wd2.wdt_text   mdl_name
-  from       AUT_FUNCTIONALITY   fun
-  inner join ABC_BABEL_WORD_TEXT wd1  on  wd1.wrd_id = fun.wrd_id and
-                                          wd1.lan_id = p_lan_id
-  inner join AUT_MODULE          mdl  on  mdl.mdl_id = fun.mdl_id
-  inner join ABC_BABEL_WORD_TEXT wd2  on  wd2.wrd_id = mdl.wrd_id and
-                                          wd2.lan_id = p_lan_id
+
+  ,      fun.fun_id
+  ,      wd1.wrd_id
+  ,      wd1.wdt_text   fun_name
+  from ABC_AUTH_FUNCTIONALITY fun
+  join ABC_BABEL_WORD_TEXT    wd1  on  wd1.wrd_id = fun.wrd_id and
+                                       wd1.lan_id = p_lan_id
+  join ABC_AUTH_MODULE        mdl  on  mdl.mdl_id = fun.mdl_id
+  join ABC_BABEL_WORD_TEXT    wd2  on  wd2.wrd_id = mdl.wrd_id and
+                                       wd2.lan_id = p_lan_id
   where fun.fun_id = p_fun_id
   ;
 end

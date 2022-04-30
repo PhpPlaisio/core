@@ -5,16 +5,16 @@
  *
  * @type rows
  */
-create procedure abc_system_page_get_granted_companies(in p_pag_id @aut_page.pag_id%type@)
+create procedure abc_system_page_get_granted_companies(in p_pag_id @abc_auth_page.pag_id%type@)
 reads sql data
 begin
   select distinct cmp.cmp_id
   ,               cmp.cmp_abbr
-  from   AUT_PAG_FUN        apf
-  join   AUT_FUNCTIONALITY  fun  on  fun.fun_id = apf.fun_id
-  join   AUT_MODULE         mdl  on  mdl.mdl_id = fun.mdl_id
-  join   AUT_MODULE_COMPANY amc  on  amc.mdl_id = mdl.mdl_id
-  join   ABC_AUTH_COMPANY   cmp  on  cmp.cmp_id = amc.cmp_id
+  from ABC_AUTH_PAG_FUN        apf
+  join ABC_AUTH_FUNCTIONALITY  fun  on  fun.fun_id = apf.fun_id
+  join ABC_AUTH_MODULE         mdl  on  mdl.mdl_id = fun.mdl_id
+  join ABC_AUTH_MODULE_COMPANY amc  on  amc.mdl_id = mdl.mdl_id
+  join ABC_AUTH_COMPANY        cmp  on  cmp.cmp_id = amc.cmp_id
   where apf.pag_id = p_pag_id
   order by cmp.cmp_abbr
   ;

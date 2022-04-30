@@ -14,7 +14,7 @@ begin
   ,      pag.pag_class
   ,      pag.pag_label
   ,      wd1.wdt_text    pag_title
-  from       AUT_PAGE            pag
+  from       ABC_AUTH_PAGE       pag
   inner join ABC_BABEL_WORD_TEXT wd1  on  wd1.wrd_id = pag.wrd_id and
                                           wd1.lan_id = p_lan_id
   where pag.ptb_id = p_ptb_id

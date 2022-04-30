@@ -15,10 +15,10 @@ begin
   ,      rol.rol_name
   ,      aur.aur_date_start
   ,      aur.aur_date_stop
-  from       AUT_USR_ROL aur
-  inner join AUT_ROLE    rol  on  rol.rol_id = aur.rol_id
+  from ABC_AUTH_USR_ROL aur
+  join ABC_AUTH_ROLE    rol  on  rol.rol_id = aur.rol_id
   where aur.cmp_id = p_cmp_id
   and   aur.usr_id = p_usr_id
-  order by rol_weight
+  order by rol.rol_weight
   ;
 end

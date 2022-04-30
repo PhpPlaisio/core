@@ -13,24 +13,24 @@
  *
  * @return int
  */
-create procedure abc_system_page_insert_details(in p_wrd_id     @aut_page.wrd_id%type@,
-                                                in p_ptb_id     @aut_page.ptb_id%type@,
-                                                in p_pag_id_org @aut_page.pag_id%type@,
-                                                in p_pag_alias  @aut_page.pag_alias%type@,
-                                                in p_pag_class  @aut_page.pag_class%type@,
-                                                in p_pag_label  @aut_page.pag_label%type@,
-                                                in p_pag_weight @aut_page.pag_weight%type@)
+create procedure abc_system_page_insert_details(in p_wrd_id     @abc_auth_page.wrd_id%type@,
+                                                in p_ptb_id     @abc_auth_page.ptb_id%type@,
+                                                in p_pag_id_org @abc_auth_page.pag_id%type@,
+                                                in p_pag_alias  @abc_auth_page.pag_alias%type@,
+                                                in p_pag_class  @abc_auth_page.pag_class%type@,
+                                                in p_pag_label  @abc_auth_page.pag_label%type@,
+                                                in p_pag_weight @abc_auth_page.pag_weight%type@)
 modifies sql data
 begin
-  declare l_pag_id @aut_page.pag_id%type@;
+  declare l_pag_id @abc_auth_page.pag_id%type@;
 
-  insert into AUT_PAGE( wrd_id
-  ,                     ptb_id
-  ,                     pag_id_org
-  ,                     pag_alias
-  ,                     pag_class
-  ,                     pag_label
-  ,                     pag_weight )
+  insert into ABC_AUTH_PAGE( wrd_id
+  ,                          ptb_id
+  ,                          pag_id_org
+  ,                          pag_alias
+  ,                          pag_class
+  ,                          pag_label
+  ,                          pag_weight )
   values( p_wrd_id
   ,       p_ptb_id
   ,       p_pag_id_org
@@ -42,7 +42,7 @@ begin
   set l_pag_id = last_insert_id();
 
   if p_ptb_id is not null and p_pag_id_org is null then
-    update AUT_PAGE
+    update ABC_AUTH_PAGE
     set    pag_id_org = l_pag_id
     where  pag_id = l_pag_id
     ;

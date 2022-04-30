@@ -6,7 +6,7 @@
  *
  * @type row1
  */
-create procedure abc_system_page_get_details(in p_pag_id @aut_page.pag_id%type@,
+create procedure abc_system_page_get_details(in p_pag_id @abc_auth_page.pag_id%type@,
                                              in p_lan_id @abc_babel_language.lan_id%type@)
 reads sql data
 begin
@@ -20,7 +20,7 @@ begin
   ,      pag.pag_weight
   ,      wd1.wdt_text       pag_title
   ,      wd3.wdt_text       ptb_name
-  from      AUT_PAGE            pag
+  from      ABC_AUTH_PAGE       pag
   join      ABC_BABEL_WORD_TEXT wd1  on  wd1.wrd_id = pag.wrd_id and
                                          wd1.lan_id = p_lan_id
   left join AUT_PAGE_TAB        ptb  on  ptb.ptb_id = pag.ptb_id

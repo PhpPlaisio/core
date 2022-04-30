@@ -10,14 +10,14 @@ create procedure abc_company_specific_page_get_all(in p_cmp_id @abc_auth_company
                                                    in p_lan_id @abc_babel_word.wrd_id%type@)
 reads sql data
 begin
-  select apc.pag_id      pag_id
+  select apc.pag_id
   ,      bwt.wdt_text    pag_title
   ,      aup.pag_class   pag_class_parent
   ,      apc.pag_class   pag_class_child
-  from       AUT_PAGE_COMPANY    apc
-  inner join AUT_PAGE            aup  on  aup.pag_id = apc.pag_id
-  inner join ABC_BABEL_WORD_TEXT bwt  on  bwt.wrd_id = aup.wrd_id and
-                                          bwt.lan_id = p_lan_id
+  from       ABC_AUTH_PAGE_COMPANY apc
+  inner join ABC_AUTH_PAGE         aup  on  aup.pag_id = apc.pag_id
+  inner join ABC_BABEL_WORD_TEXT   bwt  on  bwt.wrd_id = aup.wrd_id and
+                                            bwt.lan_id = p_lan_id
   where apc.cmp_id = p_cmp_id
   order by aup.pag_class
   ;

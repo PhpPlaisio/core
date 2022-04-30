@@ -6,14 +6,14 @@
  *
  * @type rows
  */
-create procedure abc_company_role_group_get_all_roles(in p_cmp_id @aut_role.cmp_id%type@,
-                                                      in p_rlg_id @aut_role.rlg_id%type@)
+create procedure abc_company_role_group_get_all_roles(in p_cmp_id @abc_auth_role.cmp_id%type@,
+                                                      in p_rlg_id @abc_auth_role.rlg_id%type@)
 reads sql data
 begin
   select rol_id
   ,      rol_weight
   ,      rol_name
-  from  AUT_ROLE
+  from  ABC_AUTH_ROLE
   where cmp_id = p_cmp_id
   and   rlg_id = p_rlg_id
   order by rol_weight

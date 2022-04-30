@@ -11,19 +11,19 @@ begin
 
   create temporary table TMP_PROFILE4
   (
-    cmp_id   @aut_pro_rol.cmp_id%type@ not null,
-    pro_id   @aut_pro_rol.pro_id%type@ not null,
-    rol_id   @aut_pro_rol.rol_id%type@ not null,
+    cmp_id   @abc_auth_pro_rol.cmp_id%type@ not null,
+    pro_id   @abc_auth_pro_rol.pro_id%type@ not null,
+    rol_id   @abc_auth_pro_rol.rol_id%type@ not null,
     tmp_diff int                       not null,
     primary key (pro_id, rol_id)
   ) engine=myisam
   ;
 
   -- Compute new and obsolete profile roles.
-  insert into TMP_PROFILE4(pro_id
-  ,                        cmp_id
-  ,                        rol_id
-  ,                        tmp_diff)
+  insert into TMP_PROFILE4( pro_id
+  ,                         cmp_id
+  ,                         rol_id
+  ,                         tmp_diff )
   select pro_id
   ,      cmp_id
   ,      rol_id
@@ -34,7 +34,7 @@ begin
     ,      cmp_id
     ,      rol_id
     ,      1           src
-    from   AUT_PRO_ROL
+    from   ABC_AUTH_PRO_ROL
 
     union all
 
@@ -42,8 +42,8 @@ begin
     ,      pro.cmp_id
     ,      substring_index(substring_index(pro.pro_rol_ids, ',', seq.seq), ',', -1) rol_id
     ,      2           src
-    from       ABC_AUTH_PROFILE pro
-    inner join seq_1_to_100     seq  on  1 = 1
+    from ABC_AUTH_PROFILE pro
+    join seq_1_to_100     seq  on  1 = 1
     group by pro.pro_id
     ,        pro.cmp_id
     ,        rol_id
@@ -56,16 +56,16 @@ begin
 
   -- Delete obsolete profile roles.
   delete from apr
-  using      AUT_PRO_ROL  apr
-  inner join TMP_PROFILE4 tmp  on  tmp.pro_id = apr.pro_id and
-                                   tmp.rol_id = apr.rol_id
+  using ABC_AUTH_PRO_ROL apr
+  join  TMP_PROFILE4     tmp  on  tmp.pro_id = apr.pro_id and
+                                  tmp.rol_id = apr.rol_id
   where tmp.tmp_diff < 0
   ;
 
   -- Insert new profile roles.
-  insert into AUT_PRO_ROL(cmp_id
-  ,                       pro_id
-  ,                       rol_id)
+  insert into ABC_AUTH_PRO_ROL( cmp_id
+  ,                             pro_id
+  ,                             rol_id )
   select cmp_id
   ,      pro_id
   ,      rol_id

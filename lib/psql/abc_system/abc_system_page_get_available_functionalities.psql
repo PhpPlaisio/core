@@ -6,24 +6,25 @@
  *
  * @type rows
  */
-create procedure abc_system_page_get_available_functionalities(in p_pag_id @aut_page.pag_id%type@,
+create procedure abc_system_page_get_available_functionalities(in p_pag_id @abc_auth_page.pag_id%type@,
                                                                in p_lan_id @abc_babel_language.lan_id%type@)
 reads sql data
 begin
   select mdl.mdl_id
+  ,      wd1.wdt_text                 mdl_name
+
   ,      fun.fun_id
-  ,      wd1.wdt_text               mdl_name
-  ,      wd2.wdt_text               fun_name
-  ,      if(apf.pag_id is null,0,1) fun_checked
-  from           AUT_MODULE          mdl
-  inner join     ABC_BABEL_WORD_TEXT wd1  on  wd1.wrd_id = mdl.wrd_id and
-                                              wd1.lan_id = p_lan_id
-  inner join     AUT_FUNCTIONALITY   fun  on  fun.mdl_id = mdl.mdl_id
-  inner join     ABC_BABEL_WORD_TEXT wd2  on  wd2.wrd_id = fun.wrd_id and
-                                              wd2.lan_id = p_lan_id
-  left outer join AUT_PAG_FUN        apf  on  apf.fun_id = fun.fun_id and
-                                              apf.pag_id = p_pag_id
-  order by mdl_name
-  ,        fun_name
+  ,      wd2.wdt_text                 fun_name
+  ,      if(apf.pag_id is null, 0, 1) fun_checked
+  from      ABC_AUTH_MODULE        mdl
+  join      ABC_BABEL_WORD_TEXT    wd1  on  wd1.wrd_id = mdl.wrd_id and
+                                            wd1.lan_id = p_lan_id
+  join      ABC_AUTH_FUNCTIONALITY fun  on  fun.mdl_id = mdl.mdl_id
+  join      ABC_BABEL_WORD_TEXT    wd2  on  wd2.wrd_id = fun.wrd_id and
+                                            wd2.lan_id = p_lan_id
+  left join ABC_AUTH_PAG_FUN       apf  on  apf.fun_id = fun.fun_id and
+                                            apf.pag_id = p_pag_id
+  order by mdl.mdl_name
+  ,        fun.fun_name
   ;
 end

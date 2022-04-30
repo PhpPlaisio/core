@@ -7,16 +7,16 @@
  *
  * @type none
  */
-create procedure abc_company_specific_page_insert( in p_cmp_id    @aut_page_company.cmp_id%type@,
-                                                   in p_pag_id    @aut_page_company.pag_id%type@,
-                                                   in p_pag_class @aut_page_company.pag_class%type@ )
+create procedure abc_company_specific_page_insert( in p_cmp_id    @abc_auth_page_company.cmp_id%type@,
+                                                   in p_pag_id    @abc_auth_page_company.pag_id%type@,
+                                                   in p_pag_class @abc_auth_page_company.pag_class%type@ )
 modifies sql data
 begin
-  insert into AUT_PAGE_COMPANY ( pag_id
-  ,                              cmp_id
-  ,                              pag_class )
-  values ( p_pag_id
-  ,        p_cmp_id
-  ,        p_pag_class )
+  insert into ABC_AUTH_PAGE_COMPANY( pag_id
+  ,                                  cmp_id
+  ,                                  pag_class )
+  values( p_pag_id
+  ,       p_cmp_id
+  ,       p_pag_class )
   ;
 end

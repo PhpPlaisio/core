@@ -8,7 +8,7 @@
  * @type row1
  */
 create procedure abc_company_role_get_details(in p_cmp_id @abc_auth_company.cmp_id%type@,
-                                              in p_rol_id @aut_role.rol_id%type@,
+                                              in p_rol_id @abc_auth_role.rol_id%type@,
                                               in p_lan_id @abc_babel_language.lan_id%type@)
 reads sql data
 begin
@@ -19,10 +19,10 @@ begin
 
   ,      rlg.rlg_id
   ,      wd2.wdt_text   rlg_name
-  from       AUT_ROLE             rol
-  inner join AUT_ROLE_GROUP       rlg  on  rlg.rlg_id = rol.rlg_id
-  inner join ABC_BABEL_WORD_TEXT  wd2  on  wd2.wrd_id = rlg.wrd_id and
-                                           wd2.lan_id = p_lan_id
+  from ABC_AUTH_ROLE        rol
+  join ABC_AUTH_ROLE_GROUP  rlg  on  rlg.rlg_id = rol.rlg_id
+  join ABC_BABEL_WORD_TEXT  wd2  on  wd2.wrd_id = rlg.wrd_id and
+                                     wd2.lan_id = p_lan_id
   where  rol.cmp_id = p_cmp_id
   and    rol.rol_id = p_rol_id
   ;

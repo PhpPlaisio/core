@@ -6,11 +6,11 @@
  *
  * @type none
  */
-create procedure abc_system_module_modify( in p_mdl_id @aut_module.mdl_id%type@,
-                                           in p_wrd_id @aut_module.wrd_id%type@ )
+create procedure abc_system_module_modify( in p_mdl_id @ABC_AUTH_MODULE.mdl_id%type@,
+                                           in p_wrd_id @ABC_AUTH_MODULE.wrd_id%type@ )
 modifies sql data
 begin
-  update AUT_MODULE
+  update ABC_AUTH_MODULE
   set    wrd_id = p_wrd_id
   where  mdl_id = p_mdl_id
   ;

@@ -90,16 +90,6 @@ class C
    */
   const LEN_CMP_ABBR          =  15;
   const LEN_CMP_LABEL         =  20;
-  const LEN_PAG_ALIAS         =  32;
-  const LEN_PAG_CLASS         = 128;
-  const LEN_PAG_LABEL         = 128;
-  const LEN_PAG_WEIGHT        =  10;
-  const LEN_PTB_LABEL         =  30;
-  const LEN_RLG_LABEL         =  50;
-  const LEN_RLG_WEIGHT        =   5;
-  const LEN_ROL_LABEL         =  50;
-  const LEN_ROL_NAME          =  32;
-  const LEN_ROL_WEIGHT        =   5;
   const LEN_USR_NAME          =  64;
   const LEN_USR_PASSWORD_HASH =  60;
   const LEN_WDG_LABEL         =  30;

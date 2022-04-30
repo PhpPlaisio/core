@@ -15,7 +15,7 @@ begin
 
   select group_concat(rol_id ORDER BY rol_id)
   into   l_pro_rol_ids
-  from   AUT_USR_ROL
+  from   ABC_AUTH_USR_ROL
   where  cmp_id = p_cmp_id
   and    usr_id = p_usr_id
   and    curdate() between aur_date_start
@@ -45,13 +45,13 @@ begin
       set l_pro_id = last_insert_id();
 
       -- Insert new profile roles.
-      insert into AUT_PRO_ROL(cmp_id
-      ,                       pro_id
-      ,                       rol_id)
+      insert into ABC_AUTH_PRO_ROL( cmp_id
+      ,                             pro_id
+      ,                             rol_id )
       select p_cmp_id
       ,      l_pro_id
       ,      rol_id
-      from   AUT_USR_ROL
+      from   ABC_AUTH_USR_ROL
       where  cmp_id = p_cmp_id
       and    usr_id = p_usr_id
       and    curdate() between aur_date_start
@@ -59,16 +59,16 @@ begin
       ;
 
       -- Insert new profile pages.
-      insert into AUT_PRO_PAG(pro_id
-      ,                       pag_id)
+      insert into ABC_AUTH_PRO_PAG( pro_id
+      ,                             pag_id )
       select l_pro_id
       ,      apf.pag_id
-      from       AUT_USR_ROL        aur
-      inner join AUT_ROL_FUN        arf  on  arf.rol_id = aur.rol_id
-      inner join AUT_FUNCTIONALITY  fun  on  fun.fun_id = arf.fun_id
-      inner join AUT_PAG_FUN        apf  on  apf.fun_id = fun.fun_id
-      inner join AUT_MODULE_COMPANY amc  on  amc.mdl_id = fun.mdl_id and
-                                             amc.cmp_id = p_cmp_id
+      from       ABC_AUTH_USR_ROL        aur
+      inner join ABC_AUTH_ROL_FUN        arf  on  arf.rol_id = aur.rol_id
+      inner join ABC_AUTH_FUNCTIONALITY  fun  on  fun.fun_id = arf.fun_id
+      inner join ABC_AUTH_PAG_FUN        apf  on  apf.fun_id = fun.fun_id
+      inner join ABC_AUTH_MODULE_COMPANY amc  on  amc.mdl_id = fun.mdl_id and
+                                                  amc.cmp_id = p_cmp_id
       where aur.cmp_id = p_cmp_id
       and   aur.usr_id = p_usr_id
       and   curdate() between aur.aur_date_start

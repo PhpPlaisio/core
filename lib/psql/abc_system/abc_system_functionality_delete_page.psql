@@ -6,11 +6,11 @@
  *
  * @type none
  */
-create procedure abc_system_functionality_delete_page( in p_fun_id @aut_pag_fun.fun_id%type@,
-                                                       in p_pag_id @aut_pag_fun.pag_id%type@ )
+create procedure abc_system_functionality_delete_page(in p_fun_id @abc_auth_pag_fun.fun_id%type@,
+                                                      in p_pag_id @abc_auth_pag_fun.pag_id%type@)
 modifies sql data
 begin
-  delete from AUT_PAG_FUN
+  delete from ABC_AUTH_PAG_FUN
   where pag_id = p_pag_id
   and   fun_id = p_fun_id
   ;

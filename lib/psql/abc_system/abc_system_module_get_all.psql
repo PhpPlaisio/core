@@ -10,9 +10,9 @@ reads sql data
 begin
   select mdl.mdl_id
   ,      wd1.wdt_text   mdl_name
-  from       AUT_MODULE          mdl
-  inner join ABC_BABEL_WORD_TEXT wd1  on  wd1.wrd_id = mdl.wrd_id and
-                                          wd1.lan_id = p_lan_id
+  from ABC_AUTH_MODULE     mdl
+  join ABC_BABEL_WORD_TEXT wd1  on  wd1.wrd_id = mdl.wrd_id and
+                                    wd1.lan_id = p_lan_id
   order by mdl_name
   ;
 end

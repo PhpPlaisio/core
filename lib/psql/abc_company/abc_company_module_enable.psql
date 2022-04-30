@@ -6,12 +6,12 @@
  *
  * @type none
  */
-create procedure abc_company_module_enable( in p_cmp_id @aut_module_company.cmp_id%type@,
-                                            in p_mdl_id @aut_module_company.mdl_id%type@ )
+create procedure abc_company_module_enable( in p_cmp_id @ABC_AUTH_MODULE_company.cmp_id%type@,
+                                            in p_mdl_id @ABC_AUTH_MODULE_company.mdl_id%type@ )
 modifies sql data
 begin
-  insert into AUT_MODULE_COMPANY( cmp_id
-  ,                               mdl_id )
+  insert into ABC_AUTH_MODULE_COMPANY( cmp_id
+  ,                                    mdl_id )
   values( p_cmp_id
   ,       p_mdl_id )
   ;

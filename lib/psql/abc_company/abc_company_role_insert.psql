@@ -12,17 +12,17 @@
  * @return int
  */
 create procedure abc_company_role_insert(in p_cmp_id     @abc_auth_company.cmp_id%type@,
-                                         in p_rlg_id     @aut_role.rlg_id%type@,
-                                         in p_rol_name   @aut_role.rol_name%type@,
-                                         in p_rol_weight @aut_role.rol_weight%type@,
-                                         in p_rol_label  @aut_role.rol_label%type@)
+                                         in p_rlg_id     @abc_auth_role.rlg_id%type@,
+                                         in p_rol_name   @abc_auth_role.rol_name%type@,
+                                         in p_rol_weight @abc_auth_role.rol_weight%type@,
+                                         in p_rol_label  @abc_auth_role.rol_label%type@)
 modifies sql data
 begin
-  insert into AUT_ROLE( cmp_id
-  ,                     rlg_id
-  ,                     rol_weight
-  ,                     rol_name
-  ,                     rol_label)
+  insert into ABC_AUTH_ROLE( cmp_id
+  ,                         rlg_id
+  ,                         rol_weight
+  ,                         rol_name
+  ,                         rol_label)
   values( p_cmp_id
   ,       p_rlg_id
   ,       p_rol_weight

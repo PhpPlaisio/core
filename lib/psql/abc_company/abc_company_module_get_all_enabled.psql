@@ -10,13 +10,13 @@ create procedure abc_company_module_get_all_enabled(in p_cmp_id @abc_auth_compan
                                                     in p_lan_id @abc_babel_word.wrd_id%type@)
 reads sql data
 begin
-  select mdl.mdl_id     mdl_id
+  select mdl.mdl_id
   ,      wd1.wdt_text   mdl_name
-  from       AUT_MODULE_COMPANY  mdc
-  inner join AUT_MODULE          mdl  on  mdl.mdl_id = mdc.mdl_id
-  inner join ABC_BABEL_WORD_TEXT wd1  on  wd1.wrd_id = mdl.wrd_id and
-                                          wd1.lan_id = p_lan_id
+  from ABC_AUTH_MODULE_COMPANY  mdc
+  join ABC_AUTH_MODULE          mdl  on  mdl.mdl_id = mdc.mdl_id
+  join ABC_BABEL_WORD_TEXT      wd1  on  wd1.wrd_id = mdl.wrd_id and
+                                         wd1.lan_id = p_lan_id
   where mdc.cmp_id = p_cmp_id
-  order by mdl_name
+  order by mdl.mdl_name
   ;
 end

@@ -10,7 +10,7 @@
 create procedure abc_system_module_insert(in p_wrd_id @abc_babel_word.wrd_id%type@)
 modifies sql data
 begin
-  insert into AUT_MODULE( wrd_id )
+  insert into ABC_AUTH_MODULE( wrd_id )
   values( p_wrd_id )
   ;
 

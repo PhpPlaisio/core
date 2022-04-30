@@ -1,5 +1,5 @@
 /**
- * Recomputes all profiles and makes tables AUT_PRO_ROL and AUT_PRO_PAG proper.
+ * Recomputes all profiles and makes tables ABC_AUTH_PRO_ROL and ABC_AUTH_PRO_PAG proper.
  *
  * @type none
  */

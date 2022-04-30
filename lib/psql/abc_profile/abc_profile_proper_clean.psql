@@ -1,5 +1,5 @@
 /**
- * Recomputes all profiles and makes tables AUT_PRO_ROL and AUT_PRO_PAG proper as SP abc_profile_proper() but it removes
+ * Recomputes all profiles and makes tables ABC_AUTH_PRO_ROL and ABC_AUTH_PRO_PAG proper as SP abc_profile_proper() but it removes
  * obsolete profiles.
  *
  * @type none
@@ -10,22 +10,22 @@ begin
   call abc_profile_proper();
 
   delete from app
-  using      ABC_AUTH_PROFILE pro
-  inner join AUT_PRO_PAG      app  on  app.pro_id = pro.pro_id
-  inner join TMP_PROFILE3     tmp  on  tmp.tmp_rol_ids = pro.pro_rol_ids
+  using ABC_AUTH_PROFILE pro
+  join  ABC_AUTH_PRO_PAG app  on  app.pro_id = pro.pro_id
+  join  TMP_PROFILE3     tmp  on  tmp.tmp_rol_ids = pro.pro_rol_ids
   where tmp.tmp_diff < 0
   ;
 
   delete from apr
-  using      ABC_AUTH_PROFILE pro
-  inner join AUT_PRO_ROL      apr  on  apr.pro_id = pro.pro_id
-  inner join TMP_PROFILE3     tmp  on  tmp.tmp_rol_ids = pro.pro_rol_ids
+  using ABC_AUTH_PROFILE pro
+  join  ABC_AUTH_PRO_ROL apr  on  apr.pro_id = pro.pro_id
+  join  TMP_PROFILE3     tmp  on  tmp.tmp_rol_ids = pro.pro_rol_ids
   where tmp.tmp_diff < 0
   ;
 
   delete from pro
-  using      ABC_AUTH_PROFILE pro
-  inner join TMP_PROFILE3     tmp  on  tmp.tmp_rol_ids = pro.pro_rol_ids
+  using ABC_AUTH_PROFILE pro
+  join  TMP_PROFILE3     tmp  on  tmp.tmp_rol_ids = pro.pro_rol_ids
   where tmp.tmp_diff < 0
   ;
 end

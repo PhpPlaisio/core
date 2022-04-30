@@ -13,9 +13,9 @@ begin
   ,      rlg.rlg_weight
   ,      rlg.rlg_label
   ,      wdt.wdt_text     rlg_name
-  from       AUT_ROLE_GROUP      rlg
-  inner join ABC_BABEL_WORD_TEXT wdt  on  wdt.wrd_id = rlg.wrd_id and
-                                          wdt.lan_id = p_lan_id
+  from ABC_AUTH_ROLE_GROUP rlg
+  join ABC_BABEL_WORD_TEXT wdt  on  wdt.wrd_id = rlg.wrd_id and
+                                    wdt.lan_id = p_lan_id
   order by rlg.rlg_weight
   ;
 end

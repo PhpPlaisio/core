@@ -9,16 +9,17 @@ create procedure abc_system_functionality_get_all(in p_lan_id @abc_babel_languag
 reads sql data
 begin
   select mdl.mdl_id     mdl_id
-  ,      fun.fun_id     fun_id
   ,      wd1.wdt_text   mdl_name
+
   ,      wd2.wdt_text   fun_name
-  from       AUT_MODULE          mdl
-  inner join ABC_BABEL_WORD_TEXT wd1  on  wd1.wrd_id = mdl.wrd_id and
-                                          wd1.lan_id = p_lan_id
-  inner join AUT_FUNCTIONALITY   fun  on  fun.mdl_id = mdl.mdl_id
-  inner join ABC_BABEL_WORD_TEXT wd2  on  wd2.wrd_id = fun.wrd_id and
-                                          wd2.lan_id = p_lan_id
-  order by mdl_name
-  ,        fun_name
+  ,      fun.fun_id     fun_id
+  from ABC_AUTH_MODULE        mdl
+  join ABC_BABEL_WORD_TEXT    wd1  on  wd1.wrd_id = mdl.wrd_id and
+                                       wd1.lan_id = p_lan_id
+  join ABC_AUTH_FUNCTIONALITY fun  on  fun.mdl_id = mdl.mdl_id
+  join ABC_BABEL_WORD_TEXT    wd2  on  wd2.wrd_id = fun.wrd_id and
+                                       wd2.lan_id = p_lan_id
+  order by mdl.mdl_name
+  ,        fun.fun_name
   ;
 end

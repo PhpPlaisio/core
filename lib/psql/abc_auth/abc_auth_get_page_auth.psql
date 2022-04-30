@@ -11,11 +11,11 @@
  */
 create procedure abc_auth_get_page_auth( in p_cmp_id @abc_auth_company.cmp_id%type@,
                                          in p_pro_id @abc_auth_profile.pro_id%type@
-,                                        in p_pag_id @aut_page.pag_id%type@ )
+,                                        in p_pag_id @abc_auth_page.pag_id%type@ )
 reads sql data
 begin
   select count(*) n
-  from   AUT_PRO_PAG
+  from   ABC_AUTH_PRO_PAG
   where pag_id = p_pag_id
   and   pro_id = p_pro_id
   ;

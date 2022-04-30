@@ -5,13 +5,13 @@
  *
  * @type rows
  */
-create procedure abc_system_module_get_granted_companies(in p_mdl_id @aut_module.mdl_id%type@)
+create procedure abc_system_module_get_granted_companies(in p_mdl_id @ABC_AUTH_MODULE.mdl_id%type@)
 reads sql data
 begin
   select cmp.cmp_id
   ,      cmp.cmp_abbr
-  from       AUT_MODULE_COMPANY amc
-  inner join ABC_AUTH_COMPANY   cmp  on  cmp.cmp_id = amc.cmp_id
+  from ABC_AUTH_MODULE_COMPANY amc
+  join ABC_AUTH_COMPANY        cmp  on  cmp.cmp_id = amc.cmp_id
   where amc.mdl_id = p_mdl_id
   order by cmp.cmp_abbr
   ;

@@ -8,14 +8,14 @@
  *
  * @return int
  */
-create procedure abc_system_tab_insert_details( in p_wrd_id    @aut_page_tab.wrd_id%type@,
-                                                in p_ptb_label @aut_page_tab.ptb_label%type@ )
+create procedure abc_system_tab_insert_details(in p_wrd_id    @aut_page_tab.wrd_id%type@,
+                                               in p_ptb_label @aut_page_tab.ptb_label%type@)
 reads sql data
 begin
-  insert into AUT_PAGE_TAB( wrd_id
-  ,                         ptb_label )
-  values ( p_wrd_id
-  ,        p_ptb_label )
+  insert into AUT_PAGE_TAB     ( wrd_id
+  ,                             ptb_label )
+  values( p_wrd_id
+  ,       p_ptb_label )
   ;
 
   select last_insert_id() ptb_id;

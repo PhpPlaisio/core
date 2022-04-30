@@ -9,9 +9,11 @@
   "require": {
     "php": ">=7.4",
     "ext-curl": "*",
+    "plaisio/authority-core": "^2.0.0",
     "plaisio/babel-core": "^1.8.0",
     "plaisio/cgi": "^1.2.0",
     "plaisio/db-company": "^1.1.0",
+    "plaisio/db-page": "^0.9.0",
     "plaisio/db-profile": "^1.1.0",
     "plaisio/db-user": "^1.2.0",
     "plaisio/exception": "^1.1.0",
@@ -36,7 +38,7 @@
     "phing/phing": "^3.0.0",
     "phpunit/phpunit": "^9.5.11",
     "plaisio/console": "^2.5.0",
-    "plaisio/phing-extensions": "dev-master",
+    "plaisio/phing-extensions": "^3.1.0",
     "setbased/php-stratum": "^6.1.0"
   },
   "autoload": {

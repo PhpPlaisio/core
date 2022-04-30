@@ -23,9 +23,9 @@ begin
   select aur.cmp_id
   ,      aur.usr_id
   ,      group_concat(aur.rol_id ORDER BY aur.rol_id)
-  from            AUT_USR_ROL aur
-  left outer join AUT_ROL_FLG arf  on  arf.rol_id = aur.rol_id
-  left outer join AUT_FLAG    rfl  on  rfl.rfl_id = arf.rfl_id
+  from      ABC_AUTH_USR_ROL aur
+  left join ABC_AUTH_ROL_FLG arf  on  arf.rol_id = aur.rol_id
+  left join ABC_AUTH_FLAG    rfl  on  rfl.rfl_id = arf.rfl_id
   where curdate() between aur.aur_date_start
                   and     aur.aur_date_stop
   group by aur.cmp_id
