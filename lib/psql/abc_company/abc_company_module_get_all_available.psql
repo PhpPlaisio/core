@@ -18,6 +18,6 @@ begin
                                               wd1.lan_id = p_lan_id
   left join ABC_AUTH_MODULE_COMPANY  mdc  on  mdc.mdl_id = mdl.mdl_id and
                                               mdc.cmp_id = p_cmp_id
-  order by mdl.mdl_name
+  order by mdl_name
   ;
 end

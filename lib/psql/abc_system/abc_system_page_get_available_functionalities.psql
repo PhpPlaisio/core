@@ -24,7 +24,7 @@ begin
                                             wd2.lan_id = p_lan_id
   left join ABC_AUTH_PAG_FUN       apf  on  apf.fun_id = fun.fun_id and
                                             apf.pag_id = p_pag_id
-  order by mdl.mdl_name
-  ,        fun.fun_name
+  order by mdl_name
+  ,        fun_name
   ;
 end

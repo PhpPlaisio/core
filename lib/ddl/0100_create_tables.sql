@@ -12,7 +12,7 @@
 /*================================================================================*/
 
 CREATE TABLE `AUT_CONFIG_CLASS` (
-  `ccl_id` SMALLINT AUTO_INCREMENT NOT NULL,
+  `ccl_id` SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
   `ccl_type` VARCHAR(10) NOT NULL,
   `ccl_class` VARCHAR(128) NOT NULL,
   CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`ccl_id`)
@@ -30,9 +30,9 @@ The class for showing and modifying the parameter value.
 */
 
 CREATE TABLE `AUT_CONFIG` (
-  `cfg_id` SMALLINT AUTO_INCREMENT NOT NULL,
-  `cmp_id` SMALLINT NOT NULL,
-  `ccl_id` SMALLINT NOT NULL,
+  `cfg_id` SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
+  `cmp_id` SMALLINT UNSIGNED NOT NULL,
+  `ccl_id` SMALLINT UNSIGNED NOT NULL,
   `cfg_mandatory` BOOL DEFAULT 1 NOT NULL,
   `cfg_show_to_company` BOOL DEFAULT 0 NOT NULL,
   `cfg_modify_by_company` BOOL DEFAULT 0 NOT NULL,
@@ -58,8 +58,8 @@ If true: the value of this parameter can be modified by the administrator of the
 */
 
 CREATE TABLE `AUT_CONFIG_VALUE` (
-  `cmp_id` SMALLINT NOT NULL,
-  `cfg_id` SMALLINT NOT NULL,
+  `cmp_id` SMALLINT UNSIGNED NOT NULL,
+  `cfg_id` SMALLINT UNSIGNED NOT NULL,
   `cfg_value` VARCHAR(4000),
   CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`cmp_id`, `cfg_id`)
 )

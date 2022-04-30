@@ -17,6 +17,6 @@ begin
   join ABC_BABEL_WORD_TEXT      wd1  on  wd1.wrd_id = mdl.wrd_id and
                                          wd1.lan_id = p_lan_id
   where mdc.cmp_id = p_cmp_id
-  order by mdl.mdl_name
+  order by mdl_name
   ;
 end
