@@ -1,7 +1,7 @@
 /**
  * Deletes a text.
  *
- * @param p_txt_id The ID of the text to be be deleted.
+ * @param p_txt_id The ID of the text to be deleted.
  *
  * @type none
  */
