@@ -1,5 +1,5 @@
 /**
- * Inserts an new functionality.
+ * Inserts a new functionality.
  *
  * @param p_mdl_id The ID on the module of the new functionality.
  * @param p_wrd_id The ID of the word of the name of the new functionality.
