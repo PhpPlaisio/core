@@ -1,7 +1,7 @@
 /**
  * Deletes a word.
  *
- * @param p_wrd_id The ID of the word to be be deleted.
+ * @param p_wrd_id The ID of the word to be deleted.
  *
  * @type none
  */
