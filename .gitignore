@@ -7,6 +7,7 @@
 /doc/
 /node_modules/
 /package-lock.json
+/plaisio-assets.csv
 /test/TestDataLayer.php
 /test/coverage.xml
 /test/etc/routines.json
@@ -16,4 +17,5 @@
 /www/js/**/*.map
 /www/js/Plaisio/Form/
 /www/js/Plaisio/Helper/
+/www/js/Plaisio/Kernel/
 /www/js/Plaisio/Table/

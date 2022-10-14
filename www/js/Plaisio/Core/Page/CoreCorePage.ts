@@ -1,7 +1,9 @@
-import '../../Form/LouverFormPackage';
 import * as $ from 'jquery';
-import {FormPackage as Form} from '../../Form/FormPackage';
-import {OverviewTablePackage as OverviewTable} from '../../Table/OverviewTablePackage';
+import {FormPackage as Form} from 'Plaisio/Form/FormPackage';
+import 'Plaisio/Form/LouverFormPackage';
+import {Cast} from 'Plaisio/Helper/Cast';
+import {Kernel} from 'Plaisio/Kernel/Kernel';
+import {OverviewTablePackage as OverviewTable} from 'Plaisio/Table/OverviewTablePackage';
 
 export class CoreCorePage
 {
@@ -11,20 +13,38 @@ export class CoreCorePage
    */
   public static init()
   {
-    Form.registerForm('form');
+    this.initForms();
+    this.initTables();
+    this.initRowCount();
 
-    // Register all overview tables.
-    const mq = window.matchMedia("only screen and (max-width: 40em)");
-    OverviewTable.registerTable('table', mq);
+    Kernel.getInstance();
+  }
 
-    // Install event handler for displaying the row count of am overview table.
-    $('body').on(OverviewTable.FILTERING_ENDED, CoreCorePage.overviewTableRowCount)
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Init forms.
+   */
+  private static initForms(): void
+  {
+    Form.init();
+  }
 
-    if (window.hasOwnProperty('php_plaisio_inline_js'))
-    {
-      // @ts-ignore
-      eval(php_plaisio_inline_js);
-    }
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Install event handler for displaying the row count of am overview table.
+   */
+  private static initRowCount(): void
+  {
+    $('body').on(OverviewTable.FILTERING_ENDED, CoreCorePage.overviewTableRowCount);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Init tables.
+   */
+  private static initTables(): void
+  {
+    OverviewTable.init(window.matchMedia('only screen and (max-width: 40em)'));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -33,20 +53,25 @@ export class CoreCorePage
    *
    * @param event The OverviewTable.FILTERING_ENDED event.
    */
-  public static overviewTableRowCount(event: JQuery.TriggeredEvent): void
+  private static overviewTableRowCount(event: JQuery.TriggeredEvent): void
   {
     const $table = $(event.target);
 
-    const all     = $table.children('tbody').children('tr').length;
-    const visible = $table.children('tbody').children('tr:visible').length;
+    const prefix = Cast.toOptString($table.attr('data-overview-table'));
+    if (prefix !== null)
+    {
+      const all      = $table.children('tbody').children('tr').length;
+      const visible  = $table.children('tbody').children('tr:visible').length;
+      const selector = '.' + $.escapeSelector(prefix) + '-table-menu-row-count';
 
-    if (all === visible)
-    {
-      $table.find('span.row_count').text(all);
-    }
-    else
-    {
-      $table.find('span.row_count').text(visible + '/' + all);
+      if (all === visible)
+      {
+        $table.find(selector).text(all);
+      }
+      else
+      {
+        $table.find(selector).text(visible + '/' + all);
+      }
     }
   }
 
@@ -54,4 +79,4 @@ export class CoreCorePage
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: f80c9193310135bcf8d7226f8f311686
+// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: 73409c9563c19a828449ce57529f6fee
