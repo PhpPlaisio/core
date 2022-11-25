@@ -108,6 +108,7 @@ class FunctionalityUpdateRolesPage extends CoreCorePage
     $this->form = new LouverForm();
     $this->form->setRowFactory(new SystemFunctionalityUpdateRolesSlatControlFactory())
                ->addSubmitButton(C::WRD_ID_BUTTON_UPDATE, 'handleForm')
+               ->setName('data')
                ->populate($roles);
   }
 

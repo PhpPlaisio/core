@@ -97,6 +97,7 @@ class FunctionalityUpdatePagesPage extends CoreCorePage
     $this->form = new LouverForm();
     $this->form->setRowFactory(new SystemFunctionalityUpdatePagesSlatControlFactory())
                ->addSubmitButton(C::WRD_ID_BUTTON_UPDATE, 'handleForm')
+               ->setName('data')
                ->populate($pages);
   }
 

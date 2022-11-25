@@ -89,6 +89,7 @@ class WordTranslateWordsPage extends BabelPage
     $this->form = new LouverForm();
     $this->form->setRowFactory(new  BabelWordTranslateSlatControlFactory($this->lanIdRef, $this->lanIdTar))
                ->addSubmitButton(C::WRD_ID_BUTTON_TRANSLATE, 'handleForm')
+               ->setName('data')
                ->populate($words);
   }
 

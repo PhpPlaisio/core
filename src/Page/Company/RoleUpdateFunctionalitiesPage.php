@@ -82,6 +82,7 @@ class RoleUpdateFunctionalitiesPage extends CompanyPage
     $this->form = new LouverForm();
     $this->form->setRowFactory(new CompanyRoleUpdateFunctionalitiesSlatControlFactory())
                ->addSubmitButton(C::WRD_ID_BUTTON_UPDATE, 'handleForm')
+               ->setName('data')
                ->populate($pages);
   }
 

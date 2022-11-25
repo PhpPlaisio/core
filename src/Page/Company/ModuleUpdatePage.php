@@ -63,6 +63,7 @@ class ModuleUpdatePage extends CompanyPage
     $this->form = new LouverForm();
     $this->form->setRowFactory(new CompanyModulesUpdateSlatControlFactory())
                ->addSubmitButton(C::WRD_ID_BUTTON_UPDATE, 'handleForm')
+               ->setName('data')
                ->populate($modules);
   }
 
