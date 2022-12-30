@@ -226,7 +226,7 @@ information_schema.COLUMNS.CHARACTER_SET_NAME               32
 information_schema.COLUMNS.COLLATION_NAME                   32
 information_schema.COLUMNS.COLUMN_TYPE              4294967295
 information_schema.COLUMNS.COLUMN_KEY                        3
-information_schema.COLUMNS.EXTRA                            30
+information_schema.COLUMNS.EXTRA                            80
 information_schema.COLUMNS.PRIVILEGES                       80
 information_schema.COLUMNS.COLUMN_COMMENT                 1024
 information_schema.COLUMNS.IS_GENERATED                      6
@@ -1163,4 +1163,16 @@ test.AUT_CONFIG_VALUE.cfg_value 4000
 test.AUT_PAGE_TAB.ptb_id     3
 test.AUT_PAGE_TAB.wrd_id     5
 test.AUT_PAGE_TAB.ptb_label 30
+
+test_audit.TABLE1.c1  3
+test_audit.TABLE1.c2  5
+test_audit.TABLE1.c4 20
+
+test_audit.TABLE2.c1 10
+test_audit.TABLE2.c2 20
+test_audit.TABLE2.c3 30
+
+test_data.TABLE1.c1  3
+test_data.TABLE1.c2  5
+test_data.TABLE1.c4 20
 
