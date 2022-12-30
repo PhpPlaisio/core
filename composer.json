@@ -10,7 +10,7 @@
     "php": ">=7.4",
     "ext-curl": "*",
     "plaisio-ts/helper-cast": "^2.0.0",
-    "plaisio-ts/kernel": "^1.0.0",
+    "plaisio-ts/kernel": "^2.0.0",
     "plaisio/authority-core": "^2.0.1",
     "plaisio/babel-core": "^1.8.0",
     "plaisio/cgi": "^1.2.0",
@@ -19,8 +19,8 @@
     "plaisio/db-profile": "^1.1.0",
     "plaisio/db-user": "^1.2.0",
     "plaisio/exception": "^1.1.0",
-    "plaisio/form": "^0.53.0",
-    "plaisio/form-louver": "^0.53.0",
+    "plaisio/form": "^0.53.2",
+    "plaisio/form-louver": "^0.53.1",
     "plaisio/helper-html": "^4.0.0",
     "plaisio/helper-ob": "^1.1.1",
     "plaisio/kernel": "^3.1.1",
@@ -29,7 +29,7 @@
     "plaisio/page-decorator": "^1.1.0",
     "plaisio/response-core": "^2.7.0",
     "plaisio/table-detail": "^3.0.1",
-    "plaisio/table-overview": "^7.3.0",
+    "plaisio/table-overview": "^7.4.0",
     "plaisio/web-assets": "^3.0.0",
     "setbased/exception": "^2.2.0",
     "setbased/php-stratum-mysql": "^6.5.0"
@@ -38,10 +38,10 @@
   "prefer-stable": true,
   "require-dev": {
     "phing/phing": "^3.0.0",
-    "phpunit/phpunit": "^9.5.26",
+    "phpunit/phpunit": "^9.5.27",
     "plaisio/console": "^2.8.0",
     "plaisio/phing-extensions": "^3.1.0",
-    "setbased/php-stratum": "^6.1.0"
+    "setbased/php-stratum": "^6.2.0"
   },
   "autoload": {
     "psr-4": {
