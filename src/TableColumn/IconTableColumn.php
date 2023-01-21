@@ -67,7 +67,7 @@ abstract class IconTableColumn extends UniTableColumn
     else
     {
       $classes   = $this->getClasses($row);
-      $classes[] = 'inactive';
+      $classes[] = 'is-inactive-icon';
       $inner     = ['tag'  => 'span',
                     'attr' => ['class' => $classes],
                     'html' => null];
