@@ -17,6 +17,7 @@ use Plaisio\Kernel\Nub;
  *
  * @property-read RenderWalker $renderWalker The render walker.
  */
+#[\AllowDynamicProperties]
 class CoreFieldSet extends FieldSet
 {
   //--------------------------------------------------------------------------------------------------------------------
