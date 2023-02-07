@@ -26,7 +26,6 @@
     "plaisio/kernel": "^3.1.1",
     "plaisio/menu": "^1.0.0",
     "plaisio/page-core": "^1.5.0",
-    "plaisio/page-decorator": "^1.1.0",
     "plaisio/response-core": "^2.8.0",
     "plaisio/table-detail": "^4.0.1",
     "plaisio/table-overview": "^8.0.0",
