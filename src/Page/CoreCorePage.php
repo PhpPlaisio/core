@@ -83,7 +83,7 @@ abstract class CoreCorePage extends CorePage
    *
    * @param int $pagId The ID of the page of the tab.
    *
-   * @return string
+   * @return string|null
    */
   protected function getTabUrl(int $pagId): ?string
   {
@@ -94,7 +94,7 @@ abstract class CoreCorePage extends CorePage
   /**
    * Returns the actual page content.
    *
-   * @return string
+   * @return string|null
    */
   abstract protected function htmlTabContent(): ?string;
 
@@ -131,7 +131,7 @@ abstract class CoreCorePage extends CorePage
    *
    * @param string|null $htmlContent The actual content of the page.
    *
-   * @return array
+   * @return array|null
    */
   protected function structBody(?string $htmlContent): ?array
   {
@@ -157,7 +157,7 @@ abstract class CoreCorePage extends CorePage
    *
    * @param string|null $htmlContent The actual content of the page.
    *
-   * @return array
+   * @return array|null
    */
   protected function structGridContainer(?string $htmlContent): ?array
   {
@@ -173,7 +173,7 @@ abstract class CoreCorePage extends CorePage
    *
    * @param string|null $htmlContent The actual content of the page.
    *
-   * @return array
+   * @return array|null
    */
   protected function structGridMain(?string $htmlContent): ?array
   {
@@ -278,7 +278,7 @@ abstract class CoreCorePage extends CorePage
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * @return array
+   * @return array|null
    */
   protected function structTrailingJavaScript(): ?array
   {

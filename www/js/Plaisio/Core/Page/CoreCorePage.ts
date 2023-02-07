@@ -79,4 +79,4 @@ export class CoreCorePage
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-// Plaisio\Console\Helper\TypeScript\TypeScriptMarkHelper::md5: 73409c9563c19a828449ce57529f6fee
+// Plaisio\Console\TypeScript\Helper\MarkHelper::md5: 73409c9563c19a828449ce57529f6fee

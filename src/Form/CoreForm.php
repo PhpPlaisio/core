@@ -58,7 +58,7 @@ class CoreForm extends Form
    *                                   </ul>
    * @param bool            $mandatory Whether the form control is mandatory.
    */
-  public function addFormControl(Control $control, $label = null, bool $mandatory = false)
+  public function addFormControl(Control $control, int|string $label = null, bool $mandatory = false)
   {
     if ($control->isHidden())
     {
@@ -105,10 +105,10 @@ class CoreForm extends Form
    *
    * @return PushControl
    */
-  public function addSubmitButton($wrdId,
-                                  string $method,
-                                  string $name = 'submit',
-                                  ?string $class = 'btn btn-success'): PushControl
+  public function addSubmitButton(int|string $wrdId,
+                                  string     $method,
+                                  string     $name = 'submit',
+                                  ?string    $class = 'btn btn-success'): PushControl
   {
     $control = $this->visibleFieldSet->addSubmitButton($wrdId, $name);
     $control->setMethod($method);

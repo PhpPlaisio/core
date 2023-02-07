@@ -25,10 +25,10 @@ class WordGroupTableColumn extends DualTableColumn
   /**
    * Object constructor.
    *
-   * @param string|int|null $header   The header of this column.
+   * @param int|string|null $header   The header of this column.
    * @param int             $lanIdTar The ID of the target language.
    */
-  public function __construct($header, int $lanIdTar)
+  public function __construct(int|string|null $header, int $lanIdTar)
   {
     parent::__construct('number', 'text', $header);
 

@@ -17,9 +17,9 @@ class FunctionalityTableColumn extends DualTableColumn
   /**
    * Object constructor.
    *
-   * @param string|int|null $header The header of this column.
+   * @param int|string|null $header The header of this column.
    */
-  public function __construct($header)
+  public function __construct(int|string|null $header)
   {
     parent::__construct('number', 'text', $header);
   }

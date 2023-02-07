@@ -68,11 +68,11 @@ class WordDeletePage extends BabelPage
   /**
    * Echos the actual page content.
    *
-   * @return void
+   * @return string|null
    */
   protected function htmlTabContent(): ?string
   {
-    // Nothing to do.
+    return null;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

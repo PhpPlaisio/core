@@ -4,30 +4,30 @@
   vertical-align: middle;
 }
 
-.ot-bool,
+.ot-cell-bool,
 .ot-control-checkbox
 {
   text-align:     center;
   vertical-align: middle;
 }
 
-.ot-currency,
-.ot-number
+.ot-cell-currency,
+.ot-cell-number
 {
   text-align:           right;
   vertical-align:       middle;
   font-variant-numeric: proportional-nums;
 }
 
-.ot-currency:not(:empty):before
+.ot-cell-currency:not(:empty):before
 {
   float:         left;
   padding-right: 4px;
   content:       "€";
 }
 
-.ot-date,
-.ot-datetime
+.ot-cell-date,
+.ot-cell-datetime
 {
   text-align:           center;
   vertical-align:       middle;

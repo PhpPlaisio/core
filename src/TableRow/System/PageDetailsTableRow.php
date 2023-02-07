@@ -17,10 +17,10 @@ class PageDetailsTableRow
    * Adds a row with a class name of a page with link to the page details to a detail table.
    *
    * @param DetailTable     $table  The (detail) table.
-   * @param string|int|null $header The row header text.
+   * @param int|string|null $header The row header text.
    * @param array           $data   The page details.
    */
-  public static function addRow(DetailTable $table, $header, array $data)
+  public static function addRow(DetailTable $table, int|string|null $header, array $data): void
   {
     if ($data['pag_id_org']!==null)
     {

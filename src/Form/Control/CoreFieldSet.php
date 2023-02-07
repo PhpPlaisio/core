@@ -64,7 +64,7 @@ class CoreFieldSet extends FieldSet
    *
    * @return $this
    */
-  public function addFormControl(Control $control, $label = null, bool $mandatory = false): self
+  public function addFormControl(Control $control, int|string $label = null, bool $mandatory = false): self
   {
     $this->addendum[] = ['label'     => $label,
                          'mandatory' => $mandatory];
@@ -85,7 +85,7 @@ class CoreFieldSet extends FieldSet
    *
    * @return PushControl
    */
-  public function addSubmitButton($wrdId, string $name = 'submit'): PushControl
+  public function addSubmitButton(int|string $wrdId, string $name = 'submit'): PushControl
   {
     if ($this->buttonGroupControl===null)
     {

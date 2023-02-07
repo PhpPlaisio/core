@@ -31,12 +31,12 @@ class BoolIconTableColumn extends UniTableColumn
   /**
    * Object constructor.
    *
-   * @param string|int|null $header     The header text of this table column.
+   * @param int|string|null $header     The header text of this table column.
    * @param string          $fieldName  The key to be used for getting the value from the data row.
    * @param bool            $showFalse  If set for false values an icon is shown, otherwise the cell is empty for
    *                                    false values.
    */
-  public function __construct($header, string $fieldName, bool $showFalse = false)
+  public function __construct(int|string|null $header, string $fieldName, bool $showFalse = false)
   {
     parent::__construct('bool', $header);
 
