@@ -86,7 +86,7 @@ class BoolIconTableColumn extends UniTableColumn
     }
 
     $struct = ['tag'   => 'td',
-               'attr'  => ['class'      => $walker->getClasses(['cell', 'bool']),
+               'attr'  => ['class'      => $walker->getClasses(['cell', 'cell-bool']),
                            'data-value' => $value],
                'inner' => $inner];
 

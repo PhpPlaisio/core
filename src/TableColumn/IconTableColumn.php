@@ -74,7 +74,7 @@ abstract class IconTableColumn extends UniTableColumn
     }
 
     $struct = ['tag'   => 'td',
-               'attr'  => ['class' => $walker->getClasses(['cell', 'icon'])],
+               'attr'  => ['class' => $walker->getClasses(['cell', 'cell-icon'])],
                'inner' => $inner];
 
     return Html::htmlNested($struct);

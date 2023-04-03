@@ -42,13 +42,13 @@ class WordGroupTableColumn extends DualTableColumn
   public function htmlCell(RenderWalker $walker, array $row): string
   {
     $struct = [['tag'   => 'td',
-                'attr'  => ['class' => $walker->getClasses(['cell', 'number'])],
+                'attr'  => ['class' => $walker->getClasses(['cell', 'cell-number'])],
                 'inner' => ['tag'  => 'a',
                             'attr' => ['class' => 'link',
                                        'href'  => WordGroupDetailsPage::getUrl($row['wdg_id'], $this->lanIdTar)],
                             'text' => $row['wdg_id']]],
                ['tag'  => 'td',
-                'attr' => ['class' => $walker->getClasses(['cell', 'text'])],
+                'attr' => ['class' => $walker->getClasses(['cell', 'cell-text'])],
                 'text' => $row['wdg_name']]];
 
     return Html::htmlNested($struct);

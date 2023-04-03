@@ -28,7 +28,7 @@ class PageDetailsTableRow
                              'attr' => ['href' => PageDetailsPage::getUrl($data['pag_id_org'])],
                              'text' => $data['pag_id_org']]);
 
-      $table->addRow($header, ['class' => $table->renderWalker->getClasses(['cell', 'text'])], $a, true);
+      $table->addRow($header, ['class' => $table->renderWalker->getClasses(['cell', 'cell-text'])], $a, true);
     }
     else
     {
