@@ -73,7 +73,7 @@ abstract class RoleGroupBasePage extends CoreCorePage
   /**
    * Creates the form shown on this page.
    */
-  private function createForm()
+  private function createForm(): void
   {
     $this->form = new CoreForm();
 
