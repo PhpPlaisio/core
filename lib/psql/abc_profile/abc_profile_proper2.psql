@@ -3,25 +3,24 @@
  *
  * @type hidden
  */
-create procedure abc_profile_proper2()
-modifies sql data
+create procedure abc_profile_proper2 ()
+  modifies sql data
 begin
   drop temporary table if exists TMP_PROFILE2;
 
   create temporary table TMP_PROFILE2
   (
-    cmp_id      @abc_auth_company.cmp_id%type@      not null,
-    tmp_rol_ids @abc_auth_profile.pro_rol_ids%type@ not null,
-    primary key(tmp_rol_ids)
-  ) engine=myisam
-  ;
+    cmp_id      smallint(5) unsigned,             -- type: ABC_AUTH_COMPANY.cmp_id
+    tmp_rol_ids varchar(100) character set ascii, -- type: ABC_AUTH_PROFILE.pro_rol_ids
+    primary key (tmp_rol_ids)
+  )
+  engine = myisam;
 
   insert into TMP_PROFILE2( cmp_id
-  ,                         tmp_rol_ids )
+                          , tmp_rol_ids )
   select cmp_id
-  ,      tmp_rol_ids
-  from   TMP_PROFILE1
+       , tmp_rol_ids
+  from TMP_PROFILE1
   group by cmp_id
-  ,        tmp_rol_ids
-  ;
+         , tmp_rol_ids;
 end

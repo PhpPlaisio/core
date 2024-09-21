@@ -7,14 +7,16 @@
  *
  * @type none
  */
-create procedure abc_babel_text_group_update_details(in p_ttg_id    @abc_babel_text_group.ttg_id%type@,
-                                                     in p_ttg_name  @abc_babel_text_group.ttg_name%type@,
-                                                     in p_ttg_label @abc_babel_text_group.ttg_label%type@)
-modifies sql data
+create procedure abc_babel_text_group_update_details
+(
+  in p_ttg_id    tinyint(3) unsigned, --               type: ABC_BABEL_TEXT_GROUP.ttg_id
+  in p_ttg_name  varchar(64) character set utf8mb4, -- type: ABC_BABEL_TEXT_GROUP.ttg_name
+  in p_ttg_label varchar(30) character set ascii --    type: ABC_BABEL_TEXT_GROUP.ttg_label
+)
+  modifies sql data
 begin
   update ABC_BABEL_TEXT_GROUP
-  set ttg_name  = p_ttg_name
-  ,   ttg_label = p_ttg_label
-  where ttg_id = p_ttg_id
-  ;
+  set ttg_name  = p_ttg_name,
+      ttg_label = p_ttg_label
+  where ttg_id = p_ttg_id;
 end

@@ -7,19 +7,20 @@
  *
  * @type none
  */
-create procedure abc_company_update( in  p_cmp_id      @abc_auth_company.cmp_id%type@,
-                                     in  p_cmp_abbr    @abc_auth_company.cmp_abbr%type@,
-                                     in  p_cmp_label   @abc_auth_company.cmp_label%type@ )
-modifies sql data
+create procedure abc_company_update
+(
+  in p_cmp_id    smallint(5) unsigned, --              type: ABC_AUTH_COMPANY.cmp_id
+  in p_cmp_abbr  varchar(15) character set utf8mb4, -- type: ABC_AUTH_COMPANY.cmp_abbr
+  in p_cmp_label varchar(20) character set ascii --    type: ABC_AUTH_COMPANY.cmp_label
+)
+  modifies sql data
 begin
-  if (p_cmp_label='*') then
-    set p_cmp_label = concat( 'CMP_ID_', upper( replace( p_cmp_abbr, ' ', '_' ) ) );
-    /** @todo move to php */
+  if (p_cmp_label = '*') then
+    set p_cmp_label = concat('CMP_ID_', upper(replace(p_cmp_abbr, ' ', '_')));
   end if;
 
   update ABC_AUTH_COMPANY
-  set    cmp_abbr  = p_cmp_abbr
-  ,      cmp_label = p_cmp_label
-  where  cmp_id = p_cmp_id
-  ;
+  set cmp_abbr  = p_cmp_abbr,
+      cmp_label = p_cmp_label
+  where cmp_id = p_cmp_id;
 end

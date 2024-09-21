@@ -5,20 +5,23 @@
  *
  * @type rows
  */
-create procedure abc_system_page_get_all_masters(in p_lan_id @abc_babel_language.lan_id%type@)
-reads sql data
+create procedure abc_system_page_get_all_masters
+(
+  in p_lan_id tinyint(3) unsigned -- type: ABC_BABEL_LANGUAGE.lan_id
+)
+  reads sql data
 begin
   select pag.pag_id
-  ,      pag.pag_alias
-  ,      pag.pag_class
-  ,      pag.pag_label
-  ,      wd1.wdt_text           pag_title
-  ,      ptb.ptb_label
-  from      ABC_AUTH_PAGE       pag
-  join      ABC_BABEL_WORD_TEXT wd1  on  wd1.wrd_id = pag.wrd_id and
-                                         wd1.lan_id = p_lan_id
-  left join AUT_PAGE_TAB        ptb  on  ptb.ptb_id = pag.ptb_id
+       , pag.pag_alias
+       , pag.pag_class
+       , pag.pag_label
+       , wd1.wdt_text as pag_title
+
+       , ptb.ptb_label
+  from ABC_AUTH_PAGE            pag
+  join      ABC_BABEL_WORD_TEXT wd1 on wd1.wrd_id = pag.wrd_id and --
+                                       wd1.lan_id = p_lan_id
+  left join AUT_PAGE_TAB        ptb on ptb.ptb_id = pag.ptb_id
   where pag.pag_id = pag.pag_id_org
-  order by pag.pag_class
-  ;
+  order by pag.pag_class;
 end

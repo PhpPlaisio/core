@@ -6,23 +6,25 @@
  *
  * @type rows
  */
-create procedure abc_babel_text_group_get_all_texts_translator(in p_ttg_id     @abc_babel_text_group.ttg_id%type@,
-                                                               in p_lan_id_tar @abc_babel_language.lan_id%type@)
-reads sql data
+create procedure abc_babel_text_group_get_all_texts_translator
+(
+  in p_ttg_id     tinyint(3) unsigned, -- type: ABC_BABEL_TEXT.ttg_id
+  in p_lan_id_tar tinyint(3) unsigned --  type: ABC_BABEL_LANGUAGE.lan_id
+)
+  reads sql data
 begin
   select txt.txt_id
-  ,      txt.txt_label
-  ,      txt.txt_timestamp
-  ,      ref.ttt_text                   ref_ttt_text
+       , txt.txt_label
+       , txt.txt_timestamp
+       , ref.ttt_text as ref_ttt_text
 
-  ,      act.ttt_timestamp
-  ,      act.ttt_text                   act_ttt_text
-  from       ABC_BABEL_TEXT      txt
-  inner join ABC_BABEL_TEXT_TEXT act  on  act.txt_id = txt.txt_id and
-                                          act.lan_id = p_lan_id_tar
-  inner join ABC_BABEL_TEXT_TEXT ref  on  ref.txt_id = txt.txt_id and
-                                          ref.lan_id = @LAN_ID_BABEL_REFERENCE@
+       , act.ttt_timestamp
+       , act.ttt_text as act_ttt_text
+  from ABC_BABEL_TEXT      txt
+  join ABC_BABEL_TEXT_TEXT act on act.txt_id = txt.txt_id and --
+                                  act.lan_id = p_lan_id_tar
+  join ABC_BABEL_TEXT_TEXT ref on ref.txt_id = txt.txt_id and --
+                                  ref.lan_id = @LAN_ID_BABEL_REFERENCE@
   where txt.ttg_id = p_ttg_id
-  order by ref.ttt_text
-  ;
+  order by ref.ttt_text;
 end

@@ -6,19 +6,21 @@
  *
  * @type rows
  */
-create procedure abc_system_tab_get_master_pages(in p_ptb_id @aut_page_tab.ptb_id%type@,
-                                                 in p_lan_id @abc_babel_language.lan_id%type@)
-reads sql data
+create procedure abc_system_tab_get_master_pages
+(
+  in p_ptb_id tinyint(3) unsigned, -- type: AUT_PAGE_TAB.ptb_id
+  in p_lan_id tinyint(3) unsigned --  type: ABC_BABEL_LANGUAGE.lan_id
+)
+  reads sql data
 begin
   select pag.pag_id
-  ,      pag.pag_class
-  ,      pag.pag_label
-  ,      wd1.wdt_text    pag_title
-  from       ABC_AUTH_PAGE       pag
-  inner join ABC_BABEL_WORD_TEXT wd1  on  wd1.wrd_id = pag.wrd_id and
-                                          wd1.lan_id = p_lan_id
+       , pag.pag_class
+       , pag.pag_label
+       , wd1.wdt_text as pag_title
+  from ABC_AUTH_PAGE       pag
+  join ABC_BABEL_WORD_TEXT wd1 on wd1.wrd_id = pag.wrd_id and --
+                                  wd1.lan_id = p_lan_id
   where pag.ptb_id = p_ptb_id
-  and   pag.pag_id = pag.pag_id_org
-  order by pag.pag_class
-  ;
+    and pag.pag_id = pag.pag_id_org
+  order by pag.pag_class;
 end

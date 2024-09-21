@@ -5,16 +5,18 @@
  *
  * @type rows
  */
-create procedure abc_system_functionality_get_granted_companies(in p_fun_id @ABC_AUTH_FUNCTIONALITY.fun_id%type@)
-reads sql data
+create procedure abc_system_functionality_get_granted_companies
+(
+  in p_fun_id smallint(5) unsigned -- type: ABC_AUTH_FUNCTIONALITY.fun_id
+)
+  reads sql data
 begin
   select distinct cmp.cmp_id
-  ,               cmp.cmp_abbr
-  from   ABC_AUTH_FUNCTIONALITY  fun
-  join   ABC_AUTH_MODULE         mdl  on  mdl.mdl_id = fun.mdl_id
-  join   ABC_AUTH_MODULE_COMPANY amc  on  amc.mdl_id = mdl.mdl_id
-  join   ABC_AUTH_COMPANY        cmp  on  cmp.cmp_id = amc.cmp_id
+                , cmp.cmp_abbr
+  from ABC_AUTH_FUNCTIONALITY  fun
+  join ABC_AUTH_MODULE         mdl on mdl.mdl_id = fun.mdl_id
+  join ABC_AUTH_MODULE_COMPANY amc on amc.mdl_id = mdl.mdl_id
+  join ABC_AUTH_COMPANY        cmp on cmp.cmp_id = amc.cmp_id
   where fun.fun_id = p_fun_id
-  order by cmp.cmp_abbr
-  ;
+  order by cmp.cmp_abbr;
 end

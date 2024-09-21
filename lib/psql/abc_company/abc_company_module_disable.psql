@@ -6,12 +6,15 @@
  *
  * @type none
  */
-create procedure abc_company_module_disable( in p_cmp_id @ABC_AUTH_MODULE_company.cmp_id%type@,
-                                             in p_mdl_id @ABC_AUTH_MODULE_company.mdl_id%type@ )
-modifies sql data
+create procedure abc_company_module_disable
+(
+  in p_cmp_id smallint(5) unsigned, -- type: ABC_AUTH_MODULE_COMPANY.cmp_id
+  in p_mdl_id smallint(5) unsigned --  type: ABC_AUTH_MODULE_COMPANY.mdl_id
+)
+  modifies sql data
 begin
-  delete from ABC_AUTH_MODULE_COMPANY
+  delete
+  from ABC_AUTH_MODULE_COMPANY
   where cmp_id = p_cmp_id
-  and   mdl_id = p_mdl_id
-  ;
+    and mdl_id = p_mdl_id;
 end

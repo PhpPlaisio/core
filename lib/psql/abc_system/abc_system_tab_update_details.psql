@@ -7,14 +7,16 @@
  *
  * @type none
  */
-create procedure abc_system_tab_update_details( in p_ptb_id    @aut_page_tab.ptb_id%type@,
-                                                in p_wrd_id    @aut_page_tab.wrd_id%type@,
-                                                in p_ptb_label @aut_page_tab.ptb_label%type@ )
-reads sql data
+create procedure abc_system_tab_update_details
+(
+  in p_ptb_id    tinyint(3) unsigned, --            type: AUT_PAGE_TAB.ptb_id
+  in p_wrd_id    smallint(5) unsigned, --           type: AUT_PAGE_TAB.wrd_id
+  in p_ptb_label varchar(30) character set ascii -- type: AUT_PAGE_TAB.ptb_label
+)
+  reads sql data
 begin
   update AUT_PAGE_TAB
-  set    wrd_id    = p_wrd_id
-  ,      ptb_label = p_ptb_label
-  where  ptb_id = p_ptb_id
-  ;
+  set wrd_id    = p_wrd_id,
+      ptb_label = p_ptb_label
+  where ptb_id = p_ptb_id;
 end

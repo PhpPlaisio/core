@@ -5,12 +5,14 @@
  *
  * @type row1
  */
-create procedure abc_babel_text_group_get_details(in p_ttg_id @abc_babel_text_group.ttg_id%type@)
-reads sql data
+create procedure abc_babel_text_group_get_details
+(
+  in p_ttg_id tinyint(3) unsigned -- type: ABC_BABEL_TEXT_GROUP.ttg_id
+)
+  reads sql data
 begin
   select ttg_id
-  ,      ttg_name
-  from   ABC_BABEL_TEXT_GROUP
-  where  ttg_id = p_ttg_id
-  ;
+       , ttg_name
+  from ABC_BABEL_TEXT_GROUP
+  where ttg_id = p_ttg_id;
 end

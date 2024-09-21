@@ -9,24 +9,25 @@
  *
  * @type none
  */
-create procedure abc_babel_word_update_details(in p_wrd_id      @abc_babel_word.wrd_id%type@,
-                                               in p_wdg_id      @abc_babel_word.wdg_id%type@,
-                                               in p_wrd_label   @abc_babel_word.wrd_label%type@,
-                                               in p_wrd_comment @abc_babel_word.wrd_comment%type@,
-                                               in p_wdt_text    @abc_babel_word_text.wdt_text%type@)
-modifies sql data
+create procedure abc_babel_word_update_details
+(
+  in p_wrd_id      smallint(5) unsigned, --               type: ABC_BABEL_WORD.wrd_id
+  in p_wdg_id      tinyint(3) unsigned, --                type: ABC_BABEL_WORD.wdg_id
+  in p_wrd_label   varchar(50) character set ascii, --    type: ABC_BABEL_WORD.wrd_label
+  in p_wrd_comment varchar(255) character set utf8mb4, -- type: ABC_BABEL_WORD.wrd_comment
+  in p_wdt_text    varchar(80) character set utf8mb4 --   type: ABC_BABEL_WORD_TEXT.wdt_text
+)
+  modifies sql data
 begin
   update ABC_BABEL_WORD
-  set wdg_id      = p_wdg_id
-  ,   wrd_label   = p_wrd_label
-  ,   wrd_comment = p_wrd_comment
-  where wrd_id = p_wrd_id
-  ;
+  set wdg_id      = p_wdg_id,
+      wrd_label   = p_wrd_label,
+      wrd_comment = p_wrd_comment
+  where wrd_id = p_wrd_id;
 
   -- XXX Only when text has been modified.
   update ABC_BABEL_WORD_TEXT
   set wdt_text = p_wdt_text
   where wrd_id = p_wrd_id
-  and   lan_id = @LAN_ID_BABEL_REFERENCE@
-  ;
+    and lan_id = @LAN_ID_BABEL_REFERENCE@;
 end

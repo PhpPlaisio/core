@@ -3,53 +3,48 @@
  *
  * @type hidden
  */
-create procedure abc_profile_proper3()
-modifies sql data
+create procedure abc_profile_proper3 ()
+  modifies sql data
 begin
   drop temporary table if exists TMP_PROFILE3;
 
   create temporary table TMP_PROFILE3
   (
-    cmp_id      @abc_auth_company.cmp_id%type@      not null,
-    tmp_rol_ids @abc_auth_profile.pro_rol_ids%type@ not null,
-    tmp_diff    int                                 not null,
+    cmp_id      smallint(5) unsigned,             -- type: ABC_AUTH_COMPANY.cmp_id
+    tmp_rol_ids varchar(100) character set ascii, -- type: ABC_AUTH_PROFILE.pro_rol_ids
+    tmp_diff    int not null,
     primary key (tmp_rol_ids)
-  ) engine=myisam
-  ;
+  )
+  engine = myisam;
 
-  insert into TMP_PROFILE3(cmp_id
-  ,                        tmp_rol_ids
-  ,                        tmp_diff)
+  insert into TMP_PROFILE3( cmp_id
+                          , tmp_rol_ids
+                          , tmp_diff )
   select cmp_id
-  ,      pro_rol_ids
-  ,      sum(if(src=2,1,0)) - sum(if(src=1,1,0))
-  from
-  (
-    select cmp_id
-    ,      pro_rol_ids
-    ,      1             src
-    from   ABC_AUTH_PROFILE
+       , pro_rol_ids
+       , sum(if(src = 2, 1, 0)) - sum(if(src = 1, 1, 0))
+  from ( select cmp_id
+              , pro_rol_ids
+              , 1 as src
+         from ABC_AUTH_PROFILE
 
-    union all
+         union all
 
-    select cmp_id
-    ,      tmp_rol_ids
-    ,      2             src
-    from   TMP_PROFILE2
-  ) t
+         select cmp_id
+              , tmp_rol_ids
+              , 2 as src
+         from TMP_PROFILE2 ) t
   group by cmp_id
-  ,        pro_rol_ids
-  having  sum(if(src=1,1,0))<> sum(if(src=2,1,0))
-  ;
+         , pro_rol_ids
+  having sum(if(src = 1, 1, 0)) <> sum(if(src = 2, 1, 0));
 
   -- Insert new profiles
-  insert into ABC_AUTH_PROFILE(cmp_id
-  ,                            pro_flags
-  ,                            pro_rol_ids)
+  insert into ABC_AUTH_PROFILE( cmp_id
+                              , pro_flags
+                              , pro_rol_ids )
   select cmp_id
-  ,      0
-  ,      tmp_rol_ids
-  from   TMP_PROFILE3
-  where  tmp_diff > 0
-  ;
+       , 0
+       , tmp_rol_ids
+  from TMP_PROFILE3
+  where tmp_diff > 0;
 end

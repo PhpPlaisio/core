@@ -4,28 +4,25 @@
  *
  * @type none
  */
-create procedure abc_profile_proper_clean()
-modifies sql data
+create procedure abc_profile_proper_clean ()
+  modifies sql data
 begin
   call abc_profile_proper();
 
-  delete from app
-  using ABC_AUTH_PROFILE pro
-  join  ABC_AUTH_PRO_PAG app  on  app.pro_id = pro.pro_id
-  join  TMP_PROFILE3     tmp  on  tmp.tmp_rol_ids = pro.pro_rol_ids
-  where tmp.tmp_diff < 0
-  ;
+  delete
+  from app using ABC_AUTH_PROFILE pro
+                   join ABC_AUTH_PRO_PAG app on app.pro_id = pro.pro_id
+                   join TMP_PROFILE3 tmp on tmp.tmp_rol_ids = pro.pro_rol_ids
+  where tmp.tmp_diff < 0;
 
-  delete from apr
-  using ABC_AUTH_PROFILE pro
-  join  ABC_AUTH_PRO_ROL apr  on  apr.pro_id = pro.pro_id
-  join  TMP_PROFILE3     tmp  on  tmp.tmp_rol_ids = pro.pro_rol_ids
-  where tmp.tmp_diff < 0
-  ;
+  delete
+  from apr using ABC_AUTH_PROFILE pro
+                   join ABC_AUTH_PRO_ROL apr on apr.pro_id = pro.pro_id
+                   join TMP_PROFILE3 tmp on tmp.tmp_rol_ids = pro.pro_rol_ids
+  where tmp.tmp_diff < 0;
 
-  delete from pro
-  using ABC_AUTH_PROFILE pro
-  join  TMP_PROFILE3     tmp  on  tmp.tmp_rol_ids = pro.pro_rol_ids
-  where tmp.tmp_diff < 0
-  ;
+  delete
+  from pro using ABC_AUTH_PROFILE pro
+                   join TMP_PROFILE3 tmp on tmp.tmp_rol_ids = pro.pro_rol_ids
+  where tmp.tmp_diff < 0;
 end

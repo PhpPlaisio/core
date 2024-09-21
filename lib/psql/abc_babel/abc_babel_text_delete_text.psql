@@ -5,14 +5,17 @@
  *
  * @type none
  */
-create procedure abc_babel_text_delete_text(in p_txt_id @abc_babel_text.txt_id%type@)
-modifies sql data
+create procedure abc_babel_text_delete_text
+(
+  in p_txt_id smallint(5) unsigned -- type: ABC_BABEL_TEXT.txt_id
+)
+  modifies sql data
 begin
-  delete from ABC_BABEL_TEXT_TEXT
-  where wrd_id = p_txt_id
-  ;
+  delete
+  from ABC_BABEL_TEXT_TEXT
+  where wrd_id = p_txt_id;
 
-  delete from ABC_BABEL_TEXT
-  where wrd_id = p_txt_id
-  ;
+  delete
+  from ABC_BABEL_TEXT
+  where wrd_id = p_txt_id;
 end

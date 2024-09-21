@@ -7,23 +7,25 @@
  *
  * @type row1
  */
-create procedure abc_company_role_get_details(in p_cmp_id @abc_auth_company.cmp_id%type@,
-                                              in p_rol_id @abc_auth_role.rol_id%type@,
-                                              in p_lan_id @abc_babel_language.lan_id%type@)
-reads sql data
+create procedure abc_company_role_get_details
+(
+  in p_cmp_id smallint(5) unsigned, -- type: ABC_AUTH_COMPANY.cmp_id
+  in p_rol_id smallint(5) unsigned, -- type: ABC_AUTH_ROLE.rol_id
+  in p_lan_id tinyint(3) unsigned --   type: ABC_BABEL_LANGUAGE.lan_id
+)
+  reads sql data
 begin
   select rol.rol_id
-  ,      rol.rol_weight
-  ,      rol.rol_name
-  ,      rol.rol_label
+       , rol.rol_weight
+       , rol.rol_name
+       , rol.rol_label
 
-  ,      rlg.rlg_id
-  ,      wd2.wdt_text   rlg_name
-  from ABC_AUTH_ROLE        rol
-  join ABC_AUTH_ROLE_GROUP  rlg  on  rlg.rlg_id = rol.rlg_id
-  join ABC_BABEL_WORD_TEXT  wd2  on  wd2.wrd_id = rlg.wrd_id and
-                                     wd2.lan_id = p_lan_id
-  where  rol.cmp_id = p_cmp_id
-  and    rol.rol_id = p_rol_id
-  ;
+       , rlg.rlg_id
+       , wd2.wdt_text as rlg_name
+  from ABC_AUTH_ROLE       rol
+  join ABC_AUTH_ROLE_GROUP rlg on rlg.rlg_id = rol.rlg_id
+  join ABC_BABEL_WORD_TEXT wd2 on wd2.wrd_id = rlg.wrd_id and --
+                                  wd2.lan_id = p_lan_id
+  where rol.cmp_id = p_cmp_id
+    and rol.rol_id = p_rol_id;
 end

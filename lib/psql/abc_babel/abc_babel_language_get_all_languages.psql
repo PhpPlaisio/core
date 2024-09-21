@@ -5,15 +5,17 @@
  *
  * @type rows
  */
-create procedure abc_babel_language_get_all_languages(in p_lan_id @abc_babel_language.lan_id%type@)
-reads sql data
+create procedure abc_babel_language_get_all_languages
+(
+  in p_lan_id tinyint(3) unsigned -- type: ABC_BABEL_LANGUAGE.lan_id
+)
+  reads sql data
 begin
   select lan.lan_id
-  ,      lan.lan_locale
-  ,      wd1.wdt_text        lan_name
-  from       ABC_BABEL_LANGUAGE  lan
-  inner join ABC_BABEL_WORD_TEXT wd1  on  wd1.wrd_id = lan.wrd_id and
-                                          wd1.lan_id = p_lan_id
-  order by wd1.wdt_text
-  ;
+       , lan.lan_locale
+       , wd1.wdt_text as lan_name
+  from ABC_BABEL_LANGUAGE  lan
+  join ABC_BABEL_WORD_TEXT wd1 on wd1.wrd_id = lan.wrd_id and --
+                                  wd1.lan_id = p_lan_id
+  order by wd1.wdt_text;
 end

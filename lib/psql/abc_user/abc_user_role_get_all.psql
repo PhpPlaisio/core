@@ -6,19 +6,21 @@
  *
  * @type rows
  */
-create procedure abc_user_role_get_all(in p_cmp_id @abc_auth_user.cmp_id%type@,
-                                       in p_usr_id @abc_auth_user.usr_id%type@)
-reads sql data
+create procedure abc_user_role_get_all
+(
+  in p_cmp_id smallint(5) unsigned, -- type: ABC_AUTH_USER.cmp_id
+  in p_usr_id int(10) unsigned --      type: ABC_AUTH_USER.usr_id
+)
+  reads sql data
 begin
   select rol.rol_id
-  ,      rol.rol_weight
-  ,      rol.rol_name
-  ,      aur.aur_date_start
-  ,      aur.aur_date_stop
+       , rol.rol_weight
+       , rol.rol_name
+       , aur.aur_date_start
+       , aur.aur_date_stop
   from ABC_AUTH_USR_ROL aur
-  join ABC_AUTH_ROLE    rol  on  rol.rol_id = aur.rol_id
+  join ABC_AUTH_ROLE    rol on rol.rol_id = aur.rol_id
   where aur.cmp_id = p_cmp_id
-  and   aur.usr_id = p_usr_id
-  order by rol.rol_weight
-  ;
+    and aur.usr_id = p_usr_id
+  order by rol.rol_weight;
 end

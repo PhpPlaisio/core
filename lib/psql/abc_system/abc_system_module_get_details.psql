@@ -6,16 +6,18 @@
  *
  * @type row1
  */
-create procedure abc_system_module_get_details(in p_mdl_id @ABC_AUTH_MODULE.mdl_id%type@,
-                                               in p_lan_id @abc_babel_language.lan_id%type@)
-reads sql data
+create procedure abc_system_module_get_details
+(
+  in p_mdl_id smallint(5) unsigned, -- type: ABC_AUTH_MODULE.mdl_id
+  in p_lan_id tinyint(3) unsigned --   type: ABC_BABEL_LANGUAGE.lan_id
+)
+  reads sql data
 begin
   select mdl.mdl_id
-  ,      mdl.wrd_id
-  ,      wd1.wdt_text   mdl_name
+       , mdl.wrd_id
+       , wd1.wdt_text as mdl_name
   from ABC_AUTH_MODULE     mdl
-  join ABC_BABEL_WORD_TEXT wd1  on  wd1.wrd_id = mdl.wrd_id and
-                                    wd1.lan_id = p_lan_id
-  where mdl.mdl_id  = p_mdl_id
-  ;
+  join ABC_BABEL_WORD_TEXT wd1 on wd1.wrd_id = mdl.wrd_id and --
+                                  wd1.lan_id = p_lan_id
+  where mdl.mdl_id = p_mdl_id;
 end

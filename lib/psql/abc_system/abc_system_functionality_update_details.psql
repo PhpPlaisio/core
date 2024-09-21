@@ -7,14 +7,16 @@
  *
  * @type none
  */
-create procedure abc_system_functionality_update_details(in p_fun_id @ABC_AUTH_FUNCTIONALITY.fun_id%type@,
-                                                         in p_mdl_id @ABC_AUTH_FUNCTIONALITY.mdl_id%type@,
-                                                         in p_wrd_id @abc_babel_word.wrd_id%type@)
-modifies sql data
+create procedure abc_system_functionality_update_details
+(
+  in p_fun_id smallint(5) unsigned, -- type: ABC_AUTH_FUNCTIONALITY.fun_id
+  in p_mdl_id smallint(5) unsigned, -- type: ABC_AUTH_FUNCTIONALITY.mdl_id
+  in p_wrd_id smallint(5) unsigned --  type: ABC_AUTH_FUNCTIONALITY.wrd_id
+)
+  modifies sql data
 begin
   update ABC_AUTH_FUNCTIONALITY
-  set mdl_id = p_mdl_id
-  ,   wrd_id = p_wrd_id
-  where fun_id = p_fun_id
-  ;
+  set mdl_id = p_mdl_id,
+      wrd_id = p_wrd_id
+  where fun_id = p_fun_id;
 end

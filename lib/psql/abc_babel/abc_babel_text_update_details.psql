@@ -9,24 +9,25 @@
  *
  * @type none
  */
-create procedure abc_babel_text_update_details(in p_txt_id      @abc_babel_text.txt_id%type@,
-                                               in p_ttg_id      @abc_babel_text.ttg_id%type@,
-                                               in p_txt_label   @abc_babel_text.txt_label%type@,
-                                               in p_txt_comment @abc_babel_text.txt_comment%type@,
-                                               in p_ttt_text    @abc_babel_text_text.ttt_text%type@ )
-modifies sql data
+create procedure abc_babel_text_update_details
+(
+  in p_txt_id      smallint(5) unsigned, --            type: ABC_BABEL_TEXT.txt_id
+  in p_ttg_id      tinyint(3) unsigned, --             type: ABC_BABEL_TEXT.ttg_id
+  in p_txt_label   varchar(50) character set ascii, -- type: ABC_BABEL_TEXT.txt_label
+  in p_txt_comment tinytext character set utf8mb4, --  type: ABC_BABEL_TEXT.txt_comment
+  in p_ttt_text    mediumtext character set utf8mb4 -- type: ABC_BABEL_TEXT_TEXT.ttt_text
+)
+  modifies sql data
 begin
   update ABC_BABEL_TEXT
-  set ttg_id      = p_ttg_id
-  ,   txt_label   = p_txt_label
-  ,   txt_comment = p_txt_comment
-  where txt_id = p_txt_id
-  ;
+  set ttg_id      = p_ttg_id,
+      txt_label   = p_txt_label,
+      txt_comment = p_txt_comment
+  where txt_id = p_txt_id;
 
   -- XXX Only when text has been modified.
   update ABC_BABEL_TEXT_TEXT
   set ttt_text = p_ttt_text
   where txt_id = p_txt_id
-  and   lan_id = @LAN_ID_BABEL_REFERENCE@
-  ;
+    and lan_id = @LAN_ID_BABEL_REFERENCE@;
 end

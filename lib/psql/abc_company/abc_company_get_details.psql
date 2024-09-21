@@ -5,13 +5,15 @@
  *
  * @type row1
  */
-create procedure abc_company_get_details( in p_cmp_id @abc_auth_company.cmp_id%type@ )
-reads sql data
+create procedure abc_company_get_details
+(
+  in p_cmp_id smallint(5) unsigned -- type: ABC_AUTH_COMPANY.cmp_id
+)
+  reads sql data
 begin
   select cmp_id
-  ,      cmp_abbr
-  ,      cmp_label
-  from   ABC_AUTH_COMPANY
-  where  cmp_id = p_cmp_id
-  ;
+       , cmp_abbr
+       , cmp_label
+  from ABC_AUTH_COMPANY
+  where cmp_id = p_cmp_id;
 end

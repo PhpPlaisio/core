@@ -4,18 +4,19 @@
  * @param p_mdl_id The ID on the module of the new functionality.
  * @param p_wrd_id The ID of the word of the name of the new functionality.
  *
- * @type singleton1
- *
- * @return int
+ * @type singleton1 int
  */
-create procedure abc_system_functionality_insert_details(in p_mdl_id @ABC_AUTH_MODULE.mdl_id%type@,
-                                                         in p_wrd_id @abc_babel_word.wrd_id%type@)
-modifies sql data
+create procedure abc_system_functionality_insert_details
+(
+  in p_mdl_id smallint(5) unsigned, -- type: ABC_AUTH_FUNCTIONALITY.mdl_id
+  in p_wrd_id smallint(5) unsigned --  type: ABC_AUTH_FUNCTIONALITY.wrd_id
+)
+  modifies sql data
 begin
   insert into ABC_AUTH_FUNCTIONALITY( mdl_id
-  ,                                   wrd_id )
-  values( p_mdl_id
-  ,       p_wrd_id );
+                                    , wrd_id )
+  values ( p_mdl_id
+         , p_wrd_id );
 
-  select last_insert_id() fun_id;
+  select last_insert_id() as fun_id;
 end

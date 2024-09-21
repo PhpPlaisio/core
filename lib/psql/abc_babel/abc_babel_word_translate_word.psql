@@ -8,27 +8,28 @@
  *
  * @type none
  */
-create procedure abc_babel_word_translate_word(in p_usr_id   @abc_auth_user.usr_id%type@
-,                                              in p_wrd_id   @abc_babel_word.wrd_id%type@
-,                                              in p_lan_id   @abc_babel_language.lan_id%type@
-,                                              in p_wdt_text @abc_babel_word_text.wdt_text%type@)
-modifies sql data
+create procedure abc_babel_word_translate_word
+(
+  in p_usr_id   int(10) unsigned, --                 type: ABC_AUTH_USER.usr_id
+  in p_wrd_id   smallint(5) unsigned, --             type: ABC_BABEL_WORD_TEXT.wrd_id
+  in p_lan_id   tinyint(3) unsigned, --              type: ABC_BABEL_WORD_TEXT.lan_id
+  in p_wdt_text varchar(80) character set utf8mb4 -- type: ABC_BABEL_WORD_TEXT.wdt_text
+)
+  modifies sql data
 begin
   -- Update word in the specified language.
   update ABC_BABEL_WORD_TEXT
-  set    wdt_text      = p_wdt_text
-  ,      wdt_timestamp = now()
-  where  wrd_id = p_wrd_id
-  and    lan_id = p_lan_id
-  ;
+  set wdt_text      = p_wdt_text,
+      wdt_timestamp = now()
+  where wrd_id = p_wrd_id
+    and lan_id = p_lan_id;
 
-  if (p_lan_id=@LAN_ID_BABEL_REFERENCE@) then
+  if (p_lan_id = @LAN_ID_BABEL_REFERENCE@) then
     -- Update word in all languages for which the word hasn't been translated yet.
     update ABC_BABEL_WORD_TEXT
-    set    wdt_text      =  p_wdt_text
-    where  wrd_id        =  p_wrd_id
-    and    wdt_timestamp =  convert_tz('1970-01-01 12:00:00', '+00:00', @@time_zone)
-    and    lan_id        <> @LAN_ID_BABEL_REFERENCE@
-    ;
+    set wdt_text = p_wdt_text
+    where wrd_id = p_wrd_id
+      and wdt_timestamp = convert_tz('1970-01-01 12:00:00', '+00:00', @@time_zone)
+      and lan_id <> @LAN_ID_BABEL_REFERENCE@;
   end if;
 end

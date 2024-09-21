@@ -5,12 +5,14 @@
  *
  * @type row1
  */
-create procedure abc_babel_word_group_get_details(in p_wdg_id @abc_babel_word_group.wdg_id%type@)
-reads sql data
+create procedure abc_babel_word_group_get_details
+(
+  in p_wdg_id tinyint(3) unsigned -- type: ABC_BABEL_WORD_GROUP.wdg_id
+)
+  reads sql data
 begin
   select wdg_id
-  ,      wdg_name
-  from   ABC_BABEL_WORD_GROUP
-  where  wdg_id = p_wdg_id
-  ;
+       , wdg_name
+  from ABC_BABEL_WORD_GROUP
+  where wdg_id = p_wdg_id;
 end

@@ -5,15 +5,17 @@
  *
  * @type rows
  */
-create procedure abc_system_functionality_get_available_pages( in p_fun_id @ABC_AUTH_FUNCTIONALITY.fun_id%type@ )
-reads sql data
+create procedure abc_system_functionality_get_available_pages
+(
+  in p_fun_id smallint(5) unsigned -- type: ABC_AUTH_FUNCTIONALITY.fun_id
+)
+  reads sql data
 begin
   select pag.pag_id
-  ,      pag.pag_class
-  ,      if(apf.pag_id is null, 0, 1) pag_enabled
-  from      ABC_AUTH_PAGE    pag
-  left join ABC_AUTH_PAG_FUN apf  on  apf.pag_id = pag.pag_id and
-                                      apf.fun_id = p_fun_id
-  order by pag.pag_class
-  ;
+       , pag.pag_class
+       , if(apf.pag_id is null, 0, 1) as pag_enabled
+  from ABC_AUTH_PAGE         pag
+  left join ABC_AUTH_PAG_FUN apf on apf.pag_id = pag.pag_id and --
+                                    apf.fun_id = p_fun_id
+  order by pag.pag_class;
 end

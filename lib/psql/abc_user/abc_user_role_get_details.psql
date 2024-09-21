@@ -7,20 +7,22 @@
  *
  * @type row0
  */
-create procedure abc_user_role_get_details(in p_cmp_id @abc_auth_usr_rol.cmp_id%type@,
-                                           in p_usr_id @abc_auth_usr_rol.usr_id%type@,
-                                           in p_rol_id @abc_auth_usr_rol.rol_id%type@)
-reads sql data
+create procedure abc_user_role_get_details
+(
+  in p_cmp_id smallint(5) unsigned, -- type: ABC_AUTH_USR_ROL.cmp_id
+  in p_usr_id int(10) unsigned, --     type: ABC_AUTH_USR_ROL.usr_id
+  in p_rol_id smallint(5) unsigned --  type: ABC_AUTH_USR_ROL.rol_id
+)
+  reads sql data
 begin
   select rol.rol_id
-  ,      rol.rol_weight
-  ,      rol.rol_name
-  ,      aur.aur_date_start
-  ,      aur.aur_date_stop
+       , rol.rol_weight
+       , rol.rol_name
+       , aur.aur_date_start
+       , aur.aur_date_stop
   from ABC_AUTH_USR_ROL aur
-  join ABC_AUTH_ROLE    rol  on  rol.rol_id = aur.rol_id
+  join ABC_AUTH_ROLE    rol on rol.rol_id = aur.rol_id
   where aur.cmp_id = p_cmp_id
-  and   aur.usr_id = p_usr_id
-  and   aur.rol_id = p_rol_id
-  ;
+    and aur.usr_id = p_usr_id
+    and aur.rol_id = p_rol_id;
 end

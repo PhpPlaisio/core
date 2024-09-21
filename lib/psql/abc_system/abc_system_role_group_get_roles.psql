@@ -5,18 +5,20 @@
  *
  * @type rows
  */
-create procedure abc_system_role_group_get_roles(in p_rlg_id @abc_auth_role_group.rlg_id%type@)
-reads sql data
+create procedure abc_system_role_group_get_roles
+(
+  in p_rlg_id smallint(5) unsigned -- type: ABC_AUTH_ROLE_GROUP.rlg_id
+)
+  reads sql data
 begin
   select cmp.cmp_id
-  ,      cmp.cmp_abbr
+       , cmp.cmp_abbr
 
-  ,      rol.rol_id
-  ,      rol.rol_name
+       , rol.rol_id
+       , rol.rol_name
   from ABC_AUTH_ROLE    rol
-  join ABC_AUTH_COMPANY cmp  on  cmp.cmp_id = rol.cmp_id
+  join ABC_AUTH_COMPANY cmp on cmp.cmp_id = rol.cmp_id
   where rol.rlg_id = p_rlg_id
   order by cmp.cmp_abbr
-  ,        rol.rol_weight
-  ;
+         , rol.rol_weight;
 end

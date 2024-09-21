@@ -6,17 +6,19 @@
  *
  * @type row1
  */
-create procedure abc_system_tab_get_details(in p_ptb_id @aut_page_tab.ptb_id%type@,
-                                            in p_lan_id @abc_babel_language.lan_id%type@)
-reads sql data
+create procedure abc_system_tab_get_details
+(
+  in p_ptb_id tinyint(3) unsigned, -- type: AUT_PAGE_TAB.ptb_id
+  in p_lan_id tinyint(3) unsigned --  type: ABC_BABEL_LANGUAGE.lan_id
+)
+  reads sql data
 begin
   select ptb.ptb_id
-  ,      ptb.wrd_id
-  ,      ptb.ptb_label
-  ,      wd1.wdt_text    ptb_title
-  from       AUT_PAGE_TAB        ptb
-  inner join ABC_BABEL_WORD_TEXT wd1  on  wd1.wrd_id = ptb.wrd_id and
-                                          wd1.lan_id = p_lan_id
-  where  ptb.ptb_id = p_ptb_id
-  ;
+       , ptb.wrd_id
+       , ptb.ptb_label
+       , wd1.wdt_text as ptb_title
+  from AUT_PAGE_TAB        ptb
+  join ABC_BABEL_WORD_TEXT wd1 on wd1.wrd_id = ptb.wrd_id and --
+                                  wd1.lan_id = p_lan_id
+  where ptb.ptb_id = p_ptb_id;
 end

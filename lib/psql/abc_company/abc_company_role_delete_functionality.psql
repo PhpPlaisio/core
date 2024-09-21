@@ -7,14 +7,17 @@
  *
  * @type none
  */
-create procedure abc_company_role_delete_functionality( in p_cmp_id @abc_auth_company.cmp_id%type@,
-                                                        in p_rol_id @abc_auth_role.rol_id%type@,
-                                                        in p_fun_id @abc_auth_rol_fun.fun_id%type@ )
-modifies sql data
+create procedure abc_company_role_delete_functionality
+(
+  in p_cmp_id smallint(5) unsigned, -- type: ABC_AUTH_ROL_FUN.cmp_id
+  in p_rol_id smallint(5) unsigned, -- type: ABC_AUTH_ROL_FUN.rol_id
+  in p_fun_id smallint(5) unsigned --  type: ABC_AUTH_ROL_FUN.fun_id
+)
+  modifies sql data
 begin
-  delete from ABC_AUTH_ROL_FUN
+  delete
+  from ABC_AUTH_ROL_FUN
   where cmp_id = p_cmp_id
-  and   rol_id = p_rol_id
-  and   fun_id = p_fun_id
-  ;
+    and rol_id = p_rol_id
+    and fun_id = p_fun_id;
 end

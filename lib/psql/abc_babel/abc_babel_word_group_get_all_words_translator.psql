@@ -6,25 +6,27 @@
  *
  * @type rows
  */
-create procedure abc_babel_word_group_get_all_words_translator(in p_wgd_id     @abc_babel_word_group.wdg_id%type@
-,                                                              in p_lan_id_tar @abc_babel_language.lan_id%type@)
-reads sql data
+create procedure abc_babel_word_group_get_all_words_translator
+(
+  in p_wgd_id     tinyint(3) unsigned, -- type: ABC_BABEL_WORD.wdg_id
+  in p_lan_id_tar tinyint(3) unsigned --  type: ABC_BABEL_WORD_TEXT.lan_id
+)
+  reads sql data
 begin
   select wrd.wrd_id
-  ,      wrd.wdg_id
-  ,      wrd.wrd_label
-  ,      wrd.wrd_comment
-  ,      wrd.wrd_timestamp
-  ,      ref.wdt_text                ref_wdt_text
+       , wrd.wdg_id
+       , wrd.wrd_label
+       , wrd.wrd_comment
+       , wrd.wrd_timestamp
+       , ref.wdt_text as ref_wdt_text
 
-  ,      tar.wdt_timestamp
-  ,      tar.wdt_text                tar_wdt_text
-  from       ABC_BABEL_WORD      wrd
-  inner join ABC_BABEL_WORD_TEXT tar  on  tar.wrd_id = wrd.wrd_id and
-                                          tar.lan_id = p_lan_id_tar
-  inner join ABC_BABEL_WORD_TEXT ref  on  ref.wrd_id = wrd.wrd_id and
-                                          ref.lan_id = @LAN_ID_BABEL_REFERENCE@
-  where  wrd.wdg_id = p_wgd_id
-  order by ref.wdt_text
-  ;
+       , tar.wdt_timestamp
+       , tar.wdt_text as tar_wdt_text
+  from ABC_BABEL_WORD      wrd
+  join ABC_BABEL_WORD_TEXT tar on tar.wrd_id = wrd.wrd_id and --
+                                  tar.lan_id = p_lan_id_tar
+  join ABC_BABEL_WORD_TEXT ref on ref.wrd_id = wrd.wrd_id and --
+                                  ref.lan_id = @LAN_ID_BABEL_REFERENCE@
+  where wrd.wdg_id = p_wgd_id
+  order by ref.wdt_text;
 end

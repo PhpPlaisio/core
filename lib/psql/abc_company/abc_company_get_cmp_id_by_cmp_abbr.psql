@@ -3,15 +3,15 @@
  *
  * @param p_cmp_abbr The company abbreviation.
  *
- * @type singleton0
- *
- * @return int|null
+ * @type singleton0 int|null
  */
-create procedure abc_company_get_cmp_id_by_cmp_abbr(in p_cmp_abbr @abc_auth_company.cmp_abbr%sort@)
-reads sql data
+create procedure abc_company_get_cmp_id_by_cmp_abbr
+(
+  in p_cmp_abbr varchar(16383) character set utf8mb4 -- type: ABC_AUTH_COMPANY.cmp_abbr%max
+)
+  reads sql data
 begin
   select cmp_id
-  from   ABC_AUTH_COMPANY
-  where  cmp_abbr = p_cmp_abbr
-  ;
+  from ABC_AUTH_COMPANY
+  where cmp_abbr = p_cmp_abbr;
 end

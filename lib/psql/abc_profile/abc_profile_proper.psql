@@ -3,8 +3,8 @@
  *
  * @type none
  */
-create procedure abc_profile_proper()
-modifies sql data
+create procedure abc_profile_proper ()
+  modifies sql data
 begin
   -- Create a temporary table with all profiles of all users.
   call abc_profile_proper1();

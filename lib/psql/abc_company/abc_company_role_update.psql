@@ -10,20 +10,22 @@
  *
  * @type none
  */
-create procedure abc_company_role_update(in p_cmp_id     @abc_auth_company.cmp_id%type@,
-                                         in p_rol_id     @abc_auth_role.rol_id%type@,
-                                         in p_rlg_id     @abc_auth_role.rlg_id%type@,
-                                         in p_rol_name   @abc_auth_role.rol_name%type@,
-                                         in p_rol_weight @abc_auth_role.rol_weight%type@,
-                                         in p_rol_label  @abc_auth_role.rol_label%type@)
-modifies sql data
+create procedure abc_company_role_update
+(
+  in p_cmp_id     smallint(5) unsigned, --              type: ABC_AUTH_ROLE.cmp_id
+  in p_rol_id     smallint(5) unsigned, --              type: ABC_AUTH_ROLE.rol_id
+  in p_rlg_id     smallint(5) unsigned, --              type: ABC_AUTH_ROLE.rlg_id
+  in p_rol_name   varchar(32) character set utf8mb4, -- type: ABC_AUTH_ROLE.rol_name
+  in p_rol_weight smallint(6), --                       type: ABC_AUTH_ROLE.rol_weight
+  in p_rol_label  varchar(50) character set ascii --    type: ABC_AUTH_ROLE.rol_label
+)
+  modifies sql data
 begin
   update ABC_AUTH_ROLE
-  set rlg_id     = p_rlg_id
-  ,   rol_name   = p_rol_name
-  ,   rol_weight = p_rol_weight
-  ,   rol_label  = p_rol_label
+  set rlg_id     = p_rlg_id,
+      rol_name   = p_rol_name,
+      rol_weight = p_rol_weight,
+      rol_label  = p_rol_label
   where cmp_id = p_cmp_id
-  and   rol_id = p_rol_id
-  ;
+    and rol_id = p_rol_id;
 end

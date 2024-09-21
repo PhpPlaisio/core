@@ -6,16 +6,18 @@
  *
  * @type rows
  */
-create procedure abc_babel_word_group_get_all_words(in p_wgd_id @ABC_BABEL_WORD_group.wdg_id%type@
-,                                                   in p_lan_id @abc_babel_language.lan_id%type@ )
-reads sql data
+create procedure abc_babel_word_group_get_all_words
+(
+  in p_wgd_id tinyint(3) unsigned, -- type: ABC_BABEL_WORD.wdg_id
+  in p_lan_id tinyint(3) unsigned --  type: ABC_BABEL_WORD_TEXT.lan_id
+)
+  reads sql data
 begin
   select wrd.wrd_id
-  ,      wd1.wdt_text
-  from       ABC_BABEL_WORD      wrd
-  inner join ABC_BABEL_WORD_TEXT wd1  on  wd1.wrd_id = wrd.wrd_id and
-                                          wd1.lan_id = p_lan_id
-  where    wrd.wdg_id = p_wgd_id
-  order by wd1.wdt_text
-  ;
+       , wd1.wdt_text
+  from ABC_BABEL_WORD      wrd
+  join ABC_BABEL_WORD_TEXT wd1 on wd1.wrd_id = wrd.wrd_id and --
+                                  wd1.lan_id = p_lan_id
+  where wrd.wdg_id = p_wgd_id
+  order by wd1.wdt_text;
 end

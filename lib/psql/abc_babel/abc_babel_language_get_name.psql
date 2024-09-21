@@ -4,18 +4,18 @@
  * @param p_lan_id_tar The ID of the language of which the name is selected.
  * @param p_lan_id     The ID of the language for linguistic entities.
  *
- * @type singleton0
- *
- * @return string|null
+ * @type singleton0 varchar|null
  */
-create procedure abc_babel_language_get_name(in p_lan_id_tar @abc_babel_language.lan_id%type@
-,                                            in p_lan_id     @abc_babel_language.lan_id%type@)
-reads sql data
+create procedure abc_babel_language_get_name
+(
+  in p_lan_id_tar tinyint(3) unsigned, -- type: ABC_BABEL_LANGUAGE.lan_id
+  in p_lan_id     tinyint(3) unsigned --  type: ABC_BABEL_LANGUAGE.lan_id
+)
+  reads sql data
 begin
   select wdt_text
-  from       ABC_BABEL_LANGUAGE  lan
-  inner join ABC_BABEL_WORD_TEXT wdt  on  wdt.wrd_id = lan.wrd_id  and
-                                          wdt.lan_id = p_lan_id
-  where lan.lan_id = p_lan_id_tar
-  ;
+  from ABC_BABEL_LANGUAGE  lan
+  join ABC_BABEL_WORD_TEXT wdt on wdt.wrd_id = lan.wrd_id and --
+                                  wdt.lan_id = p_lan_id
+  where lan.lan_id = p_lan_id_tar;
 end

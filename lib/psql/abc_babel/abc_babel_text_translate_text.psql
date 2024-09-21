@@ -7,26 +7,27 @@
  *
  * @type none
  */
-create procedure abc_babel_text_translate_text(in p_txt_id   @abc_babel_text_text.txt_id%type@
-,                                              in p_lan_id   @abc_babel_text_text.lan_id%type@
-,                                              in p_ttt_text @abc_babel_text_text.ttt_text%type@)
-modifies sql data
+create procedure abc_babel_text_translate_text
+(
+  in p_txt_id   smallint(5) unsigned, --            type: ABC_BABEL_TEXT_TEXT.txt_id
+  in p_lan_id   tinyint(3) unsigned, --             type: ABC_BABEL_TEXT_TEXT.lan_id
+  in p_ttt_text mediumtext character set utf8mb4 -- type: ABC_BABEL_TEXT_TEXT.ttt_text
+)
+  modifies sql data
 begin
   -- Update text in the specified language.
   update ABC_BABEL_TEXT_TEXT
-  set    ttt_text      = p_ttt_text
-  ,      ttt_timestamp = now()
-  where  txt_id = p_txt_id
-  and    lan_id = p_lan_id
-  ;
+  set ttt_text      = p_ttt_text,
+      ttt_timestamp = now()
+  where txt_id = p_txt_id
+    and lan_id = p_lan_id;
 
-  if (p_lan_id=@LAN_ID_BABEL_REFERENCE@) then
+  if (p_lan_id = @LAN_ID_BABEL_REFERENCE@) then
     -- Update text in all languages for which the text hasn't been translated yet.
     update ABC_BABEL_TEXT_TEXT
-    set    ttt_text      =  p_ttt_text
-    where  txt_id        =  p_txt_id
-    and    ttt_timestamp =  convert_tz('1970-01-01 12:00:00', '+00:00', @@time_zone)
-    and    lan_id        <> @LAN_ID_BABEL_REFERENCE@
-    ;
+    set ttt_text = p_ttt_text
+    where txt_id = p_txt_id
+      and ttt_timestamp = convert_tz('1970-01-01 12:00:00', '+00:00', @@time_zone)
+      and lan_id <> @LAN_ID_BABEL_REFERENCE@;
   end if;
 end

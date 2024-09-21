@@ -6,23 +6,25 @@
  *
  * @type row1
  */
-create procedure abc_babel_text_get_details(in p_txt_id @abc_babel_text.txt_id%type@
-,                                           in p_lan_id @abc_babel_language.lan_id%type@)
-reads sql data
+create procedure abc_babel_text_get_details
+(
+  in p_txt_id smallint(5) unsigned, -- type: ABC_BABEL_TEXT_TEXT.txt_id
+  in p_lan_id tinyint(3) unsigned --   type: ABC_BABEL_TEXT_TEXT.lan_id
+)
+  reads sql data
 begin
   select txt.txt_timestamp
-  ,      txt.txt_comment
-  ,      txt.txt_label
+       , txt.txt_comment
+       , txt.txt_label
 
-  ,      ttg.ttg_id
-  ,      ttg.ttg_name
+       , ttg.ttg_id
+       , ttg.ttg_name
 
-  ,      ttt.ttt_text
-  ,      ttt.ttt_timestamp
-  from       ABC_BABEL_TEXT       txt
-  inner join ABC_BABEL_TEXT_GROUP ttg  on  txt.ttg_id = ttg.ttg_id
-  inner join ABC_BABEL_TEXT_TEXT  ttt  on  ttt.txt_id = txt.txt_id and
-                                           ttt.lan_id = p_lan_id
-  where txt.txt_id = p_txt_id
-  ;
+       , ttt.ttt_text
+       , ttt.ttt_timestamp
+  from ABC_BABEL_TEXT       txt
+  join ABC_BABEL_TEXT_GROUP ttg on txt.ttg_id = ttg.ttg_id
+  join ABC_BABEL_TEXT_TEXT  ttt on ttt.txt_id = txt.txt_id and --
+                                   ttt.lan_id = p_lan_id
+  where txt.txt_id = p_txt_id;
 end

@@ -4,19 +4,19 @@
  * @param p_wdg_name  The name of the word group.
  * @param p_wdg_label The label of the word group.
  *
- * @type singleton1
- *
- * @return int
+ * @type singleton1 int
  */
-create procedure abc_babel_word_group_insert_details(in p_wdg_name  @abc_babel_word_group.wdg_name%type@,
-                                                     in p_wdg_label @abc_babel_word_group.wdg_label%type@)
-modifies sql data
+create procedure abc_babel_word_group_insert_details
+(
+  in p_wdg_name  varchar(32) character set utf8mb4, -- type: ABC_BABEL_WORD_GROUP.wdg_name
+  in p_wdg_label varchar(30) character set ascii --    type: ABC_BABEL_WORD_GROUP.wdg_label
+)
+  modifies sql data
 begin
   insert into ABC_BABEL_WORD_GROUP( wdg_name
-  ,                                 wdg_label )
-  values( p_wdg_name
-  ,       p_wdg_label )
-  ;
+                                  , wdg_label )
+  values ( p_wdg_name
+         , p_wdg_label );
 
-  select last_insert_id() wdg_id;
+  select last_insert_id() as wdg_id;
 end

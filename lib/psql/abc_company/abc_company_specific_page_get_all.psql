@@ -6,19 +6,21 @@
  *
  * @type rows
  */
-create procedure abc_company_specific_page_get_all(in p_cmp_id @abc_auth_company.cmp_id%type@,
-                                                   in p_lan_id @abc_babel_word.wrd_id%type@)
-reads sql data
+create procedure abc_company_specific_page_get_all
+(
+  in p_cmp_id smallint(5) unsigned, -- type: ABC_AUTH_COMPANY.cmp_id
+  in p_lan_id tinyint(3) unsigned --   type: ABC_BABEL_LANGUAGE.lan_id
+)
+  reads sql data
 begin
   select apc.pag_id
-  ,      bwt.wdt_text    pag_title
-  ,      aup.pag_class   pag_class_parent
-  ,      apc.pag_class   pag_class_child
-  from       ABC_AUTH_PAGE_COMPANY apc
-  inner join ABC_AUTH_PAGE         aup  on  aup.pag_id = apc.pag_id
-  inner join ABC_BABEL_WORD_TEXT   bwt  on  bwt.wrd_id = aup.wrd_id and
-                                            bwt.lan_id = p_lan_id
+       , bwt.wdt_text  as pag_title
+       , aup.pag_class as pag_class_parent
+       , apc.pag_class as pag_class_child
+  from ABC_AUTH_PAGE_COMPANY apc
+  join ABC_AUTH_PAGE         aup on aup.pag_id = apc.pag_id
+  join ABC_BABEL_WORD_TEXT   bwt on bwt.wrd_id = aup.wrd_id and --
+                                    bwt.lan_id = p_lan_id
   where apc.cmp_id = p_cmp_id
-  order by aup.pag_class
-  ;
+  order by aup.pag_class;
 end

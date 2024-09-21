@@ -6,28 +6,30 @@
  *
  * @type rows
  */
-create procedure abc_system_functionality_get_available_roles(in p_fun_id @ABC_AUTH_FUNCTIONALITY.fun_id%type@,
-                                                              in p_lan_id @abc_babel_language.lan_id%type@)
-reads sql data
+create procedure abc_system_functionality_get_available_roles
+(
+  in p_fun_id smallint(5) unsigned, -- type: ABC_AUTH_FUNCTIONALITY.fun_id
+  in p_lan_id tinyint(3) unsigned --   type: ABC_BABEL_LANGUAGE.lan_id
+)
+  reads sql data
 begin
   select cmp.cmp_id
-  ,      cmp.cmp_abbr
+       , cmp.cmp_abbr
 
-  ,      rol.rol_id
-  ,      rol.rol_name
-  ,      if(arf.rol_id is null,0,1) rol_enabled
+       , rol.rol_id
+       , rol.rol_name
+       , if(arf.rol_id is null, 0, 1) as rol_enabled
 
-  ,      rlg.rlg_id
-  ,      wdt.wdt_text               rlg_name
-  from      ABC_AUTH_ROLE       rol
-  join      ABC_AUTH_ROLE_GROUP rlg  on  rlg.rlg_id = rol.rlg_id
-  join      ABC_BABEL_WORD_TEXT wdt  on  wdt.wrd_id = rlg.wrd_id and
-                                         wdt.lan_id = p_lan_id
-  join      ABC_AUTH_COMPANY    cmp  on  cmp.cmp_id = rol.cmp_id
-  left join ABC_AUTH_ROL_FUN    arf  on  arf.rol_id = rol.rol_id and
-                                         arf.fun_id = p_fun_id
+       , rlg.rlg_id
+       , wdt.wdt_text                 as rlg_name
+  from ABC_AUTH_ROLE            rol
+  join      ABC_AUTH_ROLE_GROUP rlg on rlg.rlg_id = rol.rlg_id
+  join      ABC_BABEL_WORD_TEXT wdt on wdt.wrd_id = rlg.wrd_id and --
+                                       wdt.lan_id = p_lan_id
+  join      ABC_AUTH_COMPANY    cmp on cmp.cmp_id = rol.cmp_id
+  left join ABC_AUTH_ROL_FUN    arf on arf.rol_id = rol.rol_id and --
+                                       arf.fun_id = p_fun_id
   order by cmp.cmp_abbr
-  ,        rlg.rlg_weight
-  ,        rol.rol_weight
-  ;
+         , rlg.rlg_weight
+         , rol.rol_weight;
 end

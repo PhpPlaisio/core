@@ -9,54 +9,55 @@
  *
  * @type row0
  */
-create procedure abc_auth_get_page_info(in p_cmp_id    @abc_auth_company.cmp_id%type@,
-                                        in p_pag_id    @abc_auth_page.pag_id%type@,
-                                        in p_pro_id    @abc_auth_profile.pro_id%type@,
-                                        in p_lan_id    @abc_babel_language.lan_id%type@,
-                                        in p_pag_alias @abc_auth_page.pag_alias%sort@)
-reads sql data
+create procedure abc_auth_get_page_info
+(
+  in p_cmp_id    smallint(5) unsigned, --             type: ABC_AUTH_COMPANY.cmp_id
+  in p_pag_id    smallint(5) unsigned, --             type: ABC_AUTH_PAGE.pag_id
+  in p_pro_id    smallint(5) unsigned, --             type: ABC_AUTH_PROFILE.pro_id
+  in p_lan_id    tinyint(3) unsigned, --              type: ABC_BABEL_LANGUAGE.lan_id
+  in p_pag_alias varchar(32) character set utf8mb4 -- type: ABC_AUTH_PAGE.pag_alias
+)
+  reads sql data
 begin
   if (p_pag_id is not null) then
     select pag.pag_id
-    ,      pag.ptb_id
-    ,      pag.pag_id_org
-    ,      wd1.wdt_text                           pag_title
-    ,      ifnull(apc.pag_class, pag.pag_class)   pag_class
-    ,      wd2.wdt_text                           ptb_title
-	,      if(app.pag_id, 1, 0)                   authorized
-    from      ABC_AUTH_PAGE         pag
-    join      ABC_BABEL_WORD_TEXT   wd1  on  wd1.wrd_id = pag.wrd_id and
-                                             wd1.lan_id = p_lan_id
-	left join ABC_AUTH_PRO_PAG      app  on  app.pag_id = pag.pag_id and
-								   		     app.pro_id = p_pro_id
-                                         -- app.cmp_id = p_cmp_id
-    left join ABC_AUTH_PAGE_COMPANY apc  on  apc.pag_id = pag.pag_id and
-                                             apc.cmp_id = p_cmp_id
-    left join AUT_PAGE_TAB          ptb  on  ptb.ptb_id = pag.ptb_id
-    left join ABC_BABEL_WORD_TEXT   wd2  on  wd2.wrd_id = ptb.wrd_id and
-                                             wd2.lan_id = p_lan_id
-    where pag.pag_id = p_pag_id
-    ;
+         , pag.ptb_id
+         , pag.pag_id_org
+         , wd1.wdt_text                         as pag_title
+         , ifnull(apc.pag_class, pag.pag_class) as pag_class
+         , wd2.wdt_text                         as ptb_title
+         , if(app.pag_id, 1, 0)                 as authorized
+    from ABC_AUTH_PAGE              pag
+    join      ABC_BABEL_WORD_TEXT   wd1 on wd1.wrd_id = pag.wrd_id and --
+                                           wd1.lan_id = p_lan_id
+    left join ABC_AUTH_PRO_PAG      app on app.pag_id = pag.pag_id and --
+                                           app.pro_id = p_pro_id
+                -- app.cmp_id = p_cmp_id
+    left join ABC_AUTH_PAGE_COMPANY apc on apc.pag_id = pag.pag_id and --
+                                           apc.cmp_id = p_cmp_id
+    left join AUT_PAGE_TAB          ptb on ptb.ptb_id = pag.ptb_id
+    left join ABC_BABEL_WORD_TEXT   wd2 on wd2.wrd_id = ptb.wrd_id and --
+                                           wd2.lan_id = p_lan_id
+    where pag.pag_id = p_pag_id;
   else
     select pag.pag_id
-    ,      pag.ptb_id
-    ,      pag.pag_id_org
-    ,      wd1.wdt_text                           pag_title
-    ,      ifnull(apc.pag_class, pag.pag_class)   pag_class
-    ,      wd2.wdt_text                           ptb_title
-	,      if(app.pag_id, 1, 0)                   authorized
-    from      ABC_AUTH_PAGE         pag
-    join      ABC_BABEL_WORD_TEXT   wd1  on  wd1.wrd_id = pag.wrd_id and
-                                             wd1.lan_id = p_lan_id
-    left join ABC_AUTH_PRO_PAG      app  on  app.pag_id = pag.pag_id and
-                                             app.pro_id = p_pro_id
-                                          -- app.cmp_id = p_cmp_id
-    left join ABC_AUTH_PAGE_COMPANY apc  on  apc.pag_id = pag.pag_id and
-                                             apc.cmp_id = p_cmp_id
-    left join AUT_PAGE_TAB          ptb  on  ptb.ptb_id = pag.ptb_id
-    left join ABC_BABEL_WORD_TEXT   wd2  on  wd2.wrd_id = ptb.wrd_id and
-                                             wd2.lan_id = p_lan_id
-    where pag.pag_alias = p_pag_alias
-    ;
+         , pag.ptb_id
+         , pag.pag_id_org
+         , wd1.wdt_text                         as pag_title
+         , ifnull(apc.pag_class, pag.pag_class) as pag_class
+         , wd2.wdt_text                         as ptb_title
+         , if(app.pag_id, 1, 0)                 as authorized
+    from ABC_AUTH_PAGE              pag
+    join      ABC_BABEL_WORD_TEXT   wd1 on wd1.wrd_id = pag.wrd_id and --
+                                           wd1.lan_id = p_lan_id
+    left join ABC_AUTH_PRO_PAG      app on app.pag_id = pag.pag_id and --
+                                           app.pro_id = p_pro_id
+                -- app.cmp_id = p_cmp_id
+    left join ABC_AUTH_PAGE_COMPANY apc on apc.pag_id = pag.pag_id and --
+                                           apc.cmp_id = p_cmp_id
+    left join AUT_PAGE_TAB          ptb on ptb.ptb_id = pag.ptb_id
+    left join ABC_BABEL_WORD_TEXT   wd2 on wd2.wrd_id = ptb.wrd_id and --
+                                           wd2.lan_id = p_lan_id
+    where pag.pag_alias = p_pag_alias;
   end if;
 end

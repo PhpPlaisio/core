@@ -3,32 +3,30 @@
  *
  * @type hidden
  */
-create procedure abc_profile_proper1()
-modifies sql data
+create procedure abc_profile_proper1 ()
+  modifies sql data
 begin
   drop temporary table if exists TMP_PROFILE1;
 
   create temporary table TMP_PROFILE1
   (
-    cmp_id      @abc_auth_company.cmp_id%type@      not null,
-    usr_id      @abc_auth_user.usr_id%type@         not null,
-    tmp_rol_ids @abc_auth_profile.pro_rol_ids%type@ not null,
-    primary key(usr_id)
-  ) engine=myisam
-  ;
+    cmp_id      smallint(5) unsigned,             -- type: ABC_AUTH_COMPANY.cmp_id
+    usr_id      int(10) unsigned,                 -- type: ABC_AUTH_USER.usr_id
+    tmp_rol_ids varchar(100) character set ascii, -- type: ABC_AUTH_PROFILE.pro_rol_ids
+    primary key (usr_id)
+  )
+  engine = myisam;
 
-  insert into TMP_PROFILE1(cmp_id
-  ,                        usr_id
-  ,                        tmp_rol_ids)
+  insert into TMP_PROFILE1( cmp_id
+                          , usr_id
+                          , tmp_rol_ids )
   select aur.cmp_id
-  ,      aur.usr_id
-  ,      group_concat(aur.rol_id ORDER BY aur.rol_id)
-  from      ABC_AUTH_USR_ROL aur
-  left join ABC_AUTH_ROL_FLG arf  on  arf.rol_id = aur.rol_id
-  left join ABC_AUTH_FLAG    rfl  on  rfl.rfl_id = arf.rfl_id
-  where curdate() between aur.aur_date_start
-                  and     aur.aur_date_stop
+       , aur.usr_id
+       , group_concat(aur.rol_id order by aur.rol_id)
+  from ABC_AUTH_USR_ROL      aur
+  left join ABC_AUTH_ROL_FLG arf on arf.rol_id = aur.rol_id
+  left join ABC_AUTH_FLAG    rfl on rfl.rfl_id = arf.rfl_id
+  where curdate() between aur.aur_date_start and aur.aur_date_stop
   group by aur.cmp_id
-  ,        aur.usr_id
-  ;
+         , aur.usr_id;
 end

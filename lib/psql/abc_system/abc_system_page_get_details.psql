@@ -6,26 +6,29 @@
  *
  * @type row1
  */
-create procedure abc_system_page_get_details(in p_pag_id @abc_auth_page.pag_id%type@,
-                                             in p_lan_id @abc_babel_language.lan_id%type@)
-reads sql data
+create procedure abc_system_page_get_details
+(
+  in p_pag_id smallint(5) unsigned, -- type: ABC_AUTH_PAGE.pag_id
+  in p_lan_id tinyint(3) unsigned --   type: ABC_BABEL_LANGUAGE.lan_id
+)
+  reads sql data
 begin
   select pag.pag_id
-  ,      pag.ptb_id
-  ,      pag.pag_id_org
-  ,      pag.wrd_id
-  ,      pag.pag_alias
-  ,      pag.pag_class
-  ,      pag.pag_label
-  ,      pag.pag_weight
-  ,      wd1.wdt_text       pag_title
-  ,      wd3.wdt_text       ptb_name
-  from      ABC_AUTH_PAGE       pag
-  join      ABC_BABEL_WORD_TEXT wd1  on  wd1.wrd_id = pag.wrd_id and
-                                         wd1.lan_id = p_lan_id
-  left join AUT_PAGE_TAB        ptb  on  ptb.ptb_id = pag.ptb_id
-  left join ABC_BABEL_WORD_TEXT wd3  on  wd3.wrd_id = ptb.wrd_id and
-                                         wd3.lan_id = p_lan_id
-  where pag.pag_id = p_pag_id
-  ;
+       , pag.pag_id_org
+       , pag.wrd_id
+       , pag.pag_alias
+       , pag.pag_class
+       , pag.pag_label
+       , pag.pag_weight
+       , wd1.wdt_text as pag_title
+
+       , ptb.ptb_id
+       , wd3.wdt_text as ptb_name
+  from ABC_AUTH_PAGE            pag
+  join      ABC_BABEL_WORD_TEXT wd1 on wd1.wrd_id = pag.wrd_id and --
+                                       wd1.lan_id = p_lan_id
+  left join AUT_PAGE_TAB        ptb on ptb.ptb_id = pag.ptb_id
+  left join ABC_BABEL_WORD_TEXT wd3 on wd3.wrd_id = ptb.wrd_id and --
+                                       wd3.lan_id = p_lan_id
+  where pag.pag_id = p_pag_id;
 end

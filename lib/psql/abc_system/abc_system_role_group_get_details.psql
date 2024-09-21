@@ -6,18 +6,20 @@
  *
  * @type row1
  */
-create procedure abc_system_role_group_get_details(in p_rlg_id @abc_auth_role_group.rlg_id%type@,
-                                                   in p_lan_id @abc_babel_language.lan_id%type@)
-reads sql data
+create procedure abc_system_role_group_get_details
+(
+  in p_rlg_id smallint(5) unsigned, -- type: ABC_AUTH_ROLE_GROUP.rlg_id
+  in p_lan_id tinyint(3) unsigned --   type: ABC_BABEL_LANGUAGE.lan_id
+)
+  reads sql data
 begin
   select rlg.rlg_id
-  ,      rlg.wrd_id
-  ,      rlg.rlg_weight
-  ,      rlg.rlg_label
-  ,      wdt.wdt_text     rlg_name
+       , rlg.wrd_id
+       , rlg.rlg_weight
+       , rlg.rlg_label
+       , wdt.wdt_text as rlg_name
   from ABC_AUTH_ROLE_GROUP rlg
-  join ABC_BABEL_WORD_TEXT wdt  on  wdt.wrd_id = rlg.wrd_id and
-                                    wdt.lan_id = p_lan_id
-  where rlg.rlg_id = p_rlg_id
-  ;
+  join ABC_BABEL_WORD_TEXT wdt on wdt.wrd_id = rlg.wrd_id and --
+                                  wdt.lan_id = p_lan_id
+  where rlg.rlg_id = p_rlg_id;
 end

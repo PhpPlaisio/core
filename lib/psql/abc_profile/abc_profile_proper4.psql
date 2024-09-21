@@ -4,72 +4,66 @@
  *
  * @type hidden
  */
-create procedure abc_profile_proper4()
-modifies sql data
+create procedure abc_profile_proper4 ()
+  modifies sql data
 begin
   drop temporary table if exists TMP_PROFILE4;
 
   create temporary table TMP_PROFILE4
   (
-    cmp_id   @abc_auth_pro_rol.cmp_id%type@ not null,
-    pro_id   @abc_auth_pro_rol.pro_id%type@ not null,
-    rol_id   @abc_auth_pro_rol.rol_id%type@ not null,
-    tmp_diff int                       not null,
+    cmp_id   smallint(5) unsigned, -- type: ABC_AUTH_PRO_ROL.cmp_id
+    pro_id   smallint(5) unsigned, -- type: ABC_AUTH_PRO_ROL.pro_id
+    rol_id   smallint(5) unsigned, -- type: ABC_AUTH_PRO_ROL.rol_id
+    tmp_diff int not null,
     primary key (pro_id, rol_id)
-  ) engine=myisam
-  ;
+  )
+  engine = myisam;
 
   -- Compute new and obsolete profile roles.
   insert into TMP_PROFILE4( pro_id
-  ,                         cmp_id
-  ,                         rol_id
-  ,                         tmp_diff )
+                          , cmp_id
+                          , rol_id
+                          , tmp_diff )
   select pro_id
-  ,      cmp_id
-  ,      rol_id
-  ,      sum(if(src=2,1,0)) - sum(if(src=1,1,0))
-  from
-  (
-    select pro_id
-    ,      cmp_id
-    ,      rol_id
-    ,      1           src
-    from   ABC_AUTH_PRO_ROL
+       , cmp_id
+       , rol_id
+       , sum(if(src = 2, 1, 0)) - sum(if(src = 1, 1, 0))
+  from ( select pro_id
+              , cmp_id
+              , rol_id
+              , 1 as src
+         from ABC_AUTH_PRO_ROL
 
-    union all
+         union all
 
-    select pro.pro_id
-    ,      pro.cmp_id
-    ,      substring_index(substring_index(pro.pro_rol_ids, ',', seq.seq), ',', -1) rol_id
-    ,      2           src
-    from ABC_AUTH_PROFILE pro
-    join seq_1_to_100     seq  on  1 = 1
-    group by pro.pro_id
-    ,        pro.cmp_id
-    ,        rol_id
-  ) t
+         select pro.pro_id
+              , pro.cmp_id
+              , substring_index(substring_index(pro.pro_rol_ids, ',', seq.seq), ',', -1) as rol_id
+              , 2                                                                        as src
+         from ABC_AUTH_PROFILE pro
+         join seq_1_to_100     seq on 1 = 1
+         group by pro.pro_id
+                , pro.cmp_id
+                , rol_id ) t
   group by cmp_id
-  ,        pro_id
-  ,        rol_id
-  having  sum(if(src=1,1,0)) <> sum(if(src=2,1,0))
-  ;
+         , pro_id
+         , rol_id
+  having sum(if(src = 1, 1, 0)) <> sum(if(src = 2, 1, 0));
 
   -- Delete obsolete profile roles.
-  delete from apr
-  using ABC_AUTH_PRO_ROL apr
-  join  TMP_PROFILE4     tmp  on  tmp.pro_id = apr.pro_id and
-                                  tmp.rol_id = apr.rol_id
-  where tmp.tmp_diff < 0
-  ;
+  delete
+  from apr using ABC_AUTH_PRO_ROL apr
+                   join TMP_PROFILE4 tmp on tmp.pro_id = apr.pro_id and --
+                                            tmp.rol_id = apr.rol_id
+  where tmp.tmp_diff < 0;
 
   -- Insert new profile roles.
   insert into ABC_AUTH_PRO_ROL( cmp_id
-  ,                             pro_id
-  ,                             rol_id )
+                              , pro_id
+                              , rol_id )
   select cmp_id
-  ,      pro_id
-  ,      rol_id
-  from   TMP_PROFILE4
-  where  tmp_diff > 0
-  ;
+       , pro_id
+       , rol_id
+  from TMP_PROFILE4
+  where tmp_diff > 0;
 end

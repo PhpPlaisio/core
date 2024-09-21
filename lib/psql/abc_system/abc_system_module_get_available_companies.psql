@@ -5,16 +5,18 @@
  *
  * @type rows
  */
-create procedure abc_system_module_get_available_companies(in p_mdl_id @ABC_AUTH_MODULE.mdl_id%type@)
-reads sql data
+create procedure abc_system_module_get_available_companies
+(
+  in p_mdl_id smallint(5) unsigned -- type: ABC_AUTH_MODULE.mdl_id
+)
+  reads sql data
 begin
   select cmp.cmp_id
-  ,      cmp.cmp_abbr
+       , cmp.cmp_abbr
 
-  ,      if(amc.mdl_id, 1, 0)  mdl_granted
-  from      ABC_AUTH_COMPANY        cmp
-  left join ABC_AUTH_MODULE_COMPANY amc  on  amc.mdl_id = p_mdl_id and
-                                             amc.cmp_id = cmp.cmp_id
-  order by cmp.cmp_abbr
-  ;
+       , if(amc.mdl_id, 1, 0) as mdl_granted
+  from ABC_AUTH_COMPANY             cmp
+  left join ABC_AUTH_MODULE_COMPANY amc on amc.mdl_id = p_mdl_id and --
+                                           amc.cmp_id = cmp.cmp_id
+  order by cmp.cmp_abbr;
 end

@@ -2,8 +2,6 @@
 /.phpunit.result.cache
 /bin/
 /composer.lock
-/custom.task.properties
-/custom.type.properties
 /node_modules/
 /package-lock.json
 /plaisio-assets.csv

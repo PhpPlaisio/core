@@ -1,22 +1,22 @@
 /**
- * Selects non-zero if a user has the proper authorization for page. Otherwise, selects 0.
+ * Selects whether a user has the proper authorization for page.
  *
  * @param p_cmp_id The ID of the company of the user (safeguard).
  * @param p_pro_id The ID of the profile of the user.
  * @param p_pag_id The ID of the page.
  *
- * @type singleton1
- *
- * @return bool
+ * @type singleton1 bool
  */
-create procedure abc_auth_get_page_auth( in p_cmp_id @abc_auth_company.cmp_id%type@,
-                                         in p_pro_id @abc_auth_profile.pro_id%type@
-,                                        in p_pag_id @abc_auth_page.pag_id%type@ )
-reads sql data
+create procedure abc_auth_get_page_auth
+(
+  in p_cmp_id smallint(5) unsigned, -- type: ABC_AUTH_COMPANY.cmp_id
+  in p_pro_id smallint(5) unsigned, -- type: ABC_AUTH_PRO_PAG.pro_id
+  in p_pag_id smallint(5) unsigned --  type: ABC_AUTH_PRO_PAG.pag_id
+)
+  reads sql data
 begin
-  select count(*) n
-  from   ABC_AUTH_PRO_PAG
+  select count(*) as n
+  from ABC_AUTH_PRO_PAG
   where pag_id = p_pag_id
-  and   pro_id = p_pro_id
-  ;
+    and pro_id = p_pro_id;
 end

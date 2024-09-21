@@ -6,83 +6,77 @@
  *
  * @type none
  */
-create procedure abc_profile_proper_user(in p_cmp_id @abc_auth_user.cmp_id%type@,
-                                         in p_usr_id @abc_auth_user.usr_id%type@)
-modifies sql data
+create procedure abc_profile_proper_user
+(
+  in p_cmp_id smallint(5) unsigned, -- type: ABC_AUTH_USER.cmp_id
+  in p_usr_id int(10) unsigned --      type: ABC_AUTH_USER.usr_id
+)
+  modifies sql data
 begin
-  declare l_pro_id      @abc_auth_profile.pro_id%type@;
-  declare l_pro_rol_ids @abc_auth_profile.pro_rol_ids%type@;
+  declare l_pro_id smallint(5) unsigned; --                  type: ABC_AUTH_PROFILE.pro_id
+  declare l_pro_rol_ids varchar(100) character set ascii; -- type: ABC_AUTH_PROFILE.pro_rol_ids
 
-  select group_concat(rol_id ORDER BY rol_id)
-  into   l_pro_rol_ids
-  from   ABC_AUTH_USR_ROL
-  where  cmp_id = p_cmp_id
-  and    usr_id = p_usr_id
-  and    curdate() between aur_date_start
-                   and     aur_date_stop
+  select group_concat(rol_id order by rol_id)
+  into l_pro_rol_ids
+  from ABC_AUTH_USR_ROL
+  where cmp_id = p_cmp_id
+    and usr_id = p_usr_id
+    and curdate() between aur_date_start and aur_date_stop
   group by cmp_id
-  ,        usr_id
-  ;
+         , usr_id;
 
   if (l_pro_rol_ids is not null) then
     select pro_id
-    into   l_pro_id
-    from   ABC_AUTH_PROFILE
-    where  cmp_id      = p_cmp_id
-    and    pro_rol_ids = l_pro_rol_ids
-    for update
-    ;
+    into l_pro_id
+    from ABC_AUTH_PROFILE
+    where cmp_id = p_cmp_id
+      and pro_rol_ids = l_pro_rol_ids for
+    update;
 
     if (l_pro_id is null) then
       insert into ABC_AUTH_PROFILE( cmp_id
-      ,                             pro_flags
-      ,                             pro_rol_ids )
-      values( p_cmp_id
-      ,       0
-      ,       l_pro_rol_ids )
-      ;
+                                  , pro_flags
+                                  , pro_rol_ids )
+      values ( p_cmp_id
+             , 0
+             , l_pro_rol_ids );
 
       set l_pro_id = last_insert_id();
 
       -- Insert new profile roles.
       insert into ABC_AUTH_PRO_ROL( cmp_id
-      ,                             pro_id
-      ,                             rol_id )
+                                  , pro_id
+                                  , rol_id )
       select p_cmp_id
-      ,      l_pro_id
-      ,      rol_id
-      from   ABC_AUTH_USR_ROL
-      where  cmp_id = p_cmp_id
-      and    usr_id = p_usr_id
-      and    curdate() between aur_date_start
-                       and     aur_date_stop
-      ;
+           , l_pro_id
+           , rol_id
+      from ABC_AUTH_USR_ROL
+      where cmp_id = p_cmp_id
+        and usr_id = p_usr_id
+        and curdate() between aur_date_start and aur_date_stop;
 
       -- Insert new profile pages.
       insert into ABC_AUTH_PRO_PAG( pro_id
-      ,                             pag_id )
+                                  , pag_id )
       select l_pro_id
-      ,      apf.pag_id
-      from       ABC_AUTH_USR_ROL        aur
-      inner join ABC_AUTH_ROL_FUN        arf  on  arf.rol_id = aur.rol_id
-      inner join ABC_AUTH_FUNCTIONALITY  fun  on  fun.fun_id = arf.fun_id
-      inner join ABC_AUTH_PAG_FUN        apf  on  apf.fun_id = fun.fun_id
-      inner join ABC_AUTH_MODULE_COMPANY amc  on  amc.mdl_id = fun.mdl_id and
-                                                  amc.cmp_id = p_cmp_id
+           , apf.pag_id
+      from ABC_AUTH_USR_ROL        aur
+      join ABC_AUTH_ROL_FUN        arf on arf.rol_id = aur.rol_id
+      join ABC_AUTH_FUNCTIONALITY  fun on fun.fun_id = arf.fun_id
+      join ABC_AUTH_PAG_FUN        apf on apf.fun_id = fun.fun_id
+      join ABC_AUTH_MODULE_COMPANY amc on amc.mdl_id = fun.mdl_id and --
+                                          amc.cmp_id = p_cmp_id
       where aur.cmp_id = p_cmp_id
-      and   aur.usr_id = p_usr_id
-      and   curdate() between aur.aur_date_start
-                      and     aur.aur_date_stop
+        and aur.usr_id = p_usr_id
+        and curdate() between aur.aur_date_start and aur.aur_date_stop
       group by l_pro_id
-      ,        apf.pag_id
-      ;
+             , apf.pag_id;
     end if;
   end if;
 
   update ABC_AUTH_USER
   set pro_id = l_pro_id
-  where cmp_id             = p_cmp_id
-  and   usr_id             = p_usr_id
-  and   ifnull(pro_id, 0) <> ifnull(l_pro_id, 0)
-  ;
+  where cmp_id = p_cmp_id
+    and usr_id = p_usr_id
+    and ifnull(pro_id, 0) <> ifnull(l_pro_id, 0);
 end

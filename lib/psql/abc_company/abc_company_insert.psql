@@ -4,19 +4,19 @@
  * @param p_cmp_abbr  The abbreviation of the new company.
  * @param p_cmp_label The label of the new company.
  *
- * @type singleton1
- *
- * @return int
+ * @type singleton1 int
  */
-create procedure abc_company_insert(in p_cmp_abbr  @abc_auth_company.cmp_abbr%type@,
-                                    in p_cmp_label @abc_auth_company.cmp_label%type@)
-modifies sql data
+create procedure abc_company_insert
+(
+  in p_cmp_abbr  varchar(15) character set utf8mb4, -- type: ABC_AUTH_COMPANY.cmp_abbr
+  in p_cmp_label varchar(20) character set ascii --    type: ABC_AUTH_COMPANY.cmp_label
+)
+  modifies sql data
 begin
   insert into ABC_AUTH_COMPANY( cmp_abbr
-  ,                             cmp_label )
-  values( p_cmp_abbr
-  ,       p_cmp_label )
-  ;
+                              , cmp_label )
+  values ( p_cmp_abbr
+         , p_cmp_label );
 
-  select last_insert_id();
+  select last_insert_id() as cmp_id;
 end

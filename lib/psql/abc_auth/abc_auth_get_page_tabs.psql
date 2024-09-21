@@ -8,27 +8,28 @@
  *
  * @type rows_with_key pag_id
  */
-create procedure abc_auth_get_page_tabs(in p_cmp_id @abc_auth_company.cmp_id%type@,
-                                        in p_ptb_id @aut_page_tab.ptb_id%type@,
-                                        in p_pro_id @abc_auth_profile.pro_id%type@,
-                                        in p_lan_id @abc_babel_language.lan_id%type@)
-reads sql data
+create procedure abc_auth_get_page_tabs
+(
+  in p_cmp_id smallint(5) unsigned, -- type: ABC_AUTH_COMPANY.cmp_id
+  in p_ptb_id tinyint(3) unsigned, --  type: AUT_PAGE_TAB.ptb_id
+  in p_pro_id smallint(5) unsigned, -- type: ABC_AUTH_PROFILE.pro_id
+  in p_lan_id tinyint(3) unsigned --   type: ABC_BABEL_LANGUAGE.lan_id
+)
+  reads sql data
 begin
-  select  pag.pag_id
-  ,       pag.pag_id    tab_id
-  ,       wd1.wdt_text  tab_name
+  select pag.pag_id
+       , pag.pag_id   as tab_id
+       , wd1.wdt_text as tab_name
   from ABC_AUTH_PAGE       pag
-  join ABC_AUTH_PRO_PAG    app  on  app.pag_id = pag.pag_id and
-                                    app.pro_id = p_pro_id
-  join ABC_AUTH_PAG_FUN    apf  on  apf.pag_id = pag.pag_id
-  join ABC_AUTH_ROL_FUN    arl  on  arl.fun_id = apf.fun_id
-  join ABC_AUTH_USR_ROL    aur  on  aur.rol_id = arl.rol_id and
-                                    curdate() between aur.aur_date_start
-                                              and     aur.aur_date_stop
-  join ABC_BABEL_WORD_TEXT wd1  on  wd1.wrd_id = pag.wrd_id and
-                                    wd1.lan_id = p_lan_id
+  join ABC_AUTH_PRO_PAG    app on app.pag_id = pag.pag_id and --
+                                  app.pro_id = p_pro_id
+  join ABC_AUTH_PAG_FUN    apf on apf.pag_id = pag.pag_id
+  join ABC_AUTH_ROL_FUN    arl on arl.fun_id = apf.fun_id
+  join ABC_AUTH_USR_ROL    aur on aur.rol_id = arl.rol_id and --
+                                  curdate() between aur.aur_date_start and aur.aur_date_stop
+  join ABC_BABEL_WORD_TEXT wd1 on wd1.wrd_id = pag.wrd_id and --
+                                  wd1.lan_id = p_lan_id
   where pag.ptb_id = p_ptb_id
-  and   pag.pag_weight is not null
-  order by pag.pag_weight
-  ;
+    and pag.pag_weight is not null
+  order by pag.pag_weight;
 end

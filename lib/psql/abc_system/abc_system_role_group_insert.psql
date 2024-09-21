@@ -5,22 +5,22 @@
  * @param p_rlg_weight The weight for sorting of the role group.
  * @param p_rlg_label  The label of the word group.
  *
- * @type singleton1
- *
- * @return int
+ * @type singleton1 int
  */
-create procedure abc_system_role_group_insert(in p_wrd_id     @abc_auth_role_group.wrd_id%type@,
-                                              in p_rlg_weight @abc_auth_role_group.rlg_weight%type@,
-                                              in p_rlg_label  @abc_auth_role_group.rlg_label%type@)
-modifies sql data
+create procedure abc_system_role_group_insert
+(
+  in p_wrd_id     smallint(5) unsigned, --           type: ABC_AUTH_ROLE_GROUP.wrd_id
+  in p_rlg_weight smallint(6), --                    type: ABC_AUTH_ROLE_GROUP.rlg_weight
+  in p_rlg_label  varchar(50) character set ascii -- type: ABC_AUTH_ROLE_GROUP.rlg_label
+)
+  modifies sql data
 begin
   insert into ABC_AUTH_ROLE_GROUP( wrd_id
-  ,                                rlg_weight
-  ,                                rlg_label )
-  values( p_wrd_id
-  ,       p_rlg_weight
-  ,       p_rlg_label )
-  ;
+                                 , rlg_weight
+                                 , rlg_label )
+  values ( p_wrd_id
+         , p_rlg_weight
+         , p_rlg_label );
 
-  select last_insert_id() rlg_id;
+  select last_insert_id() as rlg_id;
 end

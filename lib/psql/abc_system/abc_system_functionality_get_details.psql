@@ -6,22 +6,24 @@
  *
  * @type row1
  */
-create procedure abc_system_functionality_get_details(in p_fun_id @ABC_AUTH_FUNCTIONALITY.fun_id%type@,
-                                                      in p_lan_id @abc_babel_language.lan_id%type@)
-reads sql data
+create procedure abc_system_functionality_get_details
+(
+  in p_fun_id smallint(5) unsigned, -- type: ABC_AUTH_FUNCTIONALITY.fun_id
+  in p_lan_id tinyint(3) unsigned --   type: ABC_BABEL_LANGUAGE.lan_id
+)
+  reads sql data
 begin
   select mdl.mdl_id
-  ,      wd2.wdt_text   mdl_name
+       , wd2.wdt_text as mdl_name
 
-  ,      fun.fun_id
-  ,      wd1.wrd_id
-  ,      wd1.wdt_text   fun_name
+       , fun.fun_id
+       , wd1.wrd_id
+       , wd1.wdt_text as fun_name
   from ABC_AUTH_FUNCTIONALITY fun
-  join ABC_BABEL_WORD_TEXT    wd1  on  wd1.wrd_id = fun.wrd_id and
-                                       wd1.lan_id = p_lan_id
-  join ABC_AUTH_MODULE        mdl  on  mdl.mdl_id = fun.mdl_id
-  join ABC_BABEL_WORD_TEXT    wd2  on  wd2.wrd_id = mdl.wrd_id and
-                                       wd2.lan_id = p_lan_id
-  where fun.fun_id = p_fun_id
-  ;
+  join ABC_BABEL_WORD_TEXT    wd1 on wd1.wrd_id = fun.wrd_id and --
+                                     wd1.lan_id = p_lan_id
+  join ABC_AUTH_MODULE        mdl on mdl.mdl_id = fun.mdl_id
+  join ABC_BABEL_WORD_TEXT    wd2 on wd2.wrd_id = mdl.wrd_id and --
+                                     wd2.lan_id = p_lan_id
+  where fun.fun_id = p_fun_id;
 end

@@ -6,17 +6,19 @@
  *
  * @type rows
  */
-create procedure abc_company_module_get_all_enabled(in p_cmp_id @abc_auth_company.cmp_id%type@,
-                                                    in p_lan_id @abc_babel_word.wrd_id%type@)
-reads sql data
+create procedure abc_company_module_get_all_enabled
+(
+  in p_cmp_id smallint(5) unsigned, -- type: ABC_AUTH_COMPANY.cmp_id
+  in p_lan_id smallint(5) unsigned --  type: ABC_BABEL_LANGUAGE.wrd_id
+)
+  reads sql data
 begin
   select mdl.mdl_id
-  ,      wd1.wdt_text   mdl_name
-  from ABC_AUTH_MODULE_COMPANY  mdc
-  join ABC_AUTH_MODULE          mdl  on  mdl.mdl_id = mdc.mdl_id
-  join ABC_BABEL_WORD_TEXT      wd1  on  wd1.wrd_id = mdl.wrd_id and
-                                         wd1.lan_id = p_lan_id
+       , wd1.wdt_text as mdl_name
+  from ABC_AUTH_MODULE_COMPANY mdc
+  join ABC_AUTH_MODULE         mdl on mdl.mdl_id = mdc.mdl_id
+  join ABC_BABEL_WORD_TEXT     wd1 on wd1.wrd_id = mdl.wrd_id and --
+                                      wd1.lan_id = p_lan_id
   where mdc.cmp_id = p_cmp_id
-  order by mdl_name
-  ;
+  order by mdl_name;
 end

@@ -3,16 +3,16 @@
  *
  * @param p_wrd_id The ID of the word of the name of the module.
  *
- * @type singleton1
- *
- * @return int
+ * @type singleton1 int
  */
-create procedure abc_system_module_insert(in p_wrd_id @abc_babel_word.wrd_id%type@)
-modifies sql data
+create procedure abc_system_module_insert
+(
+  in p_wrd_id smallint(5) unsigned -- type: ABC_BABEL_WORD.wrd_id
+)
+  modifies sql data
 begin
   insert into ABC_AUTH_MODULE( wrd_id )
-  values( p_wrd_id )
-  ;
+  values ( p_wrd_id );
 
-  select last_insert_id() mdl_id;
+  select last_insert_id() as mdl_id;
 end

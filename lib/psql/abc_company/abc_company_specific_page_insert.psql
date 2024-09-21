@@ -7,16 +7,18 @@
  *
  * @type none
  */
-create procedure abc_company_specific_page_insert( in p_cmp_id    @abc_auth_page_company.cmp_id%type@,
-                                                   in p_pag_id    @abc_auth_page_company.pag_id%type@,
-                                                   in p_pag_class @abc_auth_page_company.pag_class%type@ )
-modifies sql data
+create procedure abc_company_specific_page_insert
+(
+  in p_cmp_id    smallint(5) unsigned, --              type: ABC_AUTH_PAGE_COMPANY.cmp_id
+  in p_pag_id    smallint(5) unsigned, --              type: ABC_AUTH_PAGE_COMPANY.pag_id
+  in p_pag_class varchar(128) character set utf8mb4 -- type: ABC_AUTH_PAGE_COMPANY.pag_class
+)
+  modifies sql data
 begin
   insert into ABC_AUTH_PAGE_COMPANY( pag_id
-  ,                                  cmp_id
-  ,                                  pag_class )
-  values( p_pag_id
-  ,       p_cmp_id
-  ,       p_pag_class )
-  ;
+                                   , cmp_id
+                                   , pag_class )
+  values ( p_pag_id
+         , p_cmp_id
+         , p_pag_class );
 end

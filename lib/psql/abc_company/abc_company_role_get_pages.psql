@@ -7,22 +7,24 @@
  *
  * @type rows
  */
-create procedure abc_company_role_get_pages(in p_cmp_id @abc_auth_company.cmp_id%type@,
-                                            in p_rol_id @abc_auth_role.rol_id%type@,
-                                            in p_lan_id @abc_babel_language.lan_id%type@)
-reads sql data
+create procedure abc_company_role_get_pages
+(
+  in p_cmp_id smallint(5) unsigned, -- type: ABC_AUTH_COMPANY.cmp_id
+  in p_rol_id smallint(5) unsigned, -- type: ABC_AUTH_ROLE.rol_id
+  in p_lan_id tinyint(3) unsigned --   type: ABC_BABEL_LANGUAGE.lan_id
+)
+  reads sql data
 begin
   select distinct pag.pag_id
-  ,               wd2.wdt_text   pag_title
-  ,               pag.pag_class
-  ,               pag.pag_label
+                , wd2.wdt_text as pag_title
+                , pag.pag_class
+                , pag.pag_label
   from ABC_AUTH_ROL_FUN    arf
-  join ABC_AUTH_PAG_FUN    apf  on  apf.fun_id = arf.fun_id
-  join ABC_AUTH_PAGE       pag  on  pag.pag_id = apf.pag_id
-  join ABC_BABEL_WORD_TEXT wd2  on  wd2.wrd_id = pag.wrd_id and
-                                    wd2.lan_id = p_lan_id
+  join ABC_AUTH_PAG_FUN    apf on apf.fun_id = arf.fun_id
+  join ABC_AUTH_PAGE       pag on pag.pag_id = apf.pag_id
+  join ABC_BABEL_WORD_TEXT wd2 on wd2.wrd_id = pag.wrd_id and --
+                                  wd2.lan_id = p_lan_id
   where arf.cmp_id = p_cmp_id
-  and   arf.rol_id = p_rol_id
-  order by pag.pag_class
-  ;
+    and arf.rol_id = p_rol_id
+  order by pag.pag_class;
 end

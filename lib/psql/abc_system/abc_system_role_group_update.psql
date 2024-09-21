@@ -8,16 +8,18 @@
  *
  * @type none
  */
-create procedure abc_system_role_group_update(in p_rlg_id     @abc_auth_role_group.rlg_id%type@,
-                                              in p_wrd_id     @abc_auth_role_group.wrd_id%type@,
-                                              in p_rlg_weight @abc_auth_role_group.rlg_weight%type@,
-                                              in p_rlg_label  @abc_auth_role_group.rlg_label%type@)
-modifies sql data
+create procedure abc_system_role_group_update
+(
+  in p_rlg_id     smallint(5) unsigned, --           type: ABC_AUTH_ROLE_GROUP.rlg_id
+  in p_wrd_id     smallint(5) unsigned, --           type: ABC_AUTH_ROLE_GROUP.wrd_id
+  in p_rlg_weight smallint(6), --                    type: ABC_AUTH_ROLE_GROUP.rlg_weight
+  in p_rlg_label  varchar(50) character set ascii -- type: ABC_AUTH_ROLE_GROUP.rlg_label
+)
+  modifies sql data
 begin
   update ABC_AUTH_ROLE_GROUP
-  set    wrd_id     = p_wrd_id
-  ,      rlg_weight = p_rlg_weight
-  ,      rlg_label  = p_rlg_label
-  where  rlg_id = p_rlg_id
-  ;
+  set wrd_id     = p_wrd_id,
+      rlg_weight = p_rlg_weight,
+      rlg_label  = p_rlg_label
+  where rlg_id = p_rlg_id;
 end
