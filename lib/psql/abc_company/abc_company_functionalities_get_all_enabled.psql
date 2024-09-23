@@ -25,6 +25,6 @@ begin
   join ABC_BABEL_WORD_TEXT     wd2 on wd2.wrd_id = fun.wrd_id and --
                                       wd2.lan_id = p_lan_id
   where mdc.cmp_id = p_cmp_id
-  order by mdl.mdl_name
+  order by mdl_name
          , fun_name;
 end

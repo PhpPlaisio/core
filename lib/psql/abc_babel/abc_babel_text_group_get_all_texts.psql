@@ -17,7 +17,7 @@ begin
        , ttt.ttt_text
   from ABC_BABEL_TEXT      txt
   join ABC_BABEL_TEXT_TEXT ttt on ttt.txt_id = txt.txt_id and --
-                                  ttt.lan_id = p_lan_id_tar
+                                  ttt.lan_id = p_lan_id
   where txt.ttg_id = p_ttg_id
   order by ttt.ttt_text;
 end
