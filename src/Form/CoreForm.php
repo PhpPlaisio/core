@@ -58,7 +58,7 @@ class CoreForm extends Form
    *                                   </ul>
    * @param bool            $mandatory Whether the form control is mandatory.
    */
-  public function addFormControl(Control $control, int|string $label = null, bool $mandatory = false)
+  public function addFormControl(Control $control, int|string $label = null, bool $mandatory = false): void
   {
     if ($control->isHidden())
     {
